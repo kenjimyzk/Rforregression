@@ -3,6 +3,11 @@ title: "R Notebook"
 output: html_notebook
 ---
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
 ## R
 ### R のインストール
 
@@ -15,7 +20,7 @@ R は扱う対象をオブジェクトといい, 関数や変数
 C言語と違い, 型は事前に宣言しなくてもよい.
 また`#` の後を R は評価しないので, コメントとして用いる.
 
-### 電卓としてのR
+### 電卓としての R
 
 R は電卓してとして使える. 
 数値を扱う算術演算子として次のもとがある.
@@ -31,7 +36,14 @@ R は電卓してとして使える.
 `%/%`     | 割り算の切り下げ  | `5 %/% 2 = 2`
 
 ```{r}
+5 + 2
+5 - 2
+5 * 2
+5 / 2
+5 ^ 2
+5 ** 2
 5 %% 2
+5 %/% 2
 ```
 
 ### 関数電卓としてのR
@@ -48,6 +60,10 @@ R は関数として使える. たとえば以下の関数がある.
 `ceiling()` | 切り上げ    
 
 ```{r}
+sqrt(10)
+exp(10)
+log(10)
+abs(-10)
 round(3.5)
 floor(3.5)
 ceiling(3.5)
@@ -98,7 +114,8 @@ R では最初のやり方を推奨している.
 `c()` を用いて構成する. 
 ベクトル
 ```{r}
-(x<- c(1,4))
+(num<-c(2,3,7,9))
+(chr <- c("cat","dog","cow"))
 ```
 
 型が同じ値によって構成される. 
@@ -116,6 +133,7 @@ length(chr)
 数値と論理値の場合は論理値の `TRUE` が1に `FALSE` が0に変換される.
 
 ```{r}
+(x<- c(1,4))
 typeof(x)
 (y <- c(2,FALSE,"4"))
 typeof(y)
@@ -167,8 +185,8 @@ logic1 & logic2
 ```
 
 ```{r}
-any(logic)
-all(logic)
+any(logic1)
+all(logic1)
 logic1 || logic2
 logic1 && logic2
 ```
@@ -354,203 +372,4 @@ unlist(lst)
 
 
 ## データフレーム
-
-## データ分析
-### 単回帰分析
-回帰分析は以下のコマンドで実施する.
-```{r}
-fm <- lm(dist ~ speed, data= cars)
-```
-
-リストが作られる.
-```{r}
-typeof(fm)
-names(fm)
-```
-
-主な
-```{r}
-fm[["coefficients"]] # fm$coefficients
-fm[["residuals"]]  # fm$residuals
-fm[["fitted.values"]] # fm$fitted.values
-```
-
-これらは以下の関数でも計算できる.
-```{r}
-coef(fm)
-resid(fm)
-fitted(fm) #predict(fm)
-```
-
-
-計算結果は `summary()` で表記される.
-```{r}
-summary(fm)
-```
-
-これもリスト型であり, 以下の要素をもつ.
-```{r}
-typeof(summary(fm))
-names(summary(fm))
-```
-
-おもな要素は以下である.
-```{r}
-summary(fm)[["coefficients"]]
-summary(fm)[["sigma"]]
-summary(fm)[["r.squared"]]
-summary(fm)[["adj.r.squared"]]
-summary(fm)[["cov.unscaled"]]
-```
-
-次のように計算してもよい. 
-```{r}
-coef(summary(fm))
-sigma(fm)
-vcov(fm)
-```
-
-### 重回帰分析
-複数の変数は `+` 付け足すことができる.
-```{r}
-fm<-lm(mpg ~ disp + wt, data =mtcars)
-summary(fm)
-```
-
-```{r}
-data("CPS1985", package="AER")
-summary(CPS1985)
-fm1 <- lm(wage ~ experience + education, data=CPS1985)
-summary(fm1)
-```
-
-
-### 非線形モデル
-被説明変数が対数をとるときの回帰分析は以下を実行する.
-```{r}
-summary(lm(log(dist) ~ speed, data=cars))
-```
-
-説明変数が対数をとるときの回帰分析は以下を実行する.
-```{r}
-summary(lm(dist ~ log(speed), data=cars))
-```
-
-両方が対数をとるときの回帰分析は以下を実行する.
-```{r}
-summary(lm(log(dist) ~ log(speed), data=cars))
-```
-
-または以下のように実行してもよい.
-```{r}
-summary(lm(dist ~ speed, data=log(cars)))
-```
-
-
-## 多項式
-```{r}
-summary(lm(dist ~ speed + I(speed^2), data=cars))
-```
-
-```{r}
-summary(lm(dist ~ poly(speed,2,raw=TRUE), data=cars))
-```
-
-## ダミー変数
-```{r}
-fm1<-lm(mpg ~ disp + am, data =mtcars)
-summary(fm1)
-```
-
-```{r}
-fm<-lm(mpg ~ disp + factor(cyl), data =mtcars)
-summary(fm)
-```
-
-
-
-```{r}
-data("CPS1985", package="AER")
-summary(CPS1985)
-fm1 <- lm(log(wage) ~ education + gender, data=CPS1985)
-summary(fm1)
-```
-
-```{r}
-library(mosaic)
-fn <- makeFun(fm1)
-CPS1985 %>% gf_point(log(wage)~education) %>% 
-  gf_fun(log(fn(education,gender="male"))~education,color="red") %>%
-  gf_fun(log(fn(education,gender="female"))~education,color="blue")
-```
-
-## 交差項
-```{r}
-fm<-lm(mpg ~ disp + factor(cyl) + disp:factor(cyl), data =mtcars)
-summary(fm)
-```
-
-```{r}
-fm<-lm(mpg ~ disp * factor(cyl), data =mtcars)
-summary(fm)
-```
-
-
-```{r}
-fm2 <- lm(log(wage) ~ education + gender + education:gender, data=CPS1985)
-summary(fm2)
-```
-
-```{r}
-fm2 <- lm(log(wage) ~ education * gender, data=CPS1985)
-```
-
-```{r}
-library(mosaic)
-fn <- makeFun(fm2)
-CPS1985 %>% gf_point(log(wage)~education) %>% 
-  gf_fun(log(fn(education,gender="male"))~education,color="red") %>%
-  gf_fun(log(fn(education,gender="female"))~education,color="blue")
-```
-
-以下のようにして, 簡単に作図できる.
-```{r}
-CPS1985 %>% gf_point(log(wage)~education) %>% gf_lm(color = ~gender)
-```
-
-
-## F検定
-個々の説明変数の有意性はティー検定を実施すればよい.
-複数の場合はエフ検定を実施する.
-```{r}
-fm1<- lm(log(wage)~experience, data=CPS1985)
-fm2<- update(fm1,.~.+I(experience^2))
-fm3 <- update(fm2,.~.+education+gender)
-fm4 <- update(fm2,.~.+education*gender)
-anova(fm1,fm2,fm3,fm4)
-
-```
-
-
-## ロバスト分散
-説明変数と誤差項が互いに独立とは言い切れず,
-せいぜい無相関の場合, 最小二乗推定量は不偏でなく一致である.
-漸近的に正規分布にしたがうが,
-係数の分散の計算方法を変える必要がある.
-
-```{r}
-library(AER)
-coeftest(fm4,vcov=vcovHC(fm4,type="HC1"),df = Inf)
-```
-
-```{r}
-waldtest(fm3,fm4,vcov=vcovHC(fm4,type="HC1"),test="Chisq")
-```
-
-## workflow
-+ データフレイム作成
-+ 回帰モデルを推計
-+ 検定を実行
-
-
 
