@@ -234,14 +234,15 @@ summary(fm)
 
 ```{r}
 fn <- makeFun(fm)
-mtcars %>% gf_point(mpg ~ disp) %>% 
+mtcars %>% gf_point(mpg ~ disp, color = ~factor(cyl)) %>% 
   gf_fun(fn(x, cyl = "4") ~ x, color="red") %>% 
   gf_fun(fn(x, cyl = "6") ~ x, color="green") %>% 
   gf_fun(fn(x, cyl = "8") ~ x, color="blue")
 ```
 
 ```{r}
-mtcars %>% gf_point(mpg ~ disp) %>% gf_lm(color = ~factor(cyl))
+mtcars %>% gf_point(mpg ~ disp,color = ~factor(cyl)) %>%
+  gf_lm(color = ~factor(cyl))
 ```
 
 
