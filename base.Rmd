@@ -1,6 +1,8 @@
 ---
 title: "R Notebook"
-output: html_notebook
+output:
+  html_notebook: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -307,24 +309,22 @@ sample(1:5, replace=TRUE) #復元抽出
 とオプション `replace=TRUE` をつける.
 
 いくつ取り出すかをオプション `size` で決められる.
-非復元抽出の場合, 取りうる値より大きくできないことに注意されたい.
 ```{r}
 sample(c("A","B"), size=10,replace=TRUE)
 ```
-
+非復元抽出の場合, 取りうる値より大きくできないことに注意されたい.
 
 さらに確率を `prob` で変えることができる. 
 ```{r}
 sample(c("A","B"), prob=c(0.8,0.2),size=10,replace=TRUE)
 ```
 
-一様分布は `runif(size)`, `rnorm(size)` で出力される.
+一様分布は `runif(size)`, 正規分布は `rnorm(size)` で出力される.
 ```{r}
 size <- 8
 runif(size)
 rnorm(size)
 ```
-
 
 
 ## 因子ベクトル
