@@ -1,0 +1,556 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+## R
+### R のインストール
+
+## RStudio 
+### RStudio のインストール
+## RStudio のつかい方
+
+## basis
+R は扱う対象をオブジェクトといい, 関数や変数
+C言語と違い, 型は事前に宣言しなくてもよい.
+また`#` の後を R は評価しないので, コメントとして用いる.
+
+### 電卓としてのR
+
+R は電卓してとして使える. 
+数値を扱う算術演算子として次のもとがある.
+
+演算子  | 説明          | 例
+------- | ------------- | ----------
+`+`     | 足し算        | `5 + 2 = 7`
+`-`     | 引き算        | `5 - 2 = 3`
+`*`     | 掛け算        | `5 * 2 = 10`
+`/`     | 割り算        | `5 / 2 = 2.5`
+`^`, `**`| べき算        | `5 ^ 2 = 25`, `5 ** 2 = 25`
+`%%`     | 割り算の余り | `5 %% 2 = 1`
+`%/%`     | 割り算の切り下げ  | `5 %/% 2 = 2`
+
+```{r}
+5 %% 2
+```
+
+### 関数電卓としてのR
+R は関数として使える. たとえば以下の関数がある.
+
+関数    | 説明          
+------- | -------------
+`sqrt()`    | 平方根    
+`exp()`     | 指数    
+`log()`     | 対数    
+`abs()`     | 絶対値    
+`round()`   | 四捨五入    
+`floor()`   | 切り下げ    
+`ceiling()` | 切り上げ    
+
+```{r}
+round(3.5)
+floor(3.5)
+ceiling(3.5)
+```
+
+関数の括弧無いに入る数値を引数という.
+
+
+### 型
+値は型をもち, 型として数値 (numeric) と文字列 (character) と論理値 (logical) など^[他にも日付 (Date) やバイナリ (raw) がある.]の型がある.
+数値には整数 (integer) と, 実数をコンピュータ的に扱っている倍数精度小数 (double) など^[他にも複素数 (complex) がある.]がある.
+`pi` のようにすでに割り当てらている変数もある.
+
+文字は ダブルクオーテーション (") もしくは シングルクォーテーション (') で区切られる.
+
+`TRUE` もしくは `FALSE` を取る値を論理値 (logical) という. 省略して `T` と `F` とあわらせることもできるが混乱するので個人的に推奨しない. 
+
+欠損値を意味する `NA` は型として論理値として分類される.
+空を意味する `NULL` という型もある.
+
+値の型は関数 `typeof()` で確認できる.
+
+### 変数
+値は変数 (variable) に代入することによって再利用が可能になる.
+Rでは代入のことを付値 (assign) といい, 以下のように実行される.
+```{r}
+x <- 4 # 4 -> x
+x = 4
+assign("x",4)
+```
+多くのプログラム言語では2番目のやり方を採用しているが,
+R では最初のやり方を推奨している.
++ https://google.github.io/styleguide/Rguide.xml
++ http://adv-r.had.co.nz/Style.html
+
+
+付値される変数として, 事前予約されている
+大文字と小文字が区別される.
+日本語も使えるが, 機種によって文字コードが違うため, 避けて使うほうが望ましい.
+
+`objects()` を使うことで，現在どんなオブジェクトがあるかを調べることが出来る．
+また，前に定義したオブジェクトを消す場合 `rm()` を用いる．
+さらに，全てのオブジェクトを消す場合は `rm(list=ls(all=TRUE))` とすればよい．
+
+## ベクトル
+### ベクトル
+値を集めたものをベクトルという.
+`c()` を用いて構成する. 
+ベクトル
+```{r}
+(x<- c(1,4))
+```
+
+型が同じ値によって構成される. 
+
+ベクトルには長さという属性 (attribute) が付く.
+```{r}
+length(num)
+length(chr)
+```
+ベクトルはオブジェクトの基本であり, 一つの値は長さが1のベクトルと考えらる.
+
+
+同じでない場合強制的に同じ型に変換される.
+文字列が含まれればすべて文字列になる.
+数値と論理値の場合は論理値の `TRUE` が1に `FALSE` が0に変換される.
+
+```{r}
+typeof(x)
+(y <- c(2,FALSE,"4"))
+typeof(y)
+(z <- c(2,FALSE))
+typeof(z)
+```
+
+
+### ベクトルの算術演算子
+ベクトルの算術演算子はその要素ごと行う.
+```{r}
+a<-c(2,3,3,3)
+b<-c(3,3,5,7)
+a+b
+a-b
+a*b
+a/b
+a^b
+```
+
+片方が値, 一次元のベクトルの場合, 同じ長さのベクトルとして演算が実行される.
+```{r}
+a+2
+a-2
+a*2
+a/2
+a^2
+```
+
+一般に長さが違う場合, 短いほうが繰り返される.
+```{r}
+c<-c(1,2)
+a+c
+a-c
+a*c
+a/c
+a^c
+```
+なお 短いほうが長い方の約数でないと警告がでる.
+
+
+### 論理演算子
+```{r}
+logic1 <- c(TRUE, FALSE, FALSE)
+logic2 <- c(TRUE, TRUE, FALSE)
+!logic1
+logic1 | logic2
+logic1 & logic2
+```
+
+```{r}
+any(logic)
+all(logic)
+logic1 || logic2
+logic1 && logic2
+```
+
+
+### 比較演算子
+```{r}
+vec1 <- 1:4
+vec2 <- c(2,1,3,4)
+vec1 == vec2
+vec1 > vec2
+vec1 < vec2
+```
+
+```{r}
+vec1 != vec2 # !(vec1==vec2)
+vec1 >= vec2 # (vec1 > vec2 | vec1 == vec2)
+vec1 <= vec2 # (vec1 < vec2 | vec1 == vec2)
+```
+
+
+### ベクトルの関数
+
+ベクトルの和や積も扱える.
+```{r}
+x<-c(1,2,3,4,5)
+sum(x)
+cumsum(x)
+prod(x)
+cumprod(x)
+```
+
+平均, 中央値, 分散, 標準偏差などの統計関数をあつかう.
+```{r}
+x <- c(x,10)
+mean(x)
+median(x)
+var(x)
+sd(x)
+```
+
+
+ベクトルを並べ替えたり, 最小値や最大値
+```{r}
+sort(x)
+min(x)
+which.min(x)
+max(x)
+which.max(x)
+```
+
+### ベクトルの要素
+ベクトルの要素はカギカッコで取り出す.
+```{r}
+num<-c(2,3,7,9)
+num[3]
+```
+
+```{r}
+num[3] <- 500
+num
+```
+
+マイナスをつけるとその要素以外を取り出す.
+```{r}
+num[-3]
+```
+
+複数取り出すこともできる.
+```{r}
+num[c(1,4)]
+```
+
+論理値ベクトルを使って取り出すことができる.
+```{r}
+idx <- c(TRUE,FALSE,TRUE,TRUE)
+num[idx]
+```
+
+論理演算子と組み合わせることができる.
+```{r}
+(num>4)
+num[num>4]
+```
+
+また `:` をもちいて連続したベクトルが作れるので, それを利用してベクトルを抜き出すことができる.
+```{r}
+2:4
+num[2:4]
+```
+
+## 規則的な数列
+```{r}
+1:5
+seq(1, 5)
+seq(1, 5, by = 2)
+seq(1, 5, length.out = 4)
+```
+
+```{r}
+rep(1, 5)
+rep(c(1, 2), times = 3)
+rep(c(1, 2), each = 3)
+```
+
+
+## 乱数列
+1:5の値をでたらめに並べ替えるには関数 `sample` を使う
+```{r}
+set.seed(10)
+sample(1:5) #非復元抽出
+```
+この乱数は一旦出力された値は二度とでない非復元抽出である.
+復元抽出にするには
+```{r}
+sample(1:5, replace=TRUE) #復元抽出
+```
+とオプション `replace=TRUE` をつける.
+
+いくつ取り出すかをオプション `size` で決められる.
+非復元抽出の場合, 取りうる値より大きくできないことに注意されたい.
+```{r}
+sample(c("A","B"), size=10,replace=TRUE)
+```
+
+
+さらに確率を `prob` で変えることができる. 
+```{r}
+sample(c("A","B"), prob=c(0.8,0.2),size=10,replace=TRUE)
+```
+
+一様分布は `runif(size)`, `rnorm(size)` で出力される.
+```{r}
+size <- 8
+runif(size)
+rnorm(size)
+```
+
+
+
+## 因子ベクトル
+ベクトルに `level` という属性をつけることによって, 因子ベクトルとよばれる.
+
+```{r}
+x<-factor("L","S","M","L")
+```
+
+```{r}
+typeof(x)
+class(x)
+length(x)
+```
+
+## リスト
+ベクトルなどを集めたものをリストという.
+ベクトル型の違うベクトルを集められる.
+
+リスト自体もリストとして含められる.
+```{r}
+lst <- list(name="a",num=c(3,3,2))
+lst
+```
+
+```{r}
+typeof(lst)
+class(lst)
+names(lst)
+length(x)
+```
+
+
+
+
+リストベクトルに変換する.
+```{r}
+vec<- c(1:3,2:6)
+vec
+lst<-list(1:3,2:6)
+lst
+unlist(lst)
+```
+
+
+
+## データフレーム
+
+## データ分析
+### 単回帰分析
+回帰分析は以下のコマンドで実施する.
+```{r}
+fm <- lm(dist ~ speed, data= cars)
+```
+
+リストが作られる.
+```{r}
+typeof(fm)
+names(fm)
+```
+
+主な
+```{r}
+fm[["coefficients"]] # fm$coefficients
+fm[["residuals"]]  # fm$residuals
+fm[["fitted.values"]] # fm$fitted.values
+```
+
+これらは以下の関数でも計算できる.
+```{r}
+coef(fm)
+resid(fm)
+fitted(fm) #predict(fm)
+```
+
+
+計算結果は `summary()` で表記される.
+```{r}
+summary(fm)
+```
+
+これもリスト型であり, 以下の要素をもつ.
+```{r}
+typeof(summary(fm))
+names(summary(fm))
+```
+
+おもな要素は以下である.
+```{r}
+summary(fm)[["coefficients"]]
+summary(fm)[["sigma"]]
+summary(fm)[["r.squared"]]
+summary(fm)[["adj.r.squared"]]
+summary(fm)[["cov.unscaled"]]
+```
+
+次のように計算してもよい. 
+```{r}
+coef(summary(fm))
+sigma(fm)
+vcov(fm)
+```
+
+### 重回帰分析
+複数の変数は `+` 付け足すことができる.
+```{r}
+fm<-lm(mpg ~ disp + wt, data =mtcars)
+summary(fm)
+```
+
+```{r}
+data("CPS1985", package="AER")
+summary(CPS1985)
+fm1 <- lm(wage ~ experience + education, data=CPS1985)
+summary(fm1)
+```
+
+
+### 非線形モデル
+被説明変数が対数をとるときの回帰分析は以下を実行する.
+```{r}
+summary(lm(log(dist) ~ speed, data=cars))
+```
+
+説明変数が対数をとるときの回帰分析は以下を実行する.
+```{r}
+summary(lm(dist ~ log(speed), data=cars))
+```
+
+両方が対数をとるときの回帰分析は以下を実行する.
+```{r}
+summary(lm(log(dist) ~ log(speed), data=cars))
+```
+
+または以下のように実行してもよい.
+```{r}
+summary(lm(dist ~ speed, data=log(cars)))
+```
+
+
+## 多項式
+```{r}
+summary(lm(dist ~ speed + I(speed^2), data=cars))
+```
+
+```{r}
+summary(lm(dist ~ poly(speed,2,raw=TRUE), data=cars))
+```
+
+## ダミー変数
+```{r}
+fm1<-lm(mpg ~ disp + am, data =mtcars)
+summary(fm1)
+```
+
+```{r}
+fm<-lm(mpg ~ disp + factor(cyl), data =mtcars)
+summary(fm)
+```
+
+
+
+```{r}
+data("CPS1985", package="AER")
+summary(CPS1985)
+fm1 <- lm(log(wage) ~ education + gender, data=CPS1985)
+summary(fm1)
+```
+
+```{r}
+library(mosaic)
+fn <- makeFun(fm1)
+CPS1985 %>% gf_point(log(wage)~education) %>% 
+  gf_fun(log(fn(education,gender="male"))~education,color="red") %>%
+  gf_fun(log(fn(education,gender="female"))~education,color="blue")
+```
+
+## 交差項
+```{r}
+fm<-lm(mpg ~ disp + factor(cyl) + disp:factor(cyl), data =mtcars)
+summary(fm)
+```
+
+```{r}
+fm<-lm(mpg ~ disp * factor(cyl), data =mtcars)
+summary(fm)
+```
+
+
+```{r}
+fm2 <- lm(log(wage) ~ education + gender + education:gender, data=CPS1985)
+summary(fm2)
+```
+
+```{r}
+fm2 <- lm(log(wage) ~ education * gender, data=CPS1985)
+```
+
+```{r}
+library(mosaic)
+fn <- makeFun(fm2)
+CPS1985 %>% gf_point(log(wage)~education) %>% 
+  gf_fun(log(fn(education,gender="male"))~education,color="red") %>%
+  gf_fun(log(fn(education,gender="female"))~education,color="blue")
+```
+
+以下のようにして, 簡単に作図できる.
+```{r}
+CPS1985 %>% gf_point(log(wage)~education) %>% gf_lm(color = ~gender)
+```
+
+
+## F検定
+個々の説明変数の有意性はティー検定を実施すればよい.
+複数の場合はエフ検定を実施する.
+```{r}
+fm1<- lm(log(wage)~experience, data=CPS1985)
+fm2<- update(fm1,.~.+I(experience^2))
+fm3 <- update(fm2,.~.+education+gender)
+fm4 <- update(fm2,.~.+education*gender)
+anova(fm1,fm2,fm3,fm4)
+
+```
+
+
+## ロバスト分散
+説明変数と誤差項が互いに独立とは言い切れず,
+せいぜい無相関の場合, 最小二乗推定量は不偏でなく一致である.
+漸近的に正規分布にしたがうが,
+係数の分散の計算方法を変える必要がある.
+
+```{r}
+library(AER)
+coeftest(fm4,vcov=vcovHC(fm4,type="HC1"),df = Inf)
+```
+
+```{r}
+waldtest(fm3,fm4,vcov=vcovHC(fm4,type="HC1"),test="Chisq")
+```
+
+## workflow
++ データフレイム作成
++ 回帰モデルを推計
++ 検定を実行
+
+
+
