@@ -4,7 +4,11 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, collapse=TRUE)
+```
+
+```{r, message=FALSE, warning=FALSE}
+library(tidyverse)
 ```
 
 ## はじめに
@@ -15,7 +19,7 @@ R においてデータ分析をおこなうには
 読み込まれたデータはRではデータフレイムとなる.
 
 外部ファイルから入力するさいには
-```{r}
+```{r, eval=FALSE}
 getwd()
 ```
 で現在のワークングディレクトリとファイルが一致しているかどうかを確認しなければならない.
@@ -102,44 +106,43 @@ var1, var2, var3
 4, 4, "text"
 ...
 ```
-最初の一行は変数名を含まれていることが多い, ない場合もある.
+最初の一行は変数名を含まれていることが多いけれど, ない場合もあり事前に確認んが必要である.
+R 以外の計算機で作成した結果を csv で保存しておけば,
+それを R に取り込むことができる.
 
-データの保存のとしては基本的
-
-
-こうしたファイルをRに取り込むには `raed.table` を使えばよい.
-```
+csv ファイルをRに取り込むには関数 `raed.table` を使うのが基本である.
+```{r, eval=FALSE}
 df <- read.table("data.csv", header=TRUE, sep = ",")
 ```
 こうすればオブジェクト `df` にデータフレイムとして導入される.
 
 関数 `read.csv` を使えば, 以上のオプションを付ける必要がない.
-```
+```{r, eval=FALSE}
 df <- read.table("data.csv")
 ```
 
 外部からファイルを取り込んだ場合, 文字列は自動的に因子ベクトルに変換されてしまう.
 これを避けるには次のようにオプションをつける必要がある.
-```
+```{r, eval=FALSE}
 df <- read.table("data.csv", stringsAsFactors= FALSE)
 ```
 
 ファイルを書き込むときには次のようにする. 
-```
+```{r, eval=FALSE}
 write.csv(df,"data.csv", row.names = FALSE)
 ```
 このオプションはファイルの一列目に `rownames` が書き込まれるのを避けるための設定である.
 
 もしくはライブラリ `readr` を導入する.
 ファイルの読み込みは以下となる.
-```
+```{r, eval=FALSE}
 library(readr)
 df <- read_csv("data.csv")
 ```
 特にオプションをつけなくても, 文字列は自動的に因子ベクトルに変換されない.
 
 ファイルの書き込みは以下となる.
-```
+```{r, eval=FALSE}
 write_csv(df,"data.csv")
 ```
 特にオプションをつけなくても, rownames` は書き込まない.
@@ -150,14 +153,14 @@ R は EXCEL のデータを扱うことができる.
 
 最近のEXCELデータの拡張子は `xlsx` である.
 これを導入するにはライブラリ `readxl` を使えばよい.
-```
+```{r, eval=FALSE}
 library(readxl)
 df <- read_excel("data.xlsx",1)
 ```
 ファイル`data.xls` の一枚目のシートを意味する.
 
 直接シート名を指定することができる.
-```
+```{r, eval=FALSE}
 read_excel("data.xlsx","Revenues")
 ```
 こちらは「Revenues」という名前のシートを意味する.
@@ -180,11 +183,11 @@ Linux や Mac では文字コードをUTF-8 にしているので
 そのままの読み込みだと⽇本語が⽂字化けになる . 
 Windows でも RStudio を導入したときに最初に文字コードを UTF-8 に設定していたのなら同じように文字化けになる.
 それを防ぐためには , `read.csv` を用いるときは
-```
+```{r, eval=FALSE}
 df <- read.csv("data.csv", stringAsFactors=FALSE, fileEncoding="SJIS")
 ```
 として, `read_csv` を用いるときは
-```
+```{r, eval=FALSE}
 df <- read_csv("data.csv", locale=locale(encoding = "SJIS"))
 ```
 とする必要がある.
@@ -198,29 +201,29 @@ R は Stata のデータを扱うことができる.
 
 Stata のデータは拡張子 `dta` で保存されている.
 これを導入するにはライブラリ `foreign` を用いる.
-```
+```{r, eval=FALSE}
 library(foreign)
 df <- read.dta("data.dta")
 ```
 
 ただ, 最新のstataには対応していない.
 最新のstataに対応するにはライブラリ `foreign` を導入する.
-```
+```{r, eval=FALSE}
 library(haven)
 df <- read_dta("data.dta")
 ```
 
-他にも `SAS` や `SPSS` などの統計パッケージに対応している.
+他にも `SAS` や `SPSS` などの統計パッケージのデータも取り込むことができる.
 
 ## R に入っているデータ
 R およびパッケージにはいくつかのデータがはいっている.
 どのようなデータが利用可能課は以下のコマンドで調べくことができる.
-```
+```{r, eval=FALSE}
 data()
 ```
 
 それがどのような変数が含まれているのかを調べるには, `help` を使えばよい.
-```
+```{r, eval=FALSE}
 help(cars)
 ```
 
@@ -232,7 +235,7 @@ summary(CPS1985)
 ```
 
 
-## インターネット
+## インターネットからデータ入力
 またWebスクレイピングをしてインターネットのサイトから直接入手できる.
 幾つかのデータベースでは api が公開されて,
 それにもとづいてパッケージが作成されている.
