@@ -6,10 +6,10 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, collapse=TRUE)
 ```
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 library(mosaic)
 ```
 
@@ -21,10 +21,10 @@ library(mosaic)
 fm <- lm(dist ~ speed, data= cars)
 ```
 
+作図すると次のようになる.
 ```{r}
 cars %>% gf_point(dist ~ speed) %>% gf_lm()
 ```
-
 
 リストが作られる.
 ```{r}
@@ -32,7 +32,7 @@ typeof(fm)
 names(fm)
 ```
 
-主な
+おもな要素は以下である.
 ```{r}
 fm[["coefficients"]] # fm$coefficients
 fm[["residuals"]]  # fm$residuals
@@ -135,7 +135,7 @@ summary(fm_3)
 ```
 
 ```{r}
-log(cars) %>% gf_point(dist ~ speed) %>% gf_lm()
+cars %>% gf_point(log(dist) ~ log(speed)) %>% gf_lm()
 ```
 
 ```{r}
@@ -179,12 +179,17 @@ cars %>% gf_point(dist ~ speed) %>% gf_fun(fn5(x) ~ x)
 ```
 
 ## ダミー変数
+以下のデータを考える.
 ```{r}
 summary(mtcars)
+```
+
+`am` が0から1を取るダミー変数である.
+```{r}
 fm1<-lm(mpg ~ disp + am, data =mtcars)
 summary(fm1)
 ```
-
+図示すると以下になる.
 ```{r}
 fn1 <- makeFun(fm1)
 mtcars %>% gf_point(mpg ~ disp) %>% 
@@ -192,11 +197,12 @@ mtcars %>% gf_point(mpg ~ disp) %>%
   gf_fun(fn1(x, am=1) ~ x, color="blue")
 ```
 
+Rでは三種類の値をとる因子ベクトルも説明変数に加えれる.
 ```{r}
 fm<-lm(mpg ~ disp + factor(cyl), data =mtcars)
 summary(fm)
 ```
-
+図示すると以下になる.
 ```{r}
 fn <- makeFun(fm)
 mtcars %>% gf_point(mpg ~ disp) %>% 
@@ -204,19 +210,20 @@ mtcars %>% gf_point(mpg ~ disp) %>%
   gf_fun(fn(x, cyl = "6") ~ x, color="red") %>% 
   gf_fun(fn(x, cyl = "8") ~ x, color="pink")
 ```
+6と8はほぼ同じなため重なってしまう.
 
-
+もう一つ教育年数を説明変数, 賃金を対数としたデータの回帰分析を示す. 
 ```{r}
 data("CPS1985", package="AER")
 summary(CPS1985)
 fm1 <- lm(log(wage) ~ education + gender, data=CPS1985)
 summary(fm1)
 ```
-
+図示すると以下になる.
 ```{r}
 library(mosaic)
 fn <- makeFun(fm1)
-CPS1985 %>% gf_point(log(wage)~education) %>% 
+CPS1985 %>% gf_point(log(wage)~education, color=~gender) %>% 
   gf_fun(log(fn(education,gender="male"))~education,color="red") %>%
   gf_fun(log(fn(education,gender="female"))~education,color="blue")
 ```
@@ -258,14 +265,14 @@ fm2 <- lm(log(wage) ~ education * gender, data=CPS1985)
 ```{r}
 library(mosaic)
 fn <- makeFun(fm2)
-CPS1985 %>% gf_point(log(wage)~education) %>% 
+CPS1985 %>% gf_point(log(wage)~education, color=~gender) %>% 
   gf_fun(log(fn(education,gender="male"))~education,color="red") %>%
-  gf_fun(log(fn(education,gender="female"))~education,color="blue")
+  gf_fun(log(fn(education,gender="female"))~education,color="green")
 ```
 
 以下のようにして, 簡単に作図できる.
 ```{r}
-CPS1985 %>% gf_point(log(wage)~education) %>% gf_lm(color = ~gender)
+CPS1985 %>% gf_point(log(wage)~education, color = ~gender) %>% gf_lm()
 ```
 
 
@@ -296,10 +303,4 @@ coeftest(fm4,vcov=vcovHC(fm4,type="HC1"),df = Inf)
 ```{r}
 waldtest(fm3,fm4,vcov=vcovHC(fm4,type="HC1"),test="Chisq")
 ```
-
-## workflow
-+ データフレイム作成
-+ 回帰モデルを推計
-+ 検定を実行
-
 
