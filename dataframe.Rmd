@@ -1,0 +1,265 @@
+---
+title: "dataframe"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## vector
+```{r}
+vec <- 1:5
+vec <- c(3,3,4)
+```
+
+```{r}
+length(vec)
+```
+
+要素の取り出し
+
+名前
+```{r}
+vec2 <- c(x= 3, y =3, z = 4)
+```
+
+```{r}
+names(vec) <- letters[1:5]
+```
+
+```{r}
+vec["d"]
+```
+
+## factor
+```{r}
+fac <- factor(c("L","L","M","M","S"))
+```
+
+```{r}
+typeof(fac)
+class(fac)
+```
+
+```{r}
+levels(fac)
+```
+
+```{r}
+fac <- factor(c("L","L","M","M","S"), levels =c("S","M","L"))
+fac
+```
+
+```{r}
+(fac.ord <- ordered(fac))
+# ordered(c("L","L","M","M","S"), levels =c("S","M","L"))
+```
+
+0から10までの値を発生させる.
+```{r}
+x <- runif(10,0,10)
+x
+```
+
+5等分するには以下のようにする.
+```{r}
+cut(x, breaks=5)
+```
+これは登場したデータの最大値と最小値の幅を5等分している.
+
+区間を指定するには以下のようにベクトルで指定する.
+```{r}
+cut(x,breaks=c(0,2,4,6,8,10))
+```
+0より大きく2以下, 2より大きく4以下,... となっている.
+
+0も含めるのなら `include.lowest=TRUE` というオプションをつける.
+```{r}
+cut(x, breaks=seq(0,10,2),include.lowest=TRUE)
+```
+
+またこれを0以上2未満, 2以上4未満, ... とするにはオプション `right=FALSE` をつける.
+```{r}
+cut(x, breaks=seq(0,10,2),right=FALSE,include.lowest=TRUE)
+```
+このとき, `include.lowest=TRUE` は最大値を含めることを意味する.
+
+また因子の名称はオプション `labels` で変更可能である.
+```{r}
+cut(x, breaks=seq(0,10,2),right=FALSE,include.lowest=TRUE,
+    labels =c("A","B","C","D","E"))
+```
+
+## matrix
+```{r}
+mat <- matrix(1:10, nrow=2,ncol=5)
+mat
+```
+
+オプション `byrow=TRUE` で横から行列を作成できる.
+```{r}
+matrix(1:10, nrow=2,ncol=5,byrow = TRUE)
+```
+
+```{r}
+typeof(mat)
+class(mat)
+```
+
+
+```{r}
+length(mat)
+dim(mat)
+nrow(mat)
+ncol(mat)
+```
+
+行列からベクトルの取り出し
+```{r}
+mat[2,]
+```
+
+オプション `drop=FALSE` で行列のまま取り出す.
+```{r}
+mat[, 3, drop=FALSE]
+```
+
+
+```{r}
+mat[,2:3]
+```
+
+要素の取り出し
+```{r}
+mat[2,3]
+```
+
+名前を付けられる.
+```{r}
+colnames(mat) <- 1:5
+rownames(mat) <- letters[1:2]
+mat
+```
+
+
+```{r}
+mat["a","3"]
+```
+
+### list
+
+```{r}
+lst <- list("mat",1:5,rnorm(10))
+```
+
+```{r}
+lst[1]
+```
+
+```{r}
+lst[[1]]
+```
+
+
+名前
+```{r}
+names(lst) <- c("x","y","z")
+lst <- list(x="mat",y=1:5,z=rnorm(10))
+```
+
+```{r}
+lst["x"]
+```
+
+```{r}
+lst[["x"]]
+lst$x
+```
+
+```{r}
+sum(lst$y)
+with(lst,sum(y))
+```
+
+転置
+```{r}
+t(mat)
+```
+
+```{r}
+matb<-matrix(1:4,nrow=2,ncol=2)
+matb %*% mat
+t(mat) %*% mat
+crossprod(mat)
+```
+
+
+```{r}
+colSums(mat)
+rowSums(mat)
+sum(mat)
+```
+
+```{r}
+colMeans(mat)
+rowMeans(mat)
+sum(mat)
+```
+
+
+
+### dataframe
+```{r}
+df <- data.frame(x=rnorm(10),y=sample(letters[1:2],10,replace=TRUE))
+df
+```
+
+```{r}
+typeof(df)
+class(df)
+```
+
+リストのように長さと名前をもつ.
+```{r}
+length(df)
+names(df)
+```
+
+行列と同じ次元をもつ.
+```{r}
+dim(df)
+ncol(df)
+nrow(df)
+```
+`ncol(df)` は `length(df)` と同じである.
+
+
+行列と同じ名前をもつ.
+```{r}
+colnames(df)
+rownames(df)
+```
+`colnames(df)` は `names(df)` と同じである.
+
+データフレイムとして取り出す
+```{r}
+df["x"] #df[,"x",drop=FALSE]
+```
+
+ベクトルとして取り出す
+```{r}
+df[["x"]] # df[,"x"]
+```
+
+要素を取り出す
+```{r}
+df$x[3] 
+```
+
+平均など
+```{r}
+summary(df)
+```
+
+
