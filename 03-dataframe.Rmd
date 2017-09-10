@@ -2,7 +2,7 @@
 title: "dataframe"
 output: html_document
 ---
-
+# データ構造
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE,collapse=TRUE)
 ```

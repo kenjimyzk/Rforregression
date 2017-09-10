@@ -3,6 +3,7 @@ title: "データ入力"
 output: html_document
 ---
 
+# データ入力
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, collapse=TRUE)
 ```

@@ -3,12 +3,11 @@ title: "datawrangling"
 output: html_document
 ---
 
+# 整然データ
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-
-## 整然データ
 http://r4ds.had.co.nz/tidy-data.html
 
 データが整然 (tidy) であるとは次の条件を満たすデータのことである.

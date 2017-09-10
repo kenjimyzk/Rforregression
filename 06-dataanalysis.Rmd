@@ -5,16 +5,12 @@ output:
   html_notebook: default
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, collapse=TRUE)
-```
-
+# データ分析
 ```{r, message=FALSE, warning=FALSE}
 library(mosaic)
 ```
 
-
-## データ分析
+## 回帰分析
 ### 単回帰分析
 回帰分析は以下のコマンドで実施する.
 ```{r}
@@ -89,7 +85,8 @@ summary(fm1)
 ```
 
 
-### 非線形モデル
+## 非線形モデル
+### 対数モデル
 被説明変数が対数をとるときの回帰分析は以下を実行する.
 ```{r}
 fm_1 <-lm(log(dist) ~ speed, data=cars)
@@ -163,7 +160,7 @@ log(cars) %>% gf_point(dist ~ speed) %>% gf_fun(fn4(x) ~ x)
 ```
 
 
-## 多項式
+### 多項式
 ```{r}
 summary(lm(dist ~ speed + I(speed^2), data=cars))
 ```
@@ -179,6 +176,7 @@ cars %>% gf_point(dist ~ speed) %>% gf_fun(fn5(x) ~ x)
 ```
 
 ## ダミー変数
+### 定数ダミー項
 以下のデータを考える.
 ```{r}
 summary(mtcars)
@@ -228,7 +226,7 @@ CPS1985 %>% gf_point(log(wage)~education, color=~gender) %>%
   gf_fun(log(fn(education,gender="female"))~education,color="blue")
 ```
 
-## 交差項
+### 交差項
 ```{r}
 fm<-lm(mpg ~ disp + factor(cyl) + disp:factor(cyl), data =mtcars)
 summary(fm)
