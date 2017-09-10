@@ -38,8 +38,6 @@ df <- data_frame(x = rnorm(10), y = letters[1:10])
 str(df)
 ```
 
-
-
 外部ファイルから入力するさいには
 ```{r, eval=FALSE}
 getwd()
@@ -50,8 +48,6 @@ getwd()
 また `RStudio` はメニューバーの `File => Import Dataset` からインタラクティブに外部ファイルが入力可能である.
 いったんこれで入力したとしても, `history` ペインでどのようなコマンドを実行したかを確認して, 
 次回も実行できるよう記録しておくとよい.
-
-
 
 ## csv ファイル
 
