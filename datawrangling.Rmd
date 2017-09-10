@@ -1,0 +1,169 @@
+---
+title: "datawrangling"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+```
+
+
+## データ整形
+https://github.com/rstudio/cheatsheets/raw/master/source/pdfs/data-transformation-cheatsheet.pdf
+
+データセット `mtcars` を取り扱う.
+```{r, eval=FALSE}
+data()
+help(mtcars)
+```
+
+この最初の6つを見るには以下を実施する.
+```{r}
+mtcars %>% head()
+```
+`%>%` はパイプ処理といって, 
+```{r, eval=FALSE}
+head(mtcars)
+```
+と同じ効果をもたらす. 括弧が重複する場合, こちらのほうがわかりやすい.
+
+## dplyr
+ライブラリ `dplyr` でデータフレイムの処理が簡単になる.
+select で変数を選択できる.
+```{r}
+mtcars %>% select(mpg, disp) %>% head()
+```
+
+`filter` により条件に応じた抽出ができる.
+```{r}
+mtcars %>% select(mpg, disp) %>% filter(disp > 300) %>% head()
+```
+
+`rename` により変数名を変更することができる. 日本語でも一応対応している.
+```{r}
+mtcars %>% select(mpg, disp) %>% rename(速度 =mpg, 距離 =disp) %>% head()
+```
+
+`arrange` により順序を変更できる.
+```{r}
+mtcars %>% select(mpg, disp) %>% arrange(mpg) %>% head()
+```
+
+逆順には以下のようにすればよい.
+```{r}
+mtcars %>% select(mpg, disp) %>% arrange(desc(mpg)) %>% head()
+```
+
+新しい変数を作成するには以下のように `mutate` を用いる.
+```{r}
+mtcars %>% select(mpg) %>% mutate(gpm = 1/mpg) %>% head()
+```
+
+以下は20より大きいと`TRUE`, そうでないと `FALSE` をとる変数を作成している.
+```{r}
+mtcars %>% select(mpg) %>% mutate(binarympg = ifelse(mpg>20,TRUE,FALSE)) %>% head()
+```
+
+`summarize` により変数の基本統計表を作成できる.
+```{r}
+mtcars %>% summarize(avg = mean(mpg), sd =sd(mpg))
+```
+
+
+`group_by` と 'summarize` を組み合わせてグループごとの基本統計量も作成できる.
+
+```{r}
+mtcars %>% group_by(cyl) %>% summarize(n = n(), avg = mean(mpg), sd =sd(mpg))
+```
+
+## tidyr
+
+以下のデータセットを考える.
+```{r}
+df <- data.frame(
+  time = 2010:2014,
+  X = rnorm(5, 0, 1),
+  Y = rnorm(5, 0, 2),
+  Z = rnorm(5, 0, 4)
+)
+df
+```
+
+それぞれの変数名をキーとして, 値を示した表は `gather` で作れる.
+```{r}
+df_gather <- df %>% gather(key,value,-time)
+df_gather
+```
+
+`spread` でもとに戻ることができる.
+```{r}
+df_gather %>% spread(key, value)
+```
+
+`spread` で `time` にすると別の形で展開できる.
+```{r}
+df_spread <- df_gather %>% spread(time, value)
+df_spread
+```
+
+以下のようにすればもとに戻る.
+```{r}
+df_spread %>% gather(time,value,-key)
+```
+
+`gather` をうまく使えば変数ごとの基本統計量の表を作ることができる.
+```{r}
+cars %>% gather(variable,value) %>% group_by(variable) %>%
+  summarize(nobs = n(), avg = mean(value), sd =sd(value))
+```
+
+日本語だと次のようにすればよい.
+```{r}
+tab <- cars %>% rename(距離=dist,速度=speed ) %>%
+  gather(変数,value) %>% group_by(変数) %>%
+  summarize(観測数 = n(), 平均 = mean(value), 標準偏差 =sd(value))
+head(tab)
+```
+
+## 実践例
+tidyr を用いた別の例をみてみよう.
+横軸を年としたデータセット `df` がある.
+```{r}
+df <- data_frame(name=letters, "2010"=rnorm(26),"2011"=rnorm(26),"2012"=rnorm(26)) 
+head(df)
+```
+`data.frame` でないことに注意されたい.
+
+また, 年ごとのデータセット `df_2010`, `df_2011`, `df_2012` が3つある.
+```{r}
+df_2010 <- data_frame(name=letters,runif=runif(26))
+df_2011 <- data_frame(name=letters,runif=runif(26))
+df_2012 <- data_frame(name=letters,runif=runif(26))
+```
+これら4つのデータセットを1つにまとめよう.
+
+まずデータ `df` についてであるが, `gather` をつかう.
+```{r}
+df_rnorm <- df %>% gather(time,rnorm,-name) %>%
+  mutate(time=as.numeric(time))
+head(df_rnorm)
+```
+時間の変数を数値に変換している.
+
+データセット `df_2010`, `df_2011`, `df_2012` をつなげる.
+```{r}
+df_runif <- bind_rows(df_2010,df_2011,df_2012) %>% 
+  bind_cols(time=rep(2010:2012,each=26)) 
+head(df_runif)
+```
+それぞれの年の変数を付け加えている.
+
+これを `full_join` を用いてつなげる.
+```{r}
+df_full <- full_join(df_rnorm,df_runif,by=c("name","time"))
+head(df_full)  
+```
