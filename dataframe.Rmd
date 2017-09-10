@@ -4,58 +4,41 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE,collapse=TRUE)
 ```
 
-## vector
+## 因子ベクトル
+文字列ベクトルを引数にした関数 `factor`によって 因子 (factor) ベクトルを作成できる.
 ```{r}
-vec <- 1:5
-vec <- c(3,3,4)
+(x <- c("L","S","M","M","L"))
+(x.fac <- factor(x))
 ```
 
+因子ベクトルの実体は `level` という属性をもつ整数ベクトルである.
 ```{r}
-length(vec)
+typeof(x.fac)
+length(x.fac)
+levels(x.fac)
 ```
 
-要素の取り出し
-
-名前
+関数 `class` によって因数ベクトルがであることが確認でき, `str` で属性を詳しく調べることができる.
 ```{r}
-vec2 <- c(x= 3, y =3, z = 4)
+class(x.fac)
+str(x.fac)
 ```
 
+また水準の表示順は自動的にアルファベット順になるが, それを変更するには次のようにする.
 ```{r}
-names(vec) <- letters[1:5]
+(x.factor <- factor(x,levels=c("S","M","L")))
 ```
 
+この水準に順序構造を付与するには次のようにする.
 ```{r}
-vec["d"]
+(x.order <- ordered(x,levels=c("S","M","L")))
 ```
 
-## factor
-```{r}
-fac <- factor(c("L","L","M","M","S"))
-```
-
-```{r}
-typeof(fac)
-class(fac)
-```
-
-```{r}
-levels(fac)
-```
-
-```{r}
-fac <- factor(c("L","L","M","M","S"), levels =c("S","M","L"))
-fac
-```
-
-```{r}
-(fac.ord <- ordered(fac))
-# ordered(c("L","L","M","M","S"), levels =c("S","M","L"))
-```
-
+## cut
+また数値を区間ごとに区分した因子ベクトルも作成可能である.
 0から10までの値を発生させる.
 ```{r}
 x <- runif(10,0,10)
@@ -92,28 +75,37 @@ cut(x, breaks=seq(0,10,2),right=FALSE,include.lowest=TRUE,
 ```
 
 ## matrix
+ベクトルに縦と横の次元を付与することによって行列を作ることができる.
 ```{r}
 mat <- matrix(1:10, nrow=2,ncol=5)
 mat
 ```
 
-オプション `byrow=TRUE` で横から行列を作成できる.
+またオプション `byrow=TRUE` で横から行列を作成できる.
 ```{r}
 matrix(1:10, nrow=2,ncol=5,byrow = TRUE)
 ```
 
+この行列の実体は `dim` という属性を持つ数値ベクトルである.
 ```{r}
 typeof(mat)
-class(mat)
-```
-
-
-```{r}
 length(mat)
 dim(mat)
+dim(mat)
+```
+
+他にもそれぞれの要素の次元は以下で得ることができる.
+```{r}
 nrow(mat)
 ncol(mat)
 ```
+
+関数 `class` によって因数ベクトルがであることが確認でき, `str` で属性を詳しく調べることができる.
+```{r}
+class(mat)
+str(mat)
+```
+
 
 行列からベクトルの取り出し
 ```{r}
@@ -135,52 +127,18 @@ mat[,2:3]
 mat[2,3]
 ```
 
-名前を付けられる.
+行列に名前を付けることができる.
 ```{r}
 colnames(mat) <- 1:5
 rownames(mat) <- letters[1:2]
 mat
 ```
 
-
+これによって以下のようにしてもアクセス可能である.
 ```{r}
 mat["a","3"]
 ```
 
-### list
-
-```{r}
-lst <- list("mat",1:5,rnorm(10))
-```
-
-```{r}
-lst[1]
-```
-
-```{r}
-lst[[1]]
-```
-
-
-名前
-```{r}
-names(lst) <- c("x","y","z")
-lst <- list(x="mat",y=1:5,z=rnorm(10))
-```
-
-```{r}
-lst["x"]
-```
-
-```{r}
-lst[["x"]]
-lst$x
-```
-
-```{r}
-sum(lst$y)
-with(lst,sum(y))
-```
 
 転置
 ```{r}
@@ -208,13 +166,95 @@ sum(mat)
 ```
 
 
+## リスト
+ベクトルなどを集めたものをリストという.
+ベクトル型の違うベクトルを関数 `list` で集める.
 
-### dataframe
+リストの属性には長さがある.
 ```{r}
-df <- data.frame(x=rnorm(10),y=sample(letters[1:2],10,replace=TRUE))
-df
+(lst <- list("a",c(3,3,2)))
+typeof(lst)
+length(lst)
 ```
 
+関数 `class` によってリストがであることが確認でき, `str` で属性を詳しく調べることができる.
+```{r}
+class(lst)
+str(lst)
+```
+
+また次のようにして名前の属性をつけられる.
+```{r}
+(lst <- list(name="a",num=c(3,3,2)))
+names(lst)
+```
+
+リストの取りだすには次のようにする.
+```{r}
+lst[1]
+```
+名前の属性がついていれば以下のようにもできる.
+```{r}
+lst["num"]
+```
+
+いずれにせよ取り出したののもリストになることに注意されたい.
+```{r}
+typeof(lst[1])
+typeof(lst["num"])
+```
+
+ベクトルとして取り出すには次のようにする.
+```{r}
+lst[[2]]
+typeof(lst[[2]])
+```
+名前の属性がついていれば以下のようにもできる.
+```{r}
+lst[["num"]]
+lst$num
+```
+
+リストとベクトルの違いとして, リスト自体もリストとして含められることがある.
+```{r}
+typeof(list("b",lst))
+```
+
+リストベクトルに変換するには `unlist` を用いる.
+それぞれの型が違う場合, 同じ型に強制変換される.
+```{r}
+lst<-list(1:3,2:6)
+lst
+unlist(lst)
+unlist(list("a",1:4))
+```
+
+
+## データフレイム
+同じ長さのベクトルを組み合わせたリストをデータフレイム (dataframe) という.
+データフレイムは次のようにして作られる.
+```{r}
+df <- data.frame(x = rnorm(10), y = letters[1:10])
+```
+
+データフレイムは大規模なことが多いので最初の数行だけをみるためには `head` をもちいる.
+```{r}
+head(df)
+```
+
+データの簡単な統計表は `summary` を使うとよい.
+```{r}
+summary(df)
+```
+
+よりプログラム言語としてのデータ構造を調べるには `str` を使えばよい.
+```{r}
+str(df)
+```
+
+## データフレイムの構造
+
+データフレイムはリストである.
 ```{r}
 typeof(df)
 class(df)
@@ -242,24 +282,50 @@ rownames(df)
 ```
 `colnames(df)` は `names(df)` と同じである.
 
-データフレイムとして取り出す
+
+## データフレイムの変換
+
+データフレイムは自動的に文字列が因子ベクトルに変換されてしまう.
+これを避けるには次のように `stringsAsFactors= FALSE` をつける.
 ```{r}
-df["x"] #df[,"x",drop=FALSE]
+df <- data.frame(x = rnorm(10), y = letters[1:10], stringsAsFactors= FALSE)
+str(df)
 ```
 
-ベクトルとして取り出す
+もしくはライブラリ `dplyr` にある `data_frame` を用いれば, そのようなオプションを付けることなくデータフレイムを拡張したクラスを作ることができる.
 ```{r}
-df[["x"]] # df[,"x"]
+library(dplyr)
+df <- data_frame(x = rnorm(10), y = letters[1:10])
+str(df)
 ```
 
-要素を取り出す
+## データフレイムのアクセス.
+データのアクセスとして, ベクトルのように一つのカギカッコで取り出すと以下のようになる.
 ```{r}
-df$x[3] 
+df["x"]
 ```
+他にも `df[1]` でもよいが, いずれにせよデータフレイムとして取り出されてしまう.
 
-平均など
+ベクトルとして取り出すには以下を実施する.
 ```{r}
-summary(df)
+df$x
 ```
+他にも `df[["x"]], df[[1]], df[,"x"], df[,1]` でもよい.
+`
+ある変数 $x$ の5番目の要素を取り出して別の値`100`を代入するには以下のようにする.
+```{r}
+df$x[5] <- 100
+```
+他にも `df[["x"]][5], df[[1]][5], df[5,"x"], df[5,1]` でもよい.
+
+データフレイムのある変数の平均値を求めるには次のようにする.
+```{r}
+mean(df$x)
+```
+もしくは以下とする.
+```{r}
+with(df, mean(x))
+```
+他にも `attach(df)` を使うやり方もあるが, 現在では推奨されない.
 
 
