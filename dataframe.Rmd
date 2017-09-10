@@ -8,6 +8,7 @@ knitr::opts_chunk$set(echo = TRUE,collapse=TRUE)
 ```
 
 ## 因子ベクトル
+### factor
 文字列ベクトルを引数にした関数 `factor`によって 因子 (factor) ベクトルを作成できる.
 ```{r}
 (x <- c("L","S","M","M","L"))
@@ -37,7 +38,7 @@ str(x.fac)
 (x.order <- ordered(x,levels=c("S","M","L")))
 ```
 
-## cut
+### cut
 また数値を区間ごとに区分した因子ベクトルも作成可能である.
 0から10までの値を発生させる.
 ```{r}
@@ -74,8 +75,8 @@ cut(x, breaks=seq(0,10,2),right=FALSE,include.lowest=TRUE,
     labels =c("A","B","C","D","E"))
 ```
 
-## matrix
-ベクトルに縦と横の次元を付与することによって行列を作ることができる.
+## 行列
+ベクトルに縦と横の次元を付与することによって行列 (matrix) を作ることができる.
 ```{r}
 mat <- matrix(1:10, nrow=2,ncol=5)
 mat
@@ -106,6 +107,7 @@ class(mat)
 str(mat)
 ```
 
+### 行列のアクセス
 
 行列からベクトルの取り出し
 ```{r}
@@ -139,32 +141,35 @@ mat
 mat["a","3"]
 ```
 
-
-転置
+### 行列の演算
+転置行列は以下のようにすればよい.
 ```{r}
 t(mat)
 ```
 
+通常の `*` は要素ごとの掛け算になる. 
+数学で用いられる行列同士の掛け算は `%*%` を実施する.
 ```{r}
 matb<-matrix(1:4,nrow=2,ncol=2)
 matb %*% mat
-t(mat) %*% mat
-crossprod(mat)
 ```
+行列のことが一致させる必要がある.
 
-
+また列ごとの合計, 行ごとの合計は以下を実施する.
 ```{r}
 colSums(mat)
 rowSums(mat)
+```
+返り値はベクトルになる. 行列のすべての要素を足すには `sum` でよい.
+```{r}
 sum(mat)
 ```
 
+また列ごとの平均, 行ごとの平均は以下を実施する.
 ```{r}
 colMeans(mat)
 rowMeans(mat)
-sum(mat)
 ```
-
 
 ## リスト
 ベクトルなどを集めたものをリストという.
@@ -183,6 +188,23 @@ class(lst)
 str(lst)
 ```
 
+
+リストとベクトルの違いとして, リスト自体もリストとして含められることがある.
+```{r}
+typeof(list("b",lst))
+```
+
+リストベクトルに変換するには `unlist` を用いる.
+それぞれの型が違う場合, 同じ型に強制変換される.
+```{r}
+lst<-list(1:3,2:6)
+lst
+unlist(lst)
+unlist(list("a",1:4))
+```
+
+
+### リストのアクセス
 また次のようにして名前の属性をつけられる.
 ```{r}
 (lst <- list(name="a",num=c(3,3,2)))
@@ -215,18 +237,13 @@ lst[["num"]]
 lst$num
 ```
 
-リストとベクトルの違いとして, リスト自体もリストとして含められることがある.
+リストのあるベクトルの平均値を求めるには次のようにする.
 ```{r}
-typeof(list("b",lst))
+mean(lst$num)
 ```
-
-リストベクトルに変換するには `unlist` を用いる.
-それぞれの型が違う場合, 同じ型に強制変換される.
+もしくは以下とする.
 ```{r}
-lst<-list(1:3,2:6)
-lst
-unlist(lst)
-unlist(list("a",1:4))
+with(lst, mean(num))
 ```
 
 
@@ -252,8 +269,6 @@ summary(df)
 str(df)
 ```
 
-## データフレイムの構造
-
 データフレイムはリストである.
 ```{r}
 typeof(df)
@@ -274,7 +289,6 @@ nrow(df)
 ```
 `ncol(df)` は `length(df)` と同じである.
 
-
 行列と同じ名前をもつ.
 ```{r}
 colnames(df)
@@ -283,23 +297,7 @@ rownames(df)
 `colnames(df)` は `names(df)` と同じである.
 
 
-## データフレイムの変換
-
-データフレイムは自動的に文字列が因子ベクトルに変換されてしまう.
-これを避けるには次のように `stringsAsFactors= FALSE` をつける.
-```{r}
-df <- data.frame(x = rnorm(10), y = letters[1:10], stringsAsFactors= FALSE)
-str(df)
-```
-
-もしくはライブラリ `dplyr` にある `data_frame` を用いれば, そのようなオプションを付けることなくデータフレイムを拡張したクラスを作ることができる.
-```{r}
-library(dplyr)
-df <- data_frame(x = rnorm(10), y = letters[1:10])
-str(df)
-```
-
-## データフレイムのアクセス.
+### データフレイムのアクセス.
 データのアクセスとして, ベクトルのように一つのカギカッコで取り出すと以下のようになる.
 ```{r}
 df["x"]
