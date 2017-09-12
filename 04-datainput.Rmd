@@ -50,6 +50,8 @@ getwd()
 いったんこれで入力したとしても, `history` ペインでどのようなコマンドを実行したかを確認して, 
 次回も実行できるよう記録しておくとよい.
 
+
+
 ## csv ファイル
 
 csv ファイルの csv とは comma separated variable の略で,
@@ -179,6 +181,10 @@ data()
 それがどのような変数が含まれているのかを調べるには, `help` を使えばよい.
 ```{r, eval=FALSE}
 help(cars)
+```
+
+```{r}
+knitr::include_graphics("figs/rstudio_data.gif")
 ```
 
 パッケージのデータは関数 `data` をつかって利用可能になる.
