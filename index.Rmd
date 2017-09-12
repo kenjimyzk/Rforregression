@@ -1,6 +1,6 @@
 --- 
-title: "book_title"
-author: "author_name"
+title: "R のきほん"
+author: "宮﨑憲治"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 output:
