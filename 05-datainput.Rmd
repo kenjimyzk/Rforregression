@@ -1,5 +1,4 @@
 ---
-title: "データ入力"
 output: html_document
 ---
 
@@ -46,11 +45,12 @@ getwd()
 で現在のワークングディレクトリとファイルが一致しているかどうかを確認しなければならない.
 もし一致していないのなら `setwd` で変更する必要がある.
 
-また `RStudio` はメニューバーの `File => Import Dataset` からインタラクティブに外部ファイルが入力可能である.
-いったんこれで入力したとしても, `history` ペインでどのようなコマンドを実行したかを確認して, 
-次回も実行できるよう記録しておくとよい.
+また `RStudio` はメニューバーの `File` から `Import Dataset` からインタラクティブに外部ファイルが入力可能である.
+いったんこれで入力したとしても, history ペインでどのようなコマンドを実行したかを確認して, 次回も実行できるよう記録しておくとよい.
 
-
+```{r, echo=FALSE}
+knitr::include_graphics("figs/rstudio_input.gif")
+```
 
 ## csv ファイル
 
@@ -62,9 +62,8 @@ var1, var2, var3
 4, 4, "text"
 ...
 ```
-最初の一行は変数名を含まれていることが多いけれど, ない場合もあり事前に確認んが必要である.
-R 以外の計算機で作成した結果を csv で保存しておけば,
-それを R に取り込むことができる.
+最初の一行は変数名を含まれていることが多いけれど, ない場合もあり事前に確認が必要である.
+R 以外の計算機で作成した結果を csv で保存しておけば, それを R に取り込むことができる.
 
 csv ファイルをRに取り込むには関数 `raed.table` を使うのが基本である.
 ```{r, eval=FALSE}
@@ -101,7 +100,7 @@ df <- read_csv("data.csv")
 ```{r, eval=FALSE}
 write_csv(df,"data.csv")
 ```
-特にオプションをつけなくても, rownames` は書き込まない.
+特にオプションをつけなくても, `rownames` は書き込まない.
 
 ## EXCEL ファイル
 EXCELはビジネスにおいてデファクトスタンダードになっているスプレッドシートソフトウェアである.
@@ -163,7 +162,7 @@ df <- read.dta("data.dta")
 ```
 
 ただ, 最新のstataには対応していない.
-最新のstataに対応するにはライブラリ `foreign` を導入する.
+最新のstataに対応するにはライブラリ `haven` を導入する.
 ```{r, eval=FALSE}
 library(haven)
 df <- read_dta("data.dta")
@@ -183,7 +182,7 @@ data()
 help(cars)
 ```
 
-```{r}
+```{r, echo=FALSE}
 knitr::include_graphics("figs/rstudio_data.gif")
 ```
 
