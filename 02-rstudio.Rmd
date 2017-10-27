@@ -5,13 +5,13 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, collapse=TRUE)
+knitr::opts_chunk$set(echo = FALSE, collapse=TRUE)
 ```
 
 # RStudio
 
 ## RStudio とは
-R の統合開発環境 (IDE, Integrated Development Enviroment) である.
+RStudio とは R の統合開発環境 (IDE, Integrated Development Enviroment) である.
 オープンソース版が存在する.
 
 https://ja.wikipedia.org/wiki/R-Studio

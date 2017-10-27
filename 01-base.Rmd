@@ -9,7 +9,8 @@ knitr::opts_chunk$set(echo = TRUE, collapse=TRUE)
 ```
 
 # 基本
-R の基本として以下音2つがよくできている. ただし英語である.
+R の基本として以下の2つのサイトでオンラインで学習することをオススメする.
+  ただし英語である.
 
 http://tryr.codeschool.com/
 
@@ -144,9 +145,9 @@ x = 4
 assign("x",4)
 ```
 多くのプログラム言語では3番目のやり方をだけであるが,
-R では最初のやり方を推奨している.
-例えば以下を参照されたい:  
-http://adv-r.had.co.nz/Style.html
+R では最初のやり方を推奨している.^[
+例えば以下を参照されたい: http://adv-r.had.co.nz/Style.html
+]
 
 代入した値を確認するには単にその変数を入力すればよい.
 代入と同時に確認するには丸括弧をつけるとよい.
@@ -185,7 +186,7 @@ R においてパッケージを導入することによって, 機能を拡張�
 ```{r, eval=FALSE}
 install.packages("pkg", dependencies = =TRUE)
 ```
-とする. オプション `dependencies = =TRUE` 依存するパッケージを同時に導入してくれる.
+とする. オプション `dependencies = TRUE` 依存するパッケージを同時に導入してくれる.
 
 パッケージ `pkg` が導入していれば, そのコマンド `cmd` を実行するには
 ```{r, eval=FALSE}
