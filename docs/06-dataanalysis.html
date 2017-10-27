@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html  lang="ja-JP">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>book_title</title>
+  <meta name="description" content="This is a description. Please wrote a abstract this contents.">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+
+  <meta property="og:title" content="book_title" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a description. Please wrote a abstract this contents." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="book_title" />
+  
+  <meta name="twitter:description" content="This is a description. Please wrote a abstract this contents." />
+  
+
+<meta name="author" content="author_name">
+
+
+<meta name="date" content="2017-09-12">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="05-datawrangling.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">サイト(書籍)タイトルいれてね</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>はじめに</a><ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#r-とは"><i class="fa fa-check"></i><b>0.1</b> R とは</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#r-のインストール"><i class="fa fa-check"></i><b>0.2</b> R のインストール</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#r-の設定"><i class="fa fa-check"></i><b>0.3</b> R の設定</a></li>
+<li class="chapter" data-level="0.4" data-path="index.html"><a href="index.html#r-の使い方"><i class="fa fa-check"></i><b>0.4</b> R の使い方</a></li>
+<li class="chapter" data-level="0.5" data-path="index.html"><a href="index.html#rstudio-とは"><i class="fa fa-check"></i><b>0.5</b> RStudio とは</a></li>
+<li class="chapter" data-level="0.6" data-path="index.html"><a href="index.html#rstudio-のインストール"><i class="fa fa-check"></i><b>0.6</b> RStudio のインストール</a></li>
+<li class="chapter" data-level="0.7" data-path="index.html"><a href="index.html#rstudio-の設定"><i class="fa fa-check"></i><b>0.7</b> RStudio の設定</a></li>
+<li class="chapter" data-level="0.8" data-path="index.html"><a href="index.html#rstudio-の使い方"><i class="fa fa-check"></i><b>0.8</b> RStudio の使い方</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="01-base.html"><a href="01-base.html"><i class="fa fa-check"></i><b>1</b> 基本</a><ul>
+<li class="chapter" data-level="1.1" data-path="01-base.html"><a href="01-base.html#電卓としての-r"><i class="fa fa-check"></i><b>1.1</b> 電卓としての R</a></li>
+<li class="chapter" data-level="1.2" data-path="01-base.html"><a href="01-base.html#関数電卓としてのr"><i class="fa fa-check"></i><b>1.2</b> 関数電卓としてのR</a></li>
+<li class="chapter" data-level="1.3" data-path="01-base.html"><a href="01-base.html#r-の型"><i class="fa fa-check"></i><b>1.3</b> R の型</a></li>
+<li class="chapter" data-level="1.4" data-path="01-base.html"><a href="01-base.html#変数"><i class="fa fa-check"></i><b>1.4</b> 変数</a></li>
+<li class="chapter" data-level="1.5" data-path="01-base.html"><a href="01-base.html#パッケージ"><i class="fa fa-check"></i><b>1.5</b> パッケージ</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="02-vector.html"><a href="02-vector.html"><i class="fa fa-check"></i><b>2</b> ベクトル</a><ul>
+<li class="chapter" data-level="2.1" data-path="02-vector.html"><a href="02-vector.html#ベクトル-1"><i class="fa fa-check"></i><b>2.1</b> ベクトル</a></li>
+<li class="chapter" data-level="2.2" data-path="02-vector.html"><a href="02-vector.html#算術演算子"><i class="fa fa-check"></i><b>2.2</b> 算術演算子</a></li>
+<li class="chapter" data-level="2.3" data-path="02-vector.html"><a href="02-vector.html#論理演算子"><i class="fa fa-check"></i><b>2.3</b> 論理演算子</a></li>
+<li class="chapter" data-level="2.4" data-path="02-vector.html"><a href="02-vector.html#比較演算子"><i class="fa fa-check"></i><b>2.4</b> 比較演算子</a></li>
+<li class="chapter" data-level="2.5" data-path="02-vector.html"><a href="02-vector.html#要素"><i class="fa fa-check"></i><b>2.5</b> 要素</a></li>
+<li class="chapter" data-level="2.6" data-path="02-vector.html"><a href="02-vector.html#関数"><i class="fa fa-check"></i><b>2.6</b> 関数</a></li>
+<li class="chapter" data-level="2.7" data-path="02-vector.html"><a href="02-vector.html#規則的なベクトル"><i class="fa fa-check"></i><b>2.7</b> 規則的なベクトル</a></li>
+<li class="chapter" data-level="2.8" data-path="02-vector.html"><a href="02-vector.html#乱数ベクトル"><i class="fa fa-check"></i><b>2.8</b> 乱数ベクトル</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="03-dataframe.html"><a href="03-dataframe.html"><i class="fa fa-check"></i><b>3</b> データ構造</a><ul>
+<li class="chapter" data-level="3.1" data-path="03-dataframe.html"><a href="03-dataframe.html#因子ベクトル"><i class="fa fa-check"></i><b>3.1</b> 因子ベクトル</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="03-dataframe.html"><a href="03-dataframe.html#factor"><i class="fa fa-check"></i><b>3.1.1</b> factor</a></li>
+<li class="chapter" data-level="3.1.2" data-path="03-dataframe.html"><a href="03-dataframe.html#cut"><i class="fa fa-check"></i><b>3.1.2</b> cut</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="03-dataframe.html"><a href="03-dataframe.html#行列"><i class="fa fa-check"></i><b>3.2</b> 行列</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="03-dataframe.html"><a href="03-dataframe.html#行列のアクセス"><i class="fa fa-check"></i><b>3.2.1</b> 行列のアクセス</a></li>
+<li class="chapter" data-level="3.2.2" data-path="03-dataframe.html"><a href="03-dataframe.html#行列の演算"><i class="fa fa-check"></i><b>3.2.2</b> 行列の演算</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="03-dataframe.html"><a href="03-dataframe.html#リスト"><i class="fa fa-check"></i><b>3.3</b> リスト</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="03-dataframe.html"><a href="03-dataframe.html#リストのアクセス"><i class="fa fa-check"></i><b>3.3.1</b> リストのアクセス</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="03-dataframe.html"><a href="03-dataframe.html#データフレイム"><i class="fa fa-check"></i><b>3.4</b> データフレイム</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="03-dataframe.html"><a href="03-dataframe.html#データフレイムのアクセス."><i class="fa fa-check"></i><b>3.4.1</b> データフレイムのアクセス.</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="04-datainput.html"><a href="04-datainput.html"><i class="fa fa-check"></i><b>4</b> データ入力</a><ul>
+<li class="chapter" data-level="4.1" data-path="04-datainput.html"><a href="04-datainput.html#はじめに-1"><i class="fa fa-check"></i><b>4.1</b> はじめに</a></li>
+<li class="chapter" data-level="4.2" data-path="04-datainput.html"><a href="04-datainput.html#csv-ファイル"><i class="fa fa-check"></i><b>4.2</b> csv ファイル</a></li>
+<li class="chapter" data-level="4.3" data-path="04-datainput.html"><a href="04-datainput.html#excel-ファイル"><i class="fa fa-check"></i><b>4.3</b> EXCEL ファイル</a></li>
+<li class="chapter" data-level="4.4" data-path="04-datainput.html"><a href="04-datainput.html#stata"><i class="fa fa-check"></i><b>4.4</b> STATA</a></li>
+<li class="chapter" data-level="4.5" data-path="04-datainput.html"><a href="04-datainput.html#r-に入っているデータ"><i class="fa fa-check"></i><b>4.5</b> R に入っているデータ</a></li>
+<li class="chapter" data-level="4.6" data-path="04-datainput.html"><a href="04-datainput.html#インターネットからデータ入力"><i class="fa fa-check"></i><b>4.6</b> インターネットからデータ入力</a></li>
+<li class="chapter" data-level="4.7" data-path="04-datainput.html"><a href="04-datainput.html#その他のデータ入力"><i class="fa fa-check"></i><b>4.7</b> その他のデータ入力</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="05-datawrangling.html"><a href="05-datawrangling.html"><i class="fa fa-check"></i><b>5</b> 整然データ</a><ul>
+<li class="chapter" data-level="5.1" data-path="05-datawrangling.html"><a href="05-datawrangling.html#データ整形"><i class="fa fa-check"></i><b>5.1</b> データ整形</a></li>
+<li class="chapter" data-level="5.2" data-path="05-datawrangling.html"><a href="05-datawrangling.html#データ結合"><i class="fa fa-check"></i><b>5.2</b> データ結合</a></li>
+<li class="chapter" data-level="5.3" data-path="05-datawrangling.html"><a href="05-datawrangling.html#tidyr"><i class="fa fa-check"></i><b>5.3</b> tidyr</a></li>
+<li class="chapter" data-level="5.4" data-path="05-datawrangling.html"><a href="05-datawrangling.html#実践例"><i class="fa fa-check"></i><b>5.4</b> 実践例</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="06-dataanalysis.html"><a href="06-dataanalysis.html"><i class="fa fa-check"></i><b>6</b> データ分析</a><ul>
+<li class="chapter" data-level="6.1" data-path="06-dataanalysis.html"><a href="06-dataanalysis.html#回帰分析"><i class="fa fa-check"></i><b>6.1</b> 回帰分析</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="06-dataanalysis.html"><a href="06-dataanalysis.html#単回帰分析"><i class="fa fa-check"></i><b>6.1.1</b> 単回帰分析</a></li>
+<li class="chapter" data-level="6.1.2" data-path="06-dataanalysis.html"><a href="06-dataanalysis.html#重回帰分析"><i class="fa fa-check"></i><b>6.1.2</b> 重回帰分析</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="06-dataanalysis.html"><a href="06-dataanalysis.html#非線形モデル"><i class="fa fa-check"></i><b>6.2</b> 非線形モデル</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="06-dataanalysis.html"><a href="06-dataanalysis.html#対数モデル"><i class="fa fa-check"></i><b>6.2.1</b> 対数モデル</a></li>
+<li class="chapter" data-level="6.2.2" data-path="06-dataanalysis.html"><a href="06-dataanalysis.html#多項式"><i class="fa fa-check"></i><b>6.2.2</b> 多項式</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="06-dataanalysis.html"><a href="06-dataanalysis.html#ダミー変数"><i class="fa fa-check"></i><b>6.3</b> ダミー変数</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="06-dataanalysis.html"><a href="06-dataanalysis.html#定数ダミー項"><i class="fa fa-check"></i><b>6.3.1</b> 定数ダミー項</a></li>
+<li class="chapter" data-level="6.3.2" data-path="06-dataanalysis.html"><a href="06-dataanalysis.html#交差項"><i class="fa fa-check"></i><b>6.3.2</b> 交差項</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="06-dataanalysis.html"><a href="06-dataanalysis.html#f検定"><i class="fa fa-check"></i><b>6.4</b> F検定</a></li>
+<li class="chapter" data-level="6.5" data-path="06-dataanalysis.html"><a href="06-dataanalysis.html#ロバスト分散"><i class="fa fa-check"></i><b>6.5</b> ロバスト分散</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">book_title</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="データ分析" class="section level1">
+<h1><span class="header-section-number">6</span> データ分析</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(modelr)
+<span class="kw">library</span>(mosaic)</code></pre></div>
+<div id="回帰分析" class="section level2">
+<h2><span class="header-section-number">6.1</span> 回帰分析</h2>
+<div id="単回帰分析" class="section level3">
+<h3><span class="header-section-number">6.1.1</span> 単回帰分析</h3>
+<p>回帰分析は以下のコマンドで実施する.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fm &lt;-<span class="st"> </span><span class="kw">lm</span>(dist ~<span class="st"> </span>speed, <span class="dt">data=</span> cars)</code></pre></div>
+<p>作図すると次のようになる.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cars %&gt;%<span class="st"> </span><span class="kw">gf_point</span>(dist ~<span class="st"> </span>speed) %&gt;%<span class="st"> </span><span class="kw">gf_lm</span>()</code></pre></div>
+<p><img src="06-dataanalysis_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>リストが作られる.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">typeof</span>(fm)</code></pre></div>
+<pre><code>## [1] &quot;list&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(fm)</code></pre></div>
+<pre><code>##  [1] &quot;coefficients&quot;  &quot;residuals&quot;     &quot;effects&quot;       &quot;rank&quot;         
+##  [5] &quot;fitted.values&quot; &quot;assign&quot;        &quot;qr&quot;            &quot;df.residual&quot;  
+##  [9] &quot;xlevels&quot;       &quot;call&quot;          &quot;terms&quot;         &quot;model&quot;</code></pre>
+<p>おもな要素は以下である.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fm[[<span class="st">&quot;coefficients&quot;</span>]] <span class="co"># fm$coefficients</span></code></pre></div>
+<pre><code>## (Intercept)       speed 
+##  -17.579095    3.932409</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fm[[<span class="st">&quot;residuals&quot;</span>]]  <span class="co"># fm$residuals</span></code></pre></div>
+<pre><code>##          1          2          3          4          5          6 
+##   3.849460  11.849460  -5.947766  12.052234   2.119825  -7.812584 
+##          7          8          9         10         11         12 
+##  -3.744993   4.255007  12.255007  -8.677401   2.322599 -15.609810 
+##         13         14         15         16         17         18 
+##  -9.609810  -5.609810  -1.609810  -7.542219   0.457781   0.457781 
+##         19         20         21         22         23         24 
+##  12.457781 -11.474628  -1.474628  22.525372  42.525372 -21.407036 
+##         25         26         27         28         29         30 
+## -15.407036  12.592964 -13.339445  -5.339445 -17.271854  -9.271854 
+##         31         32         33         34         35         36 
+##   0.728146 -11.204263   2.795737  22.795737  30.795737 -21.136672 
+##         37         38         39         40         41         42 
+## -11.136672  10.863328 -29.069080 -13.069080  -9.069080  -5.069080 
+##         43         44         45         46         47         48 
+##   2.930920  -2.933898 -18.866307  -6.798715  15.201285  16.201285 
+##         49         50 
+##  43.201285   4.268876</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fm[[<span class="st">&quot;fitted.values&quot;</span>]] <span class="co"># fm$fitted.values</span></code></pre></div>
+<pre><code>##         1         2         3         4         5         6         7 
+## -1.849460 -1.849460  9.947766  9.947766 13.880175 17.812584 21.744993 
+##         8         9        10        11        12        13        14 
+## 21.744993 21.744993 25.677401 25.677401 29.609810 29.609810 29.609810 
+##        15        16        17        18        19        20        21 
+## 29.609810 33.542219 33.542219 33.542219 33.542219 37.474628 37.474628 
+##        22        23        24        25        26        27        28 
+## 37.474628 37.474628 41.407036 41.407036 41.407036 45.339445 45.339445 
+##        29        30        31        32        33        34        35 
+## 49.271854 49.271854 49.271854 53.204263 53.204263 53.204263 53.204263 
+##        36        37        38        39        40        41        42 
+## 57.136672 57.136672 57.136672 61.069080 61.069080 61.069080 61.069080 
+##        43        44        45        46        47        48        49 
+## 61.069080 68.933898 72.866307 76.798715 76.798715 76.798715 76.798715 
+##        50 
+## 80.731124</code></pre>
+<p>これらは以下の関数でも計算できる.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">coef</span>(fm)</code></pre></div>
+<pre><code>## (Intercept)       speed 
+##  -17.579095    3.932409</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">resid</span>(fm)</code></pre></div>
+<pre><code>##          1          2          3          4          5          6 
+##   3.849460  11.849460  -5.947766  12.052234   2.119825  -7.812584 
+##          7          8          9         10         11         12 
+##  -3.744993   4.255007  12.255007  -8.677401   2.322599 -15.609810 
+##         13         14         15         16         17         18 
+##  -9.609810  -5.609810  -1.609810  -7.542219   0.457781   0.457781 
+##         19         20         21         22         23         24 
+##  12.457781 -11.474628  -1.474628  22.525372  42.525372 -21.407036 
+##         25         26         27         28         29         30 
+## -15.407036  12.592964 -13.339445  -5.339445 -17.271854  -9.271854 
+##         31         32         33         34         35         36 
+##   0.728146 -11.204263   2.795737  22.795737  30.795737 -21.136672 
+##         37         38         39         40         41         42 
+## -11.136672  10.863328 -29.069080 -13.069080  -9.069080  -5.069080 
+##         43         44         45         46         47         48 
+##   2.930920  -2.933898 -18.866307  -6.798715  15.201285  16.201285 
+##         49         50 
+##  43.201285   4.268876</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fitted</span>(fm) <span class="co">#predict(fm)</span></code></pre></div>
+<pre><code>##         1         2         3         4         5         6         7 
+## -1.849460 -1.849460  9.947766  9.947766 13.880175 17.812584 21.744993 
+##         8         9        10        11        12        13        14 
+## 21.744993 21.744993 25.677401 25.677401 29.609810 29.609810 29.609810 
+##        15        16        17        18        19        20        21 
+## 29.609810 33.542219 33.542219 33.542219 33.542219 37.474628 37.474628 
+##        22        23        24        25        26        27        28 
+## 37.474628 37.474628 41.407036 41.407036 41.407036 45.339445 45.339445 
+##        29        30        31        32        33        34        35 
+## 49.271854 49.271854 49.271854 53.204263 53.204263 53.204263 53.204263 
+##        36        37        38        39        40        41        42 
+## 57.136672 57.136672 57.136672 61.069080 61.069080 61.069080 61.069080 
+##        43        44        45        46        47        48        49 
+## 61.069080 68.933898 72.866307 76.798715 76.798715 76.798715 76.798715 
+##        50 
+## 80.731124</code></pre>
+<p>計算結果は <code>summary()</code> で表記される.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(fm)</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = dist ~ speed, data = cars)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -29.069  -9.525  -2.272   9.215  43.201 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) -17.5791     6.7584  -2.601   0.0123 *  
+## speed         3.9324     0.4155   9.464 1.49e-12 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 15.38 on 48 degrees of freedom
+## Multiple R-squared:  0.6511, Adjusted R-squared:  0.6438 
+## F-statistic: 89.57 on 1 and 48 DF,  p-value: 1.49e-12</code></pre>
+<p>これもリスト型であり, 以下の要素をもつ.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">typeof</span>(<span class="kw">summary</span>(fm))</code></pre></div>
+<pre><code>## [1] &quot;list&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(<span class="kw">summary</span>(fm))</code></pre></div>
+<pre><code>##  [1] &quot;call&quot;          &quot;terms&quot;         &quot;residuals&quot;     &quot;coefficients&quot; 
+##  [5] &quot;aliased&quot;       &quot;sigma&quot;         &quot;df&quot;            &quot;r.squared&quot;    
+##  [9] &quot;adj.r.squared&quot; &quot;fstatistic&quot;    &quot;cov.unscaled&quot;</code></pre>
+<p>おもな要素は以下である.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(fm)[[<span class="st">&quot;coefficients&quot;</span>]]</code></pre></div>
+<pre><code>##               Estimate Std. Error   t value     Pr(&gt;|t|)
+## (Intercept) -17.579095  6.7584402 -2.601058 1.231882e-02
+## speed         3.932409  0.4155128  9.463990 1.489836e-12</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(fm)[[<span class="st">&quot;sigma&quot;</span>]]</code></pre></div>
+<pre><code>## [1] 15.37959</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(fm)[[<span class="st">&quot;r.squared&quot;</span>]]</code></pre></div>
+<pre><code>## [1] 0.6510794</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(fm)[[<span class="st">&quot;adj.r.squared&quot;</span>]]</code></pre></div>
+<pre><code>## [1] 0.6438102</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(fm)[[<span class="st">&quot;cov.unscaled&quot;</span>]]</code></pre></div>
+<pre><code>##             (Intercept)        speed
+## (Intercept)  0.19310949 -0.011240876
+## speed       -0.01124088  0.000729927</code></pre>
+<p>次のように計算してもよい.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">coef</span>(<span class="kw">summary</span>(fm))</code></pre></div>
+<pre><code>##               Estimate Std. Error   t value     Pr(&gt;|t|)
+## (Intercept) -17.579095  6.7584402 -2.601058 1.231882e-02
+## speed         3.932409  0.4155128  9.463990 1.489836e-12</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sigma</span>(fm)</code></pre></div>
+<pre><code>## [1] 15.37959</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">vcov</span>(fm)</code></pre></div>
+<pre><code>##             (Intercept)      speed
+## (Intercept)   45.676514 -2.6588234
+## speed         -2.658823  0.1726509</code></pre>
+</div>
+<div id="重回帰分析" class="section level3">
+<h3><span class="header-section-number">6.1.2</span> 重回帰分析</h3>
+<p>複数の変数は <code>+</code> 付け足すことができる.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fm&lt;-<span class="kw">lm</span>(mpg ~<span class="st"> </span>disp +<span class="st"> </span>wt, <span class="dt">data =</span>mtcars)
+<span class="kw">summary</span>(fm)</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = mpg ~ disp + wt, data = mtcars)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -3.4087 -2.3243 -0.7683  1.7721  6.3484 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 34.96055    2.16454  16.151 4.91e-16 ***
+## disp        -0.01773    0.00919  -1.929  0.06362 .  
+## wt          -3.35082    1.16413  -2.878  0.00743 ** 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 2.917 on 29 degrees of freedom
+## Multiple R-squared:  0.7809, Adjusted R-squared:  0.7658 
+## F-statistic: 51.69 on 2 and 29 DF,  p-value: 2.744e-10</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(<span class="st">&quot;CPS1985&quot;</span>, <span class="dt">package=</span><span class="st">&quot;AER&quot;</span>)
+<span class="kw">summary</span>(CPS1985)</code></pre></div>
+<pre><code>##       wage          education       experience         age       
+##  Min.   : 1.000   Min.   : 2.00   Min.   : 0.00   Min.   :18.00  
+##  1st Qu.: 5.250   1st Qu.:12.00   1st Qu.: 8.00   1st Qu.:28.00  
+##  Median : 7.780   Median :12.00   Median :15.00   Median :35.00  
+##  Mean   : 9.024   Mean   :13.02   Mean   :17.82   Mean   :36.83  
+##  3rd Qu.:11.250   3rd Qu.:15.00   3rd Qu.:26.00   3rd Qu.:44.00  
+##  Max.   :44.500   Max.   :18.00   Max.   :55.00   Max.   :64.00  
+##     ethnicity     region       gender         occupation 
+##  cauc    :440   south:156   male  :289   worker    :156  
+##  hispanic: 27   other:378   female:245   technical :105  
+##  other   : 67                            services  : 83  
+##                                          office    : 97  
+##                                          sales     : 38  
+##                                          management: 55  
+##            sector    union     married  
+##  manufacturing: 99   no :438   no :184  
+##  construction : 24   yes: 96   yes:350  
+##  other        :411                      
+##                                         
+##                                         
+## </code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fm1 &lt;-<span class="st"> </span><span class="kw">lm</span>(wage ~<span class="st"> </span>experience +<span class="st"> </span>education, <span class="dt">data=</span>CPS1985)
+<span class="kw">summary</span>(fm1)</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = wage ~ experience + education, data = CPS1985)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -8.351 -2.857 -0.599  1.994 36.336 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  -4.9045     1.2189  -4.024 6.56e-05 ***
+## experience    0.1051     0.0172   6.113 1.89e-09 ***
+## education     0.9260     0.0814  11.375  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 4.599 on 531 degrees of freedom
+## Multiple R-squared:  0.202,  Adjusted R-squared:  0.199 
+## F-statistic: 67.22 on 2 and 531 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<div id="非線形モデル" class="section level2">
+<h2><span class="header-section-number">6.2</span> 非線形モデル</h2>
+<div id="対数モデル" class="section level3">
+<h3><span class="header-section-number">6.2.1</span> 対数モデル</h3>
+<p>被説明変数が対数をとるときの回帰分析は以下を実行する.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fm_1 &lt;-<span class="kw">lm</span>(<span class="kw">log</span>(dist) ~<span class="st"> </span>speed, <span class="dt">data=</span>cars)
+<span class="kw">summary</span>(fm_1)</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = log(dist) ~ speed, data = cars)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -1.46604 -0.20800 -0.01683  0.24080  1.01519 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  1.67612    0.19614   8.546 3.34e-11 ***
+## speed        0.12077    0.01206  10.015 2.41e-13 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.4463 on 48 degrees of freedom
+## Multiple R-squared:  0.6763, Adjusted R-squared:  0.6696 
+## F-statistic: 100.3 on 1 and 48 DF,  p-value: 2.413e-13</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cars %&gt;%<span class="st"> </span><span class="kw">gf_point</span>(<span class="kw">log</span>(dist) ~<span class="st"> </span>speed) %&gt;%<span class="st"> </span><span class="kw">gf_lm</span>()</code></pre></div>
+<p><img src="06-dataanalysis_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fn1 &lt;-<span class="st"> </span><span class="kw">makeFun</span>(fm_1)
+cars %&gt;%<span class="st"> </span><span class="kw">gf_point</span>(<span class="kw">log</span>(dist) ~<span class="st"> </span>speed) %&gt;%<span class="st"> </span><span class="kw">gf_fun</span>(<span class="kw">log</span>(<span class="kw">fn1</span>(speed))~speed)</code></pre></div>
+<p><img src="06-dataanalysis_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cars %&gt;%<span class="st"> </span><span class="kw">gf_point</span>(dist ~<span class="st"> </span>speed) %&gt;%<span class="st"> </span><span class="kw">gf_fun</span>(<span class="kw">fn1</span>(speed)~speed)</code></pre></div>
+<p><img src="06-dataanalysis_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">grid &lt;-<span class="st"> </span>cars %&gt;%<span class="st"> </span><span class="kw">data_grid</span>(<span class="dt">speed=</span><span class="kw">seq_range</span>(speed,<span class="dv">15</span>)) %&gt;%
+<span class="st">  </span><span class="kw">add_predictions</span>(fm_1)
+cars %&gt;%<span class="st"> </span><span class="kw">gf_point</span>(dist ~<span class="st"> </span>speed) %&gt;%
+<span class="st">  </span><span class="kw">gf_line</span>(<span class="dt">data=</span>grid, <span class="kw">exp</span>(pred)~speed)</code></pre></div>
+<p><img src="06-dataanalysis_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p>説明変数が対数をとるときの回帰分析は以下を実行する.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fm_2 &lt;-<span class="st"> </span><span class="kw">lm</span>(dist ~<span class="st"> </span><span class="kw">log</span>(speed), <span class="dt">data=</span>cars)
+<span class="kw">summary</span>(fm_2)</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = dist ~ log(speed), data = cars)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -26.501 -11.273  -4.466   8.593  53.020 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  -80.822     16.004  -5.050 6.79e-06 ***
+## log(speed)    46.507      5.942   7.827 4.02e-10 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 17.26 on 48 degrees of freedom
+## Multiple R-squared:  0.5607, Adjusted R-squared:  0.5516 
+## F-statistic: 61.27 on 1 and 48 DF,  p-value: 4.02e-10</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cars %&gt;%<span class="st"> </span><span class="kw">gf_point</span>(dist ~<span class="st"> </span><span class="kw">log</span>(speed)) %&gt;%<span class="st"> </span><span class="kw">gf_lm</span>()</code></pre></div>
+<p><img src="06-dataanalysis_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fn2 &lt;-<span class="st"> </span><span class="kw">makeFun</span>(fm_2)
+cars %&gt;%<span class="st"> </span><span class="kw">gf_point</span>(dist ~<span class="st"> </span><span class="kw">log</span>(speed)) %&gt;%<span class="st"> </span><span class="kw">gf_fun</span>(<span class="kw">fn2</span>(<span class="kw">exp</span>(x)) ~<span class="st"> </span>x)</code></pre></div>
+<p><img src="06-dataanalysis_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cars %&gt;%<span class="st"> </span><span class="kw">gf_point</span>(dist ~<span class="st"> </span>speed) %&gt;%<span class="st"> </span><span class="kw">gf_fun</span>(<span class="kw">fn2</span>(speed)~speed)</code></pre></div>
+<p><img src="06-dataanalysis_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">grid &lt;-<span class="st"> </span>cars %&gt;%<span class="st"> </span><span class="kw">data_grid</span>(<span class="dt">speed=</span><span class="kw">seq_range</span>(speed,<span class="dv">15</span>)) %&gt;%
+<span class="st">  </span><span class="kw">add_predictions</span>(fm_2)
+cars %&gt;%<span class="st"> </span><span class="kw">gf_point</span>(dist ~<span class="st"> </span>speed) %&gt;%
+<span class="st">  </span><span class="kw">gf_line</span>(<span class="dt">data=</span>grid, pred~speed)</code></pre></div>
+<p><img src="06-dataanalysis_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<p>両方が対数をとるときの回帰分析は以下を実行する.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fm_3 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log</span>(dist) ~<span class="st"> </span><span class="kw">log</span>(speed), <span class="dt">data=</span>cars)
+<span class="kw">summary</span>(fm_3)</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = log(dist) ~ log(speed), data = cars)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -1.00215 -0.24578 -0.02898  0.20717  0.88289 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  -0.7297     0.3758  -1.941   0.0581 .  
+## log(speed)    1.6024     0.1395  11.484 2.26e-15 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.4053 on 48 degrees of freedom
+## Multiple R-squared:  0.7331, Adjusted R-squared:  0.7276 
+## F-statistic: 131.9 on 1 and 48 DF,  p-value: 2.259e-15</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cars %&gt;%<span class="st"> </span><span class="kw">gf_point</span>(<span class="kw">log</span>(dist) ~<span class="st"> </span><span class="kw">log</span>(speed)) %&gt;%<span class="st"> </span><span class="kw">gf_lm</span>()</code></pre></div>
+<p><img src="06-dataanalysis_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fn3 &lt;-<span class="st"> </span><span class="kw">makeFun</span>(fm_3)
+cars %&gt;%<span class="st"> </span><span class="kw">gf_point</span>(<span class="kw">log</span>(dist) ~<span class="st"> </span><span class="kw">log</span>(speed)) %&gt;%<span class="st"> </span><span class="kw">gf_fun</span>(<span class="kw">log</span>(<span class="kw">fn3</span>(<span class="kw">exp</span>(x))) ~<span class="st"> </span>x)</code></pre></div>
+<p><img src="06-dataanalysis_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cars %&gt;%<span class="st"> </span><span class="kw">gf_point</span>(dist ~<span class="st"> </span>speed) %&gt;%<span class="st"> </span><span class="kw">gf_fun</span>(<span class="kw">fn3</span>(x) ~<span class="st"> </span>x)</code></pre></div>
+<p><img src="06-dataanalysis_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">grid &lt;-<span class="st"> </span>cars %&gt;%<span class="st"> </span><span class="kw">data_grid</span>(<span class="dt">speed=</span><span class="kw">seq_range</span>(speed,<span class="dv">15</span>)) %&gt;%
+<span class="st">  </span><span class="kw">add_predictions</span>(fm_3)
+cars %&gt;%<span class="st"> </span><span class="kw">gf_point</span>(dist ~<span class="st"> </span>speed) %&gt;%
+<span class="st">  </span><span class="kw">gf_line</span>(<span class="dt">data=</span>grid, <span class="kw">exp</span>(pred)~speed)</code></pre></div>
+<p><img src="06-dataanalysis_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<p>または以下のように実行してもよい.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fm_4 &lt;-<span class="kw">lm</span>(dist ~<span class="st"> </span>speed, <span class="dt">data=</span><span class="kw">log</span>(cars))
+<span class="kw">summary</span>(fm_4)</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = dist ~ speed, data = log(cars))
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -1.00215 -0.24578 -0.02898  0.20717  0.88289 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  -0.7297     0.3758  -1.941   0.0581 .  
+## speed         1.6024     0.1395  11.484 2.26e-15 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.4053 on 48 degrees of freedom
+## Multiple R-squared:  0.7331, Adjusted R-squared:  0.7276 
+## F-statistic: 131.9 on 1 and 48 DF,  p-value: 2.259e-15</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">log</span>(cars) %&gt;%<span class="st"> </span><span class="kw">gf_point</span>(dist ~<span class="st"> </span>speed) %&gt;%<span class="st"> </span><span class="kw">gf_lm</span>()</code></pre></div>
+<p><img src="06-dataanalysis_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fn4 &lt;-<span class="st"> </span><span class="kw">makeFun</span>(fm_4)
+<span class="kw">log</span>(cars) %&gt;%<span class="st"> </span><span class="kw">gf_point</span>(dist ~<span class="st"> </span>speed) %&gt;%<span class="st"> </span><span class="kw">gf_fun</span>(<span class="kw">fn4</span>(x) ~<span class="st"> </span>x)</code></pre></div>
+<p><img src="06-dataanalysis_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
+</div>
+<div id="多項式" class="section level3">
+<h3><span class="header-section-number">6.2.2</span> 多項式</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(<span class="kw">lm</span>(dist ~<span class="st"> </span>speed +<span class="st"> </span><span class="kw">I</span>(speed^<span class="dv">2</span>), <span class="dt">data=</span>cars))</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = dist ~ speed + I(speed^2), data = cars)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -28.720  -9.184  -3.188   4.628  45.152 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept)  2.47014   14.81716   0.167    0.868
+## speed        0.91329    2.03422   0.449    0.656
+## I(speed^2)   0.09996    0.06597   1.515    0.136
+## 
+## Residual standard error: 15.18 on 47 degrees of freedom
+## Multiple R-squared:  0.6673, Adjusted R-squared:  0.6532 
+## F-statistic: 47.14 on 2 and 47 DF,  p-value: 5.852e-12</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fm_5 &lt;-<span class="st"> </span><span class="kw">lm</span>(dist ~<span class="st"> </span><span class="kw">poly</span>(speed,<span class="dv">2</span>,<span class="dt">raw=</span><span class="ot">TRUE</span>), <span class="dt">data=</span>cars)
+<span class="kw">summary</span>(fm_5)</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = dist ~ poly(speed, 2, raw = TRUE), data = cars)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -28.720  -9.184  -3.188   4.628  45.152 
+## 
+## Coefficients:
+##                             Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept)                  2.47014   14.81716   0.167    0.868
+## poly(speed, 2, raw = TRUE)1  0.91329    2.03422   0.449    0.656
+## poly(speed, 2, raw = TRUE)2  0.09996    0.06597   1.515    0.136
+## 
+## Residual standard error: 15.18 on 47 degrees of freedom
+## Multiple R-squared:  0.6673, Adjusted R-squared:  0.6532 
+## F-statistic: 47.14 on 2 and 47 DF,  p-value: 5.852e-12</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fn5 &lt;-<span class="st"> </span><span class="kw">makeFun</span>(fm_5)
+cars %&gt;%<span class="st"> </span><span class="kw">gf_point</span>(dist ~<span class="st"> </span>speed) %&gt;%<span class="st"> </span><span class="kw">gf_fun</span>(<span class="kw">fn5</span>(x) ~<span class="st"> </span>x)</code></pre></div>
+<p><img src="06-dataanalysis_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">grid &lt;-<span class="st"> </span>cars %&gt;%<span class="st"> </span><span class="kw">data_grid</span>(<span class="dt">speed=</span><span class="kw">seq_range</span>(speed,<span class="dv">15</span>)) %&gt;%
+<span class="st">  </span><span class="kw">add_predictions</span>(fm_5)
+cars %&gt;%<span class="st"> </span><span class="kw">gf_point</span>(dist ~<span class="st"> </span>speed) %&gt;%
+<span class="st">  </span><span class="kw">gf_line</span>(<span class="dt">data=</span>grid, pred~speed)</code></pre></div>
+<p><img src="06-dataanalysis_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
+</div>
+</div>
+<div id="ダミー変数" class="section level2">
+<h2><span class="header-section-number">6.3</span> ダミー変数</h2>
+<div id="定数ダミー項" class="section level3">
+<h3><span class="header-section-number">6.3.1</span> 定数ダミー項</h3>
+<p>以下のデータを考える.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(mtcars)</code></pre></div>
+<pre><code>##       mpg             cyl             disp             hp       
+##  Min.   :10.40   Min.   :4.000   Min.   : 71.1   Min.   : 52.0  
+##  1st Qu.:15.43   1st Qu.:4.000   1st Qu.:120.8   1st Qu.: 96.5  
+##  Median :19.20   Median :6.000   Median :196.3   Median :123.0  
+##  Mean   :20.09   Mean   :6.188   Mean   :230.7   Mean   :146.7  
+##  3rd Qu.:22.80   3rd Qu.:8.000   3rd Qu.:326.0   3rd Qu.:180.0  
+##  Max.   :33.90   Max.   :8.000   Max.   :472.0   Max.   :335.0  
+##       drat             wt             qsec             vs        
+##  Min.   :2.760   Min.   :1.513   Min.   :14.50   Min.   :0.0000  
+##  1st Qu.:3.080   1st Qu.:2.581   1st Qu.:16.89   1st Qu.:0.0000  
+##  Median :3.695   Median :3.325   Median :17.71   Median :0.0000  
+##  Mean   :3.597   Mean   :3.217   Mean   :17.85   Mean   :0.4375  
+##  3rd Qu.:3.920   3rd Qu.:3.610   3rd Qu.:18.90   3rd Qu.:1.0000  
+##  Max.   :4.930   Max.   :5.424   Max.   :22.90   Max.   :1.0000  
+##        am              gear            carb      
+##  Min.   :0.0000   Min.   :3.000   Min.   :1.000  
+##  1st Qu.:0.0000   1st Qu.:3.000   1st Qu.:2.000  
+##  Median :0.0000   Median :4.000   Median :2.000  
+##  Mean   :0.4062   Mean   :3.688   Mean   :2.812  
+##  3rd Qu.:1.0000   3rd Qu.:4.000   3rd Qu.:4.000  
+##  Max.   :1.0000   Max.   :5.000   Max.   :8.000</code></pre>
+<p><code>am</code> が0から1を取るダミー変数である.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fm&lt;-<span class="kw">lm</span>(mpg ~<span class="st"> </span>disp +<span class="st"> </span>am, <span class="dt">data =</span>mtcars)
+<span class="kw">summary</span>(fm)</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = mpg ~ disp + am, data = mtcars)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -4.6382 -2.4751 -0.5631  2.2333  6.8386 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 27.848081   1.834071  15.184 2.45e-15 ***
+## disp        -0.036851   0.005782  -6.373 5.75e-07 ***
+## am           1.833458   1.436100   1.277    0.212    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 3.218 on 29 degrees of freedom
+## Multiple R-squared:  0.7333, Adjusted R-squared:  0.7149 
+## F-statistic: 39.87 on 2 and 29 DF,  p-value: 4.749e-09</code></pre>
+<p>図示すると以下になる.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fn &lt;-<span class="st"> </span><span class="kw">makeFun</span>(fm)
+mtcars %&gt;%<span class="st"> </span><span class="kw">gf_point</span>(mpg ~<span class="st"> </span>disp) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">gf_fun</span>(<span class="kw">fn</span>(x, <span class="dt">am=</span><span class="dv">0</span>) ~<span class="st"> </span>x, <span class="dt">color=</span><span class="st">&quot;red&quot;</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">gf_fun</span>(<span class="kw">fn</span>(x, <span class="dt">am=</span><span class="dv">1</span>) ~<span class="st"> </span>x, <span class="dt">color=</span><span class="st">&quot;blue&quot;</span>)</code></pre></div>
+<p><img src="06-dataanalysis_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">grid &lt;-<span class="st"> </span>mtcars %&gt;%<span class="st"> </span><span class="kw">data_grid</span>(<span class="dt">disp=</span><span class="kw">seq_range</span>(disp,<span class="dv">15</span>), <span class="dt">am=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>)) %&gt;%
+<span class="st">  </span><span class="kw">add_predictions</span>(fm)
+mtcars %&gt;%<span class="st"> </span><span class="kw">gf_point</span>(mpg ~<span class="st"> </span>disp, <span class="dt">color=</span>~<span class="kw">factor</span>(am)) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">gf_line</span>(<span class="dt">data=</span>grid, pred~disp)</code></pre></div>
+<p><img src="06-dataanalysis_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mtcars %&gt;%<span class="st"> </span><span class="kw">gf_point</span>(mpg ~<span class="st"> </span>disp, <span class="dt">color=</span>~<span class="kw">factor</span>(am)) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">gf_line</span>(<span class="dt">data=</span>grid, pred~disp|<span class="kw">factor</span>(am))</code></pre></div>
+<p><img src="06-dataanalysis_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
+<p>Rでは三種類の値をとる因子ベクトルも説明変数に加えれる.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fm1&lt;-<span class="kw">lm</span>(mpg ~<span class="st"> </span>disp +<span class="st"> </span><span class="kw">factor</span>(cyl), <span class="dt">data =</span>mtcars)
+<span class="kw">summary</span>(fm1)</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = mpg ~ disp + factor(cyl), data = mtcars)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -4.8304 -1.5873 -0.5851  0.9753  6.3069 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  29.53477    1.42662  20.703  &lt; 2e-16 ***
+## disp         -0.02731    0.01061  -2.574  0.01564 *  
+## factor(cyl)6 -4.78585    1.64982  -2.901  0.00717 ** 
+## factor(cyl)8 -4.79209    2.88682  -1.660  0.10808    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 2.95 on 28 degrees of freedom
+## Multiple R-squared:  0.7837, Adjusted R-squared:  0.7605 
+## F-statistic: 33.81 on 3 and 28 DF,  p-value: 1.906e-09</code></pre>
+<p>図示すると以下になる.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fn1 &lt;-<span class="st"> </span><span class="kw">makeFun</span>(fm1)
+mtcars %&gt;%<span class="st"> </span><span class="kw">gf_point</span>(mpg ~<span class="st"> </span>disp) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">gf_fun</span>(<span class="kw">fn1</span>(x, <span class="dt">cyl =</span> <span class="st">&quot;4&quot;</span>) ~<span class="st"> </span>x, <span class="dt">color=</span><span class="st">&quot;blue&quot;</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">gf_fun</span>(<span class="kw">fn1</span>(x, <span class="dt">cyl =</span> <span class="st">&quot;6&quot;</span>) ~<span class="st"> </span>x, <span class="dt">color=</span><span class="st">&quot;red&quot;</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">gf_fun</span>(<span class="kw">fn1</span>(x, <span class="dt">cyl =</span> <span class="st">&quot;8&quot;</span>) ~<span class="st"> </span>x, <span class="dt">color=</span><span class="st">&quot;pink&quot;</span>)</code></pre></div>
+<p><img src="06-dataanalysis_files/figure-html/unnamed-chunk-41-1.png" width="672" /> 6と8はほぼ同じなため重なってしまう.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">grid &lt;-<span class="st"> </span>mtcars %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">data_grid</span>(<span class="dt">disp=</span><span class="kw">seq_range</span>(disp,<span class="dv">15</span>), <span class="dt">cyl=</span><span class="kw">factor</span>(cyl)) %&gt;%
+<span class="st">  </span><span class="kw">add_predictions</span>(fm1)
+mtcars %&gt;%<span class="st"> </span><span class="kw">gf_point</span>(mpg ~<span class="st"> </span>disp, <span class="dt">color=</span>~<span class="kw">factor</span>(cyl)) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">gf_line</span>(<span class="dt">data=</span>grid, pred ~<span class="st"> </span>disp)</code></pre></div>
+<p><img src="06-dataanalysis_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mtcars %&gt;%<span class="st"> </span><span class="kw">gf_point</span>(mpg ~<span class="st"> </span>disp, <span class="dt">color=</span>~<span class="kw">factor</span>(cyl)) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">gf_line</span>(<span class="dt">data=</span>grid, pred ~<span class="st"> </span>disp|<span class="kw">factor</span>(cyl))</code></pre></div>
+<p><img src="06-dataanalysis_files/figure-html/unnamed-chunk-43-1.png" width="672" /></p>
+</div>
+<div id="交差項" class="section level3">
+<h3><span class="header-section-number">6.3.2</span> 交差項</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fm2&lt;-<span class="kw">lm</span>(mpg ~<span class="st"> </span>disp +<span class="st"> </span><span class="kw">factor</span>(cyl) +<span class="st"> </span>disp:<span class="kw">factor</span>(cyl), <span class="dt">data =</span>mtcars)
+<span class="kw">summary</span>(fm2)</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = mpg ~ disp + factor(cyl) + disp:factor(cyl), data = mtcars)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -3.4766 -1.8101 -0.2297  1.3523  5.0208 
+## 
+## Coefficients:
+##                    Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)        40.87196    3.02012  13.533 2.79e-13 ***
+## disp               -0.13514    0.02791  -4.842 5.10e-05 ***
+## factor(cyl)6      -21.78997    5.30660  -4.106 0.000354 ***
+## factor(cyl)8      -18.83916    4.61166  -4.085 0.000374 ***
+## disp:factor(cyl)6   0.13875    0.03635   3.817 0.000753 ***
+## disp:factor(cyl)8   0.11551    0.02955   3.909 0.000592 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 2.372 on 26 degrees of freedom
+## Multiple R-squared:  0.8701, Adjusted R-squared:  0.8452 
+## F-statistic: 34.84 on 5 and 26 DF,  p-value: 9.968e-11</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fm2&lt;-<span class="kw">lm</span>(mpg ~<span class="st"> </span>disp *<span class="st"> </span><span class="kw">factor</span>(cyl), <span class="dt">data =</span>mtcars)
+<span class="kw">summary</span>(fm2)</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = mpg ~ disp * factor(cyl), data = mtcars)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -3.4766 -1.8101 -0.2297  1.3523  5.0208 
+## 
+## Coefficients:
+##                    Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)        40.87196    3.02012  13.533 2.79e-13 ***
+## disp               -0.13514    0.02791  -4.842 5.10e-05 ***
+## factor(cyl)6      -21.78997    5.30660  -4.106 0.000354 ***
+## factor(cyl)8      -18.83916    4.61166  -4.085 0.000374 ***
+## disp:factor(cyl)6   0.13875    0.03635   3.817 0.000753 ***
+## disp:factor(cyl)8   0.11551    0.02955   3.909 0.000592 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 2.372 on 26 degrees of freedom
+## Multiple R-squared:  0.8701, Adjusted R-squared:  0.8452 
+## F-statistic: 34.84 on 5 and 26 DF,  p-value: 9.968e-11</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fn2 &lt;-<span class="st"> </span><span class="kw">makeFun</span>(fm2)
+mtcars %&gt;%<span class="st"> </span><span class="kw">gf_point</span>(mpg ~<span class="st"> </span>disp, <span class="dt">color =</span> ~<span class="kw">factor</span>(cyl)) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">gf_fun</span>(<span class="kw">fn2</span>(x, <span class="dt">cyl =</span> <span class="st">&quot;4&quot;</span>) ~<span class="st"> </span>x, <span class="dt">color=</span><span class="st">&quot;red&quot;</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">gf_fun</span>(<span class="kw">fn2</span>(x, <span class="dt">cyl =</span> <span class="st">&quot;6&quot;</span>) ~<span class="st"> </span>x, <span class="dt">color=</span><span class="st">&quot;green&quot;</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">gf_fun</span>(<span class="kw">fn2</span>(x, <span class="dt">cyl =</span> <span class="st">&quot;8&quot;</span>) ~<span class="st"> </span>x, <span class="dt">color=</span><span class="st">&quot;blue&quot;</span>)</code></pre></div>
+<p><img src="06-dataanalysis_files/figure-html/unnamed-chunk-46-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">grid &lt;-<span class="st"> </span>mtcars %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">data_grid</span>(<span class="dt">disp=</span><span class="kw">seq_range</span>(disp,<span class="dv">15</span>), <span class="dt">cyl=</span><span class="kw">factor</span>(cyl)) %&gt;%
+<span class="st">  </span><span class="kw">add_predictions</span>(fm2)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mtcars %&gt;%<span class="st"> </span><span class="kw">gf_point</span>(mpg ~<span class="st"> </span>disp, <span class="dt">color=</span>~<span class="kw">factor</span>(cyl)) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">gf_line</span>(<span class="dt">data=</span>grid, pred~disp)</code></pre></div>
+<p><img src="06-dataanalysis_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mtcars %&gt;%<span class="st"> </span><span class="kw">gf_point</span>(mpg ~<span class="st"> </span>disp, <span class="dt">color=</span>~<span class="kw">factor</span>(cyl)) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">gf_line</span>(<span class="dt">data=</span>grid, pred~disp|<span class="kw">factor</span>(cyl))</code></pre></div>
+<p><img src="06-dataanalysis_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">grid &lt;-<span class="st"> </span>mtcars %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">data_grid</span>(<span class="dt">disp=</span><span class="kw">seq_range</span>(disp,<span class="dv">15</span>), <span class="dt">cyl=</span><span class="kw">factor</span>(cyl)) %&gt;%
+<span class="st">  </span><span class="kw">gather_predictions</span>(fm1,fm2)
+mtcars %&gt;%<span class="st"> </span><span class="kw">gf_point</span>(mpg ~<span class="st"> </span>disp, <span class="dt">color=</span>~<span class="kw">factor</span>(cyl)) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">gf_line</span>(<span class="dt">data=</span>grid, pred~disp|model)</code></pre></div>
+<p><img src="06-dataanalysis_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
+</div>
+</div>
+<div id="f検定" class="section level2">
+<h2><span class="header-section-number">6.4</span> F検定</h2>
+<p>個々の説明変数の有意性はティー検定を実施すればよい. 複数の場合はエフ検定を実施する.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">anova</span>(fm1,fm2)</code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Model 1: mpg ~ disp + factor(cyl)
+## Model 2: mpg ~ disp * factor(cyl)
+##   Res.Df    RSS Df Sum of Sq      F   Pr(&gt;F)   
+## 1     28 243.62                                
+## 2     26 146.23  2    97.386 8.6574 0.001313 **
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+</div>
+<div id="ロバスト分散" class="section level2">
+<h2><span class="header-section-number">6.5</span> ロバスト分散</h2>
+<p>説明変数と誤差項が互いに独立とは言い切れず, せいぜい無相関の場合, 最小二乗推定量は不偏でなく一致である. 漸近的に正規分布にしたがうが, 係数の分散の計算方法を変える必要がある.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(AER)
+<span class="kw">coeftest</span>(fm2,<span class="dt">vcov=</span><span class="kw">vcovHC</span>(fm2,<span class="dt">type=</span><span class="st">&quot;HC1&quot;</span>),<span class="dt">df =</span> <span class="ot">Inf</span>)</code></pre></div>
+<pre><code>## 
+## z test of coefficients:
+## 
+##                     Estimate Std. Error z value  Pr(&gt;|z|)    
+## (Intercept)        40.871955   3.365408 12.1447 &lt; 2.2e-16 ***
+## disp               -0.135142   0.032030 -4.2192 2.452e-05 ***
+## factor(cyl)6      -21.789968   4.267759 -5.1057 3.295e-07 ***
+## factor(cyl)8      -18.839156   4.437738 -4.2452 2.184e-05 ***
+## disp:factor(cyl)6   0.138747   0.035304  3.9301 8.491e-05 ***
+## disp:factor(cyl)8   0.115508   0.033329  3.4657 0.0005289 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">waldtest</span>(fm1,fm2,<span class="dt">vcov=</span><span class="kw">vcovHC</span>(fm2,<span class="dt">type=</span><span class="st">&quot;HC1&quot;</span>),<span class="dt">test=</span><span class="st">&quot;Chisq&quot;</span>)</code></pre></div>
+<pre><code>## Wald test
+## 
+## Model 1: mpg ~ disp + factor(cyl)
+## Model 2: mpg ~ disp * factor(cyl)
+##   Res.Df Df  Chisq Pr(&gt;Chisq)    
+## 1     28                         
+## 2     26  2 15.452  0.0004412 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+
+</div>
+</div>
+
+
+
+
+
+
+
+
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="05-datawrangling.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/06-dataanalysis.Rmd",
+"text": "Edit"
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

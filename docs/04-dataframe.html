@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html  lang="ja-JP">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>R と RStudio</title>
+  <meta name="description" content="This is a description. Please wrote a abstract this contents.">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+
+  <meta property="og:title" content="R と RStudio" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a description. Please wrote a abstract this contents." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="R と RStudio" />
+  
+  <meta name="twitter:description" content="This is a description. Please wrote a abstract this contents." />
+  
+
+<meta name="author" content="宮﨑憲治">
+
+
+<meta name="date" content="2017-10-27">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="03-vector.html">
+<link rel="next" href="05-datainput.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R と RStudio</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>はじめに</a><ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#r-とは"><i class="fa fa-check"></i><b>0.1</b> R とは</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#r-のインストール"><i class="fa fa-check"></i><b>0.2</b> R のインストール</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#r-の設定"><i class="fa fa-check"></i><b>0.3</b> R の設定</a></li>
+<li class="chapter" data-level="0.4" data-path="index.html"><a href="index.html#r-の使い方"><i class="fa fa-check"></i><b>0.4</b> R の使い方</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="01-base.html"><a href="01-base.html"><i class="fa fa-check"></i><b>1</b> 基本</a><ul>
+<li class="chapter" data-level="1.1" data-path="01-base.html"><a href="01-base.html#電卓としての-r"><i class="fa fa-check"></i><b>1.1</b> 電卓としての R</a></li>
+<li class="chapter" data-level="1.2" data-path="01-base.html"><a href="01-base.html#関数電卓としてのr"><i class="fa fa-check"></i><b>1.2</b> 関数電卓としてのR</a></li>
+<li class="chapter" data-level="1.3" data-path="01-base.html"><a href="01-base.html#r-の型"><i class="fa fa-check"></i><b>1.3</b> R の型</a></li>
+<li class="chapter" data-level="1.4" data-path="01-base.html"><a href="01-base.html#変数"><i class="fa fa-check"></i><b>1.4</b> 変数</a></li>
+<li class="chapter" data-level="1.5" data-path="01-base.html"><a href="01-base.html#パッケージ"><i class="fa fa-check"></i><b>1.5</b> パッケージ</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="02-rstudio.html"><a href="02-rstudio.html"><i class="fa fa-check"></i><b>2</b> RStudio</a><ul>
+<li class="chapter" data-level="2.1" data-path="02-rstudio.html"><a href="02-rstudio.html#rstudio-とは"><i class="fa fa-check"></i><b>2.1</b> RStudio とは</a></li>
+<li class="chapter" data-level="2.2" data-path="02-rstudio.html"><a href="02-rstudio.html#rstudio-のインストール"><i class="fa fa-check"></i><b>2.2</b> RStudio のインストール</a></li>
+<li class="chapter" data-level="2.3" data-path="02-rstudio.html"><a href="02-rstudio.html#rstudio-の設定"><i class="fa fa-check"></i><b>2.3</b> RStudio の設定</a></li>
+<li class="chapter" data-level="2.4" data-path="02-rstudio.html"><a href="02-rstudio.html#rstudio-の使い方"><i class="fa fa-check"></i><b>2.4</b> RStudio の使い方</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="03-vector.html"><a href="03-vector.html"><i class="fa fa-check"></i><b>3</b> ベクトル</a><ul>
+<li class="chapter" data-level="3.1" data-path="03-vector.html"><a href="03-vector.html#ベクトル-1"><i class="fa fa-check"></i><b>3.1</b> ベクトル</a></li>
+<li class="chapter" data-level="3.2" data-path="03-vector.html"><a href="03-vector.html#算術演算子"><i class="fa fa-check"></i><b>3.2</b> 算術演算子</a></li>
+<li class="chapter" data-level="3.3" data-path="03-vector.html"><a href="03-vector.html#論理演算子"><i class="fa fa-check"></i><b>3.3</b> 論理演算子</a></li>
+<li class="chapter" data-level="3.4" data-path="03-vector.html"><a href="03-vector.html#比較演算子"><i class="fa fa-check"></i><b>3.4</b> 比較演算子</a></li>
+<li class="chapter" data-level="3.5" data-path="03-vector.html"><a href="03-vector.html#要素"><i class="fa fa-check"></i><b>3.5</b> 要素</a></li>
+<li class="chapter" data-level="3.6" data-path="03-vector.html"><a href="03-vector.html#関数"><i class="fa fa-check"></i><b>3.6</b> 関数</a></li>
+<li class="chapter" data-level="3.7" data-path="03-vector.html"><a href="03-vector.html#規則的なベクトル"><i class="fa fa-check"></i><b>3.7</b> 規則的なベクトル</a></li>
+<li class="chapter" data-level="3.8" data-path="03-vector.html"><a href="03-vector.html#乱数ベクトル"><i class="fa fa-check"></i><b>3.8</b> 乱数ベクトル</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="04-dataframe.html"><a href="04-dataframe.html"><i class="fa fa-check"></i><b>4</b> データ構造</a><ul>
+<li class="chapter" data-level="4.1" data-path="04-dataframe.html"><a href="04-dataframe.html#ベクトル-2"><i class="fa fa-check"></i><b>4.1</b> ベクトル</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="04-dataframe.html"><a href="04-dataframe.html#ベクトルのアクセス"><i class="fa fa-check"></i><b>4.1.1</b> ベクトルのアクセス</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="04-dataframe.html"><a href="04-dataframe.html#リスト"><i class="fa fa-check"></i><b>4.2</b> リスト</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="04-dataframe.html"><a href="04-dataframe.html#リストのアクセス"><i class="fa fa-check"></i><b>4.2.1</b> リストのアクセス</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="04-dataframe.html"><a href="04-dataframe.html#因子ベクトル"><i class="fa fa-check"></i><b>4.3</b> 因子ベクトル</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="04-dataframe.html"><a href="04-dataframe.html#factor"><i class="fa fa-check"></i><b>4.3.1</b> factor</a></li>
+<li class="chapter" data-level="4.3.2" data-path="04-dataframe.html"><a href="04-dataframe.html#cut"><i class="fa fa-check"></i><b>4.3.2</b> cut</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="04-dataframe.html"><a href="04-dataframe.html#行列"><i class="fa fa-check"></i><b>4.4</b> 行列</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="04-dataframe.html"><a href="04-dataframe.html#行列の演算"><i class="fa fa-check"></i><b>4.4.1</b> 行列の演算</a></li>
+<li class="chapter" data-level="4.4.2" data-path="04-dataframe.html"><a href="04-dataframe.html#行列のアクセス"><i class="fa fa-check"></i><b>4.4.2</b> 行列のアクセス</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="04-dataframe.html"><a href="04-dataframe.html#データフレイム"><i class="fa fa-check"></i><b>4.5</b> データフレイム</a><ul>
+<li class="chapter" data-level="4.5.1" data-path="04-dataframe.html"><a href="04-dataframe.html#データフレイムの演算"><i class="fa fa-check"></i><b>4.5.1</b> データフレイムの演算</a></li>
+<li class="chapter" data-level="4.5.2" data-path="04-dataframe.html"><a href="04-dataframe.html#データフレイムのアクセス"><i class="fa fa-check"></i><b>4.5.2</b> データフレイムのアクセス</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="05-datainput.html"><a href="05-datainput.html"><i class="fa fa-check"></i><b>5</b> データ入力</a><ul>
+<li class="chapter" data-level="5.1" data-path="05-datainput.html"><a href="05-datainput.html#はじめに-1"><i class="fa fa-check"></i><b>5.1</b> はじめに</a></li>
+<li class="chapter" data-level="5.2" data-path="05-datainput.html"><a href="05-datainput.html#csv-ファイル"><i class="fa fa-check"></i><b>5.2</b> csv ファイル</a></li>
+<li class="chapter" data-level="5.3" data-path="05-datainput.html"><a href="05-datainput.html#excel-ファイル"><i class="fa fa-check"></i><b>5.3</b> EXCEL ファイル</a></li>
+<li class="chapter" data-level="5.4" data-path="05-datainput.html"><a href="05-datainput.html#stata"><i class="fa fa-check"></i><b>5.4</b> STATA</a></li>
+<li class="chapter" data-level="5.5" data-path="05-datainput.html"><a href="05-datainput.html#r-に入っているデータ"><i class="fa fa-check"></i><b>5.5</b> R に入っているデータ</a></li>
+<li class="chapter" data-level="5.6" data-path="05-datainput.html"><a href="05-datainput.html#インターネットからデータ入力"><i class="fa fa-check"></i><b>5.6</b> インターネットからデータ入力</a></li>
+<li class="chapter" data-level="5.7" data-path="05-datainput.html"><a href="05-datainput.html#その他のデータ入力"><i class="fa fa-check"></i><b>5.7</b> その他のデータ入力</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="06-datawrangling.html"><a href="06-datawrangling.html"><i class="fa fa-check"></i><b>6</b> 整然データ</a><ul>
+<li class="chapter" data-level="6.1" data-path="06-datawrangling.html"><a href="06-datawrangling.html#データ整形"><i class="fa fa-check"></i><b>6.1</b> データ整形</a></li>
+<li class="chapter" data-level="6.2" data-path="06-datawrangling.html"><a href="06-datawrangling.html#データ結合"><i class="fa fa-check"></i><b>6.2</b> データ結合</a></li>
+<li class="chapter" data-level="6.3" data-path="06-datawrangling.html"><a href="06-datawrangling.html#tidyr"><i class="fa fa-check"></i><b>6.3</b> tidyr</a></li>
+<li class="chapter" data-level="6.4" data-path="06-datawrangling.html"><a href="06-datawrangling.html#実践例"><i class="fa fa-check"></i><b>6.4</b> 実践例</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="07-regression.html"><a href="07-regression.html"><i class="fa fa-check"></i><b>7</b> データ生成</a><ul>
+<li class="chapter" data-level="7.1" data-path="07-regression.html"><a href="07-regression.html#単回帰モデル"><i class="fa fa-check"></i><b>7.1</b> 単回帰モデル</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="07-regression.html"><a href="07-regression.html#ティー検定"><i class="fa fa-check"></i><b>7.1.1</b> ティー検定</a></li>
+<li class="chapter" data-level="7.1.2" data-path="07-regression.html"><a href="07-regression.html#対数変換"><i class="fa fa-check"></i><b>7.1.2</b> 対数変換</a></li>
+<li class="chapter" data-level="7.1.3" data-path="07-regression.html"><a href="07-regression.html#切片なし回帰モデル"><i class="fa fa-check"></i><b>7.1.3</b> 切片なし回帰モデル</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="07-regression.html"><a href="07-regression.html#重回帰モデル"><i class="fa fa-check"></i><b>7.2</b> 重回帰モデル</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="07-regression.html"><a href="07-regression.html#自乗項"><i class="fa fa-check"></i><b>7.2.1</b> 自乗項</a></li>
+<li class="chapter" data-level="7.2.2" data-path="07-regression.html"><a href="07-regression.html#交差項"><i class="fa fa-check"></i><b>7.2.2</b> 交差項</a></li>
+<li class="chapter" data-level="7.2.3" data-path="07-regression.html"><a href="07-regression.html#エフ検定"><i class="fa fa-check"></i><b>7.2.3</b> エフ検定</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R と RStudio</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="データ構造" class="section level1">
+<h1><span class="header-section-number">4</span> データ構造</h1>
+<div id="ベクトル-2" class="section level2">
+<h2><span class="header-section-number">4.1</span> ベクトル</h2>
+<p>Rでは同じ型の値を集めたものをベクトルという. ベクトルは <code>c()</code> を用いて構成する.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(num&lt;-<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">7</span>,<span class="dv">9</span>))
+## [1] 2 3 7 9
+(chr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;cat&quot;</span>,<span class="st">&quot;dog&quot;</span>,<span class="st">&quot;cow&quot;</span>))
+## [1] &quot;cat&quot; &quot;dog&quot; &quot;cow&quot;</code></pre></div>
+<p>ベクトルには長さという属性 (attribute) が付く.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(num)
+## [1] 4
+<span class="kw">length</span>(chr)
+## [1] 3</code></pre></div>
+<p>ベクトルはオブジェクトの基本であり, 一つの値は長さが1のベクトルと考える.</p>
+<p>型が同じでない場合, 強制的に同じ型に変換される. 文字列が含まれればすべて文字列になる. 数値と論理値の場合は論理値の <code>TRUE</code> が1に <code>FALSE</code> が0に変換される.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(x&lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">4</span>))
+## [1] 1 4
+<span class="kw">typeof</span>(x)
+## [1] &quot;double&quot;
+(y &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>,<span class="ot">FALSE</span>,<span class="st">&quot;4&quot;</span>))
+## [1] &quot;2&quot;     &quot;FALSE&quot; &quot;4&quot;
+<span class="kw">typeof</span>(y)
+## [1] &quot;character&quot;
+(z &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>,<span class="ot">FALSE</span>))
+## [1] 2 0
+<span class="kw">typeof</span>(z)
+## [1] &quot;double&quot;</code></pre></div>
+<div id="ベクトルのアクセス" class="section level3">
+<h3><span class="header-section-number">4.1.1</span> ベクトルのアクセス</h3>
+<p>ベクトルの要素はカギカッコに整数値を代入することで 取り出すせることができる. たとえば3番目のベクトルの要素を取り出すには以下とする.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">num &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">7</span>,<span class="dv">9</span>)
+num[<span class="dv">3</span>]
+## [1] 7</code></pre></div>
+<p>また名前の属性をつけてベクトルを構成することがでる.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dt">x=</span> <span class="dv">3</span>, <span class="dt">y =</span><span class="dv">3</span>, <span class="dt">z =</span> <span class="dv">4</span>)
+vec
+## x y z 
+## 3 3 4
+<span class="kw">names</span>(vec)
+## [1] &quot;x&quot; &quot;y&quot; &quot;z&quot;</code></pre></div>
+<p>すでにあるリストの場合, 次のようにしてもよい.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(num) &lt;-<span class="st"> </span>letters[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]
+num
+## a b c d 
+## 2 3 7 9</code></pre></div>
+<p>いずれに名前の属性をつけると次のようにしてアクセスが可能である.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vec[<span class="st">&quot;x&quot;</span>]
+## x 
+## 3
+num[<span class="st">&quot;d&quot;</span>]
+## d 
+## 9</code></pre></div>
+</div>
+</div>
+<div id="リスト" class="section level2">
+<h2><span class="header-section-number">4.2</span> リスト</h2>
+<p>ベクトルなどを集めたものをリストという. ベクトル型の違うベクトルを関数 <code>list</code> で集める.</p>
+<p>リストの属性には長さがある.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(lst &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="st">&quot;a&quot;</span>,<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">2</span>)))
+## [[1]]
+## [1] &quot;a&quot;
+## 
+## [[2]]
+## [1] 3 3 2
+<span class="kw">typeof</span>(lst)
+## [1] &quot;list&quot;
+<span class="kw">length</span>(lst)
+## [1] 2</code></pre></div>
+<p>関数 <code>class</code> によってリストがであることが確認でき, <code>str</code> で属性を詳しく調べることができる.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(lst)
+## [1] &quot;list&quot;
+<span class="kw">str</span>(lst)
+## List of 2
+##  $ : chr &quot;a&quot;
+##  $ : num [1:3] 3 3 2</code></pre></div>
+<p>リストとベクトルの違いとして, リスト自体もリストとして含められることがある.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">typeof</span>(<span class="kw">list</span>(<span class="st">&quot;b&quot;</span>,lst))
+## [1] &quot;list&quot;</code></pre></div>
+<p>リストベクトルに変換するには <code>unlist</code> を用いる. それぞれの型が違う場合, 同じ型に強制変換される.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lst&lt;-<span class="kw">list</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,<span class="dv">2</span><span class="op">:</span><span class="dv">6</span>)
+lst
+## [[1]]
+## [1] 1 2 3
+## 
+## [[2]]
+## [1] 2 3 4 5 6
+<span class="kw">unlist</span>(lst)
+## [1] 1 2 3 2 3 4 5 6
+<span class="kw">unlist</span>(<span class="kw">list</span>(<span class="st">&quot;a&quot;</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>))
+## [1] &quot;a&quot; &quot;1&quot; &quot;2&quot; &quot;3&quot; &quot;4&quot;</code></pre></div>
+<div id="リストのアクセス" class="section level3">
+<h3><span class="header-section-number">4.2.1</span> リストのアクセス</h3>
+<p>リストの取りだすには, ベクトルのようにかぎかっこで数値を入力する. 以下は一番目のリストを表示している.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lst[<span class="dv">1</span>]
+## [[1]]
+## [1] 1 2 3</code></pre></div>
+<p>また名前の属性をもてば, その名前を入力することで取り出すことができる. たと次のようにして名前の属性をつけたリストを作る.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(lst &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">name=</span><span class="st">&quot;a&quot;</span>,<span class="dt">num=</span><span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">2</span>)))
+## $name
+## [1] &quot;a&quot;
+## 
+## $num
+## [1] 3 3 2
+<span class="kw">names</span>(lst)
+## [1] &quot;name&quot; &quot;num&quot;</code></pre></div>
+<p>その上で以下のようにすれば2番目の要素が取り出せる.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lst[<span class="st">&quot;num&quot;</span>]
+## $num
+## [1] 3 3 2</code></pre></div>
+<p>いずれにせよ取り出したののもリストになることに注意されたい.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">typeof</span>(lst[<span class="dv">1</span>])
+## [1] &quot;list&quot;
+<span class="kw">typeof</span>(lst[<span class="st">&quot;num&quot;</span>])
+## [1] &quot;list&quot;</code></pre></div>
+<p>ベクトルとして取り出すには次のようにする.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lst[[<span class="dv">2</span>]]
+## [1] 3 3 2
+<span class="kw">typeof</span>(lst[[<span class="dv">2</span>]])
+## [1] &quot;double&quot;</code></pre></div>
+<p>名前の属性がついていれば以下のようにもできる.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lst[[<span class="st">&quot;num&quot;</span>]]
+## [1] 3 3 2
+lst<span class="op">$</span>num
+## [1] 3 3 2</code></pre></div>
+<p>リストのなかのあるベクトルの平均値を求めるには次のようにする.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## mean(lst[[2]])
+## mean(lst[[&quot;num&quot;]])
+<span class="kw">mean</span>(lst<span class="op">$</span>num)
+## [1] 2.666667</code></pre></div>
+<p>もしくは以下とする.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(lst, <span class="kw">mean</span>(num))
+## [1] 2.666667</code></pre></div>
+<p>なおリストの要素を消すには以下のようにする.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lst<span class="op">$</span>num &lt;-<span class="st"> </span><span class="ot">NULL</span>
+lst
+## $name
+## [1] &quot;a&quot;</code></pre></div>
+</div>
+</div>
+<div id="因子ベクトル" class="section level2">
+<h2><span class="header-section-number">4.3</span> 因子ベクトル</h2>
+<div id="factor" class="section level3">
+<h3><span class="header-section-number">4.3.1</span> factor</h3>
+<p>文字列ベクトルを引数にした関数 <code>factor</code>によって 因子 (factor) ベクトルを作成できる.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;L&quot;</span>,<span class="st">&quot;S&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;L&quot;</span>))
+## [1] &quot;L&quot; &quot;S&quot; &quot;M&quot; &quot;M&quot; &quot;L&quot;
+(x.fac &lt;-<span class="st"> </span><span class="kw">factor</span>(x))
+## [1] L S M M L
+## Levels: L M S</code></pre></div>
+<p>因子ベクトルの実体は <code>level</code> という属性をもつ整数ベクトルである.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">typeof</span>(x.fac)
+## [1] &quot;integer&quot;
+<span class="kw">length</span>(x.fac)
+## [1] 5
+<span class="kw">levels</span>(x.fac)
+## [1] &quot;L&quot; &quot;M&quot; &quot;S&quot;</code></pre></div>
+<p>関数 <code>class</code> によって因数ベクトルがであることが確認でき, <code>str</code> で属性を詳しく調べることができる.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(x.fac)
+## [1] &quot;factor&quot;
+<span class="kw">str</span>(x.fac)
+##  Factor w/ 3 levels &quot;L&quot;,&quot;M&quot;,&quot;S&quot;: 1 3 2 2 1</code></pre></div>
+<p>また水準の表示順は自動的にアルファベット順になるが, それを変更するには次のようにする.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(x.factor &lt;-<span class="st"> </span><span class="kw">factor</span>(x,<span class="dt">levels=</span><span class="kw">c</span>(<span class="st">&quot;S&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;L&quot;</span>)))
+## [1] L S M M L
+## Levels: S M L</code></pre></div>
+<p>この水準に順序構造を付与するには次のようにする.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(x.order &lt;-<span class="st"> </span><span class="kw">ordered</span>(x,<span class="dt">levels=</span><span class="kw">c</span>(<span class="st">&quot;S&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;L&quot;</span>)))
+## [1] L S M M L
+## Levels: S &lt; M &lt; L</code></pre></div>
+</div>
+<div id="cut" class="section level3">
+<h3><span class="header-section-number">4.3.2</span> cut</h3>
+<p>また数値を区間ごとに区分した因子ベクトルも作成可能である. 0から10までの値を発生させる.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">10</span>,<span class="dv">0</span>,<span class="dv">10</span>)
+x
+##  [1] 2.180875 9.474309 7.413325 9.395008 6.021331 8.879978 4.493322
+##  [8] 5.493958 3.778338 2.009900</code></pre></div>
+<p>5等分するには以下のようにする.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cut</span>(x, <span class="dt">breaks=</span><span class="dv">5</span>)
+##  [1] (2,3.5]     (7.98,9.48] (6.49,7.98] (7.98,9.48] (5,6.49]   
+##  [6] (7.98,9.48] (3.5,5]     (5,6.49]    (3.5,5]     (2,3.5]    
+## Levels: (2,3.5] (3.5,5] (5,6.49] (6.49,7.98] (7.98,9.48]</code></pre></div>
+<p>これは登場したデータの最大値と最小値の幅を5等分している.</p>
+<p>区間を指定するには以下のようにベクトルで指定する.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cut</span>(x,<span class="dt">breaks=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">6</span>,<span class="dv">8</span>,<span class="dv">10</span>))
+##  [1] (2,4]  (8,10] (6,8]  (8,10] (6,8]  (8,10] (4,6]  (4,6]  (2,4]  (2,4] 
+## Levels: (0,2] (2,4] (4,6] (6,8] (8,10]</code></pre></div>
+<p>0より大きく2以下, 2より大きく4以下,… となっている.</p>
+<p>0も含めるのなら <code>include.lowest=TRUE</code> というオプションをつける.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cut</span>(x, <span class="dt">breaks=</span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">10</span>,<span class="dv">2</span>),<span class="dt">include.lowest=</span><span class="ot">TRUE</span>)
+##  [1] (2,4]  (8,10] (6,8]  (8,10] (6,8]  (8,10] (4,6]  (4,6]  (2,4]  (2,4] 
+## Levels: [0,2] (2,4] (4,6] (6,8] (8,10]</code></pre></div>
+<p>またこれを0以上2未満, 2以上4未満, … とするにはオプション <code>right=FALSE</code> をつける.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cut</span>(x, <span class="dt">breaks=</span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">10</span>,<span class="dv">2</span>),<span class="dt">right=</span><span class="ot">FALSE</span>,<span class="dt">include.lowest=</span><span class="ot">TRUE</span>)
+##  [1] [2,4)  [8,10] [6,8)  [8,10] [6,8)  [8,10] [4,6)  [4,6)  [2,4)  [2,4) 
+## Levels: [0,2) [2,4) [4,6) [6,8) [8,10]</code></pre></div>
+<p>このとき, <code>include.lowest=TRUE</code> は最大値を含めることを意味する.</p>
+<p>また因子の名称はオプション <code>labels</code> で変更可能である.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cut</span>(x, <span class="dt">breaks=</span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">10</span>,<span class="dv">2</span>),<span class="dt">right=</span><span class="ot">FALSE</span>,<span class="dt">include.lowest=</span><span class="ot">TRUE</span>,
+    <span class="dt">labels =</span><span class="kw">c</span>(<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;C&quot;</span>,<span class="st">&quot;D&quot;</span>,<span class="st">&quot;E&quot;</span>))
+##  [1] B E D E D E C C B B
+## Levels: A B C D E</code></pre></div>
+</div>
+</div>
+<div id="行列" class="section level2">
+<h2><span class="header-section-number">4.4</span> 行列</h2>
+<p>ベクトルに縦と横の次元を付与することによって行列 (matrix) を作ることができる.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mat &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">nrow=</span><span class="dv">2</span>,<span class="dt">ncol=</span><span class="dv">5</span>)
+mat
+##      [,1] [,2] [,3] [,4] [,5]
+## [1,]    1    3    5    7    9
+## [2,]    2    4    6    8   10</code></pre></div>
+<p>またオプション <code>byrow=TRUE</code> で横から行列を作成できる.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">nrow=</span><span class="dv">2</span>,<span class="dt">ncol=</span><span class="dv">5</span>,<span class="dt">byrow =</span> <span class="ot">TRUE</span>)
+##      [,1] [,2] [,3] [,4] [,5]
+## [1,]    1    2    3    4    5
+## [2,]    6    7    8    9   10</code></pre></div>
+<p>この行列の実体は <code>dim</code> という属性を持つ数値ベクトルである.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">typeof</span>(mat)
+## [1] &quot;integer&quot;
+<span class="kw">length</span>(mat)
+## [1] 10
+<span class="kw">dim</span>(mat)
+## [1] 2 5
+<span class="kw">dim</span>(mat)
+## [1] 2 5</code></pre></div>
+<p>他にもそれぞれの要素の次元は以下で得ることができる.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">nrow</span>(mat)
+## [1] 2
+<span class="kw">ncol</span>(mat)
+## [1] 5</code></pre></div>
+<p>関数 <code>class</code> によって因数ベクトルがであることが確認でき, <code>str</code> で属性を詳しく調べることができる.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(mat)
+## [1] &quot;matrix&quot;
+<span class="kw">str</span>(mat)
+##  int [1:2, 1:5] 1 2 3 4 5 6 7 8 9 10</code></pre></div>
+<div id="行列の演算" class="section level3">
+<h3><span class="header-section-number">4.4.1</span> 行列の演算</h3>
+<p>縦での結合は <code>rbind</code> を用いる</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mata&lt;-<span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,<span class="dt">nrow=</span><span class="dv">1</span>,<span class="dt">ncol=</span><span class="dv">5</span>)
+<span class="kw">rbind</span>(mat,mata)
+##      [,1] [,2] [,3] [,4] [,5]
+## [1,]    1    3    5    7    9
+## [2,]    2    4    6    8   10
+## [3,]    1    2    3    4    5</code></pre></div>
+<p>横での結合は <code>cbind</code> を用いる</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">matb&lt;-<span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>,<span class="dt">nrow=</span><span class="dv">2</span>,<span class="dt">ncol=</span><span class="dv">2</span>)
+<span class="kw">cbind</span>(mat,matb)
+##      [,1] [,2] [,3] [,4] [,5] [,6] [,7]
+## [1,]    1    3    5    7    9    1    3
+## [2,]    2    4    6    8   10    2    4</code></pre></div>
+<p>転置行列は以下のようにすればよい.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">t</span>(mat)
+##      [,1] [,2]
+## [1,]    1    2
+## [2,]    3    4
+## [3,]    5    6
+## [4,]    7    8
+## [5,]    9   10</code></pre></div>
+<p>通常の <code>*</code> は要素ごとの掛け算になる. 数学で用いられる行列同士の掛け算は <code>%*%</code> を実施する.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">matb <span class="op">%*%</span><span class="st"> </span>mat
+##      [,1] [,2] [,3] [,4] [,5]
+## [1,]    7   15   23   31   39
+## [2,]   10   22   34   46   58</code></pre></div>
+<p>行列のことが一致させる必要がある.</p>
+<p>また列ごとの合計, 行ごとの合計は以下を実施する.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colSums</span>(mat)
+## [1]  3  7 11 15 19
+<span class="kw">rowSums</span>(mat)
+## [1] 25 30</code></pre></div>
+<p>返り値はベクトルになる. 行列のすべての要素を足すには <code>sum</code> でよい.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(mat)
+## [1] 55</code></pre></div>
+<p>また列ごとの平均, 行ごとの平均は以下を実施する.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colMeans</span>(mat)
+## [1] 1.5 3.5 5.5 7.5 9.5
+<span class="kw">rowMeans</span>(mat)
+## [1] 5 6</code></pre></div>
+</div>
+<div id="行列のアクセス" class="section level3">
+<h3><span class="header-section-number">4.4.2</span> 行列のアクセス</h3>
+<p>行列からベクトルの取り出し以下のようにｓる.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mat[<span class="dv">2</span>,]
+## [1]  2  4  6  8 10</code></pre></div>
+<p>ベクトルのまま取り出されてしまう. オプション <code>drop=FALSE</code> をつけると行列のまま取り出すことができる.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mat[, <span class="dv">3</span>, drop=<span class="ot">FALSE</span>]
+##      [,1]
+## [1,]    5
+## [2,]    6</code></pre></div>
+<p>2つ同時に取り出すにときは特にオプションをしていしなくても行列として取り出せる.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mat[,<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>]
+##      [,1] [,2]
+## [1,]    3    5
+## [2,]    4    6</code></pre></div>
+<p>要素の取り出し</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mat[<span class="dv">2</span>,<span class="dv">3</span>]
+## [1] 6</code></pre></div>
+<p>行列に名前を付けることができる.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rownames</span>(mat) &lt;-<span class="st"> </span>letters[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]
+<span class="kw">colnames</span>(mat) &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">5</span>
+mat
+##   1 2 3 4  5
+## a 1 3 5 7  9
+## b 2 4 6 8 10</code></pre></div>
+<p>これによって以下のようにしてもアクセス可能である.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mat[<span class="st">&quot;a&quot;</span>,<span class="st">&quot;3&quot;</span>]
+## [1] 5</code></pre></div>
+<p>なお名前は次のようにしてあとから作成することができる.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dimnames</span>(mat) &lt;-<span class="st"> </span><span class="kw">list</span>(LETTERS[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>],<span class="dv">2</span><span class="op">:</span><span class="dv">6</span>)
+mat
+##   2 3 4 5  6
+## A 1 3 5 7  9
+## B 2 4 6 8 10</code></pre></div>
+</div>
+</div>
+<div id="データフレイム" class="section level2">
+<h2><span class="header-section-number">4.5</span> データフレイム</h2>
+<p>同じ長さのベクトルを組み合わせたリストをデータフレイム (dataframe) という. データフレイムは次のようにして作られる.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>), <span class="dt">y =</span> letters[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>])</code></pre></div>
+<p>データフレイムは大規模なことが多いので最初の数行だけをみるためには <code>head</code> をもちいる.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(df)
+##            x y
+## 1  0.4187007 a
+## 2 -0.7127679 b
+## 3 -0.4768582 c
+## 4 -0.9334514 d
+## 5 -3.4820073 e
+## 6 -0.8391195 f</code></pre></div>
+<p>データの簡単な統計表は <code>summary</code> を使うとよい.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(df)
+##        x                 y    
+##  Min.   :-3.4820   a      :1  
+##  1st Qu.:-0.9163   b      :1  
+##  Median :-0.7759   c      :1  
+##  Mean   :-0.9304   d      :1  
+##  3rd Qu.:-0.1954   e      :1  
+##  Max.   : 0.4187   f      :1  
+##                    (Other):4</code></pre></div>
+<p>よりプログラム言語としてのデータ構造を調べるには <code>str</code> を使えばよい.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(df)
+## &#39;data.frame&#39;:    10 obs. of  2 variables:
+##  $ x: num  0.419 -0.713 -0.477 -0.933 -3.482 ...
+##  $ y: Factor w/ 10 levels &quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;,..: 1 2 3 4 5 6 7 8 9 10</code></pre></div>
+<p>データフレイムはリストである.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">typeof</span>(df)
+## [1] &quot;list&quot;
+<span class="kw">class</span>(df)
+## [1] &quot;data.frame&quot;</code></pre></div>
+<p>リストのように長さと名前をもつ.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(df)
+## [1] 2
+<span class="kw">names</span>(df)
+## [1] &quot;x&quot; &quot;y&quot;</code></pre></div>
+<p>行列と同じ次元をもつ.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(df)
+## [1] 10  2
+<span class="kw">ncol</span>(df)
+## [1] 2
+<span class="kw">nrow</span>(df)
+## [1] 10</code></pre></div>
+<p><code>ncol(df)</code> は <code>length(df)</code> と同じである.</p>
+<p>行列と同じ名前をもつ.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dimnames</span>(df)
+## [[1]]
+##  [1] &quot;1&quot;  &quot;2&quot;  &quot;3&quot;  &quot;4&quot;  &quot;5&quot;  &quot;6&quot;  &quot;7&quot;  &quot;8&quot;  &quot;9&quot;  &quot;10&quot;
+## 
+## [[2]]
+## [1] &quot;x&quot; &quot;y&quot;
+<span class="kw">colnames</span>(df)
+## [1] &quot;x&quot; &quot;y&quot;
+<span class="kw">rownames</span>(df)
+##  [1] &quot;1&quot;  &quot;2&quot;  &quot;3&quot;  &quot;4&quot;  &quot;5&quot;  &quot;6&quot;  &quot;7&quot;  &quot;8&quot;  &quot;9&quot;  &quot;10&quot;</code></pre></div>
+<p><code>colnames(df)</code> は <code>names(df)</code> と同じである.</p>
+<div id="データフレイムの演算" class="section level3">
+<h3><span class="header-section-number">4.5.1</span> データフレイムの演算</h3>
+<p>データフレイムは行列でもあるので, 注意があるが 行列での演算がほとんどそのまま利用できる.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rbind</span>(df, <span class="kw">c</span>(<span class="dv">3</span>,<span class="st">&quot;a&quot;</span>))
+##                      x y
+## 1    0.418700733421167 a
+## 2   -0.712767857933726 b
+## 3   -0.476858240917065 c
+## 4   -0.933451370580552 d
+## 5     -3.4820073330201 e
+## 6   -0.839119485760245 f
+## 7  -0.0607198649243853 g
+## 8    -2.25093661965145 h
+## 9   -0.864870930858021 i
+## 10  -0.101613882366791 j
+## 11                   3 a</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cbind</span>(df,<span class="dt">z=</span><span class="kw">runif</span>(<span class="dv">10</span>))
+##              x y          z
+## 1   0.41870073 a 0.74762011
+## 2  -0.71276786 b 0.50972781
+## 3  -0.47685824 c 0.07916254
+## 4  -0.93345137 d 0.67327459
+## 5  -3.48200733 e 0.39688222
+## 6  -0.83911949 f 0.19932462
+## 7  -0.06071986 g 0.88068580
+## 8  -2.25093662 h 0.71013799
+## 9  -0.86487093 i 0.70481136
+## 10 -0.10161388 j 0.68360377</code></pre></div>
+<p>転置行列は行列として出力可能である. 以下のようにデータフレイムに因子ベクトルが含まれていたら全て文字列になる.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">t</span>(df)
+##   [,1]          [,2]          [,3]          [,4]          [,5]         
+## x &quot; 0.41870073&quot; &quot;-0.71276786&quot; &quot;-0.47685824&quot; &quot;-0.93345137&quot; &quot;-3.48200733&quot;
+## y &quot;a&quot;           &quot;b&quot;           &quot;c&quot;           &quot;d&quot;           &quot;e&quot;          
+##   [,6]          [,7]          [,8]          [,9]          [,10]        
+## x &quot;-0.83911949&quot; &quot;-0.06071986&quot; &quot;-2.25093662&quot; &quot;-0.86487093&quot; &quot;-0.10161388&quot;
+## y &quot;f&quot;           &quot;g&quot;           &quot;h&quot;           &quot;i&quot;           &quot;j&quot;</code></pre></div>
+<p>データフレイムの構成ベクトルがすべて論理値もしくは数値のとき, 同じ行数と列数のデータフレイムの要素ごとの四則演算は可能である. ただし, 通常の行列演算を実施するには, 行列に変換しなければならない.</p>
+<p>また データフレイムの構成ベクトルがすべて論理値もしくは数値のとき, 列ごとの合計, 行ごとの合計が可能である.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dff&lt;-<span class="kw">data.frame</span>(<span class="dt">a=</span><span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,<span class="dt">b=</span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">TRUE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>,<span class="ot">FALSE</span>))
+<span class="kw">colSums</span>(dff)
+##  a  b 
+## 15  3
+<span class="kw">rowSums</span>(dff)
+## [1] 2 3 4 4 5</code></pre></div>
+<p>返り値はベクトルになる. 行列のすべての要素を足すには <code>sum</code> でよい.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(dff)
+## [1] 18</code></pre></div>
+<p>また列ごとの平均, 行ごとの平均は以下を実施する.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colMeans</span>(dff)
+##   a   b 
+## 3.0 0.6
+<span class="kw">rowMeans</span>(dff)
+## [1] 1.0 1.5 2.0 2.0 2.5</code></pre></div>
+</div>
+<div id="データフレイムのアクセス" class="section level3">
+<h3><span class="header-section-number">4.5.2</span> データフレイムのアクセス</h3>
+<p>データのアクセスとして, ベクトルのように一つのカギカッコで取り出すと以下のようになる.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df[<span class="st">&quot;x&quot;</span>]
+##              x
+## 1   0.41870073
+## 2  -0.71276786
+## 3  -0.47685824
+## 4  -0.93345137
+## 5  -3.48200733
+## 6  -0.83911949
+## 7  -0.06071986
+## 8  -2.25093662
+## 9  -0.86487093
+## 10 -0.10161388</code></pre></div>
+<p>他にも <code>df[1]</code> でもよいが, いずれにせよデータフレイムとして取り出されてしまう.</p>
+<p>ベクトルとして取り出すには以下を実施する.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df<span class="op">$</span>x
+##  [1]  0.41870073 -0.71276786 -0.47685824 -0.93345137 -3.48200733
+##  [6] -0.83911949 -0.06071986 -2.25093662 -0.86487093 -0.10161388</code></pre></div>
+<p>他にも <code>df[[&quot;x&quot;]], df[[1]], df[,&quot;x&quot;], df[,1]</code> でもよい. <code>ある変数 $x$ の5番目の要素を取り出して別の値</code>100`を代入するには以下のようにする.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df<span class="op">$</span>x[<span class="dv">5</span>] &lt;-<span class="st"> </span><span class="dv">100</span></code></pre></div>
+<p>他にも <code>df[[&quot;x&quot;]][5], df[[1]][5], df[5,&quot;x&quot;], df[5,1]</code> でもよい.</p>
+<p>データフレイムのある変数の平均値を求めるには次のようにする.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(df<span class="op">$</span>x)
+## [1] 9.417836</code></pre></div>
+<p>もしくは以下とする.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(df, <span class="kw">mean</span>(x))
+## [1] 9.417836</code></pre></div>
+<p>他にも <code>attach(df)</code> を使うやり方もあるが, 現在では推奨されない.</p>
+<p>なおリストの要素を消すには以下のようにする.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df<span class="op">$</span>x &lt;-<span class="st"> </span><span class="ot">NULL</span></code></pre></div>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="03-vector.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="05-datainput.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/04-dataframe.Rmd",
+"text": "Edit"
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
