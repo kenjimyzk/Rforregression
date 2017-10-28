@@ -25,7 +25,7 @@
 <meta name="author" content="宮﨑憲治">
 
 
-<meta name="date" content="2017-10-27">
+<meta name="date" content="2017-10-28">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -167,7 +167,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="6.3" data-path="06-datawrangling.html"><a href="06-datawrangling.html#tidyr"><i class="fa fa-check"></i><b>6.3</b> tidyr</a></li>
 <li class="chapter" data-level="6.4" data-path="06-datawrangling.html"><a href="06-datawrangling.html#実践例"><i class="fa fa-check"></i><b>6.4</b> 実践例</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="07-regression.html"><a href="07-regression.html"><i class="fa fa-check"></i><b>7</b> データ生成</a><ul>
+<li class="chapter" data-level="7" data-path="07-regression.html"><a href="07-regression.html"><i class="fa fa-check"></i><b>7</b> 回帰分析</a><ul>
 <li class="chapter" data-level="7.1" data-path="07-regression.html"><a href="07-regression.html#単回帰モデル"><i class="fa fa-check"></i><b>7.1</b> 単回帰モデル</a><ul>
 <li class="chapter" data-level="7.1.1" data-path="07-regression.html"><a href="07-regression.html#ティー検定"><i class="fa fa-check"></i><b>7.1.1</b> ティー検定</a></li>
 <li class="chapter" data-level="7.1.2" data-path="07-regression.html"><a href="07-regression.html#対数変換"><i class="fa fa-check"></i><b>7.1.2</b> 対数変換</a></li>
@@ -177,6 +177,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="7.2.1" data-path="07-regression.html"><a href="07-regression.html#自乗項"><i class="fa fa-check"></i><b>7.2.1</b> 自乗項</a></li>
 <li class="chapter" data-level="7.2.2" data-path="07-regression.html"><a href="07-regression.html#交差項"><i class="fa fa-check"></i><b>7.2.2</b> 交差項</a></li>
 <li class="chapter" data-level="7.2.3" data-path="07-regression.html"><a href="07-regression.html#エフ検定"><i class="fa fa-check"></i><b>7.2.3</b> エフ検定</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="07-regression.html"><a href="07-regression.html#最小二乗推定量のための仮定について"><i class="fa fa-check"></i><b>7.3</b> 最小二乗推定量のための仮定について</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="07-regression.html"><a href="07-regression.html#ロバスト分散"><i class="fa fa-check"></i><b>7.3.1</b> ロバスト分散</a></li>
+<li class="chapter" data-level="7.3.2" data-path="07-regression.html"><a href="07-regression.html#分散不均一の検定"><i class="fa fa-check"></i><b>7.3.2</b> 分散不均一の検定</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -202,7 +206,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="header">
 <h1 class="title">R と RStudio</h1>
 <h4 class="author"><em>宮﨑憲治</em></h4>
-<h4 class="date"><em>2017-10-27</em></h4>
+<h4 class="date"><em>2017-10-28</em></h4>
 </div>
 <div id="はじめに" class="section level1 unnumbered">
 <h1>はじめに</h1>
@@ -216,7 +220,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Rをインストールするには</p>
 <p><a href="https://cran.r-project.org/" class="uri">https://cran.r-project.org/</a></p>
 <p>にいき, 該当機種のファイルをダウンロードする. ダウンロードしたあとに実行すればインストールされる.</p>
-<p>Windows の場合, 32bit か 64bit を選択するが, 最近のパソコンのCPUは 64bit と考えられるが, どちらかわからなければ 32bit にしておけばよい.</p>
+<p>Windows の場合, 32bit か 64bit を選択する. 最近のパソコンの CPU は 64bit と考えられるが, どちらかわからなければ 32bit にしておけばよい.</p>
 <p>Ubuntu なら <code>ppa</code> を使って導入してもよい.</p>
 <pre><code>sudo add-apt-repository ppa:marutter/rrutter
 sudo apt-get update

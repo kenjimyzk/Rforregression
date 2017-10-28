@@ -9,7 +9,7 @@ output:
 # RStudio
 
 ## RStudio とは
-RStudio とは R の統合開発環境 (IDE, Integrated Development Enviroment) である.
+RStudio は R の統合開発環境 (IDE, Integrated Development Enviroment) の一つである.
 オープンソース版が存在する.
 
 https://ja.wikipedia.org/wiki/R-Studio

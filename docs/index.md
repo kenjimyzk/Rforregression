@@ -1,7 +1,7 @@
 --- 
 title: "R と RStudio"
 author: "宮﨑憲治"
-date: "2017-10-27"
+date: "2017-10-28"
 site: bookdown::bookdown_site
 output:
   bookdown::epub_book
@@ -33,8 +33,8 @@ https://cran.r-project.org/
 にいき, 該当機種のファイルをダウンロードする.
 ダウンロードしたあとに実行すればインストールされる.
 
-Windows の場合, 32bit か 64bit を選択するが, 
-最近のパソコンのCPUは 64bit と考えられるが,
+Windows の場合, 32bit か 64bit を選択する. 
+最近のパソコンの CPU は 64bit と考えられるが,
 どちらかわからなければ 32bit にしておけばよい.
 
 Ubuntu なら `ppa` を使って導入してもよい.

@@ -25,7 +25,7 @@
 <meta name="author" content="宮﨑憲治">
 
 
-<meta name="date" content="2017-10-27">
+<meta name="date" content="2017-10-28">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -167,7 +167,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="6.3" data-path="06-datawrangling.html"><a href="06-datawrangling.html#tidyr"><i class="fa fa-check"></i><b>6.3</b> tidyr</a></li>
 <li class="chapter" data-level="6.4" data-path="06-datawrangling.html"><a href="06-datawrangling.html#実践例"><i class="fa fa-check"></i><b>6.4</b> 実践例</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="07-regression.html"><a href="07-regression.html"><i class="fa fa-check"></i><b>7</b> データ生成</a><ul>
+<li class="chapter" data-level="7" data-path="07-regression.html"><a href="07-regression.html"><i class="fa fa-check"></i><b>7</b> 回帰分析</a><ul>
 <li class="chapter" data-level="7.1" data-path="07-regression.html"><a href="07-regression.html#単回帰モデル"><i class="fa fa-check"></i><b>7.1</b> 単回帰モデル</a><ul>
 <li class="chapter" data-level="7.1.1" data-path="07-regression.html"><a href="07-regression.html#ティー検定"><i class="fa fa-check"></i><b>7.1.1</b> ティー検定</a></li>
 <li class="chapter" data-level="7.1.2" data-path="07-regression.html"><a href="07-regression.html#対数変換"><i class="fa fa-check"></i><b>7.1.2</b> 対数変換</a></li>
@@ -177,6 +177,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="7.2.1" data-path="07-regression.html"><a href="07-regression.html#自乗項"><i class="fa fa-check"></i><b>7.2.1</b> 自乗項</a></li>
 <li class="chapter" data-level="7.2.2" data-path="07-regression.html"><a href="07-regression.html#交差項"><i class="fa fa-check"></i><b>7.2.2</b> 交差項</a></li>
 <li class="chapter" data-level="7.2.3" data-path="07-regression.html"><a href="07-regression.html#エフ検定"><i class="fa fa-check"></i><b>7.2.3</b> エフ検定</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="07-regression.html"><a href="07-regression.html#最小二乗推定量のための仮定について"><i class="fa fa-check"></i><b>7.3</b> 最小二乗推定量のための仮定について</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="07-regression.html"><a href="07-regression.html#ロバスト分散"><i class="fa fa-check"></i><b>7.3.1</b> ロバスト分散</a></li>
+<li class="chapter" data-level="7.3.2" data-path="07-regression.html"><a href="07-regression.html#分散不均一の検定"><i class="fa fa-check"></i><b>7.3.2</b> 分散不均一の検定</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -211,14 +215,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>), <span class="dt">y =</span> letters[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>], <span class="dt">stringsAsFactors=</span> <span class="ot">FALSE</span>)
 <span class="kw">str</span>(df)
 ## &#39;data.frame&#39;:    10 obs. of  2 variables:
-##  $ x: num  0.9154 0.2745 -1.0227 1.7641 0.0612 ...
+##  $ x: num  2.46 -0.172 0.406 -0.273 0.559 ...
 ##  $ y: chr  &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; ...</code></pre></div>
 <p>もしくはライブラリ <code>dplyr</code> にある <code>data_frame</code> を用いれば, そのようなオプションを付けることなくデータフレイムを拡張したクラスを作ることができる.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
 df &lt;-<span class="st"> </span><span class="kw">data_frame</span>(<span class="dt">x =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>), <span class="dt">y =</span> letters[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>])
 <span class="kw">str</span>(df)
 ## Classes &#39;tbl_df&#39;, &#39;tbl&#39; and &#39;data.frame&#39;:    10 obs. of  2 variables:
-##  $ x: num  -0.3857 -1.08557 0.00458 1.28309 1.28056 ...
+##  $ x: num  0.548 -0.674 -0.299 1.003 0.166 ...
 ##  $ y: chr  &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; ...</code></pre></div>
 <p>外部ファイルから入力するさいには</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">getwd</span>()</code></pre></div>

@@ -25,7 +25,7 @@
 <meta name="author" content="宮﨑憲治">
 
 
-<meta name="date" content="2017-10-27">
+<meta name="date" content="2017-10-28">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -167,7 +167,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="6.3" data-path="06-datawrangling.html"><a href="06-datawrangling.html#tidyr"><i class="fa fa-check"></i><b>6.3</b> tidyr</a></li>
 <li class="chapter" data-level="6.4" data-path="06-datawrangling.html"><a href="06-datawrangling.html#実践例"><i class="fa fa-check"></i><b>6.4</b> 実践例</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="07-regression.html"><a href="07-regression.html"><i class="fa fa-check"></i><b>7</b> データ生成</a><ul>
+<li class="chapter" data-level="7" data-path="07-regression.html"><a href="07-regression.html"><i class="fa fa-check"></i><b>7</b> 回帰分析</a><ul>
 <li class="chapter" data-level="7.1" data-path="07-regression.html"><a href="07-regression.html#単回帰モデル"><i class="fa fa-check"></i><b>7.1</b> 単回帰モデル</a><ul>
 <li class="chapter" data-level="7.1.1" data-path="07-regression.html"><a href="07-regression.html#ティー検定"><i class="fa fa-check"></i><b>7.1.1</b> ティー検定</a></li>
 <li class="chapter" data-level="7.1.2" data-path="07-regression.html"><a href="07-regression.html#対数変換"><i class="fa fa-check"></i><b>7.1.2</b> 対数変換</a></li>
@@ -177,6 +177,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="7.2.1" data-path="07-regression.html"><a href="07-regression.html#自乗項"><i class="fa fa-check"></i><b>7.2.1</b> 自乗項</a></li>
 <li class="chapter" data-level="7.2.2" data-path="07-regression.html"><a href="07-regression.html#交差項"><i class="fa fa-check"></i><b>7.2.2</b> 交差項</a></li>
 <li class="chapter" data-level="7.2.3" data-path="07-regression.html"><a href="07-regression.html#エフ検定"><i class="fa fa-check"></i><b>7.2.3</b> エフ検定</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="07-regression.html"><a href="07-regression.html#最小二乗推定量のための仮定について"><i class="fa fa-check"></i><b>7.3</b> 最小二乗推定量のための仮定について</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="07-regression.html"><a href="07-regression.html#ロバスト分散"><i class="fa fa-check"></i><b>7.3.1</b> ロバスト分散</a></li>
+<li class="chapter" data-level="7.3.2" data-path="07-regression.html"><a href="07-regression.html#分散不均一の検定"><i class="fa fa-check"></i><b>7.3.2</b> 分散不均一の検定</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -380,73 +384,73 @@ dfy &lt;-<span class="st"> </span><span class="kw">data_frame</span>(<span class
 )
 df</code></pre></div>
 <pre><code>## # A tibble: 5 x 4
-##    time          X          Y         Z
-##   &lt;int&gt;      &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;
-## 1  2010  0.6293810  1.4169667  1.929605
-## 2  2011 -1.6580129  1.0370836  4.357563
-## 3  2012  0.4207063  3.5639349  6.275122
-## 4  2013 -0.6887907 -1.1305699 -2.691399
-## 5  2014  1.0434867 -0.4531038  2.899786</code></pre>
+##    time          X          Y          Z
+##   &lt;int&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
+## 1  2010  1.9522534 -5.1801738  0.4165186
+## 2  2011  0.7285880  2.0890653 -4.8864095
+## 3  2012 -0.1287017  1.4776272  6.0249703
+## 4  2013  2.3425137 -0.6164781 -1.8657655
+## 5  2014  0.5732866 -3.0318162  1.9761996</code></pre>
 <p>それぞれの変数名をキーとして, 値を示した表は <code>gather</code> で作れる.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df_gather &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">gather</span>(key,value,<span class="op">-</span>time)
 df_gather</code></pre></div>
 <pre><code>## # A tibble: 15 x 3
 ##     time   key      value
 ##    &lt;int&gt; &lt;chr&gt;      &lt;dbl&gt;
-##  1  2010     X  0.6293810
-##  2  2011     X -1.6580129
-##  3  2012     X  0.4207063
-##  4  2013     X -0.6887907
-##  5  2014     X  1.0434867
-##  6  2010     Y  1.4169667
-##  7  2011     Y  1.0370836
-##  8  2012     Y  3.5639349
-##  9  2013     Y -1.1305699
-## 10  2014     Y -0.4531038
-## 11  2010     Z  1.9296053
-## 12  2011     Z  4.3575630
-## 13  2012     Z  6.2751223
-## 14  2013     Z -2.6913992
-## 15  2014     Z  2.8997856</code></pre>
+##  1  2010     X  1.9522534
+##  2  2011     X  0.7285880
+##  3  2012     X -0.1287017
+##  4  2013     X  2.3425137
+##  5  2014     X  0.5732866
+##  6  2010     Y -5.1801738
+##  7  2011     Y  2.0890653
+##  8  2012     Y  1.4776272
+##  9  2013     Y -0.6164781
+## 10  2014     Y -3.0318162
+## 11  2010     Z  0.4165186
+## 12  2011     Z -4.8864095
+## 13  2012     Z  6.0249703
+## 14  2013     Z -1.8657655
+## 15  2014     Z  1.9761996</code></pre>
 <p><code>spread</code> でもとに戻ることができる.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df_gather <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">spread</span>(key, value)</code></pre></div>
 <pre><code>## # A tibble: 5 x 4
-##    time          X          Y         Z
-## * &lt;int&gt;      &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;
-## 1  2010  0.6293810  1.4169667  1.929605
-## 2  2011 -1.6580129  1.0370836  4.357563
-## 3  2012  0.4207063  3.5639349  6.275122
-## 4  2013 -0.6887907 -1.1305699 -2.691399
-## 5  2014  1.0434867 -0.4531038  2.899786</code></pre>
+##    time          X          Y          Z
+## * &lt;int&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
+## 1  2010  1.9522534 -5.1801738  0.4165186
+## 2  2011  0.7285880  2.0890653 -4.8864095
+## 3  2012 -0.1287017  1.4776272  6.0249703
+## 4  2013  2.3425137 -0.6164781 -1.8657655
+## 5  2014  0.5732866 -3.0318162  1.9761996</code></pre>
 <p><code>spread</code> で <code>time</code> にすると別の形で展開できる.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df_spread &lt;-<span class="st"> </span>df_gather <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">spread</span>(time, value)
 df_spread</code></pre></div>
 <pre><code>## # A tibble: 3 x 6
-##     key   `2010`    `2011`    `2012`     `2013`     `2014`
-## * &lt;chr&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
-## 1     X 0.629381 -1.658013 0.4207063 -0.6887907  1.0434867
-## 2     Y 1.416967  1.037084 3.5639349 -1.1305699 -0.4531038
-## 3     Z 1.929605  4.357563 6.2751223 -2.6913992  2.8997856</code></pre>
+##     key     `2010`    `2011`     `2012`     `2013`     `2014`
+## * &lt;chr&gt;      &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
+## 1     X  1.9522534  0.728588 -0.1287017  2.3425137  0.5732866
+## 2     Y -5.1801738  2.089065  1.4776272 -0.6164781 -3.0318162
+## 3     Z  0.4165186 -4.886410  6.0249703 -1.8657655  1.9761996</code></pre>
 <p>以下のようにすればもとに戻る.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df_spread <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">gather</span>(time,value,<span class="op">-</span>key)</code></pre></div>
 <pre><code>## # A tibble: 15 x 3
 ##      key  time      value
 ##    &lt;chr&gt; &lt;chr&gt;      &lt;dbl&gt;
-##  1     X  2010  0.6293810
-##  2     Y  2010  1.4169667
-##  3     Z  2010  1.9296053
-##  4     X  2011 -1.6580129
-##  5     Y  2011  1.0370836
-##  6     Z  2011  4.3575630
-##  7     X  2012  0.4207063
-##  8     Y  2012  3.5639349
-##  9     Z  2012  6.2751223
-## 10     X  2013 -0.6887907
-## 11     Y  2013 -1.1305699
-## 12     Z  2013 -2.6913992
-## 13     X  2014  1.0434867
-## 14     Y  2014 -0.4531038
-## 15     Z  2014  2.8997856</code></pre>
+##  1     X  2010  1.9522534
+##  2     Y  2010 -5.1801738
+##  3     Z  2010  0.4165186
+##  4     X  2011  0.7285880
+##  5     Y  2011  2.0890653
+##  6     Z  2011 -4.8864095
+##  7     X  2012 -0.1287017
+##  8     Y  2012  1.4776272
+##  9     Z  2012  6.0249703
+## 10     X  2013  2.3425137
+## 11     Y  2013 -0.6164781
+## 12     Z  2013 -1.8657655
+## 13     X  2014  0.5732866
+## 14     Y  2014 -3.0318162
+## 15     Z  2014  1.9761996</code></pre>
 <p><code>gather</code> をうまく使えば変数ごとの基本統計量の表を作ることができる.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cars <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">gather</span>(variable,value) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(variable) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">summarize</span>(<span class="dt">nobs =</span> <span class="kw">n</span>(), <span class="dt">avg =</span> <span class="kw">mean</span>(value), <span class="dt">sd =</span><span class="kw">sd</span>(value))</code></pre></div>
@@ -474,12 +478,12 @@ df_spread</code></pre></div>
 <pre><code>## # A tibble: 6 x 4
 ##    name      `2010`     `2011`      `2012`
 ##   &lt;chr&gt;       &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;
-## 1     a  0.54526213  0.2129262 -1.19758856
-## 2     b -0.14287345 -0.3619152  0.23161425
-## 3     c -0.46127337  1.6378412  0.99236131
-## 4     d  0.04435301 -1.2559851 -0.61822128
-## 5     e -0.63677230 -0.6669380  0.03118362
-## 6     f -1.32648226 -0.2426282  0.37369492</code></pre>
+## 1     a -0.04785856  0.9341694 -0.48962257
+## 2     b -0.94000726 -1.6841029 -0.07700197
+## 3     c -1.00014023 -1.4572711 -0.08335870
+## 4     d -0.73763261  0.7613498  0.08282785
+## 5     e  1.43692666  1.8283499 -0.31634723
+## 6     f -2.35168607 -0.2510021  1.35721957</code></pre>
 <p><code>data.frame</code> でないことに注意されたい.</p>
 <p>また, 年ごとのデータセット <code>df_2010</code>, <code>df_2011</code>, <code>df_2012</code> が3つある.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df_<span class="dv">2010</span> &lt;-<span class="st"> </span><span class="kw">data_frame</span>(<span class="dt">name=</span>letters,<span class="dt">runif=</span><span class="kw">runif</span>(<span class="dv">26</span>))
@@ -493,12 +497,12 @@ df_<span class="dv">2012</span> &lt;-<span class="st"> </span><span class="kw">d
 <pre><code>## # A tibble: 6 x 3
 ##    name  time       rnorm
 ##   &lt;chr&gt; &lt;dbl&gt;       &lt;dbl&gt;
-## 1     a  2010  0.54526213
-## 2     b  2010 -0.14287345
-## 3     c  2010 -0.46127337
-## 4     d  2010  0.04435301
-## 5     e  2010 -0.63677230
-## 6     f  2010 -1.32648226</code></pre>
+## 1     a  2010 -0.04785856
+## 2     b  2010 -0.94000726
+## 3     c  2010 -1.00014023
+## 4     d  2010 -0.73763261
+## 5     e  2010  1.43692666
+## 6     f  2010 -2.35168607</code></pre>
 <p>時間の変数を数値に変換している.</p>
 <p>データセット <code>df_2010</code>, <code>df_2011</code>, <code>df_2012</code> をつなげる.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df_runif &lt;-<span class="st"> </span><span class="kw">bind_rows</span>(df_<span class="dv">2010</span>,df_<span class="dv">2011</span>,df_<span class="dv">2012</span>) <span class="op">%&gt;%</span><span class="st"> </span>
@@ -507,12 +511,12 @@ df_<span class="dv">2012</span> &lt;-<span class="st"> </span><span class="kw">d
 <pre><code>## # A tibble: 6 x 3
 ##    name      runif  time
 ##   &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt;
-## 1     a 0.36776594  2010
-## 2     b 0.97536725  2010
-## 3     c 0.00743164  2010
-## 4     d 0.33568691  2010
-## 5     e 0.97664153  2010
-## 6     f 0.77630955  2010</code></pre>
+## 1     a 0.01658722  2010
+## 2     b 0.99341703  2010
+## 3     c 0.29438363  2010
+## 4     d 0.61593309  2010
+## 5     e 0.34009468  2010
+## 6     f 0.67319148  2010</code></pre>
 <p>それぞれの年の変数を付け加えている.</p>
 <p>これを <code>full_join</code> を用いてつなげる.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df_full &lt;-<span class="st"> </span><span class="kw">full_join</span>(df_rnorm,df_runif,<span class="dt">by=</span><span class="kw">c</span>(<span class="st">&quot;name&quot;</span>,<span class="st">&quot;time&quot;</span>))
@@ -520,12 +524,12 @@ df_<span class="dv">2012</span> &lt;-<span class="st"> </span><span class="kw">d
 <pre><code>## # A tibble: 6 x 4
 ##    name  time       rnorm      runif
 ##   &lt;chr&gt; &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt;
-## 1     a  2010  0.54526213 0.36776594
-## 2     b  2010 -0.14287345 0.97536725
-## 3     c  2010 -0.46127337 0.00743164
-## 4     d  2010  0.04435301 0.33568691
-## 5     e  2010 -0.63677230 0.97664153
-## 6     f  2010 -1.32648226 0.77630955</code></pre>
+## 1     a  2010 -0.04785856 0.01658722
+## 2     b  2010 -0.94000726 0.99341703
+## 3     c  2010 -1.00014023 0.29438363
+## 4     d  2010 -0.73763261 0.61593309
+## 5     e  2010  1.43692666 0.34009468
+## 6     f  2010 -2.35168607 0.67319148</code></pre>
 
 </div>
 </div>
