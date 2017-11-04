@@ -379,32 +379,32 @@ lst
 <p>また数値を区間ごとに区分した因子ベクトルも作成可能である. 0から10までの値を発生させる.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">10</span>,<span class="dv">0</span>,<span class="dv">10</span>)
 x
-##  [1] 4.003271 5.036024 4.801610 1.218557 6.985596 4.789283 4.025132
-##  [8] 6.736584 5.214231 2.009371</code></pre></div>
+##  [1] 5.285248 5.407279 4.381485 4.864951 2.929941 7.280647 5.876833
+##  [8] 7.230955 1.729933 9.053433</code></pre></div>
 <p>5等分するには以下のようにする.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cut</span>(x, <span class="dt">breaks=</span><span class="dv">5</span>)
-##  [1] (3.53,4.68] (4.68,5.83] (4.68,5.83] (1.21,2.37] (5.83,6.99]
-##  [6] (4.68,5.83] (3.53,4.68] (5.83,6.99] (4.68,5.83] (1.21,2.37]
-## Levels: (1.21,2.37] (2.37,3.53] (3.53,4.68] (4.68,5.83] (5.83,6.99]</code></pre></div>
+##  [1] (4.66,6.12] (4.66,6.12] (3.19,4.66] (4.66,6.12] (1.72,3.19]
+##  [6] (6.12,7.59] (4.66,6.12] (6.12,7.59] (1.72,3.19] (7.59,9.06]
+## Levels: (1.72,3.19] (3.19,4.66] (4.66,6.12] (6.12,7.59] (7.59,9.06]</code></pre></div>
 <p>これは登場したデータの最大値と最小値の幅を5等分している.</p>
 <p>区間を指定するには以下のようにベクトルで指定する.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cut</span>(x,<span class="dt">breaks=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">6</span>,<span class="dv">8</span>,<span class="dv">10</span>))
-##  [1] (4,6] (4,6] (4,6] (0,2] (6,8] (4,6] (4,6] (6,8] (4,6] (2,4]
+##  [1] (4,6]  (4,6]  (4,6]  (4,6]  (2,4]  (6,8]  (4,6]  (6,8]  (0,2]  (8,10]
 ## Levels: (0,2] (2,4] (4,6] (6,8] (8,10]</code></pre></div>
 <p>0より大きく2以下, 2より大きく4以下,… となっている.</p>
 <p>0も含めるのなら <code>include.lowest=TRUE</code> というオプションをつける.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cut</span>(x, <span class="dt">breaks=</span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">10</span>,<span class="dv">2</span>),<span class="dt">include.lowest=</span><span class="ot">TRUE</span>)
-##  [1] (4,6] (4,6] (4,6] [0,2] (6,8] (4,6] (4,6] (6,8] (4,6] (2,4]
+##  [1] (4,6]  (4,6]  (4,6]  (4,6]  (2,4]  (6,8]  (4,6]  (6,8]  [0,2]  (8,10]
 ## Levels: [0,2] (2,4] (4,6] (6,8] (8,10]</code></pre></div>
 <p>またこれを0以上2未満, 2以上4未満, … とするにはオプション <code>right=FALSE</code> をつける.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cut</span>(x, <span class="dt">breaks=</span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">10</span>,<span class="dv">2</span>),<span class="dt">right=</span><span class="ot">FALSE</span>,<span class="dt">include.lowest=</span><span class="ot">TRUE</span>)
-##  [1] [4,6) [4,6) [4,6) [0,2) [6,8) [4,6) [4,6) [6,8) [4,6) [2,4)
+##  [1] [4,6)  [4,6)  [4,6)  [4,6)  [2,4)  [6,8)  [4,6)  [6,8)  [0,2)  [8,10]
 ## Levels: [0,2) [2,4) [4,6) [6,8) [8,10]</code></pre></div>
 <p>このとき, <code>include.lowest=TRUE</code> は最大値を含めることを意味する.</p>
 <p>また因子の名称はオプション <code>labels</code> で変更可能である.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cut</span>(x, <span class="dt">breaks=</span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">10</span>,<span class="dv">2</span>),<span class="dt">right=</span><span class="ot">FALSE</span>,<span class="dt">include.lowest=</span><span class="ot">TRUE</span>,
     <span class="dt">labels =</span><span class="kw">c</span>(<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;C&quot;</span>,<span class="st">&quot;D&quot;</span>,<span class="st">&quot;E&quot;</span>))
-##  [1] C C C A D C C D C B
+##  [1] C C C C B D C D A E
 ## Levels: A B C D E</code></pre></div>
 </div>
 </div>
@@ -525,27 +525,27 @@ mat
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>), <span class="dt">y =</span> letters[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>])</code></pre></div>
 <p>データフレイムは大規模なことが多いので最初の数行だけをみるためには <code>head</code> をもちいる.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(df)
-##            x y
-## 1 -0.8590929 a
-## 2 -1.3674449 b
-## 3 -0.2737766 c
-## 4 -0.4788242 d
-## 5 -0.3126285 e
-## 6 -0.6290982 f</code></pre></div>
+##             x y
+## 1  0.04845364 a
+## 2 -1.56492504 b
+## 3  0.80215978 c
+## 4  0.67254446 d
+## 5  0.24845715 e
+## 6  1.44182080 f</code></pre></div>
 <p>データの簡単な統計表は <code>summary</code> を使うとよい.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(df)
 ##        x                  y    
-##  Min.   :-2.60081   a      :1  
-##  1st Qu.:-0.80159   b      :1  
-##  Median :-0.39573   c      :1  
-##  Mean   :-0.41520   d      :1  
-##  3rd Qu.: 0.07077   e      :1  
-##  Max.   : 1.39208   f      :1  
+##  Min.   :-2.03061   a      :1  
+##  1st Qu.:-0.43860   b      :1  
+##  Median : 0.14846   c      :1  
+##  Mean   :-0.03738   d      :1  
+##  3rd Qu.: 0.69707   e      :1  
+##  Max.   : 1.44182   f      :1  
 ##                     (Other):4</code></pre></div>
 <p>よりプログラム言語としてのデータ構造を調べるには <code>str</code> を使えばよい.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(df)
 ## &#39;data.frame&#39;:    10 obs. of  2 variables:
-##  $ x: num  -0.859 -1.367 -0.274 -0.479 -0.313 ...
+##  $ x: num  0.0485 -1.5649 0.8022 0.6725 0.2485 ...
 ##  $ y: Factor w/ 10 levels &quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;,..: 1 2 3 4 5 6 7 8 9 10</code></pre></div>
 <p>データフレイムはリストである.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">typeof</span>(df)
@@ -582,37 +582,37 @@ mat
 <p>データフレイムは行列でもあるので, 注意があるが 行列での演算がほとんどそのまま利用できる.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rbind</span>(df, <span class="kw">c</span>(<span class="dv">3</span>,<span class="st">&quot;a&quot;</span>))
 ##                     x y
-## 1   -0.85909285708271 a
-## 2   -1.36744485431212 b
-## 3  -0.273776565630475 c
-## 4  -0.478824167084888 d
-## 5  -0.312628465883223 e
-## 6  -0.629098232725711 f
-## 7   0.791986795006527 g
-## 8   0.185618678382722 h
-## 9    -2.6008131015349 i
-## 10   1.39208288143789 j
+## 1   0.048453640633134 a
+## 2   -1.56492504146139 b
+## 3   0.802159783527768 c
+## 4   0.672544462322742 d
+## 5   0.248457145686967 e
+## 6     1.4418207991147 f
+## 7    0.70524935177787 g
+## 8  -0.528729846956891 h
+## 9   -0.16820829945171 i
+## 10  -2.03061312500717 j
 ## 11                  3 a</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cbind</span>(df,<span class="dt">z=</span><span class="kw">runif</span>(<span class="dv">10</span>))
-##             x y          z
-## 1  -0.8590929 a 0.04574575
-## 2  -1.3674449 b 0.81958309
-## 3  -0.2737766 c 0.73691148
-## 4  -0.4788242 d 0.92400877
-## 5  -0.3126285 e 0.10133997
-## 6  -0.6290982 f 0.63315593
-## 7   0.7919868 g 0.88698844
-## 8   0.1856187 h 0.07319147
-## 9  -2.6008131 i 0.90465416
-## 10  1.3920829 j 0.83563112</code></pre></div>
+##              x y         z
+## 1   0.04845364 a 0.1489456
+## 2  -1.56492504 b 0.7975270
+## 3   0.80215978 c 0.3570256
+## 4   0.67254446 d 0.7485110
+## 5   0.24845715 e 0.2105837
+## 6   1.44182080 f 0.8583000
+## 7   0.70524935 g 0.8381952
+## 8  -0.52872985 h 0.4975882
+## 9  -0.16820830 i 0.3159512
+## 10 -2.03061313 j 0.5452213</code></pre></div>
 <p>転置行列は行列として出力可能である. 以下のようにデータフレイムに因子ベクトルが含まれていたら全て文字列になる.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">t</span>(df)
-##   [,1]         [,2]         [,3]         [,4]         [,5]        
-## x &quot;-0.8590929&quot; &quot;-1.3674449&quot; &quot;-0.2737766&quot; &quot;-0.4788242&quot; &quot;-0.3126285&quot;
-## y &quot;a&quot;          &quot;b&quot;          &quot;c&quot;          &quot;d&quot;          &quot;e&quot;         
-##   [,6]         [,7]         [,8]         [,9]         [,10]       
-## x &quot;-0.6290982&quot; &quot; 0.7919868&quot; &quot; 0.1856187&quot; &quot;-2.6008131&quot; &quot; 1.3920829&quot;
-## y &quot;f&quot;          &quot;g&quot;          &quot;h&quot;          &quot;i&quot;          &quot;j&quot;</code></pre></div>
+##   [,1]          [,2]          [,3]          [,4]          [,5]         
+## x &quot; 0.04845364&quot; &quot;-1.56492504&quot; &quot; 0.80215978&quot; &quot; 0.67254446&quot; &quot; 0.24845715&quot;
+## y &quot;a&quot;           &quot;b&quot;           &quot;c&quot;           &quot;d&quot;           &quot;e&quot;          
+##   [,6]          [,7]          [,8]          [,9]          [,10]        
+## x &quot; 1.44182080&quot; &quot; 0.70524935&quot; &quot;-0.52872985&quot; &quot;-0.16820830&quot; &quot;-2.03061313&quot;
+## y &quot;f&quot;           &quot;g&quot;           &quot;h&quot;           &quot;i&quot;           &quot;j&quot;</code></pre></div>
 <p>データフレイムの構成ベクトルがすべて論理値もしくは数値のとき, 同じ行数と列数のデータフレイムの要素ごとの四則演算は可能である. ただし, 通常の行列演算を実施するには, 行列に変換しなければならない.</p>
 <p>また データフレイムの構成ベクトルがすべて論理値もしくは数値のとき, 列ごとの合計, 行ごとの合計が可能である.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dff&lt;-<span class="kw">data.frame</span>(<span class="dt">a=</span><span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,<span class="dt">b=</span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">TRUE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>,<span class="ot">FALSE</span>))
@@ -635,31 +635,31 @@ mat
 <h3><span class="header-section-number">4.5.2</span> データフレイムのアクセス</h3>
 <p>データのアクセスとして, ベクトルのように一つのカギカッコで取り出すと以下のようになる.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df[<span class="st">&quot;x&quot;</span>]
-##             x
-## 1  -0.8590929
-## 2  -1.3674449
-## 3  -0.2737766
-## 4  -0.4788242
-## 5  -0.3126285
-## 6  -0.6290982
-## 7   0.7919868
-## 8   0.1856187
-## 9  -2.6008131
-## 10  1.3920829</code></pre></div>
+##              x
+## 1   0.04845364
+## 2  -1.56492504
+## 3   0.80215978
+## 4   0.67254446
+## 5   0.24845715
+## 6   1.44182080
+## 7   0.70524935
+## 8  -0.52872985
+## 9  -0.16820830
+## 10 -2.03061313</code></pre></div>
 <p>他にも <code>df[1]</code> でもよいが, いずれにせよデータフレイムとして取り出されてしまう.</p>
 <p>ベクトルとして取り出すには以下を実施する.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df<span class="op">$</span>x
-##  [1] -0.8590929 -1.3674449 -0.2737766 -0.4788242 -0.3126285 -0.6290982
-##  [7]  0.7919868  0.1856187 -2.6008131  1.3920829</code></pre></div>
+##  [1]  0.04845364 -1.56492504  0.80215978  0.67254446  0.24845715
+##  [6]  1.44182080  0.70524935 -0.52872985 -0.16820830 -2.03061313</code></pre></div>
 <p>他にも <code>df[[&quot;x&quot;]], df[[1]], df[,&quot;x&quot;], df[,1]</code> でもよい. <code>ある変数 $x$ の5番目の要素を取り出して別の値</code>100`を代入するには以下のようにする.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df<span class="op">$</span>x[<span class="dv">5</span>] &lt;-<span class="st"> </span><span class="dv">100</span></code></pre></div>
 <p>他にも <code>df[[&quot;x&quot;]][5], df[[1]][5], df[5,&quot;x&quot;], df[5,1]</code> でもよい.</p>
 <p>データフレイムのある変数の平均値を求めるには次のようにする.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(df<span class="op">$</span>x)
-## [1] 9.616064</code></pre></div>
+## [1] 9.937775</code></pre></div>
 <p>もしくは以下とする.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(df, <span class="kw">mean</span>(x))
-## [1] 9.616064</code></pre></div>
+## [1] 9.937775</code></pre></div>
 <p>他にも <code>attach(df)</code> を使うやり方もあるが, 現在では推奨されない.</p>
 <p>なおリストの要素を消すには以下のようにする.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df<span class="op">$</span>x &lt;-<span class="st"> </span><span class="ot">NULL</span></code></pre></div>
