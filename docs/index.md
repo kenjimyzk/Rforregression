@@ -1,14 +1,14 @@
 --- 
 title: "R と RStudio"
 author: "宮﨑憲治"
-date: "2017-10-28"
+date: "2017-11-04"
 site: bookdown::bookdown_site
 output:
   bookdown::epub_book
 documentclass: bxjsbook
 classoption: ja=standard, xelatex
 geometry: no
-bibliography: template.bib
+# bibliography: template.bib
 biblio-style: jeconunicode
 link-citations: yes
 # csl: apa-jp_JSAM.csl

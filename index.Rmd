@@ -8,7 +8,7 @@ output:
 documentclass: bxjsbook
 classoption: ja=standard, xelatex
 geometry: no
-bibliography: template.bib
+# bibliography: template.bib
 biblio-style: jeconunicode
 link-citations: yes
 # csl: apa-jp_JSAM.csl

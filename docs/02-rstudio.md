@@ -35,7 +35,7 @@ https://www.rstudio.com/products/rstudio/download-server/
 これは, 立ち上げたきに環境をクリーンし,
 終了時に, データの保存を聞かれないようにするためである.
 
-<img src="figs/rstudio-general.PNG" width="292" />
+![](figs/rstudio-general.PNG)<!-- -->
 
 次に, [Code] の タブ [Saving] で. 
 [Default text encoding] を `UTF-8` としている.
@@ -50,11 +50,11 @@ HTML として出力を考えているなら, `UTF-8` としたほうが無難�
 またインターネットで公開されている日本語のRファイルは
 Windows の使用が前提となっているため, 文字コードが CP932 であることが多い. Windows 以外を使っている場合, 一時的に文字コードを SJIS を選択する必要がある.
 
-<img src="figs/rstudio-utf8.PNG" width="296" />
+![](figs/rstudio-utf8.PNG)<!-- -->
 
 あと, [R Markdown] で 真ん中あたりの [Show output preview in:] を `View Pane` に変更する
 
-<img src="figs/rstudio-rmd.PNG" width="292" />
+![](figs/rstudio-rmd.PNG)<!-- -->
 
 ## RStudio の使い方
 RStudio の使い方として日本語版のチートシートがある.
