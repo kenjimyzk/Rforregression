@@ -25,7 +25,7 @@
 <meta name="author" content="宮﨑憲治">
 
 
-<meta name="date" content="2017-10-28">
+<meta name="date" content="2017-11-05">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -180,7 +180,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="7.3" data-path="07-regression.html"><a href="07-regression.html#最小二乗推定量のための仮定について"><i class="fa fa-check"></i><b>7.3</b> 最小二乗推定量のための仮定について</a><ul>
 <li class="chapter" data-level="7.3.1" data-path="07-regression.html"><a href="07-regression.html#ロバスト分散"><i class="fa fa-check"></i><b>7.3.1</b> ロバスト分散</a></li>
-<li class="chapter" data-level="7.3.2" data-path="07-regression.html"><a href="07-regression.html#分散不均一の検定"><i class="fa fa-check"></i><b>7.3.2</b> 分散不均一の検定</a></li>
+<li class="chapter" data-level="7.3.2" data-path="07-regression.html"><a href="07-regression.html#分散均一の検定"><i class="fa fa-check"></i><b>7.3.2</b> 分散均一の検定</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -215,14 +215,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>), <span class="dt">y =</span> letters[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>], <span class="dt">stringsAsFactors=</span> <span class="ot">FALSE</span>)
 <span class="kw">str</span>(df)
 ## &#39;data.frame&#39;:    10 obs. of  2 variables:
-##  $ x: num  2.46 -0.172 0.406 -0.273 0.559 ...
+##  $ x: num  2.02 0.215 -0.252 1.115 0.423 ...
 ##  $ y: chr  &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; ...</code></pre></div>
 <p>もしくはライブラリ <code>dplyr</code> にある <code>data_frame</code> を用いれば, そのようなオプションを付けることなくデータフレイムを拡張したクラスを作ることができる.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
 df &lt;-<span class="st"> </span><span class="kw">data_frame</span>(<span class="dt">x =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>), <span class="dt">y =</span> letters[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>])
 <span class="kw">str</span>(df)
 ## Classes &#39;tbl_df&#39;, &#39;tbl&#39; and &#39;data.frame&#39;:    10 obs. of  2 variables:
-##  $ x: num  0.548 -0.674 -0.299 1.003 0.166 ...
+##  $ x: num  0.59 1.682 1.254 1.531 0.381 ...
 ##  $ y: chr  &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; ...</code></pre></div>
 <p>外部ファイルから入力するさいには</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">getwd</span>()</code></pre></div>
