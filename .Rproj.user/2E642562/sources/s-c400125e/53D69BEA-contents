@@ -1,11 +1,7 @@
 --- 
 title: "R と RStudio"
 author: "宮﨑憲治"
-<<<<<<< HEAD
-date: "2017-11-04"
-=======
-date: "2017-11-07"
->>>>>>> master
+date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 output:
   bookdown::epub_book
@@ -22,7 +18,9 @@ description: "This is a description. Please wrote a abstract this contents. "
 ---
 # はじめに {-}
 
-
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
 
 ## R とは
 Rは統計・データ解析・統計グラフ作成のためのオープンソースソフトである.

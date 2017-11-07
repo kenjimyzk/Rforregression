@@ -1,0 +1,13 @@
+mroz <- read_dta("http://fmwww.bc.edu/ec-p/data/wooldridge/mroz.dta")
+oursample <- subset(mroz, !is.na(wage))
+
+res.2sls <- ivreg(log(wage)~educ+exper+I(exper^2)
+                 |exper+I(exper^2)+motheduc+fatheduc,data=oursample)
+summary(res.2sls, diagnostics = TRUE)
+
+res.2sls <- ivreg(log(wage)~educ+exper+I(exper^2)
+                  |exper+I(exper^2)+motheduc+fatheduc+huseduc,data=oursample)
+summary(res.2sls, diagnostics = TRUE)
+
+fm <- lm(I(resid(res.2sls)^2)~exper+I(exper^2)+motheduc+fatheduc+huseduc,data=oursample)
+summary(fm)

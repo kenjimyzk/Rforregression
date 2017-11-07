@@ -22,7 +22,7 @@ http://r4ds.had.co.nz/tidy-data.html
 またはそうしたデータにする方法を紹介する.
 
 ここでは以下のライブラリに全面に依存する.
-```{r}
+```{r message=FALSE, warning=FALSE}
 library(tidyverse)
 ```
 特に `dplyr` と `tidyr` を用いる.

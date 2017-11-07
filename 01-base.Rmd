@@ -199,3 +199,13 @@ pkg::cmd
 なお複数のパッケージで同じ名前のコマンドがある場合,
 あとで `library` もしくは `require` としたパッケージの方が優先させるので注意されたい.
 
+なお `library` と `require` に使い方にほとんど違いがないが, 
+`require` だと以下のように存在しなければインストールするように設定できる.
+```{r, eval=FALSE}
+if (!require(lattice)){
+  install.packages("lattice", dependencies = TRUE)
+  require(lattice)
+} 
+```
+ただ私は昔からの癖で `library` を使っている.
+
