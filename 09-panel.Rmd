@@ -40,7 +40,7 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}
 $$
 この $\alpha_i$ は固定効果と呼ばれている.
 $\alpha_i$ は時間 $t$ に対して一定である.
-$\alpha_i$ は説明変数と相関があるもしれない..
+$\alpha_i$ は誤差項と相関があるもしれない.
 
 この推計は以下のようにする.
 ```{r}
