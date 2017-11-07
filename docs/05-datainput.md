@@ -18,10 +18,14 @@ R においてデータ分析をおこなうには
 読み込まれたデータはRではデータフレイム (dataframe) となる.
 
 データフレイムは同じ長さのベクトルを組み合わせたリストのことである.
-たてばデータフレイムは次のようにして作られる.
+例えばデータフレイムは次のようにして作られる.
 
 ```r
 df <- data.frame(x = rnorm(10), y = letters[1:10])
+str(df)
+## 'data.frame':	10 obs. of  2 variables:
+##  $ x: num  -1.168 -1.8825 0.4457 -0.0793 -2.5358 ...
+##  $ y: Factor w/ 10 levels "a","b","c","d",..: 1 2 3 4 5 6 7 8 9 10
 ```
 
 ただデータフレイムは自動的に文字列が因子ベクトルに変換されてしまう.
@@ -31,7 +35,7 @@ df <- data.frame(x = rnorm(10), y = letters[1:10])
 df <- data.frame(x = rnorm(10), y = letters[1:10], stringsAsFactors= FALSE)
 str(df)
 ## 'data.frame':	10 obs. of  2 variables:
-##  $ x: num  -1.0044 0.0243 0.8631 -0.4867 -0.3543 ...
+##  $ x: num  -0.21242 -0.36094 0.58465 -0.00408 0.36444 ...
 ##  $ y: chr  "a" "b" "c" "d" ...
 ```
 
@@ -42,17 +46,34 @@ library(dplyr)
 df <- data_frame(x = rnorm(10), y = letters[1:10])
 str(df)
 ## Classes 'tbl_df', 'tbl' and 'data.frame':	10 obs. of  2 variables:
-##  $ x: num  0.578 -1.18 0.54 -2.132 0.499 ...
+##  $ x: num  0.228 0.95 0.439 0.708 -0.317 ...
 ##  $ y: chr  "a" "b" "c" "d" ...
 ```
 
-外部ファイルから入力するさいには
+以降, それぞれのファイル形式ごとにファイル入力について説明する.
+いずれのファイル形式にせよ, 外部ファイルから入力するさいには
+現在のワークングディレクトリとファイルの場所をきちんと把握しておかなければならない.
+
+現在のワーキングディレクトリは以下のコマンドで確認できる.
 
 ```r
 getwd()
 ```
-で現在のワークングディレクトリとファイルが一致しているかどうかを確認しなければならない.
-もし一致していないのなら `setwd` で変更する必要がある.
+またワーキングディレクトリを変更するには `setwd` を実行する.
+
+例えば, 現在のワーキングディレクトリの位置が 
+`C:\Users\kenji\work\project` にあり, 
+データ `data.csv` が `C:\Users\kenji\work\project\data` にある場合,
+
+```r
+df <- read.table("work/data.csv", header=TRUE, sep = ",")
+```
+とするか, ワーキングディレクトリを変更しなければならない.
+
+```r
+setwd("C:/Users/kenji/work/project/data")
+df <- read.table("data.csv", header=TRUE, sep = ",")
+```
 
 また `RStudio` はメニューバーの `File` から `Import Dataset` からインタラクティブに外部ファイルが入力可能である.
 いったんこれで入力したとしても, history ペインでどのようなコマンドを実行したかを確認して, 次回も実行できるよう記録しておくとよい.
@@ -114,6 +135,9 @@ df <- read_csv("data.csv")
 write_csv(df,"data.csv")
 ```
 特にオプションをつけなくても, `rownames` は書き込まない.
+
+日本語が含まれるcsvファイルについては注意が必要である.
+これについては次の節で触れることにする.
 
 ## EXCEL ファイル
 EXCELはビジネスにおいてデファクトスタンダードになっているスプレッドシートソフトウェアである.
@@ -179,8 +203,8 @@ library(foreign)
 df <- read.dta("data.dta")
 ```
 
-ただ, 最新のstataには対応していない.
-最新のstataに対応するにはライブラリ `haven` を導入する.
+ただ, 最新の Stata には対応していない.
+最新の Stata に対応するにはライブラリ `haven` を導入する.
 
 ```r
 library(haven)
@@ -191,7 +215,7 @@ df <- read_dta("data.dta")
 
 ## R に入っているデータ
 R およびパッケージにはいくつかのデータがはいっている.
-どのようなデータが利用可能課は以下のコマンドで調べくことができる.
+どのようなデータが利用可能かは以下のコマンドで調べることができる.
 
 ```r
 data()
@@ -258,11 +282,11 @@ summary(CPS1985)
 幾つかのデータベースでは api が公開されて,
 それにもとづいてパッケージが作成されている.
 
-+ yahoo finance (quantmod)
-+ yahoo finance Japan (RFinanceYJ)
-+ World Development Indicators (WDI)
-+ Eurostat (eurostat)
-+ e-stat (estatap)
++ [Yahoo! Finance](https://finance.yahoo.com/) (`quantmod`)
++ [Yahoo! Finance Japan](https://finance.yahoo.co.jp/) (`RFinanceYJ`)
++ [World Development Indicators](http://www.worldbank.org/) (`WDI`)
++ [Eurostat](http://ec.europa.eu/eurostat/data/database) (`eurostat`)
++ [e-stat](https://www.e-stat.go.jp/) (`estatap`)
 
 また直接, インターネットのファイルをダウンロードすることもできる.
 
