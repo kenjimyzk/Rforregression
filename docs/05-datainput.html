@@ -25,11 +25,7 @@
 <meta name="author" content="宮﨑憲治">
 
 
-<<<<<<< HEAD
-<meta name="date" content="2017-11-04">
-=======
 <meta name="date" content="2017-11-07">
->>>>>>> master
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -239,28 +235,20 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>), <span class="dt">y =</span> letters[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>])
 <span class="kw">str</span>(df)
 ## &#39;data.frame&#39;:    10 obs. of  2 variables:
-##  $ x: num  -1.168 -1.8825 0.4457 -0.0793 -2.5358 ...
+##  $ x: num  -1.749 -1.926 -0.663 1.254 -0.925 ...
 ##  $ y: Factor w/ 10 levels &quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;,..: 1 2 3 4 5 6 7 8 9 10</code></pre></div>
 <p>ただデータフレイムは自動的に文字列が因子ベクトルに変換されてしまう. これを避けるには次のように <code>stringsAsFactors= FALSE</code> をつける.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>), <span class="dt">y =</span> letters[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>], <span class="dt">stringsAsFactors=</span> <span class="ot">FALSE</span>)
 <span class="kw">str</span>(df)
 ## &#39;data.frame&#39;:    10 obs. of  2 variables:
-<<<<<<< HEAD
-##  $ x: num  -0.118 -0.608 0.837 -1.172 -0.499 ...
-=======
-##  $ x: num  -0.21242 -0.36094 0.58465 -0.00408 0.36444 ...
->>>>>>> master
+##  $ x: num  0.0447 0.3528 -1.0394 0.9638 0.5271 ...
 ##  $ y: chr  &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; ...</code></pre></div>
 <p>もしくはライブラリ <code>dplyr</code> にある <code>data_frame</code> を用いれば, そのようなオプションを付けることなくデータフレイムを拡張したクラスを作ることができる.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
 df &lt;-<span class="st"> </span><span class="kw">data_frame</span>(<span class="dt">x =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>), <span class="dt">y =</span> letters[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>])
 <span class="kw">str</span>(df)
 ## Classes &#39;tbl_df&#39;, &#39;tbl&#39; and &#39;data.frame&#39;:    10 obs. of  2 variables:
-<<<<<<< HEAD
-##  $ x: num  0.824 -2.3 1.695 -0.479 -0.918 ...
-=======
-##  $ x: num  0.228 0.95 0.439 0.708 -0.317 ...
->>>>>>> master
+##  $ x: num  0.5071 1.9829 0.0614 -0.0947 1.7011 ...
 ##  $ y: chr  &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; ...</code></pre></div>
 <p>以降, それぞれのファイル形式ごとにファイル入力について説明する. いずれのファイル形式にせよ, 外部ファイルから入力するさいには 現在のワークングディレクトリとファイルの場所をきちんと把握しておかなければならない.</p>
 <p>現在のワーキングディレクトリは以下のコマンドで確認できる.</p>

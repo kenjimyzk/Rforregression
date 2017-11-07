@@ -10,9 +10,9 @@ knitr::opts_chunk$set(echo = TRUE)
 ## データ
 ```{r message=FALSE, warning=FALSE}
 library(AER)
-library(PoEdata)
-data("mroz", package="PoEdata")
-df <- subset(mroz, lfp==1)
+library(wooldridge)
+data("mroz", package="wooldridge")
+df <- subset(mroz, inlf==1)
 ```
 
 ## 操作変数
@@ -50,11 +50,11 @@ df <- subset(mroz, lfp==1)
 R においては次のコマンドを実行すればよい.
 ここで被説明変数は `log(wage)`,
 内生変数は `educ`, 外生変数は `expr`, `I(expr^2)`,
-操作変数は `mothereduc`, `fathereduc` である.
+操作変数は `motheduc`, `fatheduc` である.
 
 ```{r}
 fm  <- ivreg(log(wage)~educ+exper+I(exper^2)|
-            exper+I(exper^2)+mothereduc+fathereduc,
+            exper+I(exper^2)+motheduc+fatheduc,
             data=df)
 summary(fm)
 ```
@@ -65,7 +65,7 @@ summary(fm)
 以下のやりかただと内生変数の予測値および外生変数から算出するためである.
 
 ```{r}
-ols1 <- lm(educ~exper+I(exper^2)+mothereduc+fathereduc,  data = df)
+ols1 <- lm(educ~exper+I(exper^2)+motheduc+fatheduc,  data = df)
 ols2 <- lm(log(wage)~fitted(ols1)+exper+I(exper^2),  data = df)
 summary(ols2)
 ```
@@ -76,7 +76,7 @@ summary(ols2)
 例えば, 2つの外生変数の係数がゼロのときの仮説検定をRで実行するには以下を実施する.
 
 ```{r}
-fm0 <- ivreg(log(wage)~educ|mothereduc+fathereduc,data=df)
+fm0 <- ivreg(log(wage)~educ|motheduc+fatheduc,data=df)
 waldtest(fm0,fm)
 ```
 
@@ -117,7 +117,7 @@ Sargan 検定は
 帰無仮説が相関が無い場合で, 対立仮説は相関がある場合である.
 LM検定を実施する.
 ```{r}
-jt <- lm(resid(fm)~exper+I(exper^2)+mothereduc+fathereduc,data=df)
+jt <- lm(resid(fm)~exper+I(exper^2)+motheduc+fatheduc,data=df)
 (jt <- nrow(df)*summary(jt)$r.squared)
 1-pchisq(jt,df=3)
 ```
@@ -149,7 +149,7 @@ waldtest(fm0,fm, vcov=sandwich)
 ただ通常のコマンド `bptest` では正しく実行できないので注意が必要である.
 
 ```{r}
-bpt <- lm(I(resid(fm)^2)~exper + I(exper^2) + mothereduc + fathereduc,data=df)
+bpt <- lm(I(resid(fm)^2)~exper + I(exper^2) + motheduc + fatheduc,data=df)
 (bpt <- nrow(df)*summary(bpt)$r.squared)
 1-pchisq(bpt,df=3)
 ```
