@@ -42,7 +42,7 @@ knitr::include_graphics("figs/rstudio-general.PNG")
 ```
 
 次に, [Code] の タブ [Saving] で. 
-[Default text encoding] を `UTF-8` としている.
+[Default text encoding] を `UTF-8` とする.
 Windows 以外だとOSのシステムフォントが同じなので問題ない.
 ただ, Windows は SJIS を拡張した CP932 なので, 注意が必要である.
 
