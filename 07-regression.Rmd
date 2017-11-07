@@ -7,6 +7,11 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE, collapse=TRUE)
 ```
 
+```{r message=FALSE, warning=FALSE}
+library(AER)
+```
+
+
 仮想的に以下のようにデータを生成する.
 ```{r}
 N <- 100
@@ -248,22 +253,39 @@ $$
 となる検定を実施したい. 
 
 これは複数の係数がゼロであるエフ検定である.
-コマンド `anova` を用いればエフ検定できる.
+対立仮説の残差自乗和を $SSR$ とし, その自由度を $df$ とする.
+自由度は観測数から説明変数の数を減じた数である.
+帰無仮説の残差自乗和を $SSR_0$ とし, 制約の数を $q$ とする.
+制約の数は帰無仮説の自由度から帰無仮説の自由度を差し引いた数である.
+このとき, 以下のF値は帰無仮説が正しいもと自由度 $df$ と $q$ のF分布にしたがう.
+$$
+\frac{(SSR_0-SSR)/q}{SSR/df}
+$$
+
+R でF値は次のようにして算出する.
 ```{r}
 fm0 <- lm(y~x,data=df)
 fm1 <- lm(y~x*w,data=df)
+dof <- fm1$df
+q <- fm0$df-dof
+SSR0 <- deviance(fm0)
+SSR <- deviance(fm1)
+(F <- ((SSR0-SSR)/q)/(SSR/dof))
+```
+
+この時のP値は以下である.
+```{r}
+1-pf(F,df1=q,df2=dof)
+```
+
+これらの手順はコマンド `anova` を用いれば簡単に実現できる.
+```{r}
 anova(fm0,fm1)
 ```
 
 順番を変えても, 検定統計量自体に変更はない.
 ```{r}
 anova(fm1,fm0)
-```
-
-またモデルの更新として `update` を使えば簡単になる場合もある.
-```{r}
-fm1 <- update(fm0, .~. +w + w:x)
-anova(fm0,fm1)
 ```
 
 ## 最小二乗推定量のための仮定について
@@ -278,7 +300,6 @@ anova(fm0,fm1)
 
 ここの係数ゼロのティー検定について, ライブラリ `AER` を導入して `coeftest` を用いればよい.
 ```{r}
-library(AER)
 coeftest(fm0,df=Inf)
 ```
 ただ十分なデータのもとではティー値のままでもよい.

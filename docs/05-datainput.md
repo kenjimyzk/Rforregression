@@ -24,7 +24,7 @@ R においてデータ分析をおこなうには
 df <- data.frame(x = rnorm(10), y = letters[1:10])
 str(df)
 ## 'data.frame':	10 obs. of  2 variables:
-##  $ x: num  -1.168 -1.8825 0.4457 -0.0793 -2.5358 ...
+##  $ x: num  -0.2547 -1.0981 -0.0572 1.04 2.1232 ...
 ##  $ y: Factor w/ 10 levels "a","b","c","d",..: 1 2 3 4 5 6 7 8 9 10
 ```
 
@@ -35,7 +35,7 @@ str(df)
 df <- data.frame(x = rnorm(10), y = letters[1:10], stringsAsFactors= FALSE)
 str(df)
 ## 'data.frame':	10 obs. of  2 variables:
-##  $ x: num  -0.21242 -0.36094 0.58465 -0.00408 0.36444 ...
+##  $ x: num  -1.3453 -0.5427 -1.1844 -0.0901 0.5584 ...
 ##  $ y: chr  "a" "b" "c" "d" ...
 ```
 
@@ -46,7 +46,7 @@ library(dplyr)
 df <- data_frame(x = rnorm(10), y = letters[1:10])
 str(df)
 ## Classes 'tbl_df', 'tbl' and 'data.frame':	10 obs. of  2 variables:
-##  $ x: num  0.228 0.95 0.439 0.708 -0.317 ...
+##  $ x: num  0.382 -1.667 0.752 -0.657 0.25 ...
 ##  $ y: chr  "a" "b" "c" "d" ...
 ```
 
