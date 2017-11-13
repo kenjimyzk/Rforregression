@@ -25,7 +25,7 @@
 <meta name="author" content="宮﨑憲治">
 
 
-<meta name="date" content="2017-11-07">
+<meta name="date" content="2017-11-13">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -245,7 +245,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>メニューバーの [Tools] から [Global Options…] を選択することで設定を変更できる.</p>
 <p>[General] で以下のように [Restore .RData …] のチェックを外していいて, その下を <code>Never</code> にしている. これは, 立ち上げたきに環境をクリーンし, 終了時に, データの保存を聞かれないようにするためである.</p>
 <p><img src="figs/rstudio-general.PNG" width="292" /></p>
-<p>次に, [Code] の タブ [Saving] で. [Default text encoding] を <code>UTF-8</code> としている. Windows 以外だとOSのシステムフォントが同じなので問題ない. ただ, Windows は SJIS を拡張した CP932 なので, 注意が必要である.</p>
+<p>次に, [Code] の タブ [Saving] で. [Default text encoding] を <code>UTF-8</code> とする. Windows 以外だとOSのシステムフォントが同じなので問題ない. しかし Windows は SJIS を拡張した CP932 なので, 注意が必要である.</p>
 <p>Windows のRは UTF-8 を選択してもR自身はCP932処理している. ただ, 他のOSとの併用の場合, UTF-8 にしたほうがよいだろう. またHTMLファイルは UTF-8 でのファイルが前提になりつつあるので, HTML として出力を考えているなら, <code>UTF-8</code> としたほうが無難である.</p>
 <p>またインターネットで公開されている日本語のRファイルは Windows の使用が前提となっているため, 文字コードが CP932 であることが多い. Windows 以外を使っている場合, 一時的に文字コードを SJIS を選択する必要がある.</p>
 <p><img src="figs/rstudio-utf8.PNG" width="296" /></p>

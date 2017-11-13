@@ -239,7 +239,6 @@ matrix(1:10, nrow=2,ncol=5,byrow = TRUE)
 typeof(mat)
 length(mat)
 dim(mat)
-dim(mat)
 ```
 
 他にもそれぞれの要素の次元は以下で得ることができる.
