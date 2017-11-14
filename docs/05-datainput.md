@@ -24,11 +24,7 @@ R においてデータ分析をおこなうには
 df <- data.frame(x = rnorm(10), y = letters[1:10])
 str(df)
 ## 'data.frame':	10 obs. of  2 variables:
-<<<<<<< HEAD
-##  $ x: num  -1.749 -1.926 -0.663 1.254 -0.925 ...
-=======
-##  $ x: num  1.2 -1.673 -0.565 -0.357 1.024 ...
->>>>>>> 79675b74d78966ba07e55032da96d31b332ad755
+##  $ x: num  0.378 1.159 0.607 1.409 -0.369 ...
 ##  $ y: Factor w/ 10 levels "a","b","c","d",..: 1 2 3 4 5 6 7 8 9 10
 ```
 
@@ -39,11 +35,7 @@ str(df)
 df <- data.frame(x = rnorm(10), y = letters[1:10], stringsAsFactors= FALSE)
 str(df)
 ## 'data.frame':	10 obs. of  2 variables:
-<<<<<<< HEAD
-##  $ x: num  0.0447 0.3528 -1.0394 0.9638 0.5271 ...
-=======
-##  $ x: num  0.676 -1.022 -0.39 -0.583 0.465 ...
->>>>>>> 79675b74d78966ba07e55032da96d31b332ad755
+##  $ x: num  -0.23 1.795 -1.27 -0.593 1.792 ...
 ##  $ y: chr  "a" "b" "c" "d" ...
 ```
 
@@ -54,11 +46,7 @@ library(dplyr)
 df <- data_frame(x = rnorm(10), y = letters[1:10])
 str(df)
 ## Classes 'tbl_df', 'tbl' and 'data.frame':	10 obs. of  2 variables:
-<<<<<<< HEAD
-##  $ x: num  0.5071 1.9829 0.0614 -0.0947 1.7011 ...
-=======
-##  $ x: num  2.062 0.468 0.962 0.184 -0.531 ...
->>>>>>> 79675b74d78966ba07e55032da96d31b332ad755
+##  $ x: num  -0.06513 0.47428 -0.00589 -0.7016 0.68314 ...
 ##  $ y: chr  "a" "b" "c" "d" ...
 ```
 

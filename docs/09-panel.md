@@ -52,13 +52,13 @@ summary(gp)
 ## Call:
 ## plm(formula = inv ~ value + capital, data = Grunfeld, model = "pooling")
 ## 
-## Balanced Panel: n=10, T=20, N=200
+## Balanced Panel: n = 10, T = 20, N = 200
 ## 
-## Residuals :
+## Residuals:
 ##      Min.   1st Qu.    Median   3rd Qu.      Max. 
 ## -291.6757  -30.0137    5.3033   34.8293  369.4464 
 ## 
-## Coefficients :
+## Coefficients:
 ##                Estimate  Std. Error t-value  Pr(>|t|)    
 ## (Intercept) -42.7143694   9.5116760 -4.4907 1.207e-05 ***
 ## value         0.1155622   0.0058357 19.8026 < 2.2e-16 ***
@@ -123,13 +123,13 @@ summary(gi)
 ## Call:
 ## plm(formula = inv ~ value + capital, data = Grunfeld, model = "within")
 ## 
-## Balanced Panel: n=10, T=20, N=200
+## Balanced Panel: n = 10, T = 20, N = 200
 ## 
-## Residuals :
+## Residuals:
 ##       Min.    1st Qu.     Median    3rd Qu.       Max. 
 ## -184.00857  -17.64316    0.56337   19.19222  250.70974 
 ## 
-## Coefficients :
+## Coefficients:
 ##         Estimate Std. Error t-value  Pr(>|t|)    
 ## value   0.110124   0.011857  9.2879 < 2.2e-16 ***
 ## capital 0.310065   0.017355 17.8666 < 2.2e-16 ***
@@ -214,13 +214,13 @@ summary(gt)
 ## plm(formula = inv ~ value + capital, data = Grunfeld, effect = "twoways", 
 ##     model = "within")
 ## 
-## Balanced Panel: n=10, T=20, N=200
+## Balanced Panel: n = 10, T = 20, N = 200
 ## 
-## Residuals :
+## Residuals:
 ##      Min.   1st Qu.    Median   3rd Qu.      Max. 
 ## -162.6094  -19.4710   -1.2669   19.1277  211.8420 
 ## 
-## Coefficients :
+## Coefficients:
 ##         Estimate Std. Error t-value  Pr(>|t|)    
 ## value   0.117716   0.013751  8.5604 6.653e-15 ***
 ## capital 0.357916   0.022719 15.7540 < 2.2e-16 ***
@@ -386,19 +386,19 @@ summary(gr)
 ## Call:
 ## plm(formula = inv ~ value + capital, data = Grunfeld, model = "random")
 ## 
-## Balanced Panel: n=10, T=20, N=200
+## Balanced Panel: n = 10, T = 20, N = 200
 ## 
 ## Effects:
 ##                   var std.dev share
 ## idiosyncratic 2784.46   52.77 0.282
 ## individual    7089.80   84.20 0.718
-## theta:  0.8612  
+## theta: 0.8612
 ## 
-## Residuals :
+## Residuals:
 ##      Min.   1st Qu.    Median   3rd Qu.      Max. 
 ## -177.6063  -19.7350    4.6851   19.5105  252.8743 
 ## 
-## Coefficients :
+## Coefficients:
 ##               Estimate Std. Error t-value Pr(>|t|)    
 ## (Intercept) -57.834415  28.898935 -2.0013  0.04674 *  
 ## value         0.109781   0.010493 10.4627  < 2e-16 ***
@@ -428,50 +428,50 @@ summary(grt)
 ## plm(formula = inv ~ value + capital + factor(year), data = Grunfeld, 
 ##     model = "random")
 ## 
-## Balanced Panel: n=10, T=20, N=200
+## Balanced Panel: n = 10, T = 20, N = 200
 ## 
 ## Effects:
 ##                   var std.dev share
-## idiosyncratic 2675.43   51.72 0.264
-## individual    7458.35   86.36 0.736
-## theta:  0.8673  
+## idiosyncratic 2675.43   51.72 0.274
+## individual    7095.25   84.23 0.726
+## theta: 0.864
 ## 
-## Residuals :
+## Residuals:
 ##        Min.     1st Qu.      Median     3rd Qu.        Max. 
-## -160.249203  -19.705021   -0.023872   19.282175  214.023744 
+## -160.759401  -19.805349   -0.028228   19.194961  214.295364 
 ## 
-## Coefficients :
+## Coefficients:
 ##                    Estimate Std. Error t-value  Pr(>|t|)    
-## (Intercept)      -29.932675  32.908999 -0.9096  0.364285    
-## value              0.113911   0.011820  9.6374 < 2.2e-16 ***
-## capital            0.354516   0.022573 15.7055 < 2.2e-16 ***
-## factor(year)1936 -17.741195  23.585305 -0.7522  0.452916    
-## factor(year)1937 -38.098671  24.338353 -1.5654  0.119271    
-## factor(year)1938 -38.432863  23.272433 -1.6514  0.100413    
-## factor(year)1939 -67.734952  23.577926 -2.8728  0.004563 ** 
-## factor(year)1940 -42.284029  23.690295 -1.7849  0.075986 .  
-## factor(year)1941 -16.967455  23.613424 -0.7186  0.473360    
-## factor(year)1942 -19.999001  23.411276 -0.8542  0.394117    
-## factor(year)1943 -41.368571  23.535549 -1.7577  0.080517 .  
-## factor(year)1944 -41.371185  23.574297 -1.7549  0.080992 .  
-## factor(year)1945 -53.503398  23.781401 -2.2498  0.025686 *  
-## factor(year)1946 -28.697568  23.948970 -1.1983  0.232401    
-## factor(year)1947 -37.720827  23.801945 -1.5848  0.114792    
-## factor(year)1948 -42.020754  23.997685 -1.7510  0.081663 .  
-## factor(year)1949 -71.600868  24.205455 -2.9580  0.003517 ** 
-## factor(year)1950 -73.706966  24.348310 -3.0272  0.002835 ** 
-## factor(year)1951 -59.337596  24.727838 -2.3996  0.017444 *  
-## factor(year)1952 -61.111948  25.183631 -2.4267  0.016236 *  
-## factor(year)1953 -63.078394  26.233291 -2.4045  0.017219 *  
-## factor(year)1954 -88.765641  26.797397 -3.3125  0.001120 ** 
+## (Intercept)      -29.828275  32.380484 -0.9212  0.358203    
+## value              0.113779   0.011759  9.6763 < 2.2e-16 ***
+## capital            0.354336   0.022594 15.6826 < 2.2e-16 ***
+## factor(year)1936 -17.690058  23.612087 -0.7492  0.454729    
+## factor(year)1937 -38.006448  24.356323 -1.5604  0.120433    
+## factor(year)1938 -38.400547  23.303431 -1.6478  0.101148    
+## factor(year)1939 -67.669031  23.605147 -2.8667  0.004648 ** 
+## factor(year)1940 -42.210436  23.716150 -1.7798  0.076812 .  
+## factor(year)1941 -16.896674  23.640596 -0.7147  0.475711    
+## factor(year)1942 -19.950610  23.442180 -0.8511  0.395882    
+## factor(year)1943 -41.303361  23.564907 -1.7527  0.081367 .  
+## factor(year)1944 -41.301975  23.603031 -1.7499  0.081866 .  
+## factor(year)1945 -53.418089  23.807547 -2.2437  0.026081 *  
+## factor(year)1946 -28.601243  23.973397 -1.1930  0.234441    
+## factor(year)1947 -37.647517  23.832869 -1.5796  0.115963    
+## factor(year)1948 -41.944013  24.029174 -1.7455  0.082615 .  
+## factor(year)1949 -71.515032  24.236975 -2.9507  0.003598 ** 
+## factor(year)1950 -73.609655  24.379280 -3.0194  0.002906 ** 
+## factor(year)1951 -59.205876  24.754226 -2.3917  0.017810 *  
+## factor(year)1952 -60.963457  25.209460 -2.4183  0.016602 *  
+## factor(year)1953 -62.886188  26.252610 -2.3954  0.017638 *  
+## factor(year)1954 -88.564196  26.819791 -3.3022  0.001159 ** 
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## Total Sum of Squares:    2369700
-## Residual Sum of Squares: 478420
-## R-Squared:      0.79811
-## Adj. R-Squared: 0.77429
-## F-statistic: 33.5086 on 21 and 178 DF, p-value: < 2.22e-16
+## Total Sum of Squares:    2376000
+## Residual Sum of Squares: 479720
+## R-Squared:      0.7981
+## Adj. R-Squared: 0.77428
+## F-statistic: 33.506 on 21 and 178 DF, p-value: < 2.22e-16
 ```
 
 時間効果が有意かどうかは次の検定を実施すれば良い.
@@ -487,7 +487,7 @@ waldtest(gr,grt)
 ## Model 2: inv ~ value + capital + factor(year)
 ##   Res.Df Df  Chisq Pr(>Chisq)
 ## 1    197                     
-## 2    178 19 25.422     0.1471
+## 2    178 19 25.303     0.1508
 ```
 
 ## ハウスマン検定
@@ -518,7 +518,7 @@ phtest(gt,grt)
 ## 	Hausman Test
 ## 
 ## data:  inv ~ value + capital
-## chisq = 4.6434, df = 2, p-value = 0.09811
+## chisq = 6.5733, df = 2, p-value = 0.03738
 ## alternative hypothesis: one model is inconsistent
 ```
 
