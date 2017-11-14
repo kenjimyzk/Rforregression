@@ -38,9 +38,9 @@ https://www.rstudio.com/products/rstudio/download-server/
 ![](figs/rstudio-general.PNG)<!-- -->
 
 次に, [Code] の タブ [Saving] で. 
-[Default text encoding] を `UTF-8` としている.
+[Default text encoding] を `UTF-8` とする.
 Windows 以外だとOSのシステムフォントが同じなので問題ない.
-ただ, Windows は SJIS を拡張した CP932 なので, 注意が必要である.
+しかし Windows は SJIS を拡張した CP932 なので, 注意が必要である.
 
 Windows のRは UTF-8 を選択してもR自身はCP932処理している.
 ただ, 他のOSとの併用の場合, UTF-8 にしたほうがよいだろう.

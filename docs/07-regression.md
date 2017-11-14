@@ -5,6 +5,12 @@ output: html_document
 # 回帰分析
 
 
+
+```r
+library(AER)
+```
+
+
 仮想的に以下のようにデータを生成する.
 
 ```r
@@ -20,7 +26,7 @@ df <- data.frame(w,x,y)
 plot(y~x)
 ```
 
-<img src="07-regression_files/figure-html/unnamed-chunk-2-1.png" width="672" />
+<img src="07-regression_files/figure-html/unnamed-chunk-3-1.png" width="672" />
 
 
 ## 単回帰モデル
@@ -69,7 +75,11 @@ names(fm)
 ```r
 coef(fm)
 ## (Intercept)           x 
+<<<<<<< HEAD
 ##   10.618446    1.747718
+=======
+##   10.472808    2.048814
+>>>>>>> 79675b74d78966ba07e55032da96d31b332ad755
 # coefficients(fm)
 ```
 
@@ -80,7 +90,7 @@ plot(y~x,data=df)
 abline(fm)
 ```
 
-<img src="07-regression_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+<img src="07-regression_files/figure-html/unnamed-chunk-7-1.png" width="672" />
 
 
 残差は次のコマンドを実施する.
@@ -88,7 +98,11 @@ abline(fm)
 ```r
 head(resid(fm))
 ##           1           2           3           4           5           6 
+<<<<<<< HEAD
 ##  0.24437995  0.04484267  0.27666361  0.32921392 -1.62064812 -0.39402059
+=======
+## -0.81984155 -1.18699001 -1.85942334  0.36753169 -0.03329058 -0.75003741
+>>>>>>> 79675b74d78966ba07e55032da96d31b332ad755
 # residuals(fm)
 # with(fm, residuals)
 ```
@@ -98,7 +112,11 @@ head(resid(fm))
 ```r
 head(fitted(fm))
 ##        1        2        3        4        5        6 
+<<<<<<< HEAD
 ## 11.83070 10.76269 11.46956 11.60983 12.05825 10.88169
+=======
+## 11.03716 10.47849 10.60722 11.52772 10.71846 12.15111
+>>>>>>> 79675b74d78966ba07e55032da96d31b332ad755
 # fitted.values(fm)
 # with(fm, fitted.values)
 ```
@@ -107,9 +125,15 @@ head(fitted(fm))
 
 ```r
 deviance(fm)
+<<<<<<< HEAD
 ## [1] 127.5965
 sum(resid(fm)^2)
 ## [1] 127.5965
+=======
+## [1] 118.0346
+sum(resid(fm)^2)
+## [1] 118.0346
+>>>>>>> 79675b74d78966ba07e55032da96d31b332ad755
 ```
 
 ### ティー検定
@@ -122,6 +146,7 @@ summary(fm)
 ## lm(formula = y ~ x, data = df)
 ## 
 ## Residuals:
+<<<<<<< HEAD
 ##     Min      1Q  Median      3Q     Max 
 ## -2.5154 -0.7283 -0.0085  0.6328  3.3478 
 ## 
@@ -135,6 +160,21 @@ summary(fm)
 ## Residual standard error: 1.141 on 98 degrees of freedom
 ## Multiple R-squared:  0.1524,	Adjusted R-squared:  0.1438 
 ## F-statistic: 17.62 on 1 and 98 DF,  p-value: 5.933e-05
+=======
+##      Min       1Q   Median       3Q      Max 
+## -2.39983 -0.74397 -0.02491  0.74739  2.51129 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  10.4728     0.2062  50.794  < 2e-16 ***
+## x             2.0488     0.3471   5.902 5.15e-08 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 1.097 on 98 degrees of freedom
+## Multiple R-squared:  0.2623,	Adjusted R-squared:  0.2547 
+## F-statistic: 34.84 on 1 and 98 DF,  p-value: 5.147e-08
+>>>>>>> 79675b74d78966ba07e55032da96d31b332ad755
 ```
 
 これをみれば各変数の係数がゼロのティー検定も可能である.
@@ -158,8 +198,13 @@ names(summary(fm))
 ```r
 coef(summary(fm))
 ##              Estimate Std. Error   t value     Pr(>|t|)
+<<<<<<< HEAD
 ## (Intercept) 10.618446  0.2482136 42.779472 3.275132e-65
 ## x            1.747718  0.4163341  4.197873 5.932900e-05
+=======
+## (Intercept) 10.472808  0.2061813 50.794165 3.312337e-72
+## x            2.048814  0.3471142  5.902423 5.147156e-08
+>>>>>>> 79675b74d78966ba07e55032da96d31b332ad755
 # coefficients(summary(fm))
 ```
 
@@ -167,27 +212,45 @@ coef(summary(fm))
 
 ```r
 sqrt(deviance(fm)/df.residual(fm))
+<<<<<<< HEAD
 ## [1] 1.141054
 with(summary(fm),sigma)
 ## [1] 1.141054
+=======
+## [1] 1.097467
+with(summary(fm),sigma)
+## [1] 1.097467
+>>>>>>> 79675b74d78966ba07e55032da96d31b332ad755
 ```
 
 決定係数は次のようにして計算する.
 
 ```r
 1-deviance(fm)/with(df, sum((y-mean(y))^2))
+<<<<<<< HEAD
 ## [1] 0.1524115
 with(summary(fm),r.squared)
 ## [1] 0.1524115
+=======
+## [1] 0.2622626
+with(summary(fm),r.squared)
+## [1] 0.2622626
+>>>>>>> 79675b74d78966ba07e55032da96d31b332ad755
 ```
 
 調整済み決定係数は次のようにして計算する.
 
 ```r
 1-(deviance(fm)/df.residual(fm))/with(df, sum((y-mean(y))^2/(nrow(df)-1)))
+<<<<<<< HEAD
 ## [1] 0.1437626
 with(summary(fm),adj.r.squared)
 ## [1] 0.1437626
+=======
+## [1] 0.2547347
+with(summary(fm),adj.r.squared)
+## [1] 0.2547347
+>>>>>>> 79675b74d78966ba07e55032da96d31b332ad755
 ```
 
 
@@ -208,6 +271,7 @@ summary(fm)
 ## lm(formula = y ~ log(x), data = df)
 ## 
 ## Residuals:
+<<<<<<< HEAD
 ##     Min      1Q  Median      3Q     Max 
 ## -2.6699 -0.6526 -0.0512  0.5506  3.5184 
 ## 
@@ -221,6 +285,21 @@ summary(fm)
 ## Residual standard error: 1.121 on 98 degrees of freedom
 ## Multiple R-squared:  0.1823,	Adjusted R-squared:  0.174 
 ## F-statistic: 21.85 on 1 and 98 DF,  p-value: 9.406e-06
+=======
+##      Min       1Q   Median       3Q      Max 
+## -2.62123 -0.77885 -0.02688  0.79448  2.88979 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) 12.06829    0.15064  80.111  < 2e-16 ***
+## log(x)       0.51178    0.09187   5.571 2.22e-07 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 1.114 on 98 degrees of freedom
+## Multiple R-squared:  0.2405,	Adjusted R-squared:  0.2328 
+## F-statistic: 31.04 on 1 and 98 DF,  p-value: 2.224e-07
+>>>>>>> 79675b74d78966ba07e55032da96d31b332ad755
 ```
 
 作図すると以下のようになる.
@@ -230,7 +309,7 @@ plot(y~log(x),data=df)
 abline(fm)
 ```
 
-<img src="07-regression_files/figure-html/unnamed-chunk-17-1.png" width="672" />
+<img src="07-regression_files/figure-html/unnamed-chunk-18-1.png" width="672" />
 
 被説明変数が対数の場合も同様である.
 
@@ -243,6 +322,7 @@ summary(fm)
 ## 
 ## Residuals:
 ##       Min        1Q    Median        3Q       Max 
+<<<<<<< HEAD
 ## -0.240988 -0.059389  0.004433  0.059341  0.244743 
 ## 
 ## Coefficients:
@@ -255,6 +335,20 @@ summary(fm)
 ## Residual standard error: 0.09865 on 98 degrees of freedom
 ## Multiple R-squared:  0.1589,	Adjusted R-squared:  0.1504 
 ## F-statistic: 18.52 on 1 and 98 DF,  p-value: 3.984e-05
+=======
+## -0.225056 -0.061134  0.003044  0.065015  0.215131 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  2.34501    0.01816 129.113  < 2e-16 ***
+## x            0.18186    0.03058   5.947 4.21e-08 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.09668 on 98 degrees of freedom
+## Multiple R-squared:  0.2652,	Adjusted R-squared:  0.2577 
+## F-statistic: 35.37 on 1 and 98 DF,  p-value: 4.207e-08
+>>>>>>> 79675b74d78966ba07e55032da96d31b332ad755
 ```
 
 作図すると以下のようになる.
@@ -264,7 +358,7 @@ plot(log(y)~x,data=df)
 abline(fm)
 ```
 
-<img src="07-regression_files/figure-html/unnamed-chunk-19-1.png" width="672" />
+<img src="07-regression_files/figure-html/unnamed-chunk-20-1.png" width="672" />
 
 
 
@@ -285,6 +379,7 @@ summary(fm)
 ## 
 ## Residuals:
 ##    Min     1Q Median     3Q    Max 
+<<<<<<< HEAD
 ## -6.027 -1.868  2.864  5.803 10.107 
 ## 
 ## Coefficients:
@@ -296,6 +391,19 @@ summary(fm)
 ## Residual standard error: 5.036 on 99 degrees of freedom
 ## Multiple R-squared:  0.8137,	Adjusted R-squared:  0.8118 
 ## F-statistic: 432.5 on 1 and 99 DF,  p-value: < 2.2e-16
+=======
+## -6.486 -1.234  3.005  7.112 11.820 
+## 
+## Coefficients:
+##   Estimate Std. Error t value Pr(>|t|)    
+## x   16.975      0.961   17.66   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 5.708 on 99 degrees of freedom
+## Multiple R-squared:  0.7591,	Adjusted R-squared:  0.7567 
+## F-statistic:   312 on 1 and 99 DF,  p-value: < 2.2e-16
+>>>>>>> 79675b74d78966ba07e55032da96d31b332ad755
 ```
 
 もしくは `+0` を加える.
@@ -309,6 +417,7 @@ summary(fm)
 ## 
 ## Residuals:
 ##    Min     1Q Median     3Q    Max 
+<<<<<<< HEAD
 ## -6.027 -1.868  2.864  5.803 10.107 
 ## 
 ## Coefficients:
@@ -320,6 +429,19 @@ summary(fm)
 ## Residual standard error: 5.036 on 99 degrees of freedom
 ## Multiple R-squared:  0.8137,	Adjusted R-squared:  0.8118 
 ## F-statistic: 432.5 on 1 and 99 DF,  p-value: < 2.2e-16
+=======
+## -6.486 -1.234  3.005  7.112 11.820 
+## 
+## Coefficients:
+##   Estimate Std. Error t value Pr(>|t|)    
+## x   16.975      0.961   17.66   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 5.708 on 99 degrees of freedom
+## Multiple R-squared:  0.7591,	Adjusted R-squared:  0.7567 
+## F-statistic:   312 on 1 and 99 DF,  p-value: < 2.2e-16
+>>>>>>> 79675b74d78966ba07e55032da96d31b332ad755
 ```
 
 
@@ -349,6 +471,7 @@ summary(fm)
 ## 
 ## Residuals:
 ##      Min       1Q   Median       3Q      Max 
+<<<<<<< HEAD
 ## -2.22642 -0.66475 -0.03003  0.65491  3.02415 
 ## 
 ## Coefficients:
@@ -362,6 +485,21 @@ summary(fm)
 ## Residual standard error: 1.081 on 97 degrees of freedom
 ## Multiple R-squared:  0.2467,	Adjusted R-squared:  0.2311 
 ## F-statistic: 15.88 on 2 and 97 DF,  p-value: 1.082e-06
+=======
+## -2.75143 -0.54065  0.09165  0.70291  2.01589 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  10.9609     0.2126  51.569  < 2e-16 ***
+## x             2.1011     0.3141   6.690 1.44e-09 ***
+## wT           -0.9526     0.1992  -4.782 6.20e-06 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.9923 on 97 degrees of freedom
+## Multiple R-squared:  0.403,	Adjusted R-squared:  0.3907 
+## F-statistic: 32.74 on 2 and 97 DF,  p-value: 1.366e-11
+>>>>>>> 79675b74d78966ba07e55032da96d31b332ad755
 ```
 
 R の特徴は因子もとくに変換することなくダミー変数として扱える.
@@ -382,6 +520,7 @@ summary(fm)
 ## lm(formula = y ~ x + I(x^2), data = df)
 ## 
 ## Residuals:
+<<<<<<< HEAD
 ##     Min      1Q  Median      3Q     Max 
 ## -2.6547 -0.6327 -0.0935  0.6460  3.4946 
 ## 
@@ -396,6 +535,22 @@ summary(fm)
 ## Residual standard error: 1.138 on 97 degrees of freedom
 ## Multiple R-squared:  0.1649,	Adjusted R-squared:  0.1477 
 ## F-statistic:  9.58 on 2 and 97 DF,  p-value: 0.0001596
+=======
+##      Min       1Q   Median       3Q      Max 
+## -2.28535 -0.76510  0.03674  0.70698  2.66877 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  10.2495     0.2877  35.628   <2e-16 ***
+## x             3.5565     1.3996   2.541   0.0126 *  
+## I(x^2)       -1.5157     1.3632  -1.112   0.2689    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 1.096 on 97 degrees of freedom
+## Multiple R-squared:  0.2715,	Adjusted R-squared:  0.2565 
+## F-statistic: 18.08 on 2 and 97 DF,  p-value: 2.121e-07
+>>>>>>> 79675b74d78966ba07e55032da96d31b332ad755
 ```
 
 ### 交差項
@@ -415,6 +570,7 @@ summary(fm)
 ## 
 ## Residuals:
 ##     Min      1Q  Median      3Q     Max 
+<<<<<<< HEAD
 ## -2.3094 -0.5942 -0.0150  0.6483  3.1541 
 ## 
 ## Coefficients:
@@ -429,6 +585,22 @@ summary(fm)
 ## Residual standard error: 1.082 on 96 degrees of freedom
 ## Multiple R-squared:  0.2533,	Adjusted R-squared:   0.23 
 ## F-statistic: 10.86 on 3 and 96 DF,  p-value: 3.317e-06
+=======
+## -2.8017 -0.6040  0.0919  0.7009  2.0210 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  11.0515     0.2778  39.784  < 2e-16 ***
+## x             1.9167     0.4803   3.991 0.000129 ***
+## wT           -1.1148     0.3762  -2.964 0.003834 ** 
+## x:wT          0.3241     0.6366   0.509 0.611849    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.9962 on 96 degrees of freedom
+## Multiple R-squared:  0.4046,	Adjusted R-squared:  0.386 
+## F-statistic: 21.74 on 3 and 96 DF,  p-value: 7.899e-11
+>>>>>>> 79675b74d78966ba07e55032da96d31b332ad755
 ```
 
 もしくは以下のように `*` を使って簡便的に表せる.
@@ -442,6 +614,7 @@ summary(fm)
 ## 
 ## Residuals:
 ##     Min      1Q  Median      3Q     Max 
+<<<<<<< HEAD
 ## -2.3094 -0.5942 -0.0150  0.6483  3.1541 
 ## 
 ## Coefficients:
@@ -456,6 +629,22 @@ summary(fm)
 ## Residual standard error: 1.082 on 96 degrees of freedom
 ## Multiple R-squared:  0.2533,	Adjusted R-squared:   0.23 
 ## F-statistic: 10.86 on 3 and 96 DF,  p-value: 3.317e-06
+=======
+## -2.8017 -0.6040  0.0919  0.7009  2.0210 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  11.0515     0.2778  39.784  < 2e-16 ***
+## x             1.9167     0.4803   3.991 0.000129 ***
+## wT           -1.1148     0.3762  -2.964 0.003834 ** 
+## x:wT          0.3241     0.6366   0.509 0.611849    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.9962 on 96 degrees of freedom
+## Multiple R-squared:  0.4046,	Adjusted R-squared:  0.386 
+## F-statistic: 21.74 on 3 and 96 DF,  p-value: 7.899e-11
+>>>>>>> 79675b74d78966ba07e55032da96d31b332ad755
 ```
 
 ### エフ検定
@@ -470,19 +659,52 @@ $$
 となる検定を実施したい. 
 
 これは複数の係数がゼロであるエフ検定である.
-コマンド `anova` を用いればエフ検定できる.
+対立仮説の残差自乗和を $SSR$ とし, その自由度を $df$ とする.
+自由度は観測数から説明変数の数を減じた数である.
+帰無仮説の残差自乗和を $SSR_0$ とし, 制約の数を $q$ とする.
+制約の数は帰無仮説の自由度から帰無仮説の自由度を差し引いた数である.
+このとき, 以下のF値は帰無仮説が正しいもと自由度 $df$ と $q$ のF分布にしたがう.
+$$
+\frac{(SSR_0-SSR)/q}{SSR/df}
+$$
+
+R でF値は次のようにして算出する.
 
 ```r
 fm0 <- lm(y~x,data=df)
 fm1 <- lm(y~x*w,data=df)
+dof <- fm1$df
+q <- fm0$df-dof
+SSR0 <- deviance(fm0)
+SSR <- deviance(fm1)
+(F <- ((SSR0-SSR)/q)/(SSR/dof))
+## [1] 11.47382
+```
+
+この時のP値は以下である.
+
+```r
+1-pf(F,df1=q,df2=dof)
+## [1] 3.403611e-05
+```
+
+これらの手順はコマンド `anova` を用いれば簡単に実現できる.
+
+```r
 anova(fm0,fm1)
 ## Analysis of Variance Table
 ## 
 ## Model 1: y ~ x
 ## Model 2: y ~ x * w
+<<<<<<< HEAD
 ##   Res.Df   RSS Df Sum of Sq      F   Pr(>F)   
 ## 1     98 127.6                                
 ## 2     96 112.4  2    15.193 6.4881 0.002276 **
+=======
+##   Res.Df     RSS Df Sum of Sq      F    Pr(>F)    
+## 1     98 118.035                                  
+## 2     96  95.263  2    22.771 11.474 3.404e-05 ***
+>>>>>>> 79675b74d78966ba07e55032da96d31b332ad755
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -495,6 +717,7 @@ anova(fm1,fm0)
 ## 
 ## Model 1: y ~ x * w
 ## Model 2: y ~ x
+<<<<<<< HEAD
 ##   Res.Df   RSS Df Sum of Sq      F   Pr(>F)   
 ## 1     96 112.4                                
 ## 2     98 127.6 -2   -15.193 6.4881 0.002276 **
@@ -514,6 +737,11 @@ anova(fm0,fm1)
 ##   Res.Df   RSS Df Sum of Sq      F   Pr(>F)   
 ## 1     98 127.6                                
 ## 2     96 112.4  2    15.193 6.4881 0.002276 **
+=======
+##   Res.Df     RSS Df Sum of Sq      F    Pr(>F)    
+## 1     96  95.263                                  
+## 2     98 118.035 -2   -22.771 11.474 3.404e-05 ***
+>>>>>>> 79675b74d78966ba07e55032da96d31b332ad755
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -531,24 +759,18 @@ anova(fm0,fm1)
 ここの係数ゼロのティー検定について, ライブラリ `AER` を導入して `coeftest` を用いればよい.
 
 ```r
-library(AER)
-##  要求されたパッケージ car をロード中です
-##  要求されたパッケージ lmtest をロード中です
-##  要求されたパッケージ zoo をロード中です
-## 
-##  次のパッケージを付け加えます: 'zoo'
-##  以下のオブジェクトは 'package:base' からマスクされています: 
-## 
-##      as.Date, as.Date.numeric
-##  要求されたパッケージ sandwich をロード中です
-##  要求されたパッケージ survival をロード中です
 coeftest(fm0,df=Inf)
 ## 
 ## z test of coefficients:
 ## 
 ##             Estimate Std. Error z value  Pr(>|z|)    
+<<<<<<< HEAD
 ## (Intercept) 10.61845    0.24821 42.7795 < 2.2e-16 ***
 ## x            1.74772    0.41633  4.1979 2.694e-05 ***
+=======
+## (Intercept) 10.47281    0.20618 50.7942 < 2.2e-16 ***
+## x            2.04881    0.34711  5.9024 3.582e-09 ***
+>>>>>>> 79675b74d78966ba07e55032da96d31b332ad755
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -563,10 +785,17 @@ waldtest(fm0,fm1,test="Chisq")
 ## Wald test
 ## 
 ## Model 1: y ~ x
+<<<<<<< HEAD
 ## Model 2: y ~ x + w + x:w
 ##   Res.Df Df  Chisq Pr(>Chisq)   
 ## 1     98                        
 ## 2     96  2 12.976   0.001521 **
+=======
+## Model 2: y ~ x * w
+##   Res.Df Df  Chisq Pr(>Chisq)    
+## 1     98                         
+## 2     96  2 22.948   1.04e-05 ***
+>>>>>>> 79675b74d78966ba07e55032da96d31b332ad755
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -579,10 +808,17 @@ waldtest(fm0,fm1)
 ## Wald test
 ## 
 ## Model 1: y ~ x
+<<<<<<< HEAD
 ## Model 2: y ~ x + w + x:w
 ##   Res.Df Df      F   Pr(>F)   
 ## 1     98                      
 ## 2     96  2 6.4881 0.002276 **
+=======
+## Model 2: y ~ x * w
+##   Res.Df Df      F    Pr(>F)    
+## 1     98                        
+## 2     96  2 11.474 3.404e-05 ***
+>>>>>>> 79675b74d78966ba07e55032da96d31b332ad755
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -593,10 +829,17 @@ anova(fm0,fm1)
 ## Analysis of Variance Table
 ## 
 ## Model 1: y ~ x
+<<<<<<< HEAD
 ## Model 2: y ~ x + w + x:w
 ##   Res.Df   RSS Df Sum of Sq      F   Pr(>F)   
 ## 1     98 127.6                                
 ## 2     96 112.4  2    15.193 6.4881 0.002276 **
+=======
+## Model 2: y ~ x * w
+##   Res.Df     RSS Df Sum of Sq      F    Pr(>F)    
+## 1     98 118.035                                  
+## 2     96  95.263  2    22.771 11.474 3.404e-05 ***
+>>>>>>> 79675b74d78966ba07e55032da96d31b332ad755
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -609,7 +852,11 @@ anova(fm0,fm1)
 ```r
 lmt <- lm(I(resid(fm1))~w*x,data=df)
 (lmt <- nrow(df)*summary(lmt)$r.squared)
+<<<<<<< HEAD
 ## [1] 3.813275e-30
+=======
+## [1] 2.798396e-30
+>>>>>>> 79675b74d78966ba07e55032da96d31b332ad755
 1-pchisq(lmt,df=1)
 ## [1] 1
 ```
@@ -637,11 +884,19 @@ coeftest(fm1,vcov=vcovHC)
 ## 
 ## t test of coefficients:
 ## 
+<<<<<<< HEAD
 ##             Estimate Std. Error t value Pr(>|t|)    
 ## (Intercept) 11.04373    0.37788 29.2254  < 2e-16 ***
 ## x            1.49520    0.68736  2.1753  0.03207 *  
 ## wT          -1.17176    0.48091 -2.4365  0.01667 *  
 ## x:wT         0.73791    0.83964  0.8788  0.38168    
+=======
+##             Estimate Std. Error t value  Pr(>|t|)    
+## (Intercept) 11.05148    0.34454 32.0760 < 2.2e-16 ***
+## x            1.91665    0.59421  3.2255  0.001720 ** 
+## wT          -1.11481    0.40819 -2.7311  0.007511 ** 
+## x:wT         0.32411    0.71804  0.4514  0.652728    
+>>>>>>> 79675b74d78966ba07e55032da96d31b332ad755
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -654,11 +909,19 @@ coeftest(fm1,vcov=vcovHC(fm1,type="HC1"))
 ## 
 ## t test of coefficients:
 ## 
+<<<<<<< HEAD
 ##             Estimate Std. Error t value Pr(>|t|)    
 ## (Intercept) 11.04373    0.36867 29.9555  < 2e-16 ***
 ## x            1.49520    0.66754  2.2399  0.02741 *  
 ## wT          -1.17176    0.46363 -2.5274  0.01313 *  
 ## x:wT         0.73791    0.80827  0.9129  0.36356    
+=======
+##             Estimate Std. Error t value  Pr(>|t|)    
+## (Intercept) 11.05148    0.33246 33.2411 < 2.2e-16 ***
+## x            1.91665    0.56999  3.3626  0.001110 ** 
+## wT          -1.11481    0.39497 -2.8225  0.005792 ** 
+## x:wT         0.32411    0.69156  0.4687  0.640370    
+>>>>>>> 79675b74d78966ba07e55032da96d31b332ad755
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -672,8 +935,13 @@ coeftest(fm0,vcov=vcovHC,df=Inf)
 ## z test of coefficients:
 ## 
 ##             Estimate Std. Error z value  Pr(>|z|)    
+<<<<<<< HEAD
 ## (Intercept) 10.61845    0.25886 41.0201 < 2.2e-16 ***
 ## x            1.74772    0.43919  3.9794  6.91e-05 ***
+=======
+## (Intercept) 10.47281    0.21547 48.6037 < 2.2e-16 ***
+## x            2.04881    0.36650  5.5902 2.268e-08 ***
+>>>>>>> 79675b74d78966ba07e55032da96d31b332ad755
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -685,10 +953,17 @@ waldtest(fm0,fm1,vcov=vcovHC)
 ## Wald test
 ## 
 ## Model 1: y ~ x
+<<<<<<< HEAD
 ## Model 2: y ~ x + w + x:w
 ##   Res.Df Df      F   Pr(>F)   
 ## 1     98                      
 ## 2     96  2 7.1832 0.001238 **
+=======
+## Model 2: y ~ x * w
+##   Res.Df Df      F    Pr(>F)    
+## 1     98                        
+## 2     96  2 10.674 6.522e-05 ***
+>>>>>>> 79675b74d78966ba07e55032da96d31b332ad755
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -700,10 +975,14 @@ waldtest(fm0,fm1,vcov=vcovHC, test="Chisq")
 ## Wald test
 ## 
 ## Model 1: y ~ x
-## Model 2: y ~ x + w + x:w
+## Model 2: y ~ x * w
 ##   Res.Df Df  Chisq Pr(>Chisq)    
 ## 1     98                         
+<<<<<<< HEAD
 ## 2     96  2 14.366  0.0007593 ***
+=======
+## 2     96  2 21.347  2.315e-05 ***
+>>>>>>> 79675b74d78966ba07e55032da96d31b332ad755
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -723,9 +1002,15 @@ BP検定は帰無仮説が分散均一で, 対立仮説が分散が説明変数�
 ```r
 bpt <- lm(I(resid(fm1)^2)~w*x,data=df)
 (bpt <- nrow(df)*summary(bpt)$r.squared)
+<<<<<<< HEAD
 ## [1] 2.309253
 1-pchisq(bpt,df=3)
 ## [1] 0.5107505
+=======
+## [1] 4.170697
+1-pchisq(bpt,df=3)
+## [1] 0.243612
+>>>>>>> 79675b74d78966ba07e55032da96d31b332ad755
 ```
 
 ここでの例ではP値が5%を超えているので帰無仮説を棄却できないので,
@@ -739,7 +1024,11 @@ bptest(fm1)
 ## 	studentized Breusch-Pagan test
 ## 
 ## data:  fm1
+<<<<<<< HEAD
 ## BP = 2.3093, df = 3, p-value = 0.5108
+=======
+## BP = 4.1707, df = 3, p-value = 0.2436
+>>>>>>> 79675b74d78966ba07e55032da96d31b332ad755
 ```
 
 これまでのBPテストは誤差項の分散が説明変数の線形関係あることを暗黙に仮定している.
@@ -751,9 +1040,15 @@ bptest(fm1)
 ```r
 wht <- lm(I(resid(fm1)^2)~fitted(fm1)+I(fitted(fm1)^2),data=df)
 (wht <- nrow(df)*summary(wht)$r.squared)
+<<<<<<< HEAD
 ## [1] 1.435067
 1-pchisq(wht,df=2)
 ## [1] 0.4879544
+=======
+## [1] 1.995547
+1-pchisq(wht,df=2)
+## [1] 0.3686995
+>>>>>>> 79675b74d78966ba07e55032da96d31b332ad755
 ```
 ホワイト検定でも分散均一が示唆されている.
 
@@ -765,7 +1060,11 @@ bptest(fm1,I(resid(fm1)^2)~fitted(fm1)+I(fitted(fm1)^2))
 ## 	studentized Breusch-Pagan test
 ## 
 ## data:  fm1
+<<<<<<< HEAD
 ## BP = 1.4351, df = 2, p-value = 0.488
+=======
+## BP = 1.9955, df = 2, p-value = 0.3687
+>>>>>>> 79675b74d78966ba07e55032da96d31b332ad755
 ```
 
 このように分散均一性は検定することが可能であるが, そもそも分散均一が疑われる場合は,

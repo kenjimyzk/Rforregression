@@ -1,5 +1,6 @@
 ---
-output: html_document
+output: 
+  html_document
 ---
 # パネル分析
 
