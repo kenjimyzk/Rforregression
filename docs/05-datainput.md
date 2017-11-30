@@ -24,7 +24,11 @@ R においてデータ分析をおこなうには
 df <- data.frame(x = rnorm(10), y = letters[1:10])
 str(df)
 ## 'data.frame':	10 obs. of  2 variables:
+<<<<<<< HEAD
 ##  $ x: num  2.929 0.196 1.247 -1.457 -0.944 ...
+=======
+##  $ x: num  0.378 1.159 0.607 1.409 -0.369 ...
+>>>>>>> 7a907db56f9a902d6e0d8b7b6b40751f6048538a
 ##  $ y: Factor w/ 10 levels "a","b","c","d",..: 1 2 3 4 5 6 7 8 9 10
 ```
 
@@ -35,7 +39,11 @@ str(df)
 df <- data.frame(x = rnorm(10), y = letters[1:10], stringsAsFactors= FALSE)
 str(df)
 ## 'data.frame':	10 obs. of  2 variables:
+<<<<<<< HEAD
 ##  $ x: num  -0.1168 0.0833 -1.1255 0.7302 0.2913 ...
+=======
+##  $ x: num  -0.23 1.795 -1.27 -0.593 1.792 ...
+>>>>>>> 7a907db56f9a902d6e0d8b7b6b40751f6048538a
 ##  $ y: chr  "a" "b" "c" "d" ...
 ```
 
@@ -46,7 +54,11 @@ library(dplyr)
 df <- data_frame(x = rnorm(10), y = letters[1:10])
 str(df)
 ## Classes 'tbl_df', 'tbl' and 'data.frame':	10 obs. of  2 variables:
+<<<<<<< HEAD
 ##  $ x: num  -0.49 -0.406 0.406 1.183 0.481 ...
+=======
+##  $ x: num  -0.06513 0.47428 -0.00589 -0.7016 0.68314 ...
+>>>>>>> 7a907db56f9a902d6e0d8b7b6b40751f6048538a
 ##  $ y: chr  "a" "b" "c" "d" ...
 ```
 

@@ -25,7 +25,11 @@
 <meta name="author" content="宮﨑憲治">
 
 
+<<<<<<< HEAD
 <meta name="date" content="2017-11-30">
+=======
+<meta name="date" content="2017-11-14">
+>>>>>>> 7a907db56f9a902d6e0d8b7b6b40751f6048538a
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -397,6 +401,7 @@ dfy &lt;-<span class="st"> </span><span class="kw">data_frame</span>(<span class
 )
 df</code></pre></div>
 <pre><code>## # A tibble: 5 x 4
+<<<<<<< HEAD
 ##    time         X          Y          Z
 ##   &lt;int&gt;     &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
 ## 1  2010 0.6668134  0.8541186  2.6083581
@@ -404,10 +409,20 @@ df</code></pre></div>
 ## 3  2012 1.3217493  1.4422435 -4.8753729
 ## 4  2013 0.9813393  1.9200486 -1.4462353
 ## 5  2014 0.0409546 -2.0088853  1.4705626</code></pre>
+=======
+##    time          X         Y          Z
+##   &lt;int&gt;      &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+## 1  2010  1.1965219 1.7206587  -5.713069
+## 2  2011 -0.9256137 0.2992468  -4.270570
+## 3  2012  1.0729644 0.4861500  -2.440908
+## 4  2013  0.1519230 1.5298740  -2.138360
+## 5  2014 -0.0661224 0.1758807 -11.287628</code></pre>
+>>>>>>> 7a907db56f9a902d6e0d8b7b6b40751f6048538a
 <p>それぞれの変数名をキーとして, 値を示した表は <code>gather</code> で作れる.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df_gather &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">gather</span>(key,value,<span class="op">-</span>time)
 df_gather</code></pre></div>
 <pre><code>## # A tibble: 15 x 3
+<<<<<<< HEAD
 ##     time   key      value
 ##    &lt;int&gt; &lt;chr&gt;      &lt;dbl&gt;
 ##  1  2010     X  0.6668134
@@ -435,10 +450,40 @@ df_gather</code></pre></div>
 ## 3  2012 1.3217493  1.4422435 -4.8753729
 ## 4  2013 0.9813393  1.9200486 -1.4462353
 ## 5  2014 0.0409546 -2.0088853  1.4705626</code></pre>
+=======
+##     time   key       value
+##    &lt;int&gt; &lt;chr&gt;       &lt;dbl&gt;
+##  1  2010     X   1.1965219
+##  2  2011     X  -0.9256137
+##  3  2012     X   1.0729644
+##  4  2013     X   0.1519230
+##  5  2014     X  -0.0661224
+##  6  2010     Y   1.7206587
+##  7  2011     Y   0.2992468
+##  8  2012     Y   0.4861500
+##  9  2013     Y   1.5298740
+## 10  2014     Y   0.1758807
+## 11  2010     Z  -5.7130690
+## 12  2011     Z  -4.2705704
+## 13  2012     Z  -2.4409076
+## 14  2013     Z  -2.1383600
+## 15  2014     Z -11.2876277</code></pre>
+<p><code>spread</code> でもとに戻ることができる.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df_gather <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">spread</span>(key, value)</code></pre></div>
+<pre><code>## # A tibble: 5 x 4
+##    time          X         Y          Z
+## * &lt;int&gt;      &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+## 1  2010  1.1965219 1.7206587  -5.713069
+## 2  2011 -0.9256137 0.2992468  -4.270570
+## 3  2012  1.0729644 0.4861500  -2.440908
+## 4  2013  0.1519230 1.5298740  -2.138360
+## 5  2014 -0.0661224 0.1758807 -11.287628</code></pre>
+>>>>>>> 7a907db56f9a902d6e0d8b7b6b40751f6048538a
 <p><code>spread</code> で <code>time</code> にすると別の形で展開できる.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df_spread &lt;-<span class="st"> </span>df_gather <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">spread</span>(time, value)
 df_spread</code></pre></div>
 <pre><code>## # A tibble: 3 x 6
+<<<<<<< HEAD
 ##     key    `2010`     `2011`    `2012`     `2013`     `2014`
 ## * &lt;chr&gt;     &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
 ## 1     X 0.6668134  0.1126151  1.321749  0.9813393  0.0409546
@@ -464,6 +509,33 @@ df_spread</code></pre></div>
 ## 13     X  2014  0.0409546
 ## 14     Y  2014 -2.0088853
 ## 15     Z  2014  1.4705626</code></pre>
+=======
+##     key    `2010`     `2011`    `2012`    `2013`      `2014`
+## * &lt;chr&gt;     &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;
+## 1     X  1.196522 -0.9256137  1.072964  0.151923  -0.0661224
+## 2     Y  1.720659  0.2992468  0.486150  1.529874   0.1758807
+## 3     Z -5.713069 -4.2705704 -2.440908 -2.138360 -11.2876277</code></pre>
+<p>以下のようにすればもとに戻る.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df_spread <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">gather</span>(time,value,<span class="op">-</span>key)</code></pre></div>
+<pre><code>## # A tibble: 15 x 3
+##      key  time       value
+##    &lt;chr&gt; &lt;chr&gt;       &lt;dbl&gt;
+##  1     X  2010   1.1965219
+##  2     Y  2010   1.7206587
+##  3     Z  2010  -5.7130690
+##  4     X  2011  -0.9256137
+##  5     Y  2011   0.2992468
+##  6     Z  2011  -4.2705704
+##  7     X  2012   1.0729644
+##  8     Y  2012   0.4861500
+##  9     Z  2012  -2.4409076
+## 10     X  2013   0.1519230
+## 11     Y  2013   1.5298740
+## 12     Z  2013  -2.1383600
+## 13     X  2014  -0.0661224
+## 14     Y  2014   0.1758807
+## 15     Z  2014 -11.2876277</code></pre>
+>>>>>>> 7a907db56f9a902d6e0d8b7b6b40751f6048538a
 <p><code>gather</code> をうまく使えば変数ごとの基本統計量の表を作ることができる.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cars <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">gather</span>(variable,value) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(variable) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">summarize</span>(<span class="dt">nobs =</span> <span class="kw">n</span>(), <span class="dt">avg =</span> <span class="kw">mean</span>(value), <span class="dt">sd =</span><span class="kw">sd</span>(value))</code></pre></div>
@@ -489,6 +561,7 @@ df_spread</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">data_frame</span>(<span class="dt">name=</span>letters, <span class="st">&quot;2010&quot;</span>=<span class="kw">rnorm</span>(<span class="dv">26</span>),<span class="st">&quot;2011&quot;</span>=<span class="kw">rnorm</span>(<span class="dv">26</span>),<span class="st">&quot;2012&quot;</span>=<span class="kw">rnorm</span>(<span class="dv">26</span>)) 
 <span class="kw">head</span>(df)</code></pre></div>
 <pre><code>## # A tibble: 6 x 4
+<<<<<<< HEAD
 ##    name     `2010`     `2011`     `2012`
 ##   &lt;chr&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
 ## 1     a -0.8580794 -0.9433395 -0.6235081
@@ -497,6 +570,16 @@ df_spread</code></pre></div>
 ## 4     d  0.1731588 -0.2368608  2.8138704
 ## 5     e -1.4061746  0.7925130 -0.2641340
 ## 6     f  1.4762895 -1.2891451 -0.3747514</code></pre>
+=======
+##    name      `2010`       `2011`     `2012`
+##   &lt;chr&gt;       &lt;dbl&gt;        &lt;dbl&gt;      &lt;dbl&gt;
+## 1     a  1.18740184 -0.374725013  0.1329990
+## 2     b  0.08926124 -1.383157218  0.7050418
+## 3     c -0.98475038 -1.279833988  1.2406488
+## 4     d  0.72549173  0.603919931 -0.4531015
+## 5     e  0.46533016  0.002044949  0.7365002
+## 6     f  0.05959534 -1.032577896 -0.2336940</code></pre>
+>>>>>>> 7a907db56f9a902d6e0d8b7b6b40751f6048538a
 <p><code>data.frame</code> でないことに注意されたい.</p>
 <p>また, 年ごとのデータセット <code>df_2010</code>, <code>df_2011</code>, <code>df_2012</code> が3つある.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df_<span class="dv">2010</span> &lt;-<span class="st"> </span><span class="kw">data_frame</span>(<span class="dt">name=</span>letters,<span class="dt">runif=</span><span class="kw">runif</span>(<span class="dv">26</span>))
@@ -508,6 +591,7 @@ df_<span class="dv">2012</span> &lt;-<span class="st"> </span><span class="kw">d
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">time=</span><span class="kw">as.numeric</span>(time))
 <span class="kw">head</span>(df_rnorm)</code></pre></div>
 <pre><code>## # A tibble: 6 x 3
+<<<<<<< HEAD
 ##    name  time      rnorm
 ##   &lt;chr&gt; &lt;dbl&gt;      &lt;dbl&gt;
 ## 1     a  2010 -0.8580794
@@ -516,6 +600,16 @@ df_<span class="dv">2012</span> &lt;-<span class="st"> </span><span class="kw">d
 ## 4     d  2010  0.1731588
 ## 5     e  2010 -1.4061746
 ## 6     f  2010  1.4762895</code></pre>
+=======
+##    name  time       rnorm
+##   &lt;chr&gt; &lt;dbl&gt;       &lt;dbl&gt;
+## 1     a  2010  1.18740184
+## 2     b  2010  0.08926124
+## 3     c  2010 -0.98475038
+## 4     d  2010  0.72549173
+## 5     e  2010  0.46533016
+## 6     f  2010  0.05959534</code></pre>
+>>>>>>> 7a907db56f9a902d6e0d8b7b6b40751f6048538a
 <p>時間の変数を数値に変換している.</p>
 <p>データセット <code>df_2010</code>, <code>df_2011</code>, <code>df_2012</code> をつなげる.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df_runif &lt;-<span class="st"> </span><span class="kw">bind_rows</span>(df_<span class="dv">2010</span>,df_<span class="dv">2011</span>,df_<span class="dv">2012</span>) <span class="op">%&gt;%</span><span class="st"> </span>
@@ -524,17 +618,27 @@ df_<span class="dv">2012</span> &lt;-<span class="st"> </span><span class="kw">d
 <pre><code>## # A tibble: 6 x 3
 ##    name     runif  time
 ##   &lt;chr&gt;     &lt;dbl&gt; &lt;int&gt;
+<<<<<<< HEAD
 ## 1     a 0.1133997  2010
 ## 2     b 0.2765237  2010
 ## 3     c 0.1257070  2010
 ## 4     d 0.1305665  2010
 ## 5     e 0.7373962  2010
 ## 6     f 0.4074623  2010</code></pre>
+=======
+## 1     a 0.3470124  2010
+## 2     b 0.3747049  2010
+## 3     c 0.4459528  2010
+## 4     d 0.2198896  2010
+## 5     e 0.4818801  2010
+## 6     f 0.4591683  2010</code></pre>
+>>>>>>> 7a907db56f9a902d6e0d8b7b6b40751f6048538a
 <p>それぞれの年の変数を付け加えている.</p>
 <p>これを <code>full_join</code> を用いてつなげる.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df_full &lt;-<span class="st"> </span><span class="kw">full_join</span>(df_rnorm,df_runif,<span class="dt">by=</span><span class="kw">c</span>(<span class="st">&quot;name&quot;</span>,<span class="st">&quot;time&quot;</span>))
 <span class="kw">head</span>(df_full)  </code></pre></div>
 <pre><code>## # A tibble: 6 x 4
+<<<<<<< HEAD
 ##    name  time      rnorm     runif
 ##   &lt;chr&gt; &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;
 ## 1     a  2010 -0.8580794 0.1133997
@@ -543,6 +647,16 @@ df_<span class="dv">2012</span> &lt;-<span class="st"> </span><span class="kw">d
 ## 4     d  2010  0.1731588 0.1305665
 ## 5     e  2010 -1.4061746 0.7373962
 ## 6     f  2010  1.4762895 0.4074623</code></pre>
+=======
+##    name  time       rnorm     runif
+##   &lt;chr&gt; &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;
+## 1     a  2010  1.18740184 0.3470124
+## 2     b  2010  0.08926124 0.3747049
+## 3     c  2010 -0.98475038 0.4459528
+## 4     d  2010  0.72549173 0.2198896
+## 5     e  2010  0.46533016 0.4818801
+## 6     f  2010  0.05959534 0.4591683</code></pre>
+>>>>>>> 7a907db56f9a902d6e0d8b7b6b40751f6048538a
 
 </div>
 </div>

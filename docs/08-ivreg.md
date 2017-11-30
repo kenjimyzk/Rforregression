@@ -9,9 +9,9 @@ output: html_document
 
 ```r
 library(AER)
-library(PoEdata)
-data("mroz", package="PoEdata")
-df <- subset(mroz, lfp==1)
+library(wooldridge)
+data("mroz", package="wooldridge")
+df <- subset(mroz, inlf==1)
 ```
 
 ## 操作変数
@@ -49,12 +49,12 @@ df <- subset(mroz, lfp==1)
 R においては次のコマンドを実行すればよい.
 ここで被説明変数は `log(wage)`,
 内生変数は `educ`, 外生変数は `expr`, `I(expr^2)`,
-操作変数は `mothereduc`, `fathereduc` である.
+操作変数は `motheduc`, `fatheduc` である.
 
 
 ```r
 fm  <- ivreg(log(wage)~educ+exper+I(exper^2)|
-            exper+I(exper^2)+mothereduc+fathereduc,
+            exper+I(exper^2)+motheduc+fatheduc,
             data=df)
 summary(fm)
 ```
@@ -63,7 +63,7 @@ summary(fm)
 ## 
 ## Call:
 ## ivreg(formula = log(wage) ~ educ + exper + I(exper^2) | exper + 
-##     I(exper^2) + mothereduc + fathereduc, data = df)
+##     I(exper^2) + motheduc + fatheduc, data = df)
 ## 
 ## Residuals:
 ##     Min      1Q  Median      3Q     Max 
@@ -90,7 +90,7 @@ summary(fm)
 
 
 ```r
-ols1 <- lm(educ~exper+I(exper^2)+mothereduc+fathereduc,  data = df)
+ols1 <- lm(educ~exper+I(exper^2)+motheduc+fatheduc,  data = df)
 ols2 <- lm(log(wage)~fitted(ols1)+exper+I(exper^2),  data = df)
 summary(ols2)
 ```
@@ -125,16 +125,16 @@ summary(ols2)
 
 
 ```r
-fm0 <- ivreg(log(wage)~educ|mothereduc+fathereduc,data=df)
+fm0 <- ivreg(log(wage)~educ|motheduc+fatheduc,data=df)
 waldtest(fm0,fm)
 ```
 
 ```
 ## Wald test
 ## 
-## Model 1: log(wage) ~ educ | mothereduc + fathereduc
+## Model 1: log(wage) ~ educ | motheduc + fatheduc
 ## Model 2: log(wage) ~ educ + exper + I(exper^2) | exper + I(exper^2) + 
-##     mothereduc + fathereduc
+##     motheduc + fatheduc
 ##   Res.Df Df  Chisq Pr(>Chisq)    
 ## 1    426                         
 ## 2    424  2 19.639  5.439e-05 ***
@@ -150,7 +150,7 @@ lmt <- lm(resid(fm0)~educ + exper + I(exper^2) ,data=df)
 ```
 
 ```
-## [1] 33.97988
+## [1] 33.97987
 ```
 
 ```r
@@ -158,7 +158,7 @@ lmt <- lm(resid(fm0)~educ + exper + I(exper^2) ,data=df)
 ```
 
 ```
-## [1] 2.000664e-07
+## [1] 2.000665e-07
 ```
 
 ## 特定化検定
@@ -172,7 +172,7 @@ summary(fm, diagnostics = TRUE)
 ## 
 ## Call:
 ## ivreg(formula = log(wage) ~ educ + exper + I(exper^2) | exper + 
-##     I(exper^2) + mothereduc + fathereduc, data = df)
+##     I(exper^2) + motheduc + fatheduc, data = df)
 ## 
 ## Residuals:
 ##     Min      1Q  Median      3Q     Max 
@@ -214,7 +214,7 @@ anova(ols0, ols1)
 ## Analysis of Variance Table
 ## 
 ## Model 1: educ ~ exper + I(exper^2)
-## Model 2: educ ~ exper + I(exper^2) + mothereduc + fathereduc
+## Model 2: educ ~ exper + I(exper^2) + motheduc + fatheduc
 ##   Res.Df    RSS Df Sum of Sq    F    Pr(>F)    
 ## 1    425 2219.2                                
 ## 2    423 1758.6  2    460.64 55.4 < 2.2e-16 ***
@@ -267,12 +267,12 @@ LM検定を実施する.
 
 
 ```r
-jt <- lm(resid(fm)~exper+I(exper^2)+mothereduc+fathereduc,data=df)
+jt <- lm(resid(fm)~exper+I(exper^2)+motheduc+fatheduc,data=df)
 (jt <- nrow(df)*summary(jt)$r.squared)
 ```
 
 ```
-## [1] 0.3780715
+## [1] 0.3780714
 ```
 
 ```r
@@ -297,7 +297,7 @@ summary(fm, vcov = sandwich, df = Inf)
 ## 
 ## Call:
 ## ivreg(formula = log(wage) ~ educ + exper + I(exper^2) | exper + 
-##     I(exper^2) + mothereduc + fathereduc, data = df)
+##     I(exper^2) + motheduc + fatheduc, data = df)
 ## 
 ## Residuals:
 ##     Min      1Q  Median      3Q     Max 
@@ -345,9 +345,9 @@ waldtest(fm0,fm, vcov=sandwich)
 ```
 ## Wald test
 ## 
-## Model 1: log(wage) ~ educ | mothereduc + fathereduc
+## Model 1: log(wage) ~ educ | motheduc + fatheduc
 ## Model 2: log(wage) ~ educ + exper + I(exper^2) | exper + I(exper^2) + 
-##     mothereduc + fathereduc
+##     motheduc + fatheduc
 ##   Res.Df Df  Chisq Pr(>Chisq)    
 ## 1    426                         
 ## 2    424  2 15.018  0.0005483 ***
@@ -363,7 +363,7 @@ waldtest(fm0,fm, vcov=sandwich)
 
 
 ```r
-bpt <- lm(I(resid(fm)^2)~exper + I(exper^2) + mothereduc + fathereduc,data=df)
+bpt <- lm(I(resid(fm)^2)~exper + I(exper^2) + motheduc + fatheduc,data=df)
 (bpt <- nrow(df)*summary(bpt)$r.squared)
 ```
 
@@ -376,7 +376,11 @@ bpt <- lm(I(resid(fm)^2)~exper + I(exper^2) + mothereduc + fathereduc,data=df)
 ```
 
 ```
+<<<<<<< HEAD
 ## [1] 0.01450172
+=======
+## [1] 0.006081395
+>>>>>>> 7a907db56f9a902d6e0d8b7b6b40751f6048538a
 ```
 
 
