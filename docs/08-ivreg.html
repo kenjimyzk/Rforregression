@@ -25,11 +25,7 @@
 <meta name="author" content="宮﨑憲治">
 
 
-<<<<<<< HEAD
 <meta name="date" content="2017-11-30">
-=======
-<meta name="date" content="2017-11-14">
->>>>>>> 7a907db56f9a902d6e0d8b7b6b40751f6048538a
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -402,26 +398,15 @@ ols4 &lt;-<span class="st"> </span><span class="kw">update</span>(ols3, . <span 
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 </div>
-<<<<<<< HEAD
 <div id="sargan-検定" class="section level3">
 <h3><span class="header-section-number">8.5.3</span> Sargan 検定</h3>
 <p>Sargan 検定は 誤差項が操作変数 (および外生変数) と相関しているかどうかを検定する. 帰無仮説が相関が無い場合で, 対立仮説は相関がある場合である.</p>
 <p>LM検定を実施する. 1. 二段階最小二乗法を実施したときの残差える. (<code>resid(fm)</code>) 2. 残差を外生変数および操作変数に回帰する. 3. 回帰の決定係数に観測数を乗じたLM統計量をえる. 4. 検定統計量は, 帰無仮説のもと, 操作変数の数から内生変数の数を差し引いた自由度のカイ二乗分布にしたがう.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">jt &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">resid</span>(fm)<span class="op">~</span>exper<span class="op">+</span><span class="kw">I</span>(exper<span class="op">^</span><span class="dv">2</span>)<span class="op">+</span>mothereduc<span class="op">+</span>fathereduc,<span class="dt">data=</span>df)
-(jt &lt;-<span class="st"> </span><span class="kw">nrow</span>(df)<span class="op">*</span><span class="kw">summary</span>(jt)<span class="op">$</span>r.squared)</code></pre></div>
-<pre><code>## [1] 0.3780715</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span><span class="op">-</span><span class="kw">pchisq</span>(jt,<span class="dt">df=</span><span class="dv">1</span>)</code></pre></div>
-<pre><code>## [1] 0.5386372</code></pre>
-=======
-<div id="sargan" class="section level3">
-<h3><span class="header-section-number">8.5.3</span> Sargan</h3>
-<p>Sargan 検定は 誤差項が操作変数 (および外生変数) と相関しているかどうかを検定する. 帰無仮説が相関が無い場合で, 対立仮説は相関がある場合である. LM検定を実施する.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">jt &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">resid</span>(fm)<span class="op">~</span>exper<span class="op">+</span><span class="kw">I</span>(exper<span class="op">^</span><span class="dv">2</span>)<span class="op">+</span>motheduc<span class="op">+</span>fatheduc,<span class="dt">data=</span>df)
 (jt &lt;-<span class="st"> </span><span class="kw">nrow</span>(df)<span class="op">*</span><span class="kw">summary</span>(jt)<span class="op">$</span>r.squared)</code></pre></div>
 <pre><code>## [1] 0.3780714</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span><span class="op">-</span><span class="kw">pchisq</span>(jt,<span class="dt">df=</span><span class="dv">3</span>)</code></pre></div>
-<pre><code>## [1] 0.9447342</code></pre>
->>>>>>> 7a907db56f9a902d6e0d8b7b6b40751f6048538a
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span><span class="op">-</span><span class="kw">pchisq</span>(jt,<span class="dt">df=</span><span class="dv">1</span>)</code></pre></div>
+<pre><code>## [1] 0.5386372</code></pre>
 </div>
 </div>
 <div id="ロバスト分散" class="section level2">
@@ -480,13 +465,8 @@ ols4 &lt;-<span class="st"> </span><span class="kw">update</span>(ols3, . <span 
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bpt &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">I</span>(<span class="kw">resid</span>(fm)<span class="op">^</span><span class="dv">2</span>)<span class="op">~</span>exper <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(exper<span class="op">^</span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span>motheduc <span class="op">+</span><span class="st"> </span>fatheduc,<span class="dt">data=</span>df)
 (bpt &lt;-<span class="st"> </span><span class="kw">nrow</span>(df)<span class="op">*</span><span class="kw">summary</span>(bpt)<span class="op">$</span>r.squared)</code></pre></div>
 <pre><code>## [1] 12.41758</code></pre>
-<<<<<<< HEAD
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span><span class="op">-</span><span class="kw">pchisq</span>(bpt,<span class="dt">df=</span><span class="dv">4</span>)</code></pre></div>
 <pre><code>## [1] 0.01450172</code></pre>
-=======
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span><span class="op">-</span><span class="kw">pchisq</span>(bpt,<span class="dt">df=</span><span class="dv">3</span>)</code></pre></div>
-<pre><code>## [1] 0.006081395</code></pre>
->>>>>>> 7a907db56f9a902d6e0d8b7b6b40751f6048538a
 
 </div>
 </div>

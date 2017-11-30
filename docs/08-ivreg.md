@@ -376,11 +376,7 @@ bpt <- lm(I(resid(fm)^2)~exper + I(exper^2) + motheduc + fatheduc,data=df)
 ```
 
 ```
-<<<<<<< HEAD
 ## [1] 0.01450172
-=======
-## [1] 0.006081395
->>>>>>> 7a907db56f9a902d6e0d8b7b6b40751f6048538a
 ```
 
 
