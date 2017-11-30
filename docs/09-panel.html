@@ -25,7 +25,7 @@
 <meta name="author" content="宮﨑憲治">
 
 
-<meta name="date" content="2017-11-13">
+<meta name="date" content="2017-11-30">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -33,7 +33,7 @@
   
   
 <link rel="prev" href="08-ivreg.html">
-
+<link rel="next" href="test.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -178,10 +178,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="7.2.2" data-path="07-regression.html"><a href="07-regression.html#交差項"><i class="fa fa-check"></i><b>7.2.2</b> 交差項</a></li>
 <li class="chapter" data-level="7.2.3" data-path="07-regression.html"><a href="07-regression.html#エフ検定"><i class="fa fa-check"></i><b>7.2.3</b> エフ検定</a></li>
 </ul></li>
-<li class="chapter" data-level="7.3" data-path="07-regression.html"><a href="07-regression.html#最小二乗推定量のための仮定について"><i class="fa fa-check"></i><b>7.3</b> 最小二乗推定量のための仮定について</a><ul>
-<li class="chapter" data-level="7.3.1" data-path="07-regression.html"><a href="07-regression.html#ロバスト分散"><i class="fa fa-check"></i><b>7.3.1</b> ロバスト分散</a></li>
-<li class="chapter" data-level="7.3.2" data-path="07-regression.html"><a href="07-regression.html#分散均一の検定"><i class="fa fa-check"></i><b>7.3.2</b> 分散均一の検定</a></li>
-</ul></li>
+<li class="chapter" data-level="7.3" data-path="07-regression.html"><a href="07-regression.html#正規性の仮定について"><i class="fa fa-check"></i><b>7.3</b> 正規性の仮定について</a></li>
+<li class="chapter" data-level="7.4" data-path="07-regression.html"><a href="07-regression.html#誤差項と説明変数が独立の仮定について"><i class="fa fa-check"></i><b>7.4</b> 誤差項と説明変数が独立の仮定について</a></li>
+<li class="chapter" data-level="7.5" data-path="07-regression.html"><a href="07-regression.html#分散均一の検定"><i class="fa fa-check"></i><b>7.5</b> 分散均一の検定</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="08-ivreg.html"><a href="08-ivreg.html"><i class="fa fa-check"></i><b>8</b> 操作変数法</a><ul>
 <li class="chapter" data-level="8.1" data-path="08-ivreg.html"><a href="08-ivreg.html#データ"><i class="fa fa-check"></i><b>8.1</b> データ</a></li>
@@ -190,10 +189,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="8.4" data-path="08-ivreg.html"><a href="08-ivreg.html#複数制約の検定"><i class="fa fa-check"></i><b>8.4</b> 複数制約の検定</a></li>
 <li class="chapter" data-level="8.5" data-path="08-ivreg.html"><a href="08-ivreg.html#特定化検定"><i class="fa fa-check"></i><b>8.5</b> 特定化検定</a><ul>
 <li class="chapter" data-level="8.5.1" data-path="08-ivreg.html"><a href="08-ivreg.html#weak-instruments"><i class="fa fa-check"></i><b>8.5.1</b> Weak instruments</a></li>
-<li class="chapter" data-level="8.5.2" data-path="08-ivreg.html"><a href="08-ivreg.html#du-hausman"><i class="fa fa-check"></i><b>8.5.2</b> Du-Hausman</a></li>
-<li class="chapter" data-level="8.5.3" data-path="08-ivreg.html"><a href="08-ivreg.html#sargan"><i class="fa fa-check"></i><b>8.5.3</b> Sargan</a></li>
+<li class="chapter" data-level="8.5.2" data-path="08-ivreg.html"><a href="08-ivreg.html#du-hausman-検定"><i class="fa fa-check"></i><b>8.5.2</b> Du-Hausman 検定</a></li>
+<li class="chapter" data-level="8.5.3" data-path="08-ivreg.html"><a href="08-ivreg.html#sargan-検定"><i class="fa fa-check"></i><b>8.5.3</b> Sargan 検定</a></li>
 </ul></li>
-<li class="chapter" data-level="8.6" data-path="08-ivreg.html"><a href="08-ivreg.html#ロバスト分散-1"><i class="fa fa-check"></i><b>8.6</b> ロバスト分散</a></li>
+<li class="chapter" data-level="8.6" data-path="08-ivreg.html"><a href="08-ivreg.html#ロバスト分散"><i class="fa fa-check"></i><b>8.6</b> ロバスト分散</a></li>
 <li class="chapter" data-level="8.7" data-path="08-ivreg.html"><a href="08-ivreg.html#分散不均一の検定"><i class="fa fa-check"></i><b>8.7</b> 分散不均一の検定</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="09-panel.html"><a href="09-panel.html"><i class="fa fa-check"></i><b>9</b> パネル分析</a><ul>
@@ -204,6 +203,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="9.5" data-path="09-panel.html"><a href="09-panel.html#変量効果モデル"><i class="fa fa-check"></i><b>9.5</b> 変量効果モデル</a></li>
 <li class="chapter" data-level="9.6" data-path="09-panel.html"><a href="09-panel.html#ハウスマン検定"><i class="fa fa-check"></i><b>9.6</b> ハウスマン検定</a></li>
 <li class="chapter" data-level="9.7" data-path="09-panel.html"><a href="09-panel.html#分散不均一の検定-1"><i class="fa fa-check"></i><b>9.7</b> 分散不均一の検定</a></li>
+<li class="chapter" data-level="9.8" data-path="test.html"><a href="test.html"><i class="fa fa-check"></i><b>9.8</b> R Markdown</a></li>
+<li class="chapter" data-level="9.9" data-path="test.html"><a href="test.html#including-plots"><i class="fa fa-check"></i><b>9.9</b> Including Plots</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -255,13 +256,13 @@ inv_{it} = \beta_0 + \beta_1 value_{it} + \beta_2 capital_{it} + u_{it}
 ## Call:
 ## plm(formula = inv ~ value + capital, data = Grunfeld, model = &quot;pooling&quot;)
 ## 
-## Balanced Panel: n=10, T=20, N=200
+## Balanced Panel: n = 10, T = 20, N = 200
 ## 
-## Residuals :
+## Residuals:
 ##      Min.   1st Qu.    Median   3rd Qu.      Max. 
 ## -291.6757  -30.0137    5.3033   34.8293  369.4464 
 ## 
-## Coefficients :
+## Coefficients:
 ##                Estimate  Std. Error t-value  Pr(&gt;|t|)    
 ## (Intercept) -42.7143694   9.5116760 -4.4907 1.207e-05 ***
 ## value         0.1155622   0.0058357 19.8026 &lt; 2.2e-16 ***
@@ -309,13 +310,13 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}
 ## Call:
 ## plm(formula = inv ~ value + capital, data = Grunfeld, model = &quot;within&quot;)
 ## 
-## Balanced Panel: n=10, T=20, N=200
+## Balanced Panel: n = 10, T = 20, N = 200
 ## 
-## Residuals :
+## Residuals:
 ##       Min.    1st Qu.     Median    3rd Qu.       Max. 
 ## -184.00857  -17.64316    0.56337   19.19222  250.70974 
 ## 
-## Coefficients :
+## Coefficients:
 ##         Estimate Std. Error t-value  Pr(&gt;|t|)    
 ## value   0.110124   0.011857  9.2879 &lt; 2.2e-16 ***
 ## capital 0.310065   0.017355 17.8666 &lt; 2.2e-16 ***
@@ -376,13 +377,13 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it}+ \gamma_t +\alpha_i + u_{it
 ## plm(formula = inv ~ value + capital, data = Grunfeld, effect = &quot;twoways&quot;, 
 ##     model = &quot;within&quot;)
 ## 
-## Balanced Panel: n=10, T=20, N=200
+## Balanced Panel: n = 10, T = 20, N = 200
 ## 
-## Residuals :
+## Residuals:
 ##      Min.   1st Qu.    Median   3rd Qu.      Max. 
 ## -162.6094  -19.4710   -1.2669   19.1277  211.8420 
 ## 
-## Coefficients :
+## Coefficients:
 ##         Estimate Std. Error t-value  Pr(&gt;|t|)    
 ## value   0.117716   0.013751  8.5604 6.653e-15 ***
 ## capital 0.357916   0.022719 15.7540 &lt; 2.2e-16 ***
@@ -497,19 +498,19 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}
 ## Call:
 ## plm(formula = inv ~ value + capital, data = Grunfeld, model = &quot;random&quot;)
 ## 
-## Balanced Panel: n=10, T=20, N=200
+## Balanced Panel: n = 10, T = 20, N = 200
 ## 
 ## Effects:
 ##                   var std.dev share
 ## idiosyncratic 2784.46   52.77 0.282
 ## individual    7089.80   84.20 0.718
-## theta:  0.8612  
+## theta: 0.8612
 ## 
-## Residuals :
+## Residuals:
 ##      Min.   1st Qu.    Median   3rd Qu.      Max. 
 ## -177.6063  -19.7350    4.6851   19.5105  252.8743 
 ## 
-## Coefficients :
+## Coefficients:
 ##               Estimate Std. Error t-value Pr(&gt;|t|)    
 ## (Intercept) -57.834415  28.898935 -2.0013  0.04674 *  
 ## value         0.109781   0.010493 10.4627  &lt; 2e-16 ***
@@ -532,50 +533,50 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}
 ## plm(formula = inv ~ value + capital + factor(year), data = Grunfeld, 
 ##     model = &quot;random&quot;)
 ## 
-## Balanced Panel: n=10, T=20, N=200
+## Balanced Panel: n = 10, T = 20, N = 200
 ## 
 ## Effects:
 ##                   var std.dev share
-## idiosyncratic 2675.43   51.72 0.264
-## individual    7458.35   86.36 0.736
-## theta:  0.8673  
+## idiosyncratic 2675.43   51.72 0.274
+## individual    7095.25   84.23 0.726
+## theta: 0.864
 ## 
-## Residuals :
+## Residuals:
 ##        Min.     1st Qu.      Median     3rd Qu.        Max. 
-## -160.249203  -19.705021   -0.023872   19.282175  214.023744 
+## -160.759401  -19.805349   -0.028228   19.194961  214.295364 
 ## 
-## Coefficients :
+## Coefficients:
 ##                    Estimate Std. Error t-value  Pr(&gt;|t|)    
-## (Intercept)      -29.932675  32.908999 -0.9096  0.364285    
-## value              0.113911   0.011820  9.6374 &lt; 2.2e-16 ***
-## capital            0.354516   0.022573 15.7055 &lt; 2.2e-16 ***
-## factor(year)1936 -17.741195  23.585305 -0.7522  0.452916    
-## factor(year)1937 -38.098671  24.338353 -1.5654  0.119271    
-## factor(year)1938 -38.432863  23.272433 -1.6514  0.100413    
-## factor(year)1939 -67.734952  23.577926 -2.8728  0.004563 ** 
-## factor(year)1940 -42.284029  23.690295 -1.7849  0.075986 .  
-## factor(year)1941 -16.967455  23.613424 -0.7186  0.473360    
-## factor(year)1942 -19.999001  23.411276 -0.8542  0.394117    
-## factor(year)1943 -41.368571  23.535549 -1.7577  0.080517 .  
-## factor(year)1944 -41.371185  23.574297 -1.7549  0.080992 .  
-## factor(year)1945 -53.503398  23.781401 -2.2498  0.025686 *  
-## factor(year)1946 -28.697568  23.948970 -1.1983  0.232401    
-## factor(year)1947 -37.720827  23.801945 -1.5848  0.114792    
-## factor(year)1948 -42.020754  23.997685 -1.7510  0.081663 .  
-## factor(year)1949 -71.600868  24.205455 -2.9580  0.003517 ** 
-## factor(year)1950 -73.706966  24.348310 -3.0272  0.002835 ** 
-## factor(year)1951 -59.337596  24.727838 -2.3996  0.017444 *  
-## factor(year)1952 -61.111948  25.183631 -2.4267  0.016236 *  
-## factor(year)1953 -63.078394  26.233291 -2.4045  0.017219 *  
-## factor(year)1954 -88.765641  26.797397 -3.3125  0.001120 ** 
+## (Intercept)      -29.828275  32.380484 -0.9212  0.358203    
+## value              0.113779   0.011759  9.6763 &lt; 2.2e-16 ***
+## capital            0.354336   0.022594 15.6826 &lt; 2.2e-16 ***
+## factor(year)1936 -17.690058  23.612087 -0.7492  0.454729    
+## factor(year)1937 -38.006448  24.356323 -1.5604  0.120433    
+## factor(year)1938 -38.400547  23.303431 -1.6478  0.101148    
+## factor(year)1939 -67.669031  23.605147 -2.8667  0.004648 ** 
+## factor(year)1940 -42.210436  23.716150 -1.7798  0.076812 .  
+## factor(year)1941 -16.896674  23.640596 -0.7147  0.475711    
+## factor(year)1942 -19.950610  23.442180 -0.8511  0.395882    
+## factor(year)1943 -41.303361  23.564907 -1.7527  0.081367 .  
+## factor(year)1944 -41.301975  23.603031 -1.7499  0.081866 .  
+## factor(year)1945 -53.418089  23.807547 -2.2437  0.026081 *  
+## factor(year)1946 -28.601243  23.973397 -1.1930  0.234441    
+## factor(year)1947 -37.647517  23.832869 -1.5796  0.115963    
+## factor(year)1948 -41.944013  24.029174 -1.7455  0.082615 .  
+## factor(year)1949 -71.515032  24.236975 -2.9507  0.003598 ** 
+## factor(year)1950 -73.609655  24.379280 -3.0194  0.002906 ** 
+## factor(year)1951 -59.205876  24.754226 -2.3917  0.017810 *  
+## factor(year)1952 -60.963457  25.209460 -2.4183  0.016602 *  
+## factor(year)1953 -62.886188  26.252610 -2.3954  0.017638 *  
+## factor(year)1954 -88.564196  26.819791 -3.3022  0.001159 ** 
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Total Sum of Squares:    2369700
-## Residual Sum of Squares: 478420
-## R-Squared:      0.79811
-## Adj. R-Squared: 0.77429
-## F-statistic: 33.5086 on 21 and 178 DF, p-value: &lt; 2.22e-16</code></pre>
+## Total Sum of Squares:    2376000
+## Residual Sum of Squares: 479720
+## R-Squared:      0.7981
+## Adj. R-Squared: 0.77428
+## F-statistic: 33.506 on 21 and 178 DF, p-value: &lt; 2.22e-16</code></pre>
 <p>時間効果が有意かどうかは次の検定を実施すれば良い.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">waldtest</span>(gr,grt)</code></pre></div>
 <pre><code>## Wald test
@@ -584,7 +585,7 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}
 ## Model 2: inv ~ value + capital + factor(year)
 ##   Res.Df Df  Chisq Pr(&gt;Chisq)
 ## 1    197                     
-## 2    178 19 25.422     0.1471</code></pre>
+## 2    178 19 25.303     0.1508</code></pre>
 </div>
 <div id="ハウスマン検定" class="section level2">
 <h2><span class="header-section-number">9.6</span> ハウスマン検定</h2>
@@ -602,7 +603,7 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}
 ##  Hausman Test
 ## 
 ## data:  inv ~ value + capital
-## chisq = 4.6434, df = 2, p-value = 0.09811
+## chisq = 6.5733, df = 2, p-value = 0.03738
 ## alternative hypothesis: one model is inconsistent</code></pre>
 </div>
 <div id="分散不均一の検定-1" class="section level2">
@@ -672,25 +673,13 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 
 </div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
             </section>
 
           </div>
         </div>
       </div>
-<a href="08-ivreg.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="08-ivreg.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="test.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

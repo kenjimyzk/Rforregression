@@ -1,10 +1,9 @@
 --- 
 title: "R と RStudio"
 author: "宮﨑憲治"
-date: "2017-11-13"
+date: "2017-11-30"
 site: bookdown::bookdown_site
-output:
-  bookdown::epub_book
+output: bookdown::epub_book
 documentclass: bxjsbook
 classoption: ja=standard, xelatex
 geometry: no
