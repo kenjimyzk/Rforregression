@@ -70,7 +70,7 @@ ols2 <- lm(log(wage)~fitted(ols1)+exper+I(exper^2),  data = df)
 summary(ols2)
 ```
 
-## 複数制約の検定
+### 複数制約の検定
 
 帰無仮説が複数制約のワルド検定は以下のように実施する.
 例えば, 2つの外生変数の係数がゼロのときの仮説検定をRで実行するには以下を実施する.
@@ -146,21 +146,21 @@ jt <- lm(resid(fm)~exper+I(exper^2)+motheduc+fatheduc,data=df)
 そうした分散をロバスト分散という.
 ロバスト分散は次のコマンドで実施する.
 ```{r}
-summary(fm, vcov = sandwich, df = Inf)
+summary(fm, vcov = vcovHC, df = Inf)
 ```
 
 また次のコマンドでも可能である.
 ```{r}
-coeftest(fm, vcov=sandwich)
+coeftest(fm, vcov=vcovHC)
 ```
 
 ロバスト分散のもとでの複数制約の検定は以下を実施する.
 ```{r}
-waldtest(fm0,fm, vcov=sandwich)
+waldtest(fm0,fm, vcov=vcovHC)
 ```
 
 
-## 分散不均一の検定
+### 分散不均一の検定
 誤差項が操作変数と独立なら条件付き分散は操作変数に無関係で均一である.
 これを利用して分散均一を帰無仮説に, 分散不均一を対立仮説にしたBP検定が実行可能である.
 ただ通常のコマンド `bptest` では正しく実行できないので注意が必要である.

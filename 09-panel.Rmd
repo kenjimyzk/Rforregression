@@ -86,7 +86,7 @@ waldtest(gi,git)
 ```
 
 
-## 固定効果VSプーリングOLS
+### 固定効果VSプーリングOLS
 帰無仮説が固定効果, 対立仮説が固定効果モデルの検定は以下のコマンドを実行すればよい.
 ```{r}
 pFtest(gi,gp)
@@ -126,7 +126,7 @@ summary(grt)
 waldtest(gr,grt)
 ```
 
-## ハウスマン検定
+### ハウスマン検定
 帰無仮説が変量効果モデル, 対立仮説が固定効果モデルの検定はハウスマン検定を実施する.
 ハウスマン検定は以下で実施する.
 ```{r}
@@ -138,23 +138,16 @@ phtest(gi,gr)
 phtest(gt,grt)
 ```
 
-## 分散不均一の検定
-分散不均一かどうかは時間効果がない場合, 以下のようにすればよい.
-```{r}
-bptest(inv ~ value + capital + factor(firm), data=Grunfeld)
-```
 
-分散不均一が疑われる場合, クラスターロバスト分散を用いる.
+## クラスターロバスト分散
+分散不均一が疑われる場合, パネルデータではクラスターロバスト分散を用いる.
+時間効果がない場合は以下の様にする.
 ```{r}
 coeftest(gi,vcov=vcovHC(gi,type="sss"))
 ```
 
-分散不均一かどうかは時間効果がある場合, 以下のようにすればよい.
-```{r}
-bptest(inv ~ value + capital + factor(firm) + factor(year),data=Grunfeld)
-```
-
 分散不均一が疑われる場合, クラスターロバスト分散を用いる.
+時間効果がある場合は以下の様にする.
 ```{r}
 coeftest(gt,vcov=vcovHC(gt,type="sss"))
 ```
@@ -162,6 +155,17 @@ coeftest(gt,vcov=vcovHC(gt,type="sss"))
 また次のようにしても求められる.
 ```{r}
 coeftest(git,vcov=vcovHC(git,type="HC1",cluster = "group"))
+```
+
+### 分散不均一の検定
+分散不均一かどうかは時間効果がない場合, 以下のようにすればよい.
+```{r}
+bptest(inv ~ value + capital + factor(firm), data=Grunfeld)
+```
+
+時間効果がある場合, 以下のようにすればよい.
+```{r}
+bptest(inv ~ value + capital + factor(firm) + factor(year),data=Grunfeld)
 ```
 
 
