@@ -8,7 +8,8 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ## データ
-```{r}
+```{r message=FALSE, warning=FALSE}
+library(AER)
 library(plm)
 data("Grunfeld", package="plm")
 head(Grunfeld)
@@ -60,6 +61,7 @@ summary(lm(inv ~ value + capital+0+factor(firm), data = Grunfeld))
 ```
 決定係数が大きく異なっていることに注意されたい.
 
+### 時間効果
 次のモデルを考える.
 $$
 inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it}+ \gamma_t +\alpha_i + u_{it}
@@ -68,21 +70,19 @@ $$
 
 この推計は以下のようにする.
 ```{r}
-gt <- plm(inv ~ value + capital, data = Grunfeld, effect="twoways",model = "within")
-summary(gt)
+git <- plm(inv ~ value + capital, data = Grunfeld, effect="twoways",model = "within")
+summary(git)
 ```
 
 これは以下の回帰分析と同じである.
 ```{r}
-summary(lm(inv ~ value + capital+0+factor(firm)+factor(year), data = Grunfeld))
+summary(lm(inv ~ value + capital+factor(firm)+factor(year), data = Grunfeld))
 ```
 決定係数が大きく異なっていることに注意されたい.
 
 時間効果が有効かどうかはワルド検定を実施する.
 ```{r}
-git<-update(gi,.~.+factor(year))
-library(lmtest)
-waldtest(gi,git)
+waldtest(gi, update(gi,.~.+factor(year)))
 ```
 
 
@@ -94,8 +94,8 @@ pFtest(gi,gp)
 
 時間効果モデルの場合は次のようにする.
 ```{r}
-gpt <- plm(inv ~ value + capital + factor(year), data = Grunfeld, model = "pooling")
-pFtest(gt,gpt)
+gpt <- update(gp, . ~ . +factor(year))
+pFtest(git,gpt)
 ```
 
 ## 変量効果モデル
@@ -115,11 +115,18 @@ gr <- plm(inv ~ value + capital, data = Grunfeld, model = "random")
 summary(gr)
 ```
 
+変量効果は以下のコマンドで確かめられる.
+```{r}
+ranef(gr)
+```
+
+
+### 時間効果
 時間効果のある変量モデルとは次のコマンドを実施する.
 ```{r}
-grt <- plm(inv ~ value + capital + factor(year), data = Grunfeld, model = "random")
-summary(grt)
+grt <- update(gr, .~. + factor(year))
 ```
+
 
 時間効果が有意かどうかは次の検定を実施すれば良い.
 ```{r}
@@ -135,12 +142,12 @@ phtest(gi,gr)
 
 時間効果がある場合以下を実行すればよい.
 ```{r}
-phtest(gt,grt)
+phtest(git,grt)
 ```
 
 
 ## クラスターロバスト分散
-分散不均一が疑われる場合, パネルデータではクラスターロバスト分散を用いる.
+固定効果モデルにおいて, 分散不均一が疑われる場合, ではクラスターロバスト分散を用いる.
 時間効果がない場合は以下の様にする.
 ```{r}
 coeftest(gi,vcov=vcovHC(gi,type="sss"))
@@ -149,12 +156,7 @@ coeftest(gi,vcov=vcovHC(gi,type="sss"))
 分散不均一が疑われる場合, クラスターロバスト分散を用いる.
 時間効果がある場合は以下の様にする.
 ```{r}
-coeftest(gt,vcov=vcovHC(gt,type="sss"))
-```
-
-また次のようにしても求められる.
-```{r}
-coeftest(git,vcov=vcovHC(git,type="HC1",cluster = "group"))
+coeftest(git,vcov=vcovHC(git,type="sss"))
 ```
 
 ### 分散不均一の検定

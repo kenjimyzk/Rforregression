@@ -68,12 +68,17 @@ coef(fm)
 # coefficients(fm)
 ```
 
+傾きの推定値は以下でも実行可能である.
+```{r}
+with(df, cov(x,y)/var(x))
+```
+
+
 作図すると以下のようになる.
 ```{r}
 plot(y~x,data=df)
 abline(fm)
 ```
-
 
 残差は次のコマンドを実施する.
 ```{r}
@@ -119,20 +124,20 @@ coef(summary(fm))
 
 残差の標準誤差は次のようにして得られる.
 ```{r}
-sqrt(deviance(fm)/df.residual(fm))
 with(summary(fm),sigma)
+sqrt(deviance(fm)/df.residual(fm))
 ```
 
 決定係数は次のようにして計算する.
 ```{r}
-1-deviance(fm)/with(df, sum((y-mean(y))^2))
 with(summary(fm),r.squared)
+1-deviance(fm)/with(df, sum((y-mean(y))^2))
 ```
 
 調整済み決定係数は次のようにして計算する.
 ```{r}
-1-(deviance(fm)/df.residual(fm))/with(df, sum((y-mean(y))^2/(nrow(df)-1)))
 with(summary(fm),adj.r.squared)
+1-(deviance(fm)/df.residual(fm))/with(df, sum((y-mean(y))^2/(nrow(df)-1)))
 ```
 
 

@@ -8,14 +8,8 @@ output:
 ## データ
 
 ```r
+library(AER)
 library(plm)
-```
-
-```
-##  要求されたパッケージ Formula をロード中です
-```
-
-```r
 data("Grunfeld", package="plm")
 head(Grunfeld)
 ```
@@ -194,6 +188,7 @@ summary(lm(inv ~ value + capital+0+factor(firm), data = Grunfeld))
 ```
 決定係数が大きく異なっていることに注意されたい.
 
+### 時間効果
 次のモデルを考える.
 $$
 inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it}+ \gamma_t +\alpha_i + u_{it}
@@ -203,8 +198,8 @@ $$
 この推計は以下のようにする.
 
 ```r
-gt <- plm(inv ~ value + capital, data = Grunfeld, effect="twoways",model = "within")
-summary(gt)
+git <- plm(inv ~ value + capital, data = Grunfeld, effect="twoways",model = "within")
+summary(git)
 ```
 
 ```
@@ -237,13 +232,13 @@ summary(gt)
 これは以下の回帰分析と同じである.
 
 ```r
-summary(lm(inv ~ value + capital+0+factor(firm)+factor(year), data = Grunfeld))
+summary(lm(inv ~ value + capital+factor(firm)+factor(year), data = Grunfeld))
 ```
 
 ```
 ## 
 ## Call:
-## lm(formula = inv ~ value + capital + 0 + factor(firm) + factor(year), 
+## lm(formula = inv ~ value + capital + factor(firm) + factor(year), 
 ##     data = Grunfeld)
 ## 
 ## Residuals:
@@ -252,18 +247,18 @@ summary(lm(inv ~ value + capital+0+factor(firm)+factor(year), data = Grunfeld))
 ## 
 ## Coefficients:
 ##                    Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)       -86.90023   56.04663  -1.550 0.122893    
 ## value               0.11772    0.01375   8.560 6.65e-15 ***
 ## capital             0.35792    0.02272  15.754  < 2e-16 ***
-## factor(firm)1     -86.90023   56.04663  -1.550 0.122893    
-## factor(firm)2     120.15401   29.16688   4.120 5.93e-05 ***
-## factor(firm)3    -222.13103   28.59744  -7.768 7.37e-13 ***
-## factor(firm)4       8.45361   20.41784   0.414 0.679377    
-## factor(firm)5     -92.33883   20.91106  -4.416 1.79e-05 ***
-## factor(firm)6      15.98841   19.88487   0.804 0.422498    
-## factor(firm)7     -35.43362   20.17003  -1.757 0.080772 .  
-## factor(firm)8     -19.40972   20.49076  -0.947 0.344868    
-## factor(firm)9     -56.68267   19.81211  -2.861 0.004756 ** 
-## factor(firm)10     39.93689   20.40337   1.957 0.051951 .  
+## factor(firm)2     207.05424   35.17275   5.887 2.07e-08 ***
+## factor(firm)3    -135.23080   35.70897  -3.787 0.000212 ***
+## factor(firm)4      95.35384   50.72212   1.880 0.061839 .  
+## factor(firm)5      -5.43860   57.83052  -0.094 0.925186    
+## factor(firm)6     102.88864   54.17388   1.899 0.059238 .  
+## factor(firm)7      51.46661   58.17922   0.885 0.377617    
+## factor(firm)8      67.49051   50.97093   1.324 0.187258    
+## factor(firm)9      30.21756   55.72307   0.542 0.588339    
+## factor(firm)10    126.83712   58.52545   2.167 0.031618 *  
 ## factor(year)1936  -19.19741   23.67586  -0.811 0.418596    
 ## factor(year)1937  -40.69001   24.69541  -1.648 0.101277    
 ## factor(year)1938  -39.22640   23.23594  -1.688 0.093221 .  
@@ -287,35 +282,15 @@ summary(lm(inv ~ value + capital+0+factor(firm)+factor(year), data = Grunfeld))
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
 ## Residual standard error: 51.72 on 169 degrees of freedom
-## Multiple R-squared:  0.9668,	Adjusted R-squared:  0.9607 
-## F-statistic: 158.8 on 31 and 169 DF,  p-value: < 2.2e-16
+## Multiple R-squared:  0.9517,	Adjusted R-squared:  0.9431 
+## F-statistic:   111 on 30 and 169 DF,  p-value: < 2.2e-16
 ```
 決定係数が大きく異なっていることに注意されたい.
 
 時間効果が有効かどうかはワルド検定を実施する.
 
 ```r
-git<-update(gi,.~.+factor(year))
-library(lmtest)
-```
-
-```
-##  要求されたパッケージ zoo をロード中です
-```
-
-```
-## 
-##  次のパッケージを付け加えます: 'zoo'
-```
-
-```
-##  以下のオブジェクトは 'package:base' からマスクされています: 
-## 
-##      as.Date, as.Date.numeric
-```
-
-```r
-waldtest(gi,git)
+waldtest(gi, update(gi,.~.+factor(year)))
 ```
 
 ```
@@ -329,7 +304,7 @@ waldtest(gi,git)
 ```
 
 
-## 固定効果VSプーリングOLS
+### 固定効果VSプーリングOLS
 帰無仮説が固定効果, 対立仮説が固定効果モデルの検定は以下のコマンドを実行すればよい.
 
 ```r
@@ -348,8 +323,8 @@ pFtest(gi,gp)
 時間効果モデルの場合は次のようにする.
 
 ```r
-gpt <- plm(inv ~ value + capital + factor(year), data = Grunfeld, model = "pooling")
-pFtest(gt,gpt)
+gpt <- update(gp, . ~ . +factor(year))
+pFtest(git,gpt)
 ```
 
 ```
@@ -413,66 +388,27 @@ summary(gr)
 ## F-statistic: 328.837 on 2 and 197 DF, p-value: < 2.22e-16
 ```
 
+変量効果は以下のコマンドで確かめられる.
+
+```r
+ranef(gr)
+```
+
+```
+##            1            2            3            4            5 
+##   -9.5242955  157.8910235 -172.8958044   29.9119801  -54.6790089 
+##            6            7            8            9           10 
+##   34.3461316   -7.8977584    0.6726376  -28.1393497   50.3144442
+```
+
+
+### 時間効果
 時間効果のある変量モデルとは次のコマンドを実施する.
 
 ```r
-grt <- plm(inv ~ value + capital + factor(year), data = Grunfeld, model = "random")
-summary(grt)
+grt <- update(gr, .~. + factor(year))
 ```
 
-```
-## Oneway (individual) effect Random Effect Model 
-##    (Swamy-Arora's transformation)
-## 
-## Call:
-## plm(formula = inv ~ value + capital + factor(year), data = Grunfeld, 
-##     model = "random")
-## 
-## Balanced Panel: n = 10, T = 20, N = 200
-## 
-## Effects:
-##                   var std.dev share
-## idiosyncratic 2675.43   51.72 0.274
-## individual    7095.25   84.23 0.726
-## theta: 0.864
-## 
-## Residuals:
-##        Min.     1st Qu.      Median     3rd Qu.        Max. 
-## -160.759401  -19.805349   -0.028228   19.194961  214.295364 
-## 
-## Coefficients:
-##                    Estimate Std. Error t-value  Pr(>|t|)    
-## (Intercept)      -29.828275  32.380484 -0.9212  0.358203    
-## value              0.113779   0.011759  9.6763 < 2.2e-16 ***
-## capital            0.354336   0.022594 15.6826 < 2.2e-16 ***
-## factor(year)1936 -17.690058  23.612087 -0.7492  0.454729    
-## factor(year)1937 -38.006448  24.356323 -1.5604  0.120433    
-## factor(year)1938 -38.400547  23.303431 -1.6478  0.101148    
-## factor(year)1939 -67.669031  23.605147 -2.8667  0.004648 ** 
-## factor(year)1940 -42.210436  23.716150 -1.7798  0.076812 .  
-## factor(year)1941 -16.896674  23.640596 -0.7147  0.475711    
-## factor(year)1942 -19.950610  23.442180 -0.8511  0.395882    
-## factor(year)1943 -41.303361  23.564907 -1.7527  0.081367 .  
-## factor(year)1944 -41.301975  23.603031 -1.7499  0.081866 .  
-## factor(year)1945 -53.418089  23.807547 -2.2437  0.026081 *  
-## factor(year)1946 -28.601243  23.973397 -1.1930  0.234441    
-## factor(year)1947 -37.647517  23.832869 -1.5796  0.115963    
-## factor(year)1948 -41.944013  24.029174 -1.7455  0.082615 .  
-## factor(year)1949 -71.515032  24.236975 -2.9507  0.003598 ** 
-## factor(year)1950 -73.609655  24.379280 -3.0194  0.002906 ** 
-## factor(year)1951 -59.205876  24.754226 -2.3917  0.017810 *  
-## factor(year)1952 -60.963457  25.209460 -2.4183  0.016602 *  
-## factor(year)1953 -62.886188  26.252610 -2.3954  0.017638 *  
-## factor(year)1954 -88.564196  26.819791 -3.3022  0.001159 ** 
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Total Sum of Squares:    2376000
-## Residual Sum of Squares: 479720
-## R-Squared:      0.7981
-## Adj. R-Squared: 0.77428
-## F-statistic: 33.506 on 21 and 178 DF, p-value: < 2.22e-16
-```
 
 時間効果が有意かどうかは次の検定を実施すれば良い.
 
@@ -490,7 +426,7 @@ waldtest(gr,grt)
 ## 2    178 19 25.303     0.1508
 ```
 
-## ハウスマン検定
+### ハウスマン検定
 帰無仮説が変量効果モデル, 対立仮説が固定効果モデルの検定はハウスマン検定を実施する.
 ハウスマン検定は以下で実施する.
 
@@ -510,7 +446,7 @@ phtest(gi,gr)
 時間効果がある場合以下を実行すればよい.
 
 ```r
-phtest(gt,grt)
+phtest(git,grt)
 ```
 
 ```
@@ -522,22 +458,10 @@ phtest(gt,grt)
 ## alternative hypothesis: one model is inconsistent
 ```
 
-## 分散不均一の検定
-分散不均一かどうかは時間効果がない場合, 以下のようにすればよい.
 
-```r
-bptest(inv ~ value + capital + factor(firm), data=Grunfeld)
-```
-
-```
-## 
-## 	studentized Breusch-Pagan test
-## 
-## data:  inv ~ value + capital + factor(firm)
-## BP = 85.836, df = 11, p-value = 1.086e-13
-```
-
-分散不均一が疑われる場合, クラスターロバスト分散を用いる.
+## クラスターロバスト分散
+固定効果モデルにおいて, 分散不均一が疑われる場合, ではクラスターロバスト分散を用いる.
+時間効果がない場合は以下の様にする.
 
 ```r
 coeftest(gi,vcov=vcovHC(gi,type="sss"))
@@ -554,24 +478,11 @@ coeftest(gi,vcov=vcovHC(gi,type="sss"))
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
-分散不均一かどうかは時間効果がある場合, 以下のようにすればよい.
-
-```r
-bptest(inv ~ value + capital + factor(firm) + factor(year),data=Grunfeld)
-```
-
-```
-## 
-## 	studentized Breusch-Pagan test
-## 
-## data:  inv ~ value + capital + factor(firm) + factor(year)
-## BP = 97.357, df = 30, p-value = 4.833e-09
-```
-
 分散不均一が疑われる場合, クラスターロバスト分散を用いる.
+時間効果がある場合は以下の様にする.
 
 ```r
-coeftest(gt,vcov=vcovHC(gt,type="sss"))
+coeftest(git,vcov=vcovHC(git,type="sss"))
 ```
 
 ```
@@ -585,40 +496,33 @@ coeftest(gt,vcov=vcovHC(gt,type="sss"))
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
-また次のようにしても求められる.
+### 分散不均一の検定
+分散不均一かどうかは時間効果がない場合, 以下のようにすればよい.
 
 ```r
-coeftest(git,vcov=vcovHC(git,type="HC1",cluster = "group"))
+bptest(inv ~ value + capital + factor(firm), data=Grunfeld)
 ```
 
 ```
 ## 
-## t test of coefficients:
+## 	studentized Breusch-Pagan test
 ## 
-##                    Estimate Std. Error t value  Pr(>|t|)    
-## value              0.117716   0.010266 11.4667 < 2.2e-16 ***
-## capital            0.357916   0.045380  7.8872 3.665e-13 ***
-## factor(year)1936 -19.197405  19.630596 -0.9779 0.3295053    
-## factor(year)1937 -40.690009  31.565895 -1.2890 0.1991424    
-## factor(year)1938 -39.226404  14.924544 -2.6283 0.0093713 ** 
-## factor(year)1939 -69.470288  25.605714 -2.7131 0.0073565 ** 
-## factor(year)1940 -44.235085  16.475952 -2.6848 0.0079797 ** 
-## factor(year)1941 -18.804463  16.926601 -1.1109 0.2681716    
-## factor(year)1942 -21.139792  13.433918 -1.5736 0.1174471    
-## factor(year)1943 -42.977623  11.896875 -3.6125 0.0003996 ***
-## factor(year)1944 -43.098772  10.428514 -4.1328 5.630e-05 ***
-## factor(year)1945 -55.683040  14.417542 -3.8622 0.0001598 ***
-## factor(year)1946 -31.169284  19.837679 -1.5712 0.1180028    
-## factor(year)1947 -39.392242  25.073011 -1.5711 0.1180294    
-## factor(year)1948 -43.716514  36.872612 -1.1856 0.2374409    
-## factor(year)1949 -73.495099  36.280703 -2.0257 0.0443649 *  
-## factor(year)1950 -75.896112  34.899790 -2.1747 0.0310435 *  
-## factor(year)1951 -62.480912  46.868328 -1.3331 0.1842881    
-## factor(year)1952 -64.632341  48.901664 -1.3217 0.1880611    
-## factor(year)1953 -67.717966  41.487585 -1.6322 0.1044895    
-## factor(year)1954 -93.526221  30.089357 -3.1083 0.0022084 ** 
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## data:  inv ~ value + capital + factor(firm)
+## BP = 85.836, df = 11, p-value = 1.086e-13
+```
+
+時間効果がある場合, 以下のようにすればよい.
+
+```r
+bptest(inv ~ value + capital + factor(firm) + factor(year),data=Grunfeld)
+```
+
+```
+## 
+## 	studentized Breusch-Pagan test
+## 
+## data:  inv ~ value + capital + factor(firm) + factor(year)
+## BP = 97.357, df = 30, p-value = 4.833e-09
 ```
 
 
