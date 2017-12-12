@@ -25,7 +25,7 @@
 <meta name="author" content="宮﨑憲治">
 
 
-<meta name="date" content="2017-12-05">
+<meta name="date" content="2017-12-12">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -508,6 +508,7 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}
 \]</span> この <span class="math inline">\(\alpha_i\)</span> は変量効果と呼ばれている. <span class="math inline">\(\alpha_i\)</span> は時間 <span class="math inline">\(t\)</span> について一定であるが, <span class="math inline">\(i\)</span> について独立同一分布の確率変数にしたがう. さらに <span class="math inline">\(\alpha_i\)</span> は説明変数と無相関であることが必要である. このため固定効果モデルと違い, 欠落変数バイアスを除去することができない. しかしながら, <span class="math inline">\(i\)</span> についてのダミー変数を付け加えることができる.</p>
 <p>変量効果モデルは次のコマンドで実施する.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gr &lt;-<span class="st"> </span><span class="kw">plm</span>(inv <span class="op">~</span><span class="st"> </span>value <span class="op">+</span><span class="st"> </span>capital, <span class="dt">data =</span> Grunfeld, <span class="dt">model =</span> <span class="st">&quot;random&quot;</span>)
+
 <span class="kw">summary</span>(gr)</code></pre></div>
 <pre><code>## Oneway (individual) effect Random Effect Model 
 ##    (Swamy-Arora&#39;s transformation)
@@ -548,7 +549,43 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}
 ##   34.3461316   -7.8977584    0.6726376  -28.1393497   50.3144442</code></pre>
 <div id="時間効果-1" class="section level3">
 <h3><span class="header-section-number">9.4.1</span> 時間効果</h3>
-<p>時間効果のある変量モデルとは次のコマンドを実施する.</p>
+<p>変量効果モデルの時間効果は二種類ある. 時間効果が確率変数である場合は次のコマンドを実施する.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gr2 &lt;-<span class="st"> </span><span class="kw">plm</span>(inv <span class="op">~</span><span class="st"> </span>value <span class="op">+</span><span class="st"> </span>capital, <span class="dt">data =</span> Grunfeld, <span class="dt">effect=</span> <span class="st">&quot;twoways&quot;</span>,<span class="dt">model =</span> <span class="st">&quot;random&quot;</span>)
+<span class="kw">summary</span>(gr2)</code></pre></div>
+<pre><code>## Twoways effects Random Effect Model 
+##    (Swamy-Arora&#39;s transformation)
+## 
+## Call:
+## plm(formula = inv ~ value + capital, data = Grunfeld, effect = &quot;twoways&quot;, 
+##     model = &quot;random&quot;)
+## 
+## Balanced Panel: n = 10, T = 20, N = 200
+## 
+## Effects:
+##                   var std.dev share
+## idiosyncratic 2675.43   51.72 0.274
+## individual    7095.25   84.23 0.726
+## time             0.00    0.00 0.000
+## theta: 0.864 (id) 0 (time) 5.551e-17 (total)
+## 
+## Residuals:
+##      Min.   1st Qu.    Median   3rd Qu.      Max. 
+## -177.1700  -19.7576    4.6048   19.4676  252.7596 
+## 
+## Coefficients:
+##               Estimate Std. Error t-value Pr(&gt;|t|)    
+## (Intercept) -57.865377  29.393359 -1.9687   0.0504 .  
+## value         0.109790   0.010528 10.4285   &lt;2e-16 ***
+## capital       0.308190   0.017171 17.9483   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Total Sum of Squares:    2376000
+## Residual Sum of Squares: 547910
+## R-Squared:      0.7694
+## Adj. R-Squared: 0.76706
+## F-statistic: 328.647 on 2 and 197 DF, p-value: &lt; 2.22e-16</code></pre>
+<p>時間効果が固定されている場合は次のコマンドを実施する.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">grt &lt;-<span class="st"> </span><span class="kw">update</span>(gr, .<span class="op">~</span>. <span class="op">+</span><span class="st"> </span><span class="kw">factor</span>(year))
 <span class="kw">summary</span>(grt)</code></pre></div>
 <pre><code>## Oneway (individual) effect Random Effect Model 
@@ -602,7 +639,7 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}
 ## R-Squared:      0.7981
 ## Adj. R-Squared: 0.77428
 ## F-statistic: 33.506 on 21 and 178 DF, p-value: &lt; 2.22e-16</code></pre>
-<p>時間効果が有意かどうかは次の検定を実施すれば良い.</p>
+<p>固定された時間効果が有意かどうかは次の検定を実施すれば良い.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">waldtest</span>(gr,grt)</code></pre></div>
 <pre><code>## Wald test
 ## 
@@ -622,7 +659,15 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}
 ## data:  inv ~ value + capital
 ## chisq = 2.3304, df = 2, p-value = 0.3119
 ## alternative hypothesis: one model is inconsistent</code></pre>
-<p>時間効果がある場合以下を実行すればよい.</p>
+<p>時間効果が確率変数である場合以下を実行すればよい.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">phtest</span>(git,gr2)</code></pre></div>
+<pre><code>## 
+##  Hausman Test
+## 
+## data:  inv ~ value + capital
+## chisq = 13.46, df = 2, p-value = 0.001194
+## alternative hypothesis: one model is inconsistent</code></pre>
+<p>時間効果が確率変数でない場合以下を実行すればよい.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">phtest</span>(git,grt)</code></pre></div>
 <pre><code>## 
 ##  Hausman Test

@@ -119,6 +119,7 @@ $\alpha_i$ は時間 $t$ について一定であるが, $i$ について独立�
 変量効果モデルは次のコマンドで実施する.
 ```{r}
 gr <- plm(inv ~ value + capital, data = Grunfeld, model = "random")
+
 summary(gr)
 ```
 
@@ -127,16 +128,22 @@ summary(gr)
 ranef(gr)
 ```
 
-
 ### 時間効果
-時間効果のある変量モデルとは次のコマンドを実施する.
+変量効果モデルの時間効果は二種類ある.
+時間効果が確率変数である場合は次のコマンドを実施する.
+```{r}
+gr2 <- plm(inv ~ value + capital, data = Grunfeld, effect= "twoways",model = "random")
+summary(gr2)
+```
+
+時間効果が固定されている場合は次のコマンドを実施する.
 ```{r}
 grt <- update(gr, .~. + factor(year))
 summary(grt)
 ```
 
 
-時間効果が有意かどうかは次の検定を実施すれば良い.
+固定された時間効果が有意かどうかは次の検定を実施すれば良い.
 ```{r}
 waldtest(gr,grt)
 ```
@@ -148,7 +155,12 @@ waldtest(gr,grt)
 phtest(gi,gr)
 ```
 
-時間効果がある場合以下を実行すればよい.
+時間効果が確率変数である場合以下を実行すればよい.
+```{r}
+phtest(git,gr2)
+```
+
+時間効果が確率変数でない場合以下を実行すればよい.
 ```{r}
 phtest(git,grt)
 ```

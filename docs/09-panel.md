@@ -380,6 +380,7 @@ $\alpha_i$ は時間 $t$ について一定であるが, $i$ について独立�
 
 ```r
 gr <- plm(inv ~ value + capital, data = Grunfeld, model = "random")
+
 summary(gr)
 ```
 
@@ -430,9 +431,52 @@ ranef(gr)
 ##   34.3461316   -7.8977584    0.6726376  -28.1393497   50.3144442
 ```
 
-
 ### 時間効果
-時間効果のある変量モデルとは次のコマンドを実施する.
+変量効果モデルの時間効果は二種類ある.
+時間効果が確率変数である場合は次のコマンドを実施する.
+
+```r
+gr2 <- plm(inv ~ value + capital, data = Grunfeld, effect= "twoways",model = "random")
+summary(gr2)
+```
+
+```
+## Twoways effects Random Effect Model 
+##    (Swamy-Arora's transformation)
+## 
+## Call:
+## plm(formula = inv ~ value + capital, data = Grunfeld, effect = "twoways", 
+##     model = "random")
+## 
+## Balanced Panel: n = 10, T = 20, N = 200
+## 
+## Effects:
+##                   var std.dev share
+## idiosyncratic 2675.43   51.72 0.274
+## individual    7095.25   84.23 0.726
+## time             0.00    0.00 0.000
+## theta: 0.864 (id) 0 (time) 5.551e-17 (total)
+## 
+## Residuals:
+##      Min.   1st Qu.    Median   3rd Qu.      Max. 
+## -177.1700  -19.7576    4.6048   19.4676  252.7596 
+## 
+## Coefficients:
+##               Estimate Std. Error t-value Pr(>|t|)    
+## (Intercept) -57.865377  29.393359 -1.9687   0.0504 .  
+## value         0.109790   0.010528 10.4285   <2e-16 ***
+## capital       0.308190   0.017171 17.9483   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Total Sum of Squares:    2376000
+## Residual Sum of Squares: 547910
+## R-Squared:      0.7694
+## Adj. R-Squared: 0.76706
+## F-statistic: 328.647 on 2 and 197 DF, p-value: < 2.22e-16
+```
+
+時間効果が固定されている場合は次のコマンドを実施する.
 
 ```r
 grt <- update(gr, .~. + factor(year))
@@ -494,7 +538,7 @@ summary(grt)
 ```
 
 
-時間効果が有意かどうかは次の検定を実施すれば良い.
+固定された時間効果が有意かどうかは次の検定を実施すれば良い.
 
 ```r
 waldtest(gr,grt)
@@ -527,7 +571,22 @@ phtest(gi,gr)
 ## alternative hypothesis: one model is inconsistent
 ```
 
-時間効果がある場合以下を実行すればよい.
+時間効果が確率変数である場合以下を実行すればよい.
+
+```r
+phtest(git,gr2)
+```
+
+```
+## 
+## 	Hausman Test
+## 
+## data:  inv ~ value + capital
+## chisq = 13.46, df = 2, p-value = 0.001194
+## alternative hypothesis: one model is inconsistent
+```
+
+時間効果が確率変数でない場合以下を実行すればよい.
 
 ```r
 phtest(git,grt)
