@@ -74,6 +74,13 @@ git <- plm(inv ~ value + capital, data = Grunfeld, effect="twoways",model = "wit
 summary(git)
 ```
 
+それぞれの効果は以下になる.
+```{r}
+fixef(git, effect = "individual")
+fixef(git, effect = "time")
+```
+
+
 これは以下の回帰分析と同じである.
 ```{r}
 summary(lm(inv ~ value + capital+factor(firm)+factor(year), data = Grunfeld))
@@ -125,6 +132,7 @@ ranef(gr)
 時間効果のある変量モデルとは次のコマンドを実施する.
 ```{r}
 grt <- update(gr, .~. + factor(year))
+summary(grt)
 ```
 
 
