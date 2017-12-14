@@ -80,16 +80,15 @@ fixef(git, effect = "individual")
 fixef(git, effect = "time")
 ```
 
-
 これは以下の回帰分析と同じである.
 ```{r}
 summary(lm(inv ~ value + capital+factor(firm)+factor(year), data = Grunfeld))
 ```
 決定係数が大きく異なっていることに注意されたい.
 
-時間効果が有効かどうかはワルド検定を実施する.
+時間効果が有効かどうかは以下の検定を実施する.
 ```{r}
-waldtest(gi, update(gi,.~.+factor(year)))
+pFtest(git, gi)
 ```
 
 
@@ -99,11 +98,26 @@ waldtest(gi, update(gi,.~.+factor(year)))
 pFtest(gi,gp)
 ```
 
-時間効果モデルの場合は次のようにする.
+時間効果をもつ固定効果モデルの場合は, 帰無仮説仮説に応じて変化する.
+もし帰無仮説が時間効果を持たないプーリングOLSモデルなら, 以下を実行する.
+```{r}
+pFtest(git, gp)
+```
+
+もし帰無仮説が時間効果をもつモデルなら, 以下を実行する.
+次のようにする.
 ```{r}
 gpt <- update(gp, . ~ . +factor(year))
 pFtest(git,gpt)
 ```
+
+もしくは以下でもよいだろう.
+```{r}
+pFtest(git, update(git, . ~ ., effect="time"))
+```
+
+
+
 
 ## 変量効果モデル
 次のモデルを考える.

@@ -25,7 +25,7 @@
 <meta name="author" content="宮﨑憲治">
 
 
-<meta name="date" content="2017-12-12">
+<meta name="date" content="2017-12-14">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -470,15 +470,14 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it}+ \gamma_t +\alpha_i + u_{it
 ## Multiple R-squared:  0.9517, Adjusted R-squared:  0.9431 
 ## F-statistic:   111 on 30 and 169 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>決定係数が大きく異なっていることに注意されたい.</p>
-<p>時間効果が有効かどうかはワルド検定を実施する.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">waldtest</span>(gi, <span class="kw">update</span>(gi,.<span class="op">~</span>.<span class="op">+</span><span class="kw">factor</span>(year)))</code></pre></div>
-<pre><code>## Wald test
+<p>時間効果が有効かどうかは以下の検定を実施する.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pFtest</span>(git, gi)</code></pre></div>
+<pre><code>## 
+##  F test for twoways effects
 ## 
-## Model 1: inv ~ value + capital
-## Model 2: inv ~ value + capital + factor(year)
-##   Res.Df Df  Chisq Pr(&gt;Chisq)
-## 1    188                     
-## 2    169 19 26.662     0.1128</code></pre>
+## data:  inv ~ value + capital
+## F = 1.4032, df1 = 19, df2 = 169, p-value = 0.1309
+## alternative hypothesis: significant effects</code></pre>
 </div>
 <div id="固定効果vsプーリングols" class="section level3">
 <h3><span class="header-section-number">9.3.2</span> 固定効果VSプーリングOLS</h3>
@@ -490,9 +489,25 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it}+ \gamma_t +\alpha_i + u_{it
 ## data:  inv ~ value + capital
 ## F = 49.177, df1 = 9, df2 = 188, p-value &lt; 2.2e-16
 ## alternative hypothesis: significant effects</code></pre>
-<p>時間効果モデルの場合は次のようにする.</p>
+<p>時間効果をもつ固定効果モデルの場合は, 帰無仮説仮説に応じて変化する. もし帰無仮説が時間効果を持たないプーリングOLSモデルなら, 以下を実行する.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pFtest</span>(git, gp)</code></pre></div>
+<pre><code>## 
+##  F test for twoways effects
+## 
+## data:  inv ~ value + capital
+## F = 17.403, df1 = 28, df2 = 169, p-value &lt; 2.2e-16
+## alternative hypothesis: significant effects</code></pre>
+<p>もし帰無仮説が時間効果をもつモデルなら, 以下を実行する. 次のようにする.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gpt &lt;-<span class="st"> </span><span class="kw">update</span>(gp, . <span class="op">~</span><span class="st"> </span>. <span class="op">+</span><span class="kw">factor</span>(year))
 <span class="kw">pFtest</span>(git,gpt)</code></pre></div>
+<pre><code>## 
+##  F test for twoways effects
+## 
+## data:  inv ~ value + capital
+## F = 52.362, df1 = 9, df2 = 169, p-value &lt; 2.2e-16
+## alternative hypothesis: significant effects</code></pre>
+<p>もしくは以下でもよいだろう.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pFtest</span>(git, <span class="kw">update</span>(git, . <span class="op">~</span><span class="st"> </span>., <span class="dt">effect=</span><span class="st">&quot;time&quot;</span>))</code></pre></div>
 <pre><code>## 
 ##  F test for twoways effects
 ## 
@@ -648,6 +663,7 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}
 ##   Res.Df Df  Chisq Pr(&gt;Chisq)
 ## 1    197                     
 ## 2    178 19 25.303     0.1508</code></pre>
+<p>時間効果が確率変数のときは以下のハウスマン検定を実施ればよい.</p>
 </div>
 <div id="ハウスマン検定" class="section level3">
 <h3><span class="header-section-number">9.4.2</span> ハウスマン検定</h3>
@@ -674,6 +690,14 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}
 ## 
 ## data:  inv ~ value + capital
 ## chisq = 6.5733, df = 2, p-value = 0.03738
+## alternative hypothesis: one model is inconsistent</code></pre>
+<p>ハウスマン検定は, 帰無仮説が時間効果が確率変数の変量モデル, 対立仮説が時間効果が存在しない変量モデルの場合の場合にも検定できる.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">phtest</span>(gr,gr2)</code></pre></div>
+<pre><code>## 
+##  Hausman Test
+## 
+## data:  inv ~ value + capital
+## chisq = 0.016122, df = 2, p-value = 0.992
 ## alternative hypothesis: one model is inconsistent</code></pre>
 </div>
 </div>

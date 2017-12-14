@@ -257,7 +257,6 @@ fixef(git, effect = "time")
 ## -100.55428 -126.36254
 ```
 
-
 これは以下の回帰分析と同じである.
 
 ```r
@@ -316,20 +315,19 @@ summary(lm(inv ~ value + capital+factor(firm)+factor(year), data = Grunfeld))
 ```
 決定係数が大きく異なっていることに注意されたい.
 
-時間効果が有効かどうかはワルド検定を実施する.
+時間効果が有効かどうかは以下の検定を実施する.
 
 ```r
-waldtest(gi, update(gi,.~.+factor(year)))
+pFtest(git, gi)
 ```
 
 ```
-## Wald test
 ## 
-## Model 1: inv ~ value + capital
-## Model 2: inv ~ value + capital + factor(year)
-##   Res.Df Df  Chisq Pr(>Chisq)
-## 1    188                     
-## 2    169 19 26.662     0.1128
+## 	F test for twoways effects
+## 
+## data:  inv ~ value + capital
+## F = 1.4032, df1 = 19, df2 = 169, p-value = 0.1309
+## alternative hypothesis: significant effects
 ```
 
 
@@ -349,7 +347,24 @@ pFtest(gi,gp)
 ## alternative hypothesis: significant effects
 ```
 
-時間効果モデルの場合は次のようにする.
+時間効果をもつ固定効果モデルの場合は, 帰無仮説仮説に応じて変化する.
+もし帰無仮説が時間効果を持たないプーリングOLSモデルなら, 以下を実行する.
+
+```r
+pFtest(git, gp)
+```
+
+```
+## 
+## 	F test for twoways effects
+## 
+## data:  inv ~ value + capital
+## F = 17.403, df1 = 28, df2 = 169, p-value < 2.2e-16
+## alternative hypothesis: significant effects
+```
+
+もし帰無仮説が時間効果をもつモデルなら, 以下を実行する.
+次のようにする.
 
 ```r
 gpt <- update(gp, . ~ . +factor(year))
@@ -364,6 +379,24 @@ pFtest(git,gpt)
 ## F = 52.362, df1 = 9, df2 = 169, p-value < 2.2e-16
 ## alternative hypothesis: significant effects
 ```
+
+もしくは以下でもよいだろう.
+
+```r
+pFtest(git, update(git, . ~ ., effect="time"))
+```
+
+```
+## 
+## 	F test for twoways effects
+## 
+## data:  inv ~ value + capital
+## F = 52.362, df1 = 9, df2 = 169, p-value < 2.2e-16
+## alternative hypothesis: significant effects
+```
+
+
+
 
 ## 変量効果モデル
 次のモデルを考える.
@@ -537,7 +570,6 @@ summary(grt)
 ## F-statistic: 33.506 on 21 and 178 DF, p-value: < 2.22e-16
 ```
 
-
 固定された時間効果が有意かどうかは次の検定を実施すれば良い.
 
 ```r
@@ -553,6 +585,8 @@ waldtest(gr,grt)
 ## 1    197                     
 ## 2    178 19 25.303     0.1508
 ```
+
+時間効果が確率変数のときは以下のハウスマン検定を実施ればよい.
 
 ### ハウスマン検定
 帰無仮説が変量効果モデル, 対立仮説が固定効果モデルの検定はハウスマン検定を実施する.
@@ -598,6 +632,23 @@ phtest(git,grt)
 ## 
 ## data:  inv ~ value + capital
 ## chisq = 6.5733, df = 2, p-value = 0.03738
+## alternative hypothesis: one model is inconsistent
+```
+
+ハウスマン検定は,
+帰無仮説が時間効果が確率変数の変量モデル, 
+対立仮説が時間効果が存在しない変量モデルの場合の場合にも検定できる.
+
+```r
+phtest(gr,gr2)
+```
+
+```
+## 
+## 	Hausman Test
+## 
+## data:  inv ~ value + capital
+## chisq = 0.016122, df = 2, p-value = 0.992
 ## alternative hypothesis: one model is inconsistent
 ```
 
