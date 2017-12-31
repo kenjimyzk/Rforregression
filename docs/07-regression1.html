@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html  lang="ja-JP">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>R と RStudio</title>
+  <meta name="description" content="This is a description. Please wrote a abstract this contents.">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+
+  <meta property="og:title" content="R と RStudio" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a description. Please wrote a abstract this contents." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="R と RStudio" />
+  
+  <meta name="twitter:description" content="This is a description. Please wrote a abstract this contents." />
+  
+
+<meta name="author" content="宮﨑憲治">
+
+
+<meta name="date" content="2018-01-01">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="06-datawrangling.html">
+<link rel="next" href="08-regression2.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R と RStudio</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>はじめに</a><ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#r-とは"><i class="fa fa-check"></i><b>0.1</b> R とは</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#r-のインストール"><i class="fa fa-check"></i><b>0.2</b> R のインストール</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#r-の設定"><i class="fa fa-check"></i><b>0.3</b> R の設定</a></li>
+<li class="chapter" data-level="0.4" data-path="index.html"><a href="index.html#r-の使い方"><i class="fa fa-check"></i><b>0.4</b> R の使い方</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="01-base.html"><a href="01-base.html"><i class="fa fa-check"></i><b>1</b> 基本</a><ul>
+<li class="chapter" data-level="1.1" data-path="01-base.html"><a href="01-base.html#電卓としての-r"><i class="fa fa-check"></i><b>1.1</b> 電卓としての R</a></li>
+<li class="chapter" data-level="1.2" data-path="01-base.html"><a href="01-base.html#関数電卓としてのr"><i class="fa fa-check"></i><b>1.2</b> 関数電卓としてのR</a></li>
+<li class="chapter" data-level="1.3" data-path="01-base.html"><a href="01-base.html#r-の型"><i class="fa fa-check"></i><b>1.3</b> R の型</a></li>
+<li class="chapter" data-level="1.4" data-path="01-base.html"><a href="01-base.html#変数"><i class="fa fa-check"></i><b>1.4</b> 変数</a></li>
+<li class="chapter" data-level="1.5" data-path="01-base.html"><a href="01-base.html#パッケージ"><i class="fa fa-check"></i><b>1.5</b> パッケージ</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="02-rstudio.html"><a href="02-rstudio.html"><i class="fa fa-check"></i><b>2</b> RStudio</a><ul>
+<li class="chapter" data-level="2.1" data-path="02-rstudio.html"><a href="02-rstudio.html#rstudio-とは"><i class="fa fa-check"></i><b>2.1</b> RStudio とは</a></li>
+<li class="chapter" data-level="2.2" data-path="02-rstudio.html"><a href="02-rstudio.html#rstudio-のインストール"><i class="fa fa-check"></i><b>2.2</b> RStudio のインストール</a></li>
+<li class="chapter" data-level="2.3" data-path="02-rstudio.html"><a href="02-rstudio.html#rstudio-の設定"><i class="fa fa-check"></i><b>2.3</b> RStudio の設定</a></li>
+<li class="chapter" data-level="2.4" data-path="02-rstudio.html"><a href="02-rstudio.html#rstudio-の使い方"><i class="fa fa-check"></i><b>2.4</b> RStudio の使い方</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="03-vector.html"><a href="03-vector.html"><i class="fa fa-check"></i><b>3</b> ベクトル</a><ul>
+<li class="chapter" data-level="3.1" data-path="03-vector.html"><a href="03-vector.html#ベクトル-1"><i class="fa fa-check"></i><b>3.1</b> ベクトル</a></li>
+<li class="chapter" data-level="3.2" data-path="03-vector.html"><a href="03-vector.html#算術演算子"><i class="fa fa-check"></i><b>3.2</b> 算術演算子</a></li>
+<li class="chapter" data-level="3.3" data-path="03-vector.html"><a href="03-vector.html#論理演算子"><i class="fa fa-check"></i><b>3.3</b> 論理演算子</a></li>
+<li class="chapter" data-level="3.4" data-path="03-vector.html"><a href="03-vector.html#比較演算子"><i class="fa fa-check"></i><b>3.4</b> 比較演算子</a></li>
+<li class="chapter" data-level="3.5" data-path="03-vector.html"><a href="03-vector.html#要素"><i class="fa fa-check"></i><b>3.5</b> 要素</a></li>
+<li class="chapter" data-level="3.6" data-path="03-vector.html"><a href="03-vector.html#関数"><i class="fa fa-check"></i><b>3.6</b> 関数</a></li>
+<li class="chapter" data-level="3.7" data-path="03-vector.html"><a href="03-vector.html#規則的なベクトル"><i class="fa fa-check"></i><b>3.7</b> 規則的なベクトル</a></li>
+<li class="chapter" data-level="3.8" data-path="03-vector.html"><a href="03-vector.html#乱数ベクトル"><i class="fa fa-check"></i><b>3.8</b> 乱数ベクトル</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="04-dataframe.html"><a href="04-dataframe.html"><i class="fa fa-check"></i><b>4</b> データ構造</a><ul>
+<li class="chapter" data-level="4.1" data-path="04-dataframe.html"><a href="04-dataframe.html#ベクトル-2"><i class="fa fa-check"></i><b>4.1</b> ベクトル</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="04-dataframe.html"><a href="04-dataframe.html#ベクトルのアクセス"><i class="fa fa-check"></i><b>4.1.1</b> ベクトルのアクセス</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="04-dataframe.html"><a href="04-dataframe.html#リスト"><i class="fa fa-check"></i><b>4.2</b> リスト</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="04-dataframe.html"><a href="04-dataframe.html#リストのアクセス"><i class="fa fa-check"></i><b>4.2.1</b> リストのアクセス</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="04-dataframe.html"><a href="04-dataframe.html#因子ベクトル"><i class="fa fa-check"></i><b>4.3</b> 因子ベクトル</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="04-dataframe.html"><a href="04-dataframe.html#factor"><i class="fa fa-check"></i><b>4.3.1</b> factor</a></li>
+<li class="chapter" data-level="4.3.2" data-path="04-dataframe.html"><a href="04-dataframe.html#cut"><i class="fa fa-check"></i><b>4.3.2</b> cut</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="04-dataframe.html"><a href="04-dataframe.html#行列"><i class="fa fa-check"></i><b>4.4</b> 行列</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="04-dataframe.html"><a href="04-dataframe.html#行列の演算"><i class="fa fa-check"></i><b>4.4.1</b> 行列の演算</a></li>
+<li class="chapter" data-level="4.4.2" data-path="04-dataframe.html"><a href="04-dataframe.html#行列のアクセス"><i class="fa fa-check"></i><b>4.4.2</b> 行列のアクセス</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="04-dataframe.html"><a href="04-dataframe.html#データフレイム"><i class="fa fa-check"></i><b>4.5</b> データフレイム</a><ul>
+<li class="chapter" data-level="4.5.1" data-path="04-dataframe.html"><a href="04-dataframe.html#データフレイムの演算"><i class="fa fa-check"></i><b>4.5.1</b> データフレイムの演算</a></li>
+<li class="chapter" data-level="4.5.2" data-path="04-dataframe.html"><a href="04-dataframe.html#データフレイムのアクセス"><i class="fa fa-check"></i><b>4.5.2</b> データフレイムのアクセス</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="05-datainput.html"><a href="05-datainput.html"><i class="fa fa-check"></i><b>5</b> データ入力</a><ul>
+<li class="chapter" data-level="5.1" data-path="05-datainput.html"><a href="05-datainput.html#はじめに-1"><i class="fa fa-check"></i><b>5.1</b> はじめに</a></li>
+<li class="chapter" data-level="5.2" data-path="05-datainput.html"><a href="05-datainput.html#csv-ファイル"><i class="fa fa-check"></i><b>5.2</b> csv ファイル</a></li>
+<li class="chapter" data-level="5.3" data-path="05-datainput.html"><a href="05-datainput.html#excel-ファイル"><i class="fa fa-check"></i><b>5.3</b> EXCEL ファイル</a></li>
+<li class="chapter" data-level="5.4" data-path="05-datainput.html"><a href="05-datainput.html#stata"><i class="fa fa-check"></i><b>5.4</b> STATA</a></li>
+<li class="chapter" data-level="5.5" data-path="05-datainput.html"><a href="05-datainput.html#r-に入っているデータ"><i class="fa fa-check"></i><b>5.5</b> R に入っているデータ</a></li>
+<li class="chapter" data-level="5.6" data-path="05-datainput.html"><a href="05-datainput.html#インターネットからデータ入力"><i class="fa fa-check"></i><b>5.6</b> インターネットからデータ入力</a></li>
+<li class="chapter" data-level="5.7" data-path="05-datainput.html"><a href="05-datainput.html#その他のデータ入力"><i class="fa fa-check"></i><b>5.7</b> その他のデータ入力</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="06-datawrangling.html"><a href="06-datawrangling.html"><i class="fa fa-check"></i><b>6</b> 整然データ</a><ul>
+<li class="chapter" data-level="6.1" data-path="06-datawrangling.html"><a href="06-datawrangling.html#データ整形"><i class="fa fa-check"></i><b>6.1</b> データ整形</a></li>
+<li class="chapter" data-level="6.2" data-path="06-datawrangling.html"><a href="06-datawrangling.html#データ結合"><i class="fa fa-check"></i><b>6.2</b> データ結合</a></li>
+<li class="chapter" data-level="6.3" data-path="06-datawrangling.html"><a href="06-datawrangling.html#tidyr"><i class="fa fa-check"></i><b>6.3</b> tidyr</a></li>
+<li class="chapter" data-level="6.4" data-path="06-datawrangling.html"><a href="06-datawrangling.html#実践例"><i class="fa fa-check"></i><b>6.4</b> 実践例</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="07-regression1.html"><a href="07-regression1.html"><i class="fa fa-check"></i><b>7</b> 古典的仮定のもとでの最小二乗法</a><ul>
+<li class="chapter" data-level="7.1" data-path="07-regression1.html"><a href="07-regression1.html#単回帰モデル"><i class="fa fa-check"></i><b>7.1</b> 単回帰モデル</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="07-regression1.html"><a href="07-regression1.html#ティー検定"><i class="fa fa-check"></i><b>7.1.1</b> ティー検定</a></li>
+<li class="chapter" data-level="7.1.2" data-path="07-regression1.html"><a href="07-regression1.html#対数変換"><i class="fa fa-check"></i><b>7.1.2</b> 対数変換</a></li>
+<li class="chapter" data-level="7.1.3" data-path="07-regression1.html"><a href="07-regression1.html#切片なし回帰モデル"><i class="fa fa-check"></i><b>7.1.3</b> 切片なし回帰モデル</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="07-regression1.html"><a href="07-regression1.html#重回帰モデル"><i class="fa fa-check"></i><b>7.2</b> 重回帰モデル</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="07-regression1.html"><a href="07-regression1.html#自乗項"><i class="fa fa-check"></i><b>7.2.1</b> 自乗項</a></li>
+<li class="chapter" data-level="7.2.2" data-path="07-regression1.html"><a href="07-regression1.html#交差項"><i class="fa fa-check"></i><b>7.2.2</b> 交差項</a></li>
+<li class="chapter" data-level="7.2.3" data-path="07-regression1.html"><a href="07-regression1.html#エフ検定"><i class="fa fa-check"></i><b>7.2.3</b> エフ検定</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="08-regression2.html"><a href="08-regression2.html"><i class="fa fa-check"></i><b>8</b> 現代的仮定のもとでの最小二乗法</a><ul>
+<li class="chapter" data-level="8.1" data-path="08-regression2.html"><a href="08-regression2.html#正規性の仮定について"><i class="fa fa-check"></i><b>8.1</b> 正規性の仮定について</a></li>
+<li class="chapter" data-level="8.2" data-path="08-regression2.html"><a href="08-regression2.html#誤差項と説明変数が独立の仮定について"><i class="fa fa-check"></i><b>8.2</b> 誤差項と説明変数が独立の仮定について</a></li>
+<li class="chapter" data-level="8.3" data-path="08-regression2.html"><a href="08-regression2.html#分散均一の検定"><i class="fa fa-check"></i><b>8.3</b> 分散均一の検定</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="09-ivreg.html"><a href="09-ivreg.html"><i class="fa fa-check"></i><b>9</b> 操作変数法</a><ul>
+<li class="chapter" data-level="9.1" data-path="09-ivreg.html"><a href="09-ivreg.html#データ"><i class="fa fa-check"></i><b>9.1</b> データ</a></li>
+<li class="chapter" data-level="9.2" data-path="09-ivreg.html"><a href="09-ivreg.html#操作変数"><i class="fa fa-check"></i><b>9.2</b> 操作変数</a></li>
+<li class="chapter" data-level="9.3" data-path="09-ivreg.html"><a href="09-ivreg.html#段階最小二乗法"><i class="fa fa-check"></i><b>9.3</b> 2段階最小二乗法</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="09-ivreg.html"><a href="09-ivreg.html#複数制約の検定"><i class="fa fa-check"></i><b>9.3.1</b> 複数制約の検定</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="09-ivreg.html"><a href="09-ivreg.html#特定化検定"><i class="fa fa-check"></i><b>9.4</b> 特定化検定</a><ul>
+<li class="chapter" data-level="9.4.1" data-path="09-ivreg.html"><a href="09-ivreg.html#weak-instruments"><i class="fa fa-check"></i><b>9.4.1</b> Weak instruments</a></li>
+<li class="chapter" data-level="9.4.2" data-path="09-ivreg.html"><a href="09-ivreg.html#du-hausman-検定"><i class="fa fa-check"></i><b>9.4.2</b> Du-Hausman 検定</a></li>
+<li class="chapter" data-level="9.4.3" data-path="09-ivreg.html"><a href="09-ivreg.html#sargan-検定"><i class="fa fa-check"></i><b>9.4.3</b> Sargan 検定</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="09-ivreg.html"><a href="09-ivreg.html#ロバスト分散"><i class="fa fa-check"></i><b>9.5</b> ロバスト分散</a><ul>
+<li class="chapter" data-level="9.5.1" data-path="09-ivreg.html"><a href="09-ivreg.html#分散不均一の検定"><i class="fa fa-check"></i><b>9.5.1</b> 分散不均一の検定</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="10-panel.html"><a href="10-panel.html"><i class="fa fa-check"></i><b>10</b> パネル分析</a><ul>
+<li class="chapter" data-level="10.1" data-path="10-panel.html"><a href="10-panel.html#データ-1"><i class="fa fa-check"></i><b>10.1</b> データ</a></li>
+<li class="chapter" data-level="10.2" data-path="10-panel.html"><a href="10-panel.html#プーリングols"><i class="fa fa-check"></i><b>10.2</b> プーリングOLS</a></li>
+<li class="chapter" data-level="10.3" data-path="10-panel.html"><a href="10-panel.html#固定効果モデル"><i class="fa fa-check"></i><b>10.3</b> 固定効果モデル</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="10-panel.html"><a href="10-panel.html#時間効果"><i class="fa fa-check"></i><b>10.3.1</b> 時間効果</a></li>
+<li class="chapter" data-level="10.3.2" data-path="10-panel.html"><a href="10-panel.html#固定効果vsプーリングols"><i class="fa fa-check"></i><b>10.3.2</b> 固定効果VSプーリングOLS</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="10-panel.html"><a href="10-panel.html#変量効果モデル"><i class="fa fa-check"></i><b>10.4</b> 変量効果モデル</a><ul>
+<li class="chapter" data-level="10.4.1" data-path="10-panel.html"><a href="10-panel.html#時間効果-1"><i class="fa fa-check"></i><b>10.4.1</b> 時間効果</a></li>
+<li class="chapter" data-level="10.4.2" data-path="10-panel.html"><a href="10-panel.html#ハウスマン検定"><i class="fa fa-check"></i><b>10.4.2</b> ハウスマン検定</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="10-panel.html"><a href="10-panel.html#クラスターロバスト分散"><i class="fa fa-check"></i><b>10.5</b> クラスターロバスト分散</a><ul>
+<li class="chapter" data-level="10.5.1" data-path="10-panel.html"><a href="10-panel.html#分散不均一の検定-1"><i class="fa fa-check"></i><b>10.5.1</b> 分散不均一の検定</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R と RStudio</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="古典的仮定のもとでの最小二乗法" class="section level1">
+<h1><span class="header-section-number">7</span> 古典的仮定のもとでの最小二乗法</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(AER)</code></pre></div>
+<div id="単回帰モデル" class="section level2">
+<h2><span class="header-section-number">7.1</span> 単回帰モデル</h2>
+<p>次の単回帰モデルを考えてる.</p>
+<p><span class="math display">\[
+y = \alpha + \beta x + u
+\]</span> ここで <span class="math inline">\(x\)</span> は説明変数で, <span class="math inline">\(y\)</span> は被説明変数である. <span class="math inline">\(u\)</span> は誤差項である. パラメータとして <span class="math inline">\(\alpha\)</span> は切片パラメータ, <span class="math inline">\(\beta\)</span> は傾きパラメータである.</p>
+<p>次の仮定を置いている.</p>
+<ul>
+<li><span class="math inline">\((x_i,y_i)\)</span> は独立同一分布にしたがう.</li>
+<li><span class="math inline">\(E[u_i]=0\)</span> である.</li>
+<li><span class="math inline">\(u_i\)</span> と <span class="math inline">\(x_i\)</span> は独立である.</li>
+<li><span class="math inline">\(u_i\)</span> は正規分布にしたがう.</li>
+</ul>
+<p>このとき最小二乗推定量は一致で, 不偏であり, 正規分布にしたがう. 一致とは推定量が観測値を増やすことによって真のパラメータに (確率) 収束することある. 不偏とは推定量の期待値が真のパラメータになることである. また他の線形不偏推定量のなかで最も分散が小さいことも知られている.</p>
+<p>仮想的に以下のモデルを考える.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">N &lt;-<span class="st"> </span><span class="dv">100</span>
+x &lt;-<span class="st"> </span><span class="kw">runif</span>(N)
+y &lt;-<span class="st"> </span><span class="dv">10</span> <span class="op">+</span><span class="st"> </span><span class="dv">2</span><span class="op">*</span>x <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(N)
+df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(x,y)</code></pre></div>
+<p>作図すると以下である.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(y<span class="op">~</span>x)</code></pre></div>
+<p><img src="07-regression1_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>R で回帰分析を実施するには <code>lm</code> を実施する.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fm &lt;-<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data=</span>df)</code></pre></div>
+<p><code>fm</code> 自体はリストであり, 以下の要素がある.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">typeof</span>(fm)
+## [1] &quot;list&quot;
+<span class="kw">names</span>(fm)
+##  [1] &quot;coefficients&quot;  &quot;residuals&quot;     &quot;effects&quot;       &quot;rank&quot;         
+##  [5] &quot;fitted.values&quot; &quot;assign&quot;        &quot;qr&quot;            &quot;df.residual&quot;  
+##  [9] &quot;xlevels&quot;       &quot;call&quot;          &quot;terms&quot;         &quot;model&quot;</code></pre></div>
+<p>係数は次のコマンドを実施する.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">coef</span>(fm)
+## (Intercept)           x 
+##   10.023499    2.150754
+<span class="co"># coefficients(fm)</span></code></pre></div>
+<p>傾きの推定値は以下でも実行可能である.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(df, <span class="kw">cov</span>(x,y)<span class="op">/</span><span class="kw">var</span>(x))
+## [1] 2.150754</code></pre></div>
+<p>作図すると以下のようになる.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(y<span class="op">~</span>x,<span class="dt">data=</span>df)
+<span class="kw">abline</span>(fm)</code></pre></div>
+<p><img src="07-regression1_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>残差は次のコマンドを実施する.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">resid</span>(fm))
+##          1          2          3          4          5          6 
+## -0.4002569 -0.4948268 -0.3294694  0.8559347  0.6781065 -1.2631742
+<span class="co"># residuals(fm)</span>
+<span class="co"># with(fm, residuals)</span></code></pre></div>
+<p>予測値は次のコマンドを実施する.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">fitted</span>(fm))
+##        1        2        3        4        5        6 
+## 11.22489 10.21803 11.76267 10.07515 11.95904 10.19354
+<span class="co"># fitted.values(fm)</span>
+<span class="co"># with(fm, fitted.values)</span></code></pre></div>
+<p>残差自乗和は次のコマンドを実施する.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">deviance</span>(fm)
+## [1] 97.54873
+<span class="kw">sum</span>(<span class="kw">resid</span>(fm)<span class="op">^</span><span class="dv">2</span>)
+## [1] 97.54873</code></pre></div>
+<div id="ティー検定" class="section level3">
+<h3><span class="header-section-number">7.1.1</span> ティー検定</h3>
+<p>その結果を見るには <code>summary</code> を実施する.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(fm)
+## 
+## Call:
+## lm(formula = y ~ x, data = df)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -2.4272 -0.7150 -0.0124  0.7409  2.0455 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  10.0235     0.1837  54.575  &lt; 2e-16 ***
+## x             2.1508     0.3334   6.452 4.22e-09 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.9977 on 98 degrees of freedom
+## Multiple R-squared:  0.2981, Adjusted R-squared:  0.291 
+## F-statistic: 41.63 on 1 and 98 DF,  p-value: 4.216e-09</code></pre></div>
+<p>これをみれば各変数の係数がゼロのティー検定の結果が示されている. 他にも, 残差標準誤差, 決定係数, 修正済み決定係数, 全ての係数がゼロであるエフ検定の結果も示されている.</p>
+<p><code>summary(fm)</code> もリストであり, それぞれの要素は以下である.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">typeof</span>(<span class="kw">summary</span>(fm))
+## [1] &quot;list&quot;
+<span class="kw">names</span>(<span class="kw">summary</span>(fm))
+##  [1] &quot;call&quot;          &quot;terms&quot;         &quot;residuals&quot;     &quot;coefficients&quot; 
+##  [5] &quot;aliased&quot;       &quot;sigma&quot;         &quot;df&quot;            &quot;r.squared&quot;    
+##  [9] &quot;adj.r.squared&quot; &quot;fstatistic&quot;    &quot;cov.unscaled&quot;</code></pre></div>
+<p>単なる <code>fm</code> と同じ名前もあるが, 中身が違っている場合もある. 例えば <code>residuals</code> は同じであるが, 係数はより情報が加わっている.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">coef</span>(<span class="kw">summary</span>(fm))
+##              Estimate Std. Error   t value     Pr(&gt;|t|)
+## (Intercept) 10.023499  0.1836639 54.575237 3.695690e-75
+## x            2.150754  0.3333533  6.451874 4.216474e-09
+<span class="co"># coefficients(summary(fm))</span></code></pre></div>
+<p>残差の標準誤差は次のようにして得られる.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(<span class="kw">summary</span>(fm),sigma)
+## [1] 0.9976949
+<span class="kw">sqrt</span>(<span class="kw">deviance</span>(fm)<span class="op">/</span><span class="kw">df.residual</span>(fm))
+## [1] 0.9976949</code></pre></div>
+<p>決定係数は次のようにして計算する.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(<span class="kw">summary</span>(fm),r.squared)
+## [1] 0.2981284
+<span class="dv">1</span><span class="op">-</span><span class="kw">deviance</span>(fm)<span class="op">/</span><span class="kw">with</span>(df, <span class="kw">sum</span>((y<span class="op">-</span><span class="kw">mean</span>(y))<span class="op">^</span><span class="dv">2</span>))
+## [1] 0.2981284</code></pre></div>
+<p>調整済み決定係数は次のようにして計算する.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(<span class="kw">summary</span>(fm),adj.r.squared)
+## [1] 0.2909665
+<span class="dv">1</span><span class="op">-</span>(<span class="kw">deviance</span>(fm)<span class="op">/</span><span class="kw">df.residual</span>(fm))<span class="op">/</span><span class="kw">with</span>(df, <span class="kw">sum</span>((y<span class="op">-</span><span class="kw">mean</span>(y))<span class="op">^</span><span class="dv">2</span><span class="op">/</span>(<span class="kw">nrow</span>(df)<span class="op">-</span><span class="dv">1</span>)))
+## [1] 0.2909665</code></pre></div>
+</div>
+<div id="対数変換" class="section level3">
+<h3><span class="header-section-number">7.1.2</span> 対数変換</h3>
+<p>次のモデルを考える. <span class="math display">\[
+y = \alpha + \beta \log(x) + u
+\]</span></p>
+<p>対数変換をおこなう場合, <code>log</code> を用いるとよい.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fm &lt;-<span class="st"> </span><span class="kw">lm</span>(y<span class="op">~</span><span class="kw">log</span>(x),<span class="dt">data=</span>df)
+<span class="kw">summary</span>(fm)
+## 
+## Call:
+## lm(formula = y ~ log(x), data = df)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -2.5485 -0.8177  0.0038  0.7833  2.1618 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  11.6132     0.1562  74.371  &lt; 2e-16 ***
+## log(x)        0.5257     0.1017   5.169 1.24e-06 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 1.056 on 98 degrees of freedom
+## Multiple R-squared:  0.2143, Adjusted R-squared:  0.2062 
+## F-statistic: 26.72 on 1 and 98 DF,  p-value: 1.242e-06</code></pre></div>
+<p>作図すると以下のようになる.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(y<span class="op">~</span><span class="kw">log</span>(x),<span class="dt">data=</span>df)
+<span class="kw">abline</span>(fm)</code></pre></div>
+<p><img src="07-regression1_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p>被説明変数が対数の場合も同様である.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fm &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log</span>(y)<span class="op">~</span>x,<span class="dt">data=</span>df)
+<span class="kw">summary</span>(fm)
+## 
+## Call:
+## lm(formula = log(y) ~ x, data = df)
+## 
+## Residuals:
+##       Min        1Q    Median        3Q       Max 
+## -0.267678 -0.063377  0.003739  0.073017  0.176159 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  2.30259    0.01699 135.501  &lt; 2e-16 ***
+## x            0.19703    0.03084   6.388 5.66e-09 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.09231 on 98 degrees of freedom
+## Multiple R-squared:  0.294,  Adjusted R-squared:  0.2868 
+## F-statistic: 40.81 on 1 and 98 DF,  p-value: 5.661e-09</code></pre></div>
+<p>作図すると以下のようになる.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="kw">log</span>(y)<span class="op">~</span>x,<span class="dt">data=</span>df)
+<span class="kw">abline</span>(fm)</code></pre></div>
+<p><img src="07-regression1_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+</div>
+<div id="切片なし回帰モデル" class="section level3">
+<h3><span class="header-section-number">7.1.3</span> 切片なし回帰モデル</h3>
+<p>次のモデルを考える. <span class="math display">\[
+y = \beta x + u
+\]</span></p>
+<p>切片なしモデルを推定したい場合は次のように <code>-1</code> とする.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fm &lt;-<span class="st"> </span><span class="kw">lm</span>(y<span class="op">~</span>x<span class="op">-</span><span class="dv">1</span>,<span class="dt">data=</span>df)
+<span class="kw">summary</span>(fm)
+## 
+## Call:
+## lm(formula = y ~ x - 1, data = df)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -6.441 -1.254  3.343  7.090 10.639 
+## 
+## Coefficients:
+##   Estimate Std. Error t value Pr(&gt;|t|)    
+## x   17.425      1.009   17.26   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 5.562 on 99 degrees of freedom
+## Multiple R-squared:  0.7506, Adjusted R-squared:  0.7481 
+## F-statistic:   298 on 1 and 99 DF,  p-value: &lt; 2.2e-16</code></pre></div>
+<p>もしくは <code>+0</code> を加える.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fm &lt;-<span class="st"> </span><span class="kw">lm</span>(y<span class="op">~</span>x<span class="op">+</span><span class="dv">0</span>,<span class="dt">data=</span>df)
+<span class="kw">summary</span>(fm)
+## 
+## Call:
+## lm(formula = y ~ x + 0, data = df)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -6.441 -1.254  3.343  7.090 10.639 
+## 
+## Coefficients:
+##   Estimate Std. Error t value Pr(&gt;|t|)    
+## x   17.425      1.009   17.26   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 5.562 on 99 degrees of freedom
+## Multiple R-squared:  0.7506, Adjusted R-squared:  0.7481 
+## F-statistic:   298 on 1 and 99 DF,  p-value: &lt; 2.2e-16</code></pre></div>
+</div>
+</div>
+<div id="重回帰モデル" class="section level2">
+<h2><span class="header-section-number">7.2</span> 重回帰モデル</h2>
+<p>説明変数として <span class="math inline">\(w\)</span> を加えたモデルを考える. <span class="math display">\[
+y = \alpha + \beta x +\gamma w+ u
+\]</span></p>
+<p>暗黙に次の仮定を置いている.</p>
+<ul>
+<li><span class="math inline">\((w_i, x_i,y_i)\)</span> は独立同一分布にしたがう.</li>
+<li>誤差項の期待値はゼロである. <span class="math inline">\(E[u_i]=0\)</span> である.</li>
+<li>誤差項 <span class="math inline">\(u_i\)</span> は説明変数 <span class="math inline">\((x_i, w_i)\)</span> に対して独立である.</li>
+<li>誤差項 <span class="math inline">\(u_i\)</span> は正規分布にしたがう.</li>
+<li>説明変数間に多重共線性は存在しない. つまり <span class="math inline">\(x_i\)</span> は <span class="math inline">\(w_i\)</span> の一次変換で表せない.</li>
+</ul>
+<p>仮想的に以下のモデルを考える.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">N &lt;-<span class="st"> </span><span class="dv">100</span>
+x&lt;-<span class="kw">runif</span>(N)
+w&lt;-<span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;H&quot;</span>,<span class="st">&quot;T&quot;</span>),N,<span class="dt">replace=</span><span class="ot">TRUE</span>)
+y &lt;-<span class="st"> </span><span class="dv">10</span> <span class="op">+</span><span class="st"> </span><span class="dv">2</span><span class="op">*</span>x <span class="op">+</span><span class="st"> </span><span class="kw">ifelse</span>(w<span class="op">==</span><span class="st">&quot;H&quot;</span>,<span class="dv">1</span>,<span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(N)
+df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(w,x,y)</code></pre></div>
+<p>作図すると以下である.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(y<span class="op">~</span>x)</code></pre></div>
+<p><img src="07-regression1_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<p>説明変数を加えたいときには <code>+</code> と変数名を使うことができる.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fm &lt;-<span class="st"> </span><span class="kw">lm</span>(y<span class="op">~</span>x<span class="op">+</span>w,<span class="dt">data=</span>df)
+<span class="kw">summary</span>(fm)
+## 
+## Call:
+## lm(formula = y ~ x + w, data = df)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -2.59070 -0.71651  0.04425  0.69793  2.23241 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  10.9648     0.1978  55.425  &lt; 2e-16 ***
+## x             1.9589     0.3459   5.663 1.51e-07 ***
+## wT           -0.9796     0.1979  -4.951 3.11e-06 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.9698 on 97 degrees of freedom
+## Multiple R-squared:  0.3287, Adjusted R-squared:  0.3149 
+## F-statistic: 23.75 on 2 and 97 DF,  p-value: 4.02e-09</code></pre></div>
+<p>R の特徴は因子もとくに変換することなくダミー変数として扱える.</p>
+<div id="自乗項" class="section level3">
+<h3><span class="header-section-number">7.2.1</span> 自乗項</h3>
+<p>説明変数として自乗項を加えたモデルを考える. <span class="math display">\[
+y = \alpha + \beta x + \gamma x^2 + u
+\]</span></p>
+<p>R では単に自乗するのでなく <code>I(x^2)</code> としなければならない.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fm &lt;-<span class="st"> </span><span class="kw">lm</span>(y<span class="op">~</span>x<span class="op">+</span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">2</span>),<span class="dt">data=</span>df)
+<span class="kw">summary</span>(fm)
+## 
+## Call:
+## lm(formula = y ~ x + I(x^2), data = df)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -3.09952 -0.70765 -0.04141  0.83326  2.12192 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  10.4981     0.3309  31.727   &lt;2e-16 ***
+## x             2.5575     1.6007   1.598    0.113    
+## I(x^2)       -0.9391     1.5697  -0.598    0.551    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 1.083 on 97 degrees of freedom
+## Multiple R-squared:  0.1622, Adjusted R-squared:  0.1449 
+## F-statistic: 9.389 on 2 and 97 DF,  p-value: 0.0001873</code></pre></div>
+</div>
+<div id="交差項" class="section level3">
+<h3><span class="header-section-number">7.2.2</span> 交差項</h3>
+<p>説明変数として交差項を加えたモデルを考える. <span class="math display">\[
+y = \alpha + \beta x + \gamma w + \delta xw + u
+\]</span></p>
+<p>説明変数 <code>x</code> と <code>w</code>の自乗項は自乗項は <code>x:w</code> である.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fm&lt;-<span class="kw">lm</span>(y<span class="op">~</span>x<span class="op">+</span>w<span class="op">+</span>x<span class="op">:</span>w,<span class="dt">data=</span>df)
+<span class="kw">summary</span>(fm)
+## 
+## Call:
+## lm(formula = y ~ x + w + x:w, data = df)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -2.58216 -0.71785  0.03446  0.70799  2.23829 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  10.9355     0.2435  44.904  &lt; 2e-16 ***
+## x             2.0286     0.4829   4.201 5.96e-05 ***
+## wT           -0.9106     0.3868  -2.354   0.0206 *  
+## x:wT         -0.1447     0.6957  -0.208   0.8357    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.9746 on 96 degrees of freedom
+## Multiple R-squared:  0.329,  Adjusted R-squared:  0.3081 
+## F-statistic: 15.69 on 3 and 96 DF,  p-value: 2.214e-08</code></pre></div>
+<p>もしくは以下のように <code>*</code> を使って簡便的に表せる.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fm &lt;-<span class="st"> </span><span class="kw">lm</span>(y<span class="op">~</span>x<span class="op">*</span>w,<span class="dt">data=</span>df)
+<span class="kw">summary</span>(fm)
+## 
+## Call:
+## lm(formula = y ~ x * w, data = df)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -2.58216 -0.71785  0.03446  0.70799  2.23829 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  10.9355     0.2435  44.904  &lt; 2e-16 ***
+## x             2.0286     0.4829   4.201 5.96e-05 ***
+## wT           -0.9106     0.3868  -2.354   0.0206 *  
+## x:wT         -0.1447     0.6957  -0.208   0.8357    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.9746 on 96 degrees of freedom
+## Multiple R-squared:  0.329,  Adjusted R-squared:  0.3081 
+## F-statistic: 15.69 on 3 and 96 DF,  p-value: 2.214e-08</code></pre></div>
+</div>
+<div id="エフ検定" class="section level3">
+<h3><span class="header-section-number">7.2.3</span> エフ検定</h3>
+<p>今, 帰無仮説が <span class="math display">\[
+y = \alpha + \beta x + u
+\]</span> で, 対立仮説が <span class="math display">\[
+y = \alpha + \beta x + \gamma w + \delta xw + u
+\]</span> となる検定を実施したい.</p>
+<p>これは複数の係数がゼロであるエフ検定である. 対立仮説の残差自乗和を <span class="math inline">\(SSR\)</span> とし, その自由度を <span class="math inline">\(df\)</span> とする. 自由度は観測数から説明変数の数を減じた数である. 帰無仮説の残差自乗和を <span class="math inline">\(SSR_0\)</span> とし, 制約の数を <span class="math inline">\(q\)</span> とする. 制約の数は帰無仮説の自由度から帰無仮説の自由度を差し引いた数である. このとき, 以下のF値は帰無仮説が正しいもと自由度 <span class="math inline">\(df\)</span> と <span class="math inline">\(q\)</span> のF分布にしたがう. <span class="math display">\[
+\frac{(SSR_0-SSR)/q}{SSR/df}
+\]</span></p>
+<p>R でF値は次のようにして算出する.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fm0 &lt;-<span class="st"> </span><span class="kw">lm</span>(y<span class="op">~</span>x,<span class="dt">data=</span>df)
+fm1 &lt;-<span class="st"> </span><span class="kw">lm</span>(y<span class="op">~</span>x<span class="op">*</span>w,<span class="dt">data=</span>df)
+dof &lt;-<span class="st"> </span>fm1<span class="op">$</span>df
+q &lt;-<span class="st"> </span>fm0<span class="op">$</span>df<span class="op">-</span>dof
+SSR0 &lt;-<span class="st"> </span><span class="kw">deviance</span>(fm0)
+SSR &lt;-<span class="st"> </span><span class="kw">deviance</span>(fm1)
+(F &lt;-<span class="st"> </span>((SSR0<span class="op">-</span>SSR)<span class="op">/</span>q)<span class="op">/</span>(SSR<span class="op">/</span>dof))
+## [1] 12.15762</code></pre></div>
+<p>この時のP値は以下である.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span><span class="op">-</span><span class="kw">pf</span>(F,<span class="dt">df1=</span>q,<span class="dt">df2=</span>dof)
+## [1] 1.966205e-05</code></pre></div>
+<p>これらの手順はコマンド <code>anova</code> を用いれば簡単に実現できる.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">anova</span>(fm0,fm1)
+## Analysis of Variance Table
+## 
+## Model 1: y ~ x
+## Model 2: y ~ x * w
+##   Res.Df    RSS Df Sum of Sq      F    Pr(&gt;F)    
+## 1     98 114.27                                  
+## 2     96  91.18  2    23.094 12.158 1.966e-05 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre></div>
+<p>順番を変えても, 検定統計量自体に変更はない.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">anova</span>(fm1,fm0)
+## Analysis of Variance Table
+## 
+## Model 1: y ~ x * w
+## Model 2: y ~ x
+##   Res.Df    RSS Df Sum of Sq      F    Pr(&gt;F)    
+## 1     96  91.18                                  
+## 2     98 114.27 -2   -23.094 12.158 1.966e-05 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre></div>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="06-datawrangling.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="08-regression2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/07-regression1.Rmd",
+"text": "Edit"
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

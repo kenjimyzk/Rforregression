@@ -69,6 +69,13 @@ RStudio の使い方として日本語版のチートシートがある.
 
 https://github.com/rstudio/cheatsheets/raw/master/translations/japanese/rstudio-IDE-cheatsheet_ja.pdf
 
+英語であるがこの動画も有益である.
+第一章だけで公開公開されている.
+
+https://www.datacamp.com/courses/working-with-the-rstudio-ide-part-1
+
+
+
 RStudio プロジェクト単位で複数のソースコードを管理するのことが推奨される.
 そうするとプロジェクトごとに作業ディレクトリが設定される.
 プロジェクトはメニューバー の [File] から [New Project] を選択する.
@@ -119,6 +126,11 @@ Files ペインはWindowsではエクスプローラーのようなもので,
 Mac はFinder のようなもので, ファイル管理をおこなう.
 ファイル管理として新たなフォルダを作成したり, ファイルを削除したり,
 ファイル名を変更したりする.
+
+またワーキングディレクトリを直感的に設定することもできる.
+ワーキングを設定したい場所に移動して,
+Files ペインの上に並んでいるアイコンのうち, Moreをクリックし,
+[Set As Working Directory] をクリックすればよい.
 
 Plots ペインはコンソール画面で作図をコマンドの実行したら, 表示されるペインである. そこで作成した図をコマンドを使わずに保存したりすることができる.
 Packages ペインは現在Rに導入されているパッケージリストが表示される.

@@ -11,10 +11,14 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r message=FALSE, warning=FALSE}
 library(AER)
 library(plm)
-data("Grunfeld", package="plm")
+data("Grunfeld", package = "plm")
 head(Grunfeld)
 ```
 
+```{r}
+pdata <- pdata.frame(Grunfeld, index = c("firm", "year"))
+pdim(pdata)
+```
 
 ## プーリングOLS
 $$
@@ -26,13 +30,13 @@ $$
 
 この推計は以下のようにする.
 ```{r}
-gp <- plm(inv ~ value + capital, data = Grunfeld, model = "pooling")
+gp <- plm(inv ~ value + capital, data = pdata, model = "pooling")
 summary(gp)
 ```
 
 これは以下の回帰分析と同じである.
 ```{r}
-summary(lm(inv ~ value + capital, data = Grunfeld))
+summary(lm(inv ~ value + capital, data = pdata))
 ```
 
 ## 固定効果モデル
@@ -46,7 +50,7 @@ $\alpha_i$ は誤差項と相関があるもしれない.
 
 この推計は以下のようにする.
 ```{r}
-gi <- plm(inv ~ value + capital, data = Grunfeld, model = "within")
+gi <- plm(inv ~ value + capital, data = pdata, model = "within")
 summary(gi)
 ```
 
@@ -57,7 +61,7 @@ fixef(gi)
 
 これは以下の回帰分析と同じである.
 ```{r}
-summary(lm(inv ~ value + capital+0+factor(firm), data = Grunfeld))
+summary(lm(inv ~ value + capital+0+factor(firm), data = pdata))
 ```
 決定係数が大きく異なっていることに注意されたい.
 
@@ -70,7 +74,7 @@ $$
 
 この推計は以下のようにする.
 ```{r}
-git <- plm(inv ~ value + capital, data = Grunfeld, effect="twoways",model = "within")
+git <- plm(inv ~ value + capital, data = pdata, effect="twoways",model = "within")
 summary(git)
 ```
 
@@ -82,7 +86,7 @@ fixef(git, effect = "time")
 
 これは以下の回帰分析と同じである.
 ```{r}
-summary(lm(inv ~ value + capital+factor(firm)+factor(year), data = Grunfeld))
+summary(lm(inv ~ value + capital+factor(firm)+factor(year), data = pdata))
 ```
 決定係数が大きく異なっていることに注意されたい.
 
@@ -132,7 +136,7 @@ $\alpha_i$ は時間 $t$ について一定であるが, $i$ について独立�
 
 変量効果モデルは次のコマンドで実施する.
 ```{r}
-gr <- plm(inv ~ value + capital, data = Grunfeld, model = "random")
+gr <- plm(inv ~ value + capital, data = pdata, model = "random")
 
 summary(gr)
 ```
@@ -146,7 +150,7 @@ ranef(gr)
 変量効果モデルの時間効果は二種類ある.
 時間効果が確率変数である場合は次のコマンドを実施する.
 ```{r}
-gr2 <- plm(inv ~ value + capital, data = Grunfeld, effect= "twoways",model = "random")
+gr2 <- plm(inv ~ value + capital, data = pdata, effect= "twoways",model = "random")
 summary(gr2)
 ```
 
@@ -204,12 +208,12 @@ coeftest(git,vcov=vcovHC(git,type="sss"))
 ### 分散不均一の検定
 分散不均一かどうかは時間効果がない場合, 以下のようにすればよい.
 ```{r}
-bptest(inv ~ value + capital + factor(firm), data=Grunfeld)
+bptest(inv ~ value + capital + factor(firm), data=pdata)
 ```
 
 時間効果がある場合, 以下のようにすればよい.
 ```{r}
-bptest(inv ~ value + capital + factor(firm) + factor(year),data=Grunfeld)
+bptest(inv ~ value + capital + factor(firm) + factor(year),data=pdata)
 ```
 
 
