@@ -25,7 +25,7 @@
 <meta name="author" content="宮﨑憲治">
 
 
-<meta name="date" content="2018-01-01">
+<meta name="date" content="2018-01-02">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -244,20 +244,20 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>), <span class="dt">y =</span> letters[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>])
 <span class="kw">str</span>(df)
 ## &#39;data.frame&#39;:    10 obs. of  2 variables:
-##  $ x: num  -2.2429 2.275 0.0318 0.8474 0.5179 ...
+##  $ x: num  0.964 -0.232 -0.102 -0.601 -1.727 ...
 ##  $ y: Factor w/ 10 levels &quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;,..: 1 2 3 4 5 6 7 8 9 10</code></pre></div>
 <p>ただデータフレイムは自動的に文字列が因子ベクトルに変換されてしまう. これを避けるには次のように <code>stringsAsFactors= FALSE</code> をつける.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>), <span class="dt">y =</span> letters[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>], <span class="dt">stringsAsFactors=</span> <span class="ot">FALSE</span>)
 <span class="kw">str</span>(df)
 ## &#39;data.frame&#39;:    10 obs. of  2 variables:
-##  $ x: num  1.55 -0.599 0.501 -1.029 -0.615 ...
+##  $ x: num  3.662 2.541 -0.188 -0.198 1.779 ...
 ##  $ y: chr  &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; ...</code></pre></div>
 <p>もしくはライブラリ <code>dplyr</code> にある <code>data_frame</code> を用いれば, そのようなオプションを付けることなくデータフレイムを拡張したクラスを作ることができる.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
 df &lt;-<span class="st"> </span><span class="kw">data_frame</span>(<span class="dt">x =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>), <span class="dt">y =</span> letters[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>])
 <span class="kw">str</span>(df)
 ## Classes &#39;tbl_df&#39;, &#39;tbl&#39; and &#39;data.frame&#39;:    10 obs. of  2 variables:
-##  $ x: num  1.4 -0.32 0.742 1.489 1.776 ...
+##  $ x: num  -0.527 1.191 0.771 -0.328 0.914 ...
 ##  $ y: chr  &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; ...</code></pre></div>
 <p>以降, それぞれのファイル形式ごとにファイル入力について説明する. いずれのファイル形式にせよ, 外部ファイルから入力するさいには 現在のワークングディレクトリとファイルの場所をきちんと把握しておかなければならない.</p>
 <p>現在のワーキングディレクトリは以下のコマンドで確認できる.</p>

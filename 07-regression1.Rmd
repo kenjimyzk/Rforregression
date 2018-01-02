@@ -16,7 +16,7 @@ library(AER)
 
 
 ## 単回帰モデル
-次の単回帰モデルを考えてる.
+次の単回帰モデルを考える.
 
 $$
 y = \alpha + \beta x + u
@@ -190,7 +190,6 @@ summary(fm)
 fm <- lm(y~x+0,data=df)
 summary(fm)
 ```
-
 
 
 ## 重回帰モデル
