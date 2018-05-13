@@ -24,7 +24,7 @@ R においてデータ分析をおこなうには
 df <- data.frame(x = rnorm(10), y = letters[1:10])
 str(df)
 ## 'data.frame':	10 obs. of  2 variables:
-##  $ x: num  -0.8115 -0.133 -0.0254 -0.8591 -1.1167 ...
+##  $ x: num  -0.769 0.204 -0.716 0.558 0.174 ...
 ##  $ y: Factor w/ 10 levels "a","b","c","d",..: 1 2 3 4 5 6 7 8 9 10
 ```
 
@@ -35,7 +35,7 @@ str(df)
 df <- data.frame(x = rnorm(10), y = letters[1:10], stringsAsFactors= FALSE)
 str(df)
 ## 'data.frame':	10 obs. of  2 variables:
-##  $ x: num  1.5998 -0.4996 -0.4439 -0.0367 0.3568 ...
+##  $ x: num  -0.829 0.245 0.847 -0.741 1.782 ...
 ##  $ y: chr  "a" "b" "c" "d" ...
 ```
 
@@ -46,7 +46,7 @@ library(dplyr)
 df <- data_frame(x = rnorm(10), y = letters[1:10])
 str(df)
 ## Classes 'tbl_df', 'tbl' and 'data.frame':	10 obs. of  2 variables:
-##  $ x: num  0.665 1.439 -1.01 1.196 0.577 ...
+##  $ x: num  1.36 -1.012 -0.637 -0.652 0.978 ...
 ##  $ y: chr  "a" "b" "c" "d" ...
 ```
 
@@ -188,7 +188,7 @@ df <- read_csv("data.csv", locale=locale(encoding = "SJIS"))
 ```
 とする必要がある.
 
-私の使った印象だとライブラリ `readxl` は賢く日本語を扱ってくれっるので,
+私の使った印象だとライブラリ `readxl` は賢く日本語を扱ってくれるので,
 日本語が含まれている場合, csv に変換せず, そのまま入力したほうがよい.
 
 ## STATA

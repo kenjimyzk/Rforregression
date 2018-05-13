@@ -69,7 +69,7 @@ R は関数として使える. たとえば以下の関数がある.
 `sqrt()`    | 平方根 $\sqrt{\cdot}$    
 `exp()`     | 指数    
 `log()`     | 対数    
-`factorial()`     | 順列    
+`factorial()`     | 階乗    
 `choose()`     | 組み合わせ    
 `abs()`     | 絶対値    
 `round()`   | 四捨五入    
@@ -230,16 +230,16 @@ R においてパッケージを導入することによって, 機能を拡張�
 パッケージ `pkg` を導入するため一度だけ以下を実行する.
 
 ```r
-install.packages("pkg", dependencies = =TRUE)
+install.packages("pkg")
 ```
-とする. オプション `dependencies = TRUE` 依存するパッケージを同時に導入してくれる.
+とする. なおオプション `dependencies = TRUE` とすれば依存するパッケージを全て導入してくれる.
 
-パッケージ `pkg` が導入していれば, そのコマンド `cmd` を実行するには
+パッケージ `pkg` が導入していれば, そのパッケージにあるコマンド `cmd` を実行するには
 
 ```r
 pkg::cmd
 ```
-とパッケージとコマンドの間に `::` とする. 
+とパッケージとコマンドの間に `::` とする必要がある. 
 
 もしくは `library(pkg)` もしくは `require(pkg)` 予め入力しておけば,
 最初の `pkg::` を省略することができる.
@@ -251,7 +251,7 @@ pkg::cmd
 
 ```r
 if (!require(lattice)){
-  install.packages("lattice", dependencies = TRUE)
+  install.packages("lattice")
   require(lattice)
 } 
 ```

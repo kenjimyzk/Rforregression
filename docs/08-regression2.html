@@ -265,9 +265,9 @@ fm0 &lt;-<span class="st"> </span><span class="kw">lm</span>(y<span class="op">~
 ## z test of coefficients:
 ## 
 ##             Estimate Std. Error z value  Pr(&gt;|z|)    
-## (Intercept) 10.70052    0.24066 44.4637 &lt; 2.2e-16 ***
-## x            1.95683    0.36889  5.3047 1.129e-07 ***
-## wT          -0.78113    0.22295 -3.5036 0.0004591 ***
+## (Intercept) 10.62129    0.23558 45.0856 &lt; 2.2e-16 ***
+## x            2.17207    0.37082  5.8575 4.699e-09 ***
+## wT          -0.54477    0.19956 -2.7299  0.006336 ** 
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>ただ十分なデータのもとではティー値のままでもよい.</p>
@@ -277,9 +277,9 @@ fm0 &lt;-<span class="st"> </span><span class="kw">lm</span>(y<span class="op">~
 ## 
 ## Model 1: y ~ x
 ## Model 2: y ~ x + w
-##   Res.Df Df  Chisq Pr(&gt;Chisq)    
-## 1     98                         
-## 2     97  1 12.275  0.0004591 ***
+##   Res.Df Df  Chisq Pr(&gt;Chisq)   
+## 1     98                        
+## 2     97  1 7.4521   0.006336 **
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>エフ検定も十分なデータのもとではそのままでよいであろう.</p>
@@ -289,9 +289,9 @@ fm0 &lt;-<span class="st"> </span><span class="kw">lm</span>(y<span class="op">~
 ## 
 ## Model 1: y ~ x
 ## Model 2: y ~ x + w
-##   Res.Df Df      F    Pr(&gt;F)    
-## 1     98                        
-## 2     97  1 12.275 0.0006962 ***
+##   Res.Df Df      F   Pr(&gt;F)   
+## 1     98                      
+## 2     97  1 7.4521 0.007526 **
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>これは <code>anova</code> と同じである.</p>
@@ -300,17 +300,17 @@ fm0 &lt;-<span class="st"> </span><span class="kw">lm</span>(y<span class="op">~
 ## 
 ## Model 1: y ~ x
 ## Model 2: y ~ x + w
-##   Res.Df    RSS Df Sum of Sq      F    Pr(&gt;F)    
-## 1     98 133.88                                  
-## 2     97 118.84  1    15.039 12.275 0.0006962 ***
+##   Res.Df     RSS Df Sum of Sq      F   Pr(&gt;F)   
+## 1     98 101.966                                
+## 2     97  94.691  1    7.2747 7.4521 0.007526 **
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>複数制約の検定としてLM検定というのもある. 制約付きの回帰分析を実行し, その残差を制約なしのモデルの説明変数に回帰する. その決定係数に観測数を掛けた統計量が自由どが制約の数のカイ二乗分布にしたがうことが知られている.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lmt &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">I</span>(<span class="kw">resid</span>(fm1))<span class="op">~</span>w<span class="op">*</span>x,<span class="dt">data=</span>df)
 (lmt &lt;-<span class="st"> </span><span class="kw">nrow</span>(df)<span class="op">*</span><span class="kw">summary</span>(lmt)<span class="op">$</span>r.squared)</code></pre></div>
-<pre><code>## [1] 0.4137117</code></pre>
+<pre><code>## [1] 0.3224047</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span><span class="op">-</span><span class="kw">pchisq</span>(lmt,<span class="dt">df=</span><span class="dv">1</span>)</code></pre></div>
-<pre><code>## [1] 0.5200916</code></pre>
+<pre><code>## [1] 0.5701661</code></pre>
 </div>
 <div id="誤差項と説明変数が独立の仮定について" class="section level2">
 <h2><span class="header-section-number">8.2</span> 誤差項と説明変数が独立の仮定について</h2>
@@ -322,9 +322,9 @@ fm0 &lt;-<span class="st"> </span><span class="kw">lm</span>(y<span class="op">~
 ## t test of coefficients:
 ## 
 ##             Estimate Std. Error t value  Pr(&gt;|t|)    
-## (Intercept) 10.70052    0.24803 43.1418 &lt; 2.2e-16 ***
-## x            1.95683    0.35762  5.4718 3.481e-07 ***
-## wT          -0.78113    0.22303 -3.5024 0.0006989 ***
+## (Intercept) 10.62129    0.24283 43.7399 &lt; 2.2e-16 ***
+## x            2.17207    0.35542  6.1112 2.061e-08 ***
+## wT          -0.54477    0.20312 -2.6820  0.008604 ** 
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>先の値と標準誤差が違っていることが確認できるであろう. ただこの値は STATA と少し異なっている. STATA と同じにするには</p>
@@ -333,9 +333,9 @@ fm0 &lt;-<span class="st"> </span><span class="kw">lm</span>(y<span class="op">~
 ## t test of coefficients:
 ## 
 ##             Estimate Std. Error t value  Pr(&gt;|t|)    
-## (Intercept) 10.70052    0.24330 43.9814 &lt; 2.2e-16 ***
-## x            1.95683    0.34988  5.5929  2.06e-07 ***
-## wT          -0.78113    0.21966 -3.5561  0.000584 ***
+## (Intercept) 10.62129    0.23791 44.6437 &lt; 2.2e-16 ***
+## x            2.17207    0.34660  6.2667 1.017e-08 ***
+## wT          -0.54477    0.20019 -2.7212  0.007711 ** 
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>としなければならない.</p>
@@ -345,8 +345,8 @@ fm0 &lt;-<span class="st"> </span><span class="kw">lm</span>(y<span class="op">~
 ## z test of coefficients:
 ## 
 ##             Estimate Std. Error z value  Pr(&gt;|z|)    
-## (Intercept) 10.31238    0.23019 44.7990 &lt; 2.2e-16 ***
-## x            1.87328    0.37719  4.9664 6.821e-07 ***
+## (Intercept) 10.28750    0.21373 48.1321 &lt; 2.2e-16 ***
+## x            2.31200    0.35511  6.5107 7.478e-11 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>複数の係数についての検定は <code>waldtest</code> を実行すればよい.</p>
@@ -355,9 +355,9 @@ fm0 &lt;-<span class="st"> </span><span class="kw">lm</span>(y<span class="op">~
 ## 
 ## Model 1: y ~ x
 ## Model 2: y ~ x + w
-##   Res.Df Df      F    Pr(&gt;F)    
-## 1     98                        
-## 2     97  1 12.267 0.0006989 ***
+##   Res.Df Df      F   Pr(&gt;F)   
+## 1     98                      
+## 2     97  1 7.1929 0.008604 **
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>先の結果はエフ検定であるが, カイ二乗検定を実施するには以下を実施すればよい.</p>
@@ -366,9 +366,9 @@ fm0 &lt;-<span class="st"> </span><span class="kw">lm</span>(y<span class="op">~
 ## 
 ## Model 1: y ~ x
 ## Model 2: y ~ x + w
-##   Res.Df Df  Chisq Pr(&gt;Chisq)    
-## 1     98                         
-## 2     97  1 12.267  0.0004611 ***
+##   Res.Df Df  Chisq Pr(&gt;Chisq)   
+## 1     98                        
+## 2     97  1 7.1929   0.007319 **
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 </div>
@@ -379,9 +379,9 @@ fm0 &lt;-<span class="st"> </span><span class="kw">lm</span>(y<span class="op">~
 <p>残差の自乗を被説明変数として回帰分析をおこない, その決定係数に観測数をかけたものが検定統計量となる.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bpt &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">I</span>(<span class="kw">resid</span>(fm1)<span class="op">^</span><span class="dv">2</span>)<span class="op">~</span>w<span class="op">*</span>x,<span class="dt">data=</span>df)
 (bpt &lt;-<span class="st"> </span><span class="kw">nrow</span>(df)<span class="op">*</span><span class="kw">summary</span>(bpt)<span class="op">$</span>r.squared)</code></pre></div>
-<pre><code>## [1] 1.826218</code></pre>
+<pre><code>## [1] 1.499085</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span><span class="op">-</span><span class="kw">pchisq</span>(bpt,<span class="dt">df=</span><span class="dv">3</span>)</code></pre></div>
-<pre><code>## [1] 0.6092462</code></pre>
+<pre><code>## [1] 0.6824815</code></pre>
 <p>ここでの例ではP値が5%を超えているので帰無仮説を棄却できないので, 分散均一を仮定してよいことが示唆されている.</p>
 <p>R では以下のように実施すればよい.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">bptest</span>(fm1)</code></pre></div>
@@ -389,13 +389,13 @@ fm0 &lt;-<span class="st"> </span><span class="kw">lm</span>(y<span class="op">~
 ##  studentized Breusch-Pagan test
 ## 
 ## data:  fm1
-## BP = 1.7681, df = 2, p-value = 0.4131</code></pre>
+## BP = 1.4354, df = 2, p-value = 0.4879</code></pre>
 <p>これまでのBPテストは誤差項の分散が説明変数の線形関係あることを暗黙に仮定している. 非線形性を考慮するために説明変数の二次項を導入した分散不均一性の検定をホワイト検定という. 説明変数が複数ある場合ホワイト検定は煩雑になるため, 被説明変数の予測値を使って計算することがある. そのときホワイトテストは以下で実施する.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">wht &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">I</span>(<span class="kw">resid</span>(fm1)<span class="op">^</span><span class="dv">2</span>)<span class="op">~</span><span class="kw">fitted</span>(fm1)<span class="op">+</span><span class="kw">I</span>(<span class="kw">fitted</span>(fm1)<span class="op">^</span><span class="dv">2</span>),<span class="dt">data=</span>df)
 (wht &lt;-<span class="st"> </span><span class="kw">nrow</span>(df)<span class="op">*</span><span class="kw">summary</span>(wht)<span class="op">$</span>r.squared)</code></pre></div>
-<pre><code>## [1] 2.028572</code></pre>
+<pre><code>## [1] 1.920479</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span><span class="op">-</span><span class="kw">pchisq</span>(wht,<span class="dt">df=</span><span class="dv">2</span>)</code></pre></div>
-<pre><code>## [1] 0.3626613</code></pre>
+<pre><code>## [1] 0.3828011</code></pre>
 <p>ホワイト検定でも分散均一が示唆されている.</p>
 <p>もしくは以下を実行する.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">bptest</span>(fm1,<span class="op">~</span><span class="kw">fitted</span>(fm1)<span class="op">+</span><span class="kw">I</span>(<span class="kw">fitted</span>(fm1)<span class="op">^</span><span class="dv">2</span>))</code></pre></div>
@@ -403,7 +403,7 @@ fm0 &lt;-<span class="st"> </span><span class="kw">lm</span>(y<span class="op">~
 ##  studentized Breusch-Pagan test
 ## 
 ## data:  fm1
-## BP = 2.0286, df = 2, p-value = 0.3627</code></pre>
+## BP = 1.9205, df = 2, p-value = 0.3828</code></pre>
 <p>このように分散均一性は検定することが可能であるが, そもそも分散均一が疑われる場合は, ロバスト分散で推定するので十分であるため最近の実証分析ではこの検定は実施されない.</p>
 
 </div>

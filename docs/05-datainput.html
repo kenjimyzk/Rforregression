@@ -244,20 +244,20 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>), <span class="dt">y =</span> letters[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>])
 <span class="kw">str</span>(df)
 ## &#39;data.frame&#39;:    10 obs. of  2 variables:
-##  $ x: num  -0.8115 -0.133 -0.0254 -0.8591 -1.1167 ...
+##  $ x: num  -0.769 0.204 -0.716 0.558 0.174 ...
 ##  $ y: Factor w/ 10 levels &quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;,..: 1 2 3 4 5 6 7 8 9 10</code></pre></div>
 <p>ただデータフレイムは自動的に文字列が因子ベクトルに変換されてしまう. これを避けるには次のように <code>stringsAsFactors= FALSE</code> をつける.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>), <span class="dt">y =</span> letters[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>], <span class="dt">stringsAsFactors=</span> <span class="ot">FALSE</span>)
 <span class="kw">str</span>(df)
 ## &#39;data.frame&#39;:    10 obs. of  2 variables:
-##  $ x: num  1.5998 -0.4996 -0.4439 -0.0367 0.3568 ...
+##  $ x: num  -0.829 0.245 0.847 -0.741 1.782 ...
 ##  $ y: chr  &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; ...</code></pre></div>
 <p>もしくはライブラリ <code>dplyr</code> にある <code>data_frame</code> を用いれば, そのようなオプションを付けることなくデータフレイムを拡張したクラスを作ることができる.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
 df &lt;-<span class="st"> </span><span class="kw">data_frame</span>(<span class="dt">x =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>), <span class="dt">y =</span> letters[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>])
 <span class="kw">str</span>(df)
 ## Classes &#39;tbl_df&#39;, &#39;tbl&#39; and &#39;data.frame&#39;:    10 obs. of  2 variables:
-##  $ x: num  0.665 1.439 -1.01 1.196 0.577 ...
+##  $ x: num  1.36 -1.012 -0.637 -0.652 0.978 ...
 ##  $ y: chr  &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; ...</code></pre></div>
 <p>以降, それぞれのファイル形式ごとにファイル入力について説明する. いずれのファイル形式にせよ, 外部ファイルから入力するさいには 現在のワークングディレクトリとファイルの場所をきちんと把握しておかなければならない.</p>
 <p>現在のワーキングディレクトリは以下のコマンドで確認できる.</p>
@@ -315,7 +315,7 @@ df &lt;-<span class="st"> </span><span class="kw">read_excel</span>(<span class=
 <p>として, <code>read_csv</code> を用いるときは</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data.csv&quot;</span>, <span class="dt">locale=</span><span class="kw">locale</span>(<span class="dt">encoding =</span> <span class="st">&quot;SJIS&quot;</span>))</code></pre></div>
 <p>とする必要がある.</p>
-<p>私の使った印象だとライブラリ <code>readxl</code> は賢く日本語を扱ってくれっるので, 日本語が含まれている場合, csv に変換せず, そのまま入力したほうがよい.</p>
+<p>私の使った印象だとライブラリ <code>readxl</code> は賢く日本語を扱ってくれるので, 日本語が含まれている場合, csv に変換せず, そのまま入力したほうがよい.</p>
 </div>
 <div id="stata" class="section level2">
 <h2><span class="header-section-number">5.4</span> STATA</h2>

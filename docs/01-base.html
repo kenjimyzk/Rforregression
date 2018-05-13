@@ -335,7 +335,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </tr>
 <tr class="even">
 <td><code>factorial()</code></td>
-<td>順列</td>
+<td>階乗</td>
 </tr>
 <tr class="odd">
 <td><code>choose()</code></td>
@@ -454,15 +454,15 @@ pi
 <h2><span class="header-section-number">1.5</span> パッケージ</h2>
 <p>R においてパッケージを導入することによって, 機能を拡張させることができる.</p>
 <p>パッケージ <code>pkg</code> を導入するため一度だけ以下を実行する.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;pkg&quot;</span>, <span class="dt">dependencies =</span> =<span class="ot">TRUE</span>)</code></pre></div>
-<p>とする. オプション <code>dependencies = TRUE</code> 依存するパッケージを同時に導入してくれる.</p>
-<p>パッケージ <code>pkg</code> が導入していれば, そのコマンド <code>cmd</code> を実行するには</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;pkg&quot;</span>)</code></pre></div>
+<p>とする. なおオプション <code>dependencies = TRUE</code> とすれば依存するパッケージを全て導入してくれる.</p>
+<p>パッケージ <code>pkg</code> が導入していれば, そのパッケージにあるコマンド <code>cmd</code> を実行するには</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pkg<span class="op">::</span>cmd</code></pre></div>
-<p>とパッケージとコマンドの間に <code>::</code> とする.</p>
+<p>とパッケージとコマンドの間に <code>::</code> とする必要がある.</p>
 <p>もしくは <code>library(pkg)</code> もしくは <code>require(pkg)</code> 予め入力しておけば, 最初の <code>pkg::</code> を省略することができる. なお複数のパッケージで同じ名前のコマンドがある場合, あとで <code>library</code> もしくは <code>require</code> としたパッケージの方が優先させるので注意されたい.</p>
 <p>なお <code>library</code> と <code>require</code> に使い方にほとんど違いがないが, <code>require</code> だと以下のように存在しなければインストールするように設定できる.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(lattice)){
-  <span class="kw">install.packages</span>(<span class="st">&quot;lattice&quot;</span>, <span class="dt">dependencies =</span> <span class="ot">TRUE</span>)
+  <span class="kw">install.packages</span>(<span class="st">&quot;lattice&quot;</span>)
   <span class="kw">require</span>(lattice)
 } </code></pre></div>
 <p>ただ私は昔からの癖で <code>library</code> を使っている.</p>
