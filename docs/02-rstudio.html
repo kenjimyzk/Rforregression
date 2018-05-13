@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>R と RStudio</title>
   <meta name="description" content="This is a description. Please wrote a abstract this contents.">
-  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
   <meta property="og:title" content="R と RStudio" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="宮﨑憲治">
 
 
-<meta name="date" content="2018-01-02">
+<meta name="date" content="2018-05-13">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -253,19 +253,19 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2><span class="header-section-number">2.3</span> RStudio の設定</h2>
 <p>メニューバーの [Tools] から [Global Options…] を選択することで設定を変更できる.</p>
 <p>[General] で以下のように [Restore .RData …] のチェックを外していいて, その下を <code>Never</code> にしている. これは, 立ち上げたきに環境をクリーンし, 終了時に, データの保存を聞かれないようにするためである.</p>
-<p><img src="figs/rstudio-general.PNG" width="292" /></p>
+<p><img src="figs/rstudio-general.PNG" /><!-- --></p>
 <p>次に, [Code] の タブ [Saving] で. [Default text encoding] を <code>UTF-8</code> とする. Windows 以外だとOSのシステムフォントが同じなので問題ない. しかし Windows は SJIS を拡張した CP932 なので, 注意が必要である.</p>
 <p>Windows のRは UTF-8 を選択してもR自身はCP932処理している. ただ, 他のOSとの併用の場合, UTF-8 にしたほうがよいだろう. またHTMLファイルは UTF-8 でのファイルが前提になりつつあるので, HTML として出力を考えているなら, <code>UTF-8</code> としたほうが無難である.</p>
 <p>またインターネットで公開されている日本語のRファイルは Windows の使用が前提となっているため, 文字コードが CP932 であることが多い. Windows 以外を使っている場合, 一時的に文字コードを SJIS を選択する必要がある.</p>
-<p><img src="figs/rstudio-utf8.PNG" width="296" /></p>
+<p><img src="figs/rstudio-utf8.PNG" /><!-- --></p>
 <p>あと, [R Markdown] で 真ん中あたりの [Show output preview in:] を <code>View Pane</code> に変更する</p>
-<p><img src="figs/rstudio-rmd.PNG" width="292" /></p>
+<p><img src="figs/rstudio-rmd.PNG" /><!-- --></p>
 </div>
 <div id="rstudio-の使い方" class="section level2">
 <h2><span class="header-section-number">2.4</span> RStudio の使い方</h2>
 <p>RStudio の使い方として日本語版のチートシートがある.</p>
 <p><a href="https://github.com/rstudio/cheatsheets/raw/master/translations/japanese/rstudio-IDE-cheatsheet_ja.pdf" class="uri">https://github.com/rstudio/cheatsheets/raw/master/translations/japanese/rstudio-IDE-cheatsheet_ja.pdf</a></p>
-<p>英語であるがこの動画も有益である. 第一章だけで公開公開されている.</p>
+<p>英語であるがこの動画も有益である. 第一章だけ公開されている.</p>
 <p><a href="https://www.datacamp.com/courses/working-with-the-rstudio-ide-part-1" class="uri">https://www.datacamp.com/courses/working-with-the-rstudio-ide-part-1</a></p>
 <p>RStudio プロジェクト単位で複数のソースコードを管理するのことが推奨される. そうするとプロジェクトごとに作業ディレクトリが設定される. プロジェクトはメニューバー の [File] から [New Project] を選択する. そうすると新たに新たにディレクトリを作成するか, 既存のディレクトリを採用するかなどが選べる. また, バージョン管理ソフトを導入していればそこから取り入れることも可能となる.</p>
 <p><img src="figs/rstudio_project.gif" /><!-- --></p>
@@ -310,10 +310,11 @@ gitbook.start({
 "facebook": true,
 "twitter": true,
 "google": false,
+"linkedin": false,
 "weibo": false,
 "instapper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -337,9 +338,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(script.src))
-      script.src  = script.src.replace(/^https?:/, '');
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>

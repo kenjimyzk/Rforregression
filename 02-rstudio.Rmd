@@ -70,7 +70,7 @@ RStudio の使い方として日本語版のチートシートがある.
 https://github.com/rstudio/cheatsheets/raw/master/translations/japanese/rstudio-IDE-cheatsheet_ja.pdf
 
 英語であるがこの動画も有益である.
-第一章だけで公開公開されている.
+第一章だけ公開されている.
 
 https://www.datacamp.com/courses/working-with-the-rstudio-ide-part-1
 

@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>R と RStudio</title>
   <meta name="description" content="This is a description. Please wrote a abstract this contents.">
-  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
   <meta property="og:title" content="R と RStudio" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="宮﨑憲治">
 
 
-<meta name="date" content="2018-01-02">
+<meta name="date" content="2018-05-13">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -244,20 +244,20 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>), <span class="dt">y =</span> letters[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>])
 <span class="kw">str</span>(df)
 ## &#39;data.frame&#39;:    10 obs. of  2 variables:
-##  $ x: num  0.964 -0.232 -0.102 -0.601 -1.727 ...
+##  $ x: num  -0.8115 -0.133 -0.0254 -0.8591 -1.1167 ...
 ##  $ y: Factor w/ 10 levels &quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;,..: 1 2 3 4 5 6 7 8 9 10</code></pre></div>
 <p>ただデータフレイムは自動的に文字列が因子ベクトルに変換されてしまう. これを避けるには次のように <code>stringsAsFactors= FALSE</code> をつける.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>), <span class="dt">y =</span> letters[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>], <span class="dt">stringsAsFactors=</span> <span class="ot">FALSE</span>)
 <span class="kw">str</span>(df)
 ## &#39;data.frame&#39;:    10 obs. of  2 variables:
-##  $ x: num  3.662 2.541 -0.188 -0.198 1.779 ...
+##  $ x: num  1.5998 -0.4996 -0.4439 -0.0367 0.3568 ...
 ##  $ y: chr  &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; ...</code></pre></div>
 <p>もしくはライブラリ <code>dplyr</code> にある <code>data_frame</code> を用いれば, そのようなオプションを付けることなくデータフレイムを拡張したクラスを作ることができる.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
 df &lt;-<span class="st"> </span><span class="kw">data_frame</span>(<span class="dt">x =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>), <span class="dt">y =</span> letters[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>])
 <span class="kw">str</span>(df)
 ## Classes &#39;tbl_df&#39;, &#39;tbl&#39; and &#39;data.frame&#39;:    10 obs. of  2 variables:
-##  $ x: num  -0.527 1.191 0.771 -0.328 0.914 ...
+##  $ x: num  0.665 1.439 -1.01 1.196 0.577 ...
 ##  $ y: chr  &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; ...</code></pre></div>
 <p>以降, それぞれのファイル形式ごとにファイル入力について説明する. いずれのファイル形式にせよ, 外部ファイルから入力するさいには 現在のワークングディレクトリとファイルの場所をきちんと把握しておかなければならない.</p>
 <p>現在のワーキングディレクトリは以下のコマンドで確認できる.</p>
@@ -338,6 +338,7 @@ df &lt;-<span class="st"> </span><span class="kw">read_dta</span>(<span class="s
 <p>パッケージのデータは関数 <code>data</code> をつかって利用可能になる.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(AER)
 ##  要求されたパッケージ car をロード中です
+##  要求されたパッケージ carData をロード中です
 ## 
 ##  次のパッケージを付け加えます: &#39;car&#39;
 ##  以下のオブジェクトは &#39;package:dplyr&#39; からマスクされています: 
@@ -429,10 +430,11 @@ gitbook.start({
 "facebook": true,
 "twitter": true,
 "google": false,
+"linkedin": false,
 "weibo": false,
 "instapper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -456,9 +458,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(script.src))
-      script.src  = script.src.replace(/^https?:/, '');
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>

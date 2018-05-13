@@ -258,14 +258,14 @@ Du-Hausman 検定は
 
 具体的には以下のF検定を実施する.
 
-1. それぞれの内生変数を外生変数に回帰したときの残差える. (`residuals(ols1)`)
+1. それぞれの内生変数を外生変数に回帰したときの残差を得る. (`resid(ols1)`)
 2. 被説明変数を説明変数に回帰する (`ols3`)
 3. 被説明変数を説明変数および先程の残差に回帰する (`ols4`)
 4. これらの残差の係数はゼロであるという帰無仮説のもとF検定を実施する.
 
 ```r
 ols3 <- lm(log(wage) ~ educ  + exper + I(exper^2), data = df)
-ols4 <- update(ols3, . ~ . + residuals(ols1))
+ols4 <- update(ols3, . ~ . + resid(ols1))
 anova(ols3,ols4)
 ```
 
@@ -273,7 +273,7 @@ anova(ols3,ols4)
 ## Analysis of Variance Table
 ## 
 ## Model 1: log(wage) ~ educ + exper + I(exper^2)
-## Model 2: log(wage) ~ educ + exper + I(exper^2) + residuals(ols1)
+## Model 2: log(wage) ~ educ + exper + I(exper^2) + resid(ols1)
 ##   Res.Df    RSS Df Sum of Sq      F  Pr(>F)  
 ## 1    424 188.31                              
 ## 2    423 187.07  1     1.235 2.7926 0.09544 .
@@ -288,7 +288,7 @@ Sargan 検定は
 
 LM検定を実施する.
 
-1. 二段階最小二乗法を実施したときの残差える. (`resid(fm)`)
+1. 二段階最小二乗法を実施したときの残差を得る. (`resid(fm)`)
 2. 残差を外生変数および操作変数に回帰する. 
 3. 回帰の決定係数に観測数を乗じたLM統計量をえる.
 4. 検定統計量は, 帰無仮説のもと, 操作変数の数から内生変数の数を差し引いた自由度のカイ二乗分布にしたがう.

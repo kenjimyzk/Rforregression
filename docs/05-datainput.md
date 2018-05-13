@@ -24,7 +24,7 @@ R においてデータ分析をおこなうには
 df <- data.frame(x = rnorm(10), y = letters[1:10])
 str(df)
 ## 'data.frame':	10 obs. of  2 variables:
-##  $ x: num  0.964 -0.232 -0.102 -0.601 -1.727 ...
+##  $ x: num  -0.8115 -0.133 -0.0254 -0.8591 -1.1167 ...
 ##  $ y: Factor w/ 10 levels "a","b","c","d",..: 1 2 3 4 5 6 7 8 9 10
 ```
 
@@ -35,7 +35,7 @@ str(df)
 df <- data.frame(x = rnorm(10), y = letters[1:10], stringsAsFactors= FALSE)
 str(df)
 ## 'data.frame':	10 obs. of  2 variables:
-##  $ x: num  3.662 2.541 -0.188 -0.198 1.779 ...
+##  $ x: num  1.5998 -0.4996 -0.4439 -0.0367 0.3568 ...
 ##  $ y: chr  "a" "b" "c" "d" ...
 ```
 
@@ -46,7 +46,7 @@ library(dplyr)
 df <- data_frame(x = rnorm(10), y = letters[1:10])
 str(df)
 ## Classes 'tbl_df', 'tbl' and 'data.frame':	10 obs. of  2 variables:
-##  $ x: num  -0.527 1.191 0.771 -0.328 0.914 ...
+##  $ x: num  0.665 1.439 -1.01 1.196 0.577 ...
 ##  $ y: chr  "a" "b" "c" "d" ...
 ```
 
@@ -234,6 +234,7 @@ help(cars)
 ```r
 library(AER)
 ##  要求されたパッケージ car をロード中です
+##  要求されたパッケージ carData をロード中です
 ## 
 ##  次のパッケージを付け加えます: 'car'
 ##  以下のオブジェクトは 'package:dplyr' からマスクされています: 
