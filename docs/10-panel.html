@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>R と RStudio</title>
+  <title>10 パネル分析 | R と RStudio</title>
   <meta name="description" content="This is a description. Please wrote a abstract this contents.">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="R と RStudio" />
+  <meta property="og:title" content="10 パネル分析 | R と RStudio" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="R と RStudio" />
+  <meta name="twitter:title" content="10 パネル分析 | R と RStudio" />
   
   <meta name="twitter:description" content="This is a description. Please wrote a abstract this contents." />
   
@@ -25,7 +25,7 @@
 <meta name="author" content="宮﨑憲治">
 
 
-<meta name="date" content="2018-05-13">
+<meta name="date" content="2018-12-24">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -36,6 +36,7 @@
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -50,41 +51,67 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -100,118 +127,122 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">R と RStudio</a></li>
+<li><a href="./">R & RStudio</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>はじめに</a><ul>
-<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#r-とは"><i class="fa fa-check"></i><b>0.1</b> R とは</a></li>
-<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#r-のインストール"><i class="fa fa-check"></i><b>0.2</b> R のインストール</a></li>
-<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#r-の設定"><i class="fa fa-check"></i><b>0.3</b> R の設定</a></li>
-<li class="chapter" data-level="0.4" data-path="index.html"><a href="index.html#r-の使い方"><i class="fa fa-check"></i><b>0.4</b> R の使い方</a></li>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#r-"><i class="fa fa-check"></i><b>0.1</b> R とは</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#r-"><i class="fa fa-check"></i><b>0.2</b> R のインストール</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#r-"><i class="fa fa-check"></i><b>0.3</b> R の設定</a></li>
+<li class="chapter" data-level="0.4" data-path="index.html"><a href="index.html#r-"><i class="fa fa-check"></i><b>0.4</b> R の使い方</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="01-base.html"><a href="01-base.html"><i class="fa fa-check"></i><b>1</b> 基本</a><ul>
-<li class="chapter" data-level="1.1" data-path="01-base.html"><a href="01-base.html#電卓としての-r"><i class="fa fa-check"></i><b>1.1</b> 電卓としての R</a></li>
-<li class="chapter" data-level="1.2" data-path="01-base.html"><a href="01-base.html#関数電卓としてのr"><i class="fa fa-check"></i><b>1.2</b> 関数電卓としてのR</a></li>
-<li class="chapter" data-level="1.3" data-path="01-base.html"><a href="01-base.html#r-の型"><i class="fa fa-check"></i><b>1.3</b> R の型</a></li>
-<li class="chapter" data-level="1.4" data-path="01-base.html"><a href="01-base.html#変数"><i class="fa fa-check"></i><b>1.4</b> 変数</a></li>
-<li class="chapter" data-level="1.5" data-path="01-base.html"><a href="01-base.html#パッケージ"><i class="fa fa-check"></i><b>1.5</b> パッケージ</a></li>
+<li class="chapter" data-level="1.1" data-path="01-base.html"><a href="01-base.html#-r"><i class="fa fa-check"></i><b>1.1</b> 電卓としての R</a></li>
+<li class="chapter" data-level="1.2" data-path="01-base.html"><a href="01-base.html#r"><i class="fa fa-check"></i><b>1.2</b> 関数電卓としてのR</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#r-"><i class="fa fa-check"></i><b>1.3</b> R の型</a></li>
+<li class="chapter" data-level="1.4" data-path="01-base.html"><a href="01-base.html#section-1.4"><i class="fa fa-check"></i><b>1.4</b> 変数</a></li>
+<li class="chapter" data-level="1.5" data-path="01-base.html"><a href="01-base.html#section-1.5"><i class="fa fa-check"></i><b>1.5</b> パッケージ</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="02-rstudio.html"><a href="02-rstudio.html"><i class="fa fa-check"></i><b>2</b> RStudio</a><ul>
-<li class="chapter" data-level="2.1" data-path="02-rstudio.html"><a href="02-rstudio.html#rstudio-とは"><i class="fa fa-check"></i><b>2.1</b> RStudio とは</a></li>
-<li class="chapter" data-level="2.2" data-path="02-rstudio.html"><a href="02-rstudio.html#rstudio-のインストール"><i class="fa fa-check"></i><b>2.2</b> RStudio のインストール</a></li>
-<li class="chapter" data-level="2.3" data-path="02-rstudio.html"><a href="02-rstudio.html#rstudio-の設定"><i class="fa fa-check"></i><b>2.3</b> RStudio の設定</a></li>
-<li class="chapter" data-level="2.4" data-path="02-rstudio.html"><a href="02-rstudio.html#rstudio-の使い方"><i class="fa fa-check"></i><b>2.4</b> RStudio の使い方</a></li>
+<li class="chapter" data-level="2.1" data-path="02-rstudio.html"><a href="02-rstudio.html#rstudio-"><i class="fa fa-check"></i><b>2.1</b> RStudio とは</a></li>
+<li class="chapter" data-level="2.2" data-path="02-rstudio.html"><a href="02-rstudio.html#rstudio-"><i class="fa fa-check"></i><b>2.2</b> RStudio のインストール</a></li>
+<li class="chapter" data-level="2.3" data-path="02-rstudio.html"><a href="02-rstudio.html#rstudio-"><i class="fa fa-check"></i><b>2.3</b> RStudio の設定</a></li>
+<li class="chapter" data-level="2.4" data-path="02-rstudio.html"><a href="02-rstudio.html#rstudio-"><i class="fa fa-check"></i><b>2.4</b> RStudio の使い方</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="03-vector.html"><a href="03-vector.html"><i class="fa fa-check"></i><b>3</b> ベクトル</a><ul>
-<li class="chapter" data-level="3.1" data-path="03-vector.html"><a href="03-vector.html#ベクトル-1"><i class="fa fa-check"></i><b>3.1</b> ベクトル</a></li>
-<li class="chapter" data-level="3.2" data-path="03-vector.html"><a href="03-vector.html#算術演算子"><i class="fa fa-check"></i><b>3.2</b> 算術演算子</a></li>
-<li class="chapter" data-level="3.3" data-path="03-vector.html"><a href="03-vector.html#論理演算子"><i class="fa fa-check"></i><b>3.3</b> 論理演算子</a></li>
-<li class="chapter" data-level="3.4" data-path="03-vector.html"><a href="03-vector.html#比較演算子"><i class="fa fa-check"></i><b>3.4</b> 比較演算子</a></li>
-<li class="chapter" data-level="3.5" data-path="03-vector.html"><a href="03-vector.html#要素"><i class="fa fa-check"></i><b>3.5</b> 要素</a></li>
-<li class="chapter" data-level="3.6" data-path="03-vector.html"><a href="03-vector.html#関数"><i class="fa fa-check"></i><b>3.6</b> 関数</a></li>
-<li class="chapter" data-level="3.7" data-path="03-vector.html"><a href="03-vector.html#規則的なベクトル"><i class="fa fa-check"></i><b>3.7</b> 規則的なベクトル</a></li>
-<li class="chapter" data-level="3.8" data-path="03-vector.html"><a href="03-vector.html#乱数ベクトル"><i class="fa fa-check"></i><b>3.8</b> 乱数ベクトル</a></li>
+<li class="chapter" data-level="3.1" data-path="03-vector.html"><a href="03-vector.html#-1"><i class="fa fa-check"></i><b>3.1</b> ベクトル</a></li>
+<li class="chapter" data-level="3.2" data-path="03-vector.html"><a href="03-vector.html#section-3.2"><i class="fa fa-check"></i><b>3.2</b> 算術演算子</a></li>
+<li class="chapter" data-level="3.3" data-path="03-vector.html"><a href="03-vector.html#section-3.3"><i class="fa fa-check"></i><b>3.3</b> 論理演算子</a></li>
+<li class="chapter" data-level="3.4" data-path="03-vector.html"><a href="03-vector.html#section-3.4"><i class="fa fa-check"></i><b>3.4</b> 比較演算子</a></li>
+<li class="chapter" data-level="3.5" data-path="03-vector.html"><a href="03-vector.html#section-3.5"><i class="fa fa-check"></i><b>3.5</b> 要素</a></li>
+<li class="chapter" data-level="3.6" data-path="03-vector.html"><a href="03-vector.html#section-3.6"><i class="fa fa-check"></i><b>3.6</b> 関数</a></li>
+<li class="chapter" data-level="3.7" data-path="03-vector.html"><a href="03-vector.html#section-3.7"><i class="fa fa-check"></i><b>3.7</b> 規則的なベクトル</a></li>
+<li class="chapter" data-level="3.8" data-path="03-vector.html"><a href="03-vector.html#section-3.8"><i class="fa fa-check"></i><b>3.8</b> 乱数ベクトル</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="04-dataframe.html"><a href="04-dataframe.html"><i class="fa fa-check"></i><b>4</b> データ構造</a><ul>
-<li class="chapter" data-level="4.1" data-path="04-dataframe.html"><a href="04-dataframe.html#ベクトル-2"><i class="fa fa-check"></i><b>4.1</b> ベクトル</a><ul>
-<li class="chapter" data-level="4.1.1" data-path="04-dataframe.html"><a href="04-dataframe.html#ベクトルのアクセス"><i class="fa fa-check"></i><b>4.1.1</b> ベクトルのアクセス</a></li>
+<li class="chapter" data-level="4.1" data-path="04-dataframe.html"><a href="04-dataframe.html#-2"><i class="fa fa-check"></i><b>4.1</b> ベクトル</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="04-dataframe.html"><a href="04-dataframe.html#section-4.1.1"><i class="fa fa-check"></i><b>4.1.1</b> ベクトルのアクセス</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="04-dataframe.html"><a href="04-dataframe.html#リスト"><i class="fa fa-check"></i><b>4.2</b> リスト</a><ul>
-<li class="chapter" data-level="4.2.1" data-path="04-dataframe.html"><a href="04-dataframe.html#リストのアクセス"><i class="fa fa-check"></i><b>4.2.1</b> リストのアクセス</a></li>
+<li class="chapter" data-level="4.2" data-path="04-dataframe.html"><a href="04-dataframe.html#section-4.2"><i class="fa fa-check"></i><b>4.2</b> リスト</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="04-dataframe.html"><a href="04-dataframe.html#section-4.2.1"><i class="fa fa-check"></i><b>4.2.1</b> リストのアクセス</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="04-dataframe.html"><a href="04-dataframe.html#因子ベクトル"><i class="fa fa-check"></i><b>4.3</b> 因子ベクトル</a><ul>
+<li class="chapter" data-level="4.3" data-path="04-dataframe.html"><a href="04-dataframe.html#section-4.3"><i class="fa fa-check"></i><b>4.3</b> 因子ベクトル</a><ul>
 <li class="chapter" data-level="4.3.1" data-path="04-dataframe.html"><a href="04-dataframe.html#factor"><i class="fa fa-check"></i><b>4.3.1</b> factor</a></li>
 <li class="chapter" data-level="4.3.2" data-path="04-dataframe.html"><a href="04-dataframe.html#cut"><i class="fa fa-check"></i><b>4.3.2</b> cut</a></li>
 </ul></li>
-<li class="chapter" data-level="4.4" data-path="04-dataframe.html"><a href="04-dataframe.html#行列"><i class="fa fa-check"></i><b>4.4</b> 行列</a><ul>
-<li class="chapter" data-level="4.4.1" data-path="04-dataframe.html"><a href="04-dataframe.html#行列の演算"><i class="fa fa-check"></i><b>4.4.1</b> 行列の演算</a></li>
-<li class="chapter" data-level="4.4.2" data-path="04-dataframe.html"><a href="04-dataframe.html#行列のアクセス"><i class="fa fa-check"></i><b>4.4.2</b> 行列のアクセス</a></li>
+<li class="chapter" data-level="4.4" data-path="04-dataframe.html"><a href="04-dataframe.html#section-4.4"><i class="fa fa-check"></i><b>4.4</b> 行列</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="04-dataframe.html"><a href="04-dataframe.html#section-4.4.1"><i class="fa fa-check"></i><b>4.4.1</b> 行列の演算</a></li>
+<li class="chapter" data-level="4.4.2" data-path="04-dataframe.html"><a href="04-dataframe.html#section-4.4.2"><i class="fa fa-check"></i><b>4.4.2</b> 行列のアクセス</a></li>
 </ul></li>
-<li class="chapter" data-level="4.5" data-path="04-dataframe.html"><a href="04-dataframe.html#データフレイム"><i class="fa fa-check"></i><b>4.5</b> データフレイム</a><ul>
-<li class="chapter" data-level="4.5.1" data-path="04-dataframe.html"><a href="04-dataframe.html#データフレイムの演算"><i class="fa fa-check"></i><b>4.5.1</b> データフレイムの演算</a></li>
-<li class="chapter" data-level="4.5.2" data-path="04-dataframe.html"><a href="04-dataframe.html#データフレイムのアクセス"><i class="fa fa-check"></i><b>4.5.2</b> データフレイムのアクセス</a></li>
+<li class="chapter" data-level="4.5" data-path="04-dataframe.html"><a href="04-dataframe.html#section-4.5"><i class="fa fa-check"></i><b>4.5</b> データフレイム</a><ul>
+<li class="chapter" data-level="4.5.1" data-path="04-dataframe.html"><a href="04-dataframe.html#section-4.5.1"><i class="fa fa-check"></i><b>4.5.1</b> データフレイムの演算</a></li>
+<li class="chapter" data-level="4.5.2" data-path="04-dataframe.html"><a href="04-dataframe.html#section-4.5.2"><i class="fa fa-check"></i><b>4.5.2</b> データフレイムのアクセス</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="05-datainput.html"><a href="05-datainput.html"><i class="fa fa-check"></i><b>5</b> データ入力</a><ul>
-<li class="chapter" data-level="5.1" data-path="05-datainput.html"><a href="05-datainput.html#はじめに-1"><i class="fa fa-check"></i><b>5.1</b> はじめに</a></li>
-<li class="chapter" data-level="5.2" data-path="05-datainput.html"><a href="05-datainput.html#csv-ファイル"><i class="fa fa-check"></i><b>5.2</b> csv ファイル</a></li>
-<li class="chapter" data-level="5.3" data-path="05-datainput.html"><a href="05-datainput.html#excel-ファイル"><i class="fa fa-check"></i><b>5.3</b> EXCEL ファイル</a></li>
+<li class="chapter" data-level="5.1" data-path="03-vector.html"><a href="03-vector.html#-1"><i class="fa fa-check"></i><b>5.1</b> はじめに</a></li>
+<li class="chapter" data-level="5.2" data-path="05-datainput.html"><a href="05-datainput.html#csv-"><i class="fa fa-check"></i><b>5.2</b> csv ファイル</a></li>
+<li class="chapter" data-level="5.3" data-path="05-datainput.html"><a href="05-datainput.html#excel-"><i class="fa fa-check"></i><b>5.3</b> EXCEL ファイル</a></li>
 <li class="chapter" data-level="5.4" data-path="05-datainput.html"><a href="05-datainput.html#stata"><i class="fa fa-check"></i><b>5.4</b> STATA</a></li>
-<li class="chapter" data-level="5.5" data-path="05-datainput.html"><a href="05-datainput.html#r-に入っているデータ"><i class="fa fa-check"></i><b>5.5</b> R に入っているデータ</a></li>
-<li class="chapter" data-level="5.6" data-path="05-datainput.html"><a href="05-datainput.html#インターネットからデータ入力"><i class="fa fa-check"></i><b>5.6</b> インターネットからデータ入力</a></li>
-<li class="chapter" data-level="5.7" data-path="05-datainput.html"><a href="05-datainput.html#その他のデータ入力"><i class="fa fa-check"></i><b>5.7</b> その他のデータ入力</a></li>
+<li class="chapter" data-level="5.5" data-path="index.html"><a href="index.html#r-"><i class="fa fa-check"></i><b>5.5</b> R に入っているデータ</a></li>
+<li class="chapter" data-level="5.6" data-path="05-datainput.html"><a href="05-datainput.html#section-5.6"><i class="fa fa-check"></i><b>5.6</b> インターネットからデータ入力</a></li>
+<li class="chapter" data-level="5.7" data-path="05-datainput.html"><a href="05-datainput.html#section-5.7"><i class="fa fa-check"></i><b>5.7</b> その他のデータ入力</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="06-datawrangling.html"><a href="06-datawrangling.html"><i class="fa fa-check"></i><b>6</b> 整然データ</a><ul>
-<li class="chapter" data-level="6.1" data-path="06-datawrangling.html"><a href="06-datawrangling.html#データ整形"><i class="fa fa-check"></i><b>6.1</b> データ整形</a></li>
-<li class="chapter" data-level="6.2" data-path="06-datawrangling.html"><a href="06-datawrangling.html#データ結合"><i class="fa fa-check"></i><b>6.2</b> データ結合</a></li>
+<li class="chapter" data-level="6.1" data-path="06-datawrangling.html"><a href="06-datawrangling.html#section-6.1"><i class="fa fa-check"></i><b>6.1</b> データ整形</a></li>
+<li class="chapter" data-level="6.2" data-path="06-datawrangling.html"><a href="06-datawrangling.html#section-6.2"><i class="fa fa-check"></i><b>6.2</b> データ結合</a></li>
 <li class="chapter" data-level="6.3" data-path="06-datawrangling.html"><a href="06-datawrangling.html#tidyr"><i class="fa fa-check"></i><b>6.3</b> tidyr</a></li>
-<li class="chapter" data-level="6.4" data-path="06-datawrangling.html"><a href="06-datawrangling.html#実践例"><i class="fa fa-check"></i><b>6.4</b> 実践例</a></li>
+<li class="chapter" data-level="6.4" data-path="06-datawrangling.html"><a href="06-datawrangling.html#section-6.4"><i class="fa fa-check"></i><b>6.4</b> 実践例</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="07-regression1.html"><a href="07-regression1.html"><i class="fa fa-check"></i><b>7</b> 古典的仮定のもとでの最小二乗法</a><ul>
-<li class="chapter" data-level="7.1" data-path="07-regression1.html"><a href="07-regression1.html#単回帰モデル"><i class="fa fa-check"></i><b>7.1</b> 単回帰モデル</a><ul>
-<li class="chapter" data-level="7.1.1" data-path="07-regression1.html"><a href="07-regression1.html#ティー検定"><i class="fa fa-check"></i><b>7.1.1</b> ティー検定</a></li>
-<li class="chapter" data-level="7.1.2" data-path="07-regression1.html"><a href="07-regression1.html#対数変換"><i class="fa fa-check"></i><b>7.1.2</b> 対数変換</a></li>
-<li class="chapter" data-level="7.1.3" data-path="07-regression1.html"><a href="07-regression1.html#切片なし回帰モデル"><i class="fa fa-check"></i><b>7.1.3</b> 切片なし回帰モデル</a></li>
+<li class="chapter" data-level="7.1" data-path="07-regression1.html"><a href="07-regression1.html#section-7.1"><i class="fa fa-check"></i><b>7.1</b> 単回帰モデル</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="07-regression1.html"><a href="07-regression1.html#section-7.1.1"><i class="fa fa-check"></i><b>7.1.1</b> ティー検定</a></li>
+<li class="chapter" data-level="7.1.2" data-path="07-regression1.html"><a href="07-regression1.html#section-7.1.2"><i class="fa fa-check"></i><b>7.1.2</b> 対数変換</a></li>
+<li class="chapter" data-level="7.1.3" data-path="07-regression1.html"><a href="07-regression1.html#section-7.1.3"><i class="fa fa-check"></i><b>7.1.3</b> 切片なし回帰モデル</a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="07-regression1.html"><a href="07-regression1.html#重回帰モデル"><i class="fa fa-check"></i><b>7.2</b> 重回帰モデル</a><ul>
-<li class="chapter" data-level="7.2.1" data-path="07-regression1.html"><a href="07-regression1.html#自乗項"><i class="fa fa-check"></i><b>7.2.1</b> 自乗項</a></li>
-<li class="chapter" data-level="7.2.2" data-path="07-regression1.html"><a href="07-regression1.html#交差項"><i class="fa fa-check"></i><b>7.2.2</b> 交差項</a></li>
-<li class="chapter" data-level="7.2.3" data-path="07-regression1.html"><a href="07-regression1.html#エフ検定"><i class="fa fa-check"></i><b>7.2.3</b> エフ検定</a></li>
+<li class="chapter" data-level="7.2" data-path="07-regression1.html"><a href="07-regression1.html#section-7.2"><i class="fa fa-check"></i><b>7.2</b> 重回帰モデル</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="07-regression1.html"><a href="07-regression1.html#section-7.2.1"><i class="fa fa-check"></i><b>7.2.1</b> 自乗項</a></li>
+<li class="chapter" data-level="7.2.2" data-path="07-regression1.html"><a href="07-regression1.html#section-7.2.2"><i class="fa fa-check"></i><b>7.2.2</b> 交差項</a></li>
+<li class="chapter" data-level="7.2.3" data-path="07-regression1.html"><a href="07-regression1.html#section-7.2.3"><i class="fa fa-check"></i><b>7.2.3</b> エフ検定</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="08-regression2.html"><a href="08-regression2.html"><i class="fa fa-check"></i><b>8</b> 現代的仮定のもとでの最小二乗法</a><ul>
-<li class="chapter" data-level="8.1" data-path="08-regression2.html"><a href="08-regression2.html#正規性の仮定について"><i class="fa fa-check"></i><b>8.1</b> 正規性の仮定について</a></li>
-<li class="chapter" data-level="8.2" data-path="08-regression2.html"><a href="08-regression2.html#誤差項と説明変数が独立の仮定について"><i class="fa fa-check"></i><b>8.2</b> 誤差項と説明変数が独立の仮定について</a></li>
-<li class="chapter" data-level="8.3" data-path="08-regression2.html"><a href="08-regression2.html#分散均一の検定"><i class="fa fa-check"></i><b>8.3</b> 分散均一の検定</a></li>
+<li class="chapter" data-level="8.1" data-path="08-regression2.html"><a href="08-regression2.html#section-8.1"><i class="fa fa-check"></i><b>8.1</b> 正規性の仮定について</a></li>
+<li class="chapter" data-level="8.2" data-path="08-regression2.html"><a href="08-regression2.html#section-8.2"><i class="fa fa-check"></i><b>8.2</b> 誤差項と説明変数が独立の仮定について</a></li>
+<li class="chapter" data-level="8.3" data-path="08-regression2.html"><a href="08-regression2.html#section-8.3"><i class="fa fa-check"></i><b>8.3</b> 分散均一の検定</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="09-ivreg.html"><a href="09-ivreg.html"><i class="fa fa-check"></i><b>9</b> 操作変数法</a><ul>
-<li class="chapter" data-level="9.1" data-path="09-ivreg.html"><a href="09-ivreg.html#データ"><i class="fa fa-check"></i><b>9.1</b> データ</a></li>
-<li class="chapter" data-level="9.2" data-path="09-ivreg.html"><a href="09-ivreg.html#操作変数"><i class="fa fa-check"></i><b>9.2</b> 操作変数</a></li>
-<li class="chapter" data-level="9.3" data-path="09-ivreg.html"><a href="09-ivreg.html#段階最小二乗法"><i class="fa fa-check"></i><b>9.3</b> 2段階最小二乗法</a><ul>
-<li class="chapter" data-level="9.3.1" data-path="09-ivreg.html"><a href="09-ivreg.html#複数制約の検定"><i class="fa fa-check"></i><b>9.3.1</b> 複数制約の検定</a></li>
+<li class="chapter" data-level="9.1" data-path="09-ivreg.html"><a href="09-ivreg.html#section-9.1"><i class="fa fa-check"></i><b>9.1</b> データ</a></li>
+<li class="chapter" data-level="9.2" data-path="09-ivreg.html"><a href="09-ivreg.html#section-9.2"><i class="fa fa-check"></i><b>9.2</b> 操作変数</a></li>
+<li class="chapter" data-level="9.3" data-path="09-ivreg.html"><a href="09-ivreg.html#section-9.3"><i class="fa fa-check"></i><b>9.3</b> 2段階最小二乗法</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="09-ivreg.html"><a href="09-ivreg.html#section-9.3.1"><i class="fa fa-check"></i><b>9.3.1</b> 複数制約の検定</a></li>
 </ul></li>
-<li class="chapter" data-level="9.4" data-path="09-ivreg.html"><a href="09-ivreg.html#特定化検定"><i class="fa fa-check"></i><b>9.4</b> 特定化検定</a><ul>
+<li class="chapter" data-level="9.4" data-path="09-ivreg.html"><a href="09-ivreg.html#section-9.4"><i class="fa fa-check"></i><b>9.4</b> 特定化検定</a><ul>
 <li class="chapter" data-level="9.4.1" data-path="09-ivreg.html"><a href="09-ivreg.html#weak-instruments"><i class="fa fa-check"></i><b>9.4.1</b> Weak instruments</a></li>
-<li class="chapter" data-level="9.4.2" data-path="09-ivreg.html"><a href="09-ivreg.html#du-hausman-検定"><i class="fa fa-check"></i><b>9.4.2</b> Du-Hausman 検定</a></li>
-<li class="chapter" data-level="9.4.3" data-path="09-ivreg.html"><a href="09-ivreg.html#sargan-検定"><i class="fa fa-check"></i><b>9.4.3</b> Sargan 検定</a></li>
+<li class="chapter" data-level="9.4.2" data-path="09-ivreg.html"><a href="09-ivreg.html#wu-hausman-"><i class="fa fa-check"></i><b>9.4.2</b> Wu-Hausman 検定</a></li>
+<li class="chapter" data-level="9.4.3" data-path="09-ivreg.html"><a href="09-ivreg.html#sargan-"><i class="fa fa-check"></i><b>9.4.3</b> Sargan 検定</a></li>
 </ul></li>
-<li class="chapter" data-level="9.5" data-path="09-ivreg.html"><a href="09-ivreg.html#ロバスト分散"><i class="fa fa-check"></i><b>9.5</b> ロバスト分散</a><ul>
-<li class="chapter" data-level="9.5.1" data-path="09-ivreg.html"><a href="09-ivreg.html#分散不均一の検定"><i class="fa fa-check"></i><b>9.5.1</b> 分散不均一の検定</a></li>
+<li class="chapter" data-level="9.5" data-path="09-ivreg.html"><a href="09-ivreg.html#section-9.5"><i class="fa fa-check"></i><b>9.5</b> ロバスト分散</a><ul>
+<li class="chapter" data-level="9.5.1" data-path="09-ivreg.html"><a href="09-ivreg.html#section-9.5.1"><i class="fa fa-check"></i><b>9.5.1</b> 分散不均一の検定</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="10-panel.html"><a href="10-panel.html"><i class="fa fa-check"></i><b>10</b> パネル分析</a><ul>
-<li class="chapter" data-level="10.1" data-path="10-panel.html"><a href="10-panel.html#データ-1"><i class="fa fa-check"></i><b>10.1</b> データ</a></li>
-<li class="chapter" data-level="10.2" data-path="10-panel.html"><a href="10-panel.html#プーリングols"><i class="fa fa-check"></i><b>10.2</b> プーリングOLS</a></li>
-<li class="chapter" data-level="10.3" data-path="10-panel.html"><a href="10-panel.html#固定効果モデル"><i class="fa fa-check"></i><b>10.3</b> 固定効果モデル</a><ul>
-<li class="chapter" data-level="10.3.1" data-path="10-panel.html"><a href="10-panel.html#時間効果"><i class="fa fa-check"></i><b>10.3.1</b> 時間効果</a></li>
-<li class="chapter" data-level="10.3.2" data-path="10-panel.html"><a href="10-panel.html#固定効果vsプーリングols"><i class="fa fa-check"></i><b>10.3.2</b> 固定効果VSプーリングOLS</a></li>
+<li class="chapter" data-level="10.1" data-path="03-vector.html"><a href="03-vector.html#-1"><i class="fa fa-check"></i><b>10.1</b> データ</a></li>
+<li class="chapter" data-level="10.2" data-path="10-panel.html"><a href="10-panel.html#ols"><i class="fa fa-check"></i><b>10.2</b> プーリングOLS</a></li>
+<li class="chapter" data-level="10.3" data-path="10-panel.html"><a href="10-panel.html#-"><i class="fa fa-check"></i><b>10.3</b> 固定効果モデル (平均差分法)</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="10-panel.html"><a href="10-panel.html#section-10.3.1"><i class="fa fa-check"></i><b>10.3.1</b> 時間効果</a></li>
+<li class="chapter" data-level="10.3.2" data-path="10-panel.html"><a href="10-panel.html#vsols"><i class="fa fa-check"></i><b>10.3.2</b> 固定効果VSプーリングOLS</a></li>
 </ul></li>
-<li class="chapter" data-level="10.4" data-path="10-panel.html"><a href="10-panel.html#変量効果モデル"><i class="fa fa-check"></i><b>10.4</b> 変量効果モデル</a><ul>
-<li class="chapter" data-level="10.4.1" data-path="10-panel.html"><a href="10-panel.html#時間効果-1"><i class="fa fa-check"></i><b>10.4.1</b> 時間効果</a></li>
-<li class="chapter" data-level="10.4.2" data-path="10-panel.html"><a href="10-panel.html#ハウスマン検定"><i class="fa fa-check"></i><b>10.4.2</b> ハウスマン検定</a></li>
+<li class="chapter" data-level="10.4" data-path="10-panel.html"><a href="10-panel.html#-"><i class="fa fa-check"></i><b>10.4</b> 固定効果モデル (一階差分法)</a><ul>
+<li class="chapter" data-level="10.4.1" data-path="03-vector.html"><a href="03-vector.html#-1"><i class="fa fa-check"></i><b>10.4.1</b> 時間効果</a></li>
+<li class="chapter" data-level="10.4.2" data-path="10-panel.html"><a href="10-panel.html#section-10.4.2"><i class="fa fa-check"></i><b>10.4.2</b> 平均差分法と一階差分法</a></li>
 </ul></li>
-<li class="chapter" data-level="10.5" data-path="10-panel.html"><a href="10-panel.html#クラスターロバスト分散"><i class="fa fa-check"></i><b>10.5</b> クラスターロバスト分散</a><ul>
-<li class="chapter" data-level="10.5.1" data-path="10-panel.html"><a href="10-panel.html#分散不均一の検定-1"><i class="fa fa-check"></i><b>10.5.1</b> 分散不均一の検定</a></li>
+<li class="chapter" data-level="10.5" data-path="10-panel.html"><a href="10-panel.html#section-10.5"><i class="fa fa-check"></i><b>10.5</b> 変量効果モデル</a><ul>
+<li class="chapter" data-level="10.5.1" data-path="04-dataframe.html"><a href="04-dataframe.html#-2"><i class="fa fa-check"></i><b>10.5.1</b> 時間効果</a></li>
+<li class="chapter" data-level="10.5.2" data-path="10-panel.html"><a href="10-panel.html#section-10.5.2"><i class="fa fa-check"></i><b>10.5.2</b> ハウスマン検定</a></li>
+</ul></li>
+<li class="chapter" data-level="10.6" data-path="10-panel.html"><a href="10-panel.html#section-10.6"><i class="fa fa-check"></i><b>10.6</b> クラスターロバスト分散</a><ul>
+<li class="chapter" data-level="10.6.1" data-path="03-vector.html"><a href="03-vector.html#-1"><i class="fa fa-check"></i><b>10.6.1</b> 分散不均一の検定</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -234,14 +265,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="パネル分析" class="section level1">
+<div id="section-10" class="section level1">
 <h1><span class="header-section-number">10</span> パネル分析</h1>
-<div id="データ-1" class="section level2">
+<div id="-1" class="section level2">
 <h2><span class="header-section-number">10.1</span> データ</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(AER)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(AER)
 <span class="kw">library</span>(plm)
 <span class="kw">data</span>(<span class="st">&quot;Grunfeld&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;plm&quot;</span>)
-<span class="kw">head</span>(Grunfeld)</code></pre></div>
+<span class="kw">head</span>(Grunfeld)</code></pre>
 <pre><code>##   firm year   inv  value capital
 ## 1    1 1935 317.6 3078.5     2.8
 ## 2    1 1936 391.8 4661.7    52.6
@@ -249,19 +280,20 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ## 4    1 1938 257.7 2792.2   209.2
 ## 5    1 1939 330.8 4313.2   203.4
 ## 6    1 1940 461.2 4643.9   207.2</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pdata &lt;-<span class="st"> </span><span class="kw">pdata.frame</span>(Grunfeld, <span class="dt">index =</span> <span class="kw">c</span>(<span class="st">&quot;firm&quot;</span>, <span class="st">&quot;year&quot;</span>))
-<span class="kw">pdim</span>(pdata)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">pdata &lt;-<span class="st"> </span><span class="kw">pdata.frame</span>(Grunfeld, <span class="dt">index =</span> <span class="kw">c</span>(<span class="st">&quot;firm&quot;</span>, <span class="st">&quot;year&quot;</span>))
+<span class="kw">pdim</span>(pdata)</code></pre>
 <pre><code>## Balanced Panel: n = 10, T = 20, N = 200</code></pre>
 </div>
-<div id="プーリングols" class="section level2">
+<div id="ols" class="section level2">
 <h2><span class="header-section-number">10.2</span> プーリングOLS</h2>
 <p><span class="math display">\[
 inv_{it} = \beta_0 + \beta_1 value_{it} + \beta_2 capital_{it} + u_{it}
 \]</span></p>
-<p>誤差項 <span class="math inline">\(u_{it}\)</span> は <span class="math inline">\(i\)</span> についても <span class="math inline">\(t\)</span> についても独立同一分布と仮定する. さらに誤差項は説明変数と独立である.</p>
+<p>誤差項 <span class="math inline">\(u_{it}\)</span> は <span class="math inline">\(i\)</span> についても <span class="math inline">\(t\)</span> についても独立同一分布と仮定する.
+さらに誤差項は説明変数と独立である.</p>
 <p>この推計は以下のようにする.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gp &lt;-<span class="st"> </span><span class="kw">plm</span>(inv <span class="op">~</span><span class="st"> </span>value <span class="op">+</span><span class="st"> </span>capital, <span class="dt">data =</span> pdata, <span class="dt">model =</span> <span class="st">&quot;pooling&quot;</span>)
-<span class="kw">summary</span>(gp)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">gp &lt;-<span class="st"> </span><span class="kw">plm</span>(inv <span class="op">~</span><span class="st"> </span>value <span class="op">+</span><span class="st"> </span>capital, <span class="dt">data =</span> pdata, <span class="dt">model =</span> <span class="st">&quot;pooling&quot;</span>)
+<span class="kw">summary</span>(gp)</code></pre>
 <pre><code>## Pooling Model
 ## 
 ## Call:
@@ -287,7 +319,7 @@ inv_{it} = \beta_0 + \beta_1 value_{it} + \beta_2 capital_{it} + u_{it}
 ## Adj. R-Squared: 0.8105
 ## F-statistic: 426.576 on 2 and 197 DF, p-value: &lt; 2.22e-16</code></pre>
 <p>これは以下の回帰分析と同じである.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(<span class="kw">lm</span>(inv <span class="op">~</span><span class="st"> </span>value <span class="op">+</span><span class="st"> </span>capital, <span class="dt">data =</span> pdata))</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(<span class="kw">lm</span>(inv <span class="op">~</span><span class="st"> </span>value <span class="op">+</span><span class="st"> </span>capital, <span class="dt">data =</span> pdata))</code></pre>
 <pre><code>## 
 ## Call:
 ## lm(formula = inv ~ value + capital, data = pdata)
@@ -308,14 +340,23 @@ inv_{it} = \beta_0 + \beta_1 value_{it} + \beta_2 capital_{it} + u_{it}
 ## Multiple R-squared:  0.8124, Adjusted R-squared:  0.8105 
 ## F-statistic: 426.6 on 2 and 197 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
-<div id="固定効果モデル" class="section level2">
-<h2><span class="header-section-number">10.3</span> 固定効果モデル</h2>
-<p>次のモデルを考える. <span class="math display">\[
+<div id="-" class="section level2">
+<h2><span class="header-section-number">10.3</span> 固定効果モデル (平均差分法)</h2>
+<p>次のモデルを考える.
+<span class="math display">\[
 inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}
-\]</span> この <span class="math inline">\(\alpha_i\)</span> は固定効果と呼ばれている. <span class="math inline">\(\alpha_i\)</span> は時間 <span class="math inline">\(t\)</span> に対して一定である. <span class="math inline">\(\alpha_i\)</span> は誤差項と相関があるもしれない.</p>
+\]</span>
+この <span class="math inline">\(\alpha_i\)</span> は固定効果と呼ばれている.
+<span class="math inline">\(\alpha_i\)</span> は時間 <span class="math inline">\(t\)</span> に対して一定である.
+<span class="math inline">\(\alpha_i\)</span> は誤差項と相関があるもしれない.</p>
+<p>それぞれの時間平均をとれば以下になる.
+<span class="math display">\[
+\bar{inv}_{i} = \beta_1 \bar{value}_{i} + \beta_2 \bar{capital}_{i} +\alpha_i  + \bar{u}_{i}
+\]</span></p>
+<p>それぞれの観測値を時間平均で差し引けば <span class="math inline">\(\alpha_i\)</span> は消去される. このように変換して回帰分析すれば <span class="math inline">\(\alpha_i\)</span> は誤差項と相関があっても一致推定量である.</p>
 <p>この推計は以下のようにする.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gi &lt;-<span class="st"> </span><span class="kw">plm</span>(inv <span class="op">~</span><span class="st"> </span>value <span class="op">+</span><span class="st"> </span>capital, <span class="dt">data =</span> pdata, <span class="dt">model =</span> <span class="st">&quot;within&quot;</span>)
-<span class="kw">summary</span>(gi)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">gi &lt;-<span class="st"> </span><span class="kw">plm</span>(inv <span class="op">~</span><span class="st"> </span>value <span class="op">+</span><span class="st"> </span>capital, <span class="dt">data =</span> pdata, <span class="dt">model =</span> <span class="st">&quot;within&quot;</span>)
+<span class="kw">summary</span>(gi)</code></pre>
 <pre><code>## Oneway (individual) effect Within Model
 ## 
 ## Call:
@@ -340,13 +381,13 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}
 ## Adj. R-Squared: 0.75311
 ## F-statistic: 309.014 on 2 and 188 DF, p-value: &lt; 2.22e-16</code></pre>
 <p>固定効果は以下のコマンドで確かめられる.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fixef</span>(gi)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fixef</span>(gi)</code></pre>
 <pre><code>##           1           2           3           4           5           6 
 ##  -70.296717  101.905814 -235.571841  -27.809295 -114.616813  -23.161295 
 ##           7           8           9          10 
 ##  -66.553474  -57.545657  -87.222272   -6.567844</code></pre>
 <p>これは以下の回帰分析と同じである.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(<span class="kw">lm</span>(inv <span class="op">~</span><span class="st"> </span>value <span class="op">+</span><span class="st"> </span>capital<span class="op">+</span><span class="dv">0</span><span class="op">+</span><span class="kw">factor</span>(firm), <span class="dt">data =</span> pdata))</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(<span class="kw">lm</span>(inv <span class="op">~</span><span class="st"> </span>value <span class="op">+</span><span class="st"> </span>capital<span class="op">+</span><span class="dv">0</span><span class="op">+</span><span class="kw">factor</span>(firm), <span class="dt">data =</span> pdata))</code></pre>
 <pre><code>## 
 ## Call:
 ## lm(formula = inv ~ value + capital + 0 + factor(firm), data = pdata)
@@ -376,14 +417,16 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}
 ## Multiple R-squared:  0.9616, Adjusted R-squared:  0.9591 
 ## F-statistic:   392 on 12 and 188 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>決定係数が大きく異なっていることに注意されたい.</p>
-<div id="時間効果" class="section level3">
+<div id="section-10.3.1" class="section level3">
 <h3><span class="header-section-number">10.3.1</span> 時間効果</h3>
-<p>次のモデルを考える. <span class="math display">\[
+<p>次のモデルを考える.
+<span class="math display">\[
 inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it}+ \gamma_t +\alpha_i + u_{it}
-\]</span> この <span class="math inline">\(\gamma_t\)</span> は時間効果と呼ばれている.</p>
+\]</span>
+この <span class="math inline">\(\gamma_t\)</span> は時間効果と呼ばれている.</p>
 <p>この推計は以下のようにする.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">git &lt;-<span class="st"> </span><span class="kw">plm</span>(inv <span class="op">~</span><span class="st"> </span>value <span class="op">+</span><span class="st"> </span>capital, <span class="dt">data =</span> pdata, <span class="dt">effect=</span><span class="st">&quot;twoways&quot;</span>,<span class="dt">model =</span> <span class="st">&quot;within&quot;</span>)
-<span class="kw">summary</span>(git)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">gi2 &lt;-<span class="st"> </span><span class="kw">plm</span>(inv <span class="op">~</span><span class="st"> </span>value <span class="op">+</span><span class="st"> </span>capital, <span class="dt">data =</span> pdata, <span class="dt">effect=</span><span class="st">&quot;twoways&quot;</span>,<span class="dt">model =</span> <span class="st">&quot;within&quot;</span>)
+<span class="kw">summary</span>(gi2)</code></pre>
 <pre><code>## Twoways effects Within Model
 ## 
 ## Call:
@@ -409,12 +452,12 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it}+ \gamma_t +\alpha_i + u_{it
 ## Adj. R-Squared: 0.67047
 ## F-statistic: 217.442 on 2 and 169 DF, p-value: &lt; 2.22e-16</code></pre>
 <p>それぞれの効果は以下になる.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fixef</span>(git, <span class="dt">effect =</span> <span class="st">&quot;individual&quot;</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fixef</span>(gi2, <span class="dt">effect =</span> <span class="st">&quot;individual&quot;</span>)</code></pre>
 <pre><code>##           1           2           3           4           5           6 
 ## -134.227709   72.826531 -269.458508  -38.873866 -139.666304  -31.339066 
 ##           7           8           9          10 
 ##  -82.761099  -66.737194 -104.010153   -7.390586</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fixef</span>(git, <span class="dt">effect =</span> <span class="st">&quot;time&quot;</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fixef</span>(gi2, <span class="dt">effect =</span> <span class="st">&quot;time&quot;</span>)</code></pre>
 <pre><code>##       1935       1936       1937       1938       1939       1940 
 ##  -32.83632  -52.03372  -73.52633  -72.06272 -102.30660  -77.07140 
 ##       1941       1942       1943       1944       1945       1946 
@@ -424,58 +467,32 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it}+ \gamma_t +\alpha_i + u_{it
 ##       1953       1954 
 ## -100.55428 -126.36254</code></pre>
 <p>これは以下の回帰分析と同じである.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(<span class="kw">lm</span>(inv <span class="op">~</span><span class="st"> </span>value <span class="op">+</span><span class="st"> </span>capital<span class="op">+</span><span class="kw">factor</span>(firm)<span class="op">+</span><span class="kw">factor</span>(year), <span class="dt">data =</span> pdata))</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lm</span>(inv <span class="op">~</span><span class="st"> </span>value <span class="op">+</span><span class="st"> </span>capital<span class="op">+</span><span class="dv">0</span><span class="op">+</span><span class="kw">factor</span>(firm)<span class="op">+</span><span class="kw">factor</span>(year), <span class="dt">data =</span> pdata)</code></pre>
 <pre><code>## 
 ## Call:
-## lm(formula = inv ~ value + capital + factor(firm) + factor(year), 
+## lm(formula = inv ~ value + capital + 0 + factor(firm) + factor(year), 
 ##     data = pdata)
 ## 
-## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -162.609  -19.471   -1.267   19.128  211.842 
-## 
 ## Coefficients:
-##                    Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)       -86.90023   56.04663  -1.550 0.122893    
-## value               0.11772    0.01375   8.560 6.65e-15 ***
-## capital             0.35792    0.02272  15.754  &lt; 2e-16 ***
-## factor(firm)2     207.05424   35.17275   5.887 2.07e-08 ***
-## factor(firm)3    -135.23080   35.70897  -3.787 0.000212 ***
-## factor(firm)4      95.35384   50.72212   1.880 0.061839 .  
-## factor(firm)5      -5.43860   57.83052  -0.094 0.925186    
-## factor(firm)6     102.88864   54.17388   1.899 0.059238 .  
-## factor(firm)7      51.46661   58.17922   0.885 0.377617    
-## factor(firm)8      67.49051   50.97093   1.324 0.187258    
-## factor(firm)9      30.21756   55.72307   0.542 0.588339    
-## factor(firm)10    126.83712   58.52545   2.167 0.031618 *  
-## factor(year)1936  -19.19741   23.67586  -0.811 0.418596    
-## factor(year)1937  -40.69001   24.69541  -1.648 0.101277    
-## factor(year)1938  -39.22640   23.23594  -1.688 0.093221 .  
-## factor(year)1939  -69.47029   23.65607  -2.937 0.003780 ** 
-## factor(year)1940  -44.23508   23.80979  -1.858 0.064930 .  
-## factor(year)1941  -18.80446   23.69400  -0.794 0.428519    
-## factor(year)1942  -21.13979   23.38163  -0.904 0.367219    
-## factor(year)1943  -42.97762   23.55287  -1.825 0.069808 .  
-## factor(year)1944  -43.09877   23.61020  -1.825 0.069701 .  
-## factor(year)1945  -55.68304   23.89562  -2.330 0.020974 *  
-## factor(year)1946  -31.16928   24.11598  -1.292 0.197957    
-## factor(year)1947  -39.39224   23.78368  -1.656 0.099522 .  
-## factor(year)1948  -43.71651   23.96965  -1.824 0.069945 .  
-## factor(year)1949  -73.49510   24.18292  -3.039 0.002750 ** 
-## factor(year)1950  -75.89611   24.34553  -3.117 0.002144 ** 
-## factor(year)1951  -62.48091   24.86425  -2.513 0.012911 *  
-## factor(year)1952  -64.63234   25.34950  -2.550 0.011672 *  
-## factor(year)1953  -67.71797   26.61108  -2.545 0.011832 *  
-## factor(year)1954  -93.52622   27.10786  -3.450 0.000708 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 51.72 on 169 degrees of freedom
-## Multiple R-squared:  0.9517, Adjusted R-squared:  0.9431 
-## F-statistic:   111 on 30 and 169 DF,  p-value: &lt; 2.2e-16</code></pre>
+##            value           capital     factor(firm)1     factor(firm)2  
+##           0.1177            0.3579          -86.9002          120.1540  
+##    factor(firm)3     factor(firm)4     factor(firm)5     factor(firm)6  
+##        -222.1310            8.4536          -92.3388           15.9884  
+##    factor(firm)7     factor(firm)8     factor(firm)9    factor(firm)10  
+##         -35.4336          -19.4097          -56.6827           39.9369  
+## factor(year)1936  factor(year)1937  factor(year)1938  factor(year)1939  
+##         -19.1974          -40.6900          -39.2264          -69.4703  
+## factor(year)1940  factor(year)1941  factor(year)1942  factor(year)1943  
+##         -44.2351          -18.8045          -21.1398          -42.9776  
+## factor(year)1944  factor(year)1945  factor(year)1946  factor(year)1947  
+##         -43.0988          -55.6830          -31.1693          -39.3922  
+## factor(year)1948  factor(year)1949  factor(year)1950  factor(year)1951  
+##         -43.7165          -73.4951          -75.8961          -62.4809  
+## factor(year)1952  factor(year)1953  factor(year)1954  
+##         -64.6323          -67.7180          -93.5262</code></pre>
 <p>決定係数が大きく異なっていることに注意されたい.</p>
 <p>時間効果が有効かどうかは以下の検定を実施する.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pFtest</span>(git, gi)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pFtest</span>(gi2, gi)</code></pre>
 <pre><code>## 
 ##  F test for twoways effects
 ## 
@@ -483,35 +500,29 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it}+ \gamma_t +\alpha_i + u_{it
 ## F = 1.4032, df1 = 19, df2 = 169, p-value = 0.1309
 ## alternative hypothesis: significant effects</code></pre>
 </div>
-<div id="固定効果vsプーリングols" class="section level3">
+<div id="vsols" class="section level3">
 <h3><span class="header-section-number">10.3.2</span> 固定効果VSプーリングOLS</h3>
 <p>帰無仮説が固定効果, 対立仮説が固定効果モデルの検定は以下のコマンドを実行すればよい.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pFtest</span>(gi,gp)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pFtest</span>(gi,gp)</code></pre>
 <pre><code>## 
 ##  F test for individual effects
 ## 
 ## data:  inv ~ value + capital
 ## F = 49.177, df1 = 9, df2 = 188, p-value &lt; 2.2e-16
 ## alternative hypothesis: significant effects</code></pre>
-<p>時間効果をもつ固定効果モデルの場合は, 帰無仮説仮説に応じて変化する. もし帰無仮説が時間効果を持たないプーリングOLSモデルなら, 以下を実行する.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pFtest</span>(git, gp)</code></pre></div>
+<p>時間効果をもつ固定効果モデルの場合は, 帰無仮説仮説に応じて変化する.
+もし帰無仮説が時間効果を持たないプーリングOLSモデルなら, 以下を実行する.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pFtest</span>(gi2, gp)</code></pre>
 <pre><code>## 
 ##  F test for twoways effects
 ## 
 ## data:  inv ~ value + capital
 ## F = 17.403, df1 = 28, df2 = 169, p-value &lt; 2.2e-16
 ## alternative hypothesis: significant effects</code></pre>
-<p>もし帰無仮説が時間効果をもつモデルなら, 以下を実行する. 次のようにする.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gpt &lt;-<span class="st"> </span><span class="kw">update</span>(gp, . <span class="op">~</span><span class="st"> </span>. <span class="op">+</span><span class="kw">factor</span>(year))
-<span class="kw">pFtest</span>(git,gpt)</code></pre></div>
-<pre><code>## 
-##  F test for twoways effects
-## 
-## data:  inv ~ value + capital
-## F = 52.362, df1 = 9, df2 = 169, p-value &lt; 2.2e-16
-## alternative hypothesis: significant effects</code></pre>
-<p>もしくは以下でもよいだろう.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pFtest</span>(git, <span class="kw">update</span>(git, . <span class="op">~</span><span class="st"> </span>., <span class="dt">effect=</span><span class="st">&quot;time&quot;</span>))</code></pre></div>
+<p>もし帰無仮説が時間効果をもつモデルなら, 以下を実行する.
+次のようにする.</p>
+<pre class="sourceCode r"><code class="sourceCode r">gpt &lt;-<span class="st"> </span><span class="kw">update</span>(gp, . <span class="op">~</span><span class="st"> </span>. <span class="op">+</span><span class="kw">factor</span>(year))
+<span class="kw">pFtest</span>(gi2,gpt)</code></pre>
 <pre><code>## 
 ##  F test for twoways effects
 ## 
@@ -520,15 +531,145 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it}+ \gamma_t +\alpha_i + u_{it
 ## alternative hypothesis: significant effects</code></pre>
 </div>
 </div>
-<div id="変量効果モデル" class="section level2">
-<h2><span class="header-section-number">10.4</span> 変量効果モデル</h2>
-<p>次のモデルを考える. <span class="math display">\[
+<div id="-" class="section level2">
+<h2><span class="header-section-number">10.4</span> 固定効果モデル (一階差分法)</h2>
+<p>次のモデルを考える.
+<span class="math display">\[
 inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}
-\]</span> この <span class="math inline">\(\alpha_i\)</span> は変量効果と呼ばれている. <span class="math inline">\(\alpha_i\)</span> は時間 <span class="math inline">\(t\)</span> について一定であるが, <span class="math inline">\(i\)</span> について独立同一分布の確率変数にしたがう. さらに <span class="math inline">\(\alpha_i\)</span> は説明変数と無相関であることが必要である. このため固定効果モデルと違い, 欠落変数バイアスを除去することができない. しかしながら, <span class="math inline">\(i\)</span> についてのダミー変数を付け加えることができる.</p>
+\]</span>
+この <span class="math inline">\(\alpha_i\)</span> は固定効果と呼ばれている.
+<span class="math inline">\(\alpha_i\)</span> は時間 <span class="math inline">\(t\)</span> に対して一定である.
+<span class="math inline">\(\alpha_i\)</span> は誤差項と相関があるもしれない.</p>
+<p>それぞれの階差をとれば <span class="math inline">\(\alpha_i\)</span> は消去できる.
+<span class="math display">\[
+\Delta inv_{it} = \beta_1 \Delta value_{it} + \beta_2 \Delta capital_{it} + \Delta u_{it}
+\]</span></p>
+<p>このように変換して回帰分析すれば <span class="math inline">\(\alpha_i\)</span> は誤差項と相関があっても一致推定量である.</p>
+<p>この推計は以下のようにする.</p>
+<pre class="sourceCode r"><code class="sourceCode r">gf &lt;-<span class="st"> </span><span class="kw">plm</span>(inv <span class="op">~</span><span class="st"> </span>value <span class="op">+</span><span class="st"> </span>capital, <span class="dt">data =</span> pdata, <span class="dt">model =</span> <span class="st">&quot;fd&quot;</span>)
+<span class="kw">summary</span>(gf)</code></pre>
+<pre><code>## Oneway (individual) effect First-Difference Model
+## 
+## Call:
+## plm(formula = inv ~ value + capital, data = pdata, model = &quot;fd&quot;)
+## 
+## Balanced Panel: n = 10, T = 20, N = 200
+## Observations used in estimation: 190
+## 
+## Residuals:
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+## -202.05  -15.23   -1.76   -1.39    7.95  199.27 
+## 
+## Coefficients:
+##          Estimate Std. Error t-value  Pr(&gt;|t|)    
+## value   0.0890628  0.0082341  10.816 &lt; 2.2e-16 ***
+## capital 0.2786940  0.0471564   5.910  1.58e-08 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Total Sum of Squares:    584410
+## Residual Sum of Squares: 345940
+## R-Squared:      0.40876
+## Adj. R-Squared: 0.40561
+## F-statistic: 129.597 on 1 and 188 DF, p-value: &lt; 2.22e-16</code></pre>
+<p>これは以下の回帰分析と同じである.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plm</span>(<span class="kw">diff</span>(inv) <span class="op">~</span><span class="st"> </span><span class="kw">diff</span>(value) <span class="op">+</span><span class="st"> </span><span class="kw">diff</span>(capital) <span class="op">+</span><span class="st"> </span><span class="dv">0</span>, <span class="dt">data =</span> pdata)</code></pre>
+<pre><code>## 
+## Model Formula: diff(inv) ~ diff(value) + diff(capital) + 0
+## 
+## Coefficients:
+##   diff(value) diff(capital) 
+##      0.086792      0.229800</code></pre>
+<div id="-1" class="section level3">
+<h3><span class="header-section-number">10.4.1</span> 時間効果</h3>
+<p>次のモデルを考える.
+<span class="math display">\[
+inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it}+ \gamma_t +\alpha_i + u_{it}
+\]</span>
+この <span class="math inline">\(\gamma_t\)</span> は時間効果と呼ばれている.</p>
+<p>この推計は以下のようになる.</p>
+<pre class="sourceCode r"><code class="sourceCode r">gft &lt;-<span class="st"> </span><span class="kw">plm</span>(inv <span class="op">~</span><span class="st"> </span>value <span class="op">+</span><span class="st"> </span>capital<span class="op">+</span><span class="kw">factor</span>(year), <span class="dt">data =</span> pdata, <span class="dt">model =</span> <span class="st">&quot;fd&quot;</span>)
+<span class="kw">summary</span>(gft)</code></pre>
+<pre><code>## Oneway (individual) effect First-Difference Model
+## 
+## Call:
+## plm(formula = inv ~ value + capital + factor(year), data = pdata, 
+##     model = &quot;fd&quot;)
+## 
+## Balanced Panel: n = 10, T = 20, N = 200
+## Observations used in estimation: 190
+## 
+## Residuals:
+##       Min.    1st Qu.     Median    3rd Qu.       Max. 
+## -179.69353  -18.68501    0.49555   14.27860  179.03692 
+## 
+## Coefficients:
+##                     Estimate  Std. Error t-value  Pr(&gt;|t|)    
+## value              0.0875445   0.0095107  9.2048 &lt; 2.2e-16 ***
+## capital            0.3246777   0.0571472  5.6814 5.727e-08 ***
+## factor(year)1936  -7.5752972  13.6738571 -0.5540   0.58031    
+## factor(year)1937 -19.8865297  19.8335377 -1.0027   0.31745    
+## factor(year)1938 -32.4497771  23.2978960 -1.3928   0.16550    
+## factor(year)1939 -55.1241414  27.1897154 -2.0274   0.04419 *  
+## factor(year)1940 -28.1577109  30.3227138 -0.9286   0.35442    
+## factor(year)1941  -3.5183963  33.1997669 -0.1060   0.91573    
+## factor(year)1942 -11.2051419  35.8488740 -0.3126   0.75500    
+## factor(year)1943 -29.2682673  38.4095279 -0.7620   0.44712    
+## factor(year)1944 -28.4596662  40.6136977 -0.7007   0.48443    
+## factor(year)1945 -37.4137110  42.9014107 -0.8721   0.38440    
+## factor(year)1946 -10.4932084  45.1347632 -0.2325   0.81644    
+## factor(year)1947 -24.5964020  47.8471043 -0.5141   0.60788    
+## factor(year)1948 -28.4696761  50.3295944 -0.5657   0.57237    
+## factor(year)1949 -56.4524987  52.7192122 -1.0708   0.28578    
+## factor(year)1950 -56.3883613  54.7942767 -1.0291   0.30491    
+## factor(year)1951 -35.2680213  57.0562567 -0.6181   0.53732    
+## factor(year)1952 -34.0583106  59.9336293 -0.5683   0.57061    
+## factor(year)1953 -27.7720148  63.6639644 -0.4362   0.66323    
+## factor(year)1954 -52.1173697  67.1610018 -0.7760   0.43883    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Total Sum of Squares:    584410
+## Residual Sum of Squares: 293000
+## R-Squared:      0.49864
+## Adj. R-Squared: 0.4393
+## F-statistic: 8.40405 on 20 and 169 DF, p-value: &lt; 2.22e-16</code></pre>
+<p>これが時間効果が有意であるかどうかは, 以下を実施すればよい.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pFtest</span>(gft,gf)</code></pre>
+<pre><code>## 
+##  F test for individual effects
+## 
+## data:  inv ~ value + capital + factor(year)
+## F = 1.607, df1 = 19, df2 = 169, p-value = 0.05928
+## alternative hypothesis: significant effects</code></pre>
+</div>
+<div id="section-10.4.2" class="section level3">
+<h3><span class="header-section-number">10.4.2</span> 平均差分法と一階差分法</h3>
+<p>平均差分法と一階差分法は誤差項の仮定をどのようにおくかによって変わってくる. 誤差項の階差をとることによって時間を通じて無相関になるなら一階差分法が望ましいであろう.
+しかしながら, 固定効果, 時間効果の値がきちんと計算して, それが経済学的解釈が可能なら, 平均差分法が望ましい.
+さらに他のプーリングOLSの仮定と変量効果モデルとの比較の意味でも平均差分法がよく使われる.</p>
+<p>なお時間が2期間のパネルデータのとき, 平均差分法も一階差分法も計算値は同じである.
+たとえば <span class="math inline">\(t=2\)</span>のときの変数 <span class="math inline">\(x_{it}\)</span> の平均差分値は
+<span class="math display">\[
+x_{2t}-\bar{x}_i=x_{2t}-\frac{x_{i1}+x_{i2}}{2}=\frac{x_{i2}-x_{i1}}{2}
+\]</span>
+となる.</p>
+</div>
+</div>
+<div id="section-10.5" class="section level2">
+<h2><span class="header-section-number">10.5</span> 変量効果モデル</h2>
+<p>次のモデルを考える.
+<span class="math display">\[
+inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}
+\]</span>
+この <span class="math inline">\(\alpha_i\)</span> は変量効果と呼ばれている.
+<span class="math inline">\(\alpha_i\)</span> は時間 <span class="math inline">\(t\)</span> について一定であるが, <span class="math inline">\(i\)</span> について独立同一分布の確率変数にしたがう.
+さらに <span class="math inline">\(\alpha_i\)</span> は説明変数と無相関であることが必要である.
+このため固定効果モデルと違い, 欠落変数バイアスを除去することができない.
+しかしながら, <span class="math inline">\(i\)</span> についてのダミー変数を付け加えることができる.</p>
 <p>変量効果モデルは次のコマンドで実施する.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gr &lt;-<span class="st"> </span><span class="kw">plm</span>(inv <span class="op">~</span><span class="st"> </span>value <span class="op">+</span><span class="st"> </span>capital, <span class="dt">data =</span> pdata, <span class="dt">model =</span> <span class="st">&quot;random&quot;</span>)
-
-<span class="kw">summary</span>(gr)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">gr &lt;-<span class="st"> </span><span class="kw">plm</span>(inv <span class="op">~</span><span class="st"> </span>value <span class="op">+</span><span class="st"> </span>capital, <span class="dt">data =</span> pdata, <span class="dt">model =</span> <span class="st">&quot;random&quot;</span>)
+<span class="kw">summary</span>(gr)</code></pre>
 <pre><code>## Oneway (individual) effect Random Effect Model 
 ##    (Swamy-Arora&#39;s transformation)
 ## 
@@ -561,16 +702,17 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}
 ## Adj. R-Squared: 0.76716
 ## F-statistic: 328.837 on 2 and 197 DF, p-value: &lt; 2.22e-16</code></pre>
 <p>変量効果は以下のコマンドで確かめられる.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ranef</span>(gr)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ranef</span>(gr)</code></pre>
 <pre><code>##            1            2            3            4            5 
 ##   -9.5242955  157.8910235 -172.8958044   29.9119801  -54.6790089 
 ##            6            7            8            9           10 
 ##   34.3461316   -7.8977584    0.6726376  -28.1393497   50.3144442</code></pre>
-<div id="時間効果-1" class="section level3">
-<h3><span class="header-section-number">10.4.1</span> 時間効果</h3>
-<p>変量効果モデルの時間効果は二種類ある. 時間効果が確率変数である場合は次のコマンドを実施する.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gr2 &lt;-<span class="st"> </span><span class="kw">plm</span>(inv <span class="op">~</span><span class="st"> </span>value <span class="op">+</span><span class="st"> </span>capital, <span class="dt">data =</span> pdata, <span class="dt">effect=</span> <span class="st">&quot;twoways&quot;</span>,<span class="dt">model =</span> <span class="st">&quot;random&quot;</span>)
-<span class="kw">summary</span>(gr2)</code></pre></div>
+<div id="-2" class="section level3">
+<h3><span class="header-section-number">10.5.1</span> 時間効果</h3>
+<p>変量効果モデルの時間効果は二種類ある.
+時間効果が確率変数である場合は次のコマンドを実施する.</p>
+<pre class="sourceCode r"><code class="sourceCode r">gr2 &lt;-<span class="st"> </span><span class="kw">plm</span>(inv <span class="op">~</span><span class="st"> </span>value <span class="op">+</span><span class="st"> </span>capital, <span class="dt">data =</span> pdata, <span class="dt">effect=</span> <span class="st">&quot;twoways&quot;</span>,<span class="dt">model =</span> <span class="st">&quot;random&quot;</span>)
+<span class="kw">summary</span>(gr2)</code></pre>
 <pre><code>## Twoways effects Random Effect Model 
 ##    (Swamy-Arora&#39;s transformation)
 ## 
@@ -605,8 +747,8 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}
 ## Adj. R-Squared: 0.76706
 ## F-statistic: 328.647 on 2 and 197 DF, p-value: &lt; 2.22e-16</code></pre>
 <p>時間効果が固定されている場合は次のコマンドを実施する.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">grt &lt;-<span class="st"> </span><span class="kw">update</span>(gr, .<span class="op">~</span>. <span class="op">+</span><span class="st"> </span><span class="kw">factor</span>(year))
-<span class="kw">summary</span>(grt)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">grt &lt;-<span class="st"> </span><span class="kw">update</span>(gr, .<span class="op">~</span>. <span class="op">+</span><span class="st"> </span><span class="kw">factor</span>(year))
+<span class="kw">summary</span>(grt)</code></pre>
 <pre><code>## Oneway (individual) effect Random Effect Model 
 ##    (Swamy-Arora&#39;s transformation)
 ## 
@@ -659,56 +801,49 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}
 ## Adj. R-Squared: 0.77428
 ## F-statistic: 33.506 on 21 and 178 DF, p-value: &lt; 2.22e-16</code></pre>
 <p>固定された時間効果が有意かどうかは次の検定を実施すれば良い.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">waldtest</span>(gr,grt)</code></pre></div>
-<pre><code>## Wald test
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pFtest</span>(grt,gr)</code></pre>
+<pre><code>## 
+##  F test for individual effects
 ## 
-## Model 1: inv ~ value + capital
-## Model 2: inv ~ value + capital + factor(year)
-##   Res.Df Df  Chisq Pr(&gt;Chisq)
-## 1    197                     
-## 2    178 19 25.303     0.1508</code></pre>
-<p>時間効果が確率変数のときは以下のハウスマン検定を実施ればよい.</p>
+## data:  inv ~ value + capital + factor(year)
+## F = 1.3511, df1 = 19, df2 = 178, p-value = 0.1572
+## alternative hypothesis: significant effects</code></pre>
 </div>
-<div id="ハウスマン検定" class="section level3">
-<h3><span class="header-section-number">10.4.2</span> ハウスマン検定</h3>
-<p>帰無仮説が変量効果モデル, 対立仮説が固定効果モデルの検定はハウスマン検定を実施する. ハウスマン検定は以下で実施する.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">phtest</span>(gi,gr)</code></pre></div>
+<div id="section-10.5.2" class="section level3">
+<h3><span class="header-section-number">10.5.2</span> ハウスマン検定</h3>
+<p>帰無仮説が変量効果モデル, 対立仮説が固定効果モデルの検定はハウスマン検定を実施する.
+ハウスマン検定は以下で実施する.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">phtest</span>(gi,gr)</code></pre>
 <pre><code>## 
 ##  Hausman Test
 ## 
 ## data:  inv ~ value + capital
 ## chisq = 2.3304, df = 2, p-value = 0.3119
 ## alternative hypothesis: one model is inconsistent</code></pre>
-<p>時間効果が確率変数である場合以下を実行すればよい.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">phtest</span>(git,gr2)</code></pre></div>
+<p>時間効果が確率変数である変量モデルの場合以下を実行すればよい.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">phtest</span>(gi2,gr2)</code></pre>
 <pre><code>## 
 ##  Hausman Test
 ## 
 ## data:  inv ~ value + capital
 ## chisq = 13.46, df = 2, p-value = 0.001194
 ## alternative hypothesis: one model is inconsistent</code></pre>
-<p>時間効果が確率変数でない場合以下を実行すればよい.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">phtest</span>(git,grt)</code></pre></div>
+<p>時間効果が確率変数でない変量モデルの場合以下を実行すればよい.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">phtest</span>(gi2,grt)</code></pre>
 <pre><code>## 
 ##  Hausman Test
 ## 
 ## data:  inv ~ value + capital
 ## chisq = 6.5733, df = 2, p-value = 0.03738
 ## alternative hypothesis: one model is inconsistent</code></pre>
-<p>ハウスマン検定は, 帰無仮説が時間効果が確率変数の変量モデル, 対立仮説が時間効果が存在しない変量モデルの場合の場合にも検定できる.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">phtest</span>(gr,gr2)</code></pre></div>
-<pre><code>## 
-##  Hausman Test
-## 
-## data:  inv ~ value + capital
-## chisq = 0.016122, df = 2, p-value = 0.992
-## alternative hypothesis: one model is inconsistent</code></pre>
+<p>どちらを採用するかによって結果が変わってしまうので注意されたい.</p>
 </div>
 </div>
-<div id="クラスターロバスト分散" class="section level2">
-<h2><span class="header-section-number">10.5</span> クラスターロバスト分散</h2>
-<p>固定効果モデルにおいて, 分散不均一が疑われる場合, ではクラスターロバスト分散を用いる. 時間効果がない場合は以下の様にする.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">coeftest</span>(gi,<span class="dt">vcov=</span><span class="kw">vcovHC</span>(gi,<span class="dt">type=</span><span class="st">&quot;sss&quot;</span>))</code></pre></div>
+<div id="section-10.6" class="section level2">
+<h2><span class="header-section-number">10.6</span> クラスターロバスト分散</h2>
+<p>固定効果モデルにおいて, 分散不均一が疑われる場合, ではクラスターロバスト分散を用いる.
+時間効果がない場合は以下の様にする.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">coeftest</span>(gi,<span class="dt">vcov=</span><span class="kw">vcovHC</span>(gi,<span class="dt">type=</span><span class="st">&quot;sss&quot;</span>))</code></pre>
 <pre><code>## 
 ## t test of coefficients:
 ## 
@@ -717,8 +852,9 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}
 ## capital 0.310065   0.052618  5.8927 1.726e-08 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<p>分散不均一が疑われる場合, クラスターロバスト分散を用いる. 時間効果がある場合は以下の様にする.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">coeftest</span>(git,<span class="dt">vcov=</span><span class="kw">vcovHC</span>(git,<span class="dt">type=</span><span class="st">&quot;sss&quot;</span>))</code></pre></div>
+<p>分散不均一が疑われる場合, クラスターロバスト分散を用いる.
+時間効果がある場合は以下の様にする.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">coeftest</span>(gi2,<span class="dt">vcov=</span><span class="kw">vcovHC</span>(gi2,<span class="dt">type=</span><span class="st">&quot;sss&quot;</span>))</code></pre>
 <pre><code>## 
 ## t test of coefficients:
 ## 
@@ -727,17 +863,50 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}
 ## capital 0.357916   0.045367  7.8893  3.62e-13 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<div id="分散不均一の検定-1" class="section level3">
-<h3><span class="header-section-number">10.5.1</span> 分散不均一の検定</h3>
-<p>分散不均一かどうかは時間効果がない場合, 以下のようにすればよい.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">bptest</span>(inv <span class="op">~</span><span class="st"> </span>value <span class="op">+</span><span class="st"> </span>capital <span class="op">+</span><span class="st"> </span><span class="kw">factor</span>(firm), <span class="dt">data=</span>pdata)</code></pre></div>
+<p>STATA の計算結果に合わせるには次のように実施する必要がある.</p>
+<pre class="sourceCode r"><code class="sourceCode r">git &lt;-<span class="st"> </span><span class="kw">update</span>(gi, .<span class="op">~</span>. <span class="op">+</span><span class="st"> </span><span class="kw">factor</span>(year))
+<span class="kw">coeftest</span>(git,<span class="dt">vcov=</span><span class="kw">vcovHC</span>(git,<span class="dt">type=</span><span class="st">&quot;sss&quot;</span>))</code></pre>
+<pre><code>## 
+## t test of coefficients:
+## 
+##                    Estimate Std. Error t value  Pr(&gt;|t|)    
+## value              0.117716   0.010794 10.9055 &lt; 2.2e-16 ***
+## capital            0.357916   0.047715  7.5012 3.424e-12 ***
+## factor(year)1936 -19.197405  20.640669 -0.9301 0.3536580    
+## factor(year)1937 -40.690009  33.190087 -1.2260 0.2219160    
+## factor(year)1938 -39.226404  15.692472 -2.4997 0.0133837 *  
+## factor(year)1939 -69.470288  26.923231 -2.5803 0.0107211 *  
+## factor(year)1940 -44.235085  17.323706 -2.5534 0.0115505 *  
+## factor(year)1941 -18.804463  17.797543 -1.0566 0.2922130    
+## factor(year)1942 -21.139792  14.125147 -1.4966 0.1363608    
+## factor(year)1943 -42.977623  12.509017 -3.4357 0.0007437 ***
+## factor(year)1944 -43.098772  10.965103 -3.9305 0.0001234 ***
+## factor(year)1945 -55.683040  15.159383 -3.6732 0.0003212 ***
+## factor(year)1946 -31.169284  20.858408 -1.4943 0.1369549    
+## factor(year)1947 -39.392242  26.363118 -1.4942 0.1369835    
+## factor(year)1948 -43.716514  38.769856 -1.1276 0.2610913    
+## factor(year)1949 -73.495099  38.147491 -1.9266 0.0557069 .  
+## factor(year)1950 -75.896112  36.695524 -2.0683 0.0401383 *  
+## factor(year)1951 -62.480912  49.279892 -1.2679 0.2065854    
+## factor(year)1952 -64.632341  51.417852 -1.2570 0.2104874    
+## factor(year)1953 -67.717966  43.622288 -1.5524 0.1224442    
+## factor(year)1954 -93.526221  31.637576 -2.9562 0.0035603 ** 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>どちらを採用するかによって結果が変わってしまうので注意されたい.</p>
+<div id="-1" class="section level3">
+<h3><span class="header-section-number">10.6.1</span> 分散不均一の検定</h3>
+<p>固定効果モデルにおいて,
+分散不均一かどうかを検定するには,
+時間効果がない場合, 以下のようにすればよい.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">bptest</span>(inv <span class="op">~</span><span class="st"> </span>value <span class="op">+</span><span class="st"> </span>capital <span class="op">+</span><span class="st"> </span><span class="kw">factor</span>(firm), <span class="dt">data=</span>pdata)</code></pre>
 <pre><code>## 
 ##  studentized Breusch-Pagan test
 ## 
 ## data:  inv ~ value + capital + factor(firm)
 ## BP = 85.836, df = 11, p-value = 1.086e-13</code></pre>
 <p>時間効果がある場合, 以下のようにすればよい.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">bptest</span>(inv <span class="op">~</span><span class="st"> </span>value <span class="op">+</span><span class="st"> </span>capital <span class="op">+</span><span class="st"> </span><span class="kw">factor</span>(firm) <span class="op">+</span><span class="st"> </span><span class="kw">factor</span>(year),<span class="dt">data=</span>pdata)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">bptest</span>(inv <span class="op">~</span><span class="st"> </span>value <span class="op">+</span><span class="st"> </span>capital <span class="op">+</span><span class="st"> </span><span class="kw">factor</span>(firm) <span class="op">+</span><span class="st"> </span><span class="kw">factor</span>(year),<span class="dt">data=</span>pdata)</code></pre>
 <pre><code>## 
 ##  studentized Breusch-Pagan test
 ## 
@@ -747,6 +916,11 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}
 </div>
 </div>
 </div>
+
+
+
+
+
 
 
 
@@ -784,7 +958,7 @@ gitbook.start({
 "google": false,
 "linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
 "all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
@@ -796,6 +970,10 @@ gitbook.start({
 "edit": {
 "link": "https://github.com/rstudio/bookdown-demo/edit/master/10-panel.Rmd",
 "text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
 },
 "download": null,
 "toc": {
@@ -810,8 +988,8 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;

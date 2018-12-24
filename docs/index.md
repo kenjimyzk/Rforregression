@@ -1,9 +1,9 @@
 --- 
 title: "R と RStudio"
 author: "宮﨑憲治"
-date: "2018-05-13"
+date: "2018-12-24"
 site: bookdown::bookdown_site
-output: bookdown::epub_book
+output: bookdown::gitbook
 documentclass: bxjsbook
 classoption: ja=standard, xelatex
 geometry: no
@@ -21,8 +21,6 @@ description: "This is a description. Please wrote a abstract this contents. "
 
 ## R とは
 Rは統計・データ解析・統計グラフ作成のためのオープンソースソフトである.
-
-https://ja.wikipedia.org/wiki/R%E8%A8%80%E8%AA%9E
 
 ## R のインストール
 Rをインストールするには
