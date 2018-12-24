@@ -19,9 +19,9 @@ bookdown::gitbook:
     edit:
       link: https://github.com/rstudio/bookdown-demo/edit/master/%s
 # 日本語タイトルが使えるようにするおまじないです。!import
-  pandoc_args: [
-        "--from", "markdown+autolink_bare_uris+tex_math_single_backslash-implicit_figures"
-        ]
+#  pandoc_args: [
+#        "--from", "markdown+autolink_bare_uris+tex_math_single_backslash-implicit_figures"
+#        ]
 # pdf形式の設定
 # 細かい設定内容はpramble.texを参照
 bookdown::pdf_book:
