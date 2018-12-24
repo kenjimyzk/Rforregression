@@ -39,7 +39,9 @@ summary(gp)
 summary(lm(inv ~ value + capital, data = pdata))
 ```
 
-## 固定効果モデル
+
+
+## 固定効果モデル (平均差分法)
 次のモデルを考える.
 $$
 inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}
@@ -47,6 +49,15 @@ $$
 この $\alpha_i$ は固定効果と呼ばれている.
 $\alpha_i$ は時間 $t$ に対して一定である.
 $\alpha_i$ は誤差項と相関があるもしれない.
+
+
+それぞれの時間平均をとれば以下になる.
+$$
+\bar{inv}_{i} = \beta_1 \bar{value}_{i} + \beta_2 \bar{capital}_{i} +\alpha_i  + \bar{u}_{i}
+$$
+
+それぞれの観測値を時間平均で差し引けば $\alpha_i$ は消去される. このように変換して回帰分析すれば $\alpha_i$ は誤差項と相関があっても一致推定量である.
+
 
 この推計は以下のようにする.
 ```{r}
@@ -86,7 +97,7 @@ fixef(gi2, effect = "time")
 
 これは以下の回帰分析と同じである.
 ```{r}
-summary(lm(inv ~ value + capital+0+factor(firm)+factor(year), data = pdata))
+lm(inv ~ value + capital+0+factor(firm)+factor(year), data = pdata)
 ```
 決定係数が大きく異なっていることに注意されたい.
 
@@ -115,12 +126,63 @@ gpt <- update(gp, . ~ . +factor(year))
 pFtest(gi2,gpt)
 ```
 
-もしくは以下でもよいだろう.
+
+## 固定効果モデル (一階差分法)
+次のモデルを考える.
+$$
+inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}
+$$
+この $\alpha_i$ は固定効果と呼ばれている.
+$\alpha_i$ は時間 $t$ に対して一定である.
+$\alpha_i$ は誤差項と相関があるもしれない.
+
+それぞれの階差をとれば $\alpha_i$ は消去できる.
+$$
+\Delta inv_{it} = \beta_1 \Delta value_{it} + \beta_2 \Delta capital_{it} + \Delta u_{it}
+$$
+
+このように変換して回帰分析すれば $\alpha_i$ は誤差項と相関があっても一致推定量である.
+
+この推計は以下のようにする.
 ```{r}
-pFtest(gi2, update(gi2, . ~ ., effect="time"))
+gf <- plm(inv ~ value + capital, data = pdata, model = "fd")
+summary(gf)
 ```
 
+これは以下の回帰分析と同じである.
+```{r}
+plm(diff(inv) ~ diff(value) + diff(capital) + 0, data = pdata)
+```
 
+### 時間効果
+次のモデルを考える.
+$$
+inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it}+ \gamma_t +\alpha_i + u_{it}
+$$
+この $\gamma_t$ は時間効果と呼ばれている.
+
+この推計は以下のようになる.
+```{r}
+gft <- plm(inv ~ value + capital+factor(year), data = pdata, model = "fd")
+summary(gft)
+```
+
+これが時間効果が有意であるかどうかは, 以下を実施すればよい.
+```{r}
+pFtest(gft,gf)
+```
+
+### 平均差分法と一階差分法
+平均差分法と一階差分法は誤差項の仮定をどのようにおくかによって変わってくる. 誤差項の階差をとることによって時間を通じて無相関になるなら一階差分法が望ましいであろう.
+しかしながら, 固定効果, 時間効果の値がきちんと計算して, それが経済学的解釈が可能なら, 平均差分法が望ましい.
+さらに他のプーリングOLSの仮定と変量効果モデルとの比較の意味でも平均差分法がよく使われる.
+
+なお時間が2期間のパネルデータのとき, 平均差分法も一階差分法も計算値は同じである. 
+たとえば $t=2$のときの変数 $x_{it}$ の平均差分値は
+$$
+x_{2t}-\bar{x}_i=x_{2t}-\frac{x_{i1}+x_{i2}}{2}=\frac{x_{i2}-x_{i1}}{2}
+$$
+となる.
 
 
 ## 変量効果モデル
@@ -137,7 +199,6 @@ $\alpha_i$ は時間 $t$ について一定であるが, $i$ について独立�
 変量効果モデルは次のコマンドで実施する.
 ```{r}
 gr <- plm(inv ~ value + capital, data = pdata, model = "random")
-
 summary(gr)
 ```
 
@@ -162,10 +223,8 @@ summary(grt)
 
 固定された時間効果が有意かどうかは次の検定を実施すれば良い.
 ```{r}
-waldtest(gr,grt)
+pFtest(grt,gr)
 ```
-
-時間効果が確率変数のときは以下のハウスマン検定を実施ればよい.
 
 ### ハウスマン検定
 帰無仮説が変量効果モデル, 対立仮説が固定効果モデルの検定はハウスマン検定を実施する.
@@ -174,23 +233,17 @@ waldtest(gr,grt)
 phtest(gi,gr)
 ```
 
-時間効果が確率変数である場合以下を実行すればよい.
+時間効果が確率変数である変量モデルの場合以下を実行すればよい.
 ```{r}
 phtest(gi2,gr2)
 ```
 
-時間効果が確率変数でない場合以下を実行すればよい.
+時間効果が確率変数でない変量モデルの場合以下を実行すればよい.
 ```{r}
 phtest(gi2,grt)
 ```
 
-ハウスマン検定は,
-帰無仮説が時間効果が確率変数の変量モデル, 
-対立仮説が時間効果が存在しない変量モデルの場合の場合にも検定できる.
-```{r}
-phtest(gr,gr2)
-```
-
+どちらを採用するかによって結果が変わってしまうので注意されたい.
 
 ## クラスターロバスト分散
 固定効果モデルにおいて, 分散不均一が疑われる場合, ではクラスターロバスト分散を用いる.
@@ -211,10 +264,12 @@ git <- update(gi, .~. + factor(year))
 coeftest(git,vcov=vcovHC(git,type="sss"))
 ```
 
-
+どちらを採用するかによって結果が変わってしまうので注意されたい.
 
 ### 分散不均一の検定
-分散不均一かどうかは時間効果がない場合, 以下のようにすればよい.
+固定効果モデルにおいて, 
+分散不均一かどうかを検定するには, 
+時間効果がない場合, 以下のようにすればよい.
 ```{r}
 bptest(inv ~ value + capital + factor(firm), data=pdata)
 ```
