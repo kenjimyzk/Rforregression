@@ -74,25 +74,25 @@ $$
 
 この推計は以下のようにする.
 ```{r}
-git <- plm(inv ~ value + capital, data = pdata, effect="twoways",model = "within")
-summary(git)
+gi2 <- plm(inv ~ value + capital, data = pdata, effect="twoways",model = "within")
+summary(gi2)
 ```
 
 それぞれの効果は以下になる.
 ```{r}
-fixef(git, effect = "individual")
-fixef(git, effect = "time")
+fixef(gi2, effect = "individual")
+fixef(gi2, effect = "time")
 ```
 
 これは以下の回帰分析と同じである.
 ```{r}
-summary(lm(inv ~ value + capital+factor(firm)+factor(year), data = pdata))
+summary(lm(inv ~ value + capital+0+factor(firm)+factor(year), data = pdata))
 ```
 決定係数が大きく異なっていることに注意されたい.
 
 時間効果が有効かどうかは以下の検定を実施する.
 ```{r}
-pFtest(git, gi)
+pFtest(gi2, gi)
 ```
 
 
@@ -105,19 +105,19 @@ pFtest(gi,gp)
 時間効果をもつ固定効果モデルの場合は, 帰無仮説仮説に応じて変化する.
 もし帰無仮説が時間効果を持たないプーリングOLSモデルなら, 以下を実行する.
 ```{r}
-pFtest(git, gp)
+pFtest(gi2, gp)
 ```
 
 もし帰無仮説が時間効果をもつモデルなら, 以下を実行する.
 次のようにする.
 ```{r}
 gpt <- update(gp, . ~ . +factor(year))
-pFtest(git,gpt)
+pFtest(gi2,gpt)
 ```
 
 もしくは以下でもよいだろう.
 ```{r}
-pFtest(git, update(git, . ~ ., effect="time"))
+pFtest(gi2, update(gi2, . ~ ., effect="time"))
 ```
 
 
@@ -176,12 +176,12 @@ phtest(gi,gr)
 
 時間効果が確率変数である場合以下を実行すればよい.
 ```{r}
-phtest(git,gr2)
+phtest(gi2,gr2)
 ```
 
 時間効果が確率変数でない場合以下を実行すればよい.
 ```{r}
-phtest(git,grt)
+phtest(gi2,grt)
 ```
 
 ハウスマン検定は,
@@ -202,8 +202,16 @@ coeftest(gi,vcov=vcovHC(gi,type="sss"))
 分散不均一が疑われる場合, クラスターロバスト分散を用いる.
 時間効果がある場合は以下の様にする.
 ```{r}
+coeftest(gi2,vcov=vcovHC(gi2,type="sss"))
+```
+
+STATA の計算結果に合わせるには次のように実施する必要がある.
+```{r}
+git <- update(gi, .~. + factor(year))
 coeftest(git,vcov=vcovHC(git,type="sss"))
 ```
+
+
 
 ### 分散不均一の検定
 分散不均一かどうかは時間効果がない場合, 以下のようにすればよい.
