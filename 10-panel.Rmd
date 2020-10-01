@@ -56,7 +56,11 @@ $$
 \bar{inv}_{i} = \beta_1 \bar{value}_{i} + \beta_2 \bar{capital}_{i} +\alpha_i  + \bar{u}_{i}
 $$
 
-それぞれの観測値を時間平均で差し引けば $\alpha_i$ は消去される. このように変換して回帰分析すれば $\alpha_i$ は誤差項と相関があっても一致推定量である.
+そして，それぞれの観測値を時間平均で差し引けば以下のように $\alpha_i$ は消去される.
+$$
+inv_{it}-\overline{inv}_{i} = \beta_1 (value_{it}-\overline{value}_{i}) + \beta_2 (capital_{it}-\overline{capital}_{i})  + \bar{u}_{i} -\bar{u}_{i}
+$$
+このように変換して回帰分析すれば $\alpha_i$ は誤差項と相関があっても一致推定量である.
 
 
 この推計は以下のようにする.

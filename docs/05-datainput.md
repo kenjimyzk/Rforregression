@@ -24,8 +24,8 @@ R においてデータ分析をおこなうには
 df <- data.frame(x = rnorm(10), y = letters[1:10])
 str(df)
 ## 'data.frame':	10 obs. of  2 variables:
-##  $ x: num  -1.061 -1.728 0.424 1.19 -0.191 ...
-##  $ y: Factor w/ 10 levels "a","b","c","d",..: 1 2 3 4 5 6 7 8 9 10
+##  $ x: num  -0.84 3.321 0.299 -0.139 0.781 ...
+##  $ y: chr  "a" "b" "c" "d" ...
 ```
 
 ただデータフレイムは自動的に文字列が因子ベクトルに変換されてしまう.
@@ -35,7 +35,7 @@ str(df)
 df <- data.frame(x = rnorm(10), y = letters[1:10], stringsAsFactors= FALSE)
 str(df)
 ## 'data.frame':	10 obs. of  2 variables:
-##  $ x: num  0.385 -0.472 -1.191 0.584 -0.103 ...
+##  $ x: num  1.273 -0.228 -0.596 -0.866 -1.086 ...
 ##  $ y: chr  "a" "b" "c" "d" ...
 ```
 
@@ -44,10 +44,14 @@ str(df)
 ```r
 library(dplyr)
 df <- data_frame(x = rnorm(10), y = letters[1:10])
+## Warning: `data_frame()` is deprecated as of tibble 1.1.0.
+## Please use `tibble()` instead.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_warnings()` to see where this warning was generated.
 str(df)
-## Classes 'tbl_df', 'tbl' and 'data.frame':	10 obs. of  2 variables:
-##  $ x: num  1.513 -1.782 0.843 0.878 0.332 ...
-##  $ y: chr  "a" "b" "c" "d" ...
+## tibble [10 × 2] (S3: tbl_df/tbl/data.frame)
+##  $ x: num [1:10] -0.0634 0.9815 1.2471 0.169 1.2714 ...
+##  $ y: chr [1:10] "a" "b" "c" "d" ...
 ```
 
 以降, それぞれのファイル形式ごとにファイル入力について説明する.
@@ -261,19 +265,19 @@ summary(CPS1985)
 ##  Mean   : 9.024   Mean   :13.02   Mean   :17.82   Mean   :36.83  
 ##  3rd Qu.:11.250   3rd Qu.:15.00   3rd Qu.:26.00   3rd Qu.:44.00  
 ##  Max.   :44.500   Max.   :18.00   Max.   :55.00   Max.   :64.00  
-##     ethnicity     region       gender         occupation 
-##  cauc    :440   south:156   male  :289   worker    :156  
-##  hispanic: 27   other:378   female:245   technical :105  
-##  other   : 67                            services  : 83  
-##                                          office    : 97  
-##                                          sales     : 38  
-##                                          management: 55  
-##            sector    union     married  
-##  manufacturing: 99   no :438   no :184  
-##  construction : 24   yes: 96   yes:350  
-##  other        :411                      
-##                                         
-##                                         
+##     ethnicity     region       gender         occupation            sector   
+##  cauc    :440   south:156   male  :289   worker    :156   manufacturing: 99  
+##  hispanic: 27   other:378   female:245   technical :105   construction : 24  
+##  other   : 67                            services  : 83   other        :411  
+##                                          office    : 97                      
+##                                          sales     : 38                      
+##                                          management: 55                      
+##  union     married  
+##  no :438   no :184  
+##  yes: 96   yes:350  
+##                     
+##                     
+##                     
 ## 
 ```
 

@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html  lang="ja-JP">
-
+<html lang="ja-JP" xml:lang="ja-JP">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>7 古典的仮定のもとでの最小二乗法 | R と RStudio</title>
-  <meta name="description" content="This is a description. Please wrote a abstract this contents.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="This is a description. Please wrote a abstract this contents." />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
   <meta property="og:title" content="7 古典的仮定のもとでの最小二乗法 | R と RStudio" />
   <meta property="og:type" content="book" />
@@ -22,18 +21,18 @@
   <meta name="twitter:description" content="This is a description. Please wrote a abstract this contents." />
   
 
-<meta name="author" content="宮﨑憲治">
+<meta name="author" content="宮﨑憲治" />
 
 
-<meta name="date" content="2018-12-24">
+<meta name="date" content="2020-10-01" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="06-datawrangling.html">
-<link rel="next" href="08-regression2.html">
+<link rel="prev" href="06-datawrangling.html"/>
+<link rel="next" href="08-regression2.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -41,6 +40,7 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
@@ -48,29 +48,33 @@
 
 
 
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -79,9 +83,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -131,118 +135,118 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>はじめに</a><ul>
-<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#r-"><i class="fa fa-check"></i><b>0.1</b> R とは</a></li>
-<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#r-"><i class="fa fa-check"></i><b>0.2</b> R のインストール</a></li>
-<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#r-"><i class="fa fa-check"></i><b>0.3</b> R の設定</a></li>
-<li class="chapter" data-level="0.4" data-path="index.html"><a href="index.html#r-"><i class="fa fa-check"></i><b>0.4</b> R の使い方</a></li>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#r-とは"><i class="fa fa-check"></i><b>0.1</b> R とは</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#r-のインストール"><i class="fa fa-check"></i><b>0.2</b> R のインストール</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#r-の設定"><i class="fa fa-check"></i><b>0.3</b> R の設定</a></li>
+<li class="chapter" data-level="0.4" data-path="index.html"><a href="index.html#r-の使い方"><i class="fa fa-check"></i><b>0.4</b> R の使い方</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="01-base.html"><a href="01-base.html"><i class="fa fa-check"></i><b>1</b> 基本</a><ul>
-<li class="chapter" data-level="1.1" data-path="01-base.html"><a href="01-base.html#-r"><i class="fa fa-check"></i><b>1.1</b> 電卓としての R</a></li>
-<li class="chapter" data-level="1.2" data-path="01-base.html"><a href="01-base.html#r"><i class="fa fa-check"></i><b>1.2</b> 関数電卓としてのR</a></li>
-<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#r-"><i class="fa fa-check"></i><b>1.3</b> R の型</a></li>
-<li class="chapter" data-level="1.4" data-path="01-base.html"><a href="01-base.html#section-1.4"><i class="fa fa-check"></i><b>1.4</b> 変数</a></li>
-<li class="chapter" data-level="1.5" data-path="01-base.html"><a href="01-base.html#section-1.5"><i class="fa fa-check"></i><b>1.5</b> パッケージ</a></li>
+<li class="chapter" data-level="1.1" data-path="01-base.html"><a href="01-base.html#電卓としての-r"><i class="fa fa-check"></i><b>1.1</b> 電卓としての R</a></li>
+<li class="chapter" data-level="1.2" data-path="01-base.html"><a href="01-base.html#関数電卓としてのr"><i class="fa fa-check"></i><b>1.2</b> 関数電卓としてのR</a></li>
+<li class="chapter" data-level="1.3" data-path="01-base.html"><a href="01-base.html#r-の型"><i class="fa fa-check"></i><b>1.3</b> R の型</a></li>
+<li class="chapter" data-level="1.4" data-path="01-base.html"><a href="01-base.html#変数"><i class="fa fa-check"></i><b>1.4</b> 変数</a></li>
+<li class="chapter" data-level="1.5" data-path="01-base.html"><a href="01-base.html#パッケージ"><i class="fa fa-check"></i><b>1.5</b> パッケージ</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="02-rstudio.html"><a href="02-rstudio.html"><i class="fa fa-check"></i><b>2</b> RStudio</a><ul>
-<li class="chapter" data-level="2.1" data-path="02-rstudio.html"><a href="02-rstudio.html#rstudio-"><i class="fa fa-check"></i><b>2.1</b> RStudio とは</a></li>
-<li class="chapter" data-level="2.2" data-path="02-rstudio.html"><a href="02-rstudio.html#rstudio-"><i class="fa fa-check"></i><b>2.2</b> RStudio のインストール</a></li>
-<li class="chapter" data-level="2.3" data-path="02-rstudio.html"><a href="02-rstudio.html#rstudio-"><i class="fa fa-check"></i><b>2.3</b> RStudio の設定</a></li>
-<li class="chapter" data-level="2.4" data-path="02-rstudio.html"><a href="02-rstudio.html#rstudio-"><i class="fa fa-check"></i><b>2.4</b> RStudio の使い方</a></li>
+<li class="chapter" data-level="2.1" data-path="02-rstudio.html"><a href="02-rstudio.html#rstudio-とは"><i class="fa fa-check"></i><b>2.1</b> RStudio とは</a></li>
+<li class="chapter" data-level="2.2" data-path="02-rstudio.html"><a href="02-rstudio.html#rstudio-のインストール"><i class="fa fa-check"></i><b>2.2</b> RStudio のインストール</a></li>
+<li class="chapter" data-level="2.3" data-path="02-rstudio.html"><a href="02-rstudio.html#rstudio-の設定"><i class="fa fa-check"></i><b>2.3</b> RStudio の設定</a></li>
+<li class="chapter" data-level="2.4" data-path="02-rstudio.html"><a href="02-rstudio.html#rstudio-の使い方"><i class="fa fa-check"></i><b>2.4</b> RStudio の使い方</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="03-vector.html"><a href="03-vector.html"><i class="fa fa-check"></i><b>3</b> ベクトル</a><ul>
-<li class="chapter" data-level="3.1" data-path="03-vector.html"><a href="03-vector.html#-1"><i class="fa fa-check"></i><b>3.1</b> ベクトル</a></li>
-<li class="chapter" data-level="3.2" data-path="03-vector.html"><a href="03-vector.html#section-3.2"><i class="fa fa-check"></i><b>3.2</b> 算術演算子</a></li>
-<li class="chapter" data-level="3.3" data-path="03-vector.html"><a href="03-vector.html#section-3.3"><i class="fa fa-check"></i><b>3.3</b> 論理演算子</a></li>
-<li class="chapter" data-level="3.4" data-path="03-vector.html"><a href="03-vector.html#section-3.4"><i class="fa fa-check"></i><b>3.4</b> 比較演算子</a></li>
-<li class="chapter" data-level="3.5" data-path="03-vector.html"><a href="03-vector.html#section-3.5"><i class="fa fa-check"></i><b>3.5</b> 要素</a></li>
-<li class="chapter" data-level="3.6" data-path="03-vector.html"><a href="03-vector.html#section-3.6"><i class="fa fa-check"></i><b>3.6</b> 関数</a></li>
-<li class="chapter" data-level="3.7" data-path="03-vector.html"><a href="03-vector.html#section-3.7"><i class="fa fa-check"></i><b>3.7</b> 規則的なベクトル</a></li>
-<li class="chapter" data-level="3.8" data-path="03-vector.html"><a href="03-vector.html#section-3.8"><i class="fa fa-check"></i><b>3.8</b> 乱数ベクトル</a></li>
+<li class="chapter" data-level="3.1" data-path="03-vector.html"><a href="03-vector.html#ベクトル-1"><i class="fa fa-check"></i><b>3.1</b> ベクトル</a></li>
+<li class="chapter" data-level="3.2" data-path="03-vector.html"><a href="03-vector.html#算術演算子"><i class="fa fa-check"></i><b>3.2</b> 算術演算子</a></li>
+<li class="chapter" data-level="3.3" data-path="03-vector.html"><a href="03-vector.html#論理演算子"><i class="fa fa-check"></i><b>3.3</b> 論理演算子</a></li>
+<li class="chapter" data-level="3.4" data-path="03-vector.html"><a href="03-vector.html#比較演算子"><i class="fa fa-check"></i><b>3.4</b> 比較演算子</a></li>
+<li class="chapter" data-level="3.5" data-path="03-vector.html"><a href="03-vector.html#要素"><i class="fa fa-check"></i><b>3.5</b> 要素</a></li>
+<li class="chapter" data-level="3.6" data-path="03-vector.html"><a href="03-vector.html#関数"><i class="fa fa-check"></i><b>3.6</b> 関数</a></li>
+<li class="chapter" data-level="3.7" data-path="03-vector.html"><a href="03-vector.html#規則的なベクトル"><i class="fa fa-check"></i><b>3.7</b> 規則的なベクトル</a></li>
+<li class="chapter" data-level="3.8" data-path="03-vector.html"><a href="03-vector.html#乱数ベクトル"><i class="fa fa-check"></i><b>3.8</b> 乱数ベクトル</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="04-dataframe.html"><a href="04-dataframe.html"><i class="fa fa-check"></i><b>4</b> データ構造</a><ul>
-<li class="chapter" data-level="4.1" data-path="04-dataframe.html"><a href="04-dataframe.html#-2"><i class="fa fa-check"></i><b>4.1</b> ベクトル</a><ul>
-<li class="chapter" data-level="4.1.1" data-path="04-dataframe.html"><a href="04-dataframe.html#section-4.1.1"><i class="fa fa-check"></i><b>4.1.1</b> ベクトルのアクセス</a></li>
+<li class="chapter" data-level="4.1" data-path="03-vector.html"><a href="03-vector.html#ベクトル"><i class="fa fa-check"></i><b>4.1</b> ベクトル</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="04-dataframe.html"><a href="04-dataframe.html#ベクトルのアクセス"><i class="fa fa-check"></i><b>4.1.1</b> ベクトルのアクセス</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="04-dataframe.html"><a href="04-dataframe.html#section-4.2"><i class="fa fa-check"></i><b>4.2</b> リスト</a><ul>
-<li class="chapter" data-level="4.2.1" data-path="04-dataframe.html"><a href="04-dataframe.html#section-4.2.1"><i class="fa fa-check"></i><b>4.2.1</b> リストのアクセス</a></li>
+<li class="chapter" data-level="4.2" data-path="04-dataframe.html"><a href="04-dataframe.html#リスト"><i class="fa fa-check"></i><b>4.2</b> リスト</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="04-dataframe.html"><a href="04-dataframe.html#リストのアクセス"><i class="fa fa-check"></i><b>4.2.1</b> リストのアクセス</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="04-dataframe.html"><a href="04-dataframe.html#section-4.3"><i class="fa fa-check"></i><b>4.3</b> 因子ベクトル</a><ul>
+<li class="chapter" data-level="4.3" data-path="04-dataframe.html"><a href="04-dataframe.html#因子ベクトル"><i class="fa fa-check"></i><b>4.3</b> 因子ベクトル</a><ul>
 <li class="chapter" data-level="4.3.1" data-path="04-dataframe.html"><a href="04-dataframe.html#factor"><i class="fa fa-check"></i><b>4.3.1</b> factor</a></li>
 <li class="chapter" data-level="4.3.2" data-path="04-dataframe.html"><a href="04-dataframe.html#cut"><i class="fa fa-check"></i><b>4.3.2</b> cut</a></li>
 </ul></li>
-<li class="chapter" data-level="4.4" data-path="04-dataframe.html"><a href="04-dataframe.html#section-4.4"><i class="fa fa-check"></i><b>4.4</b> 行列</a><ul>
-<li class="chapter" data-level="4.4.1" data-path="04-dataframe.html"><a href="04-dataframe.html#section-4.4.1"><i class="fa fa-check"></i><b>4.4.1</b> 行列の演算</a></li>
-<li class="chapter" data-level="4.4.2" data-path="04-dataframe.html"><a href="04-dataframe.html#section-4.4.2"><i class="fa fa-check"></i><b>4.4.2</b> 行列のアクセス</a></li>
+<li class="chapter" data-level="4.4" data-path="04-dataframe.html"><a href="04-dataframe.html#行列"><i class="fa fa-check"></i><b>4.4</b> 行列</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="04-dataframe.html"><a href="04-dataframe.html#行列の演算"><i class="fa fa-check"></i><b>4.4.1</b> 行列の演算</a></li>
+<li class="chapter" data-level="4.4.2" data-path="04-dataframe.html"><a href="04-dataframe.html#行列のアクセス"><i class="fa fa-check"></i><b>4.4.2</b> 行列のアクセス</a></li>
 </ul></li>
-<li class="chapter" data-level="4.5" data-path="04-dataframe.html"><a href="04-dataframe.html#section-4.5"><i class="fa fa-check"></i><b>4.5</b> データフレイム</a><ul>
-<li class="chapter" data-level="4.5.1" data-path="04-dataframe.html"><a href="04-dataframe.html#section-4.5.1"><i class="fa fa-check"></i><b>4.5.1</b> データフレイムの演算</a></li>
-<li class="chapter" data-level="4.5.2" data-path="04-dataframe.html"><a href="04-dataframe.html#section-4.5.2"><i class="fa fa-check"></i><b>4.5.2</b> データフレイムのアクセス</a></li>
+<li class="chapter" data-level="4.5" data-path="04-dataframe.html"><a href="04-dataframe.html#データフレイム"><i class="fa fa-check"></i><b>4.5</b> データフレイム</a><ul>
+<li class="chapter" data-level="4.5.1" data-path="04-dataframe.html"><a href="04-dataframe.html#データフレイムの演算"><i class="fa fa-check"></i><b>4.5.1</b> データフレイムの演算</a></li>
+<li class="chapter" data-level="4.5.2" data-path="04-dataframe.html"><a href="04-dataframe.html#データフレイムのアクセス"><i class="fa fa-check"></i><b>4.5.2</b> データフレイムのアクセス</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="05-datainput.html"><a href="05-datainput.html"><i class="fa fa-check"></i><b>5</b> データ入力</a><ul>
-<li class="chapter" data-level="5.1" data-path="03-vector.html"><a href="03-vector.html#-1"><i class="fa fa-check"></i><b>5.1</b> はじめに</a></li>
-<li class="chapter" data-level="5.2" data-path="05-datainput.html"><a href="05-datainput.html#csv-"><i class="fa fa-check"></i><b>5.2</b> csv ファイル</a></li>
-<li class="chapter" data-level="5.3" data-path="05-datainput.html"><a href="05-datainput.html#excel-"><i class="fa fa-check"></i><b>5.3</b> EXCEL ファイル</a></li>
+<li class="chapter" data-level="5.1" data-path="index.html"><a href="index.html#はじめに"><i class="fa fa-check"></i><b>5.1</b> はじめに</a></li>
+<li class="chapter" data-level="5.2" data-path="05-datainput.html"><a href="05-datainput.html#csv-ファイル"><i class="fa fa-check"></i><b>5.2</b> csv ファイル</a></li>
+<li class="chapter" data-level="5.3" data-path="05-datainput.html"><a href="05-datainput.html#excel-ファイル"><i class="fa fa-check"></i><b>5.3</b> EXCEL ファイル</a></li>
 <li class="chapter" data-level="5.4" data-path="05-datainput.html"><a href="05-datainput.html#stata"><i class="fa fa-check"></i><b>5.4</b> STATA</a></li>
-<li class="chapter" data-level="5.5" data-path="index.html"><a href="index.html#r-"><i class="fa fa-check"></i><b>5.5</b> R に入っているデータ</a></li>
-<li class="chapter" data-level="5.6" data-path="05-datainput.html"><a href="05-datainput.html#section-5.6"><i class="fa fa-check"></i><b>5.6</b> インターネットからデータ入力</a></li>
-<li class="chapter" data-level="5.7" data-path="05-datainput.html"><a href="05-datainput.html#section-5.7"><i class="fa fa-check"></i><b>5.7</b> その他のデータ入力</a></li>
+<li class="chapter" data-level="5.5" data-path="05-datainput.html"><a href="05-datainput.html#r-に入っているデータ"><i class="fa fa-check"></i><b>5.5</b> R に入っているデータ</a></li>
+<li class="chapter" data-level="5.6" data-path="05-datainput.html"><a href="05-datainput.html#インターネットからデータ入力"><i class="fa fa-check"></i><b>5.6</b> インターネットからデータ入力</a></li>
+<li class="chapter" data-level="5.7" data-path="05-datainput.html"><a href="05-datainput.html#その他のデータ入力"><i class="fa fa-check"></i><b>5.7</b> その他のデータ入力</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="06-datawrangling.html"><a href="06-datawrangling.html"><i class="fa fa-check"></i><b>6</b> 整然データ</a><ul>
-<li class="chapter" data-level="6.1" data-path="06-datawrangling.html"><a href="06-datawrangling.html#section-6.1"><i class="fa fa-check"></i><b>6.1</b> データ整形</a></li>
-<li class="chapter" data-level="6.2" data-path="06-datawrangling.html"><a href="06-datawrangling.html#section-6.2"><i class="fa fa-check"></i><b>6.2</b> データ結合</a></li>
+<li class="chapter" data-level="6.1" data-path="06-datawrangling.html"><a href="06-datawrangling.html#データ整形"><i class="fa fa-check"></i><b>6.1</b> データ整形</a></li>
+<li class="chapter" data-level="6.2" data-path="06-datawrangling.html"><a href="06-datawrangling.html#データ結合"><i class="fa fa-check"></i><b>6.2</b> データ結合</a></li>
 <li class="chapter" data-level="6.3" data-path="06-datawrangling.html"><a href="06-datawrangling.html#tidyr"><i class="fa fa-check"></i><b>6.3</b> tidyr</a></li>
-<li class="chapter" data-level="6.4" data-path="06-datawrangling.html"><a href="06-datawrangling.html#section-6.4"><i class="fa fa-check"></i><b>6.4</b> 実践例</a></li>
+<li class="chapter" data-level="6.4" data-path="06-datawrangling.html"><a href="06-datawrangling.html#実践例"><i class="fa fa-check"></i><b>6.4</b> 実践例</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="07-regression1.html"><a href="07-regression1.html"><i class="fa fa-check"></i><b>7</b> 古典的仮定のもとでの最小二乗法</a><ul>
-<li class="chapter" data-level="7.1" data-path="07-regression1.html"><a href="07-regression1.html#section-7.1"><i class="fa fa-check"></i><b>7.1</b> 単回帰モデル</a><ul>
-<li class="chapter" data-level="7.1.1" data-path="07-regression1.html"><a href="07-regression1.html#section-7.1.1"><i class="fa fa-check"></i><b>7.1.1</b> ティー検定</a></li>
-<li class="chapter" data-level="7.1.2" data-path="07-regression1.html"><a href="07-regression1.html#section-7.1.2"><i class="fa fa-check"></i><b>7.1.2</b> 対数変換</a></li>
-<li class="chapter" data-level="7.1.3" data-path="07-regression1.html"><a href="07-regression1.html#section-7.1.3"><i class="fa fa-check"></i><b>7.1.3</b> 切片なし回帰モデル</a></li>
+<li class="chapter" data-level="7.1" data-path="07-regression1.html"><a href="07-regression1.html#単回帰モデル"><i class="fa fa-check"></i><b>7.1</b> 単回帰モデル</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="07-regression1.html"><a href="07-regression1.html#ティー検定"><i class="fa fa-check"></i><b>7.1.1</b> ティー検定</a></li>
+<li class="chapter" data-level="7.1.2" data-path="07-regression1.html"><a href="07-regression1.html#対数変換"><i class="fa fa-check"></i><b>7.1.2</b> 対数変換</a></li>
+<li class="chapter" data-level="7.1.3" data-path="07-regression1.html"><a href="07-regression1.html#切片なし回帰モデル"><i class="fa fa-check"></i><b>7.1.3</b> 切片なし回帰モデル</a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="07-regression1.html"><a href="07-regression1.html#section-7.2"><i class="fa fa-check"></i><b>7.2</b> 重回帰モデル</a><ul>
-<li class="chapter" data-level="7.2.1" data-path="07-regression1.html"><a href="07-regression1.html#section-7.2.1"><i class="fa fa-check"></i><b>7.2.1</b> 自乗項</a></li>
-<li class="chapter" data-level="7.2.2" data-path="07-regression1.html"><a href="07-regression1.html#section-7.2.2"><i class="fa fa-check"></i><b>7.2.2</b> 交差項</a></li>
-<li class="chapter" data-level="7.2.3" data-path="07-regression1.html"><a href="07-regression1.html#section-7.2.3"><i class="fa fa-check"></i><b>7.2.3</b> エフ検定</a></li>
+<li class="chapter" data-level="7.2" data-path="07-regression1.html"><a href="07-regression1.html#重回帰モデル"><i class="fa fa-check"></i><b>7.2</b> 重回帰モデル</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="07-regression1.html"><a href="07-regression1.html#自乗項"><i class="fa fa-check"></i><b>7.2.1</b> 自乗項</a></li>
+<li class="chapter" data-level="7.2.2" data-path="07-regression1.html"><a href="07-regression1.html#交差項"><i class="fa fa-check"></i><b>7.2.2</b> 交差項</a></li>
+<li class="chapter" data-level="7.2.3" data-path="07-regression1.html"><a href="07-regression1.html#エフ検定"><i class="fa fa-check"></i><b>7.2.3</b> エフ検定</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="08-regression2.html"><a href="08-regression2.html"><i class="fa fa-check"></i><b>8</b> 現代的仮定のもとでの最小二乗法</a><ul>
-<li class="chapter" data-level="8.1" data-path="08-regression2.html"><a href="08-regression2.html#section-8.1"><i class="fa fa-check"></i><b>8.1</b> 正規性の仮定について</a></li>
-<li class="chapter" data-level="8.2" data-path="08-regression2.html"><a href="08-regression2.html#section-8.2"><i class="fa fa-check"></i><b>8.2</b> 誤差項と説明変数が独立の仮定について</a></li>
-<li class="chapter" data-level="8.3" data-path="08-regression2.html"><a href="08-regression2.html#section-8.3"><i class="fa fa-check"></i><b>8.3</b> 分散均一の検定</a></li>
+<li class="chapter" data-level="8.1" data-path="08-regression2.html"><a href="08-regression2.html#正規性の仮定について"><i class="fa fa-check"></i><b>8.1</b> 正規性の仮定について</a></li>
+<li class="chapter" data-level="8.2" data-path="08-regression2.html"><a href="08-regression2.html#誤差項と説明変数が独立の仮定について"><i class="fa fa-check"></i><b>8.2</b> 誤差項と説明変数が独立の仮定について</a></li>
+<li class="chapter" data-level="8.3" data-path="08-regression2.html"><a href="08-regression2.html#分散均一の検定"><i class="fa fa-check"></i><b>8.3</b> 分散均一の検定</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="09-ivreg.html"><a href="09-ivreg.html"><i class="fa fa-check"></i><b>9</b> 操作変数法</a><ul>
-<li class="chapter" data-level="9.1" data-path="09-ivreg.html"><a href="09-ivreg.html#section-9.1"><i class="fa fa-check"></i><b>9.1</b> データ</a></li>
-<li class="chapter" data-level="9.2" data-path="09-ivreg.html"><a href="09-ivreg.html#section-9.2"><i class="fa fa-check"></i><b>9.2</b> 操作変数</a></li>
-<li class="chapter" data-level="9.3" data-path="09-ivreg.html"><a href="09-ivreg.html#section-9.3"><i class="fa fa-check"></i><b>9.3</b> 2段階最小二乗法</a><ul>
-<li class="chapter" data-level="9.3.1" data-path="09-ivreg.html"><a href="09-ivreg.html#section-9.3.1"><i class="fa fa-check"></i><b>9.3.1</b> 複数制約の検定</a></li>
+<li class="chapter" data-level="9.1" data-path="09-ivreg.html"><a href="09-ivreg.html#データ"><i class="fa fa-check"></i><b>9.1</b> データ</a></li>
+<li class="chapter" data-level="9.2" data-path="09-ivreg.html"><a href="09-ivreg.html#操作変数"><i class="fa fa-check"></i><b>9.2</b> 操作変数</a></li>
+<li class="chapter" data-level="9.3" data-path="09-ivreg.html"><a href="09-ivreg.html#段階最小二乗法"><i class="fa fa-check"></i><b>9.3</b> 2段階最小二乗法</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="09-ivreg.html"><a href="09-ivreg.html#複数制約の検定"><i class="fa fa-check"></i><b>9.3.1</b> 複数制約の検定</a></li>
 </ul></li>
-<li class="chapter" data-level="9.4" data-path="09-ivreg.html"><a href="09-ivreg.html#section-9.4"><i class="fa fa-check"></i><b>9.4</b> 特定化検定</a><ul>
+<li class="chapter" data-level="9.4" data-path="09-ivreg.html"><a href="09-ivreg.html#特定化検定"><i class="fa fa-check"></i><b>9.4</b> 特定化検定</a><ul>
 <li class="chapter" data-level="9.4.1" data-path="09-ivreg.html"><a href="09-ivreg.html#weak-instruments"><i class="fa fa-check"></i><b>9.4.1</b> Weak instruments</a></li>
-<li class="chapter" data-level="9.4.2" data-path="09-ivreg.html"><a href="09-ivreg.html#wu-hausman-"><i class="fa fa-check"></i><b>9.4.2</b> Wu-Hausman 検定</a></li>
-<li class="chapter" data-level="9.4.3" data-path="09-ivreg.html"><a href="09-ivreg.html#sargan-"><i class="fa fa-check"></i><b>9.4.3</b> Sargan 検定</a></li>
+<li class="chapter" data-level="9.4.2" data-path="09-ivreg.html"><a href="09-ivreg.html#wu-hausman-検定"><i class="fa fa-check"></i><b>9.4.2</b> Wu-Hausman 検定</a></li>
+<li class="chapter" data-level="9.4.3" data-path="09-ivreg.html"><a href="09-ivreg.html#sargan-検定"><i class="fa fa-check"></i><b>9.4.3</b> Sargan 検定</a></li>
 </ul></li>
-<li class="chapter" data-level="9.5" data-path="09-ivreg.html"><a href="09-ivreg.html#section-9.5"><i class="fa fa-check"></i><b>9.5</b> ロバスト分散</a><ul>
-<li class="chapter" data-level="9.5.1" data-path="09-ivreg.html"><a href="09-ivreg.html#section-9.5.1"><i class="fa fa-check"></i><b>9.5.1</b> 分散不均一の検定</a></li>
+<li class="chapter" data-level="9.5" data-path="09-ivreg.html"><a href="09-ivreg.html#ロバスト分散"><i class="fa fa-check"></i><b>9.5</b> ロバスト分散</a><ul>
+<li class="chapter" data-level="9.5.1" data-path="09-ivreg.html"><a href="09-ivreg.html#分散不均一の検定"><i class="fa fa-check"></i><b>9.5.1</b> 分散不均一の検定</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="10-panel.html"><a href="10-panel.html"><i class="fa fa-check"></i><b>10</b> パネル分析</a><ul>
-<li class="chapter" data-level="10.1" data-path="03-vector.html"><a href="03-vector.html#-1"><i class="fa fa-check"></i><b>10.1</b> データ</a></li>
-<li class="chapter" data-level="10.2" data-path="10-panel.html"><a href="10-panel.html#ols"><i class="fa fa-check"></i><b>10.2</b> プーリングOLS</a></li>
-<li class="chapter" data-level="10.3" data-path="10-panel.html"><a href="10-panel.html#-"><i class="fa fa-check"></i><b>10.3</b> 固定効果モデル (平均差分法)</a><ul>
-<li class="chapter" data-level="10.3.1" data-path="10-panel.html"><a href="10-panel.html#section-10.3.1"><i class="fa fa-check"></i><b>10.3.1</b> 時間効果</a></li>
-<li class="chapter" data-level="10.3.2" data-path="10-panel.html"><a href="10-panel.html#vsols"><i class="fa fa-check"></i><b>10.3.2</b> 固定効果VSプーリングOLS</a></li>
+<li class="chapter" data-level="10.1" data-path="09-ivreg.html"><a href="09-ivreg.html#データ"><i class="fa fa-check"></i><b>10.1</b> データ</a></li>
+<li class="chapter" data-level="10.2" data-path="10-panel.html"><a href="10-panel.html#プーリングols"><i class="fa fa-check"></i><b>10.2</b> プーリングOLS</a></li>
+<li class="chapter" data-level="10.3" data-path="10-panel.html"><a href="10-panel.html#固定効果モデル-平均差分法"><i class="fa fa-check"></i><b>10.3</b> 固定効果モデル (平均差分法)</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="10-panel.html"><a href="10-panel.html#時間効果"><i class="fa fa-check"></i><b>10.3.1</b> 時間効果</a></li>
+<li class="chapter" data-level="10.3.2" data-path="10-panel.html"><a href="10-panel.html#固定効果vsプーリングols"><i class="fa fa-check"></i><b>10.3.2</b> 固定効果VSプーリングOLS</a></li>
 </ul></li>
-<li class="chapter" data-level="10.4" data-path="10-panel.html"><a href="10-panel.html#-"><i class="fa fa-check"></i><b>10.4</b> 固定効果モデル (一階差分法)</a><ul>
-<li class="chapter" data-level="10.4.1" data-path="03-vector.html"><a href="03-vector.html#-1"><i class="fa fa-check"></i><b>10.4.1</b> 時間効果</a></li>
-<li class="chapter" data-level="10.4.2" data-path="10-panel.html"><a href="10-panel.html#section-10.4.2"><i class="fa fa-check"></i><b>10.4.2</b> 平均差分法と一階差分法</a></li>
+<li class="chapter" data-level="10.4" data-path="10-panel.html"><a href="10-panel.html#固定効果モデル-一階差分法"><i class="fa fa-check"></i><b>10.4</b> 固定効果モデル (一階差分法)</a><ul>
+<li class="chapter" data-level="10.4.1" data-path="10-panel.html"><a href="10-panel.html#時間効果-1"><i class="fa fa-check"></i><b>10.4.1</b> 時間効果</a></li>
+<li class="chapter" data-level="10.4.2" data-path="10-panel.html"><a href="10-panel.html#平均差分法と一階差分法"><i class="fa fa-check"></i><b>10.4.2</b> 平均差分法と一階差分法</a></li>
 </ul></li>
-<li class="chapter" data-level="10.5" data-path="10-panel.html"><a href="10-panel.html#section-10.5"><i class="fa fa-check"></i><b>10.5</b> 変量効果モデル</a><ul>
-<li class="chapter" data-level="10.5.1" data-path="04-dataframe.html"><a href="04-dataframe.html#-2"><i class="fa fa-check"></i><b>10.5.1</b> 時間効果</a></li>
-<li class="chapter" data-level="10.5.2" data-path="10-panel.html"><a href="10-panel.html#section-10.5.2"><i class="fa fa-check"></i><b>10.5.2</b> ハウスマン検定</a></li>
+<li class="chapter" data-level="10.5" data-path="10-panel.html"><a href="10-panel.html#変量効果モデル"><i class="fa fa-check"></i><b>10.5</b> 変量効果モデル</a><ul>
+<li class="chapter" data-level="10.5.1" data-path="10-panel.html"><a href="10-panel.html#時間効果-2"><i class="fa fa-check"></i><b>10.5.1</b> 時間効果</a></li>
+<li class="chapter" data-level="10.5.2" data-path="10-panel.html"><a href="10-panel.html#ハウスマン検定"><i class="fa fa-check"></i><b>10.5.2</b> ハウスマン検定</a></li>
 </ul></li>
-<li class="chapter" data-level="10.6" data-path="10-panel.html"><a href="10-panel.html#section-10.6"><i class="fa fa-check"></i><b>10.6</b> クラスターロバスト分散</a><ul>
-<li class="chapter" data-level="10.6.1" data-path="03-vector.html"><a href="03-vector.html#-1"><i class="fa fa-check"></i><b>10.6.1</b> 分散不均一の検定</a></li>
+<li class="chapter" data-level="10.6" data-path="10-panel.html"><a href="10-panel.html#クラスターロバスト分散"><i class="fa fa-check"></i><b>10.6</b> クラスターロバスト分散</a><ul>
+<li class="chapter" data-level="10.6.1" data-path="09-ivreg.html"><a href="09-ivreg.html#分散不均一の検定"><i class="fa fa-check"></i><b>10.6.1</b> 分散不均一の検定</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -265,10 +269,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="section-7" class="section level1">
+<div id="古典的仮定のもとでの最小二乗法" class="section level1">
 <h1><span class="header-section-number">7</span> 古典的仮定のもとでの最小二乗法</h1>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(AER)</code></pre>
-<div id="section-7.1" class="section level2">
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="07-regression1.html#cb213-1"></a><span class="kw">library</span>(AER)</span></code></pre></div>
+<div id="単回帰モデル" class="section level2">
 <h2><span class="header-section-number">7.1</span> 単回帰モデル</h2>
 <p>次の単回帰モデルを考える.</p>
 <p><span class="math display">\[
@@ -288,211 +292,211 @@ y = \alpha + \beta x + u
 不偏とは推定量の期待値が真のパラメータになることである.
 また他の線形不偏推定量のなかで最も分散が小さいことも知られている.</p>
 <p>仮想的に以下のモデルを考える.</p>
-<pre class="sourceCode r"><code class="sourceCode r">N &lt;-<span class="st"> </span><span class="dv">100</span>
-x &lt;-<span class="st"> </span><span class="kw">runif</span>(N)
-y &lt;-<span class="st"> </span><span class="dv">10</span> <span class="op">+</span><span class="st"> </span><span class="dv">2</span><span class="op">*</span>x <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(N)
-df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(x,y)</code></pre>
+<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="07-regression1.html#cb214-1"></a>N &lt;-<span class="st"> </span><span class="dv">100</span></span>
+<span id="cb214-2"><a href="07-regression1.html#cb214-2"></a>x &lt;-<span class="st"> </span><span class="kw">runif</span>(N)</span>
+<span id="cb214-3"><a href="07-regression1.html#cb214-3"></a>y &lt;-<span class="st"> </span><span class="dv">10</span> <span class="op">+</span><span class="st"> </span><span class="dv">2</span><span class="op">*</span>x <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(N)</span>
+<span id="cb214-4"><a href="07-regression1.html#cb214-4"></a>df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(x,y)</span></code></pre></div>
 <p>作図すると以下である.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(y<span class="op">~</span>x)</code></pre>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="07-regression1.html#cb215-1"></a><span class="kw">plot</span>(y<span class="op">~</span>x)</span></code></pre></div>
 <p><img src="07-regression1_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>R で回帰分析を実施するには <code>lm</code> を実施する.</p>
-<pre class="sourceCode r"><code class="sourceCode r">fm &lt;-<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data=</span>df)</code></pre>
+<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="07-regression1.html#cb216-1"></a>fm &lt;-<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data=</span>df)</span></code></pre></div>
 <p><code>fm</code> 自体はリストであり, 以下の要素がある.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">typeof</span>(fm)
-<span class="co">## [1] &quot;list&quot;</span>
-<span class="kw">names</span>(fm)
-<span class="co">##  [1] &quot;coefficients&quot;  &quot;residuals&quot;     &quot;effects&quot;       &quot;rank&quot;         </span>
-<span class="co">##  [5] &quot;fitted.values&quot; &quot;assign&quot;        &quot;qr&quot;            &quot;df.residual&quot;  </span>
-<span class="co">##  [9] &quot;xlevels&quot;       &quot;call&quot;          &quot;terms&quot;         &quot;model&quot;</span></code></pre>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="07-regression1.html#cb217-1"></a><span class="kw">typeof</span>(fm)</span>
+<span id="cb217-2"><a href="07-regression1.html#cb217-2"></a><span class="co">## [1] &quot;list&quot;</span></span>
+<span id="cb217-3"><a href="07-regression1.html#cb217-3"></a><span class="kw">names</span>(fm)</span>
+<span id="cb217-4"><a href="07-regression1.html#cb217-4"></a><span class="co">##  [1] &quot;coefficients&quot;  &quot;residuals&quot;     &quot;effects&quot;       &quot;rank&quot;         </span></span>
+<span id="cb217-5"><a href="07-regression1.html#cb217-5"></a><span class="co">##  [5] &quot;fitted.values&quot; &quot;assign&quot;        &quot;qr&quot;            &quot;df.residual&quot;  </span></span>
+<span id="cb217-6"><a href="07-regression1.html#cb217-6"></a><span class="co">##  [9] &quot;xlevels&quot;       &quot;call&quot;          &quot;terms&quot;         &quot;model&quot;</span></span></code></pre></div>
 <p>係数は次のコマンドを実施する.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">coef</span>(fm)
-<span class="co">## (Intercept)           x </span>
-<span class="co">##   10.572587    1.391378</span>
-<span class="co"># coefficients(fm)</span></code></pre>
+<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="07-regression1.html#cb218-1"></a><span class="kw">coef</span>(fm)</span>
+<span id="cb218-2"><a href="07-regression1.html#cb218-2"></a><span class="co">## (Intercept)           x </span></span>
+<span id="cb218-3"><a href="07-regression1.html#cb218-3"></a><span class="co">##   10.175303    1.637939</span></span>
+<span id="cb218-4"><a href="07-regression1.html#cb218-4"></a><span class="co"># coefficients(fm)</span></span></code></pre></div>
 <p>傾きの推定値は以下でも実行可能である.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(df, <span class="kw">cov</span>(x,y)<span class="op">/</span><span class="kw">var</span>(x))
-<span class="co">## [1] 1.391378</span></code></pre>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="07-regression1.html#cb219-1"></a><span class="kw">with</span>(df, <span class="kw">cov</span>(x,y)<span class="op">/</span><span class="kw">var</span>(x))</span>
+<span id="cb219-2"><a href="07-regression1.html#cb219-2"></a><span class="co">## [1] 1.637939</span></span></code></pre></div>
 <p>作図すると以下のようになる.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(y<span class="op">~</span>x,<span class="dt">data=</span>df)
-<span class="kw">abline</span>(fm)</code></pre>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="07-regression1.html#cb220-1"></a><span class="kw">plot</span>(y<span class="op">~</span>x,<span class="dt">data=</span>df)</span>
+<span id="cb220-2"><a href="07-regression1.html#cb220-2"></a><span class="kw">abline</span>(fm)</span></code></pre></div>
 <p><img src="07-regression1_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <p>残差は次のコマンドを実施する.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">resid</span>(fm))
-<span class="co">##           1           2           3           4           5           6 </span>
-<span class="co">## -0.01840149 -0.45597077  0.22707925  0.85199029 -1.14177120 -0.70206816</span>
-<span class="co"># residuals(fm)</span>
-<span class="co"># with(fm, residuals)</span></code></pre>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="07-regression1.html#cb221-1"></a><span class="kw">head</span>(<span class="kw">resid</span>(fm))</span>
+<span id="cb221-2"><a href="07-regression1.html#cb221-2"></a><span class="co">##            1            2            3            4            5            6 </span></span>
+<span id="cb221-3"><a href="07-regression1.html#cb221-3"></a><span class="co">## -1.456943382 -1.018246796  0.008625895 -0.745907415  1.552082406 -1.599191308</span></span>
+<span id="cb221-4"><a href="07-regression1.html#cb221-4"></a><span class="co"># residuals(fm)</span></span>
+<span id="cb221-5"><a href="07-regression1.html#cb221-5"></a><span class="co"># with(fm, residuals)</span></span></code></pre></div>
 <p>予測値は次のコマンドを実施する.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">fitted</span>(fm))
-<span class="co">##        1        2        3        4        5        6 </span>
-<span class="co">## 10.77769 10.68416 11.41681 11.15414 10.66737 11.55638</span>
-<span class="co"># fitted.values(fm)</span>
-<span class="co"># with(fm, fitted.values)</span></code></pre>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="07-regression1.html#cb222-1"></a><span class="kw">head</span>(<span class="kw">fitted</span>(fm))</span>
+<span id="cb222-2"><a href="07-regression1.html#cb222-2"></a><span class="co">##        1        2        3        4        5        6 </span></span>
+<span id="cb222-3"><a href="07-regression1.html#cb222-3"></a><span class="co">## 11.16229 10.84730 10.56691 10.80326 10.55394 10.50580</span></span>
+<span id="cb222-4"><a href="07-regression1.html#cb222-4"></a><span class="co"># fitted.values(fm)</span></span>
+<span id="cb222-5"><a href="07-regression1.html#cb222-5"></a><span class="co"># with(fm, fitted.values)</span></span></code></pre></div>
 <p>残差自乗和は次のコマンドを実施する.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">deviance</span>(fm)
-<span class="co">## [1] 70.68464</span>
-<span class="kw">sum</span>(<span class="kw">resid</span>(fm)<span class="op">^</span><span class="dv">2</span>)
-<span class="co">## [1] 70.68464</span></code></pre>
-<div id="section-7.1.1" class="section level3">
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="07-regression1.html#cb223-1"></a><span class="kw">deviance</span>(fm)</span>
+<span id="cb223-2"><a href="07-regression1.html#cb223-2"></a><span class="co">## [1] 91.65505</span></span>
+<span id="cb223-3"><a href="07-regression1.html#cb223-3"></a><span class="kw">sum</span>(<span class="kw">resid</span>(fm)<span class="op">^</span><span class="dv">2</span>)</span>
+<span id="cb223-4"><a href="07-regression1.html#cb223-4"></a><span class="co">## [1] 91.65505</span></span></code></pre></div>
+<div id="ティー検定" class="section level3">
 <h3><span class="header-section-number">7.1.1</span> ティー検定</h3>
 <p>その結果を見るには <code>summary</code> を実施する.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(fm)
-<span class="co">## </span>
-<span class="co">## Call:</span>
-<span class="co">## lm(formula = y ~ x, data = df)</span>
-<span class="co">## </span>
-<span class="co">## Residuals:</span>
-<span class="co">##      Min       1Q   Median       3Q      Max </span>
-<span class="co">## -1.91957 -0.57520 -0.08316  0.66357  2.16127 </span>
-<span class="co">## </span>
-<span class="co">## Coefficients:</span>
-<span class="co">##             Estimate Std. Error t value Pr(&gt;|t|)    </span>
-<span class="co">## (Intercept)  10.5726     0.1706  61.969  &lt; 2e-16 ***</span>
-<span class="co">## x             1.3914     0.3009   4.624 1.15e-05 ***</span>
-<span class="co">## ---</span>
-<span class="co">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span>
-<span class="co">## </span>
-<span class="co">## Residual standard error: 0.8493 on 98 degrees of freedom</span>
-<span class="co">## Multiple R-squared:  0.1791, Adjusted R-squared:  0.1707 </span>
-<span class="co">## F-statistic: 21.38 on 1 and 98 DF,  p-value: 1.15e-05</span></code></pre>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="07-regression1.html#cb224-1"></a><span class="kw">summary</span>(fm)</span>
+<span id="cb224-2"><a href="07-regression1.html#cb224-2"></a><span class="co">## </span></span>
+<span id="cb224-3"><a href="07-regression1.html#cb224-3"></a><span class="co">## Call:</span></span>
+<span id="cb224-4"><a href="07-regression1.html#cb224-4"></a><span class="co">## lm(formula = y ~ x, data = df)</span></span>
+<span id="cb224-5"><a href="07-regression1.html#cb224-5"></a><span class="co">## </span></span>
+<span id="cb224-6"><a href="07-regression1.html#cb224-6"></a><span class="co">## Residuals:</span></span>
+<span id="cb224-7"><a href="07-regression1.html#cb224-7"></a><span class="co">##     Min      1Q  Median      3Q     Max </span></span>
+<span id="cb224-8"><a href="07-regression1.html#cb224-8"></a><span class="co">## -2.7170 -0.7208  0.1273  0.6365  2.4806 </span></span>
+<span id="cb224-9"><a href="07-regression1.html#cb224-9"></a><span class="co">## </span></span>
+<span id="cb224-10"><a href="07-regression1.html#cb224-10"></a><span class="co">## Coefficients:</span></span>
+<span id="cb224-11"><a href="07-regression1.html#cb224-11"></a><span class="co">##             Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span id="cb224-12"><a href="07-regression1.html#cb224-12"></a><span class="co">## (Intercept)  10.1753     0.1985  51.269  &lt; 2e-16 ***</span></span>
+<span id="cb224-13"><a href="07-regression1.html#cb224-13"></a><span class="co">## x             1.6379     0.3442   4.759  6.7e-06 ***</span></span>
+<span id="cb224-14"><a href="07-regression1.html#cb224-14"></a><span class="co">## ---</span></span>
+<span id="cb224-15"><a href="07-regression1.html#cb224-15"></a><span class="co">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb224-16"><a href="07-regression1.html#cb224-16"></a><span class="co">## </span></span>
+<span id="cb224-17"><a href="07-regression1.html#cb224-17"></a><span class="co">## Residual standard error: 0.9671 on 98 degrees of freedom</span></span>
+<span id="cb224-18"><a href="07-regression1.html#cb224-18"></a><span class="co">## Multiple R-squared:  0.1877,	Adjusted R-squared:  0.1795 </span></span>
+<span id="cb224-19"><a href="07-regression1.html#cb224-19"></a><span class="co">## F-statistic: 22.65 on 1 and 98 DF,  p-value: 6.704e-06</span></span></code></pre></div>
 <p>これをみれば各変数の係数がゼロのティー検定の結果が示されている.
 他にも, 残差標準誤差, 決定係数, 修正済み決定係数, 全ての係数がゼロであるエフ検定の結果も示されている.</p>
 <p><code>summary(fm)</code> もリストであり, それぞれの要素は以下である.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">typeof</span>(<span class="kw">summary</span>(fm))
-<span class="co">## [1] &quot;list&quot;</span>
-<span class="kw">names</span>(<span class="kw">summary</span>(fm))
-<span class="co">##  [1] &quot;call&quot;          &quot;terms&quot;         &quot;residuals&quot;     &quot;coefficients&quot; </span>
-<span class="co">##  [5] &quot;aliased&quot;       &quot;sigma&quot;         &quot;df&quot;            &quot;r.squared&quot;    </span>
-<span class="co">##  [9] &quot;adj.r.squared&quot; &quot;fstatistic&quot;    &quot;cov.unscaled&quot;</span></code></pre>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="07-regression1.html#cb225-1"></a><span class="kw">typeof</span>(<span class="kw">summary</span>(fm))</span>
+<span id="cb225-2"><a href="07-regression1.html#cb225-2"></a><span class="co">## [1] &quot;list&quot;</span></span>
+<span id="cb225-3"><a href="07-regression1.html#cb225-3"></a><span class="kw">names</span>(<span class="kw">summary</span>(fm))</span>
+<span id="cb225-4"><a href="07-regression1.html#cb225-4"></a><span class="co">##  [1] &quot;call&quot;          &quot;terms&quot;         &quot;residuals&quot;     &quot;coefficients&quot; </span></span>
+<span id="cb225-5"><a href="07-regression1.html#cb225-5"></a><span class="co">##  [5] &quot;aliased&quot;       &quot;sigma&quot;         &quot;df&quot;            &quot;r.squared&quot;    </span></span>
+<span id="cb225-6"><a href="07-regression1.html#cb225-6"></a><span class="co">##  [9] &quot;adj.r.squared&quot; &quot;fstatistic&quot;    &quot;cov.unscaled&quot;</span></span></code></pre></div>
 <p>単なる <code>fm</code> と同じ名前もあるが, 中身が違っている場合もある.
 例えば <code>residuals</code> は同じであるが, 係数はより情報が加わっている.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">coef</span>(<span class="kw">summary</span>(fm))
-<span class="co">##              Estimate Std. Error   t value    Pr(&gt;|t|)</span>
-<span class="co">## (Intercept) 10.572587  0.1706118 61.968690 2.04884e-80</span>
-<span class="co">## x            1.391378  0.3008935  4.624156 1.14957e-05</span>
-<span class="co"># coefficients(summary(fm))</span></code></pre>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="07-regression1.html#cb226-1"></a><span class="kw">coef</span>(<span class="kw">summary</span>(fm))</span>
+<span id="cb226-2"><a href="07-regression1.html#cb226-2"></a><span class="co">##              Estimate Std. Error   t value     Pr(&gt;|t|)</span></span>
+<span id="cb226-3"><a href="07-regression1.html#cb226-3"></a><span class="co">## (Intercept) 10.175303  0.1984690 51.268980 1.375148e-72</span></span>
+<span id="cb226-4"><a href="07-regression1.html#cb226-4"></a><span class="co">## x            1.637939  0.3441544  4.759316 6.704460e-06</span></span>
+<span id="cb226-5"><a href="07-regression1.html#cb226-5"></a><span class="co"># coefficients(summary(fm))</span></span></code></pre></div>
 <p>残差の標準誤差は次のようにして得られる.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(<span class="kw">summary</span>(fm),sigma)
-<span class="co">## [1] 0.8492773</span>
-<span class="kw">sqrt</span>(<span class="kw">deviance</span>(fm)<span class="op">/</span><span class="kw">df.residual</span>(fm))
-<span class="co">## [1] 0.8492773</span></code></pre>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="07-regression1.html#cb227-1"></a><span class="kw">with</span>(<span class="kw">summary</span>(fm),sigma)</span>
+<span id="cb227-2"><a href="07-regression1.html#cb227-2"></a><span class="co">## [1] 0.9670861</span></span>
+<span id="cb227-3"><a href="07-regression1.html#cb227-3"></a><span class="kw">sqrt</span>(<span class="kw">deviance</span>(fm)<span class="op">/</span><span class="kw">df.residual</span>(fm))</span>
+<span id="cb227-4"><a href="07-regression1.html#cb227-4"></a><span class="co">## [1] 0.9670861</span></span></code></pre></div>
 <p>決定係数は次のようにして計算する.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(<span class="kw">summary</span>(fm),r.squared)
-<span class="co">## [1] 0.1791113</span>
-<span class="dv">1</span><span class="op">-</span><span class="kw">deviance</span>(fm)<span class="op">/</span><span class="kw">with</span>(df, <span class="kw">sum</span>((y<span class="op">-</span><span class="kw">mean</span>(y))<span class="op">^</span><span class="dv">2</span>))
-<span class="co">## [1] 0.1791113</span></code></pre>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="07-regression1.html#cb228-1"></a><span class="kw">with</span>(<span class="kw">summary</span>(fm),r.squared)</span>
+<span id="cb228-2"><a href="07-regression1.html#cb228-2"></a><span class="co">## [1] 0.1877404</span></span>
+<span id="cb228-3"><a href="07-regression1.html#cb228-3"></a><span class="dv">1</span><span class="op">-</span><span class="kw">deviance</span>(fm)<span class="op">/</span><span class="kw">with</span>(df, <span class="kw">sum</span>((y<span class="op">-</span><span class="kw">mean</span>(y))<span class="op">^</span><span class="dv">2</span>))</span>
+<span id="cb228-4"><a href="07-regression1.html#cb228-4"></a><span class="co">## [1] 0.1877404</span></span></code></pre></div>
 <p>調整済み決定係数は次のようにして計算する.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(<span class="kw">summary</span>(fm),adj.r.squared)
-<span class="co">## [1] 0.1707349</span>
-<span class="dv">1</span><span class="op">-</span>(<span class="kw">deviance</span>(fm)<span class="op">/</span><span class="kw">df.residual</span>(fm))<span class="op">/</span><span class="kw">with</span>(df, <span class="kw">sum</span>((y<span class="op">-</span><span class="kw">mean</span>(y))<span class="op">^</span><span class="dv">2</span><span class="op">/</span>(<span class="kw">nrow</span>(df)<span class="op">-</span><span class="dv">1</span>)))
-<span class="co">## [1] 0.1707349</span></code></pre>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="07-regression1.html#cb229-1"></a><span class="kw">with</span>(<span class="kw">summary</span>(fm),adj.r.squared)</span>
+<span id="cb229-2"><a href="07-regression1.html#cb229-2"></a><span class="co">## [1] 0.1794521</span></span>
+<span id="cb229-3"><a href="07-regression1.html#cb229-3"></a><span class="dv">1</span><span class="op">-</span>(<span class="kw">deviance</span>(fm)<span class="op">/</span><span class="kw">df.residual</span>(fm))<span class="op">/</span><span class="kw">with</span>(df, <span class="kw">sum</span>((y<span class="op">-</span><span class="kw">mean</span>(y))<span class="op">^</span><span class="dv">2</span><span class="op">/</span>(<span class="kw">nrow</span>(df)<span class="op">-</span><span class="dv">1</span>)))</span>
+<span id="cb229-4"><a href="07-regression1.html#cb229-4"></a><span class="co">## [1] 0.1794521</span></span></code></pre></div>
 </div>
-<div id="section-7.1.2" class="section level3">
+<div id="対数変換" class="section level3">
 <h3><span class="header-section-number">7.1.2</span> 対数変換</h3>
 <p>次のモデルを考える.
 <span class="math display">\[
 y = \alpha + \beta \log(x) + u
 \]</span></p>
 <p>対数変換をおこなう場合, <code>log</code> を用いるとよい.</p>
-<pre class="sourceCode r"><code class="sourceCode r">fm &lt;-<span class="st"> </span><span class="kw">lm</span>(y<span class="op">~</span><span class="kw">log</span>(x),<span class="dt">data=</span>df)
-<span class="kw">summary</span>(fm)
-<span class="co">## </span>
-<span class="co">## Call:</span>
-<span class="co">## lm(formula = y ~ log(x), data = df)</span>
-<span class="co">## </span>
-<span class="co">## Residuals:</span>
-<span class="co">##     Min      1Q  Median      3Q     Max </span>
-<span class="co">## -2.1248 -0.5067 -0.0739  0.5464  2.4867 </span>
-<span class="co">## </span>
-<span class="co">## Coefficients:</span>
-<span class="co">##             Estimate Std. Error t value Pr(&gt;|t|)    </span>
-<span class="co">## (Intercept) 11.62131    0.12311  94.401  &lt; 2e-16 ***</span>
-<span class="co">## log(x)       0.35735    0.08595   4.157  6.9e-05 ***</span>
-<span class="co">## ---</span>
-<span class="co">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span>
-<span class="co">## </span>
-<span class="co">## Residual standard error: 0.8642 on 98 degrees of freedom</span>
-<span class="co">## Multiple R-squared:  0.1499, Adjusted R-squared:  0.1413 </span>
-<span class="co">## F-statistic: 17.28 on 1 and 98 DF,  p-value: 6.899e-05</span></code></pre>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="07-regression1.html#cb230-1"></a>fm &lt;-<span class="st"> </span><span class="kw">lm</span>(y<span class="op">~</span><span class="kw">log</span>(x),<span class="dt">data=</span>df)</span>
+<span id="cb230-2"><a href="07-regression1.html#cb230-2"></a><span class="kw">summary</span>(fm)</span>
+<span id="cb230-3"><a href="07-regression1.html#cb230-3"></a><span class="co">## </span></span>
+<span id="cb230-4"><a href="07-regression1.html#cb230-4"></a><span class="co">## Call:</span></span>
+<span id="cb230-5"><a href="07-regression1.html#cb230-5"></a><span class="co">## lm(formula = y ~ log(x), data = df)</span></span>
+<span id="cb230-6"><a href="07-regression1.html#cb230-6"></a><span class="co">## </span></span>
+<span id="cb230-7"><a href="07-regression1.html#cb230-7"></a><span class="co">## Residuals:</span></span>
+<span id="cb230-8"><a href="07-regression1.html#cb230-8"></a><span class="co">##      Min       1Q   Median       3Q      Max </span></span>
+<span id="cb230-9"><a href="07-regression1.html#cb230-9"></a><span class="co">## -2.32100 -0.76612  0.05587  0.65795  2.74756 </span></span>
+<span id="cb230-10"><a href="07-regression1.html#cb230-10"></a><span class="co">## </span></span>
+<span id="cb230-11"><a href="07-regression1.html#cb230-11"></a><span class="co">## Coefficients:</span></span>
+<span id="cb230-12"><a href="07-regression1.html#cb230-12"></a><span class="co">##             Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span id="cb230-13"><a href="07-regression1.html#cb230-13"></a><span class="co">## (Intercept)  11.4138     0.1493  76.439  &lt; 2e-16 ***</span></span>
+<span id="cb230-14"><a href="07-regression1.html#cb230-14"></a><span class="co">## log(x)        0.4377     0.1170   3.742 0.000308 ***</span></span>
+<span id="cb230-15"><a href="07-regression1.html#cb230-15"></a><span class="co">## ---</span></span>
+<span id="cb230-16"><a href="07-regression1.html#cb230-16"></a><span class="co">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb230-17"><a href="07-regression1.html#cb230-17"></a><span class="co">## </span></span>
+<span id="cb230-18"><a href="07-regression1.html#cb230-18"></a><span class="co">## Residual standard error: 1.004 on 98 degrees of freedom</span></span>
+<span id="cb230-19"><a href="07-regression1.html#cb230-19"></a><span class="co">## Multiple R-squared:  0.125,	Adjusted R-squared:  0.1161 </span></span>
+<span id="cb230-20"><a href="07-regression1.html#cb230-20"></a><span class="co">## F-statistic:    14 on 1 and 98 DF,  p-value: 0.0003082</span></span></code></pre></div>
 <p>作図すると以下のようになる.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(y<span class="op">~</span><span class="kw">log</span>(x),<span class="dt">data=</span>df)
-<span class="kw">abline</span>(fm)</code></pre>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="07-regression1.html#cb231-1"></a><span class="kw">plot</span>(y<span class="op">~</span><span class="kw">log</span>(x),<span class="dt">data=</span>df)</span>
+<span id="cb231-2"><a href="07-regression1.html#cb231-2"></a><span class="kw">abline</span>(fm)</span></code></pre></div>
 <p><img src="07-regression1_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
 <p>被説明変数が対数の場合も同様である.</p>
-<pre class="sourceCode r"><code class="sourceCode r">fm &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log</span>(y)<span class="op">~</span>x,<span class="dt">data=</span>df)
-<span class="kw">summary</span>(fm)
-<span class="co">## </span>
-<span class="co">## Call:</span>
-<span class="co">## lm(formula = log(y) ~ x, data = df)</span>
-<span class="co">## </span>
-<span class="co">## Residuals:</span>
-<span class="co">##      Min       1Q   Median       3Q      Max </span>
-<span class="co">## -0.19074 -0.04795 -0.00396  0.06126  0.16839 </span>
-<span class="co">## </span>
-<span class="co">## Coefficients:</span>
-<span class="co">##             Estimate Std. Error t value Pr(&gt;|t|)    </span>
-<span class="co">## (Intercept)  2.35723    0.01513   155.8  &lt; 2e-16 ***</span>
-<span class="co">## x            0.12275    0.02669     4.6 1.27e-05 ***</span>
-<span class="co">## ---</span>
-<span class="co">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span>
-<span class="co">## </span>
-<span class="co">## Residual standard error: 0.07532 on 98 degrees of freedom</span>
-<span class="co">## Multiple R-squared:  0.1776, Adjusted R-squared:  0.1692 </span>
-<span class="co">## F-statistic: 21.16 on 1 and 98 DF,  p-value: 1.266e-05</span></code></pre>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="07-regression1.html#cb232-1"></a>fm &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log</span>(y)<span class="op">~</span>x,<span class="dt">data=</span>df)</span>
+<span id="cb232-2"><a href="07-regression1.html#cb232-2"></a><span class="kw">summary</span>(fm)</span>
+<span id="cb232-3"><a href="07-regression1.html#cb232-3"></a><span class="co">## </span></span>
+<span id="cb232-4"><a href="07-regression1.html#cb232-4"></a><span class="co">## Call:</span></span>
+<span id="cb232-5"><a href="07-regression1.html#cb232-5"></a><span class="co">## lm(formula = log(y) ~ x, data = df)</span></span>
+<span id="cb232-6"><a href="07-regression1.html#cb232-6"></a><span class="co">## </span></span>
+<span id="cb232-7"><a href="07-regression1.html#cb232-7"></a><span class="co">## Residuals:</span></span>
+<span id="cb232-8"><a href="07-regression1.html#cb232-8"></a><span class="co">##      Min       1Q   Median       3Q      Max </span></span>
+<span id="cb232-9"><a href="07-regression1.html#cb232-9"></a><span class="co">## -0.25872 -0.06652  0.01463  0.06128  0.19698 </span></span>
+<span id="cb232-10"><a href="07-regression1.html#cb232-10"></a><span class="co">## </span></span>
+<span id="cb232-11"><a href="07-regression1.html#cb232-11"></a><span class="co">## Coefficients:</span></span>
+<span id="cb232-12"><a href="07-regression1.html#cb232-12"></a><span class="co">##             Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span id="cb232-13"><a href="07-regression1.html#cb232-13"></a><span class="co">## (Intercept)  2.31891    0.01816 127.674   &lt;2e-16 ***</span></span>
+<span id="cb232-14"><a href="07-regression1.html#cb232-14"></a><span class="co">## x            0.14758    0.03150   4.686    9e-06 ***</span></span>
+<span id="cb232-15"><a href="07-regression1.html#cb232-15"></a><span class="co">## ---</span></span>
+<span id="cb232-16"><a href="07-regression1.html#cb232-16"></a><span class="co">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb232-17"><a href="07-regression1.html#cb232-17"></a><span class="co">## </span></span>
+<span id="cb232-18"><a href="07-regression1.html#cb232-18"></a><span class="co">## Residual standard error: 0.0885 on 98 degrees of freedom</span></span>
+<span id="cb232-19"><a href="07-regression1.html#cb232-19"></a><span class="co">## Multiple R-squared:  0.183,	Adjusted R-squared:  0.1747 </span></span>
+<span id="cb232-20"><a href="07-regression1.html#cb232-20"></a><span class="co">## F-statistic: 21.96 on 1 and 98 DF,  p-value: 9.001e-06</span></span></code></pre></div>
 <p>作図すると以下のようになる.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="kw">log</span>(y)<span class="op">~</span>x,<span class="dt">data=</span>df)
-<span class="kw">abline</span>(fm)</code></pre>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="07-regression1.html#cb233-1"></a><span class="kw">plot</span>(<span class="kw">log</span>(y)<span class="op">~</span>x,<span class="dt">data=</span>df)</span>
+<span id="cb233-2"><a href="07-regression1.html#cb233-2"></a><span class="kw">abline</span>(fm)</span></code></pre></div>
 <p><img src="07-regression1_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
 </div>
-<div id="section-7.1.3" class="section level3">
+<div id="切片なし回帰モデル" class="section level3">
 <h3><span class="header-section-number">7.1.3</span> 切片なし回帰モデル</h3>
 <p>次のモデルを考える.
 <span class="math display">\[
 y = \beta x + u
 \]</span></p>
 <p>切片なしモデルを推定したい場合は次のように <code>-1</code> とする.</p>
-<pre class="sourceCode r"><code class="sourceCode r">fm &lt;-<span class="st"> </span><span class="kw">lm</span>(y<span class="op">~</span>x<span class="dv">-1</span>,<span class="dt">data=</span>df)
-<span class="kw">summary</span>(fm)
-<span class="co">## </span>
-<span class="co">## Call:</span>
-<span class="co">## lm(formula = y ~ x - 1, data = df)</span>
-<span class="co">## </span>
-<span class="co">## Residuals:</span>
-<span class="co">##     Min      1Q  Median      3Q     Max </span>
-<span class="co">## -7.0574 -0.8608  2.8664  6.1483 11.8838 </span>
-<span class="co">## </span>
-<span class="co">## Coefficients:</span>
-<span class="co">##   Estimate Std. Error t value Pr(&gt;|t|)    </span>
-<span class="co">## x  17.5631     0.9447   18.59   &lt;2e-16 ***</span>
-<span class="co">## ---</span>
-<span class="co">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span>
-<span class="co">## </span>
-<span class="co">## Residual standard error: 5.356 on 99 degrees of freedom</span>
-<span class="co">## Multiple R-squared:  0.7774, Adjusted R-squared:  0.7751 </span>
-<span class="co">## F-statistic: 345.7 on 1 and 99 DF,  p-value: &lt; 2.2e-16</span></code></pre>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="07-regression1.html#cb234-1"></a>fm &lt;-<span class="st"> </span><span class="kw">lm</span>(y<span class="op">~</span>x<span class="dv">-1</span>,<span class="dt">data=</span>df)</span>
+<span id="cb234-2"><a href="07-regression1.html#cb234-2"></a><span class="kw">summary</span>(fm)</span>
+<span id="cb234-3"><a href="07-regression1.html#cb234-3"></a><span class="co">## </span></span>
+<span id="cb234-4"><a href="07-regression1.html#cb234-4"></a><span class="co">## Call:</span></span>
+<span id="cb234-5"><a href="07-regression1.html#cb234-5"></a><span class="co">## lm(formula = y ~ x - 1, data = df)</span></span>
+<span id="cb234-6"><a href="07-regression1.html#cb234-6"></a><span class="co">## </span></span>
+<span id="cb234-7"><a href="07-regression1.html#cb234-7"></a><span class="co">## Residuals:</span></span>
+<span id="cb234-8"><a href="07-regression1.html#cb234-8"></a><span class="co">##     Min      1Q  Median      3Q     Max </span></span>
+<span id="cb234-9"><a href="07-regression1.html#cb234-9"></a><span class="co">## -7.9048 -0.7399  1.9294  5.8755 10.9723 </span></span>
+<span id="cb234-10"><a href="07-regression1.html#cb234-10"></a><span class="co">## </span></span>
+<span id="cb234-11"><a href="07-regression1.html#cb234-11"></a><span class="co">## Coefficients:</span></span>
+<span id="cb234-12"><a href="07-regression1.html#cb234-12"></a><span class="co">##   Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span id="cb234-13"><a href="07-regression1.html#cb234-13"></a><span class="co">## x  17.0459     0.8801   19.37   &lt;2e-16 ***</span></span>
+<span id="cb234-14"><a href="07-regression1.html#cb234-14"></a><span class="co">## ---</span></span>
+<span id="cb234-15"><a href="07-regression1.html#cb234-15"></a><span class="co">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb234-16"><a href="07-regression1.html#cb234-16"></a><span class="co">## </span></span>
+<span id="cb234-17"><a href="07-regression1.html#cb234-17"></a><span class="co">## Residual standard error: 5.075 on 99 degrees of freedom</span></span>
+<span id="cb234-18"><a href="07-regression1.html#cb234-18"></a><span class="co">## Multiple R-squared:  0.7912,	Adjusted R-squared:  0.7891 </span></span>
+<span id="cb234-19"><a href="07-regression1.html#cb234-19"></a><span class="co">## F-statistic: 375.2 on 1 and 99 DF,  p-value: &lt; 2.2e-16</span></span></code></pre></div>
 <p>もしくは <code>+0</code> を加える.</p>
-<pre class="sourceCode r"><code class="sourceCode r">fm &lt;-<span class="st"> </span><span class="kw">lm</span>(y<span class="op">~</span>x<span class="op">+</span><span class="dv">0</span>,<span class="dt">data=</span>df)
-<span class="kw">summary</span>(fm)
-<span class="co">## </span>
-<span class="co">## Call:</span>
-<span class="co">## lm(formula = y ~ x + 0, data = df)</span>
-<span class="co">## </span>
-<span class="co">## Residuals:</span>
-<span class="co">##     Min      1Q  Median      3Q     Max </span>
-<span class="co">## -7.0574 -0.8608  2.8664  6.1483 11.8838 </span>
-<span class="co">## </span>
-<span class="co">## Coefficients:</span>
-<span class="co">##   Estimate Std. Error t value Pr(&gt;|t|)    </span>
-<span class="co">## x  17.5631     0.9447   18.59   &lt;2e-16 ***</span>
-<span class="co">## ---</span>
-<span class="co">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span>
-<span class="co">## </span>
-<span class="co">## Residual standard error: 5.356 on 99 degrees of freedom</span>
-<span class="co">## Multiple R-squared:  0.7774, Adjusted R-squared:  0.7751 </span>
-<span class="co">## F-statistic: 345.7 on 1 and 99 DF,  p-value: &lt; 2.2e-16</span></code></pre>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="07-regression1.html#cb235-1"></a>fm &lt;-<span class="st"> </span><span class="kw">lm</span>(y<span class="op">~</span>x<span class="op">+</span><span class="dv">0</span>,<span class="dt">data=</span>df)</span>
+<span id="cb235-2"><a href="07-regression1.html#cb235-2"></a><span class="kw">summary</span>(fm)</span>
+<span id="cb235-3"><a href="07-regression1.html#cb235-3"></a><span class="co">## </span></span>
+<span id="cb235-4"><a href="07-regression1.html#cb235-4"></a><span class="co">## Call:</span></span>
+<span id="cb235-5"><a href="07-regression1.html#cb235-5"></a><span class="co">## lm(formula = y ~ x + 0, data = df)</span></span>
+<span id="cb235-6"><a href="07-regression1.html#cb235-6"></a><span class="co">## </span></span>
+<span id="cb235-7"><a href="07-regression1.html#cb235-7"></a><span class="co">## Residuals:</span></span>
+<span id="cb235-8"><a href="07-regression1.html#cb235-8"></a><span class="co">##     Min      1Q  Median      3Q     Max </span></span>
+<span id="cb235-9"><a href="07-regression1.html#cb235-9"></a><span class="co">## -7.9048 -0.7399  1.9294  5.8755 10.9723 </span></span>
+<span id="cb235-10"><a href="07-regression1.html#cb235-10"></a><span class="co">## </span></span>
+<span id="cb235-11"><a href="07-regression1.html#cb235-11"></a><span class="co">## Coefficients:</span></span>
+<span id="cb235-12"><a href="07-regression1.html#cb235-12"></a><span class="co">##   Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span id="cb235-13"><a href="07-regression1.html#cb235-13"></a><span class="co">## x  17.0459     0.8801   19.37   &lt;2e-16 ***</span></span>
+<span id="cb235-14"><a href="07-regression1.html#cb235-14"></a><span class="co">## ---</span></span>
+<span id="cb235-15"><a href="07-regression1.html#cb235-15"></a><span class="co">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb235-16"><a href="07-regression1.html#cb235-16"></a><span class="co">## </span></span>
+<span id="cb235-17"><a href="07-regression1.html#cb235-17"></a><span class="co">## Residual standard error: 5.075 on 99 degrees of freedom</span></span>
+<span id="cb235-18"><a href="07-regression1.html#cb235-18"></a><span class="co">## Multiple R-squared:  0.7912,	Adjusted R-squared:  0.7891 </span></span>
+<span id="cb235-19"><a href="07-regression1.html#cb235-19"></a><span class="co">## F-statistic: 375.2 on 1 and 99 DF,  p-value: &lt; 2.2e-16</span></span></code></pre></div>
 </div>
 </div>
-<div id="section-7.2" class="section level2">
+<div id="重回帰モデル" class="section level2">
 <h2><span class="header-section-number">7.2</span> 重回帰モデル</h2>
 <p>説明変数として <span class="math inline">\(w\)</span> を加えたモデルを考える.
 <span class="math display">\[
@@ -507,120 +511,120 @@ y = \alpha + \beta x +\gamma w+ u
 <li>説明変数間に多重共線性は存在しない. つまり <span class="math inline">\(x_i\)</span> は <span class="math inline">\(w_i\)</span> の一次変換で表せない.</li>
 </ul>
 <p>仮想的に以下のモデルを考える.</p>
-<pre class="sourceCode r"><code class="sourceCode r">N &lt;-<span class="st"> </span><span class="dv">100</span>
-x&lt;-<span class="kw">runif</span>(N)
-w&lt;-<span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;H&quot;</span>,<span class="st">&quot;T&quot;</span>),N,<span class="dt">replace=</span><span class="ot">TRUE</span>)
-y &lt;-<span class="st"> </span><span class="dv">10</span> <span class="op">+</span><span class="st"> </span><span class="dv">2</span><span class="op">*</span>x <span class="op">+</span><span class="st"> </span><span class="kw">ifelse</span>(w<span class="op">==</span><span class="st">&quot;H&quot;</span>,<span class="dv">1</span>,<span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(N)
-df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(w,x,y)</code></pre>
+<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="07-regression1.html#cb236-1"></a>N &lt;-<span class="st"> </span><span class="dv">100</span></span>
+<span id="cb236-2"><a href="07-regression1.html#cb236-2"></a>x&lt;-<span class="kw">runif</span>(N)</span>
+<span id="cb236-3"><a href="07-regression1.html#cb236-3"></a>w&lt;-<span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;H&quot;</span>,<span class="st">&quot;T&quot;</span>),N,<span class="dt">replace=</span><span class="ot">TRUE</span>)</span>
+<span id="cb236-4"><a href="07-regression1.html#cb236-4"></a>y &lt;-<span class="st"> </span><span class="dv">10</span> <span class="op">+</span><span class="st"> </span><span class="dv">2</span><span class="op">*</span>x <span class="op">+</span><span class="st"> </span><span class="kw">ifelse</span>(w<span class="op">==</span><span class="st">&quot;H&quot;</span>,<span class="dv">1</span>,<span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(N)</span>
+<span id="cb236-5"><a href="07-regression1.html#cb236-5"></a>df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(w,x,y)</span></code></pre></div>
 <p>作図すると以下である.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(y<span class="op">~</span>x)</code></pre>
+<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="07-regression1.html#cb237-1"></a><span class="kw">plot</span>(y<span class="op">~</span>x)</span></code></pre></div>
 <p><img src="07-regression1_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
 <p>説明変数を加えたいときには <code>+</code> と変数名を使うことができる.</p>
-<pre class="sourceCode r"><code class="sourceCode r">fm &lt;-<span class="st"> </span><span class="kw">lm</span>(y<span class="op">~</span>x<span class="op">+</span>w,<span class="dt">data=</span>df)
-<span class="kw">summary</span>(fm)
-<span class="co">## </span>
-<span class="co">## Call:</span>
-<span class="co">## lm(formula = y ~ x + w, data = df)</span>
-<span class="co">## </span>
-<span class="co">## Residuals:</span>
-<span class="co">##      Min       1Q   Median       3Q      Max </span>
-<span class="co">## -1.87119 -0.74337 -0.07869  0.51828  2.34454 </span>
-<span class="co">## </span>
-<span class="co">## Coefficients:</span>
-<span class="co">##             Estimate Std. Error t value Pr(&gt;|t|)    </span>
-<span class="co">## (Intercept)  10.7987     0.2045  52.800  &lt; 2e-16 ***</span>
-<span class="co">## x             2.6618     0.3621   7.350 6.27e-11 ***</span>
-<span class="co">## wT           -0.8598     0.2019  -4.258 4.77e-05 ***</span>
-<span class="co">## ---</span>
-<span class="co">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span>
-<span class="co">## </span>
-<span class="co">## Residual standard error: 0.9839 on 97 degrees of freedom</span>
-<span class="co">## Multiple R-squared:  0.3873, Adjusted R-squared:  0.3747 </span>
-<span class="co">## F-statistic: 30.66 on 2 and 97 DF,  p-value: 4.786e-11</span></code></pre>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="07-regression1.html#cb238-1"></a>fm &lt;-<span class="st"> </span><span class="kw">lm</span>(y<span class="op">~</span>x<span class="op">+</span>w,<span class="dt">data=</span>df)</span>
+<span id="cb238-2"><a href="07-regression1.html#cb238-2"></a><span class="kw">summary</span>(fm)</span>
+<span id="cb238-3"><a href="07-regression1.html#cb238-3"></a><span class="co">## </span></span>
+<span id="cb238-4"><a href="07-regression1.html#cb238-4"></a><span class="co">## Call:</span></span>
+<span id="cb238-5"><a href="07-regression1.html#cb238-5"></a><span class="co">## lm(formula = y ~ x + w, data = df)</span></span>
+<span id="cb238-6"><a href="07-regression1.html#cb238-6"></a><span class="co">## </span></span>
+<span id="cb238-7"><a href="07-regression1.html#cb238-7"></a><span class="co">## Residuals:</span></span>
+<span id="cb238-8"><a href="07-regression1.html#cb238-8"></a><span class="co">##      Min       1Q   Median       3Q      Max </span></span>
+<span id="cb238-9"><a href="07-regression1.html#cb238-9"></a><span class="co">## -2.65280 -0.55880 -0.07384  0.59757  2.27899 </span></span>
+<span id="cb238-10"><a href="07-regression1.html#cb238-10"></a><span class="co">## </span></span>
+<span id="cb238-11"><a href="07-regression1.html#cb238-11"></a><span class="co">## Coefficients:</span></span>
+<span id="cb238-12"><a href="07-regression1.html#cb238-12"></a><span class="co">##             Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span id="cb238-13"><a href="07-regression1.html#cb238-13"></a><span class="co">## (Intercept)  10.5944     0.2093  50.627  &lt; 2e-16 ***</span></span>
+<span id="cb238-14"><a href="07-regression1.html#cb238-14"></a><span class="co">## x             2.7300     0.3225   8.466 2.72e-13 ***</span></span>
+<span id="cb238-15"><a href="07-regression1.html#cb238-15"></a><span class="co">## wT           -0.7277     0.1971  -3.692 0.000368 ***</span></span>
+<span id="cb238-16"><a href="07-regression1.html#cb238-16"></a><span class="co">## ---</span></span>
+<span id="cb238-17"><a href="07-regression1.html#cb238-17"></a><span class="co">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb238-18"><a href="07-regression1.html#cb238-18"></a><span class="co">## </span></span>
+<span id="cb238-19"><a href="07-regression1.html#cb238-19"></a><span class="co">## Residual standard error: 0.9729 on 97 degrees of freedom</span></span>
+<span id="cb238-20"><a href="07-regression1.html#cb238-20"></a><span class="co">## Multiple R-squared:  0.4661,	Adjusted R-squared:  0.4551 </span></span>
+<span id="cb238-21"><a href="07-regression1.html#cb238-21"></a><span class="co">## F-statistic: 42.34 on 2 and 97 DF,  p-value: 6.052e-14</span></span></code></pre></div>
 <p>R の特徴は因子もとくに変換することなくダミー変数として扱える.</p>
-<div id="section-7.2.1" class="section level3">
+<div id="自乗項" class="section level3">
 <h3><span class="header-section-number">7.2.1</span> 自乗項</h3>
 <p>説明変数として自乗項を加えたモデルを考える.
 <span class="math display">\[
 y = \alpha + \beta x + \gamma x^2 + u
 \]</span></p>
 <p>R では単に自乗するのでなく <code>I(x^2)</code> としなければならない.</p>
-<pre class="sourceCode r"><code class="sourceCode r">fm &lt;-<span class="st"> </span><span class="kw">lm</span>(y<span class="op">~</span>x<span class="op">+</span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">2</span>),<span class="dt">data=</span>df)
-<span class="kw">summary</span>(fm)
-<span class="co">## </span>
-<span class="co">## Call:</span>
-<span class="co">## lm(formula = y ~ x + I(x^2), data = df)</span>
-<span class="co">## </span>
-<span class="co">## Residuals:</span>
-<span class="co">##     Min      1Q  Median      3Q     Max </span>
-<span class="co">## -2.3779 -0.8542 -0.1150  0.7690  2.6262 </span>
-<span class="co">## </span>
-<span class="co">## Coefficients:</span>
-<span class="co">##             Estimate Std. Error t value Pr(&gt;|t|)    </span>
-<span class="co">## (Intercept) 10.94239    0.32609  33.557   &lt;2e-16 ***</span>
-<span class="co">## x            0.01612    1.50768   0.011    0.991    </span>
-<span class="co">## I(x^2)       2.31619    1.46593   1.580    0.117    </span>
-<span class="co">## ---</span>
-<span class="co">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span>
-<span class="co">## </span>
-<span class="co">## Residual standard error: 1.058 on 97 degrees of freedom</span>
-<span class="co">## Multiple R-squared:  0.2911, Adjusted R-squared:  0.2765 </span>
-<span class="co">## F-statistic: 19.91 on 2 and 97 DF,  p-value: 5.672e-08</span></code></pre>
+<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="07-regression1.html#cb239-1"></a>fm &lt;-<span class="st"> </span><span class="kw">lm</span>(y<span class="op">~</span>x<span class="op">+</span><span class="kw">I</span>(x<span class="op">^</span><span class="dv">2</span>),<span class="dt">data=</span>df)</span>
+<span id="cb239-2"><a href="07-regression1.html#cb239-2"></a><span class="kw">summary</span>(fm)</span>
+<span id="cb239-3"><a href="07-regression1.html#cb239-3"></a><span class="co">## </span></span>
+<span id="cb239-4"><a href="07-regression1.html#cb239-4"></a><span class="co">## Call:</span></span>
+<span id="cb239-5"><a href="07-regression1.html#cb239-5"></a><span class="co">## lm(formula = y ~ x + I(x^2), data = df)</span></span>
+<span id="cb239-6"><a href="07-regression1.html#cb239-6"></a><span class="co">## </span></span>
+<span id="cb239-7"><a href="07-regression1.html#cb239-7"></a><span class="co">## Residuals:</span></span>
+<span id="cb239-8"><a href="07-regression1.html#cb239-8"></a><span class="co">##      Min       1Q   Median       3Q      Max </span></span>
+<span id="cb239-9"><a href="07-regression1.html#cb239-9"></a><span class="co">## -2.44137 -0.60700  0.00071  0.59665  2.69090 </span></span>
+<span id="cb239-10"><a href="07-regression1.html#cb239-10"></a><span class="co">## </span></span>
+<span id="cb239-11"><a href="07-regression1.html#cb239-11"></a><span class="co">## Coefficients:</span></span>
+<span id="cb239-12"><a href="07-regression1.html#cb239-12"></a><span class="co">##             Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span id="cb239-13"><a href="07-regression1.html#cb239-13"></a><span class="co">## (Intercept)   9.9837     0.2969  33.623  &lt; 2e-16 ***</span></span>
+<span id="cb239-14"><a href="07-regression1.html#cb239-14"></a><span class="co">## x             4.5784     1.3347   3.430 0.000887 ***</span></span>
+<span id="cb239-15"><a href="07-regression1.html#cb239-15"></a><span class="co">## I(x^2)       -1.8156     1.2595  -1.442 0.152639    </span></span>
+<span id="cb239-16"><a href="07-regression1.html#cb239-16"></a><span class="co">## ---</span></span>
+<span id="cb239-17"><a href="07-regression1.html#cb239-17"></a><span class="co">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb239-18"><a href="07-regression1.html#cb239-18"></a><span class="co">## </span></span>
+<span id="cb239-19"><a href="07-regression1.html#cb239-19"></a><span class="co">## Residual standard error: 1.028 on 97 degrees of freedom</span></span>
+<span id="cb239-20"><a href="07-regression1.html#cb239-20"></a><span class="co">## Multiple R-squared:  0.4039,	Adjusted R-squared:  0.3916 </span></span>
+<span id="cb239-21"><a href="07-regression1.html#cb239-21"></a><span class="co">## F-statistic: 32.86 on 2 and 97 DF,  p-value: 1.272e-11</span></span></code></pre></div>
 </div>
-<div id="section-7.2.2" class="section level3">
+<div id="交差項" class="section level3">
 <h3><span class="header-section-number">7.2.2</span> 交差項</h3>
 <p>説明変数として交差項を加えたモデルを考える.
 <span class="math display">\[
 y = \alpha + \beta x + \gamma w + \delta xw + u
 \]</span></p>
 <p>説明変数 <code>x</code> と <code>w</code>の自乗項は自乗項は <code>x:w</code> である.</p>
-<pre class="sourceCode r"><code class="sourceCode r">fm&lt;-<span class="kw">lm</span>(y<span class="op">~</span>x<span class="op">+</span>w<span class="op">+</span>x<span class="op">:</span>w,<span class="dt">data=</span>df)
-<span class="kw">summary</span>(fm)
-<span class="co">## </span>
-<span class="co">## Call:</span>
-<span class="co">## lm(formula = y ~ x + w + x:w, data = df)</span>
-<span class="co">## </span>
-<span class="co">## Residuals:</span>
-<span class="co">##      Min       1Q   Median       3Q      Max </span>
-<span class="co">## -1.94878 -0.73826 -0.05326  0.55981  2.42099 </span>
-<span class="co">## </span>
-<span class="co">## Coefficients:</span>
-<span class="co">##             Estimate Std. Error t value Pr(&gt;|t|)    </span>
-<span class="co">## (Intercept)  10.8678     0.2410  45.088  &lt; 2e-16 ***</span>
-<span class="co">## x             2.4974     0.4715   5.297 7.48e-07 ***</span>
-<span class="co">## wT           -1.0598     0.4179  -2.536   0.0128 *  </span>
-<span class="co">## x:wT          0.4051     0.7401   0.547   0.5854    </span>
-<span class="co">## ---</span>
-<span class="co">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span>
-<span class="co">## </span>
-<span class="co">## Residual standard error: 0.9875 on 96 degrees of freedom</span>
-<span class="co">## Multiple R-squared:  0.3893, Adjusted R-squared:  0.3702 </span>
-<span class="co">## F-statistic: 20.39 on 3 and 96 DF,  p-value: 2.629e-10</span></code></pre>
+<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="07-regression1.html#cb240-1"></a>fm&lt;-<span class="kw">lm</span>(y<span class="op">~</span>x<span class="op">+</span>w<span class="op">+</span>x<span class="op">:</span>w,<span class="dt">data=</span>df)</span>
+<span id="cb240-2"><a href="07-regression1.html#cb240-2"></a><span class="kw">summary</span>(fm)</span>
+<span id="cb240-3"><a href="07-regression1.html#cb240-3"></a><span class="co">## </span></span>
+<span id="cb240-4"><a href="07-regression1.html#cb240-4"></a><span class="co">## Call:</span></span>
+<span id="cb240-5"><a href="07-regression1.html#cb240-5"></a><span class="co">## lm(formula = y ~ x + w + x:w, data = df)</span></span>
+<span id="cb240-6"><a href="07-regression1.html#cb240-6"></a><span class="co">## </span></span>
+<span id="cb240-7"><a href="07-regression1.html#cb240-7"></a><span class="co">## Residuals:</span></span>
+<span id="cb240-8"><a href="07-regression1.html#cb240-8"></a><span class="co">##     Min      1Q  Median      3Q     Max </span></span>
+<span id="cb240-9"><a href="07-regression1.html#cb240-9"></a><span class="co">## -2.6898 -0.5470 -0.0726  0.6292  2.2415 </span></span>
+<span id="cb240-10"><a href="07-regression1.html#cb240-10"></a><span class="co">## </span></span>
+<span id="cb240-11"><a href="07-regression1.html#cb240-11"></a><span class="co">## Coefficients:</span></span>
+<span id="cb240-12"><a href="07-regression1.html#cb240-12"></a><span class="co">##             Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span id="cb240-13"><a href="07-regression1.html#cb240-13"></a><span class="co">## (Intercept)  10.5440     0.2545  41.432  &lt; 2e-16 ***</span></span>
+<span id="cb240-14"><a href="07-regression1.html#cb240-14"></a><span class="co">## x             2.8281     0.4276   6.615 2.11e-09 ***</span></span>
+<span id="cb240-15"><a href="07-regression1.html#cb240-15"></a><span class="co">## wT           -0.6084     0.3926  -1.550    0.124    </span></span>
+<span id="cb240-16"><a href="07-regression1.html#cb240-16"></a><span class="co">## x:wT         -0.2305     0.6551  -0.352    0.726    </span></span>
+<span id="cb240-17"><a href="07-regression1.html#cb240-17"></a><span class="co">## ---</span></span>
+<span id="cb240-18"><a href="07-regression1.html#cb240-18"></a><span class="co">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb240-19"><a href="07-regression1.html#cb240-19"></a><span class="co">## </span></span>
+<span id="cb240-20"><a href="07-regression1.html#cb240-20"></a><span class="co">## Residual standard error: 0.9773 on 96 degrees of freedom</span></span>
+<span id="cb240-21"><a href="07-regression1.html#cb240-21"></a><span class="co">## Multiple R-squared:  0.4668,	Adjusted R-squared:  0.4501 </span></span>
+<span id="cb240-22"><a href="07-regression1.html#cb240-22"></a><span class="co">## F-statistic: 28.01 on 3 and 96 DF,  p-value: 4.239e-13</span></span></code></pre></div>
 <p>もしくは以下のように <code>*</code> を使って簡便的に表せる.</p>
-<pre class="sourceCode r"><code class="sourceCode r">fm &lt;-<span class="st"> </span><span class="kw">lm</span>(y<span class="op">~</span>x<span class="op">*</span>w,<span class="dt">data=</span>df)
-<span class="kw">summary</span>(fm)
-<span class="co">## </span>
-<span class="co">## Call:</span>
-<span class="co">## lm(formula = y ~ x * w, data = df)</span>
-<span class="co">## </span>
-<span class="co">## Residuals:</span>
-<span class="co">##      Min       1Q   Median       3Q      Max </span>
-<span class="co">## -1.94878 -0.73826 -0.05326  0.55981  2.42099 </span>
-<span class="co">## </span>
-<span class="co">## Coefficients:</span>
-<span class="co">##             Estimate Std. Error t value Pr(&gt;|t|)    </span>
-<span class="co">## (Intercept)  10.8678     0.2410  45.088  &lt; 2e-16 ***</span>
-<span class="co">## x             2.4974     0.4715   5.297 7.48e-07 ***</span>
-<span class="co">## wT           -1.0598     0.4179  -2.536   0.0128 *  </span>
-<span class="co">## x:wT          0.4051     0.7401   0.547   0.5854    </span>
-<span class="co">## ---</span>
-<span class="co">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span>
-<span class="co">## </span>
-<span class="co">## Residual standard error: 0.9875 on 96 degrees of freedom</span>
-<span class="co">## Multiple R-squared:  0.3893, Adjusted R-squared:  0.3702 </span>
-<span class="co">## F-statistic: 20.39 on 3 and 96 DF,  p-value: 2.629e-10</span></code></pre>
+<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="07-regression1.html#cb241-1"></a>fm &lt;-<span class="st"> </span><span class="kw">lm</span>(y<span class="op">~</span>x<span class="op">*</span>w,<span class="dt">data=</span>df)</span>
+<span id="cb241-2"><a href="07-regression1.html#cb241-2"></a><span class="kw">summary</span>(fm)</span>
+<span id="cb241-3"><a href="07-regression1.html#cb241-3"></a><span class="co">## </span></span>
+<span id="cb241-4"><a href="07-regression1.html#cb241-4"></a><span class="co">## Call:</span></span>
+<span id="cb241-5"><a href="07-regression1.html#cb241-5"></a><span class="co">## lm(formula = y ~ x * w, data = df)</span></span>
+<span id="cb241-6"><a href="07-regression1.html#cb241-6"></a><span class="co">## </span></span>
+<span id="cb241-7"><a href="07-regression1.html#cb241-7"></a><span class="co">## Residuals:</span></span>
+<span id="cb241-8"><a href="07-regression1.html#cb241-8"></a><span class="co">##     Min      1Q  Median      3Q     Max </span></span>
+<span id="cb241-9"><a href="07-regression1.html#cb241-9"></a><span class="co">## -2.6898 -0.5470 -0.0726  0.6292  2.2415 </span></span>
+<span id="cb241-10"><a href="07-regression1.html#cb241-10"></a><span class="co">## </span></span>
+<span id="cb241-11"><a href="07-regression1.html#cb241-11"></a><span class="co">## Coefficients:</span></span>
+<span id="cb241-12"><a href="07-regression1.html#cb241-12"></a><span class="co">##             Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span id="cb241-13"><a href="07-regression1.html#cb241-13"></a><span class="co">## (Intercept)  10.5440     0.2545  41.432  &lt; 2e-16 ***</span></span>
+<span id="cb241-14"><a href="07-regression1.html#cb241-14"></a><span class="co">## x             2.8281     0.4276   6.615 2.11e-09 ***</span></span>
+<span id="cb241-15"><a href="07-regression1.html#cb241-15"></a><span class="co">## wT           -0.6084     0.3926  -1.550    0.124    </span></span>
+<span id="cb241-16"><a href="07-regression1.html#cb241-16"></a><span class="co">## x:wT         -0.2305     0.6551  -0.352    0.726    </span></span>
+<span id="cb241-17"><a href="07-regression1.html#cb241-17"></a><span class="co">## ---</span></span>
+<span id="cb241-18"><a href="07-regression1.html#cb241-18"></a><span class="co">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb241-19"><a href="07-regression1.html#cb241-19"></a><span class="co">## </span></span>
+<span id="cb241-20"><a href="07-regression1.html#cb241-20"></a><span class="co">## Residual standard error: 0.9773 on 96 degrees of freedom</span></span>
+<span id="cb241-21"><a href="07-regression1.html#cb241-21"></a><span class="co">## Multiple R-squared:  0.4668,	Adjusted R-squared:  0.4501 </span></span>
+<span id="cb241-22"><a href="07-regression1.html#cb241-22"></a><span class="co">## F-statistic: 28.01 on 3 and 96 DF,  p-value: 4.239e-13</span></span></code></pre></div>
 </div>
-<div id="section-7.2.3" class="section level3">
+<div id="エフ検定" class="section level3">
 <h3><span class="header-section-number">7.2.3</span> エフ検定</h3>
 <p>今, 帰無仮説が
 <span class="math display">\[
@@ -641,39 +645,39 @@ y = \alpha + \beta x + \gamma w + \delta xw + u
 \frac{(SSR_0-SSR)/q}{SSR/df}
 \]</span></p>
 <p>R でF値は次のようにして算出する.</p>
-<pre class="sourceCode r"><code class="sourceCode r">fm0 &lt;-<span class="st"> </span><span class="kw">lm</span>(y<span class="op">~</span>x,<span class="dt">data=</span>df)
-fm1 &lt;-<span class="st"> </span><span class="kw">lm</span>(y<span class="op">~</span>x<span class="op">*</span>w,<span class="dt">data=</span>df)
-dof &lt;-<span class="st"> </span>fm1<span class="op">$</span>df
-q &lt;-<span class="st"> </span>fm0<span class="op">$</span>df<span class="op">-</span>dof
-SSR0 &lt;-<span class="st"> </span><span class="kw">deviance</span>(fm0)
-SSR &lt;-<span class="st"> </span><span class="kw">deviance</span>(fm1)
-(F &lt;-<span class="st"> </span>((SSR0<span class="op">-</span>SSR)<span class="op">/</span>q)<span class="op">/</span>(SSR<span class="op">/</span>dof))
-<span class="co">## [1] 9.148776</span></code></pre>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="07-regression1.html#cb242-1"></a>fm0 &lt;-<span class="st"> </span><span class="kw">lm</span>(y<span class="op">~</span>x,<span class="dt">data=</span>df)</span>
+<span id="cb242-2"><a href="07-regression1.html#cb242-2"></a>fm1 &lt;-<span class="st"> </span><span class="kw">lm</span>(y<span class="op">~</span>x<span class="op">*</span>w,<span class="dt">data=</span>df)</span>
+<span id="cb242-3"><a href="07-regression1.html#cb242-3"></a>dof &lt;-<span class="st"> </span>fm1<span class="op">$</span>df</span>
+<span id="cb242-4"><a href="07-regression1.html#cb242-4"></a>q &lt;-<span class="st"> </span>fm0<span class="op">$</span>df<span class="op">-</span>dof</span>
+<span id="cb242-5"><a href="07-regression1.html#cb242-5"></a>SSR0 &lt;-<span class="st"> </span><span class="kw">deviance</span>(fm0)</span>
+<span id="cb242-6"><a href="07-regression1.html#cb242-6"></a>SSR &lt;-<span class="st"> </span><span class="kw">deviance</span>(fm1)</span>
+<span id="cb242-7"><a href="07-regression1.html#cb242-7"></a>(F &lt;-<span class="st"> </span>((SSR0<span class="op">-</span>SSR)<span class="op">/</span>q)<span class="op">/</span>(SSR<span class="op">/</span>dof))</span>
+<span id="cb242-8"><a href="07-regression1.html#cb242-8"></a><span class="co">## [1] 6.814768</span></span></code></pre></div>
 <p>この時のP値は以下である.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span><span class="op">-</span><span class="kw">pf</span>(F,<span class="dt">df1=</span>q,<span class="dt">df2=</span>dof)
-<span class="co">## [1] 0.0002308057</span></code></pre>
+<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="07-regression1.html#cb243-1"></a><span class="dv">1</span><span class="op">-</span><span class="kw">pf</span>(F,<span class="dt">df1=</span>q,<span class="dt">df2=</span>dof)</span>
+<span id="cb243-2"><a href="07-regression1.html#cb243-2"></a><span class="co">## [1] 0.00170803</span></span></code></pre></div>
 <p>これらの手順はコマンド <code>anova</code> を用いれば簡単に実現できる.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">anova</span>(fm0,fm1)
-<span class="co">## Analysis of Variance Table</span>
-<span class="co">## </span>
-<span class="co">## Model 1: y ~ x</span>
-<span class="co">## Model 2: y ~ x * w</span>
-<span class="co">##   Res.Df     RSS Df Sum of Sq      F    Pr(&gt;F)    </span>
-<span class="co">## 1     98 111.459                                  </span>
-<span class="co">## 2     96  93.616  2    17.843 9.1488 0.0002308 ***</span>
-<span class="co">## ---</span>
-<span class="co">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></code></pre>
+<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="07-regression1.html#cb244-1"></a><span class="kw">anova</span>(fm0,fm1)</span>
+<span id="cb244-2"><a href="07-regression1.html#cb244-2"></a><span class="co">## Analysis of Variance Table</span></span>
+<span id="cb244-3"><a href="07-regression1.html#cb244-3"></a><span class="co">## </span></span>
+<span id="cb244-4"><a href="07-regression1.html#cb244-4"></a><span class="co">## Model 1: y ~ x</span></span>
+<span id="cb244-5"><a href="07-regression1.html#cb244-5"></a><span class="co">## Model 2: y ~ x * w</span></span>
+<span id="cb244-6"><a href="07-regression1.html#cb244-6"></a><span class="co">##   Res.Df     RSS Df Sum of Sq      F   Pr(&gt;F)   </span></span>
+<span id="cb244-7"><a href="07-regression1.html#cb244-7"></a><span class="co">## 1     98 104.707                                </span></span>
+<span id="cb244-8"><a href="07-regression1.html#cb244-8"></a><span class="co">## 2     96  91.689  2    13.018 6.8148 0.001708 **</span></span>
+<span id="cb244-9"><a href="07-regression1.html#cb244-9"></a><span class="co">## ---</span></span>
+<span id="cb244-10"><a href="07-regression1.html#cb244-10"></a><span class="co">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span></code></pre></div>
 <p>順番を変えても, 検定統計量自体に変更はない.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">anova</span>(fm1,fm0)
-<span class="co">## Analysis of Variance Table</span>
-<span class="co">## </span>
-<span class="co">## Model 1: y ~ x * w</span>
-<span class="co">## Model 2: y ~ x</span>
-<span class="co">##   Res.Df     RSS Df Sum of Sq      F    Pr(&gt;F)    </span>
-<span class="co">## 1     96  93.616                                  </span>
-<span class="co">## 2     98 111.459 -2   -17.843 9.1488 0.0002308 ***</span>
-<span class="co">## ---</span>
-<span class="co">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></code></pre>
+<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="07-regression1.html#cb245-1"></a><span class="kw">anova</span>(fm1,fm0)</span>
+<span id="cb245-2"><a href="07-regression1.html#cb245-2"></a><span class="co">## Analysis of Variance Table</span></span>
+<span id="cb245-3"><a href="07-regression1.html#cb245-3"></a><span class="co">## </span></span>
+<span id="cb245-4"><a href="07-regression1.html#cb245-4"></a><span class="co">## Model 1: y ~ x * w</span></span>
+<span id="cb245-5"><a href="07-regression1.html#cb245-5"></a><span class="co">## Model 2: y ~ x</span></span>
+<span id="cb245-6"><a href="07-regression1.html#cb245-6"></a><span class="co">##   Res.Df     RSS Df Sum of Sq      F   Pr(&gt;F)   </span></span>
+<span id="cb245-7"><a href="07-regression1.html#cb245-7"></a><span class="co">## 1     96  91.689                                </span></span>
+<span id="cb245-8"><a href="07-regression1.html#cb245-8"></a><span class="co">## 2     98 104.707 -2   -13.018 6.8148 0.001708 **</span></span>
+<span id="cb245-9"><a href="07-regression1.html#cb245-9"></a><span class="co">## ---</span></span>
+<span id="cb245-10"><a href="07-regression1.html#cb245-10"></a><span class="co">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span></code></pre></div>
 
 </div>
 </div>
@@ -689,11 +693,13 @@ SSR &lt;-<span class="st"> </span><span class="kw">deviance</span>(fm1)
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -701,12 +707,11 @@ gitbook.start({
 "github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -718,6 +723,10 @@ gitbook.start({
 "text": "Edit"
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },
@@ -736,8 +745,9 @@ gitbook.start({
     script.type = "text/javascript";
     var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
