@@ -36,7 +36,7 @@ plot(y~x)
 
 ここの係数ゼロのティー検定について, ライブラリ `AER` を導入して `coeftest` を用いればよい.
 ```{r}
-fm1 <- lm(y~x+w,data=df)
+fm1 <- lm(y~x*w,data=df)
 fm0 <- lm(y~x,data=df)
 coeftest(fm1,df=Inf)
 ```
@@ -124,7 +124,7 @@ BP検定は帰無仮説が分散均一で, 対立仮説が分散が説明変数�
 その決定係数に観測数をかけたものが検定統計量となる.
 ```{r}
 bpt <- lm(I(resid(fm1)^2)~w*x,data=df)
-(bpt <- nrow(df)*summary(bpt)$r.squared)
+(bpt <-nrow(df)*summary(bpt)$r.squared)
 1-pchisq(bpt,df=3)
 ```
 

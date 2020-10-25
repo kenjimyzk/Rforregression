@@ -92,12 +92,25 @@ head(fitted(fm))
 # fitted.values(fm)
 # with(fm, fitted.values)
 ```
+予測値の平均は被説明変数の平均と等しい．
+```{r}
+mean(fitted(fm))
+mean(df$y)
+```
+
 
 残差自乗和は次のコマンドを実施する.
 ```{r}
 deviance(fm)
 sum(resid(fm)^2)
 ```
+
+残差自乗和は残差変動とも呼ばれる．予測値の偏差の自乗和を回帰変動といい，被説明変数の自乗和を全変動といえば，全変動は回帰変動と残差変動に分解できる．
+```{r}
+sum((df$y-mean(df$y))^2)
+sum((fitted(fm)-mean(df$y))^2)+deviance(fm)
+```
+
 
 ### ティー検定
 その結果を見るには `summary` を実施する.
@@ -168,6 +181,19 @@ summary(fm)
 作図すると以下のようになる.
 ```{r}
 plot(log(y)~x,data=df)
+abline(fm)
+```
+
+
+被説明変数および説明変数が対数の場合以下である.
+```{r}
+fm <- lm(log(y)~log(x),data=df)
+summary(fm)
+```
+
+作図すると以下のようになる.
+```{r}
+plot(log(y)~log(x),data=df)
 abline(fm)
 ```
 
