@@ -42,7 +42,7 @@ plot(y~x)
 ここの係数ゼロのティー検定について, ライブラリ `AER` を導入して `coeftest` を用いればよい.
 
 ```r
-fm1 <- lm(y~x+w,data=df)
+fm1 <- lm(y~x*w,data=df)
 fm0 <- lm(y~x,data=df)
 coeftest(fm1,df=Inf)
 ```
@@ -52,9 +52,10 @@ coeftest(fm1,df=Inf)
 ## z test of coefficients:
 ## 
 ##             Estimate Std. Error z value  Pr(>|z|)    
-## (Intercept) 11.05648    0.22518 49.1000 < 2.2e-16 ***
-## x            1.69837    0.33519  5.0669 4.044e-07 ***
-## wT          -0.69855    0.18538 -3.7683 0.0001644 ***
+## (Intercept) 11.14234    0.28795 38.6954 < 2.2e-16 ***
+## x            1.74539    0.52439  3.3284 0.0008733 ***
+## wT          -1.22599    0.39000 -3.1436 0.0016688 ** 
+## x:wT         0.29404    0.71492  0.4113 0.6808612    
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -72,10 +73,10 @@ waldtest(fm0,fm1,test="Chisq")
 ## Wald test
 ## 
 ## Model 1: y ~ x
-## Model 2: y ~ x + w
-##   Res.Df Df Chisq Pr(>Chisq)    
-## 1     98                        
-## 2     97  1  14.2  0.0001644 ***
+## Model 2: y ~ x * w
+##   Res.Df Df  Chisq Pr(>Chisq)    
+## 1     98                         
+## 2     96  2 27.493  1.071e-06 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -91,10 +92,10 @@ waldtest(fm0,fm1)
 ## Wald test
 ## 
 ## Model 1: y ~ x
-## Model 2: y ~ x + w
-##   Res.Df Df    F    Pr(>F)    
-## 1     98                      
-## 2     97  1 14.2 0.0002823 ***
+## Model 2: y ~ x * w
+##   Res.Df Df      F    Pr(>F)    
+## 1     98                        
+## 2     96  2 13.747 5.625e-06 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -108,10 +109,10 @@ anova(fm0,fm1)
 ## Analysis of Variance Table
 ## 
 ## Model 1: y ~ x
-## Model 2: y ~ x + w
-##   Res.Df    RSS Df Sum of Sq    F    Pr(>F)    
-## 1     98 93.317                                
-## 2     97 81.401  1    11.916 14.2 0.0002823 ***
+## Model 2: y ~ x * w
+##   Res.Df    RSS Df Sum of Sq      F    Pr(>F)    
+## 1     98 134.04                                  
+## 2     96 104.20  2    29.842 13.747 5.625e-06 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -126,7 +127,7 @@ lmt <- lm(I(resid(fm1))~w*x,data=df)
 ```
 
 ```
-## [1] 8.881425
+## [1] 2.590582e-29
 ```
 
 ```r
@@ -134,7 +135,7 @@ lmt <- lm(I(resid(fm1))~w*x,data=df)
 ```
 
 ```
-## [1] 0.002880866
+## [1] 1
 ```
 
 ## 誤差項と説明変数が独立の仮定について
@@ -164,9 +165,10 @@ coeftest(fm1,vcov=vcovHC)
 ## t test of coefficients:
 ## 
 ##             Estimate Std. Error t value  Pr(>|t|)    
-## (Intercept) 11.05648    0.23692 46.6667 < 2.2e-16 ***
-## x            1.69837    0.34558  4.9145 3.617e-06 ***
-## wT          -0.69855    0.19262 -3.6267 0.0004599 ***
+## (Intercept) 11.14234    0.21091 52.8294 < 2.2e-16 ***
+## x            1.74539    0.35609  4.9016  3.86e-06 ***
+## wT          -1.22599    0.37185 -3.2970  0.001371 ** 
+## x:wT         0.29404    0.64226  0.4578  0.648119    
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -183,9 +185,10 @@ coeftest(fm1,vcov=vcovHC(fm1,type="HC1"))
 ## t test of coefficients:
 ## 
 ##             Estimate Std. Error t value  Pr(>|t|)    
-## (Intercept) 11.05648    0.23103 47.8564 < 2.2e-16 ***
-## x            1.69837    0.33754  5.0316 2.235e-06 ***
-## wT          -0.69855    0.18943 -3.6877 0.0003733 ***
+## (Intercept) 11.14234    0.20507 54.3346 < 2.2e-16 ***
+## x            1.74539    0.34455  5.0658 1.968e-06 ***
+## wT          -1.22599    0.36357 -3.3721  0.001076 ** 
+## x:wT         0.29404    0.62110  0.4734  0.636995    
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -202,8 +205,8 @@ coeftest(fm0,vcov=vcovHC,df=Inf)
 ## z test of coefficients:
 ## 
 ##             Estimate Std. Error z value  Pr(>|z|)    
-## (Intercept) 10.60003    0.17982 58.9464 < 2.2e-16 ***
-## x            1.88421    0.35095  5.3688 7.925e-08 ***
+## (Intercept) 10.47782    0.22013 47.5993 < 2.2e-16 ***
+## x            1.95445    0.37843  5.1646  2.41e-07 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -218,10 +221,10 @@ waldtest(fm0,fm1,vcov=vcovHC)
 ## Wald test
 ## 
 ## Model 1: y ~ x
-## Model 2: y ~ x + w
+## Model 2: y ~ x * w
 ##   Res.Df Df      F    Pr(>F)    
 ## 1     98                        
-## 2     97  1 13.153 0.0004599 ***
+## 2     96  2 13.577 6.421e-06 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -236,10 +239,10 @@ waldtest(fm0,fm1,vcov=vcovHC, test="Chisq")
 ## Wald test
 ## 
 ## Model 1: y ~ x
-## Model 2: y ~ x + w
+## Model 2: y ~ x * w
 ##   Res.Df Df  Chisq Pr(>Chisq)    
 ## 1     98                         
-## 2     97  1 13.153  0.0002871 ***
+## 2     96  2 27.153   1.27e-06 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -258,11 +261,11 @@ BP検定は帰無仮説が分散均一で, 対立仮説が分散が説明変数�
 
 ```r
 bpt <- lm(I(resid(fm1)^2)~w*x,data=df)
-(bpt <- nrow(df)*summary(bpt)$r.squared)
+(bpt <-nrow(df)*summary(bpt)$r.squared)
 ```
 
 ```
-## [1] 3.194558
+## [1] 2.918499
 ```
 
 ```r
@@ -270,7 +273,7 @@ bpt <- lm(I(resid(fm1)^2)~w*x,data=df)
 ```
 
 ```
-## [1] 0.3625899
+## [1] 0.4043625
 ```
 
 ここでの例ではP値が5%を超えているので帰無仮説を棄却できないので,
@@ -287,7 +290,7 @@ bptest(fm1)
 ## 	studentized Breusch-Pagan test
 ## 
 ## data:  fm1
-## BP = 0.70498, df = 2, p-value = 0.7029
+## BP = 2.9185, df = 3, p-value = 0.4044
 ```
 
 これまでのBPテストは誤差項の分散が説明変数の線形関係あることを暗黙に仮定している.
@@ -302,7 +305,7 @@ wht <- lm(I(resid(fm1)^2)~fitted(fm1)+I(fitted(fm1)^2),data=df)
 ```
 
 ```
-## [1] 1.834542
+## [1] 2.158891
 ```
 
 ```r
@@ -310,7 +313,7 @@ wht <- lm(I(resid(fm1)^2)~fitted(fm1)+I(fitted(fm1)^2),data=df)
 ```
 
 ```
-## [1] 0.3996081
+## [1] 0.3397838
 ```
 ホワイト検定でも分散均一が示唆されている.
 
@@ -325,7 +328,7 @@ bptest(fm1,~fitted(fm1)+I(fitted(fm1)^2))
 ## 	studentized Breusch-Pagan test
 ## 
 ## data:  fm1
-## BP = 1.8345, df = 2, p-value = 0.3996
+## BP = 2.1589, df = 2, p-value = 0.3398
 ```
 
 このように分散均一性は検定することが可能であるが, そもそも分散均一が疑われる場合は,

@@ -1,7 +1,7 @@
 --- 
 title: "R と RStudio"
 author: "宮﨑憲治"
-date: "2020-10-01"
+date: "2020-10-25"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: bxjsbook
@@ -21,6 +21,16 @@ description: "This is a description. Please wrote a abstract this contents. "
 
 ## R とは
 Rは統計・データ解析・統計グラフ作成のためのオープンソースソフトである.
+
+## オンライン環境
+RStudio Cloud (https://rstudio.cloud/) にアクセスする.
+
+gmail のアカウントなどのアカウントがあれば簡単にアクセスできる.
+
+
+
+
+## ローカル環境
 
 ## R のインストール
 Rをインストールするには
