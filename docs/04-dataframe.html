@@ -136,11 +136,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>はじめに</a><ul>
 <li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#r-とは"><i class="fa fa-check"></i><b>0.1</b> R とは</a></li>
-<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#オンライン環境"><i class="fa fa-check"></i><b>0.2</b> オンライン環境</a></li>
-<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#ローカル環境"><i class="fa fa-check"></i><b>0.3</b> ローカル環境</a></li>
-<li class="chapter" data-level="0.4" data-path="index.html"><a href="index.html#r-のインストール"><i class="fa fa-check"></i><b>0.4</b> R のインストール</a></li>
-<li class="chapter" data-level="0.5" data-path="index.html"><a href="index.html#r-の設定"><i class="fa fa-check"></i><b>0.5</b> R の設定</a></li>
-<li class="chapter" data-level="0.6" data-path="index.html"><a href="index.html#r-の使い方"><i class="fa fa-check"></i><b>0.6</b> R の使い方</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#r-のインストール"><i class="fa fa-check"></i><b>0.2</b> R のインストール</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#r-の設定"><i class="fa fa-check"></i><b>0.3</b> R の設定</a></li>
+<li class="chapter" data-level="0.4" data-path="index.html"><a href="index.html#r-の使い方"><i class="fa fa-check"></i><b>0.4</b> R の使い方</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="01-base.html"><a href="01-base.html"><i class="fa fa-check"></i><b>1</b> 基本</a><ul>
 <li class="chapter" data-level="1.1" data-path="01-base.html"><a href="01-base.html#電卓としての-r"><i class="fa fa-check"></i><b>1.1</b> 電卓としての R</a></li>
@@ -456,32 +454,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 0から10までの値を発生させる.</p>
 <div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="04-dataframe.html#cb79-1"></a>x &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">10</span>,<span class="dv">0</span>,<span class="dv">10</span>)</span>
 <span id="cb79-2"><a href="04-dataframe.html#cb79-2"></a>x</span>
-<span id="cb79-3"><a href="04-dataframe.html#cb79-3"></a><span class="co">##  [1] 5.8543264 1.7558339 5.4369832 0.5314050 4.0641684 9.2777281 0.6861613</span></span>
-<span id="cb79-4"><a href="04-dataframe.html#cb79-4"></a><span class="co">##  [8] 5.9110153 0.3719196 5.1658010</span></span></code></pre></div>
+<span id="cb79-3"><a href="04-dataframe.html#cb79-3"></a><span class="co">##  [1] 9.692244 1.118645 9.771513 2.929681 7.132534 1.408130 1.670526 3.626161</span></span>
+<span id="cb79-4"><a href="04-dataframe.html#cb79-4"></a><span class="co">##  [9] 2.569095 7.820375</span></span></code></pre></div>
 <p>5等分するには以下のようにする.</p>
 <div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="04-dataframe.html#cb80-1"></a><span class="kw">cut</span>(x, <span class="dt">breaks=</span><span class="dv">5</span>)</span>
-<span id="cb80-2"><a href="04-dataframe.html#cb80-2"></a><span class="co">##  [1] (5.72,7.5]   (0.363,2.15] (3.93,5.72]  (0.363,2.15] (3.93,5.72] </span></span>
-<span id="cb80-3"><a href="04-dataframe.html#cb80-3"></a><span class="co">##  [6] (7.5,9.29]   (0.363,2.15] (5.72,7.5]   (0.363,2.15] (3.93,5.72] </span></span>
-<span id="cb80-4"><a href="04-dataframe.html#cb80-4"></a><span class="co">## Levels: (0.363,2.15] (2.15,3.93] (3.93,5.72] (5.72,7.5] (7.5,9.29]</span></span></code></pre></div>
+<span id="cb80-2"><a href="04-dataframe.html#cb80-2"></a><span class="co">##  [1] (8.04,9.78] (1.11,2.85] (8.04,9.78] (2.85,4.58] (6.31,8.04] (1.11,2.85]</span></span>
+<span id="cb80-3"><a href="04-dataframe.html#cb80-3"></a><span class="co">##  [7] (1.11,2.85] (2.85,4.58] (1.11,2.85] (6.31,8.04]</span></span>
+<span id="cb80-4"><a href="04-dataframe.html#cb80-4"></a><span class="co">## Levels: (1.11,2.85] (2.85,4.58] (4.58,6.31] (6.31,8.04] (8.04,9.78]</span></span></code></pre></div>
 <p>これは登場したデータの最大値と最小値の幅を5等分している.</p>
 <p>区間を指定するには以下のようにベクトルで指定する.</p>
 <div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="04-dataframe.html#cb81-1"></a><span class="kw">cut</span>(x,<span class="dt">breaks=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">6</span>,<span class="dv">8</span>,<span class="dv">10</span>))</span>
-<span id="cb81-2"><a href="04-dataframe.html#cb81-2"></a><span class="co">##  [1] (4,6]  (0,2]  (4,6]  (0,2]  (4,6]  (8,10] (0,2]  (4,6]  (0,2]  (4,6] </span></span>
+<span id="cb81-2"><a href="04-dataframe.html#cb81-2"></a><span class="co">##  [1] (8,10] (0,2]  (8,10] (2,4]  (6,8]  (0,2]  (0,2]  (2,4]  (2,4]  (6,8] </span></span>
 <span id="cb81-3"><a href="04-dataframe.html#cb81-3"></a><span class="co">## Levels: (0,2] (2,4] (4,6] (6,8] (8,10]</span></span></code></pre></div>
 <p>0より大きく2以下, 2より大きく4以下,… となっている.</p>
 <p>0も含めるのなら <code>include.lowest=TRUE</code> というオプションをつける.</p>
 <div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="04-dataframe.html#cb82-1"></a><span class="kw">cut</span>(x, <span class="dt">breaks=</span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">10</span>,<span class="dv">2</span>),<span class="dt">include.lowest=</span><span class="ot">TRUE</span>)</span>
-<span id="cb82-2"><a href="04-dataframe.html#cb82-2"></a><span class="co">##  [1] (4,6]  [0,2]  (4,6]  [0,2]  (4,6]  (8,10] [0,2]  (4,6]  [0,2]  (4,6] </span></span>
+<span id="cb82-2"><a href="04-dataframe.html#cb82-2"></a><span class="co">##  [1] (8,10] [0,2]  (8,10] (2,4]  (6,8]  [0,2]  [0,2]  (2,4]  (2,4]  (6,8] </span></span>
 <span id="cb82-3"><a href="04-dataframe.html#cb82-3"></a><span class="co">## Levels: [0,2] (2,4] (4,6] (6,8] (8,10]</span></span></code></pre></div>
 <p>またこれを0以上2未満, 2以上4未満, … とするにはオプション <code>right=FALSE</code> をつける.</p>
 <div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="04-dataframe.html#cb83-1"></a><span class="kw">cut</span>(x, <span class="dt">breaks=</span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">10</span>,<span class="dv">2</span>),<span class="dt">right=</span><span class="ot">FALSE</span>,<span class="dt">include.lowest=</span><span class="ot">TRUE</span>)</span>
-<span id="cb83-2"><a href="04-dataframe.html#cb83-2"></a><span class="co">##  [1] [4,6)  [0,2)  [4,6)  [0,2)  [4,6)  [8,10] [0,2)  [4,6)  [0,2)  [4,6) </span></span>
+<span id="cb83-2"><a href="04-dataframe.html#cb83-2"></a><span class="co">##  [1] [8,10] [0,2)  [8,10] [2,4)  [6,8)  [0,2)  [0,2)  [2,4)  [2,4)  [6,8) </span></span>
 <span id="cb83-3"><a href="04-dataframe.html#cb83-3"></a><span class="co">## Levels: [0,2) [2,4) [4,6) [6,8) [8,10]</span></span></code></pre></div>
 <p>このとき, <code>include.lowest=TRUE</code> は最大値を含めることを意味する.</p>
 <p>また因子の名称はオプション <code>labels</code> で変更可能である.</p>
 <div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="04-dataframe.html#cb84-1"></a><span class="kw">cut</span>(x, <span class="dt">breaks=</span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">10</span>,<span class="dv">2</span>),<span class="dt">right=</span><span class="ot">FALSE</span>,<span class="dt">include.lowest=</span><span class="ot">TRUE</span>,</span>
 <span id="cb84-2"><a href="04-dataframe.html#cb84-2"></a>    <span class="dt">labels =</span><span class="kw">c</span>(<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;C&quot;</span>,<span class="st">&quot;D&quot;</span>,<span class="st">&quot;E&quot;</span>))</span>
-<span id="cb84-3"><a href="04-dataframe.html#cb84-3"></a><span class="co">##  [1] C A C A C E A C A C</span></span>
+<span id="cb84-3"><a href="04-dataframe.html#cb84-3"></a><span class="co">##  [1] E A E B D A A B B D</span></span>
 <span id="cb84-4"><a href="04-dataframe.html#cb84-4"></a><span class="co">## Levels: A B C D E</span></span></code></pre></div>
 </div>
 </div>
@@ -603,26 +601,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="04-dataframe.html#cb104-1"></a>df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>), <span class="dt">y =</span> letters[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>])</span></code></pre></div>
 <p>データフレイムは大規模なことが多いので最初の数行だけをみるためには <code>head</code> をもちいる.</p>
 <div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="04-dataframe.html#cb105-1"></a><span class="kw">head</span>(df)</span>
-<span id="cb105-2"><a href="04-dataframe.html#cb105-2"></a><span class="co">##             x y</span></span>
-<span id="cb105-3"><a href="04-dataframe.html#cb105-3"></a><span class="co">## 1  1.30501872 a</span></span>
-<span id="cb105-4"><a href="04-dataframe.html#cb105-4"></a><span class="co">## 2  0.36554669 b</span></span>
-<span id="cb105-5"><a href="04-dataframe.html#cb105-5"></a><span class="co">## 3 -0.46246878 c</span></span>
-<span id="cb105-6"><a href="04-dataframe.html#cb105-6"></a><span class="co">## 4  0.05565643 d</span></span>
-<span id="cb105-7"><a href="04-dataframe.html#cb105-7"></a><span class="co">## 5  0.02471832 e</span></span>
-<span id="cb105-8"><a href="04-dataframe.html#cb105-8"></a><span class="co">## 6 -0.12000577 f</span></span></code></pre></div>
+<span id="cb105-2"><a href="04-dataframe.html#cb105-2"></a><span class="co">##            x y</span></span>
+<span id="cb105-3"><a href="04-dataframe.html#cb105-3"></a><span class="co">## 1  0.8550577 a</span></span>
+<span id="cb105-4"><a href="04-dataframe.html#cb105-4"></a><span class="co">## 2 -2.4594007 b</span></span>
+<span id="cb105-5"><a href="04-dataframe.html#cb105-5"></a><span class="co">## 3  0.3666026 c</span></span>
+<span id="cb105-6"><a href="04-dataframe.html#cb105-6"></a><span class="co">## 4  1.5543912 d</span></span>
+<span id="cb105-7"><a href="04-dataframe.html#cb105-7"></a><span class="co">## 5 -0.7510623 e</span></span>
+<span id="cb105-8"><a href="04-dataframe.html#cb105-8"></a><span class="co">## 6  0.9341462 f</span></span></code></pre></div>
 <p>データの簡単な統計表は <code>summary</code> を使うとよい.</p>
 <div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="04-dataframe.html#cb106-1"></a><span class="kw">summary</span>(df)</span>
-<span id="cb106-2"><a href="04-dataframe.html#cb106-2"></a><span class="co">##        x                 y            </span></span>
-<span id="cb106-3"><a href="04-dataframe.html#cb106-3"></a><span class="co">##  Min.   :-0.80996   Length:10         </span></span>
-<span id="cb106-4"><a href="04-dataframe.html#cb106-4"></a><span class="co">##  1st Qu.:-0.37685   Class :character  </span></span>
-<span id="cb106-5"><a href="04-dataframe.html#cb106-5"></a><span class="co">##  Median : 0.04019   Mode  :character  </span></span>
-<span id="cb106-6"><a href="04-dataframe.html#cb106-6"></a><span class="co">##  Mean   : 0.10730                     </span></span>
-<span id="cb106-7"><a href="04-dataframe.html#cb106-7"></a><span class="co">##  3rd Qu.: 0.38805                     </span></span>
-<span id="cb106-8"><a href="04-dataframe.html#cb106-8"></a><span class="co">##  Max.   : 1.30502</span></span></code></pre></div>
+<span id="cb106-2"><a href="04-dataframe.html#cb106-2"></a><span class="co">##        x                y            </span></span>
+<span id="cb106-3"><a href="04-dataframe.html#cb106-3"></a><span class="co">##  Min.   :-2.4594   Length:10         </span></span>
+<span id="cb106-4"><a href="04-dataframe.html#cb106-4"></a><span class="co">##  1st Qu.:-0.2775   Class :character  </span></span>
+<span id="cb106-5"><a href="04-dataframe.html#cb106-5"></a><span class="co">##  Median : 0.4049   Mode  :character  </span></span>
+<span id="cb106-6"><a href="04-dataframe.html#cb106-6"></a><span class="co">##  Mean   : 0.2488                     </span></span>
+<span id="cb106-7"><a href="04-dataframe.html#cb106-7"></a><span class="co">##  3rd Qu.: 0.9144                     </span></span>
+<span id="cb106-8"><a href="04-dataframe.html#cb106-8"></a><span class="co">##  Max.   : 1.7500</span></span></code></pre></div>
 <p>よりプログラム言語としてのデータ構造を調べるには <code>str</code> を使えばよい.</p>
 <div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="04-dataframe.html#cb107-1"></a><span class="kw">str</span>(df)</span>
 <span id="cb107-2"><a href="04-dataframe.html#cb107-2"></a><span class="co">## &#39;data.frame&#39;:    10 obs. of  2 variables:</span></span>
-<span id="cb107-3"><a href="04-dataframe.html#cb107-3"></a><span class="co">##  $ x: num  1.305 0.3655 -0.4625 0.0557 0.0247 ...</span></span>
+<span id="cb107-3"><a href="04-dataframe.html#cb107-3"></a><span class="co">##  $ x: num  0.855 -2.459 0.367 1.554 -0.751 ...</span></span>
 <span id="cb107-4"><a href="04-dataframe.html#cb107-4"></a><span class="co">##  $ y: chr  &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; ...</span></span></code></pre></div>
 <p>データフレイムはリストである.</p>
 <div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="04-dataframe.html#cb108-1"></a><span class="kw">typeof</span>(df)</span>
@@ -659,39 +657,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>データフレイムは行列でもあるので, 注意があるが
 行列での演算がほとんどそのまま利用できる.</p>
 <div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="04-dataframe.html#cb112-1"></a><span class="kw">rbind</span>(df, <span class="kw">c</span>(<span class="dv">3</span>,<span class="st">&quot;a&quot;</span>))</span>
-<span id="cb112-2"><a href="04-dataframe.html#cb112-2"></a><span class="co">##                     x y</span></span>
-<span id="cb112-3"><a href="04-dataframe.html#cb112-3"></a><span class="co">## 1    1.30501871876649 a</span></span>
-<span id="cb112-4"><a href="04-dataframe.html#cb112-4"></a><span class="co">## 2   0.365546687587815 b</span></span>
-<span id="cb112-5"><a href="04-dataframe.html#cb112-5"></a><span class="co">## 3   -0.46246877967429 c</span></span>
-<span id="cb112-6"><a href="04-dataframe.html#cb112-6"></a><span class="co">## 4  0.0556564300535692 d</span></span>
-<span id="cb112-7"><a href="04-dataframe.html#cb112-7"></a><span class="co">## 5  0.0247183182409305 e</span></span>
-<span id="cb112-8"><a href="04-dataframe.html#cb112-8"></a><span class="co">## 6    -0.1200057721757 f</span></span>
-<span id="cb112-9"><a href="04-dataframe.html#cb112-9"></a><span class="co">## 7  -0.809960070710872 g</span></span>
-<span id="cb112-10"><a href="04-dataframe.html#cb112-10"></a><span class="co">## 8  -0.573288442298967 h</span></span>
-<span id="cb112-11"><a href="04-dataframe.html#cb112-11"></a><span class="co">## 9   0.395553964413319 i</span></span>
-<span id="cb112-12"><a href="04-dataframe.html#cb112-12"></a><span class="co">## 10  0.892189026393222 j</span></span>
-<span id="cb112-13"><a href="04-dataframe.html#cb112-13"></a><span class="co">## 11                  3 a</span></span></code></pre></div>
+<span id="cb112-2"><a href="04-dataframe.html#cb112-2"></a><span class="co">##                    x y</span></span>
+<span id="cb112-3"><a href="04-dataframe.html#cb112-3"></a><span class="co">## 1  0.855057703025133 a</span></span>
+<span id="cb112-4"><a href="04-dataframe.html#cb112-4"></a><span class="co">## 2  -2.45940071486814 b</span></span>
+<span id="cb112-5"><a href="04-dataframe.html#cb112-5"></a><span class="co">## 3  0.366602573674887 c</span></span>
+<span id="cb112-6"><a href="04-dataframe.html#cb112-6"></a><span class="co">## 4   1.55439116868246 d</span></span>
+<span id="cb112-7"><a href="04-dataframe.html#cb112-7"></a><span class="co">## 5  -0.75106233354302 e</span></span>
+<span id="cb112-8"><a href="04-dataframe.html#cb112-8"></a><span class="co">## 6  0.934146242488109 f</span></span>
+<span id="cb112-9"><a href="04-dataframe.html#cb112-9"></a><span class="co">## 7  0.247149619923987 g</span></span>
+<span id="cb112-10"><a href="04-dataframe.html#cb112-10"></a><span class="co">## 8   1.75002128561049 h</span></span>
+<span id="cb112-11"><a href="04-dataframe.html#cb112-11"></a><span class="co">## 9  -0.45232752749345 i</span></span>
+<span id="cb112-12"><a href="04-dataframe.html#cb112-12"></a><span class="co">## 10 0.443159669856154 j</span></span>
+<span id="cb112-13"><a href="04-dataframe.html#cb112-13"></a><span class="co">## 11                 3 a</span></span></code></pre></div>
 <div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="04-dataframe.html#cb113-1"></a><span class="kw">cbind</span>(df,<span class="dt">z=</span><span class="kw">runif</span>(<span class="dv">10</span>))</span>
-<span id="cb113-2"><a href="04-dataframe.html#cb113-2"></a><span class="co">##              x y          z</span></span>
-<span id="cb113-3"><a href="04-dataframe.html#cb113-3"></a><span class="co">## 1   1.30501872 a 0.31139552</span></span>
-<span id="cb113-4"><a href="04-dataframe.html#cb113-4"></a><span class="co">## 2   0.36554669 b 0.00833534</span></span>
-<span id="cb113-5"><a href="04-dataframe.html#cb113-5"></a><span class="co">## 3  -0.46246878 c 0.36093000</span></span>
-<span id="cb113-6"><a href="04-dataframe.html#cb113-6"></a><span class="co">## 4   0.05565643 d 0.22324711</span></span>
-<span id="cb113-7"><a href="04-dataframe.html#cb113-7"></a><span class="co">## 5   0.02471832 e 0.88023179</span></span>
-<span id="cb113-8"><a href="04-dataframe.html#cb113-8"></a><span class="co">## 6  -0.12000577 f 0.08796891</span></span>
-<span id="cb113-9"><a href="04-dataframe.html#cb113-9"></a><span class="co">## 7  -0.80996007 g 0.74511352</span></span>
-<span id="cb113-10"><a href="04-dataframe.html#cb113-10"></a><span class="co">## 8  -0.57328844 h 0.35675028</span></span>
-<span id="cb113-11"><a href="04-dataframe.html#cb113-11"></a><span class="co">## 9   0.39555396 i 0.25525104</span></span>
-<span id="cb113-12"><a href="04-dataframe.html#cb113-12"></a><span class="co">## 10  0.89218903 j 0.96477289</span></span></code></pre></div>
+<span id="cb113-2"><a href="04-dataframe.html#cb113-2"></a><span class="co">##             x y         z</span></span>
+<span id="cb113-3"><a href="04-dataframe.html#cb113-3"></a><span class="co">## 1   0.8550577 a 0.2660282</span></span>
+<span id="cb113-4"><a href="04-dataframe.html#cb113-4"></a><span class="co">## 2  -2.4594007 b 0.1415574</span></span>
+<span id="cb113-5"><a href="04-dataframe.html#cb113-5"></a><span class="co">## 3   0.3666026 c 0.3179230</span></span>
+<span id="cb113-6"><a href="04-dataframe.html#cb113-6"></a><span class="co">## 4   1.5543912 d 0.1661038</span></span>
+<span id="cb113-7"><a href="04-dataframe.html#cb113-7"></a><span class="co">## 5  -0.7510623 e 0.5945934</span></span>
+<span id="cb113-8"><a href="04-dataframe.html#cb113-8"></a><span class="co">## 6   0.9341462 f 0.8267962</span></span>
+<span id="cb113-9"><a href="04-dataframe.html#cb113-9"></a><span class="co">## 7   0.2471496 g 0.2902335</span></span>
+<span id="cb113-10"><a href="04-dataframe.html#cb113-10"></a><span class="co">## 8   1.7500213 h 0.2279885</span></span>
+<span id="cb113-11"><a href="04-dataframe.html#cb113-11"></a><span class="co">## 9  -0.4523275 i 0.1168382</span></span>
+<span id="cb113-12"><a href="04-dataframe.html#cb113-12"></a><span class="co">## 10  0.4431597 j 0.4990337</span></span></code></pre></div>
 <p>転置行列は行列として出力可能である.
 以下のようにデータフレイムに因子ベクトルが含まれていたら全て文字列になる.</p>
 <div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="04-dataframe.html#cb114-1"></a><span class="kw">t</span>(df)</span>
-<span id="cb114-2"><a href="04-dataframe.html#cb114-2"></a><span class="co">##   [,1]          [,2]          [,3]          [,4]          [,5]         </span></span>
-<span id="cb114-3"><a href="04-dataframe.html#cb114-3"></a><span class="co">## x &quot; 1.30501872&quot; &quot; 0.36554669&quot; &quot;-0.46246878&quot; &quot; 0.05565643&quot; &quot; 0.02471832&quot;</span></span>
-<span id="cb114-4"><a href="04-dataframe.html#cb114-4"></a><span class="co">## y &quot;a&quot;           &quot;b&quot;           &quot;c&quot;           &quot;d&quot;           &quot;e&quot;          </span></span>
-<span id="cb114-5"><a href="04-dataframe.html#cb114-5"></a><span class="co">##   [,6]          [,7]          [,8]          [,9]          [,10]        </span></span>
-<span id="cb114-6"><a href="04-dataframe.html#cb114-6"></a><span class="co">## x &quot;-0.12000577&quot; &quot;-0.80996007&quot; &quot;-0.57328844&quot; &quot; 0.39555396&quot; &quot; 0.89218903&quot;</span></span>
-<span id="cb114-7"><a href="04-dataframe.html#cb114-7"></a><span class="co">## y &quot;f&quot;           &quot;g&quot;           &quot;h&quot;           &quot;i&quot;           &quot;j&quot;</span></span></code></pre></div>
+<span id="cb114-2"><a href="04-dataframe.html#cb114-2"></a><span class="co">##   [,1]         [,2]         [,3]         [,4]         [,5]         [,6]        </span></span>
+<span id="cb114-3"><a href="04-dataframe.html#cb114-3"></a><span class="co">## x &quot; 0.8550577&quot; &quot;-2.4594007&quot; &quot; 0.3666026&quot; &quot; 1.5543912&quot; &quot;-0.7510623&quot; &quot; 0.9341462&quot;</span></span>
+<span id="cb114-4"><a href="04-dataframe.html#cb114-4"></a><span class="co">## y &quot;a&quot;          &quot;b&quot;          &quot;c&quot;          &quot;d&quot;          &quot;e&quot;          &quot;f&quot;         </span></span>
+<span id="cb114-5"><a href="04-dataframe.html#cb114-5"></a><span class="co">##   [,7]         [,8]         [,9]         [,10]       </span></span>
+<span id="cb114-6"><a href="04-dataframe.html#cb114-6"></a><span class="co">## x &quot; 0.2471496&quot; &quot; 1.7500213&quot; &quot;-0.4523275&quot; &quot; 0.4431597&quot;</span></span>
+<span id="cb114-7"><a href="04-dataframe.html#cb114-7"></a><span class="co">## y &quot;g&quot;          &quot;h&quot;          &quot;i&quot;          &quot;j&quot;</span></span></code></pre></div>
 <p>データフレイムの構成ベクトルがすべて論理値もしくは数値のとき,
 同じ行数と列数のデータフレイムの要素ごとの四則演算は可能である.
 ただし, 通常の行列演算を実施するには, 行列に変換しなければならない.</p>
@@ -717,32 +715,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">4.5.2</span> データフレイムのアクセス</h3>
 <p>データのアクセスとして, ベクトルのように一つのカギカッコで取り出すと以下のようになる.</p>
 <div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="04-dataframe.html#cb118-1"></a>df[<span class="st">&quot;x&quot;</span>]</span>
-<span id="cb118-2"><a href="04-dataframe.html#cb118-2"></a><span class="co">##              x</span></span>
-<span id="cb118-3"><a href="04-dataframe.html#cb118-3"></a><span class="co">## 1   1.30501872</span></span>
-<span id="cb118-4"><a href="04-dataframe.html#cb118-4"></a><span class="co">## 2   0.36554669</span></span>
-<span id="cb118-5"><a href="04-dataframe.html#cb118-5"></a><span class="co">## 3  -0.46246878</span></span>
-<span id="cb118-6"><a href="04-dataframe.html#cb118-6"></a><span class="co">## 4   0.05565643</span></span>
-<span id="cb118-7"><a href="04-dataframe.html#cb118-7"></a><span class="co">## 5   0.02471832</span></span>
-<span id="cb118-8"><a href="04-dataframe.html#cb118-8"></a><span class="co">## 6  -0.12000577</span></span>
-<span id="cb118-9"><a href="04-dataframe.html#cb118-9"></a><span class="co">## 7  -0.80996007</span></span>
-<span id="cb118-10"><a href="04-dataframe.html#cb118-10"></a><span class="co">## 8  -0.57328844</span></span>
-<span id="cb118-11"><a href="04-dataframe.html#cb118-11"></a><span class="co">## 9   0.39555396</span></span>
-<span id="cb118-12"><a href="04-dataframe.html#cb118-12"></a><span class="co">## 10  0.89218903</span></span></code></pre></div>
+<span id="cb118-2"><a href="04-dataframe.html#cb118-2"></a><span class="co">##             x</span></span>
+<span id="cb118-3"><a href="04-dataframe.html#cb118-3"></a><span class="co">## 1   0.8550577</span></span>
+<span id="cb118-4"><a href="04-dataframe.html#cb118-4"></a><span class="co">## 2  -2.4594007</span></span>
+<span id="cb118-5"><a href="04-dataframe.html#cb118-5"></a><span class="co">## 3   0.3666026</span></span>
+<span id="cb118-6"><a href="04-dataframe.html#cb118-6"></a><span class="co">## 4   1.5543912</span></span>
+<span id="cb118-7"><a href="04-dataframe.html#cb118-7"></a><span class="co">## 5  -0.7510623</span></span>
+<span id="cb118-8"><a href="04-dataframe.html#cb118-8"></a><span class="co">## 6   0.9341462</span></span>
+<span id="cb118-9"><a href="04-dataframe.html#cb118-9"></a><span class="co">## 7   0.2471496</span></span>
+<span id="cb118-10"><a href="04-dataframe.html#cb118-10"></a><span class="co">## 8   1.7500213</span></span>
+<span id="cb118-11"><a href="04-dataframe.html#cb118-11"></a><span class="co">## 9  -0.4523275</span></span>
+<span id="cb118-12"><a href="04-dataframe.html#cb118-12"></a><span class="co">## 10  0.4431597</span></span></code></pre></div>
 <p>他にも <code>df[1]</code> でもよいが, いずれにせよデータフレイムとして取り出されてしまう.</p>
 <p>ベクトルとして取り出すには以下を実施する.</p>
 <div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="04-dataframe.html#cb119-1"></a>df<span class="op">$</span>x</span>
-<span id="cb119-2"><a href="04-dataframe.html#cb119-2"></a><span class="co">##  [1]  1.30501872  0.36554669 -0.46246878  0.05565643  0.02471832 -0.12000577</span></span>
-<span id="cb119-3"><a href="04-dataframe.html#cb119-3"></a><span class="co">##  [7] -0.80996007 -0.57328844  0.39555396  0.89218903</span></span></code></pre></div>
+<span id="cb119-2"><a href="04-dataframe.html#cb119-2"></a><span class="co">##  [1]  0.8550577 -2.4594007  0.3666026  1.5543912 -0.7510623  0.9341462</span></span>
+<span id="cb119-3"><a href="04-dataframe.html#cb119-3"></a><span class="co">##  [7]  0.2471496  1.7500213 -0.4523275  0.4431597</span></span></code></pre></div>
 <p>他にも <code>df[["x"]], df[[1]], df[,"x"], df[,1]</code> でもよい.
 <code>ある変数 $x$ の5番目の要素を取り出して別の値</code>100`を代入するには以下のようにする.</p>
 <div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="04-dataframe.html#cb120-1"></a>df<span class="op">$</span>x[<span class="dv">5</span>] &lt;-<span class="st"> </span><span class="dv">100</span></span></code></pre></div>
 <p>他にも <code>df[["x"]][5], df[[1]][5], df[5,"x"], df[5,1]</code> でもよい.</p>
 <p>データフレイムのある変数の平均値を求めるには次のようにする.</p>
 <div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="04-dataframe.html#cb121-1"></a><span class="kw">mean</span>(df<span class="op">$</span>x)</span>
-<span id="cb121-2"><a href="04-dataframe.html#cb121-2"></a><span class="co">## [1] 10.10482</span></span></code></pre></div>
+<span id="cb121-2"><a href="04-dataframe.html#cb121-2"></a><span class="co">## [1] 10.32388</span></span></code></pre></div>
 <p>もしくは以下とする.</p>
 <div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="04-dataframe.html#cb122-1"></a><span class="kw">with</span>(df, <span class="kw">mean</span>(x))</span>
-<span id="cb122-2"><a href="04-dataframe.html#cb122-2"></a><span class="co">## [1] 10.10482</span></span></code></pre></div>
+<span id="cb122-2"><a href="04-dataframe.html#cb122-2"></a><span class="co">## [1] 10.32388</span></span></code></pre></div>
 <p>他にも <code>attach(df)</code> を使うやり方もあるが, 現在では推奨されない.</p>
 <p>なおリストの要素を消すには以下のようにする.</p>
 <div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="04-dataframe.html#cb123-1"></a>df<span class="op">$</span>x &lt;-<span class="st"> </span><span class="ot">NULL</span></span></code></pre></div>

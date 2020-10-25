@@ -75,7 +75,7 @@ names(fm)
 ```r
 coef(fm)
 ## (Intercept)           x 
-##    9.782622    2.265543
+##    9.758627    2.416429
 # coefficients(fm)
 ```
 
@@ -83,7 +83,7 @@ coef(fm)
 
 ```r
 with(df, cov(x,y)/var(x))
-## [1] 2.265543
+## [1] 2.416429
 ```
 
 
@@ -101,7 +101,7 @@ abline(fm)
 ```r
 head(resid(fm))
 ##          1          2          3          4          5          6 
-## -1.5110511  0.2351087 -2.1130287 -0.6963139 -0.4808598 -0.0235480
+## -0.4486688  1.0726153  0.6447540  1.1327921 -0.7724987  1.9907376
 # residuals(fm)
 # with(fm, residuals)
 ```
@@ -111,7 +111,7 @@ head(resid(fm))
 ```r
 head(fitted(fm))
 ##         1         2         3         4         5         6 
-## 10.240087  9.992593 11.902631 10.533075 10.896471 10.001242
+## 10.636974  9.879243 10.513265 10.190192 10.582838 10.951980
 # fitted.values(fm)
 # with(fm, fitted.values)
 ```
@@ -119,9 +119,9 @@ head(fitted(fm))
 
 ```r
 mean(fitted(fm))
-## [1] 10.88417
+## [1] 10.91118
 mean(df$y)
-## [1] 10.88417
+## [1] 10.91118
 ```
 
 
@@ -129,18 +129,18 @@ mean(df$y)
 
 ```r
 deviance(fm)
-## [1] 103.8646
+## [1] 109.5468
 sum(resid(fm)^2)
-## [1] 103.8646
+## [1] 109.5468
 ```
 
 残差自乗和は残差変動とも呼ばれる．予測値の偏差の自乗和を回帰変動といい，被説明変数の自乗和を全変動といえば，全変動は回帰変動と残差変動に分解できる．
 
 ```r
 sum((df$y-mean(df$y))^2)
-## [1] 149.6259
+## [1] 158.3117
 sum((fitted(fm)-mean(df$y))^2)+deviance(fm)
-## [1] 149.6259
+## [1] 158.3117
 ```
 
 
@@ -154,19 +154,19 @@ summary(fm)
 ## lm(formula = y ~ x, data = df)
 ## 
 ## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -2.3780 -0.7582 -0.0813  0.8070  2.6925 
+##      Min       1Q   Median       3Q      Max 
+## -2.74513 -0.63947 -0.01501  0.72553  2.40418 
 ## 
 ## Coefficients:
 ##             Estimate Std. Error t value Pr(>|t|)    
-## (Intercept)   9.7826     0.1967  49.727  < 2e-16 ***
-## x             2.2655     0.3448   6.571 2.42e-09 ***
+## (Intercept)   9.7586     0.2040  47.829  < 2e-16 ***
+## x             2.4164     0.3659   6.605 2.07e-09 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## Residual standard error: 1.029 on 98 degrees of freedom
-## Multiple R-squared:  0.3058,	Adjusted R-squared:  0.2988 
-## F-statistic: 43.18 on 1 and 98 DF,  p-value: 2.425e-09
+## Residual standard error: 1.057 on 98 degrees of freedom
+## Multiple R-squared:  0.308,	Adjusted R-squared:  0.301 
+## F-statistic: 43.62 on 1 and 98 DF,  p-value: 2.07e-09
 ```
 
 これをみれば各変数の係数がゼロのティー検定の結果が示されている.
@@ -189,8 +189,8 @@ names(summary(fm))
 ```r
 coef(summary(fm))
 ##             Estimate Std. Error   t value     Pr(>|t|)
-## (Intercept) 9.782622  0.1967267 49.726968 2.457286e-71
-## x           2.265543  0.3447818  6.570949 2.424935e-09
+## (Intercept) 9.758627  0.2040305 47.829254 9.585203e-70
+## x           2.416429  0.3658535  6.604908 2.069667e-09
 # coefficients(summary(fm))
 ```
 
@@ -198,27 +198,27 @@ coef(summary(fm))
 
 ```r
 with(summary(fm),sigma)
-## [1] 1.029487
+## [1] 1.057272
 sqrt(deviance(fm)/df.residual(fm))
-## [1] 1.029487
+## [1] 1.057272
 ```
 
 決定係数は次のようにして計算する.
 
 ```r
 with(summary(fm),r.squared)
-## [1] 0.3058378
+## [1] 0.3080309
 1-deviance(fm)/with(df, sum((y-mean(y))^2))
-## [1] 0.3058378
+## [1] 0.3080309
 ```
 
 調整済み決定係数は次のようにして計算する.
 
 ```r
 with(summary(fm),adj.r.squared)
-## [1] 0.2987545
+## [1] 0.30097
 1-(deviance(fm)/df.residual(fm))/with(df, sum((y-mean(y))^2/(nrow(df)-1)))
-## [1] 0.2987545
+## [1] 0.30097
 ```
 
 
@@ -239,19 +239,19 @@ summary(fm)
 ## lm(formula = y ~ log(x), data = df)
 ## 
 ## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -2.03445 -0.83163 -0.05289  0.59492  2.87474 
+##     Min      1Q  Median      3Q     Max 
+## -2.9548 -0.7354 -0.1412  0.6381  2.7955 
 ## 
 ## Coefficients:
 ##             Estimate Std. Error t value Pr(>|t|)    
-## (Intercept)  11.5738     0.1600  72.346  < 2e-16 ***
-## log(x)        0.6718     0.1161   5.785  8.7e-08 ***
+## (Intercept)  11.5681     0.1609  71.912  < 2e-16 ***
+## log(x)        0.6180     0.1100   5.621 1.79e-07 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## Residual standard error: 1.067 on 98 degrees of freedom
-## Multiple R-squared:  0.2545,	Adjusted R-squared:  0.2469 
-## F-statistic: 33.46 on 1 and 98 DF,  p-value: 8.696e-08
+## Residual standard error: 1.105 on 98 degrees of freedom
+## Multiple R-squared:  0.2438,	Adjusted R-squared:  0.2361 
+## F-statistic: 31.59 on 1 and 98 DF,  p-value: 1.791e-07
 ```
 
 作図すると以下のようになる.
@@ -274,18 +274,18 @@ summary(fm)
 ## 
 ## Residuals:
 ##       Min        1Q    Median        3Q       Max 
-## -0.220380 -0.067282 -0.001276  0.076224  0.212949 
+## -0.283833 -0.058469  0.002987  0.071310  0.214407 
 ## 
 ## Coefficients:
 ##             Estimate Std. Error t value Pr(>|t|)    
-## (Intercept)  2.28035    0.01793  127.15  < 2e-16 ***
-## x            0.20714    0.03143    6.59 2.22e-09 ***
+## (Intercept)  2.27794    0.01883 120.965  < 2e-16 ***
+## x            0.22052    0.03377   6.531 2.93e-09 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## Residual standard error: 0.09385 on 98 degrees of freedom
-## Multiple R-squared:  0.3071,	Adjusted R-squared:    0.3 
-## F-statistic: 43.43 on 1 and 98 DF,  p-value: 2.217e-09
+## Residual standard error: 0.09758 on 98 degrees of freedom
+## Multiple R-squared:  0.3032,	Adjusted R-squared:  0.2961 
+## F-statistic: 42.65 on 1 and 98 DF,  p-value: 2.927e-09
 ```
 
 作図すると以下のようになる.
@@ -309,18 +309,18 @@ summary(fm)
 ## 
 ## Residuals:
 ##       Min        1Q    Median        3Q       Max 
-## -0.203867 -0.076996 -0.003007  0.059642  0.230947 
+## -0.303169 -0.061313 -0.007719  0.062635  0.221847 
 ## 
 ## Coefficients:
 ##             Estimate Std. Error t value Pr(>|t|)    
-## (Intercept)  2.44484    0.01453 168.277  < 2e-16 ***
-## log(x)       0.06214    0.01055   5.891 5.41e-08 ***
+## (Intercept)  2.44379    0.01478 165.386  < 2e-16 ***
+## log(x)       0.05707    0.01010   5.651 1.57e-07 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## Residual standard error: 0.09689 on 98 degrees of freedom
-## Multiple R-squared:  0.2615,	Adjusted R-squared:  0.254 
-## F-statistic: 34.71 on 1 and 98 DF,  p-value: 5.411e-08
+## Residual standard error: 0.1015 on 98 degrees of freedom
+## Multiple R-squared:  0.2458,	Adjusted R-squared:  0.2381 
+## F-statistic: 31.94 on 1 and 98 DF,  p-value: 1.567e-07
 ```
 
 作図すると以下のようになる.
@@ -351,17 +351,17 @@ summary(fm)
 ## 
 ## Residuals:
 ##    Min     1Q Median     3Q    Max 
-## -6.232 -1.130  2.393  6.897 10.879 
+## -6.420 -1.211  3.013  6.609 10.185 
 ## 
 ## Coefficients:
 ##   Estimate Std. Error t value Pr(>|t|)    
-## x  16.8755     0.9194   18.35   <2e-16 ***
+## x  17.3823     0.9306   18.68   <2e-16 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## Residual standard error: 5.246 on 99 degrees of freedom
-## Multiple R-squared:  0.7729,	Adjusted R-squared:  0.7706 
-## F-statistic: 336.9 on 1 and 99 DF,  p-value: < 2.2e-16
+## Residual standard error: 5.19 on 99 degrees of freedom
+## Multiple R-squared:  0.7789,	Adjusted R-squared:  0.7767 
+## F-statistic: 348.9 on 1 and 99 DF,  p-value: < 2.2e-16
 ```
 
 もしくは `+0` を加える.
@@ -375,17 +375,17 @@ summary(fm)
 ## 
 ## Residuals:
 ##    Min     1Q Median     3Q    Max 
-## -6.232 -1.130  2.393  6.897 10.879 
+## -6.420 -1.211  3.013  6.609 10.185 
 ## 
 ## Coefficients:
 ##   Estimate Std. Error t value Pr(>|t|)    
-## x  16.8755     0.9194   18.35   <2e-16 ***
+## x  17.3823     0.9306   18.68   <2e-16 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## Residual standard error: 5.246 on 99 degrees of freedom
-## Multiple R-squared:  0.7729,	Adjusted R-squared:  0.7706 
-## F-statistic: 336.9 on 1 and 99 DF,  p-value: < 2.2e-16
+## Residual standard error: 5.19 on 99 degrees of freedom
+## Multiple R-squared:  0.7789,	Adjusted R-squared:  0.7767 
+## F-statistic: 348.9 on 1 and 99 DF,  p-value: < 2.2e-16
 ```
 
 
@@ -433,20 +433,20 @@ summary(fm)
 ## lm(formula = y ~ x + w, data = df)
 ## 
 ## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -2.42535 -0.57962 -0.00931  0.69064  3.00245 
+##     Min      1Q  Median      3Q     Max 
+## -1.9813 -0.7949 -0.1474  0.8356  2.3886 
 ## 
 ## Coefficients:
 ##             Estimate Std. Error t value Pr(>|t|)    
-## (Intercept)  11.0605     0.1912  57.861  < 2e-16 ***
-## x             2.2165     0.3045   7.279 8.82e-11 ***
-## wT           -1.2961     0.1911  -6.782 9.32e-10 ***
+## (Intercept)  10.8656     0.2257  48.137  < 2e-16 ***
+## x             2.2787     0.3771   6.043 2.80e-08 ***
+## wT           -1.0723     0.2111  -5.079 1.83e-06 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## Residual standard error: 0.9461 on 97 degrees of freedom
-## Multiple R-squared:  0.5042,	Adjusted R-squared:  0.4939 
-## F-statistic: 49.32 on 2 and 97 DF,  p-value: 1.674e-15
+## Residual standard error: 1.044 on 97 degrees of freedom
+## Multiple R-squared:  0.3601,	Adjusted R-squared:  0.3469 
+## F-statistic: 27.29 on 2 and 97 DF,  p-value: 3.962e-10
 ```
 
 R の特徴は因子もとくに変換することなくダミー変数として扱える.
@@ -467,20 +467,20 @@ summary(fm)
 ## lm(formula = y ~ x + I(x^2), data = df)
 ## 
 ## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -2.9440 -0.7144  0.0447  0.7169  3.2853 
+##      Min       1Q   Median       3Q      Max 
+## -2.58809 -0.82093 -0.06237  1.01137  2.63777 
 ## 
 ## Coefficients:
 ##             Estimate Std. Error t value Pr(>|t|)    
-## (Intercept)  10.8177     0.3096  34.936   <2e-16 ***
-## x             0.2038     1.5241   0.134    0.894    
-## I(x^2)        1.9911     1.4690   1.355    0.178    
+## (Intercept)  10.3984     0.3719  27.959   <2e-16 ***
+## x             2.5341     1.7242   1.470    0.145    
+## I(x^2)       -0.5356     1.6813  -0.319    0.751    
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## Residual standard error: 1.138 on 97 degrees of freedom
-## Multiple R-squared:  0.2826,	Adjusted R-squared:  0.2678 
-## F-statistic: 19.11 on 2 and 97 DF,  p-value: 1.009e-07
+## Residual standard error: 1.174 on 97 degrees of freedom
+## Multiple R-squared:  0.1907,	Adjusted R-squared:  0.174 
+## F-statistic: 11.43 on 2 and 97 DF,  p-value: 3.494e-05
 ```
 
 ### 交差項
@@ -499,21 +499,21 @@ summary(fm)
 ## lm(formula = y ~ x + w + x:w, data = df)
 ## 
 ## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -2.41629 -0.60122 -0.01315  0.66352  3.02517 
+##     Min      1Q  Median      3Q     Max 
+## -1.7991 -0.8306 -0.1003  0.8133  2.4855 
 ## 
 ## Coefficients:
 ##             Estimate Std. Error t value Pr(>|t|)    
-## (Intercept)  11.0813     0.2277  48.659  < 2e-16 ***
-## x             2.1725     0.4002   5.428 4.28e-07 ***
-## wT           -1.3465     0.3522  -3.823 0.000234 ***
-## x:wT          0.1059     0.6210   0.170 0.864985    
+## (Intercept)  11.1746     0.2875  38.868  < 2e-16 ***
+## x             1.6060     0.5425   2.960 0.003872 ** 
+## wT           -1.7085     0.4269  -4.002 0.000124 ***
+## x:wT          1.2780     0.7478   1.709 0.090688 .  
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## Residual standard error: 0.9509 on 96 degrees of freedom
-## Multiple R-squared:  0.5043,	Adjusted R-squared:  0.4888 
-## F-statistic: 32.56 on 3 and 96 DF,  p-value: 1.324e-14
+## Residual standard error: 1.033 on 96 degrees of freedom
+## Multiple R-squared:  0.3789,	Adjusted R-squared:  0.3595 
+## F-statistic: 19.53 on 3 and 96 DF,  p-value: 5.794e-10
 ```
 
 もしくは以下のように `*` を使って簡便的に表せる.
@@ -526,21 +526,21 @@ summary(fm)
 ## lm(formula = y ~ x * w, data = df)
 ## 
 ## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -2.41629 -0.60122 -0.01315  0.66352  3.02517 
+##     Min      1Q  Median      3Q     Max 
+## -1.7991 -0.8306 -0.1003  0.8133  2.4855 
 ## 
 ## Coefficients:
 ##             Estimate Std. Error t value Pr(>|t|)    
-## (Intercept)  11.0813     0.2277  48.659  < 2e-16 ***
-## x             2.1725     0.4002   5.428 4.28e-07 ***
-## wT           -1.3465     0.3522  -3.823 0.000234 ***
-## x:wT          0.1059     0.6210   0.170 0.864985    
+## (Intercept)  11.1746     0.2875  38.868  < 2e-16 ***
+## x             1.6060     0.5425   2.960 0.003872 ** 
+## wT           -1.7085     0.4269  -4.002 0.000124 ***
+## x:wT          1.2780     0.7478   1.709 0.090688 .  
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## Residual standard error: 0.9509 on 96 degrees of freedom
-## Multiple R-squared:  0.5043,	Adjusted R-squared:  0.4888 
-## F-statistic: 32.56 on 3 and 96 DF,  p-value: 1.324e-14
+## Residual standard error: 1.033 on 96 degrees of freedom
+## Multiple R-squared:  0.3789,	Adjusted R-squared:  0.3595 
+## F-statistic: 19.53 on 3 and 96 DF,  p-value: 5.794e-10
 ```
 
 ### エフ検定
@@ -574,14 +574,14 @@ q <- fm0$df-dof
 SSR0 <- deviance(fm0)
 SSR <- deviance(fm1)
 (F <- ((SSR0-SSR)/q)/(SSR/dof))
-## [1] 22.78453
+## [1] 14.61497
 ```
 
 この時のP値は以下である.
 
 ```r
 1-pf(F,df1=q,df2=dof)
-## [1] 7.989833e-09
+## [1] 2.877571e-06
 ```
 
 これらの手順はコマンド `anova` を用いれば簡単に実現できる.
@@ -592,9 +592,9 @@ anova(fm0,fm1)
 ## 
 ## Model 1: y ~ x
 ## Model 2: y ~ x * w
-##   Res.Df   RSS Df Sum of Sq      F   Pr(>F)    
-## 1     98 128.0                                 
-## 2     96  86.8  2    41.202 22.785 7.99e-09 ***
+##   Res.Df    RSS Df Sum of Sq      F    Pr(>F)    
+## 1     98 133.75                                  
+## 2     96 102.53  2    31.217 14.615 2.878e-06 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -607,9 +607,9 @@ anova(fm1,fm0)
 ## 
 ## Model 1: y ~ x * w
 ## Model 2: y ~ x
-##   Res.Df   RSS Df Sum of Sq      F   Pr(>F)    
-## 1     96  86.8                                 
-## 2     98 128.0 -2   -41.202 22.785 7.99e-09 ***
+##   Res.Df    RSS Df Sum of Sq      F    Pr(>F)    
+## 1     96 102.53                                  
+## 2     98 133.75 -2   -31.217 14.615 2.878e-06 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```

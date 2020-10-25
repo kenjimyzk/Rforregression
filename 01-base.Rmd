@@ -10,22 +10,22 @@ knitr::opts_chunk$set(echo = TRUE, collapse=TRUE)
 
 # 基本
 R の基本として以下の2つのサイトでオンラインで学習することをオススメする.
-  ただし英語である.
 
-http://tryr.codeschool.com/
+https://rstudio.cloud/learn/primers
 
-https://www.datacamp.com/courses/free-introduction-to-r
+ただし英語である.
+
 
 また以下の日本語版のチートシートが有用である.
 
 https://www.rstudio.com/wp-content/uploads/2016/10/r-cheat-sheet-ja.pdf
 
-R についての動画はまず以下を見ていただきたい.
+R についての動画はまず以下を見ていただきたいと言っていたが，現時点（20201025）では一部しか無料公開されていない．日本語で合計40分くらいで13分割して配信している.　
 
 http://dotinstall.com/lessons/basic_r
 
-日本語で合計40分くらいで13分割して配信している.
-他にも Youtube にいけば他にも多数動画がある.
+
+他にも Youtube にいけば，動画が多数ある.
 
 
 ## 電卓としての R

@@ -23,16 +23,17 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## R とは
 Rは統計・データ解析・統計グラフ作成のためのオープンソースソフトである.
+基本的に無料で使える．
+最近はその統合環境であるRStudioがデファクトスタンダードとなっている．
+さらにそれらは RStudio Cloud (https://rstudio.cloud/) としてクラウド環境でも使用できる．
+ここではまずローカル環境でR言語をいれる方法を解説する．
+第2節にRStudioのローカル環境での導入方法を述べる．
 
-## オンライン環境
-RStudio Cloud (https://rstudio.cloud/) にアクセスする.
+RStudio Cloud　については直接サイトに行き，そのヘルプを見て導入すれば良いだろう．
+日本語の解説としては以下が参考になるだろう．
 
-gmail のアカウントなどのアカウントがあれば簡単にアクセスできる.
+https://qiita.com/ZaKama/items/937e6d7fa25f6d3cb385
 
-
-
-
-## ローカル環境
 
 ## R のインストール
 Rをインストールするには
@@ -59,6 +60,11 @@ sudo apt-get install r-base r-base-dev
 `C:\Users\kenji` である. バックスラッシュ `\` は $\yen$ と読み替えて頂きたい. 
 最初は `.Rprofile` を特に作成しなくても大丈夫である.
 
+Windowsを利用して日本語のユーザー名を使用している場合に使えない．
+Rを実施するためのユーザー名を別に作成するか，アカウント名を変えた方がよいだろう．
+なお日本語ユーザー名のままファイルパスを英語化するには以下を参考されたい:
+
+https://clean-copy-of-onenote.hatenablog.com/entry/R_japanese_username
 
 ## R の使い方
 Windows だとコマンドプロンプトから R と入力して立ち上げるか, R のアイコンをダブルクリックすると, Rコンソールと言われる画面が現れる.
