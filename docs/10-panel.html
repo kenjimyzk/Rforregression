@@ -24,7 +24,7 @@
 <meta name="author" content="宮﨑憲治" />
 
 
-<meta name="date" content="2020-10-25" />
+<meta name="date" content="2020-11-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,6 +51,8 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -273,10 +275,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">10</span> パネル分析</h1>
 <div id="データ-1" class="section level2">
 <h2><span class="header-section-number">10.1</span> データ</h2>
-<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb322-1"><a href="10-panel.html#cb322-1"></a><span class="kw">library</span>(AER)</span>
-<span id="cb322-2"><a href="10-panel.html#cb322-2"></a><span class="kw">library</span>(plm)</span>
-<span id="cb322-3"><a href="10-panel.html#cb322-3"></a><span class="kw">data</span>(<span class="st">&quot;Grunfeld&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;plm&quot;</span>)</span>
-<span id="cb322-4"><a href="10-panel.html#cb322-4"></a><span class="kw">head</span>(Grunfeld)</span></code></pre></div>
+<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb321-1"><a href="10-panel.html#cb321-1"></a><span class="kw">library</span>(AER)</span>
+<span id="cb321-2"><a href="10-panel.html#cb321-2"></a><span class="kw">library</span>(plm)</span>
+<span id="cb321-3"><a href="10-panel.html#cb321-3"></a><span class="kw">data</span>(<span class="st">&quot;Grunfeld&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;plm&quot;</span>)</span>
+<span id="cb321-4"><a href="10-panel.html#cb321-4"></a><span class="kw">head</span>(Grunfeld)</span></code></pre></div>
 <pre><code>##   firm year   inv  value capital
 ## 1    1 1935 317.6 3078.5     2.8
 ## 2    1 1936 391.8 4661.7    52.6
@@ -284,8 +286,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 4    1 1938 257.7 2792.2   209.2
 ## 5    1 1939 330.8 4313.2   203.4
 ## 6    1 1940 461.2 4643.9   207.2</code></pre>
-<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="10-panel.html#cb324-1"></a>pdata &lt;-<span class="st"> </span><span class="kw">pdata.frame</span>(Grunfeld, <span class="dt">index =</span> <span class="kw">c</span>(<span class="st">&quot;firm&quot;</span>, <span class="st">&quot;year&quot;</span>))</span>
-<span id="cb324-2"><a href="10-panel.html#cb324-2"></a><span class="kw">pdim</span>(pdata)</span></code></pre></div>
+<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb323-1"><a href="10-panel.html#cb323-1"></a>pdata &lt;-<span class="st"> </span><span class="kw">pdata.frame</span>(Grunfeld, <span class="dt">index =</span> <span class="kw">c</span>(<span class="st">&quot;firm&quot;</span>, <span class="st">&quot;year&quot;</span>))</span>
+<span id="cb323-2"><a href="10-panel.html#cb323-2"></a><span class="kw">pdim</span>(pdata)</span></code></pre></div>
 <pre><code>## Balanced Panel: n = 10, T = 20, N = 200</code></pre>
 </div>
 <div id="プーリングols" class="section level2">
@@ -296,8 +298,8 @@ inv_{it} = \beta_0 + \beta_1 value_{it} + \beta_2 capital_{it} + u_{it}
 <p>誤差項 <span class="math inline">\(u_{it}\)</span> は <span class="math inline">\(i\)</span> についても <span class="math inline">\(t\)</span> についても独立同一分布と仮定する.
 さらに誤差項は説明変数と独立である.</p>
 <p>この推計は以下のようにする.</p>
-<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="10-panel.html#cb326-1"></a>gp &lt;-<span class="st"> </span><span class="kw">plm</span>(inv <span class="op">~</span><span class="st"> </span>value <span class="op">+</span><span class="st"> </span>capital, <span class="dt">data =</span> pdata, <span class="dt">model =</span> <span class="st">&quot;pooling&quot;</span>)</span>
-<span id="cb326-2"><a href="10-panel.html#cb326-2"></a><span class="kw">summary</span>(gp)</span></code></pre></div>
+<div class="sourceCode" id="cb325"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb325-1"><a href="10-panel.html#cb325-1"></a>gp &lt;-<span class="st"> </span><span class="kw">plm</span>(inv <span class="op">~</span><span class="st"> </span>value <span class="op">+</span><span class="st"> </span>capital, <span class="dt">data =</span> pdata, <span class="dt">model =</span> <span class="st">&quot;pooling&quot;</span>)</span>
+<span id="cb325-2"><a href="10-panel.html#cb325-2"></a><span class="kw">summary</span>(gp)</span></code></pre></div>
 <pre><code>## Pooling Model
 ## 
 ## Call:
@@ -323,7 +325,7 @@ inv_{it} = \beta_0 + \beta_1 value_{it} + \beta_2 capital_{it} + u_{it}
 ## Adj. R-Squared: 0.8105
 ## F-statistic: 426.576 on 2 and 197 DF, p-value: &lt; 2.22e-16</code></pre>
 <p>これは以下の回帰分析と同じである.</p>
-<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="10-panel.html#cb328-1"></a><span class="kw">summary</span>(<span class="kw">lm</span>(inv <span class="op">~</span><span class="st"> </span>value <span class="op">+</span><span class="st"> </span>capital, <span class="dt">data =</span> pdata))</span></code></pre></div>
+<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="10-panel.html#cb327-1"></a><span class="kw">summary</span>(<span class="kw">lm</span>(inv <span class="op">~</span><span class="st"> </span>value <span class="op">+</span><span class="st"> </span>capital, <span class="dt">data =</span> pdata))</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = inv ~ value + capital, data = pdata)
@@ -363,8 +365,8 @@ inv_{it}-\overline{inv}_{i} = \beta_1 (value_{it}-\overline{value}_{i}) + \beta_
 \]</span>
 このように変換して回帰分析すれば <span class="math inline">\(\alpha_i\)</span> は誤差項と相関があっても一致推定量である.</p>
 <p>この推計は以下のようにする.</p>
-<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="10-panel.html#cb330-1"></a>gi &lt;-<span class="st"> </span><span class="kw">plm</span>(inv <span class="op">~</span><span class="st"> </span>value <span class="op">+</span><span class="st"> </span>capital, <span class="dt">data =</span> pdata, <span class="dt">model =</span> <span class="st">&quot;within&quot;</span>)</span>
-<span id="cb330-2"><a href="10-panel.html#cb330-2"></a><span class="kw">summary</span>(gi)</span></code></pre></div>
+<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="10-panel.html#cb329-1"></a>gi &lt;-<span class="st"> </span><span class="kw">plm</span>(inv <span class="op">~</span><span class="st"> </span>value <span class="op">+</span><span class="st"> </span>capital, <span class="dt">data =</span> pdata, <span class="dt">model =</span> <span class="st">&quot;within&quot;</span>)</span>
+<span id="cb329-2"><a href="10-panel.html#cb329-2"></a><span class="kw">summary</span>(gi)</span></code></pre></div>
 <pre><code>## Oneway (individual) effect Within Model
 ## 
 ## Call:
@@ -389,13 +391,13 @@ inv_{it}-\overline{inv}_{i} = \beta_1 (value_{it}-\overline{value}_{i}) + \beta_
 ## Adj. R-Squared: 0.75311
 ## F-statistic: 309.014 on 2 and 188 DF, p-value: &lt; 2.22e-16</code></pre>
 <p>固定効果は以下のコマンドで確かめられる.</p>
-<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="10-panel.html#cb332-1"></a><span class="kw">fixef</span>(gi)</span></code></pre></div>
+<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb331-1"><a href="10-panel.html#cb331-1"></a><span class="kw">fixef</span>(gi)</span></code></pre></div>
 <pre><code>##         1         2         3         4         5         6         7         8 
 ##  -70.2967  101.9058 -235.5718  -27.8093 -114.6168  -23.1613  -66.5535  -57.5457 
 ##         9        10 
 ##  -87.2223   -6.5678</code></pre>
 <p>これは以下の回帰分析と同じである.</p>
-<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="10-panel.html#cb334-1"></a><span class="kw">summary</span>(<span class="kw">lm</span>(inv <span class="op">~</span><span class="st"> </span>value <span class="op">+</span><span class="st"> </span>capital<span class="op">+</span><span class="dv">0</span><span class="op">+</span><span class="kw">factor</span>(firm), <span class="dt">data =</span> pdata))</span></code></pre></div>
+<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="10-panel.html#cb333-1"></a><span class="kw">summary</span>(<span class="kw">lm</span>(inv <span class="op">~</span><span class="st"> </span>value <span class="op">+</span><span class="st"> </span>capital<span class="op">+</span><span class="dv">0</span><span class="op">+</span><span class="kw">factor</span>(firm), <span class="dt">data =</span> pdata))</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = inv ~ value + capital + 0 + factor(firm), data = pdata)
@@ -433,8 +435,8 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it}+ \gamma_t +\alpha_i + u_{it
 \]</span>
 この <span class="math inline">\(\gamma_t\)</span> は時間効果と呼ばれている.</p>
 <p>この推計は以下のようにする.</p>
-<div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb336-1"><a href="10-panel.html#cb336-1"></a>gi2 &lt;-<span class="st"> </span><span class="kw">plm</span>(inv <span class="op">~</span><span class="st"> </span>value <span class="op">+</span><span class="st"> </span>capital, <span class="dt">data =</span> pdata, <span class="dt">effect=</span><span class="st">&quot;twoways&quot;</span>,<span class="dt">model =</span> <span class="st">&quot;within&quot;</span>)</span>
-<span id="cb336-2"><a href="10-panel.html#cb336-2"></a><span class="kw">summary</span>(gi2)</span></code></pre></div>
+<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="10-panel.html#cb335-1"></a>gi2 &lt;-<span class="st"> </span><span class="kw">plm</span>(inv <span class="op">~</span><span class="st"> </span>value <span class="op">+</span><span class="st"> </span>capital, <span class="dt">data =</span> pdata, <span class="dt">effect=</span><span class="st">&quot;twoways&quot;</span>,<span class="dt">model =</span> <span class="st">&quot;within&quot;</span>)</span>
+<span id="cb335-2"><a href="10-panel.html#cb335-2"></a><span class="kw">summary</span>(gi2)</span></code></pre></div>
 <pre><code>## Twoways effects Within Model
 ## 
 ## Call:
@@ -460,12 +462,12 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it}+ \gamma_t +\alpha_i + u_{it
 ## Adj. R-Squared: 0.67047
 ## F-statistic: 217.442 on 2 and 169 DF, p-value: &lt; 2.22e-16</code></pre>
 <p>それぞれの効果は以下になる.</p>
-<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb338-1"><a href="10-panel.html#cb338-1"></a><span class="kw">fixef</span>(gi2, <span class="dt">effect =</span> <span class="st">&quot;individual&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="10-panel.html#cb337-1"></a><span class="kw">fixef</span>(gi2, <span class="dt">effect =</span> <span class="st">&quot;individual&quot;</span>)</span></code></pre></div>
 <pre><code>##         1         2         3         4         5         6         7         8 
 ## -134.2277   72.8265 -269.4585  -38.8739 -139.6663  -31.3391  -82.7611  -66.7372 
 ##         9        10 
 ## -104.0102   -7.3906</code></pre>
-<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb340-1"><a href="10-panel.html#cb340-1"></a><span class="kw">fixef</span>(gi2, <span class="dt">effect =</span> <span class="st">&quot;time&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb339-1"><a href="10-panel.html#cb339-1"></a><span class="kw">fixef</span>(gi2, <span class="dt">effect =</span> <span class="st">&quot;time&quot;</span>)</span></code></pre></div>
 <pre><code>##     1935     1936     1937     1938     1939     1940     1941     1942 
 ##  -32.836  -52.034  -73.526  -72.063 -102.307  -77.071  -51.641  -53.976 
 ##     1943     1944     1945     1946     1947     1948     1949     1950 
@@ -473,7 +475,7 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it}+ \gamma_t +\alpha_i + u_{it
 ##     1951     1952     1953     1954 
 ##  -95.317  -97.469 -100.554 -126.363</code></pre>
 <p>これは以下の回帰分析と同じである.</p>
-<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb342-1"><a href="10-panel.html#cb342-1"></a><span class="kw">lm</span>(inv <span class="op">~</span><span class="st"> </span>value <span class="op">+</span><span class="st"> </span>capital<span class="op">+</span><span class="dv">0</span><span class="op">+</span><span class="kw">factor</span>(firm)<span class="op">+</span><span class="kw">factor</span>(year), <span class="dt">data =</span> pdata)</span></code></pre></div>
+<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="10-panel.html#cb341-1"></a><span class="kw">lm</span>(inv <span class="op">~</span><span class="st"> </span>value <span class="op">+</span><span class="st"> </span>capital<span class="op">+</span><span class="dv">0</span><span class="op">+</span><span class="kw">factor</span>(firm)<span class="op">+</span><span class="kw">factor</span>(year), <span class="dt">data =</span> pdata)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = inv ~ value + capital + 0 + factor(firm) + factor(year), 
@@ -498,7 +500,7 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it}+ \gamma_t +\alpha_i + u_{it
 ##         -64.6323          -67.7180          -93.5262</code></pre>
 <p>決定係数が大きく異なっていることに注意されたい.</p>
 <p>時間効果が有効かどうかは以下の検定を実施する.</p>
-<div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb344-1"><a href="10-panel.html#cb344-1"></a><span class="kw">pFtest</span>(gi2, gi)</span></code></pre></div>
+<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb343-1"><a href="10-panel.html#cb343-1"></a><span class="kw">pFtest</span>(gi2, gi)</span></code></pre></div>
 <pre><code>## 
 ##  F test for twoways effects
 ## 
@@ -509,7 +511,7 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it}+ \gamma_t +\alpha_i + u_{it
 <div id="固定効果vsプーリングols" class="section level3">
 <h3><span class="header-section-number">10.3.2</span> 固定効果VSプーリングOLS</h3>
 <p>帰無仮説が固定効果, 対立仮説が固定効果モデルの検定は以下のコマンドを実行すればよい.</p>
-<div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb346-1"><a href="10-panel.html#cb346-1"></a><span class="kw">pFtest</span>(gi,gp)</span></code></pre></div>
+<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb345-1"><a href="10-panel.html#cb345-1"></a><span class="kw">pFtest</span>(gi,gp)</span></code></pre></div>
 <pre><code>## 
 ##  F test for individual effects
 ## 
@@ -518,7 +520,7 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it}+ \gamma_t +\alpha_i + u_{it
 ## alternative hypothesis: significant effects</code></pre>
 <p>時間効果をもつ固定効果モデルの場合は, 帰無仮説仮説に応じて変化する.
 もし帰無仮説が時間効果を持たないプーリングOLSモデルなら, 以下を実行する.</p>
-<div class="sourceCode" id="cb348"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb348-1"><a href="10-panel.html#cb348-1"></a><span class="kw">pFtest</span>(gi2, gp)</span></code></pre></div>
+<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="10-panel.html#cb347-1"></a><span class="kw">pFtest</span>(gi2, gp)</span></code></pre></div>
 <pre><code>## 
 ##  F test for twoways effects
 ## 
@@ -527,8 +529,8 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it}+ \gamma_t +\alpha_i + u_{it
 ## alternative hypothesis: significant effects</code></pre>
 <p>もし帰無仮説が時間効果をもつモデルなら, 以下を実行する.
 次のようにする.</p>
-<div class="sourceCode" id="cb350"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb350-1"><a href="10-panel.html#cb350-1"></a>gpt &lt;-<span class="st"> </span><span class="kw">update</span>(gp, . <span class="op">~</span><span class="st"> </span>. <span class="op">+</span><span class="kw">factor</span>(year))</span>
-<span id="cb350-2"><a href="10-panel.html#cb350-2"></a><span class="kw">pFtest</span>(gi2,gpt)</span></code></pre></div>
+<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb349-1"><a href="10-panel.html#cb349-1"></a>gpt &lt;-<span class="st"> </span><span class="kw">update</span>(gp, . <span class="op">~</span><span class="st"> </span>. <span class="op">+</span><span class="kw">factor</span>(year))</span>
+<span id="cb349-2"><a href="10-panel.html#cb349-2"></a><span class="kw">pFtest</span>(gi2,gpt)</span></code></pre></div>
 <pre><code>## 
 ##  F test for twoways effects
 ## 
@@ -552,8 +554,8 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}
 \]</span></p>
 <p>このように変換して回帰分析すれば <span class="math inline">\(\alpha_i\)</span> は誤差項と相関があっても一致推定量である.</p>
 <p>この推計は以下のようにする.</p>
-<div class="sourceCode" id="cb352"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb352-1"><a href="10-panel.html#cb352-1"></a>gf &lt;-<span class="st"> </span><span class="kw">plm</span>(inv <span class="op">~</span><span class="st"> </span>value <span class="op">+</span><span class="st"> </span>capital, <span class="dt">data =</span> pdata, <span class="dt">model =</span> <span class="st">&quot;fd&quot;</span>)</span>
-<span id="cb352-2"><a href="10-panel.html#cb352-2"></a><span class="kw">summary</span>(gf)</span></code></pre></div>
+<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb351-1"><a href="10-panel.html#cb351-1"></a>gf &lt;-<span class="st"> </span><span class="kw">plm</span>(inv <span class="op">~</span><span class="st"> </span>value <span class="op">+</span><span class="st"> </span>capital, <span class="dt">data =</span> pdata, <span class="dt">model =</span> <span class="st">&quot;fd&quot;</span>)</span>
+<span id="cb351-2"><a href="10-panel.html#cb351-2"></a><span class="kw">summary</span>(gf)</span></code></pre></div>
 <pre><code>## Oneway (individual) effect First-Difference Model
 ## 
 ## Call:
@@ -580,7 +582,7 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}
 ## Adj. R-Squared: 0.40256
 ## F-statistic: 64.6736 on 2 and 187 DF, p-value: &lt; 2.22e-16</code></pre>
 <p>これは以下の回帰分析と同じである.</p>
-<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb354-1"><a href="10-panel.html#cb354-1"></a><span class="kw">plm</span>(<span class="kw">diff</span>(inv) <span class="op">~</span><span class="st"> </span><span class="kw">diff</span>(value) <span class="op">+</span><span class="st"> </span><span class="kw">diff</span>(capital) <span class="op">+</span><span class="st"> </span><span class="dv">0</span>, <span class="dt">data =</span> pdata)</span></code></pre></div>
+<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb353-1"><a href="10-panel.html#cb353-1"></a><span class="kw">plm</span>(<span class="kw">diff</span>(inv) <span class="op">~</span><span class="st"> </span><span class="kw">diff</span>(value) <span class="op">+</span><span class="st"> </span><span class="kw">diff</span>(capital) <span class="op">+</span><span class="st"> </span><span class="dv">0</span>, <span class="dt">data =</span> pdata)</span></code></pre></div>
 <pre><code>## 
 ## Model Formula: diff(inv) ~ diff(value) + diff(capital) + 0
 ## 
@@ -595,8 +597,8 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it}+ \gamma_t +\alpha_i + u_{it
 \]</span>
 この <span class="math inline">\(\gamma_t\)</span> は時間効果と呼ばれている.</p>
 <p>この推計は以下のようになる.</p>
-<div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb356-1"><a href="10-panel.html#cb356-1"></a>gft &lt;-<span class="st"> </span><span class="kw">plm</span>(inv <span class="op">~</span><span class="st"> </span>value <span class="op">+</span><span class="st"> </span>capital<span class="op">+</span><span class="kw">factor</span>(year), <span class="dt">data =</span> pdata, <span class="dt">model =</span> <span class="st">&quot;fd&quot;</span>)</span>
-<span id="cb356-2"><a href="10-panel.html#cb356-2"></a><span class="kw">summary</span>(gft)</span></code></pre></div>
+<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb355-1"><a href="10-panel.html#cb355-1"></a>gft &lt;-<span class="st"> </span><span class="kw">plm</span>(inv <span class="op">~</span><span class="st"> </span>value <span class="op">+</span><span class="st"> </span>capital<span class="op">+</span><span class="kw">factor</span>(year), <span class="dt">data =</span> pdata, <span class="dt">model =</span> <span class="st">&quot;fd&quot;</span>)</span>
+<span id="cb355-2"><a href="10-panel.html#cb355-2"></a><span class="kw">summary</span>(gft)</span></code></pre></div>
 <pre><code>## Oneway (individual) effect First-Difference Model
 ## 
 ## Call:
@@ -642,7 +644,7 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it}+ \gamma_t +\alpha_i + u_{it
 ## Adj. R-Squared: 0.4393
 ## F-statistic: 8.40405 on 20 and 169 DF, p-value: &lt; 2.22e-16</code></pre>
 <p>これが時間効果が有意であるかどうかは, 以下を実施すればよい.</p>
-<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb358-1"><a href="10-panel.html#cb358-1"></a><span class="kw">pFtest</span>(gft,gf)</span></code></pre></div>
+<div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb357-1"><a href="10-panel.html#cb357-1"></a><span class="kw">pFtest</span>(gft,gf)</span></code></pre></div>
 <pre><code>## 
 ##  F test for individual effects
 ## 
@@ -675,8 +677,8 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}
 このため固定効果モデルと違い, 欠落変数バイアスを除去することができない.
 しかしながら, <span class="math inline">\(i\)</span> についてのダミー変数を付け加えることができる.</p>
 <p>変量効果モデルは次のコマンドで実施する.</p>
-<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb360-1"><a href="10-panel.html#cb360-1"></a>gr &lt;-<span class="st"> </span><span class="kw">plm</span>(inv <span class="op">~</span><span class="st"> </span>value <span class="op">+</span><span class="st"> </span>capital, <span class="dt">data =</span> pdata, <span class="dt">model =</span> <span class="st">&quot;random&quot;</span>)</span>
-<span id="cb360-2"><a href="10-panel.html#cb360-2"></a><span class="kw">summary</span>(gr)</span></code></pre></div>
+<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb359-1"><a href="10-panel.html#cb359-1"></a>gr &lt;-<span class="st"> </span><span class="kw">plm</span>(inv <span class="op">~</span><span class="st"> </span>value <span class="op">+</span><span class="st"> </span>capital, <span class="dt">data =</span> pdata, <span class="dt">model =</span> <span class="st">&quot;random&quot;</span>)</span>
+<span id="cb359-2"><a href="10-panel.html#cb359-2"></a><span class="kw">summary</span>(gr)</span></code></pre></div>
 <pre><code>## Oneway (individual) effect Random Effect Model 
 ##    (Swamy-Arora&#39;s transformation)
 ## 
@@ -709,7 +711,7 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}
 ## Adj. R-Squared: 0.76716
 ## Chisq: 657.674 on 2 DF, p-value: &lt; 2.22e-16</code></pre>
 <p>変量効果は以下のコマンドで確かめられる.</p>
-<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb362-1"><a href="10-panel.html#cb362-1"></a><span class="kw">ranef</span>(gr)</span></code></pre></div>
+<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="10-panel.html#cb361-1"></a><span class="kw">ranef</span>(gr)</span></code></pre></div>
 <pre><code>##            1            2            3            4            5            6 
 ##   -9.5242955  157.8910235 -172.8958044   29.9119801  -54.6790089   34.3461316 
 ##            7            8            9           10 
@@ -718,8 +720,8 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}
 <h3><span class="header-section-number">10.5.1</span> 時間効果</h3>
 <p>変量効果モデルの時間効果は二種類ある.
 時間効果が確率変数である場合は次のコマンドを実施する.</p>
-<div class="sourceCode" id="cb364"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb364-1"><a href="10-panel.html#cb364-1"></a>gr2 &lt;-<span class="st"> </span><span class="kw">plm</span>(inv <span class="op">~</span><span class="st"> </span>value <span class="op">+</span><span class="st"> </span>capital, <span class="dt">data =</span> pdata, <span class="dt">effect=</span> <span class="st">&quot;twoways&quot;</span>,<span class="dt">model =</span> <span class="st">&quot;random&quot;</span>)</span>
-<span id="cb364-2"><a href="10-panel.html#cb364-2"></a><span class="kw">summary</span>(gr2)</span></code></pre></div>
+<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb363-1"><a href="10-panel.html#cb363-1"></a>gr2 &lt;-<span class="st"> </span><span class="kw">plm</span>(inv <span class="op">~</span><span class="st"> </span>value <span class="op">+</span><span class="st"> </span>capital, <span class="dt">data =</span> pdata, <span class="dt">effect=</span> <span class="st">&quot;twoways&quot;</span>,<span class="dt">model =</span> <span class="st">&quot;random&quot;</span>)</span>
+<span id="cb363-2"><a href="10-panel.html#cb363-2"></a><span class="kw">summary</span>(gr2)</span></code></pre></div>
 <pre><code>## Twoways effects Random Effect Model 
 ##    (Swamy-Arora&#39;s transformation)
 ## 
@@ -754,8 +756,8 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}
 ## Adj. R-Squared: 0.76706
 ## Chisq: 657.295 on 2 DF, p-value: &lt; 2.22e-16</code></pre>
 <p>時間効果が固定されている場合は次のコマンドを実施する.</p>
-<div class="sourceCode" id="cb366"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb366-1"><a href="10-panel.html#cb366-1"></a>grt &lt;-<span class="st"> </span><span class="kw">update</span>(gr, .<span class="op">~</span>. <span class="op">+</span><span class="st"> </span><span class="kw">factor</span>(year))</span>
-<span id="cb366-2"><a href="10-panel.html#cb366-2"></a><span class="kw">summary</span>(grt)</span></code></pre></div>
+<div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb365-1"><a href="10-panel.html#cb365-1"></a>grt &lt;-<span class="st"> </span><span class="kw">update</span>(gr, .<span class="op">~</span>. <span class="op">+</span><span class="st"> </span><span class="kw">factor</span>(year))</span>
+<span id="cb365-2"><a href="10-panel.html#cb365-2"></a><span class="kw">summary</span>(grt)</span></code></pre></div>
 <pre><code>## Oneway (individual) effect Random Effect Model 
 ##    (Swamy-Arora&#39;s transformation)
 ## 
@@ -808,7 +810,7 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}
 ## Adj. R-Squared: 0.77428
 ## Chisq: 703.627 on 21 DF, p-value: &lt; 2.22e-16</code></pre>
 <p>固定された時間効果が有意かどうかは次の検定を実施すれば良い.</p>
-<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb368-1"><a href="10-panel.html#cb368-1"></a><span class="kw">pFtest</span>(grt,gr)</span></code></pre></div>
+<div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb367-1"><a href="10-panel.html#cb367-1"></a><span class="kw">pFtest</span>(grt,gr)</span></code></pre></div>
 <pre><code>## 
 ##  F test for individual effects
 ## 
@@ -820,7 +822,7 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}
 <h3><span class="header-section-number">10.5.2</span> ハウスマン検定</h3>
 <p>帰無仮説が変量効果モデル, 対立仮説が固定効果モデルの検定はハウスマン検定を実施する.
 ハウスマン検定は以下で実施する.</p>
-<div class="sourceCode" id="cb370"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb370-1"><a href="10-panel.html#cb370-1"></a><span class="kw">phtest</span>(gi,gr)</span></code></pre></div>
+<div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb369-1"><a href="10-panel.html#cb369-1"></a><span class="kw">phtest</span>(gi,gr)</span></code></pre></div>
 <pre><code>## 
 ##  Hausman Test
 ## 
@@ -828,7 +830,7 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}
 ## chisq = 2.3304, df = 2, p-value = 0.3119
 ## alternative hypothesis: one model is inconsistent</code></pre>
 <p>時間効果が確率変数である変量モデルの場合以下を実行すればよい.</p>
-<div class="sourceCode" id="cb372"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb372-1"><a href="10-panel.html#cb372-1"></a><span class="kw">phtest</span>(gi2,gr2)</span></code></pre></div>
+<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb371-1"><a href="10-panel.html#cb371-1"></a><span class="kw">phtest</span>(gi2,gr2)</span></code></pre></div>
 <pre><code>## 
 ##  Hausman Test
 ## 
@@ -836,7 +838,7 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}
 ## chisq = 13.46, df = 2, p-value = 0.001194
 ## alternative hypothesis: one model is inconsistent</code></pre>
 <p>時間効果が確率変数でない変量モデルの場合以下を実行すればよい.</p>
-<div class="sourceCode" id="cb374"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb374-1"><a href="10-panel.html#cb374-1"></a><span class="kw">phtest</span>(gi2,grt)</span></code></pre></div>
+<div class="sourceCode" id="cb373"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb373-1"><a href="10-panel.html#cb373-1"></a><span class="kw">phtest</span>(gi2,grt)</span></code></pre></div>
 <pre><code>## 
 ##  Hausman Test
 ## 
@@ -850,7 +852,7 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}
 <h2><span class="header-section-number">10.6</span> クラスターロバスト分散</h2>
 <p>固定効果モデルにおいて, 分散不均一が疑われる場合, ではクラスターロバスト分散を用いる.
 時間効果がない場合は以下の様にする.</p>
-<div class="sourceCode" id="cb376"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb376-1"><a href="10-panel.html#cb376-1"></a><span class="kw">coeftest</span>(gi,<span class="dt">vcov=</span><span class="kw">vcovHC</span>(gi,<span class="dt">type=</span><span class="st">&quot;sss&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb375"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb375-1"><a href="10-panel.html#cb375-1"></a><span class="kw">coeftest</span>(gi,<span class="dt">vcov=</span><span class="kw">vcovHC</span>(gi,<span class="dt">type=</span><span class="st">&quot;sss&quot;</span>))</span></code></pre></div>
 <pre><code>## 
 ## t test of coefficients:
 ## 
@@ -861,7 +863,7 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>分散不均一が疑われる場合, クラスターロバスト分散を用いる.
 時間効果がある場合は以下の様にする.</p>
-<div class="sourceCode" id="cb378"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb378-1"><a href="10-panel.html#cb378-1"></a><span class="kw">coeftest</span>(gi2,<span class="dt">vcov=</span><span class="kw">vcovHC</span>(gi2,<span class="dt">type=</span><span class="st">&quot;sss&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb377"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb377-1"><a href="10-panel.html#cb377-1"></a><span class="kw">coeftest</span>(gi2,<span class="dt">vcov=</span><span class="kw">vcovHC</span>(gi2,<span class="dt">type=</span><span class="st">&quot;sss&quot;</span>))</span></code></pre></div>
 <pre><code>## 
 ## t test of coefficients:
 ## 
@@ -871,8 +873,8 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>STATA の計算結果に合わせるには次のように実施する必要がある.</p>
-<div class="sourceCode" id="cb380"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb380-1"><a href="10-panel.html#cb380-1"></a>git &lt;-<span class="st"> </span><span class="kw">update</span>(gi, .<span class="op">~</span>. <span class="op">+</span><span class="st"> </span><span class="kw">factor</span>(year))</span>
-<span id="cb380-2"><a href="10-panel.html#cb380-2"></a><span class="kw">coeftest</span>(git,<span class="dt">vcov=</span><span class="kw">vcovHC</span>(git,<span class="dt">type=</span><span class="st">&quot;sss&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb379"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb379-1"><a href="10-panel.html#cb379-1"></a>git &lt;-<span class="st"> </span><span class="kw">update</span>(gi, .<span class="op">~</span>. <span class="op">+</span><span class="st"> </span><span class="kw">factor</span>(year))</span>
+<span id="cb379-2"><a href="10-panel.html#cb379-2"></a><span class="kw">coeftest</span>(git,<span class="dt">vcov=</span><span class="kw">vcovHC</span>(git,<span class="dt">type=</span><span class="st">&quot;sss&quot;</span>))</span></code></pre></div>
 <pre><code>## 
 ## t test of coefficients:
 ## 
@@ -906,14 +908,14 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}
 <p>固定効果モデルにおいて,
 分散不均一かどうかを検定するには,
 時間効果がない場合, 以下のようにすればよい.</p>
-<div class="sourceCode" id="cb382"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb382-1"><a href="10-panel.html#cb382-1"></a><span class="kw">bptest</span>(inv <span class="op">~</span><span class="st"> </span>value <span class="op">+</span><span class="st"> </span>capital <span class="op">+</span><span class="st"> </span><span class="kw">factor</span>(firm), <span class="dt">data=</span>pdata)</span></code></pre></div>
+<div class="sourceCode" id="cb381"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb381-1"><a href="10-panel.html#cb381-1"></a><span class="kw">bptest</span>(inv <span class="op">~</span><span class="st"> </span>value <span class="op">+</span><span class="st"> </span>capital <span class="op">+</span><span class="st"> </span><span class="kw">factor</span>(firm), <span class="dt">data=</span>pdata)</span></code></pre></div>
 <pre><code>## 
 ##  studentized Breusch-Pagan test
 ## 
 ## data:  inv ~ value + capital + factor(firm)
 ## BP = 85.836, df = 11, p-value = 1.086e-13</code></pre>
 <p>時間効果がある場合, 以下のようにすればよい.</p>
-<div class="sourceCode" id="cb384"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb384-1"><a href="10-panel.html#cb384-1"></a><span class="kw">bptest</span>(inv <span class="op">~</span><span class="st"> </span>value <span class="op">+</span><span class="st"> </span>capital <span class="op">+</span><span class="st"> </span><span class="kw">factor</span>(firm) <span class="op">+</span><span class="st"> </span><span class="kw">factor</span>(year),<span class="dt">data=</span>pdata)</span></code></pre></div>
+<div class="sourceCode" id="cb383"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb383-1"><a href="10-panel.html#cb383-1"></a><span class="kw">bptest</span>(inv <span class="op">~</span><span class="st"> </span>value <span class="op">+</span><span class="st"> </span>capital <span class="op">+</span><span class="st"> </span><span class="kw">factor</span>(firm) <span class="op">+</span><span class="st"> </span><span class="kw">factor</span>(year),<span class="dt">data=</span>pdata)</span></code></pre></div>
 <pre><code>## 
 ##  studentized Breusch-Pagan test
 ## 

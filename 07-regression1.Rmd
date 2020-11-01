@@ -242,11 +242,6 @@ w<-sample(c("H","T"),N,replace=TRUE)
 y <- 10 + 2*x + ifelse(w=="H",1,0) + rnorm(N)
 df <- data.frame(w,x,y)
 ```
-作図すると以下である.
-```{r}
-plot(y~x)
-```
-
 
 説明変数を加えたいときには `+` と変数名を使うことができる. 
 ```{r}
@@ -332,5 +327,4 @@ anova(fm0,fm1)
 ```{r}
 anova(fm1,fm0)
 ```
-
 

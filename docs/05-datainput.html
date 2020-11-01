@@ -24,7 +24,7 @@
 <meta name="author" content="宮﨑憲治" />
 
 
-<meta name="date" content="2020-10-25" />
+<meta name="date" content="2020-11-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,6 +51,8 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -284,14 +286,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="05-datainput.html#cb125-1"></a>df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>), <span class="dt">y =</span> letters[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>])</span>
 <span id="cb125-2"><a href="05-datainput.html#cb125-2"></a><span class="kw">str</span>(df)</span>
 <span id="cb125-3"><a href="05-datainput.html#cb125-3"></a><span class="co">## &#39;data.frame&#39;:    10 obs. of  2 variables:</span></span>
-<span id="cb125-4"><a href="05-datainput.html#cb125-4"></a><span class="co">##  $ x: num  0.74 0.283 1.322 -0.52 0.195 ...</span></span>
+<span id="cb125-4"><a href="05-datainput.html#cb125-4"></a><span class="co">##  $ x: num  0.76854 -0.065585 0.230681 -1.32331 0.000596 ...</span></span>
 <span id="cb125-5"><a href="05-datainput.html#cb125-5"></a><span class="co">##  $ y: chr  &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; ...</span></span></code></pre></div>
 <p>ただデータフレイムは自動的に文字列が因子ベクトルに変換されてしまう.
 これを避けるには次のように <code>stringsAsFactors= FALSE</code> をつける.</p>
 <div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="05-datainput.html#cb126-1"></a>df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>), <span class="dt">y =</span> letters[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>], <span class="dt">stringsAsFactors=</span> <span class="ot">FALSE</span>)</span>
 <span id="cb126-2"><a href="05-datainput.html#cb126-2"></a><span class="kw">str</span>(df)</span>
 <span id="cb126-3"><a href="05-datainput.html#cb126-3"></a><span class="co">## &#39;data.frame&#39;:    10 obs. of  2 variables:</span></span>
-<span id="cb126-4"><a href="05-datainput.html#cb126-4"></a><span class="co">##  $ x: num  -0.76512 0.00483 -0.09797 -0.67961 -1.04315 ...</span></span>
+<span id="cb126-4"><a href="05-datainput.html#cb126-4"></a><span class="co">##  $ x: num  -0.628 -0.255 0.763 -1.957 -1.762 ...</span></span>
 <span id="cb126-5"><a href="05-datainput.html#cb126-5"></a><span class="co">##  $ y: chr  &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; ...</span></span></code></pre></div>
 <p>もしくはライブラリ <code>dplyr</code> にある <code>data_frame</code> を用いれば, そのようなオプションを付けることなくデータフレイムを拡張したクラスを作ることができる.</p>
 <div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="05-datainput.html#cb127-1"></a><span class="kw">library</span>(dplyr)</span>
@@ -302,7 +304,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb127-6"><a href="05-datainput.html#cb127-6"></a><span class="co">## Call `lifecycle::last_warnings()` to see where this warning was generated.</span></span>
 <span id="cb127-7"><a href="05-datainput.html#cb127-7"></a><span class="kw">str</span>(df)</span>
 <span id="cb127-8"><a href="05-datainput.html#cb127-8"></a><span class="co">## tibble [10 × 2] (S3: tbl_df/tbl/data.frame)</span></span>
-<span id="cb127-9"><a href="05-datainput.html#cb127-9"></a><span class="co">##  $ x: num [1:10] 0.32 0.884 -0.822 0.328 0.378 ...</span></span>
+<span id="cb127-9"><a href="05-datainput.html#cb127-9"></a><span class="co">##  $ x: num [1:10] -0.0965 0.9521 0.0668 0.6301 -0.3967 ...</span></span>
 <span id="cb127-10"><a href="05-datainput.html#cb127-10"></a><span class="co">##  $ y: chr [1:10] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; ...</span></span></code></pre></div>
 <p>以降, それぞれのファイル形式ごとにファイル入力について説明する.
 いずれのファイル形式にせよ, 外部ファイルから入力するさいには

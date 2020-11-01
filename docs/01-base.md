@@ -18,11 +18,10 @@ https://rstudio.cloud/learn/primers
 
 https://www.rstudio.com/wp-content/uploads/2016/10/r-cheat-sheet-ja.pdf
 
-R についての動画はまず以下を見ていただきたいと言っていたが，現時点（20201025）では一部しか無料公開されていない．
+R についての動画はまず以下を見ていただきたいと言っていたが，現時点（20201025）では一部しか無料公開されていない．日本語で合計40分くらいで13分割して配信している.　
 
 http://dotinstall.com/lessons/basic_r
 
-日本語で合計40分くらいで13分割して配信している.　
 
 他にも Youtube にいけば，動画が多数ある.
 
@@ -201,7 +200,7 @@ x
 アルファベットについて大文字と小文字が区別されることに注意されたい.
 また日本語も変数に使えるが, 機種によって文字コードが違うため, 避けて使うほうが望ましい.
 
-扱える変数は `if` などいくつか^[`break, else, FALSE, for, function, if in Inf, NA, NaN, next NULL, repeat, TRUE, while` など]はエラーになるが,
+扱える変数は `if` などいくつか^[`break, else, FALSE, for, function, if, in, Inf, NA, NaN, next NULL, repeat, TRUE, while` など]はエラーになるが,
  `pi` のようにすでに組み込まれている変数も変更して指定することができる.
 
 ```r

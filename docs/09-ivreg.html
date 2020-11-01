@@ -24,7 +24,7 @@
 <meta name="author" content="宮﨑憲治" />
 
 
-<meta name="date" content="2020-10-25" />
+<meta name="date" content="2020-11-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,6 +51,8 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -273,10 +275,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">9</span> 操作変数法</h1>
 <div id="データ" class="section level2">
 <h2><span class="header-section-number">9.1</span> データ</h2>
-<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="09-ivreg.html#cb287-1"></a><span class="kw">library</span>(AER)</span>
-<span id="cb287-2"><a href="09-ivreg.html#cb287-2"></a><span class="kw">library</span>(wooldridge)</span>
-<span id="cb287-3"><a href="09-ivreg.html#cb287-3"></a><span class="kw">data</span>(<span class="st">&quot;mroz&quot;</span>, <span class="dt">package=</span><span class="st">&quot;wooldridge&quot;</span>)</span>
-<span id="cb287-4"><a href="09-ivreg.html#cb287-4"></a>df &lt;-<span class="st"> </span><span class="kw">subset</span>(mroz, inlf<span class="op">==</span><span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="09-ivreg.html#cb286-1"></a><span class="kw">library</span>(AER)</span>
+<span id="cb286-2"><a href="09-ivreg.html#cb286-2"></a><span class="kw">library</span>(wooldridge)</span>
+<span id="cb286-3"><a href="09-ivreg.html#cb286-3"></a><span class="kw">data</span>(<span class="st">&quot;mroz&quot;</span>, <span class="dt">package=</span><span class="st">&quot;wooldridge&quot;</span>)</span>
+<span id="cb286-4"><a href="09-ivreg.html#cb286-4"></a>df &lt;-<span class="st"> </span><span class="kw">subset</span>(mroz, inlf<span class="op">==</span><span class="dv">1</span>)</span></code></pre></div>
 </div>
 <div id="操作変数" class="section level2">
 <h2><span class="header-section-number">9.2</span> 操作変数</h2>
@@ -298,12 +300,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ここで被説明変数は <code>log(wage)</code>,
 内生変数は <code>educ</code>,
 操作変数は <code>fatheduc</code> である.</p>
-<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="09-ivreg.html#cb288-1"></a>fm  &lt;-<span class="st"> </span><span class="kw">ivreg</span>(<span class="kw">log</span>(wage)<span class="op">~</span>educ<span class="op">|</span>fatheduc, <span class="dt">data=</span>df)</span>
-<span id="cb288-2"><a href="09-ivreg.html#cb288-2"></a><span class="kw">coef</span>(fm)</span></code></pre></div>
+<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="09-ivreg.html#cb287-1"></a>fm  &lt;-<span class="st"> </span><span class="kw">ivreg</span>(<span class="kw">log</span>(wage)<span class="op">~</span>educ<span class="op">|</span>fatheduc, <span class="dt">data=</span>df)</span>
+<span id="cb287-2"><a href="09-ivreg.html#cb287-2"></a><span class="kw">coef</span>(fm)</span></code></pre></div>
 <pre><code>## (Intercept)        educ 
 ##  0.44110339  0.05917348</code></pre>
 <p>傾きの推定値は以下でも実行可能である.</p>
-<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb290-1"><a href="09-ivreg.html#cb290-1"></a><span class="kw">with</span>(df, <span class="kw">cov</span>(<span class="kw">log</span>(wage),fatheduc)<span class="op">/</span><span class="kw">cov</span>(educ,fatheduc))</span></code></pre></div>
+<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="09-ivreg.html#cb289-1"></a><span class="kw">with</span>(df, <span class="kw">cov</span>(<span class="kw">log</span>(wage),fatheduc)<span class="op">/</span><span class="kw">cov</span>(educ,fatheduc))</span></code></pre></div>
 <pre><code>## [1] 0.05917348</code></pre>
 </div>
 <div id="段階最小二乗法" class="section level2">
@@ -326,10 +328,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ここで被説明変数は <code>log(wage)</code>,
 内生変数は <code>educ</code>, 外生変数は <code>expr</code>, <code>I(expr^2)</code>,
 操作変数は <code>motheduc</code>, <code>fatheduc</code> である.</p>
-<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="09-ivreg.html#cb292-1"></a>fm  &lt;-<span class="st"> </span><span class="kw">ivreg</span>(<span class="kw">log</span>(wage)<span class="op">~</span>educ<span class="op">+</span>exper<span class="op">+</span><span class="kw">I</span>(exper<span class="op">^</span><span class="dv">2</span>)<span class="op">|</span></span>
-<span id="cb292-2"><a href="09-ivreg.html#cb292-2"></a><span class="st">            </span>exper<span class="op">+</span><span class="kw">I</span>(exper<span class="op">^</span><span class="dv">2</span>)<span class="op">+</span>motheduc<span class="op">+</span>fatheduc,</span>
-<span id="cb292-3"><a href="09-ivreg.html#cb292-3"></a>            <span class="dt">data=</span>df)</span>
-<span id="cb292-4"><a href="09-ivreg.html#cb292-4"></a><span class="kw">summary</span>(fm)</span></code></pre></div>
+<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="09-ivreg.html#cb291-1"></a>fm  &lt;-<span class="st"> </span><span class="kw">ivreg</span>(<span class="kw">log</span>(wage)<span class="op">~</span>educ<span class="op">+</span>exper<span class="op">+</span><span class="kw">I</span>(exper<span class="op">^</span><span class="dv">2</span>)<span class="op">|</span></span>
+<span id="cb291-2"><a href="09-ivreg.html#cb291-2"></a><span class="st">            </span>exper<span class="op">+</span><span class="kw">I</span>(exper<span class="op">^</span><span class="dv">2</span>)<span class="op">+</span>motheduc<span class="op">+</span>fatheduc,</span>
+<span id="cb291-3"><a href="09-ivreg.html#cb291-3"></a>            <span class="dt">data=</span>df)</span>
+<span id="cb291-4"><a href="09-ivreg.html#cb291-4"></a><span class="kw">summary</span>(fm)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## ivreg(formula = log(wage) ~ educ + exper + I(exper^2) | exper + 
@@ -355,9 +357,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ただし標準誤差の値が異なっている.
 なぜなら残差は内生変数および外生変数から算出させる必要があるが,
 以下のやりかただと内生変数の予測値および外生変数から算出するためである.</p>
-<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="09-ivreg.html#cb294-1"></a>ols1 &lt;-<span class="st"> </span><span class="kw">lm</span>(educ<span class="op">~</span>exper<span class="op">+</span><span class="kw">I</span>(exper<span class="op">^</span><span class="dv">2</span>)<span class="op">+</span>motheduc<span class="op">+</span>fatheduc,  <span class="dt">data =</span> df)</span>
-<span id="cb294-2"><a href="09-ivreg.html#cb294-2"></a>ols2 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log</span>(wage)<span class="op">~</span><span class="kw">fitted</span>(ols1)<span class="op">+</span>exper<span class="op">+</span><span class="kw">I</span>(exper<span class="op">^</span><span class="dv">2</span>),  <span class="dt">data =</span> df)</span>
-<span id="cb294-3"><a href="09-ivreg.html#cb294-3"></a><span class="kw">summary</span>(ols2)</span></code></pre></div>
+<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="09-ivreg.html#cb293-1"></a>ols1 &lt;-<span class="st"> </span><span class="kw">lm</span>(educ<span class="op">~</span>exper<span class="op">+</span><span class="kw">I</span>(exper<span class="op">^</span><span class="dv">2</span>)<span class="op">+</span>motheduc<span class="op">+</span>fatheduc,  <span class="dt">data =</span> df)</span>
+<span id="cb293-2"><a href="09-ivreg.html#cb293-2"></a>ols2 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log</span>(wage)<span class="op">~</span><span class="kw">fitted</span>(ols1)<span class="op">+</span>exper<span class="op">+</span><span class="kw">I</span>(exper<span class="op">^</span><span class="dv">2</span>),  <span class="dt">data =</span> df)</span>
+<span id="cb293-3"><a href="09-ivreg.html#cb293-3"></a><span class="kw">summary</span>(ols2)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = log(wage) ~ fitted(ols1) + exper + I(exper^2), data = df)
@@ -382,8 +384,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">9.3.1</span> 複数制約の検定</h3>
 <p>帰無仮説が複数制約のワルド検定は以下のように実施する.
 例えば, 2つの外生変数の係数がゼロのときの仮説検定をRで実行するには以下を実施する.</p>
-<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb296-1"><a href="09-ivreg.html#cb296-1"></a>fm0 &lt;-<span class="st"> </span><span class="kw">ivreg</span>(<span class="kw">log</span>(wage)<span class="op">~</span>educ<span class="op">|</span>motheduc<span class="op">+</span>fatheduc,<span class="dt">data=</span>df)</span>
-<span id="cb296-2"><a href="09-ivreg.html#cb296-2"></a><span class="kw">waldtest</span>(fm0,fm)</span></code></pre></div>
+<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="09-ivreg.html#cb295-1"></a>fm0 &lt;-<span class="st"> </span><span class="kw">ivreg</span>(<span class="kw">log</span>(wage)<span class="op">~</span>educ<span class="op">|</span>motheduc<span class="op">+</span>fatheduc,<span class="dt">data=</span>df)</span>
+<span id="cb295-2"><a href="09-ivreg.html#cb295-2"></a><span class="kw">waldtest</span>(fm0,fm)</span></code></pre></div>
 <pre><code>## Wald test
 ## 
 ## Model 1: log(wage) ~ educ | motheduc + fatheduc
@@ -395,17 +397,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>LM検定は以下のように実施すればよい.</p>
-<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb298-1"><a href="09-ivreg.html#cb298-1"></a>lmt &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">resid</span>(fm0)<span class="op">~</span>educ <span class="op">+</span><span class="st"> </span>exper <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(exper<span class="op">^</span><span class="dv">2</span>) ,<span class="dt">data=</span>df)</span>
-<span id="cb298-2"><a href="09-ivreg.html#cb298-2"></a>(lmt &lt;-<span class="st"> </span><span class="kw">nrow</span>(df)<span class="op">*</span><span class="kw">summary</span>(lmt)<span class="op">$</span>r.squared)</span></code></pre></div>
+<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="09-ivreg.html#cb297-1"></a>lmt &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">resid</span>(fm0)<span class="op">~</span>educ <span class="op">+</span><span class="st"> </span>exper <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(exper<span class="op">^</span><span class="dv">2</span>) ,<span class="dt">data=</span>df)</span>
+<span id="cb297-2"><a href="09-ivreg.html#cb297-2"></a>(lmt &lt;-<span class="st"> </span><span class="kw">nrow</span>(df)<span class="op">*</span><span class="kw">summary</span>(lmt)<span class="op">$</span>r.squared)</span></code></pre></div>
 <pre><code>## [1] 33.97987</code></pre>
-<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="09-ivreg.html#cb300-1"></a><span class="dv">1</span><span class="op">-</span><span class="kw">pchisq</span>(lmt,<span class="dt">df=</span><span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb299-1"><a href="09-ivreg.html#cb299-1"></a><span class="dv">1</span><span class="op">-</span><span class="kw">pchisq</span>(lmt,<span class="dt">df=</span><span class="dv">3</span>)</span></code></pre></div>
 <pre><code>## [1] 2.000665e-07</code></pre>
 </div>
 </div>
 <div id="特定化検定" class="section level2">
 <h2><span class="header-section-number">9.4</span> 特定化検定</h2>
 <p>またいくつかの特定化検定も以下のコマンドで実施できる.</p>
-<div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb302-1"><a href="09-ivreg.html#cb302-1"></a><span class="kw">summary</span>(fm, <span class="dt">diagnostics =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb301-1"><a href="09-ivreg.html#cb301-1"></a><span class="kw">summary</span>(fm, <span class="dt">diagnostics =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## ivreg(formula = log(wage) ~ educ + exper + I(exper^2) | exper + 
@@ -439,8 +441,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 それぞれの内生変数に対して,
 帰無仮説を内生変数を外生変数のみ回帰させたモデルとし,
 対立仮説を内生変数を外生変数および操作変数のみ回帰させたモデルとし, F検定を実施する.</p>
-<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb304-1"><a href="09-ivreg.html#cb304-1"></a>ols0 &lt;-<span class="st"> </span><span class="kw">lm</span>(educ <span class="op">~</span><span class="st"> </span>exper <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(exper<span class="op">^</span><span class="dv">2</span>), <span class="dt">data =</span> df)</span>
-<span id="cb304-2"><a href="09-ivreg.html#cb304-2"></a><span class="kw">anova</span>(ols0, ols1)</span></code></pre></div>
+<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb303-1"><a href="09-ivreg.html#cb303-1"></a>ols0 &lt;-<span class="st"> </span><span class="kw">lm</span>(educ <span class="op">~</span><span class="st"> </span>exper <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(exper<span class="op">^</span><span class="dv">2</span>), <span class="dt">data =</span> df)</span>
+<span id="cb303-2"><a href="09-ivreg.html#cb303-2"></a><span class="kw">anova</span>(ols0, ols1)</span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
 ## Model 1: educ ~ exper + I(exper^2)
@@ -466,9 +468,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>被説明変数を説明変数および先程の残差に回帰する (<code>ols4</code>)</li>
 <li>これらの残差の係数はゼロであるという帰無仮説のもとF検定を実施する.</li>
 </ol>
-<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb306-1"><a href="09-ivreg.html#cb306-1"></a>ols3 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log</span>(wage) <span class="op">~</span><span class="st"> </span>educ  <span class="op">+</span><span class="st"> </span>exper <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(exper<span class="op">^</span><span class="dv">2</span>), <span class="dt">data =</span> df)</span>
-<span id="cb306-2"><a href="09-ivreg.html#cb306-2"></a>ols4 &lt;-<span class="st"> </span><span class="kw">update</span>(ols3, . <span class="op">~</span><span class="st"> </span>. <span class="op">+</span><span class="st"> </span><span class="kw">resid</span>(ols1))</span>
-<span id="cb306-3"><a href="09-ivreg.html#cb306-3"></a><span class="kw">anova</span>(ols3,ols4)</span></code></pre></div>
+<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb305-1"><a href="09-ivreg.html#cb305-1"></a>ols3 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log</span>(wage) <span class="op">~</span><span class="st"> </span>educ  <span class="op">+</span><span class="st"> </span>exper <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(exper<span class="op">^</span><span class="dv">2</span>), <span class="dt">data =</span> df)</span>
+<span id="cb305-2"><a href="09-ivreg.html#cb305-2"></a>ols4 &lt;-<span class="st"> </span><span class="kw">update</span>(ols3, . <span class="op">~</span><span class="st"> </span>. <span class="op">+</span><span class="st"> </span><span class="kw">resid</span>(ols1))</span>
+<span id="cb305-3"><a href="09-ivreg.html#cb305-3"></a><span class="kw">anova</span>(ols3,ols4)</span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
 ## Model 1: log(wage) ~ educ + exper + I(exper^2)
@@ -491,10 +493,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>回帰の決定係数に観測数を乗じたLM統計量をえる.</li>
 <li>検定統計量は, 帰無仮説のもと, 操作変数の数から内生変数の数を差し引いた自由度のカイ二乗分布にしたがう.</li>
 </ol>
-<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb308-1"><a href="09-ivreg.html#cb308-1"></a>jt &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">resid</span>(fm)<span class="op">~</span>exper<span class="op">+</span><span class="kw">I</span>(exper<span class="op">^</span><span class="dv">2</span>)<span class="op">+</span>motheduc<span class="op">+</span>fatheduc,<span class="dt">data=</span>df)</span>
-<span id="cb308-2"><a href="09-ivreg.html#cb308-2"></a>(jt &lt;-<span class="st"> </span><span class="kw">nrow</span>(df)<span class="op">*</span><span class="kw">summary</span>(jt)<span class="op">$</span>r.squared)</span></code></pre></div>
+<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb307-1"><a href="09-ivreg.html#cb307-1"></a>jt &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">resid</span>(fm)<span class="op">~</span>exper<span class="op">+</span><span class="kw">I</span>(exper<span class="op">^</span><span class="dv">2</span>)<span class="op">+</span>motheduc<span class="op">+</span>fatheduc,<span class="dt">data=</span>df)</span>
+<span id="cb307-2"><a href="09-ivreg.html#cb307-2"></a>(jt &lt;-<span class="st"> </span><span class="kw">nrow</span>(df)<span class="op">*</span><span class="kw">summary</span>(jt)<span class="op">$</span>r.squared)</span></code></pre></div>
 <pre><code>## [1] 0.3780714</code></pre>
-<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="09-ivreg.html#cb310-1"></a><span class="dv">1</span><span class="op">-</span><span class="kw">pchisq</span>(jt,<span class="dt">df=</span><span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb309"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb309-1"><a href="09-ivreg.html#cb309-1"></a><span class="dv">1</span><span class="op">-</span><span class="kw">pchisq</span>(jt,<span class="dt">df=</span><span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## [1] 0.5386372</code></pre>
 </div>
 </div>
@@ -504,7 +506,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 独立でない場合, 推定量の分散が変わりうる.
 そうした分散をロバスト分散という.
 ロバスト分散にもとづく, 推定結果は次のコマンドで実施する.</p>
-<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb312-1"><a href="09-ivreg.html#cb312-1"></a><span class="kw">summary</span>(fm, <span class="dt">vcov =</span> vcovHC, <span class="dt">df =</span> <span class="ot">Inf</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb311-1"><a href="09-ivreg.html#cb311-1"></a><span class="kw">summary</span>(fm, <span class="dt">vcov =</span> vcovHC, <span class="dt">df =</span> <span class="ot">Inf</span>)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## ivreg(formula = log(wage) ~ educ + exper + I(exper^2) | exper + 
@@ -527,7 +529,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Multiple R-Squared: 0.1357,  Adjusted R-squared: 0.1296 
 ## Wald test: 18.11 on 3 DF,  p-value: 0.0004168</code></pre>
 <p>また次のコマンドで係数結果のみ出力可能である.</p>
-<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb314-1"><a href="09-ivreg.html#cb314-1"></a><span class="kw">coeftest</span>(fm, <span class="dt">vcov=</span>vcovHC)</span></code></pre></div>
+<div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb313-1"><a href="09-ivreg.html#cb313-1"></a><span class="kw">coeftest</span>(fm, <span class="dt">vcov=</span>vcovHC)</span></code></pre></div>
 <pre><code>## 
 ## t test of coefficients:
 ## 
@@ -539,7 +541,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>ロバスト分散のもとでの複数制約の検定は以下を実施する.</p>
-<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="09-ivreg.html#cb316-1"></a><span class="kw">waldtest</span>(fm0,fm, <span class="dt">vcov=</span>vcovHC)</span></code></pre></div>
+<div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb315-1"><a href="09-ivreg.html#cb315-1"></a><span class="kw">waldtest</span>(fm0,fm, <span class="dt">vcov=</span>vcovHC)</span></code></pre></div>
 <pre><code>## Wald test
 ## 
 ## Model 1: log(wage) ~ educ | motheduc + fatheduc
@@ -555,10 +557,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>誤差項が操作変数と独立なら条件付き分散は操作変数に無関係で均一である.
 これを利用して分散均一を帰無仮説に, 分散不均一を対立仮説にしたBP検定が実行可能である.
 ただ通常のコマンド <code>bptest</code> では正しく実行できないので注意が必要である.</p>
-<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="09-ivreg.html#cb318-1"></a>bpt &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">I</span>(<span class="kw">resid</span>(fm)<span class="op">^</span><span class="dv">2</span>)<span class="op">~</span>exper <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(exper<span class="op">^</span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span>motheduc <span class="op">+</span><span class="st"> </span>fatheduc,<span class="dt">data=</span>df)</span>
-<span id="cb318-2"><a href="09-ivreg.html#cb318-2"></a>(bpt &lt;-<span class="st"> </span><span class="kw">nrow</span>(df)<span class="op">*</span><span class="kw">summary</span>(bpt)<span class="op">$</span>r.squared)</span></code></pre></div>
+<div class="sourceCode" id="cb317"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb317-1"><a href="09-ivreg.html#cb317-1"></a>bpt &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">I</span>(<span class="kw">resid</span>(fm)<span class="op">^</span><span class="dv">2</span>)<span class="op">~</span>exper <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(exper<span class="op">^</span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span>motheduc <span class="op">+</span><span class="st"> </span>fatheduc,<span class="dt">data=</span>df)</span>
+<span id="cb317-2"><a href="09-ivreg.html#cb317-2"></a>(bpt &lt;-<span class="st"> </span><span class="kw">nrow</span>(df)<span class="op">*</span><span class="kw">summary</span>(bpt)<span class="op">$</span>r.squared)</span></code></pre></div>
 <pre><code>## [1] 12.41758</code></pre>
-<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb320-1"><a href="09-ivreg.html#cb320-1"></a><span class="dv">1</span><span class="op">-</span><span class="kw">pchisq</span>(bpt,<span class="dt">df=</span><span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb319-1"><a href="09-ivreg.html#cb319-1"></a><span class="dv">1</span><span class="op">-</span><span class="kw">pchisq</span>(bpt,<span class="dt">df=</span><span class="dv">4</span>)</span></code></pre></div>
 <pre><code>## [1] 0.01450172</code></pre>
 
 </div>
