@@ -158,24 +158,6 @@ summary(gf)
 plm(diff(inv) ~ diff(value) + diff(capital) + 0, data = pdata)
 ```
 
-### 時間効果
-次のモデルを考える.
-$$
-inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it}+ \gamma_t +\alpha_i + u_{it}
-$$
-この $\gamma_t$ は時間効果と呼ばれている.
-
-この推計は以下のようになる.
-```{r}
-gft <- plm(inv ~ value + capital+factor(year), data = pdata, model = "fd")
-summary(gft)
-```
-
-これが時間効果が有意であるかどうかは, 以下を実施すればよい.
-```{r}
-pFtest(gft,gf)
-```
-
 ### 平均差分法と一階差分法
 平均差分法と一階差分法は誤差項の仮定をどのようにおくかによって変わってくる. 誤差項の階差をとることによって時間を通じて無相関になるなら一階差分法が望ましいであろう.
 しかしながら, 固定効果, 時間効果の値がきちんと計算して, それが経済学的解釈が可能なら, 平均差分法が望ましい.

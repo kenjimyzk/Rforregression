@@ -24,7 +24,7 @@ R においてデータ分析をおこなうには
 df <- data.frame(x = rnorm(10), y = letters[1:10])
 str(df)
 ## 'data.frame':	10 obs. of  2 variables:
-##  $ x: num  0.76854 -0.065585 0.230681 -1.32331 0.000596 ...
+##  $ x: num  -0.461 -0.196 -2.052 -0.772 -0.133 ...
 ##  $ y: chr  "a" "b" "c" "d" ...
 ```
 
@@ -35,7 +35,7 @@ str(df)
 df <- data.frame(x = rnorm(10), y = letters[1:10], stringsAsFactors= FALSE)
 str(df)
 ## 'data.frame':	10 obs. of  2 variables:
-##  $ x: num  -0.628 -0.255 0.763 -1.957 -1.762 ...
+##  $ x: num  -0.5586 -0.0637 0.3592 0.0364 -1.3603 ...
 ##  $ y: chr  "a" "b" "c" "d" ...
 ```
 
@@ -44,13 +44,13 @@ str(df)
 ```r
 library(dplyr)
 df <- data_frame(x = rnorm(10), y = letters[1:10])
-## Warning: `data_frame()` is deprecated as of tibble 1.1.0.
+## Warning: `data_frame()` was deprecated in tibble 1.1.0.
 ## Please use `tibble()` instead.
 ## This warning is displayed once every 8 hours.
-## Call `lifecycle::last_warnings()` to see where this warning was generated.
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.
 str(df)
 ## tibble [10 × 2] (S3: tbl_df/tbl/data.frame)
-##  $ x: num [1:10] -0.0965 0.9521 0.0668 0.6301 -0.3967 ...
+##  $ x: num [1:10] 1.7521 -0.1854 0.6773 -0.7279 0.0604 ...
 ##  $ y: chr [1:10] "a" "b" "c" "d" ...
 ```
 
@@ -237,25 +237,25 @@ help(cars)
 
 ```r
 library(AER)
-##  要求されたパッケージ car をロード中です
-##  要求されたパッケージ carData をロード中です
+## Loading required package: car
+## Loading required package: carData
 ## 
-##  次のパッケージを付け加えます: 'car'
-##  以下のオブジェクトは 'package:dplyr' からマスクされています: 
+## Attaching package: 'car'
+## The following object is masked from 'package:dplyr':
 ## 
-##      recode
-##  以下のオブジェクトは 'package:purrr' からマスクされています: 
+##     recode
+## The following object is masked from 'package:purrr':
 ## 
-##      some
-##  要求されたパッケージ lmtest をロード中です
-##  要求されたパッケージ zoo をロード中です
+##     some
+## Loading required package: lmtest
+## Loading required package: zoo
 ## 
-##  次のパッケージを付け加えます: 'zoo'
-##  以下のオブジェクトは 'package:base' からマスクされています: 
+## Attaching package: 'zoo'
+## The following objects are masked from 'package:base':
 ## 
-##      as.Date, as.Date.numeric
-##  要求されたパッケージ sandwich をロード中です
-##  要求されたパッケージ survival をロード中です
+##     as.Date, as.Date.numeric
+## Loading required package: sandwich
+## Loading required package: survival
 data(CPS1985)
 summary(CPS1985)
 ##       wage          education       experience         age       

@@ -4,19 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>8 現代的仮定のもとでの最小二乗法 | R と RStudio</title>
+  <title>8 現代的仮定のもとでの最小二乗法 | datawrangling</title>
   <meta name="description" content="This is a description. Please wrote a abstract this contents." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="8 現代的仮定のもとでの最小二乗法 | R と RStudio" />
+  <meta property="og:title" content="8 現代的仮定のもとでの最小二乗法 | datawrangling" />
   <meta property="og:type" content="book" />
-  
   
   <meta property="og:description" content="This is a description. Please wrote a abstract this contents." />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="8 現代的仮定のもとでの最小二乗法 | R と RStudio" />
+  <meta name="twitter:title" content="8 現代的仮定のもとでの最小二乗法 | datawrangling" />
   
   <meta name="twitter:description" content="This is a description. Please wrote a abstract this contents." />
   
@@ -24,7 +23,7 @@
 <meta name="author" content="宮﨑憲治" />
 
 
-<meta name="date" content="2020-11-01" />
+<meta name="date" content="2022-07-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +32,8 @@
   
 <link rel="prev" href="07-regression1.html"/>
 <link rel="next" href="09-ivreg.html"/>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -49,25 +49,24 @@
 
 
 
-
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -87,7 +86,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -120,6 +119,7 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -136,26 +136,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">R & RStudio</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>はじめに</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>はじめに</a>
+<ul>
 <li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#r-とは"><i class="fa fa-check"></i><b>0.1</b> R とは</a></li>
 <li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#r-のインストール"><i class="fa fa-check"></i><b>0.2</b> R のインストール</a></li>
 <li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#r-の設定"><i class="fa fa-check"></i><b>0.3</b> R の設定</a></li>
 <li class="chapter" data-level="0.4" data-path="index.html"><a href="index.html#r-の使い方"><i class="fa fa-check"></i><b>0.4</b> R の使い方</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="01-base.html"><a href="01-base.html"><i class="fa fa-check"></i><b>1</b> 基本</a><ul>
+<li class="chapter" data-level="1" data-path="01-base.html"><a href="01-base.html"><i class="fa fa-check"></i><b>1</b> 基本</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="01-base.html"><a href="01-base.html#電卓としての-r"><i class="fa fa-check"></i><b>1.1</b> 電卓としての R</a></li>
 <li class="chapter" data-level="1.2" data-path="01-base.html"><a href="01-base.html#関数電卓としてのr"><i class="fa fa-check"></i><b>1.2</b> 関数電卓としてのR</a></li>
 <li class="chapter" data-level="1.3" data-path="01-base.html"><a href="01-base.html#r-の型"><i class="fa fa-check"></i><b>1.3</b> R の型</a></li>
 <li class="chapter" data-level="1.4" data-path="01-base.html"><a href="01-base.html#変数"><i class="fa fa-check"></i><b>1.4</b> 変数</a></li>
 <li class="chapter" data-level="1.5" data-path="01-base.html"><a href="01-base.html#パッケージ"><i class="fa fa-check"></i><b>1.5</b> パッケージ</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="02-rstudio.html"><a href="02-rstudio.html"><i class="fa fa-check"></i><b>2</b> RStudio</a><ul>
+<li class="chapter" data-level="2" data-path="02-rstudio.html"><a href="02-rstudio.html"><i class="fa fa-check"></i><b>2</b> RStudio</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="02-rstudio.html"><a href="02-rstudio.html#rstudio-とは"><i class="fa fa-check"></i><b>2.1</b> RStudio とは</a></li>
 <li class="chapter" data-level="2.2" data-path="02-rstudio.html"><a href="02-rstudio.html#rstudio-のインストール"><i class="fa fa-check"></i><b>2.2</b> RStudio のインストール</a></li>
 <li class="chapter" data-level="2.3" data-path="02-rstudio.html"><a href="02-rstudio.html#rstudio-の設定"><i class="fa fa-check"></i><b>2.3</b> RStudio の設定</a></li>
 <li class="chapter" data-level="2.4" data-path="02-rstudio.html"><a href="02-rstudio.html#rstudio-の使い方"><i class="fa fa-check"></i><b>2.4</b> RStudio の使い方</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="03-vector.html"><a href="03-vector.html"><i class="fa fa-check"></i><b>3</b> ベクトル</a><ul>
+<li class="chapter" data-level="3" data-path="03-vector.html"><a href="03-vector.html"><i class="fa fa-check"></i><b>3</b> ベクトル</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="03-vector.html"><a href="03-vector.html#ベクトル-1"><i class="fa fa-check"></i><b>3.1</b> ベクトル</a></li>
 <li class="chapter" data-level="3.2" data-path="03-vector.html"><a href="03-vector.html#算術演算子"><i class="fa fa-check"></i><b>3.2</b> 算術演算子</a></li>
 <li class="chapter" data-level="3.3" data-path="03-vector.html"><a href="03-vector.html#論理演算子"><i class="fa fa-check"></i><b>3.3</b> 論理演算子</a></li>
@@ -165,27 +169,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.7" data-path="03-vector.html"><a href="03-vector.html#規則的なベクトル"><i class="fa fa-check"></i><b>3.7</b> 規則的なベクトル</a></li>
 <li class="chapter" data-level="3.8" data-path="03-vector.html"><a href="03-vector.html#乱数ベクトル"><i class="fa fa-check"></i><b>3.8</b> 乱数ベクトル</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="04-dataframe.html"><a href="04-dataframe.html"><i class="fa fa-check"></i><b>4</b> データ構造</a><ul>
-<li class="chapter" data-level="4.1" data-path="04-dataframe.html"><a href="04-dataframe.html#ベクトル-2"><i class="fa fa-check"></i><b>4.1</b> ベクトル</a><ul>
+<li class="chapter" data-level="4" data-path="04-dataframe.html"><a href="04-dataframe.html"><i class="fa fa-check"></i><b>4</b> データ構造</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="04-dataframe.html"><a href="04-dataframe.html#ベクトル-2"><i class="fa fa-check"></i><b>4.1</b> ベクトル</a>
+<ul>
 <li class="chapter" data-level="4.1.1" data-path="04-dataframe.html"><a href="04-dataframe.html#ベクトルのアクセス"><i class="fa fa-check"></i><b>4.1.1</b> ベクトルのアクセス</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="04-dataframe.html"><a href="04-dataframe.html#リスト"><i class="fa fa-check"></i><b>4.2</b> リスト</a><ul>
+<li class="chapter" data-level="4.2" data-path="04-dataframe.html"><a href="04-dataframe.html#リスト"><i class="fa fa-check"></i><b>4.2</b> リスト</a>
+<ul>
 <li class="chapter" data-level="4.2.1" data-path="04-dataframe.html"><a href="04-dataframe.html#リストのアクセス"><i class="fa fa-check"></i><b>4.2.1</b> リストのアクセス</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="04-dataframe.html"><a href="04-dataframe.html#因子ベクトル"><i class="fa fa-check"></i><b>4.3</b> 因子ベクトル</a><ul>
+<li class="chapter" data-level="4.3" data-path="04-dataframe.html"><a href="04-dataframe.html#因子ベクトル"><i class="fa fa-check"></i><b>4.3</b> 因子ベクトル</a>
+<ul>
 <li class="chapter" data-level="4.3.1" data-path="04-dataframe.html"><a href="04-dataframe.html#factor"><i class="fa fa-check"></i><b>4.3.1</b> factor</a></li>
 <li class="chapter" data-level="4.3.2" data-path="04-dataframe.html"><a href="04-dataframe.html#cut"><i class="fa fa-check"></i><b>4.3.2</b> cut</a></li>
 </ul></li>
-<li class="chapter" data-level="4.4" data-path="04-dataframe.html"><a href="04-dataframe.html#行列"><i class="fa fa-check"></i><b>4.4</b> 行列</a><ul>
+<li class="chapter" data-level="4.4" data-path="04-dataframe.html"><a href="04-dataframe.html#行列"><i class="fa fa-check"></i><b>4.4</b> 行列</a>
+<ul>
 <li class="chapter" data-level="4.4.1" data-path="04-dataframe.html"><a href="04-dataframe.html#行列の演算"><i class="fa fa-check"></i><b>4.4.1</b> 行列の演算</a></li>
 <li class="chapter" data-level="4.4.2" data-path="04-dataframe.html"><a href="04-dataframe.html#行列のアクセス"><i class="fa fa-check"></i><b>4.4.2</b> 行列のアクセス</a></li>
 </ul></li>
-<li class="chapter" data-level="4.5" data-path="04-dataframe.html"><a href="04-dataframe.html#データフレイム"><i class="fa fa-check"></i><b>4.5</b> データフレイム</a><ul>
+<li class="chapter" data-level="4.5" data-path="04-dataframe.html"><a href="04-dataframe.html#データフレイム"><i class="fa fa-check"></i><b>4.5</b> データフレイム</a>
+<ul>
 <li class="chapter" data-level="4.5.1" data-path="04-dataframe.html"><a href="04-dataframe.html#データフレイムの演算"><i class="fa fa-check"></i><b>4.5.1</b> データフレイムの演算</a></li>
 <li class="chapter" data-level="4.5.2" data-path="04-dataframe.html"><a href="04-dataframe.html#データフレイムのアクセス"><i class="fa fa-check"></i><b>4.5.2</b> データフレイムのアクセス</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="05-datainput.html"><a href="05-datainput.html"><i class="fa fa-check"></i><b>5</b> データ入力</a><ul>
+<li class="chapter" data-level="5" data-path="05-datainput.html"><a href="05-datainput.html"><i class="fa fa-check"></i><b>5</b> データ入力</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="05-datainput.html"><a href="05-datainput.html#はじめに-1"><i class="fa fa-check"></i><b>5.1</b> はじめに</a></li>
 <li class="chapter" data-level="5.2" data-path="05-datainput.html"><a href="05-datainput.html#csv-ファイル"><i class="fa fa-check"></i><b>5.2</b> csv ファイル</a></li>
 <li class="chapter" data-level="5.3" data-path="05-datainput.html"><a href="05-datainput.html#excel-ファイル"><i class="fa fa-check"></i><b>5.3</b> EXCEL ファイル</a></li>
@@ -194,60 +205,74 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.6" data-path="05-datainput.html"><a href="05-datainput.html#インターネットからデータ入力"><i class="fa fa-check"></i><b>5.6</b> インターネットからデータ入力</a></li>
 <li class="chapter" data-level="5.7" data-path="05-datainput.html"><a href="05-datainput.html#その他のデータ入力"><i class="fa fa-check"></i><b>5.7</b> その他のデータ入力</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="06-datawrangling.html"><a href="06-datawrangling.html"><i class="fa fa-check"></i><b>6</b> 整然データ</a><ul>
+<li class="chapter" data-level="6" data-path="06-datawrangling.html"><a href="06-datawrangling.html"><i class="fa fa-check"></i><b>6</b> 整然データ</a>
+<ul>
 <li class="chapter" data-level="6.1" data-path="06-datawrangling.html"><a href="06-datawrangling.html#データ整形"><i class="fa fa-check"></i><b>6.1</b> データ整形</a></li>
 <li class="chapter" data-level="6.2" data-path="06-datawrangling.html"><a href="06-datawrangling.html#データ結合"><i class="fa fa-check"></i><b>6.2</b> データ結合</a></li>
 <li class="chapter" data-level="6.3" data-path="06-datawrangling.html"><a href="06-datawrangling.html#tidyr"><i class="fa fa-check"></i><b>6.3</b> tidyr</a></li>
 <li class="chapter" data-level="6.4" data-path="06-datawrangling.html"><a href="06-datawrangling.html#実践例"><i class="fa fa-check"></i><b>6.4</b> 実践例</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="07-regression1.html"><a href="07-regression1.html"><i class="fa fa-check"></i><b>7</b> 古典的仮定のもとでの最小二乗法</a><ul>
-<li class="chapter" data-level="7.1" data-path="07-regression1.html"><a href="07-regression1.html#単回帰モデル"><i class="fa fa-check"></i><b>7.1</b> 単回帰モデル</a><ul>
+<li class="chapter" data-level="7" data-path="07-regression1.html"><a href="07-regression1.html"><i class="fa fa-check"></i><b>7</b> 古典的仮定のもとでの最小二乗法</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="07-regression1.html"><a href="07-regression1.html#単回帰モデル"><i class="fa fa-check"></i><b>7.1</b> 単回帰モデル</a>
+<ul>
 <li class="chapter" data-level="7.1.1" data-path="07-regression1.html"><a href="07-regression1.html#ティー検定"><i class="fa fa-check"></i><b>7.1.1</b> ティー検定</a></li>
 <li class="chapter" data-level="7.1.2" data-path="07-regression1.html"><a href="07-regression1.html#対数変換"><i class="fa fa-check"></i><b>7.1.2</b> 対数変換</a></li>
 <li class="chapter" data-level="7.1.3" data-path="07-regression1.html"><a href="07-regression1.html#切片なし回帰モデル"><i class="fa fa-check"></i><b>7.1.3</b> 切片なし回帰モデル</a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="07-regression1.html"><a href="07-regression1.html#重回帰モデル"><i class="fa fa-check"></i><b>7.2</b> 重回帰モデル</a><ul>
+<li class="chapter" data-level="7.2" data-path="07-regression1.html"><a href="07-regression1.html#重回帰モデル"><i class="fa fa-check"></i><b>7.2</b> 重回帰モデル</a>
+<ul>
 <li class="chapter" data-level="7.2.1" data-path="07-regression1.html"><a href="07-regression1.html#自乗項"><i class="fa fa-check"></i><b>7.2.1</b> 自乗項</a></li>
 <li class="chapter" data-level="7.2.2" data-path="07-regression1.html"><a href="07-regression1.html#交差項"><i class="fa fa-check"></i><b>7.2.2</b> 交差項</a></li>
 <li class="chapter" data-level="7.2.3" data-path="07-regression1.html"><a href="07-regression1.html#エフ検定"><i class="fa fa-check"></i><b>7.2.3</b> エフ検定</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="08-regression2.html"><a href="08-regression2.html"><i class="fa fa-check"></i><b>8</b> 現代的仮定のもとでの最小二乗法</a><ul>
+<li class="chapter" data-level="8" data-path="08-regression2.html"><a href="08-regression2.html"><i class="fa fa-check"></i><b>8</b> 現代的仮定のもとでの最小二乗法</a>
+<ul>
 <li class="chapter" data-level="8.1" data-path="08-regression2.html"><a href="08-regression2.html#正規性の仮定について"><i class="fa fa-check"></i><b>8.1</b> 正規性の仮定について</a></li>
 <li class="chapter" data-level="8.2" data-path="08-regression2.html"><a href="08-regression2.html#誤差項と説明変数が独立の仮定について"><i class="fa fa-check"></i><b>8.2</b> 誤差項と説明変数が独立の仮定について</a></li>
 <li class="chapter" data-level="8.3" data-path="08-regression2.html"><a href="08-regression2.html#分散均一の検定"><i class="fa fa-check"></i><b>8.3</b> 分散均一の検定</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="09-ivreg.html"><a href="09-ivreg.html"><i class="fa fa-check"></i><b>9</b> 操作変数法</a><ul>
+<li class="chapter" data-level="9" data-path="09-ivreg.html"><a href="09-ivreg.html"><i class="fa fa-check"></i><b>9</b> 操作変数法</a>
+<ul>
 <li class="chapter" data-level="9.1" data-path="09-ivreg.html"><a href="09-ivreg.html#データ"><i class="fa fa-check"></i><b>9.1</b> データ</a></li>
 <li class="chapter" data-level="9.2" data-path="09-ivreg.html"><a href="09-ivreg.html#操作変数"><i class="fa fa-check"></i><b>9.2</b> 操作変数</a></li>
-<li class="chapter" data-level="9.3" data-path="09-ivreg.html"><a href="09-ivreg.html#段階最小二乗法"><i class="fa fa-check"></i><b>9.3</b> 2段階最小二乗法</a><ul>
+<li class="chapter" data-level="9.3" data-path="09-ivreg.html"><a href="09-ivreg.html#段階最小二乗法"><i class="fa fa-check"></i><b>9.3</b> 2段階最小二乗法</a>
+<ul>
 <li class="chapter" data-level="9.3.1" data-path="09-ivreg.html"><a href="09-ivreg.html#複数制約の検定"><i class="fa fa-check"></i><b>9.3.1</b> 複数制約の検定</a></li>
 </ul></li>
-<li class="chapter" data-level="9.4" data-path="09-ivreg.html"><a href="09-ivreg.html#特定化検定"><i class="fa fa-check"></i><b>9.4</b> 特定化検定</a><ul>
+<li class="chapter" data-level="9.4" data-path="09-ivreg.html"><a href="09-ivreg.html#特定化検定"><i class="fa fa-check"></i><b>9.4</b> 特定化検定</a>
+<ul>
 <li class="chapter" data-level="9.4.1" data-path="09-ivreg.html"><a href="09-ivreg.html#weak-instruments"><i class="fa fa-check"></i><b>9.4.1</b> Weak instruments</a></li>
 <li class="chapter" data-level="9.4.2" data-path="09-ivreg.html"><a href="09-ivreg.html#wu-hausman-検定"><i class="fa fa-check"></i><b>9.4.2</b> Wu-Hausman 検定</a></li>
 <li class="chapter" data-level="9.4.3" data-path="09-ivreg.html"><a href="09-ivreg.html#sargan-検定"><i class="fa fa-check"></i><b>9.4.3</b> Sargan 検定</a></li>
 </ul></li>
-<li class="chapter" data-level="9.5" data-path="09-ivreg.html"><a href="09-ivreg.html#ロバスト分散"><i class="fa fa-check"></i><b>9.5</b> ロバスト分散</a><ul>
+<li class="chapter" data-level="9.5" data-path="09-ivreg.html"><a href="09-ivreg.html#ロバスト分散"><i class="fa fa-check"></i><b>9.5</b> ロバスト分散</a>
+<ul>
 <li class="chapter" data-level="9.5.1" data-path="09-ivreg.html"><a href="09-ivreg.html#分散不均一の検定"><i class="fa fa-check"></i><b>9.5.1</b> 分散不均一の検定</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="10-panel.html"><a href="10-panel.html"><i class="fa fa-check"></i><b>10</b> パネル分析</a><ul>
+<li class="chapter" data-level="10" data-path="10-panel.html"><a href="10-panel.html"><i class="fa fa-check"></i><b>10</b> パネル分析</a>
+<ul>
 <li class="chapter" data-level="10.1" data-path="10-panel.html"><a href="10-panel.html#データ-1"><i class="fa fa-check"></i><b>10.1</b> データ</a></li>
 <li class="chapter" data-level="10.2" data-path="10-panel.html"><a href="10-panel.html#プーリングols"><i class="fa fa-check"></i><b>10.2</b> プーリングOLS</a></li>
-<li class="chapter" data-level="10.3" data-path="10-panel.html"><a href="10-panel.html#固定効果モデル-平均差分法"><i class="fa fa-check"></i><b>10.3</b> 固定効果モデル (平均差分法)</a><ul>
+<li class="chapter" data-level="10.3" data-path="10-panel.html"><a href="10-panel.html#固定効果モデル-平均差分法"><i class="fa fa-check"></i><b>10.3</b> 固定効果モデル (平均差分法)</a>
+<ul>
 <li class="chapter" data-level="10.3.1" data-path="10-panel.html"><a href="10-panel.html#時間効果"><i class="fa fa-check"></i><b>10.3.1</b> 時間効果</a></li>
 <li class="chapter" data-level="10.3.2" data-path="10-panel.html"><a href="10-panel.html#固定効果vsプーリングols"><i class="fa fa-check"></i><b>10.3.2</b> 固定効果VSプーリングOLS</a></li>
 </ul></li>
-<li class="chapter" data-level="10.4" data-path="10-panel.html"><a href="10-panel.html#固定効果モデル-一階差分法"><i class="fa fa-check"></i><b>10.4</b> 固定効果モデル (一階差分法)</a><ul>
+<li class="chapter" data-level="10.4" data-path="10-panel.html"><a href="10-panel.html#固定効果モデル-一階差分法"><i class="fa fa-check"></i><b>10.4</b> 固定効果モデル (一階差分法)</a>
+<ul>
 <li class="chapter" data-level="10.4.1" data-path="10-panel.html"><a href="10-panel.html#時間効果-1"><i class="fa fa-check"></i><b>10.4.1</b> 時間効果</a></li>
 <li class="chapter" data-level="10.4.2" data-path="10-panel.html"><a href="10-panel.html#平均差分法と一階差分法"><i class="fa fa-check"></i><b>10.4.2</b> 平均差分法と一階差分法</a></li>
 </ul></li>
-<li class="chapter" data-level="10.5" data-path="10-panel.html"><a href="10-panel.html#変量効果モデル"><i class="fa fa-check"></i><b>10.5</b> 変量効果モデル</a><ul>
+<li class="chapter" data-level="10.5" data-path="10-panel.html"><a href="10-panel.html#変量効果モデル"><i class="fa fa-check"></i><b>10.5</b> 変量効果モデル</a>
+<ul>
 <li class="chapter" data-level="10.5.1" data-path="10-panel.html"><a href="10-panel.html#時間効果-2"><i class="fa fa-check"></i><b>10.5.1</b> 時間効果</a></li>
 <li class="chapter" data-level="10.5.2" data-path="10-panel.html"><a href="10-panel.html#ハウスマン検定"><i class="fa fa-check"></i><b>10.5.2</b> ハウスマン検定</a></li>
 </ul></li>
-<li class="chapter" data-level="10.6" data-path="10-panel.html"><a href="10-panel.html#クラスターロバスト分散"><i class="fa fa-check"></i><b>10.6</b> クラスターロバスト分散</a><ul>
+<li class="chapter" data-level="10.6" data-path="10-panel.html"><a href="10-panel.html#クラスターロバスト分散"><i class="fa fa-check"></i><b>10.6</b> クラスターロバスト分散</a>
+<ul>
 <li class="chapter" data-level="10.6.1" data-path="10-panel.html"><a href="10-panel.html#分散不均一の検定-1"><i class="fa fa-check"></i><b>10.6.1</b> 分散不均一の検定</a></li>
 </ul></li>
 </ul></li>
@@ -263,7 +288,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R と RStudio</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">datawrangling</a>
           </h1>
         </div>
 
@@ -271,9 +296,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="現代的仮定のもとでの最小二乗法" class="section level1">
-<h1><span class="header-section-number">8</span> 現代的仮定のもとでの最小二乗法</h1>
-<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="08-regression2.html#cb249-1"></a><span class="kw">library</span>(AER)</span></code></pre></div>
+<div id="現代的仮定のもとでの最小二乗法" class="section level1 hasAnchor" number="8">
+<h1><span class="header-section-number">8</span> 現代的仮定のもとでの最小二乗法<a href="08-regression2.html#現代的仮定のもとでの最小二乗法" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="08-regression2.html#cb245-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(AER)</span>
+<span id="cb245-2"><a href="08-regression2.html#cb245-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(estimatr)</span></code></pre></div>
 <p>前節において以下の仮定を置いていた.</p>
 <ul>
 <li><span class="math inline">\((x_i,y_i)\)</span> は独立同一分布にしたがう.</li>
@@ -283,201 +309,232 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>これらの仮定を緩めることで分析にどのような影響をあたえるのかを見ていく.</p>
 <p>仮想的に以下のモデルを考える.</p>
-<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="08-regression2.html#cb250-1"></a>N &lt;-<span class="st"> </span><span class="dv">100</span></span>
-<span id="cb250-2"><a href="08-regression2.html#cb250-2"></a>x&lt;-<span class="kw">runif</span>(N)</span>
-<span id="cb250-3"><a href="08-regression2.html#cb250-3"></a>w&lt;-<span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;H&quot;</span>,<span class="st">&quot;T&quot;</span>),N,<span class="dt">replace=</span><span class="ot">TRUE</span>)</span>
-<span id="cb250-4"><a href="08-regression2.html#cb250-4"></a>y &lt;-<span class="st"> </span><span class="dv">10</span> <span class="op">+</span><span class="st"> </span><span class="dv">2</span><span class="op">*</span>x <span class="op">+</span><span class="st"> </span><span class="kw">ifelse</span>(w<span class="op">==</span><span class="st">&quot;H&quot;</span>,<span class="dv">1</span>,<span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(N)</span>
-<span id="cb250-5"><a href="08-regression2.html#cb250-5"></a>df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(w,x,y)</span></code></pre></div>
+<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="08-regression2.html#cb246-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb246-2"><a href="08-regression2.html#cb246-2" aria-hidden="true" tabindex="-1"></a>x<span class="ot">&lt;-</span><span class="fu">runif</span>(N)</span>
+<span id="cb246-3"><a href="08-regression2.html#cb246-3" aria-hidden="true" tabindex="-1"></a>w<span class="ot">&lt;-</span><span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">&quot;H&quot;</span>,<span class="st">&quot;T&quot;</span>),N,<span class="at">replace=</span><span class="cn">TRUE</span>)</span>
+<span id="cb246-4"><a href="08-regression2.html#cb246-4" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">10</span> <span class="sc">+</span> <span class="dv">2</span><span class="sc">*</span>x <span class="sc">+</span> <span class="fu">ifelse</span>(w<span class="sc">==</span><span class="st">&quot;H&quot;</span>,<span class="dv">1</span>,<span class="dv">0</span>) <span class="sc">+</span> <span class="fu">rnorm</span>(N)</span>
+<span id="cb246-5"><a href="08-regression2.html#cb246-5" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(w,x,y)</span></code></pre></div>
 <p>作図すると以下である.</p>
-<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="08-regression2.html#cb251-1"></a><span class="kw">plot</span>(y<span class="op">~</span>x)</span></code></pre></div>
+<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="08-regression2.html#cb247-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(y<span class="sc">~</span>x)</span></code></pre></div>
 <p><img src="08-regression2_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
-<div id="正規性の仮定について" class="section level2">
-<h2><span class="header-section-number">8.1</span> 正規性の仮定について</h2>
+<div id="正規性の仮定について" class="section level2 hasAnchor" number="8.1">
+<h2><span class="header-section-number">8.1</span> 正規性の仮定について<a href="08-regression2.html#正規性の仮定について" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>十分な観測値が得られるばあい, <span class="math inline">\(u_i\)</span> が正規分布にしたがっていないくても, 中心極限定理定理より, 最小二乗法推定量は正規分布に近似できる.</p>
 <p>ここの係数ゼロのティー検定について, ライブラリ <code>AER</code> を導入して <code>coeftest</code> を用いればよい.</p>
-<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="08-regression2.html#cb252-1"></a>fm1 &lt;-<span class="st"> </span><span class="kw">lm</span>(y<span class="op">~</span>x<span class="op">*</span>w,<span class="dt">data=</span>df)</span>
-<span id="cb252-2"><a href="08-regression2.html#cb252-2"></a>fm0 &lt;-<span class="st"> </span><span class="kw">lm</span>(y<span class="op">~</span>x,<span class="dt">data=</span>df)</span>
-<span id="cb252-3"><a href="08-regression2.html#cb252-3"></a><span class="kw">coeftest</span>(fm1,<span class="dt">df=</span><span class="ot">Inf</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="08-regression2.html#cb248-1" aria-hidden="true" tabindex="-1"></a>fm1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y<span class="sc">~</span>x<span class="sc">*</span>w,<span class="at">data=</span>df)</span>
+<span id="cb248-2"><a href="08-regression2.html#cb248-2" aria-hidden="true" tabindex="-1"></a>fm0 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y<span class="sc">~</span>x,<span class="at">data=</span>df)</span>
+<span id="cb248-3"><a href="08-regression2.html#cb248-3" aria-hidden="true" tabindex="-1"></a><span class="fu">coeftest</span>(fm1,<span class="at">df=</span><span class="cn">Inf</span>)</span></code></pre></div>
 <pre><code>## 
 ## z test of coefficients:
 ## 
-##             Estimate Std. Error z value  Pr(&gt;|z|)    
-## (Intercept) 11.06310    0.28636 38.6330 &lt; 2.2e-16 ***
-## x            2.09006    0.53626  3.8975 9.721e-05 ***
-## wT          -0.47837    0.41882 -1.1422    0.2534    
-## x:wT        -0.78006    0.75304 -1.0359    0.3003    
+##              Estimate Std. Error z value  Pr(&gt;|z|)    
+## (Intercept) 10.983335   0.274367 40.0315 &lt; 2.2e-16 ***
+## x            2.160605   0.489039  4.4181 9.959e-06 ***
+## wT          -1.072168   0.398958 -2.6874  0.007201 ** 
+## x:wT         0.013909   0.717424  0.0194  0.984532    
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>ただ十分なデータのもとではティー値のままでもよい.</p>
-<p>同様に複数制約の場合, エフ検定統計量に制約の数を乗じた統計量が
-自由度が制約数のカイ二乗分布にしたがうことが知られている.
+<p>同様に複数制約の場合, エフ検定統計量に制約の数を乗じた統計量が 自由度が制約数のカイ二乗分布にしたがうことが知られている.
 これをR で実施するには <code>waldtest</code> を用いればよい.</p>
-<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="08-regression2.html#cb254-1"></a><span class="kw">waldtest</span>(fm0,fm1,<span class="dt">test=</span><span class="st">&quot;Chisq&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="08-regression2.html#cb250-1" aria-hidden="true" tabindex="-1"></a><span class="fu">waldtest</span>(fm0,fm1,<span class="at">test=</span><span class="st">&quot;Chisq&quot;</span>)</span></code></pre></div>
 <pre><code>## Wald test
 ## 
 ## Model 1: y ~ x
 ## Model 2: y ~ x * w
 ##   Res.Df Df  Chisq Pr(&gt;Chisq)    
 ## 1     98                         
-## 2     96  2 15.717  0.0003864 ***
+## 2     96  2 25.131   3.49e-06 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>エフ検定も十分なデータのもとではそのままでよいであろう.</p>
 <p>オプション <code>test</code> を付けなければエフ検定を実施する.</p>
-<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="08-regression2.html#cb256-1"></a><span class="kw">waldtest</span>(fm0,fm1)</span></code></pre></div>
+<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="08-regression2.html#cb252-1" aria-hidden="true" tabindex="-1"></a><span class="fu">waldtest</span>(fm0,fm1)</span></code></pre></div>
 <pre><code>## Wald test
 ## 
 ## Model 1: y ~ x
 ## Model 2: y ~ x * w
 ##   Res.Df Df      F    Pr(&gt;F)    
 ## 1     98                        
-## 2     96  2 7.8586 0.0006907 ***
+## 2     96  2 12.566 1.421e-05 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>これは <code>anova</code> と同じである.</p>
-<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="08-regression2.html#cb258-1"></a><span class="kw">anova</span>(fm0,fm1)</span></code></pre></div>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="08-regression2.html#cb254-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(fm0,fm1)</span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
 ## Model 1: y ~ x
 ## Model 2: y ~ x * w
-##   Res.Df   RSS Df Sum of Sq      F    Pr(&gt;F)    
-## 1     98 132.2                                  
-## 2     96 113.6  2    18.599 7.8586 0.0006907 ***
+##   Res.Df    RSS Df Sum of Sq      F    Pr(&gt;F)    
+## 1     98 135.36                                  
+## 2     96 107.28  2    28.084 12.566 1.421e-05 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>複数制約の検定としてLM検定というのもある.
 制約付きの回帰分析を実行し, その残差を制約なしのモデルの説明変数に回帰する.
 その決定係数に観測数を掛けた統計量が自由どが制約の数のカイ二乗分布にしたがうことが知られている.</p>
-<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="08-regression2.html#cb260-1"></a>lmt &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">I</span>(<span class="kw">resid</span>(fm1))<span class="op">~</span>w<span class="op">*</span>x,<span class="dt">data=</span>df)</span>
-<span id="cb260-2"><a href="08-regression2.html#cb260-2"></a>(lmt &lt;-<span class="st"> </span><span class="kw">nrow</span>(df)<span class="op">*</span><span class="kw">summary</span>(lmt)<span class="op">$</span>r.squared)</span></code></pre></div>
-<pre><code>## [1] 4.540527e-30</code></pre>
-<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="08-regression2.html#cb262-1"></a><span class="dv">1</span><span class="op">-</span><span class="kw">pchisq</span>(lmt,<span class="dt">df=</span><span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="08-regression2.html#cb256-1" aria-hidden="true" tabindex="-1"></a>lmt <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">I</span>(<span class="fu">resid</span>(fm1))<span class="sc">~</span>w<span class="sc">*</span>x,<span class="at">data=</span>df)</span>
+<span id="cb256-2"><a href="08-regression2.html#cb256-2" aria-hidden="true" tabindex="-1"></a>(lmt <span class="ot">&lt;-</span> <span class="fu">nrow</span>(df)<span class="sc">*</span><span class="fu">summary</span>(lmt)<span class="sc">$</span>r.squared)</span></code></pre></div>
+<pre><code>## [1] 3.238056e-30</code></pre>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="08-regression2.html#cb258-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pchisq</span>(lmt,<span class="at">df=</span><span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## [1] 1</code></pre>
 </div>
-<div id="誤差項と説明変数が独立の仮定について" class="section level2">
-<h2><span class="header-section-number">8.2</span> 誤差項と説明変数が独立の仮定について</h2>
-<p>また <span class="math inline">\(u_i\)</span> と <span class="math inline">\(x_i\)</span> は独立でなく, <span class="math inline">\(u_i\)</span> と <span class="math inline">\(x_i\)</span> が無相関という弱い条件のもとでも,
-一致推定量であることが知られている.
-ただ不偏推定量は保証できない. また 線形推定量のなかで最小の分散とも言えない.<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>
+<div id="誤差項と説明変数が独立の仮定について" class="section level2 hasAnchor" number="8.2">
+<h2><span class="header-section-number">8.2</span> 誤差項と説明変数が独立の仮定について<a href="08-regression2.html#誤差項と説明変数が独立の仮定について" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>また <span class="math inline">\(u_i\)</span> と <span class="math inline">\(x_i\)</span> は独立でなく, <span class="math inline">\(u_i\)</span> と <span class="math inline">\(x_i\)</span> が無相関という弱い条件のもとでも, 一致推定量であることが知られている.
+ただ不偏推定量は保証できない.
+また 線形推定量のなかで最小の分散とも言えない.<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>
 また独立のときの標準誤差の推定量が一致推定量でない.</p>
 <p>ただし, 別の分散のもとで正規分布に近似できることがしられている.<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a>
-つまり, 説明変数と誤差項が無相関であるが, 独立とまでは言い切れない場合,
-最小二乗推定量を実行した際, 別の方法で分散を推定する必要がある.
+つまり, 説明変数と誤差項が無相関であるが, 独立とまでは言い切れない場合, 最小二乗推定量を実行した際, 別の方法で分散を推定する必要がある.
 この別の分散をロバスト分散という.</p>
 <p>R でロバスト分散を推定するにはパッケージ <code>AER</code> を導入するのが簡単である.
 は次のコマンド <code>coeftest</code> を実行すればよい.</p>
-<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="08-regression2.html#cb264-1"></a><span class="kw">coeftest</span>(fm1,<span class="dt">vcov=</span>vcovHC)</span></code></pre></div>
+<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="08-regression2.html#cb260-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coeftest</span>(fm1,<span class="at">vcov=</span>vcovHC)</span></code></pre></div>
 <pre><code>## 
 ## t test of coefficients:
 ## 
-##             Estimate Std. Error t value  Pr(&gt;|t|)    
-## (Intercept) 11.06310    0.33910 32.6245 &lt; 2.2e-16 ***
-## x            2.09006    0.60740  3.4410 0.0008597 ***
-## wT          -0.47837    0.43771 -1.0929 0.2771796    
-## x:wT        -0.78006    0.82736 -0.9428 0.3481390    
+##              Estimate Std. Error t value  Pr(&gt;|t|)    
+## (Intercept) 10.983335   0.296592 37.0318 &lt; 2.2e-16 ***
+## x            2.160605   0.543189  3.9776  0.000135 ***
+## wT          -1.072168   0.391522 -2.7385  0.007358 ** 
+## x:wT         0.013909   0.717667  0.0194  0.984577    
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>先の値と標準誤差が違っていることが確認できるであろう.
-ただこの値は STATA と少し異なっている. STATA と同じにするには</p>
-<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="08-regression2.html#cb266-1"></a><span class="kw">coeftest</span>(fm1,<span class="dt">vcov=</span><span class="kw">vcovHC</span>(fm1,<span class="dt">type=</span><span class="st">&quot;HC1&quot;</span>))</span></code></pre></div>
+ただこの値は STATA と少し異なっている.
+STATA と同じにするには</p>
+<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="08-regression2.html#cb262-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coeftest</span>(fm1,<span class="at">vcov=</span><span class="fu">vcovHC</span>(fm1,<span class="at">type=</span><span class="st">&quot;HC1&quot;</span>))</span></code></pre></div>
 <pre><code>## 
 ## t test of coefficients:
 ## 
-##             Estimate Std. Error t value  Pr(&gt;|t|)    
-## (Intercept) 11.06310    0.32634 33.9008 &lt; 2.2e-16 ***
-## x            2.09006    0.58489  3.5734 0.0005533 ***
-## wT          -0.47837    0.42175 -1.1343 0.2595130    
-## x:wT        -0.78006    0.79570 -0.9803 0.3293840    
+##              Estimate Std. Error t value  Pr(&gt;|t|)    
+## (Intercept) 10.983335   0.289474 37.9424 &lt; 2.2e-16 ***
+## x            2.160605   0.527831  4.0934 8.862e-05 ***
+## wT          -1.072168   0.380134 -2.8205  0.005826 ** 
+## x:wT         0.013909   0.692728  0.0201  0.984022    
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>としなければならない.</p>
 <p>またティー分布でなく正規分布とすることもできる.</p>
-<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="08-regression2.html#cb268-1"></a><span class="kw">coeftest</span>(fm0,<span class="dt">vcov=</span>vcovHC,<span class="dt">df=</span><span class="ot">Inf</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="08-regression2.html#cb264-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coeftest</span>(fm0,<span class="at">vcov=</span>vcovHC,<span class="at">df=</span><span class="cn">Inf</span>)</span></code></pre></div>
 <pre><code>## 
 ## z test of coefficients:
 ## 
 ##             Estimate Std. Error z value  Pr(&gt;|z|)    
-## (Intercept) 10.91849    0.22911  47.655 &lt; 2.2e-16 ***
-## x            1.65423    0.44516   3.716 0.0002024 ***
+## (Intercept) 10.47731    0.21625 48.4504 &lt; 2.2e-16 ***
+## x            2.21664    0.39355  5.6324 1.778e-08 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>複数の係数についての検定は <code>waldtest</code> を実行すればよい.</p>
-<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="08-regression2.html#cb270-1"></a><span class="kw">waldtest</span>(fm0,fm1,<span class="dt">vcov=</span>vcovHC)</span></code></pre></div>
+<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="08-regression2.html#cb266-1" aria-hidden="true" tabindex="-1"></a><span class="fu">waldtest</span>(fm0,fm1,<span class="at">vcov=</span>vcovHC)</span></code></pre></div>
 <pre><code>## Wald test
 ## 
 ## Model 1: y ~ x
 ## Model 2: y ~ x * w
-##   Res.Df Df      F   Pr(&gt;F)   
-## 1     98                      
-## 2     96  2 7.1964 0.001224 **
+##   Res.Df Df      F    Pr(&gt;F)    
+## 1     98                        
+## 2     96  2 12.964 1.038e-05 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>先の結果はエフ検定であるが, カイ二乗検定を実施するには以下を実施すればよい.</p>
-<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="08-regression2.html#cb272-1"></a><span class="kw">waldtest</span>(fm0,fm1,<span class="dt">vcov=</span>vcovHC, <span class="dt">test=</span><span class="st">&quot;Chisq&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="08-regression2.html#cb268-1" aria-hidden="true" tabindex="-1"></a><span class="fu">waldtest</span>(fm0,fm1,<span class="at">vcov=</span>vcovHC, <span class="at">test=</span><span class="st">&quot;Chisq&quot;</span>)</span></code></pre></div>
 <pre><code>## Wald test
 ## 
 ## Model 1: y ~ x
 ## Model 2: y ~ x * w
 ##   Res.Df Df  Chisq Pr(&gt;Chisq)    
 ## 1     98                         
-## 2     96  2 14.393  0.0007493 ***
+## 2     96  2 25.928  2.344e-06 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>最近開発されたパッケージ <code>estimatr</code>のコマンド　<code>lm_robust</code>　を用いるとロバスト分散のもとの推定値が簡単に計算できる.</p>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="08-regression2.html#cb270-1" aria-hidden="true" tabindex="-1"></a>fm2<span class="ot">&lt;-</span> <span class="fu">lm_robust</span>(y<span class="sc">~</span>x<span class="sc">*</span>w,<span class="at">data=</span>df)</span>
+<span id="cb270-2"><a href="08-regression2.html#cb270-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fm2)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm_robust(formula = y ~ x * w, data = df)
+## 
+## Standard error type:  HC2 
+## 
+## Coefficients:
+##             Estimate Std. Error  t value  Pr(&gt;|t|) CI Lower CI Upper DF
+## (Intercept) 10.98333     0.2900 37.87131 1.600e-59   10.408  11.5590 96
+## x            2.16061     0.5300  4.07669 9.421e-05    1.109   3.2126 96
+## wT          -1.07217     0.3818 -2.80787 6.041e-03   -1.830  -0.3142 96
+## x:wT         0.01391     0.6979  0.01993 9.841e-01   -1.371   1.3992 96
+## 
+## Multiple R-squared:  0.3983 ,    Adjusted R-squared:  0.3795 
+## F-statistic: 21.64 on 3 and 96 DF,  p-value: 8.683e-11</code></pre>
+<p>オプション　<code>se_type = "stata"</code> を用いればSTATAと同じ計算が可能である.</p>
+<p>また以下のオプションをつければ分散均一の場合も計算できる.</p>
+<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="08-regression2.html#cb272-1" aria-hidden="true" tabindex="-1"></a>fm3<span class="ot">&lt;-</span> <span class="fu">lm_robust</span>(y<span class="sc">~</span>x<span class="sc">*</span>w,<span class="at">data=</span>df,<span class="at">se_type =</span> <span class="st">&quot;classical&quot;</span>)</span>
+<span id="cb272-2"><a href="08-regression2.html#cb272-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fm3)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm_robust(formula = y ~ x * w, data = df, se_type = &quot;classical&quot;)
+## 
+## Standard error type:  classical 
+## 
+## Coefficients:
+##             Estimate Std. Error  t value  Pr(&gt;|t|) CI Lower CI Upper DF
+## (Intercept) 10.98333     0.2744 40.03148 1.066e-61   10.439  11.5280 96
+## x            2.16061     0.4890  4.41807 2.617e-05    1.190   3.1313 96
+## wT          -1.07217     0.3990 -2.68742 8.488e-03   -1.864  -0.2802 96
+## x:wT         0.01391     0.7174  0.01939 9.846e-01   -1.410   1.4380 96
+## 
+## Multiple R-squared:  0.3983 ,    Adjusted R-squared:  0.3795 
+## F-statistic: 21.18 on 3 and 96 DF,  p-value: 1.302e-10</code></pre>
 </div>
-<div id="分散均一の検定" class="section level2">
-<h2><span class="header-section-number">8.3</span> 分散均一の検定</h2>
+<div id="分散均一の検定" class="section level2 hasAnchor" number="8.3">
+<h2><span class="header-section-number">8.3</span> 分散均一の検定<a href="08-regression2.html#分散均一の検定" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>誤差項が説明変数と独立のときと無相関のときでは標準誤差の推定量が異なる.
-正確にいうと, 条件付き分散が説明変数に依存するかどうかによって標準誤差の推定量が異なる. このことは分散均一と呼ばれている.</p>
+正確にいうと, 条件付き分散が説明変数に依存するかどうかによって標準誤差の推定量が異なる.
+このことは分散均一と呼ばれている.</p>
 <p>誤差項の分散が均一かどうかは検定可能である.
 有名な検定方法としてBP (Breusch-Pagan) 検定というものがある.
 BP検定は帰無仮説が分散均一で, 対立仮説が分散が説明変数と線形関係になっている場合の検定である.</p>
-<p>残差の自乗を被説明変数として回帰分析をおこない,
-その決定係数に観測数をかけたものが検定統計量となる.</p>
-<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="08-regression2.html#cb274-1"></a>bpt &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">I</span>(<span class="kw">resid</span>(fm1)<span class="op">^</span><span class="dv">2</span>)<span class="op">~</span>w<span class="op">*</span>x,<span class="dt">data=</span>df)</span>
-<span id="cb274-2"><a href="08-regression2.html#cb274-2"></a>(bpt &lt;-<span class="kw">nrow</span>(df)<span class="op">*</span><span class="kw">summary</span>(bpt)<span class="op">$</span>r.squared)</span></code></pre></div>
-<pre><code>## [1] 2.543338</code></pre>
-<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="08-regression2.html#cb276-1"></a><span class="dv">1</span><span class="op">-</span><span class="kw">pchisq</span>(bpt,<span class="dt">df=</span><span class="dv">3</span>)</span></code></pre></div>
-<pre><code>## [1] 0.4675099</code></pre>
-<p>ここでの例ではP値が5%を超えているので帰無仮説を棄却できないので,
-分散均一を仮定してよいことが示唆されている.</p>
+<p>残差の自乗を被説明変数として回帰分析をおこない, その決定係数に観測数をかけたものが検定統計量となる.</p>
+<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="08-regression2.html#cb274-1" aria-hidden="true" tabindex="-1"></a>bpt <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">I</span>(<span class="fu">resid</span>(fm1)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">~</span>w<span class="sc">*</span>x,<span class="at">data=</span>df)</span>
+<span id="cb274-2"><a href="08-regression2.html#cb274-2" aria-hidden="true" tabindex="-1"></a>(bpt <span class="ot">&lt;-</span><span class="fu">nrow</span>(df)<span class="sc">*</span><span class="fu">summary</span>(bpt)<span class="sc">$</span>r.squared)</span></code></pre></div>
+<pre><code>## [1] 5.67872</code></pre>
+<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="08-regression2.html#cb276-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pchisq</span>(bpt,<span class="at">df=</span><span class="dv">3</span>)</span></code></pre></div>
+<pre><code>## [1] 0.1283315</code></pre>
+<p>ここでの例ではP値が5%を超えているので帰無仮説を棄却できないので, 分散均一を仮定してよいことが示唆されている.</p>
 <p>R では以下のように実施すればよい.</p>
-<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="08-regression2.html#cb278-1"></a><span class="kw">bptest</span>(fm1)</span></code></pre></div>
+<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="08-regression2.html#cb278-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bptest</span>(fm1)</span></code></pre></div>
 <pre><code>## 
 ##  studentized Breusch-Pagan test
 ## 
 ## data:  fm1
-## BP = 2.5433, df = 3, p-value = 0.4675</code></pre>
+## BP = 5.6787, df = 3, p-value = 0.1283</code></pre>
 <p>これまでのBPテストは誤差項の分散が説明変数の線形関係あることを暗黙に仮定している.
 非線形性を考慮するために説明変数の二次項を導入した分散不均一性の検定をホワイト検定という.
-説明変数が複数ある場合ホワイト検定は煩雑になるため,
-被説明変数の予測値を使って計算することがある.
+説明変数が複数ある場合ホワイト検定は煩雑になるため, 被説明変数の予測値を使って計算することがある.
 そのときホワイトテストは以下で実施する.</p>
-<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="08-regression2.html#cb280-1"></a>wht &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">I</span>(<span class="kw">resid</span>(fm1)<span class="op">^</span><span class="dv">2</span>)<span class="op">~</span><span class="kw">fitted</span>(fm1)<span class="op">+</span><span class="kw">I</span>(<span class="kw">fitted</span>(fm1)<span class="op">^</span><span class="dv">2</span>),<span class="dt">data=</span>df)</span>
-<span id="cb280-2"><a href="08-regression2.html#cb280-2"></a>(wht &lt;-<span class="st"> </span><span class="kw">nrow</span>(df)<span class="op">*</span><span class="kw">summary</span>(wht)<span class="op">$</span>r.squared)</span></code></pre></div>
-<pre><code>## [1] 0.4868149</code></pre>
-<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="08-regression2.html#cb282-1"></a><span class="dv">1</span><span class="op">-</span><span class="kw">pchisq</span>(wht,<span class="dt">df=</span><span class="dv">2</span>)</span></code></pre></div>
-<pre><code>## [1] 0.783952</code></pre>
+<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="08-regression2.html#cb280-1" aria-hidden="true" tabindex="-1"></a>wht <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">I</span>(<span class="fu">resid</span>(fm1)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">~</span><span class="fu">fitted</span>(fm1)<span class="sc">+</span><span class="fu">I</span>(<span class="fu">fitted</span>(fm1)<span class="sc">^</span><span class="dv">2</span>),<span class="at">data=</span>df)</span>
+<span id="cb280-2"><a href="08-regression2.html#cb280-2" aria-hidden="true" tabindex="-1"></a>(wht <span class="ot">&lt;-</span> <span class="fu">nrow</span>(df)<span class="sc">*</span><span class="fu">summary</span>(wht)<span class="sc">$</span>r.squared)</span></code></pre></div>
+<pre><code>## [1] 3.059114</code></pre>
+<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="08-regression2.html#cb282-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pchisq</span>(wht,<span class="at">df=</span><span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 0.2166316</code></pre>
 <p>ホワイト検定でも分散均一が示唆されている.</p>
 <p>もしくは以下を実行する.</p>
-<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="08-regression2.html#cb284-1"></a><span class="kw">bptest</span>(fm1,<span class="op">~</span><span class="kw">fitted</span>(fm1)<span class="op">+</span><span class="kw">I</span>(<span class="kw">fitted</span>(fm1)<span class="op">^</span><span class="dv">2</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="08-regression2.html#cb284-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bptest</span>(fm1,<span class="sc">~</span><span class="fu">fitted</span>(fm1)<span class="sc">+</span><span class="fu">I</span>(<span class="fu">fitted</span>(fm1)<span class="sc">^</span><span class="dv">2</span>))</span></code></pre></div>
 <pre><code>## 
 ##  studentized Breusch-Pagan test
 ## 
 ## data:  fm1
-## BP = 0.48681, df = 2, p-value = 0.784</code></pre>
-<p>このように分散均一性は検定することが可能であるが, そもそも分散均一が疑われる場合は,
-ロバスト分散で推定するので十分であるため最近の実証分析ではこの検定は実施されない.</p>
+## BP = 3.0591, df = 2, p-value = 0.2166</code></pre>
+<p>このように分散均一性は検定することが可能であるが, そもそも分散均一が疑われる場合は, ロバスト分散で推定するので十分であるため最近の実証分析ではこの検定は実施されない.</p>
 
 </div>
 </div>
 <div class="footnotes">
 <hr />
 <ol start="5">
-<li id="fn5"><p>
-正確にいえば, 不偏推定量のとめには条件付き期待値が説明変数に依存しないことが必要である. また線形推定量のなかで最小の分散になるためには
-条件付き分散が説明変数に依存しないことが必要である. <a href="08-regression2.html#fnref5" class="footnote-back">↩︎</a></p></li>
-<li id="fn6"><p>
-正確には観測される変数に4次のモーメントが存在するという仮定が必要となる.
+<li id="fn5"><p>正確にいえば, 不偏推定量のとめには条件付き期待値が説明変数に依存しないことが必要である.
+また線形推定量のなかで最小の分散になるためには 条件付き分散が説明変数に依存しないことが必要である.<a href="08-regression2.html#fnref5" class="footnote-back">↩︎</a></p></li>
+<li id="fn6"><p>正確には観測される変数に4次のモーメントが存在するという仮定が必要となる.
 この仮定の直感的な意味は異常値が存在しないことである.<a href="08-regression2.html#fnref6" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
@@ -491,7 +548,6 @@ BP検定は帰無仮説が分散均一で, 対立仮説が分散が説明変数�
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -510,6 +566,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -530,6 +587,10 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }

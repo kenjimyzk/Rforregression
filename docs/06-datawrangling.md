@@ -138,13 +138,13 @@ mtcars %>% select(mpg) %>% mutate(gpm = 1/mpg) %>% head()
 ```
 
 ```
-##    mpg        gpm
-## 1 21.0 0.04761905
-## 2 21.0 0.04761905
-## 3 22.8 0.04385965
-## 4 21.4 0.04672897
-## 5 18.7 0.05347594
-## 6 18.1 0.05524862
+##                    mpg        gpm
+## Mazda RX4         21.0 0.04761905
+## Mazda RX4 Wag     21.0 0.04761905
+## Datsun 710        22.8 0.04385965
+## Hornet 4 Drive    21.4 0.04672897
+## Hornet Sportabout 18.7 0.05347594
+## Valiant           18.1 0.05524862
 ```
 
 以下は20より大きいと`TRUE`, そうでないと `FALSE` をとる変数を作成している.
@@ -154,13 +154,13 @@ mtcars %>% select(mpg) %>% mutate(binarympg = ifelse(mpg>20,TRUE,FALSE)) %>% hea
 ```
 
 ```
-##    mpg binarympg
-## 1 21.0      TRUE
-## 2 21.0      TRUE
-## 3 22.8      TRUE
-## 4 21.4      TRUE
-## 5 18.7     FALSE
-## 6 18.1     FALSE
+##                    mpg binarympg
+## Mazda RX4         21.0      TRUE
+## Mazda RX4 Wag     21.0      TRUE
+## Datsun 710        22.8      TRUE
+## Hornet 4 Drive    21.4      TRUE
+## Hornet Sportabout 18.7     FALSE
+## Valiant           18.1     FALSE
 ```
 
 `summarize` により変数の基本統計表を作成できる.
@@ -183,11 +183,7 @@ mtcars %>% group_by(cyl) %>% summarize(n = n(), avg = mean(mpg), sd =sd(mpg))
 ```
 
 ```
-## `summarise()` ungrouping output (override with `.groups` argument)
-```
-
-```
-## # A tibble: 3 x 4
+## # A tibble: 3 × 4
 ##     cyl     n   avg    sd
 ##   <dbl> <int> <dbl> <dbl>
 ## 1     4    11  26.7  4.51
@@ -204,10 +200,10 @@ df1 <- data_frame(X=1:2, Y=1:2)
 ```
 
 ```
-## Warning: `data_frame()` is deprecated as of tibble 1.1.0.
+## Warning: `data_frame()` was deprecated in tibble 1.1.0.
 ## Please use `tibble()` instead.
 ## This warning is displayed once every 8 hours.
-## Call `lifecycle::last_warnings()` to see where this warning was generated.
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.
 ```
 
 ```r
@@ -216,7 +212,7 @@ bind_rows(df1,df2)
 ```
 
 ```
-## # A tibble: 3 x 2
+## # A tibble: 3 × 2
 ##       X     Y
 ##   <dbl> <dbl>
 ## 1     1     1
@@ -232,7 +228,7 @@ bind_cols(df1,df3)
 ```
 
 ```
-## # A tibble: 2 x 3
+## # A tibble: 2 × 3
 ##       X     Y     Z
 ##   <int> <int> <int>
 ## 1     1     1     5
@@ -253,7 +249,7 @@ left_join(dfx,dfy,by="id")
 ```
 
 ```
-## # A tibble: 3 x 3
+## # A tibble: 3 × 3
 ##   id        X Y    
 ##   <chr> <int> <lgl>
 ## 1 A         1 TRUE 
@@ -268,7 +264,7 @@ right_join(dfx,dfy,by="id")
 ```
 
 ```
-## # A tibble: 3 x 3
+## # A tibble: 3 × 3
 ##   id        X Y    
 ##   <chr> <int> <lgl>
 ## 1 A         1 TRUE 
@@ -283,7 +279,7 @@ full_join(dfx,dfy,by="id")
 ```
 
 ```
-## # A tibble: 4 x 3
+## # A tibble: 4 × 3
 ##   id        X Y    
 ##   <chr> <int> <lgl>
 ## 1 A         1 TRUE 
@@ -299,7 +295,7 @@ inner_join(dfx,dfy,by="id")
 ```
 
 ```
-## # A tibble: 2 x 3
+## # A tibble: 2 × 3
 ##   id        X Y    
 ##   <chr> <int> <lgl>
 ## 1 A         1 TRUE 
@@ -323,14 +319,14 @@ df
 ```
 
 ```
-## # A tibble: 5 x 4
+## # A tibble: 5 × 4
 ##    time     X      Y      Z
 ##   <int> <dbl>  <dbl>  <dbl>
-## 1  2010 0.256  0.179 -3.17 
-## 2  2011 0.415 -3.42  -5.11 
-## 3  2012 0.620  0.806 -1.22 
-## 4  2013 0.153  2.80  -0.870
-## 5  2014 1.27  -1.18   2.19
+## 1  2010 0.877 -0.451  2.23 
+## 2  2011 0.215 -1.70  -1.80 
+## 3  2012 0.999  2.15  -2.09 
+## 4  2013 2.16   0.317  0.371
+## 5  2014 0.813 -2.42  -1.67
 ```
 
 それぞれの変数名をキーとして, 値を示した表は `gather` で作れる.
@@ -341,24 +337,24 @@ df_gather
 ```
 
 ```
-## # A tibble: 15 x 3
+## # A tibble: 15 × 3
 ##     time key    value
 ##    <int> <chr>  <dbl>
-##  1  2010 X      0.256
-##  2  2011 X      0.415
-##  3  2012 X      0.620
-##  4  2013 X      0.153
-##  5  2014 X      1.27 
-##  6  2010 Y      0.179
-##  7  2011 Y     -3.42 
-##  8  2012 Y      0.806
-##  9  2013 Y      2.80 
-## 10  2014 Y     -1.18 
-## 11  2010 Z     -3.17 
-## 12  2011 Z     -5.11 
-## 13  2012 Z     -1.22 
-## 14  2013 Z     -0.870
-## 15  2014 Z      2.19
+##  1  2010 X      0.877
+##  2  2011 X      0.215
+##  3  2012 X      0.999
+##  4  2013 X      2.16 
+##  5  2014 X      0.813
+##  6  2010 Y     -0.451
+##  7  2011 Y     -1.70 
+##  8  2012 Y      2.15 
+##  9  2013 Y      0.317
+## 10  2014 Y     -2.42 
+## 11  2010 Z      2.23 
+## 12  2011 Z     -1.80 
+## 13  2012 Z     -2.09 
+## 14  2013 Z      0.371
+## 15  2014 Z     -1.67
 ```
 
 `spread` でもとに戻ることができる.
@@ -368,14 +364,14 @@ df_gather %>% spread(key, value)
 ```
 
 ```
-## # A tibble: 5 x 4
+## # A tibble: 5 × 4
 ##    time     X      Y      Z
 ##   <int> <dbl>  <dbl>  <dbl>
-## 1  2010 0.256  0.179 -3.17 
-## 2  2011 0.415 -3.42  -5.11 
-## 3  2012 0.620  0.806 -1.22 
-## 4  2013 0.153  2.80  -0.870
-## 5  2014 1.27  -1.18   2.19
+## 1  2010 0.877 -0.451  2.23 
+## 2  2011 0.215 -1.70  -1.80 
+## 3  2012 0.999  2.15  -2.09 
+## 4  2013 2.16   0.317  0.371
+## 5  2014 0.813 -2.42  -1.67
 ```
 
 `spread` で `time` にすると別の形で展開できる.
@@ -386,12 +382,12 @@ df_spread
 ```
 
 ```
-## # A tibble: 3 x 6
+## # A tibble: 3 × 6
 ##   key   `2010` `2011` `2012` `2013` `2014`
 ##   <chr>  <dbl>  <dbl>  <dbl>  <dbl>  <dbl>
-## 1 X      0.256  0.415  0.620  0.153   1.27
-## 2 Y      0.179 -3.42   0.806  2.80   -1.18
-## 3 Z     -3.17  -5.11  -1.22  -0.870   2.19
+## 1 X      0.877  0.215  0.999  2.16   0.813
+## 2 Y     -0.451 -1.70   2.15   0.317 -2.42 
+## 3 Z      2.23  -1.80  -2.09   0.371 -1.67
 ```
 
 以下のようにすればもとに戻る.
@@ -401,24 +397,24 @@ df_spread %>% gather(time,value,-key)
 ```
 
 ```
-## # A tibble: 15 x 3
+## # A tibble: 15 × 3
 ##    key   time   value
 ##    <chr> <chr>  <dbl>
-##  1 X     2010   0.256
-##  2 Y     2010   0.179
-##  3 Z     2010  -3.17 
-##  4 X     2011   0.415
-##  5 Y     2011  -3.42 
-##  6 Z     2011  -5.11 
-##  7 X     2012   0.620
-##  8 Y     2012   0.806
-##  9 Z     2012  -1.22 
-## 10 X     2013   0.153
-## 11 Y     2013   2.80 
-## 12 Z     2013  -0.870
-## 13 X     2014   1.27 
-## 14 Y     2014  -1.18 
-## 15 Z     2014   2.19
+##  1 X     2010   0.877
+##  2 Y     2010  -0.451
+##  3 Z     2010   2.23 
+##  4 X     2011   0.215
+##  5 Y     2011  -1.70 
+##  6 Z     2011  -1.80 
+##  7 X     2012   0.999
+##  8 Y     2012   2.15 
+##  9 Z     2012  -2.09 
+## 10 X     2013   2.16 
+## 11 Y     2013   0.317
+## 12 Z     2013   0.371
+## 13 X     2014   0.813
+## 14 Y     2014  -2.42 
+## 15 Z     2014  -1.67
 ```
 
 `gather` をうまく使えば変数ごとの基本統計量の表を作ることができる.
@@ -429,11 +425,7 @@ cars %>% gather(variable,value) %>% group_by(variable) %>%
 ```
 
 ```
-## `summarise()` ungrouping output (override with `.groups` argument)
-```
-
-```
-## # A tibble: 2 x 4
+## # A tibble: 2 × 4
 ##   variable  nobs   avg    sd
 ##   <chr>    <int> <dbl> <dbl>
 ## 1 dist        50  43.0 25.8 
@@ -446,18 +438,11 @@ cars %>% gather(variable,value) %>% group_by(variable) %>%
 tab <- cars %>% rename(距離=dist,速度=speed ) %>%
   gather(変数,value) %>% group_by(変数) %>%
   summarize(観測数 = n(), 平均 = mean(value), 標準偏差 =sd(value))
-```
-
-```
-## `summarise()` ungrouping output (override with `.groups` argument)
-```
-
-```r
 head(tab)
 ```
 
 ```
-## # A tibble: 2 x 4
+## # A tibble: 2 × 4
 ##   変数  観測数  平均 標準偏差
 ##   <chr>  <int> <dbl>    <dbl>
 ## 1 距離      50  43.0    25.8 
@@ -474,15 +459,15 @@ head(df)
 ```
 
 ```
-## # A tibble: 6 x 4
-##   name    `2010` `2011` `2012`
-##   <chr>    <dbl>  <dbl>  <dbl>
-## 1 a     -0.722    0.867 -1.31 
-## 2 b      0.00858  0.492  0.755
-## 3 c     -1.27    -0.983 -1.30 
-## 4 d      1.22    -1.10   0.746
-## 5 e     -0.599   -1.69   1.15 
-## 6 f      1.39     1.71   0.378
+## # A tibble: 6 × 4
+##   name  `2010` `2011`  `2012`
+##   <chr>  <dbl>  <dbl>   <dbl>
+## 1 a      0.924 -0.368  0.179 
+## 2 b     -1.19  -0.389 -0.0725
+## 3 c      0.601 -0.811  1.86  
+## 4 d      0.912  0.281  0.957 
+## 5 e      0.104  0.896 -1.13  
+## 6 f     -0.385 -1.69   0.0292
 ```
 `data.frame` でないことに注意されたい.
 
@@ -504,15 +489,15 @@ head(df_rnorm)
 ```
 
 ```
-## # A tibble: 6 x 3
-##   name   time    rnorm
-##   <chr> <dbl>    <dbl>
-## 1 a      2010 -0.722  
-## 2 b      2010  0.00858
-## 3 c      2010 -1.27   
-## 4 d      2010  1.22   
-## 5 e      2010 -0.599  
-## 6 f      2010  1.39
+## # A tibble: 6 × 3
+##   name   time  rnorm
+##   <chr> <dbl>  <dbl>
+## 1 a      2010  0.924
+## 2 b      2010 -1.19 
+## 3 c      2010  0.601
+## 4 d      2010  0.912
+## 5 e      2010  0.104
+## 6 f      2010 -0.385
 ```
 時間の変数を数値に変換している.
 
@@ -525,15 +510,15 @@ head(df_runif)
 ```
 
 ```
-## # A tibble: 6 x 3
-##   name  runif  time
-##   <chr> <dbl> <int>
-## 1 a     0.227  2010
-## 2 b     0.179  2010
-## 3 c     0.444  2010
-## 4 d     0.645  2010
-## 5 e     0.717  2010
-## 6 f     0.851  2010
+## # A tibble: 6 × 3
+##   name   runif  time
+##   <chr>  <dbl> <int>
+## 1 a     0.975   2010
+## 2 b     0.252   2010
+## 3 c     0.685   2010
+## 4 d     0.0276  2010
+## 5 e     0.205   2010
+## 6 f     0.967   2010
 ```
 それぞれの年の変数を付け加えている.
 
@@ -545,13 +530,13 @@ head(df_full)
 ```
 
 ```
-## # A tibble: 6 x 4
-##   name   time    rnorm runif
-##   <chr> <dbl>    <dbl> <dbl>
-## 1 a      2010 -0.722   0.227
-## 2 b      2010  0.00858 0.179
-## 3 c      2010 -1.27    0.444
-## 4 d      2010  1.22    0.645
-## 5 e      2010 -0.599   0.717
-## 6 f      2010  1.39    0.851
+## # A tibble: 6 × 4
+##   name   time  rnorm  runif
+##   <chr> <dbl>  <dbl>  <dbl>
+## 1 a      2010  0.924 0.975 
+## 2 b      2010 -1.19  0.252 
+## 3 c      2010  0.601 0.685 
+## 4 d      2010  0.912 0.0276
+## 5 e      2010  0.104 0.205 
+## 6 f      2010 -0.385 0.967
 ```

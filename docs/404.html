@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>2 RStudio | datawrangling</title>
+  <title>Page not found | datawrangling</title>
   <meta name="description" content="This is a description. Please wrote a abstract this contents." />
   <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="2 RStudio | datawrangling" />
+  <meta property="og:title" content="Page not found | datawrangling" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This is a description. Please wrote a abstract this contents." />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2 RStudio | datawrangling" />
+  <meta name="twitter:title" content="Page not found | datawrangling" />
   
   <meta name="twitter:description" content="This is a description. Please wrote a abstract this contents." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="01-base.html"/>
-<link rel="next" href="03-vector.html"/>
+
+
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -296,132 +296,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="rstudio" class="section level1 hasAnchor" number="2">
-<h1><span class="header-section-number">2</span> RStudio<a href="02-rstudio.html#rstudio" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="rstudio-とは" class="section level2 hasAnchor" number="2.1">
-<h2><span class="header-section-number">2.1</span> RStudio とは<a href="02-rstudio.html#rstudio-とは" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>RStudio は R の統合開発環境 (IDE, Integrated Development Enviroment) の一つである.
-オープンソース版が存在する.</p>
-<p><a href="https://ja.wikipedia.org/wiki/R-Studio" class="uri">https://ja.wikipedia.org/wiki/R-Studio</a></p>
-</div>
-<div id="rstudio-のインストール" class="section level2 hasAnchor" number="2.2">
-<h2><span class="header-section-number">2.2</span> RStudio のインストール<a href="02-rstudio.html#rstudio-のインストール" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>オープンソース版のRStudio のインストールは</p>
-<p><a href="https://www.rstudio.com/products/rstudio/download/" class="uri">https://www.rstudio.com/products/rstudio/download/</a></p>
-<p>にいき, 該当機種のファイルをダウンロードする.
-ダウンロードしたあとに実行すればインストールされる.</p>
-<p>Ubuntu ならサーバー版を導入するとよい.</p>
-<p><a href="https://www.rstudio.com/products/rstudio/download-server/" class="uri">https://www.rstudio.com/products/rstudio/download-server/</a></p>
-</div>
-<div id="rstudio-の設定" class="section level2 hasAnchor" number="2.3">
-<h2><span class="header-section-number">2.3</span> RStudio の設定<a href="02-rstudio.html#rstudio-の設定" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>メニューバーの [Tools] から [Global Options…] を選択することで設定を変更できる.</p>
-<p>[General] で以下のように
-[Restore .RData …] のチェックを外していいて,
-その下を <code>Never</code> にしている.
-これは, 立ち上げたきに環境をクリーンし,
-終了時に, データの保存を聞かれないようにするためである.</p>
-<p><img src="figs/rstudio-general.PNG" width="292" /></p>
-<p>次に, [Code] の タブ [Saving] で.
-[Default text encoding] を <code>UTF-8</code> とする.
-Windows 以外だとOSのシステムフォントが同じなので問題ない.
-しかし Windows は SJIS を拡張した CP932 なので, 注意が必要である.</p>
-<p>Windows のRは UTF-8 を選択してもR自身はCP932処理している.
-ただ, 他のOSとの併用の場合, UTF-8 にしたほうがよいだろう.
-またHTMLファイルは UTF-8 でのファイルが前提になりつつあるので,
-HTML として出力を考えているなら, <code>UTF-8</code> としたほうが無難である.</p>
-<p>またインターネットで公開されている日本語のRファイルは
-Windows の使用が前提となっているため, 文字コードが CP932 であることが多い. Windows 以外を使っている場合, 一時的に文字コードを SJIS を選択する必要がある.</p>
-<p><img src="figs/rstudio-utf8.PNG" width="296" /></p>
-<p>あと, [R Markdown] で 真ん中あたりの [Show output preview in:] を <code>View Pane</code> に変更する</p>
-<p><img src="figs/rstudio-rmd.PNG" width="292" /></p>
-</div>
-<div id="rstudio-の使い方" class="section level2 hasAnchor" number="2.4">
-<h2><span class="header-section-number">2.4</span> RStudio の使い方<a href="02-rstudio.html#rstudio-の使い方" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>RStudio の使い方として日本語版のチートシートがある.</p>
-<p><a href="https://github.com/rstudio/cheatsheets/raw/master/translations/japanese/rstudio-IDE-cheatsheet_ja.pdf" class="uri">https://github.com/rstudio/cheatsheets/raw/master/translations/japanese/rstudio-IDE-cheatsheet_ja.pdf</a></p>
-<p>英語であるがこの動画も有益である.
-第一章だけ公開されている.</p>
-<p><a href="https://www.datacamp.com/courses/working-with-the-rstudio-ide-part-1" class="uri">https://www.datacamp.com/courses/working-with-the-rstudio-ide-part-1</a></p>
-<p>RStudio プロジェクト単位で複数のソースコードを管理するのことが推奨される.
-そうするとプロジェクトごとに作業ディレクトリが設定される.
-プロジェクトはメニューバー の [File] から [New Project] を選択する.
-そうすると新たに新たにディレクトリを作成するか, 既存のディレクトリを採用するかなどが選べる.
-また, バージョン管理ソフトを導入していればそこから取り入れることも可能となる.</p>
-<p><img src="figs/rstudio_project.gif" /><!-- --></p>
-<p>プロジェクトを立ち上げると左にコンソールペイン (Console Pane) が, 右側に上下に二分割されたペインが現れる.
-この配置は メニューバーの [Tools] から [Project Options -&gt; Pane Layout] を選べば変更可能である.
-コンソールペインにコマンドを入力するとその結果が直下に返される.
-何か入力した後に, Ctrl + l (Cmd + l) を押すと, 画面が更新される.
-上下の矢印キーで過去に実行したコマンドを選択できる.</p>
-<p>メニューバー の [File] から [New File -&gt; RScript] を選択するか,
-Ctrl + Shift + n (Cmd + Shift + n) と入力するか, メニューバー下の一番左の白紙のアイコンをクリックすると,
-Rのスクリプトファイルが新規に作られる.
-スクリプフォファイルを開くと左側のコンソール画面の上にソースペインが登場する.
-ここにソースコードを書く.</p>
-<p>ソースペインで何かコマンドを書いていきながら,
-ソースコードの該当行で Ctrl + Enter (Cmd + Return) と入力するか, ソースペインの上側の右に並んでいるアイコンのうち, 左側のRunと書かれたアイコンをクリックすると, 該当行がコンソール画面で実行される.
-複数行選択した後に, メニューバー の [Code] から [Run Selected line(s)] を選ぶか,
-Ctrl + Shift + Enter (Cmd + Shift + Enter) と入力すると複数行をまとめて実行させることも可能である.</p>
-<p>メニューバー の [File] から [Save] を選択するか, Ctrl + s (Cmd + s) と入力するか, メニューバー下の左から3番目のフロッピーディスクアイコンをクリック
-すると, スクリプトファイルを保存することができる.
-またメニューバー の [File] から [Open] を選択するか,
-Ctrl + o (Cmd + o) と入力するか, メニューバー下の左から2番めのフォルダを開くアイコンをクリックすると,
-既存のスクリプトファイルを開くことができる.</p>
-<p><img src="figs/rstudio_file.gif" /><!-- --></p>
-<p>右上のペインには Environment と History のタブがある.
-Environment は現在使っているオブジェクトが表示される.
-最初は空白である.
-変数に数値を代入 (R の言い方ではオブジェクトに付値) することによって,
-値が付け加わっている.
-History はこれまでの履歴が記録される.
-履歴の一部ををエディトペインかコンソールペインに挿入することができる.</p>
-<p>右下のペインには Files, Plots, Packages, Help, Viewer のタブがある.
-Files ペインはWindowsではエクスプローラーのようなもので,
-Mac はFinder のようなもので, ファイル管理をおこなう.
-ファイル管理として新たなフォルダを作成したり, ファイルを削除したり,
-ファイル名を変更したりする.</p>
-<p>またワーキングディレクトリを直感的に設定することもできる.
-ワーキングを設定したい場所に移動して,
-Files ペインの上に並んでいるアイコンのうち, Moreをクリックし,
-[Set As Working Directory] をクリックすればよい.</p>
-<p>Plots ペインはコンソール画面で作図をコマンドの実行したら, 表示されるペインである. そこで作成した図をコマンドを使わずに保存したりすることができる.
-Packages ペインは現在Rに導入されているパッケージリストが表示される.
-そこに無いパッケージはメニューバーの [Tools] から [Install Packages…] を選択して実行すればよい.
-すでにあるパッケージは, パッケージ名の左側のボックスをチェックすれば,
-ライブライリ名を付けずにコマンドを実行させることができる.</p>
-<p>Help ペインはその名の通り, ヘルプ画面が表示される.
-コンソールペインから <code>help (コマンド)</code> もしくは <code>?コマンド</code> と入力するとそのコマンドのヘルプがこのペインに表示される.
-R ではソースペインやコンソールペインで, コマンド入力していると, コマンドの後補があらわてくる. [TAB] でコマンドを補完できる.
-さらにそのコマンドでどのような引数が使われるのかも示される.
-さらに [TAB] を押せば, 引数を選べるだけでなく, 簡単なコマンドの説明がある.
-そのときに [F1] を押せば, より詳細なヘルプが立ち上がる.
-また Packages パインから該当パッケージをクリックするとそのパッケージのコマンド一覧が Help ペインに表示される.</p>
-<p><img src="figs/rstudio_help.gif" /><!-- --></p>
-<p>最後のViewer ペインは R Markdown で作成したファイルを HTMLで出力したときに表示されるペインである.
-最初の設定だと別のウィンドウ画面として結果が表示される.
-このペインに出力されるためには [Tools -&gt; R Markdown] にいき, 真ん中あたりの
-[Show output preview in:] を View Pane に変更する必要がある.
-その上でソースペインから [Ctrl + Shift + k] とするか, ソースペインの左側のアイコン群の一番右側のノートのアイコンをクリックすると,
-確認画面が現れるので <code>HTML</code> を押す.
-そうするとそのコードがすべて実行されて, 実行結果が作図も含めてHTMLファイルに出力される.
-もしくはメニューバーの [File] から [Knit Document…] としを選択するとよい.</p>
-<p><img src="figs/rstudio_knit.gif" /><!-- --></p>
-<p>これは knitr と rmarkdown いわれるパッケージを利用したもので, Rのコードを埋め込んだマークダウンファイルを作成し,
-そこからHTMLファイルを作成する.
-他にも word ファイル や pdf ファイル生成することも適切に設定していれば可能である.
-ソースコードだけでなく, マークダウンファイルに <code>R</code> コマンドを埋め込んだ <code>Rmd</code> ファイルを作成することができる
-それは新規作成でRスクリプトでなく, R Notebook や R Markdown を選択すればよい.</p>
-
-</div>
+<div id="page-not-found" class="section level1">
+<h1>Page not found</h1>
+<p>The page you requested cannot be found (perhaps it was moved or renamed).</p>
+<p>You may want to try searching to find the page's new location, or use
+the table of contents to find the page you are looking for.</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="01-base.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="03-vector.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -452,7 +339,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/02-rstudio.Rmd",
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/%s",
 "text": "Edit"
 },
 "history": {
