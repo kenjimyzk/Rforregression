@@ -263,12 +263,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="10.4" data-path="10-panel.html"><a href="10-panel.html#固定効果モデル-一階差分法"><i class="fa fa-check"></i><b>10.4</b> 固定効果モデル (一階差分法)</a>
 <ul>
-<li class="chapter" data-level="10.4.1" data-path="10-panel.html"><a href="10-panel.html#時間効果-1"><i class="fa fa-check"></i><b>10.4.1</b> 時間効果</a></li>
-<li class="chapter" data-level="10.4.2" data-path="10-panel.html"><a href="10-panel.html#平均差分法と一階差分法"><i class="fa fa-check"></i><b>10.4.2</b> 平均差分法と一階差分法</a></li>
+<li class="chapter" data-level="10.4.1" data-path="10-panel.html"><a href="10-panel.html#平均差分法と一階差分法"><i class="fa fa-check"></i><b>10.4.1</b> 平均差分法と一階差分法</a></li>
 </ul></li>
 <li class="chapter" data-level="10.5" data-path="10-panel.html"><a href="10-panel.html#変量効果モデル"><i class="fa fa-check"></i><b>10.5</b> 変量効果モデル</a>
 <ul>
-<li class="chapter" data-level="10.5.1" data-path="10-panel.html"><a href="10-panel.html#時間効果-2"><i class="fa fa-check"></i><b>10.5.1</b> 時間効果</a></li>
+<li class="chapter" data-level="10.5.1" data-path="10-panel.html"><a href="10-panel.html#時間効果-1"><i class="fa fa-check"></i><b>10.5.1</b> 時間効果</a></li>
 <li class="chapter" data-level="10.5.2" data-path="10-panel.html"><a href="10-panel.html#ハウスマン検定"><i class="fa fa-check"></i><b>10.5.2</b> ハウスマン検定</a></li>
 </ul></li>
 <li class="chapter" data-level="10.6" data-path="10-panel.html"><a href="10-panel.html#クラスターロバスト分散"><i class="fa fa-check"></i><b>10.6</b> クラスターロバスト分散</a>
@@ -478,73 +477,73 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb186-6"><a href="06-datawrangling.html#cb186-6" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb186-7"><a href="06-datawrangling.html#cb186-7" aria-hidden="true" tabindex="-1"></a>df</span></code></pre></div>
 <pre><code>## # A tibble: 5 × 4
-##    time     X      Y      Z
-##   &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
-## 1  2010 0.877 -0.451  2.23 
-## 2  2011 0.215 -1.70  -1.80 
-## 3  2012 0.999  2.15  -2.09 
-## 4  2013 2.16   0.317  0.371
-## 5  2014 0.813 -2.42  -1.67</code></pre>
+##    time       X      Y      Z
+##   &lt;int&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+## 1  2010  0.0465  1.03   4.57 
+## 2  2011  0.482   3.07  -3.49 
+## 3  2012 -0.281   0.948  0.841
+## 4  2013 -0.276  -0.899 -3.82 
+## 5  2014 -0.577   1.10   8.20</code></pre>
 <p>それぞれの変数名をキーとして, 値を示した表は <code>gather</code> で作れる.</p>
 <div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="06-datawrangling.html#cb188-1" aria-hidden="true" tabindex="-1"></a>df_gather <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">gather</span>(key,value,<span class="sc">-</span>time)</span>
 <span id="cb188-2"><a href="06-datawrangling.html#cb188-2" aria-hidden="true" tabindex="-1"></a>df_gather</span></code></pre></div>
 <pre><code>## # A tibble: 15 × 3
-##     time key    value
-##    &lt;int&gt; &lt;chr&gt;  &lt;dbl&gt;
-##  1  2010 X      0.877
-##  2  2011 X      0.215
-##  3  2012 X      0.999
-##  4  2013 X      2.16 
-##  5  2014 X      0.813
-##  6  2010 Y     -0.451
-##  7  2011 Y     -1.70 
-##  8  2012 Y      2.15 
-##  9  2013 Y      0.317
-## 10  2014 Y     -2.42 
-## 11  2010 Z      2.23 
-## 12  2011 Z     -1.80 
-## 13  2012 Z     -2.09 
-## 14  2013 Z      0.371
-## 15  2014 Z     -1.67</code></pre>
+##     time key     value
+##    &lt;int&gt; &lt;chr&gt;   &lt;dbl&gt;
+##  1  2010 X      0.0465
+##  2  2011 X      0.482 
+##  3  2012 X     -0.281 
+##  4  2013 X     -0.276 
+##  5  2014 X     -0.577 
+##  6  2010 Y      1.03  
+##  7  2011 Y      3.07  
+##  8  2012 Y      0.948 
+##  9  2013 Y     -0.899 
+## 10  2014 Y      1.10  
+## 11  2010 Z      4.57  
+## 12  2011 Z     -3.49  
+## 13  2012 Z      0.841 
+## 14  2013 Z     -3.82  
+## 15  2014 Z      8.20</code></pre>
 <p><code>spread</code> でもとに戻ることができる.</p>
 <div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="06-datawrangling.html#cb190-1" aria-hidden="true" tabindex="-1"></a>df_gather <span class="sc">%&gt;%</span> <span class="fu">spread</span>(key, value)</span></code></pre></div>
 <pre><code>## # A tibble: 5 × 4
-##    time     X      Y      Z
-##   &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
-## 1  2010 0.877 -0.451  2.23 
-## 2  2011 0.215 -1.70  -1.80 
-## 3  2012 0.999  2.15  -2.09 
-## 4  2013 2.16   0.317  0.371
-## 5  2014 0.813 -2.42  -1.67</code></pre>
+##    time       X      Y      Z
+##   &lt;int&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+## 1  2010  0.0465  1.03   4.57 
+## 2  2011  0.482   3.07  -3.49 
+## 3  2012 -0.281   0.948  0.841
+## 4  2013 -0.276  -0.899 -3.82 
+## 5  2014 -0.577   1.10   8.20</code></pre>
 <p><code>spread</code> で <code>time</code> にすると別の形で展開できる.</p>
 <div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="06-datawrangling.html#cb192-1" aria-hidden="true" tabindex="-1"></a>df_spread <span class="ot">&lt;-</span> df_gather <span class="sc">%&gt;%</span> <span class="fu">spread</span>(time, value)</span>
 <span id="cb192-2"><a href="06-datawrangling.html#cb192-2" aria-hidden="true" tabindex="-1"></a>df_spread</span></code></pre></div>
 <pre><code>## # A tibble: 3 × 6
 ##   key   `2010` `2011` `2012` `2013` `2014`
 ##   &lt;chr&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
-## 1 X      0.877  0.215  0.999  2.16   0.813
-## 2 Y     -0.451 -1.70   2.15   0.317 -2.42 
-## 3 Z      2.23  -1.80  -2.09   0.371 -1.67</code></pre>
+## 1 X     0.0465  0.482 -0.281 -0.276 -0.577
+## 2 Y     1.03    3.07   0.948 -0.899  1.10 
+## 3 Z     4.57   -3.49   0.841 -3.82   8.20</code></pre>
 <p>以下のようにすればもとに戻る.</p>
 <div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="06-datawrangling.html#cb194-1" aria-hidden="true" tabindex="-1"></a>df_spread <span class="sc">%&gt;%</span> <span class="fu">gather</span>(time,value,<span class="sc">-</span>key)</span></code></pre></div>
 <pre><code>## # A tibble: 15 × 3
-##    key   time   value
-##    &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt;
-##  1 X     2010   0.877
-##  2 Y     2010  -0.451
-##  3 Z     2010   2.23 
-##  4 X     2011   0.215
-##  5 Y     2011  -1.70 
-##  6 Z     2011  -1.80 
-##  7 X     2012   0.999
-##  8 Y     2012   2.15 
-##  9 Z     2012  -2.09 
-## 10 X     2013   2.16 
-## 11 Y     2013   0.317
-## 12 Z     2013   0.371
-## 13 X     2014   0.813
-## 14 Y     2014  -2.42 
-## 15 Z     2014  -1.67</code></pre>
+##    key   time    value
+##    &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt;
+##  1 X     2010   0.0465
+##  2 Y     2010   1.03  
+##  3 Z     2010   4.57  
+##  4 X     2011   0.482 
+##  5 Y     2011   3.07  
+##  6 Z     2011  -3.49  
+##  7 X     2012  -0.281 
+##  8 Y     2012   0.948 
+##  9 Z     2012   0.841 
+## 10 X     2013  -0.276 
+## 11 Y     2013  -0.899 
+## 12 Z     2013  -3.82  
+## 13 X     2014  -0.577 
+## 14 Y     2014   1.10  
+## 15 Z     2014   8.20</code></pre>
 <p><code>gather</code> をうまく使えば変数ごとの基本統計量の表を作ることができる.</p>
 <div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="06-datawrangling.html#cb196-1" aria-hidden="true" tabindex="-1"></a>cars <span class="sc">%&gt;%</span> <span class="fu">gather</span>(variable,value) <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(variable) <span class="sc">%&gt;%</span></span>
 <span id="cb196-2"><a href="06-datawrangling.html#cb196-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">nobs =</span> <span class="fu">n</span>(), <span class="at">avg =</span> <span class="fu">mean</span>(value), <span class="at">sd =</span><span class="fu">sd</span>(value))</span></code></pre></div>
@@ -571,14 +570,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="06-datawrangling.html#cb200-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data_frame</span>(<span class="at">name=</span>letters, <span class="st">&quot;2010&quot;</span><span class="ot">=</span><span class="fu">rnorm</span>(<span class="dv">26</span>),<span class="st">&quot;2011&quot;</span><span class="ot">=</span><span class="fu">rnorm</span>(<span class="dv">26</span>),<span class="st">&quot;2012&quot;</span><span class="ot">=</span><span class="fu">rnorm</span>(<span class="dv">26</span>)) </span>
 <span id="cb200-2"><a href="06-datawrangling.html#cb200-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df)</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 4
-##   name  `2010` `2011`  `2012`
-##   &lt;chr&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
-## 1 a      0.924 -0.368  0.179 
-## 2 b     -1.19  -0.389 -0.0725
-## 3 c      0.601 -0.811  1.86  
-## 4 d      0.912  0.281  0.957 
-## 5 e      0.104  0.896 -1.13  
-## 6 f     -0.385 -1.69   0.0292</code></pre>
+##   name    `2010` `2011` `2012`
+##   &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+## 1 a     -0.00342 -0.627  0.296
+## 2 b     -0.975   -0.714  0.712
+## 3 c     -0.401    0.218 -1.43 
+## 4 d     -0.661   -0.268 -0.137
+## 5 e      0.433   -0.291  0.921
+## 6 f      1.33     1.78  -0.255</code></pre>
 <p><code>data.frame</code> でないことに注意されたい.</p>
 <p>また, 年ごとのデータセット <code>df_2010</code>, <code>df_2011</code>, <code>df_2012</code> が3つある.</p>
 <div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="06-datawrangling.html#cb202-1" aria-hidden="true" tabindex="-1"></a>df_2010 <span class="ot">&lt;-</span> <span class="fu">data_frame</span>(<span class="at">name=</span>letters,<span class="at">runif=</span><span class="fu">runif</span>(<span class="dv">26</span>))</span>
@@ -590,14 +589,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb203-2"><a href="06-datawrangling.html#cb203-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">time=</span><span class="fu">as.numeric</span>(time))</span>
 <span id="cb203-3"><a href="06-datawrangling.html#cb203-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_rnorm)</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 3
-##   name   time  rnorm
-##   &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt;
-## 1 a      2010  0.924
-## 2 b      2010 -1.19 
-## 3 c      2010  0.601
-## 4 d      2010  0.912
-## 5 e      2010  0.104
-## 6 f      2010 -0.385</code></pre>
+##   name   time    rnorm
+##   &lt;chr&gt; &lt;dbl&gt;    &lt;dbl&gt;
+## 1 a      2010 -0.00342
+## 2 b      2010 -0.975  
+## 3 c      2010 -0.401  
+## 4 d      2010 -0.661  
+## 5 e      2010  0.433  
+## 6 f      2010  1.33</code></pre>
 <p>時間の変数を数値に変換している.</p>
 <p>データセット <code>df_2010</code>, <code>df_2011</code>, <code>df_2012</code> をつなげる.</p>
 <div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="06-datawrangling.html#cb205-1" aria-hidden="true" tabindex="-1"></a>df_runif <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(df_2010,df_2011,df_2012) <span class="sc">%&gt;%</span> </span>
@@ -606,25 +605,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## # A tibble: 6 × 3
 ##   name   runif  time
 ##   &lt;chr&gt;  &lt;dbl&gt; &lt;int&gt;
-## 1 a     0.975   2010
-## 2 b     0.252   2010
-## 3 c     0.685   2010
-## 4 d     0.0276  2010
-## 5 e     0.205   2010
-## 6 f     0.967   2010</code></pre>
+## 1 a     0.980   2010
+## 2 b     0.351   2010
+## 3 c     0.0191  2010
+## 4 d     0.127   2010
+## 5 e     0.599   2010
+## 6 f     0.647   2010</code></pre>
 <p>それぞれの年の変数を付け加えている.</p>
 <p>これを <code>full_join</code> を用いてつなげる.</p>
 <div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="06-datawrangling.html#cb207-1" aria-hidden="true" tabindex="-1"></a>df_full <span class="ot">&lt;-</span> <span class="fu">full_join</span>(df_rnorm,df_runif,<span class="at">by=</span><span class="fu">c</span>(<span class="st">&quot;name&quot;</span>,<span class="st">&quot;time&quot;</span>))</span>
 <span id="cb207-2"><a href="06-datawrangling.html#cb207-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_full)  </span></code></pre></div>
 <pre><code>## # A tibble: 6 × 4
-##   name   time  rnorm  runif
-##   &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
-## 1 a      2010  0.924 0.975 
-## 2 b      2010 -1.19  0.252 
-## 3 c      2010  0.601 0.685 
-## 4 d      2010  0.912 0.0276
-## 5 e      2010  0.104 0.205 
-## 6 f      2010 -0.385 0.967</code></pre>
+##   name   time    rnorm  runif
+##   &lt;chr&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;
+## 1 a      2010 -0.00342 0.980 
+## 2 b      2010 -0.975   0.351 
+## 3 c      2010 -0.401   0.0191
+## 4 d      2010 -0.661   0.127 
+## 5 e      2010  0.433   0.599 
+## 6 f      2010  1.33    0.647</code></pre>
 
 </div>
 </div>

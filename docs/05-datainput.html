@@ -263,12 +263,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="10.4" data-path="10-panel.html"><a href="10-panel.html#固定効果モデル-一階差分法"><i class="fa fa-check"></i><b>10.4</b> 固定効果モデル (一階差分法)</a>
 <ul>
-<li class="chapter" data-level="10.4.1" data-path="10-panel.html"><a href="10-panel.html#時間効果-1"><i class="fa fa-check"></i><b>10.4.1</b> 時間効果</a></li>
-<li class="chapter" data-level="10.4.2" data-path="10-panel.html"><a href="10-panel.html#平均差分法と一階差分法"><i class="fa fa-check"></i><b>10.4.2</b> 平均差分法と一階差分法</a></li>
+<li class="chapter" data-level="10.4.1" data-path="10-panel.html"><a href="10-panel.html#平均差分法と一階差分法"><i class="fa fa-check"></i><b>10.4.1</b> 平均差分法と一階差分法</a></li>
 </ul></li>
 <li class="chapter" data-level="10.5" data-path="10-panel.html"><a href="10-panel.html#変量効果モデル"><i class="fa fa-check"></i><b>10.5</b> 変量効果モデル</a>
 <ul>
-<li class="chapter" data-level="10.5.1" data-path="10-panel.html"><a href="10-panel.html#時間効果-2"><i class="fa fa-check"></i><b>10.5.1</b> 時間効果</a></li>
+<li class="chapter" data-level="10.5.1" data-path="10-panel.html"><a href="10-panel.html#時間効果-1"><i class="fa fa-check"></i><b>10.5.1</b> 時間効果</a></li>
 <li class="chapter" data-level="10.5.2" data-path="10-panel.html"><a href="10-panel.html#ハウスマン検定"><i class="fa fa-check"></i><b>10.5.2</b> ハウスマン検定</a></li>
 </ul></li>
 <li class="chapter" data-level="10.6" data-path="10-panel.html"><a href="10-panel.html#クラスターロバスト分散"><i class="fa fa-check"></i><b>10.6</b> クラスターロバスト分散</a>
@@ -311,14 +310,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="05-datainput.html#cb125-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">rnorm</span>(<span class="dv">10</span>), <span class="at">y =</span> letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>])</span>
 <span id="cb125-2"><a href="05-datainput.html#cb125-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)</span>
 <span id="cb125-3"><a href="05-datainput.html#cb125-3" aria-hidden="true" tabindex="-1"></a><span class="do">## &#39;data.frame&#39;:    10 obs. of  2 variables:</span></span>
-<span id="cb125-4"><a href="05-datainput.html#cb125-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ x: num  -0.461 -0.196 -2.052 -0.772 -0.133 ...</span></span>
+<span id="cb125-4"><a href="05-datainput.html#cb125-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ x: num  -0.977 0.865 -1.124 0.303 1.672 ...</span></span>
 <span id="cb125-5"><a href="05-datainput.html#cb125-5" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ y: chr  &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; ...</span></span></code></pre></div>
 <p>ただデータフレイムは自動的に文字列が因子ベクトルに変換されてしまう.
 これを避けるには次のように <code>stringsAsFactors= FALSE</code> をつける.</p>
 <div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="05-datainput.html#cb126-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">rnorm</span>(<span class="dv">10</span>), <span class="at">y =</span> letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>], <span class="at">stringsAsFactors=</span> <span class="cn">FALSE</span>)</span>
 <span id="cb126-2"><a href="05-datainput.html#cb126-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)</span>
 <span id="cb126-3"><a href="05-datainput.html#cb126-3" aria-hidden="true" tabindex="-1"></a><span class="do">## &#39;data.frame&#39;:    10 obs. of  2 variables:</span></span>
-<span id="cb126-4"><a href="05-datainput.html#cb126-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ x: num  -0.5586 -0.0637 0.3592 0.0364 -1.3603 ...</span></span>
+<span id="cb126-4"><a href="05-datainput.html#cb126-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ x: num  -0.444 -0.403 -1.01 -1.185 -1.143 ...</span></span>
 <span id="cb126-5"><a href="05-datainput.html#cb126-5" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ y: chr  &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; ...</span></span></code></pre></div>
 <p>もしくはライブラリ <code>dplyr</code> にある <code>data_frame</code> を用いれば, そのようなオプションを付けることなくデータフレイムを拡張したクラスを作ることができる.</p>
 <div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="05-datainput.html#cb127-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
@@ -329,7 +328,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb127-6"><a href="05-datainput.html#cb127-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.</span></span>
 <span id="cb127-7"><a href="05-datainput.html#cb127-7" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)</span>
 <span id="cb127-8"><a href="05-datainput.html#cb127-8" aria-hidden="true" tabindex="-1"></a><span class="do">## tibble [10 × 2] (S3: tbl_df/tbl/data.frame)</span></span>
-<span id="cb127-9"><a href="05-datainput.html#cb127-9" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ x: num [1:10] 1.7521 -0.1854 0.6773 -0.7279 0.0604 ...</span></span>
+<span id="cb127-9"><a href="05-datainput.html#cb127-9" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ x: num [1:10] 1.285 0.352 0.579 0.903 -1.136 ...</span></span>
 <span id="cb127-10"><a href="05-datainput.html#cb127-10" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ y: chr [1:10] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; ...</span></span></code></pre></div>
 <p>以降, それぞれのファイル形式ごとにファイル入力について説明する.
 いずれのファイル形式にせよ, 外部ファイルから入力するさいには
