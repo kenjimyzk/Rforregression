@@ -23,7 +23,7 @@
 <meta name="author" content="宮﨑憲治" />
 
 
-<meta name="date" content="2022-07-27" />
+<meta name="date" content="2022-09-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -310,14 +310,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="05-datainput.html#cb125-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">rnorm</span>(<span class="dv">10</span>), <span class="at">y =</span> letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>])</span>
 <span id="cb125-2"><a href="05-datainput.html#cb125-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)</span>
 <span id="cb125-3"><a href="05-datainput.html#cb125-3" aria-hidden="true" tabindex="-1"></a><span class="do">## &#39;data.frame&#39;:    10 obs. of  2 variables:</span></span>
-<span id="cb125-4"><a href="05-datainput.html#cb125-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ x: num  -0.977 0.865 -1.124 0.303 1.672 ...</span></span>
+<span id="cb125-4"><a href="05-datainput.html#cb125-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ x: num  -0.4777 0.0843 1.0352 0.9422 0.3978 ...</span></span>
 <span id="cb125-5"><a href="05-datainput.html#cb125-5" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ y: chr  &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; ...</span></span></code></pre></div>
 <p>ただデータフレイムは自動的に文字列が因子ベクトルに変換されてしまう.
 これを避けるには次のように <code>stringsAsFactors= FALSE</code> をつける.</p>
 <div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="05-datainput.html#cb126-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">rnorm</span>(<span class="dv">10</span>), <span class="at">y =</span> letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>], <span class="at">stringsAsFactors=</span> <span class="cn">FALSE</span>)</span>
 <span id="cb126-2"><a href="05-datainput.html#cb126-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)</span>
 <span id="cb126-3"><a href="05-datainput.html#cb126-3" aria-hidden="true" tabindex="-1"></a><span class="do">## &#39;data.frame&#39;:    10 obs. of  2 variables:</span></span>
-<span id="cb126-4"><a href="05-datainput.html#cb126-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ x: num  -0.444 -0.403 -1.01 -1.185 -1.143 ...</span></span>
+<span id="cb126-4"><a href="05-datainput.html#cb126-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ x: num  -1.173 -0.315 0.696 0.33 1.337 ...</span></span>
 <span id="cb126-5"><a href="05-datainput.html#cb126-5" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ y: chr  &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; ...</span></span></code></pre></div>
 <p>もしくはライブラリ <code>dplyr</code> にある <code>data_frame</code> を用いれば, そのようなオプションを付けることなくデータフレイムを拡張したクラスを作ることができる.</p>
 <div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="05-datainput.html#cb127-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
@@ -328,7 +328,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb127-6"><a href="05-datainput.html#cb127-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.</span></span>
 <span id="cb127-7"><a href="05-datainput.html#cb127-7" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)</span>
 <span id="cb127-8"><a href="05-datainput.html#cb127-8" aria-hidden="true" tabindex="-1"></a><span class="do">## tibble [10 × 2] (S3: tbl_df/tbl/data.frame)</span></span>
-<span id="cb127-9"><a href="05-datainput.html#cb127-9" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ x: num [1:10] 1.285 0.352 0.579 0.903 -1.136 ...</span></span>
+<span id="cb127-9"><a href="05-datainput.html#cb127-9" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ x: num [1:10] 1.389 -0.762 -0.898 1.692 -0.449 ...</span></span>
 <span id="cb127-10"><a href="05-datainput.html#cb127-10" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ y: chr [1:10] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; ...</span></span></code></pre></div>
 <p>以降, それぞれのファイル形式ごとにファイル入力について説明する.
 いずれのファイル形式にせよ, 外部ファイルから入力するさいには

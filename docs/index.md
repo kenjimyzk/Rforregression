@@ -1,7 +1,7 @@
 --- 
 title: "R と RStudio"
 author: "宮﨑憲治"
-date: "2022-07-27"
+date: "2022-09-12"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: bxjsbook

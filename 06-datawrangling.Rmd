@@ -143,31 +143,31 @@ df <- data_frame(
 df
 ```
 
-それぞれの変数名をキーとして, 値を示した表は `gather` で作れる.
+それぞれの変数名をキーとして, 値を示した表は `pivot_longer` で作れる.
 ```{r}
-df_gather <- df %>% gather(key,value,-time)
+df_gather <- df %>% pivot_longer(col=-time,names_to='key',values_to = 'value')
 df_gather
 ```
 
-`spread` でもとに戻ることができる.
+`pivot_wider` でもとに戻ることができる.
 ```{r}
-df_gather %>% spread(key, value)
+df_gather %>% pivot_wider(names_from = 'key', values_from = "value")
 ```
 
-`spread` で `time` にすると別の形で展開できる.
+`pivot_wider` で `time` にすると別の形で展開できる.
 ```{r}
-df_spread <- df_gather %>% spread(time, value)
+df_spread <- df_gather %>% pivot_wider(names_from = 'time', values_from = "value")
 df_spread
 ```
 
 以下のようにすればもとに戻る.
 ```{r}
-df_spread %>% gather(time,value,-key)
+df_spread %>% pivot_longer(col=-key,names_to='time',values_to = 'value')
 ```
 
-`gather` をうまく使えば変数ごとの基本統計量の表を作ることができる.
+`pivot_longer` をうまく使えば変数ごとの基本統計量の表を作ることができる.
 ```{r}
-cars %>% gather(variable,value) %>% group_by(variable) %>%
+cars %>% pivot_longer(everything(),names_to='variable',values_to = 'value') %>% group_by(variable) %>%
   summarize(nobs = n(), avg = mean(value), sd =sd(value))
 ```
 
@@ -196,9 +196,9 @@ df_2012 <- data_frame(name=letters,runif=runif(26))
 ```
 これら4つのデータセットを1つにまとめよう.
 
-まずデータ `df` についてであるが, `gather` をつかう.
+まずデータ `df` についてであるが, `pivot_longer` をつかう.
 ```{r}
-df_rnorm <- df %>% gather(time,rnorm,-name) %>%
+df_rnorm <- df %>% pivot_longer(col=-name,names_to='time',values_to = 'rnorm') %>%
   mutate(time=as.numeric(time))
 head(df_rnorm)
 ```
