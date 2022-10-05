@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>8 現代的仮定のもとでの最小二乗法 | datawrangling</title>
+  <title>8 現代的仮定のもとでの最小二乗法 | Untitled</title>
   <meta name="description" content="This is a description. Please wrote a abstract this contents." />
   <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="8 現代的仮定のもとでの最小二乗法 | datawrangling" />
+  <meta property="og:title" content="8 現代的仮定のもとでの最小二乗法 | Untitled" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This is a description. Please wrote a abstract this contents." />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="8 現代的仮定のもとでの最小二乗法 | datawrangling" />
+  <meta name="twitter:title" content="8 現代的仮定のもとでの最小二乗法 | Untitled" />
   
   <meta name="twitter:description" content="This is a description. Please wrote a abstract this contents." />
   
@@ -23,7 +23,7 @@
 <meta name="author" content="宮﨑憲治" />
 
 
-<meta name="date" content="2022-09-12" />
+<meta name="date" content="2022-09-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -258,8 +258,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.2" data-path="10-panel.html"><a href="10-panel.html#プーリングols"><i class="fa fa-check"></i><b>10.2</b> プーリングOLS</a></li>
 <li class="chapter" data-level="10.3" data-path="10-panel.html"><a href="10-panel.html#固定効果モデル-平均差分法"><i class="fa fa-check"></i><b>10.3</b> 固定効果モデル (平均差分法)</a>
 <ul>
-<li class="chapter" data-level="10.3.1" data-path="10-panel.html"><a href="10-panel.html#時間効果"><i class="fa fa-check"></i><b>10.3.1</b> 時間効果</a></li>
-<li class="chapter" data-level="10.3.2" data-path="10-panel.html"><a href="10-panel.html#固定効果vsプーリングols"><i class="fa fa-check"></i><b>10.3.2</b> 固定効果VSプーリングOLS</a></li>
+<li class="chapter" data-level="10.3.1" data-path="10-panel.html"><a href="10-panel.html#時間効果モデル"><i class="fa fa-check"></i><b>10.3.1</b> 時間効果モデル</a></li>
 </ul></li>
 <li class="chapter" data-level="10.4" data-path="10-panel.html"><a href="10-panel.html#固定効果モデル-一階差分法"><i class="fa fa-check"></i><b>10.4</b> 固定効果モデル (一階差分法)</a>
 <ul>
@@ -267,13 +266,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="10.5" data-path="10-panel.html"><a href="10-panel.html#変量効果モデル"><i class="fa fa-check"></i><b>10.5</b> 変量効果モデル</a>
 <ul>
-<li class="chapter" data-level="10.5.1" data-path="10-panel.html"><a href="10-panel.html#時間効果-1"><i class="fa fa-check"></i><b>10.5.1</b> 時間効果</a></li>
-<li class="chapter" data-level="10.5.2" data-path="10-panel.html"><a href="10-panel.html#ハウスマン検定"><i class="fa fa-check"></i><b>10.5.2</b> ハウスマン検定</a></li>
+<li class="chapter" data-level="10.5.1" data-path="10-panel.html"><a href="10-panel.html#ハウスマン検定"><i class="fa fa-check"></i><b>10.5.1</b> ハウスマン検定</a></li>
 </ul></li>
 <li class="chapter" data-level="10.6" data-path="10-panel.html"><a href="10-panel.html#クラスターロバスト分散"><i class="fa fa-check"></i><b>10.6</b> クラスターロバスト分散</a>
 <ul>
 <li class="chapter" data-level="10.6.1" data-path="10-panel.html"><a href="10-panel.html#分散不均一の検定-1"><i class="fa fa-check"></i><b>10.6.1</b> 分散不均一の検定</a></li>
 </ul></li>
+<li class="chapter" data-level="10.7" data-path="test.html"><a href="test.html"><i class="fa fa-check"></i><b>10.7</b> R Markdown</a></li>
+<li class="chapter" data-level="10.8" data-path="test.html"><a href="test.html#including-plots"><i class="fa fa-check"></i><b>10.8</b> Including Plots</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -287,7 +287,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">datawrangling</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Untitled</a>
           </h1>
         </div>
 
@@ -327,10 +327,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## z test of coefficients:
 ## 
 ##             Estimate Std. Error z value  Pr(&gt;|z|)    
-## (Intercept) 11.61023    0.25836 44.9387 &lt; 2.2e-16 ***
-## x            1.06084    0.43505  2.4385 0.0147502 *  
-## wT          -1.70373    0.50918 -3.3460 0.0008198 ***
-## x:wT         1.05244    0.80140  1.3132 0.1891007    
+## (Intercept) 10.65883    0.31636 33.6920 &lt; 2.2e-16 ***
+## x            2.74554    0.49855  5.5071 3.649e-08 ***
+## wT          -0.55268    0.40997 -1.3481    0.1776    
+## x:wT        -0.94381    0.68594 -1.3759    0.1688    
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>ただ十分なデータのもとではティー値のままでもよい.</p>
@@ -341,9 +341,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## Model 1: y ~ x
 ## Model 2: y ~ x * w
-##   Res.Df Df Chisq Pr(&gt;Chisq)    
-## 1     98                        
-## 2     96  2 29.36  4.212e-07 ***
+##   Res.Df Df  Chisq Pr(&gt;Chisq)    
+## 1     98                         
+## 2     96  2 32.907  7.152e-08 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>エフ検定も十分なデータのもとではそのままでよいであろう.</p>
@@ -353,9 +353,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## Model 1: y ~ x
 ## Model 2: y ~ x * w
-##   Res.Df Df     F    Pr(&gt;F)    
-## 1     98                       
-## 2     96  2 14.68 2.738e-06 ***
+##   Res.Df Df      F    Pr(&gt;F)    
+## 1     98                        
+## 2     96  2 16.453 7.175e-07 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>これは <code>anova</code> と同じである.</p>
@@ -364,9 +364,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## Model 1: y ~ x
 ## Model 2: y ~ x * w
-##   Res.Df     RSS Df Sum of Sq     F    Pr(&gt;F)    
-## 1     98 127.373                                 
-## 2     96  97.542  2    29.832 14.68 2.738e-06 ***
+##   Res.Df     RSS Df Sum of Sq      F    Pr(&gt;F)    
+## 1     98 111.765                                  
+## 2     96  83.234  2    28.531 16.453 7.175e-07 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>複数制約の検定としてLM検定というのもある.
@@ -374,7 +374,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 その決定係数に観測数を掛けた統計量が自由どが制約の数のカイ二乗分布にしたがうことが知られている.</p>
 <div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="08-regression2.html#cb256-1" aria-hidden="true" tabindex="-1"></a>lmt <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">I</span>(<span class="fu">resid</span>(fm1))<span class="sc">~</span>w<span class="sc">*</span>x,<span class="at">data=</span>df)</span>
 <span id="cb256-2"><a href="08-regression2.html#cb256-2" aria-hidden="true" tabindex="-1"></a>(lmt <span class="ot">&lt;-</span> <span class="fu">nrow</span>(df)<span class="sc">*</span><span class="fu">summary</span>(lmt)<span class="sc">$</span>r.squared)</span></code></pre></div>
-<pre><code>## [1] 1.39078e-29</code></pre>
+<pre><code>## [1] 1.382478e-30</code></pre>
 <div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="08-regression2.html#cb258-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pchisq</span>(lmt,<span class="at">df=</span><span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## [1] 1</code></pre>
 </div>
@@ -394,10 +394,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## t test of coefficients:
 ## 
 ##             Estimate Std. Error t value  Pr(&gt;|t|)    
-## (Intercept) 11.61023    0.26225 44.2714 &lt; 2.2e-16 ***
-## x            1.06084    0.42631  2.4884 0.0145527 *  
-## wT          -1.70373    0.49881 -3.4156 0.0009344 ***
-## x:wT         1.05244    0.83069  1.2670 0.2082372    
+## (Intercept) 10.65883    0.37488 28.4327 &lt; 2.2e-16 ***
+## x            2.74554    0.57525  4.7728 6.496e-06 ***
+## wT          -0.55268    0.46726 -1.1828    0.2398    
+## x:wT        -0.94381    0.74453 -1.2677    0.2080    
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>先の値と標準誤差が違っていることが確認できるであろう.
@@ -408,10 +408,10 @@ STATA と同じにするには</p>
 ## t test of coefficients:
 ## 
 ##             Estimate Std. Error t value  Pr(&gt;|t|)    
-## (Intercept) 11.61023    0.25628 45.3026 &lt; 2.2e-16 ***
-## x            1.06084    0.41610  2.5495 0.0123724 *  
-## wT          -1.70373    0.47365 -3.5970 0.0005109 ***
-## x:wT         1.05244    0.79527  1.3234 0.1888551    
+## (Intercept) 10.65883    0.35171 30.3054 &lt; 2.2e-16 ***
+## x            2.74554    0.54211  5.0646 1.977e-06 ***
+## wT          -0.55268    0.44370 -1.2456    0.2159    
+## x:wT        -0.94381    0.70821 -1.3327    0.1858    
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>としなければならない.</p>
@@ -420,9 +420,9 @@ STATA と同じにするには</p>
 <pre><code>## 
 ## z test of coefficients:
 ## 
-##             Estimate Std. Error z value Pr(&gt;|z|)    
-## (Intercept) 11.18367    0.27435 40.7650  &lt; 2e-16 ***
-## x            1.04381    0.44364  2.3528  0.01863 *  
+##             Estimate Std. Error z value  Pr(&gt;|z|)    
+## (Intercept) 10.22765    0.23358 43.7863 &lt; 2.2e-16 ***
+## x            2.57020    0.39072  6.5782 4.763e-11 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>複数の係数についての検定は <code>waldtest</code> を実行すればよい.</p>
@@ -433,7 +433,7 @@ STATA と同じにするには</p>
 ## Model 2: y ~ x * w
 ##   Res.Df Df      F    Pr(&gt;F)    
 ## 1     98                        
-## 2     96  2 15.385 1.601e-06 ***
+## 2     96  2 17.132 4.338e-07 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>先の結果はエフ検定であるが, カイ二乗検定を実施するには以下を実施すればよい.</p>
@@ -442,9 +442,9 @@ STATA と同じにするには</p>
 ## 
 ## Model 1: y ~ x
 ## Model 2: y ~ x * w
-##   Res.Df Df Chisq Pr(&gt;Chisq)    
-## 1     98                        
-## 2     96  2 30.77  2.082e-07 ***
+##   Res.Df Df  Chisq Pr(&gt;Chisq)    
+## 1     98                         
+## 2     96  2 34.265  3.626e-08 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>最近開発されたパッケージ <code>estimatr</code>のコマンド　<code>lm_robust</code>　を用いるとロバスト分散のもとの推定値が簡単に計算できる.</p>
@@ -458,13 +458,13 @@ STATA と同じにするには</p>
 ## 
 ## Coefficients:
 ##             Estimate Std. Error t value  Pr(&gt;|t|) CI Lower CI Upper DF
-## (Intercept)   11.610     0.2566  45.245 1.507e-66  11.1009   12.120 96
-## x              1.061     0.4169   2.545 1.253e-02   0.2333    1.888 96
-## wT            -1.704     0.4810  -3.542 6.147e-04  -2.6585   -0.749 96
-## x:wT           1.052     0.8043   1.308 1.938e-01  -0.5442    2.649 96
+## (Intercept)  10.6588     0.3593  29.663 3.883e-50    9.946  11.3721 96
+## x             2.7455     0.5526   4.968 2.941e-06    1.649   3.8425 96
+## wT           -0.5527     0.4506  -1.227 2.230e-01   -1.447   0.3417 96
+## x:wT         -0.9438     0.7186  -1.313 1.922e-01   -2.370   0.4826 96
 ## 
-## Multiple R-squared:  0.2823 ,    Adjusted R-squared:  0.2599 
-## F-statistic: 15.51 on 3 and 96 DF,  p-value: 2.657e-08</code></pre>
+## Multiple R-squared:  0.4864 ,    Adjusted R-squared:  0.4703 
+## F-statistic: 28.71 on 3 and 96 DF,  p-value: 2.443e-13</code></pre>
 <p>オプション　<code>se_type = "stata"</code> を用いればSTATAと同じ計算が可能である.</p>
 <p>また以下のオプションをつければ分散均一の場合も計算できる.</p>
 <div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="08-regression2.html#cb272-1" aria-hidden="true" tabindex="-1"></a>fm3<span class="ot">&lt;-</span> <span class="fu">lm_robust</span>(y<span class="sc">~</span>x<span class="sc">*</span>w,<span class="at">data=</span>df,<span class="at">se_type =</span> <span class="st">&quot;classical&quot;</span>)</span>
@@ -477,13 +477,13 @@ STATA と同じにするには</p>
 ## 
 ## Coefficients:
 ##             Estimate Std. Error t value  Pr(&gt;|t|) CI Lower CI Upper DF
-## (Intercept)   11.610     0.2584  44.939 2.811e-66  11.0974   12.123 96
-## x              1.061     0.4350   2.438 1.659e-02   0.1973    1.924 96
-## wT            -1.704     0.5092  -3.346 1.171e-03  -2.7145   -0.693 96
-## x:wT           1.052     0.8014   1.313 1.922e-01  -0.5383    2.643 96
+## (Intercept)  10.6588     0.3164  33.692 5.507e-55   10.031  11.2868 96
+## x             2.7455     0.4985   5.507 3.045e-07    1.756   3.7352 96
+## wT           -0.5527     0.4100  -1.348 1.808e-01   -1.366   0.2611 96
+## x:wT         -0.9438     0.6859  -1.376 1.720e-01   -2.305   0.4178 96
 ## 
-## Multiple R-squared:  0.2823 ,    Adjusted R-squared:  0.2599 
-## F-statistic: 12.59 on 3 and 96 DF,  p-value: 5.213e-07</code></pre>
+## Multiple R-squared:  0.4864 ,    Adjusted R-squared:  0.4703 
+## F-statistic:  30.3 on 3 and 96 DF,  p-value: 7.16e-14</code></pre>
 </div>
 <div id="分散均一の検定" class="section level2 hasAnchor" number="8.3">
 <h2><span class="header-section-number">8.3</span> 分散均一の検定<a href="08-regression2.html#分散均一の検定" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -496,9 +496,9 @@ BP検定は帰無仮説が分散均一で, 対立仮説が分散が説明変数�
 <p>残差の自乗を被説明変数として回帰分析をおこない, その決定係数に観測数をかけたものが検定統計量となる.</p>
 <div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="08-regression2.html#cb274-1" aria-hidden="true" tabindex="-1"></a>bpt <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">I</span>(<span class="fu">resid</span>(fm1)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">~</span>w<span class="sc">*</span>x,<span class="at">data=</span>df)</span>
 <span id="cb274-2"><a href="08-regression2.html#cb274-2" aria-hidden="true" tabindex="-1"></a>(bpt <span class="ot">&lt;-</span><span class="fu">nrow</span>(df)<span class="sc">*</span><span class="fu">summary</span>(bpt)<span class="sc">$</span>r.squared)</span></code></pre></div>
-<pre><code>## [1] 2.976469</code></pre>
+<pre><code>## [1] 1.280115</code></pre>
 <div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="08-regression2.html#cb276-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pchisq</span>(bpt,<span class="at">df=</span><span class="dv">3</span>)</span></code></pre></div>
-<pre><code>## [1] 0.3952674</code></pre>
+<pre><code>## [1] 0.7338602</code></pre>
 <p>ここでの例ではP値が5%を超えているので帰無仮説を棄却できないので, 分散均一を仮定してよいことが示唆されている.</p>
 <p>R では以下のように実施すればよい.</p>
 <div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="08-regression2.html#cb278-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bptest</span>(fm1)</span></code></pre></div>
@@ -506,16 +506,16 @@ BP検定は帰無仮説が分散均一で, 対立仮説が分散が説明変数�
 ##  studentized Breusch-Pagan test
 ## 
 ## data:  fm1
-## BP = 2.9765, df = 3, p-value = 0.3953</code></pre>
+## BP = 1.2801, df = 3, p-value = 0.7339</code></pre>
 <p>これまでのBPテストは誤差項の分散が説明変数の線形関係あることを暗黙に仮定している.
 非線形性を考慮するために説明変数の二次項を導入した分散不均一性の検定をホワイト検定という.
 説明変数が複数ある場合ホワイト検定は煩雑になるため, 被説明変数の予測値を使って計算することがある.
 そのときホワイトテストは以下で実施する.</p>
 <div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="08-regression2.html#cb280-1" aria-hidden="true" tabindex="-1"></a>wht <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">I</span>(<span class="fu">resid</span>(fm1)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">~</span><span class="fu">fitted</span>(fm1)<span class="sc">+</span><span class="fu">I</span>(<span class="fu">fitted</span>(fm1)<span class="sc">^</span><span class="dv">2</span>),<span class="at">data=</span>df)</span>
 <span id="cb280-2"><a href="08-regression2.html#cb280-2" aria-hidden="true" tabindex="-1"></a>(wht <span class="ot">&lt;-</span> <span class="fu">nrow</span>(df)<span class="sc">*</span><span class="fu">summary</span>(wht)<span class="sc">$</span>r.squared)</span></code></pre></div>
-<pre><code>## [1] 1.637699</code></pre>
+<pre><code>## [1] 0.5731928</code></pre>
 <div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="08-regression2.html#cb282-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pchisq</span>(wht,<span class="at">df=</span><span class="dv">2</span>)</span></code></pre></div>
-<pre><code>## [1] 0.4409387</code></pre>
+<pre><code>## [1] 0.7508147</code></pre>
 <p>ホワイト検定でも分散均一が示唆されている.</p>
 <p>もしくは以下を実行する.</p>
 <div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="08-regression2.html#cb284-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bptest</span>(fm1,<span class="sc">~</span><span class="fu">fitted</span>(fm1)<span class="sc">+</span><span class="fu">I</span>(<span class="fu">fitted</span>(fm1)<span class="sc">^</span><span class="dv">2</span>))</span></code></pre></div>
@@ -523,7 +523,7 @@ BP検定は帰無仮説が分散均一で, 対立仮説が分散が説明変数�
 ##  studentized Breusch-Pagan test
 ## 
 ## data:  fm1
-## BP = 1.6377, df = 2, p-value = 0.4409</code></pre>
+## BP = 0.57319, df = 2, p-value = 0.7508</code></pre>
 <p>このように分散均一性は検定することが可能であるが, そもそも分散均一が疑われる場合は, ロバスト分散で推定するので十分であるため最近の実証分析ではこの検定は実施されない.</p>
 
 </div>

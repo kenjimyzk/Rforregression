@@ -1,11 +1,17 @@
 ---
 output: 
   html_document
+editor_options: 
+  markdown: 
+    wrap: sentence
 ---
+
 # パネル分析
 
 
+
 ## データ
+
 
 ```r
 library(AER)
@@ -35,14 +41,20 @@ pdim(pdata)
 ```
 
 ## プーリングOLS
+
+次の重回帰モデルを考える.
+
 $$
 inv_{it} = \beta_0 + \beta_1 value_{it} + \beta_2 capital_{it} + u_{it}
 $$
 
 誤差項 $u_{it}$ は $i$ についても $t$ についても独立同一分布と仮定する.
 さらに誤差項は説明変数と独立である.
+この時、パネルデータにおいてもOLS推定法でパラメータは不偏である.
+ここでの重回帰モデルをプーリングOLSモデルと呼ぶことにする.
 
 この推計は以下のようにする.
+
 
 ```r
 gp <- plm(inv ~ value + capital, data = pdata, model = "pooling")
@@ -78,6 +90,7 @@ summary(gp)
 
 これは以下の回帰分析と同じである.
 
+
 ```r
 summary(lm(inv ~ value + capital, data = pdata))
 ```
@@ -104,17 +117,15 @@ summary(lm(inv ~ value + capital, data = pdata))
 ## F-statistic: 426.6 on 2 and 197 DF,  p-value: < 2.2e-16
 ```
 
-
-
 ## 固定効果モデル (平均差分法)
-次のモデルを考える.
+
+次の重回帰モデルを考える.
 $$
 inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}
-$$
-この $\alpha_i$ は固定効果と呼ばれている.
+$$ この $\alpha_i$ は個別固定効果と呼ばれている.
 $\alpha_i$ は時間 $t$ に対して一定である.
 $\alpha_i$ は誤差項と相関があるもしれない.
-
+この個別固定効果を持つ重回帰モデルを固定効果モデルと呼ぶことにする.
 
 それぞれの時間平均をとれば以下になる.
 $$
@@ -124,11 +135,11 @@ $$
 そして，それぞれの観測値を時間平均で差し引けば以下のように $\alpha_i$ は消去される.
 $$
 inv_{it}-\overline{inv}_{i} = \beta_1 (value_{it}-\overline{value}_{i}) + \beta_2 (capital_{it}-\overline{capital}_{i})  + \bar{u}_{i} -\bar{u}_{i}
-$$
-このように変換して回帰分析すれば $\alpha_i$ は誤差項と相関があっても一致推定量である.
-
+$$ このように変換して回帰分析すれば $\alpha_i$ は誤差項と相関があっても一致推定量である.
+このような推定方法を**平均差分法**という.
 
 この推計は以下のようにする.
+
 
 ```r
 gi <- plm(inv ~ value + capital, data = pdata, model = "within")
@@ -161,7 +172,8 @@ summary(gi)
 ## F-statistic: 309.014 on 2 and 188 DF, p-value: < 2.22e-16
 ```
 
-固定効果は以下のコマンドで確かめられる.
+個別固定効果は以下のコマンドで確かめられる.
+
 
 ```r
 fixef(gi)
@@ -175,6 +187,7 @@ fixef(gi)
 ```
 
 これは以下の回帰分析と同じである.
+
 
 ```r
 summary(lm(inv ~ value + capital+0+factor(firm), data = pdata))
@@ -210,16 +223,35 @@ summary(lm(inv ~ value + capital+0+factor(firm), data = pdata))
 ## Multiple R-squared:  0.9616,	Adjusted R-squared:  0.9591 
 ## F-statistic:   392 on 12 and 188 DF,  p-value: < 2.2e-16
 ```
+
 決定係数が大きく異なっていることに注意されたい.
 
-### 時間効果
+個別固定効果が有効かどうかは以下の検定を実施すればよい.
+
+
+```r
+pFtest(gi,gp)
+```
+
+```
+## 
+## 	F test for individual effects
+## 
+## data:  inv ~ value + capital
+## F = 49.177, df1 = 9, df2 = 188, p-value < 2.2e-16
+## alternative hypothesis: significant effects
+```
+
+### 時間効果モデル
+
 次のモデルを考える.
 $$
 inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it}+ \gamma_t +\alpha_i + u_{it}
-$$
-この $\gamma_t$ は時間効果と呼ばれている.
+$$ この $\gamma_t$ は時間固定効果と呼ばれている.
+ここでは個別固定効果と時間固定効果の2つの固定効果を持つ重回帰モデルを**時間効果モデル**と呼ぶことにする.
 
 この推計は以下のようにする.
+
 
 ```r
 gi2 <- plm(inv ~ value + capital, data = pdata, effect="twoways",model = "within")
@@ -253,7 +285,8 @@ summary(gi2)
 ## F-statistic: 217.442 on 2 and 169 DF, p-value: < 2.22e-16
 ```
 
-それぞれの効果は以下になる.
+それぞれの固定効果は以下になる.
+
 
 ```r
 fixef(gi2, effect = "individual")
@@ -279,8 +312,9 @@ fixef(gi2, effect = "time")
 
 これは以下の回帰分析と同じである.
 
+
 ```r
-lm(inv ~ value + capital+0+factor(firm)+factor(year), data = pdata)
+summary(lm(inv ~ value + capital+0+factor(firm)+factor(year), data = pdata))
 ```
 
 ```
@@ -289,27 +323,55 @@ lm(inv ~ value + capital+0+factor(firm)+factor(year), data = pdata)
 ## lm(formula = inv ~ value + capital + 0 + factor(firm) + factor(year), 
 ##     data = pdata)
 ## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -162.609  -19.471   -1.267   19.128  211.842 
+## 
 ## Coefficients:
-##            value           capital     factor(firm)1     factor(firm)2  
-##           0.1177            0.3579          -86.9002          120.1540  
-##    factor(firm)3     factor(firm)4     factor(firm)5     factor(firm)6  
-##        -222.1310            8.4536          -92.3388           15.9884  
-##    factor(firm)7     factor(firm)8     factor(firm)9    factor(firm)10  
-##         -35.4336          -19.4097          -56.6827           39.9369  
-## factor(year)1936  factor(year)1937  factor(year)1938  factor(year)1939  
-##         -19.1974          -40.6900          -39.2264          -69.4703  
-## factor(year)1940  factor(year)1941  factor(year)1942  factor(year)1943  
-##         -44.2351          -18.8045          -21.1398          -42.9776  
-## factor(year)1944  factor(year)1945  factor(year)1946  factor(year)1947  
-##         -43.0988          -55.6830          -31.1693          -39.3922  
-## factor(year)1948  factor(year)1949  factor(year)1950  factor(year)1951  
-##         -43.7165          -73.4951          -75.8961          -62.4809  
-## factor(year)1952  factor(year)1953  factor(year)1954  
-##         -64.6323          -67.7180          -93.5262
+##                    Estimate Std. Error t value Pr(>|t|)    
+## value               0.11772    0.01375   8.560 6.65e-15 ***
+## capital             0.35792    0.02272  15.754  < 2e-16 ***
+## factor(firm)1     -86.90023   56.04663  -1.550 0.122893    
+## factor(firm)2     120.15401   29.16688   4.120 5.93e-05 ***
+## factor(firm)3    -222.13103   28.59744  -7.768 7.37e-13 ***
+## factor(firm)4       8.45361   20.41784   0.414 0.679377    
+## factor(firm)5     -92.33883   20.91106  -4.416 1.79e-05 ***
+## factor(firm)6      15.98841   19.88487   0.804 0.422498    
+## factor(firm)7     -35.43362   20.17003  -1.757 0.080772 .  
+## factor(firm)8     -19.40972   20.49076  -0.947 0.344868    
+## factor(firm)9     -56.68267   19.81211  -2.861 0.004756 ** 
+## factor(firm)10     39.93689   20.40337   1.957 0.051951 .  
+## factor(year)1936  -19.19741   23.67586  -0.811 0.418596    
+## factor(year)1937  -40.69001   24.69541  -1.648 0.101277    
+## factor(year)1938  -39.22640   23.23594  -1.688 0.093221 .  
+## factor(year)1939  -69.47029   23.65607  -2.937 0.003780 ** 
+## factor(year)1940  -44.23508   23.80979  -1.858 0.064930 .  
+## factor(year)1941  -18.80446   23.69400  -0.794 0.428519    
+## factor(year)1942  -21.13979   23.38163  -0.904 0.367219    
+## factor(year)1943  -42.97762   23.55287  -1.825 0.069808 .  
+## factor(year)1944  -43.09877   23.61020  -1.825 0.069701 .  
+## factor(year)1945  -55.68304   23.89562  -2.330 0.020974 *  
+## factor(year)1946  -31.16928   24.11598  -1.292 0.197957    
+## factor(year)1947  -39.39224   23.78368  -1.656 0.099522 .  
+## factor(year)1948  -43.71651   23.96965  -1.824 0.069945 .  
+## factor(year)1949  -73.49510   24.18292  -3.039 0.002750 ** 
+## factor(year)1950  -75.89611   24.34553  -3.117 0.002144 ** 
+## factor(year)1951  -62.48091   24.86425  -2.513 0.012911 *  
+## factor(year)1952  -64.63234   25.34950  -2.550 0.011672 *  
+## factor(year)1953  -67.71797   26.61108  -2.545 0.011832 *  
+## factor(year)1954  -93.52622   27.10786  -3.450 0.000708 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 51.72 on 169 degrees of freedom
+## Multiple R-squared:  0.9668,	Adjusted R-squared:  0.9607 
+## F-statistic: 158.8 on 31 and 169 DF,  p-value: < 2.2e-16
 ```
+
 決定係数が大きく異なっていることに注意されたい.
 
-時間効果が有効かどうかは以下の検定を実施する.
+時間固定効果が有効かどうかは以下の検定を実施すればよい.
+
 
 ```r
 pFtest(gi2, gi)
@@ -324,63 +386,12 @@ pFtest(gi2, gi)
 ## alternative hypothesis: significant effects
 ```
 
-
-### 固定効果VSプーリングOLS
-帰無仮説が固定効果がないモデル, 対立仮説が固定効果モデルの検定は以下のコマンドを実行すればよい.
-
-```r
-pFtest(gi,gp)
-```
-
-```
-## 
-## 	F test for individual effects
-## 
-## data:  inv ~ value + capital
-## F = 49.177, df1 = 9, df2 = 188, p-value < 2.2e-16
-## alternative hypothesis: significant effects
-```
-
-時間効果をもつ固定効果モデルの場合は, 帰無仮説仮説に応じて変化する.
-もし帰無仮説が時間効果を持たないプーリングOLSモデルなら, 以下を実行する.
-
-```r
-pFtest(gi2, gp)
-```
-
-```
-## 
-## 	F test for twoways effects
-## 
-## data:  inv ~ value + capital
-## F = 17.403, df1 = 28, df2 = 169, p-value < 2.2e-16
-## alternative hypothesis: significant effects
-```
-
-もし帰無仮説が時間効果をもつモデルなら, 以下を実行する.
-次のようにする.
-
-```r
-gpt <- update(gp, . ~ . +factor(year))
-pFtest(gi2,gpt)
-```
-
-```
-## 
-## 	F test for twoways effects
-## 
-## data:  inv ~ value + capital
-## F = 52.362, df1 = 9, df2 = 169, p-value < 2.2e-16
-## alternative hypothesis: significant effects
-```
-
-
 ## 固定効果モデル (一階差分法)
+
 次のモデルを考える.
 $$
 inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}
-$$
-この $\alpha_i$ は固定効果と呼ばれている.
+$$ この $\alpha_i$ は固定効果と呼ばれている.
 $\alpha_i$ は時間 $t$ に対して一定である.
 $\alpha_i$ は誤差項と相関があるもしれない.
 
@@ -393,8 +404,9 @@ $$
 
 この推計は以下のようにする.
 
+
 ```r
-gf <- plm(inv ~ value + capital, data = pdata, model = "fd")
+gf <- plm(inv ~ value + capital+0, data = pdata, model = "fd")
 summary(gf)
 ```
 
@@ -402,70 +414,124 @@ summary(gf)
 ## Oneway (individual) effect First-Difference Model
 ## 
 ## Call:
-## plm(formula = inv ~ value + capital, data = pdata, model = "fd")
+## plm(formula = inv ~ value + capital + 0, data = pdata, model = "fd")
 ## 
 ## Balanced Panel: n = 10, T = 20, N = 200
 ## Observations used in estimation: 190
 ## 
 ## Residuals:
-##        Min.     1st Qu.      Median     3rd Qu.        Max. 
-## -200.889558  -13.889063    0.016677    9.504223  195.634938 
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+## -202.05  -15.23   -1.76   -1.39    7.95  199.27 
 ## 
 ## Coefficients:
-##               Estimate Std. Error t-value  Pr(>|t|)    
-## (Intercept) -1.8188902  3.5655931 -0.5101    0.6106    
-## value        0.0897625  0.0083636 10.7325 < 2.2e-16 ***
-## capital      0.2917667  0.0537516  5.4281 1.752e-07 ***
+##          Estimate Std. Error t-value  Pr(>|t|)    
+## value   0.0890628  0.0082341  10.816 < 2.2e-16 ***
+## capital 0.2786940  0.0471564   5.910  1.58e-08 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
 ## Total Sum of Squares:    584410
-## Residual Sum of Squares: 345460
-## R-Squared:      0.40888
-## Adj. R-Squared: 0.40256
-## F-statistic: 64.6736 on 2 and 187 DF, p-value: < 2.22e-16
+## Residual Sum of Squares: 345940
+## R-Squared:      0.40876
+## Adj. R-Squared: 0.40561
+## F-statistic: 70.5784 on 2 and 188 DF, p-value: < 2.22e-16
 ```
 
-これは以下の回帰分析と同じである.
+時間効果がある場合, 以下を実行する.
+
 
 ```r
-plm(diff(inv) ~ diff(value) + diff(capital) + 0, data = pdata)
+gf2 <-plm(inv ~ value + capital+0+factor(year), data = pdata, model = "fd")
+summary(gf2)
+```
+
+```
+## Oneway (individual) effect First-Difference Model
+## 
+## Call:
+## plm(formula = inv ~ value + capital + 0 + factor(year), data = pdata, 
+##     model = "fd")
+## 
+## Balanced Panel: n = 10, T = 20, N = 200
+## Observations used in estimation: 190
+## 
+## Residuals:
+##       Min.    1st Qu.     Median    3rd Qu.       Max. 
+## -179.69353  -18.68501    0.49555   14.27860  179.03692 
+## 
+## Coefficients: (1 dropped because of singularities)
+##                    Estimate Std. Error t-value  Pr(>|t|)    
+## value             0.0875445  0.0095107  9.2048 < 2.2e-16 ***
+## capital           0.3246777  0.0571472  5.6814 5.727e-08 ***
+## factor(year)1935 52.1173697 67.1610018  0.7760   0.43883    
+## factor(year)1936 44.5420725 65.0001486  0.6853   0.49412    
+## factor(year)1937 32.2308400 62.5656219  0.5152   0.60712    
+## factor(year)1938 19.6675926 60.6802571  0.3241   0.74625    
+## factor(year)1939 -3.0067716 58.4729853 -0.0514   0.95905    
+## factor(year)1940 23.9596588 56.8175845  0.4217   0.67378    
+## factor(year)1941 48.5989734 54.8059164  0.8867   0.37648    
+## factor(year)1942 40.9122279 52.7118790  0.7761   0.43875    
+## factor(year)1943 22.8491024 50.5894648  0.4517   0.65209    
+## factor(year)1944 23.6577035 48.8480758  0.4843   0.62879    
+## factor(year)1945 14.7036587 46.6708001  0.3151   0.75311    
+## factor(year)1946 41.6241613 44.2490709  0.9407   0.34821    
+## factor(year)1947 27.5209677 40.4024259  0.6812   0.49670    
+## factor(year)1948 23.6476936 37.0841079  0.6377   0.52455    
+## factor(year)1949 -4.3351290 33.6481639 -0.1288   0.89764    
+## factor(year)1950 -4.2709916 30.2836724 -0.1410   0.88801    
+## factor(year)1951 16.8493484 26.2244634  0.6425   0.52142    
+## factor(year)1952 18.0590591 20.8995024  0.8641   0.38876    
+## factor(year)1953 24.3453549 13.9307034  1.7476   0.08235 .  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Total Sum of Squares:    584410
+## Residual Sum of Squares: 293000
+## R-Squared:      0.49864
+## Adj. R-Squared: 0.4393
+## F-statistic: 8.5881 on 21 and 169 DF, p-value: < 2.22e-16
+```
+
+時間固定効果が有効かどうかは以下の検定を実施すればよい.
+
+
+```r
+pFtest(gf2,gf)
 ```
 
 ```
 ## 
-## Model Formula: diff(inv) ~ diff(value) + diff(capital) + 0
+## 	F test for individual effects
 ## 
-## Coefficients:
-##   diff(value) diff(capital) 
-##      0.086792      0.229800
+## data:  inv ~ value + capital + 0 + factor(year)
+## F = 1.607, df1 = 19, df2 = 169, p-value = 0.05928
+## alternative hypothesis: significant effects
 ```
 
 ### 平均差分法と一階差分法
-平均差分法と一階差分法は誤差項の仮定をどのようにおくかによって変わってくる. 誤差項の階差をとることによって時間を通じて無相関になるなら一階差分法が望ましいであろう.
+
+平均差分法と一階差分法は誤差項の仮定をどのようにおくかによって変わってくる.
+誤差項の階差をとることによって時間を通じて無相関になるなら一階差分法が望ましいであろう.
 しかしながら, 固定効果, 時間効果の値がきちんと計算して, それが経済学的解釈が可能なら, 平均差分法が望ましい.
 さらに他のプーリングOLSの仮定と変量効果モデルとの比較の意味でも平均差分法がよく使われる.
 
-なお時間が2期間のパネルデータのとき, 平均差分法も一階差分法も計算値は同じである. 
-たとえば $t=2$のときの変数 $x_{it}$ の平均差分値は
-$$
+なお時間が2期間のパネルデータのとき, 平均差分法も一階差分法も計算値は同じである.
+たとえば $t=2$のときの変数 $x_{it}$ の平均差分値は $$
 x_{2t}-\bar{x}_i=x_{2t}-\frac{x_{i1}+x_{i2}}{2}=\frac{x_{i2}-x_{i1}}{2}
-$$
-となる.
-
+$$ となる.
 
 ## 変量効果モデル
+
 次のモデルを考える.
 $$
 inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}
-$$
-この $\alpha_i$ は変量効果と呼ばれている.
-$\alpha_i$ は時間 $t$ について一定であるが, $i$ について独立同一分布の確率変数にしたがう.
-さらに $\alpha_i$ は説明変数と無相関であることが必要である.
-このため固定効果モデルと違い, 欠落変数バイアスを除去することができない.
-しかしながら, $i$ についてのダミー変数を付け加えることができる.
+$$ この $\alpha_i$ は時間 $t$ について一定であるが, $i$ について独立同一分布の確率変数にしたがう.
+さらに $\alpha_i$ は説明変数と無相関である時, この $\alpha_i$ は個別変量効果と呼ばれている.
+個別固定効果は説明変数と無相関を仮定していない.
+. この個別変量効果を持つ重回帰モデルを変量効果モデルと呼ぶことにする.
 
 変量効果モデルは次のコマンドで実施する.
+
 
 ```r
 gr <- plm(inv ~ value + capital, data = pdata, model = "random")
@@ -508,6 +574,7 @@ summary(gr)
 
 変量効果は以下のコマンドで確かめられる.
 
+
 ```r
 ranef(gr)
 ```
@@ -519,130 +586,11 @@ ranef(gr)
 ##   -7.8977584    0.6726376  -28.1393497   50.3144442
 ```
 
-### 時間効果
-変量効果モデルの時間効果は二種類ある.
-時間効果が確率変数である場合は次のコマンドを実施する.
-
-```r
-gr2 <- plm(inv ~ value + capital, data = pdata, effect= "twoways",model = "random")
-summary(gr2)
-```
-
-```
-## Twoways effects Random Effect Model 
-##    (Swamy-Arora's transformation)
-## 
-## Call:
-## plm(formula = inv ~ value + capital, data = pdata, effect = "twoways", 
-##     model = "random")
-## 
-## Balanced Panel: n = 10, T = 20, N = 200
-## 
-## Effects:
-##                   var std.dev share
-## idiosyncratic 2675.43   51.72 0.274
-## individual    7095.25   84.23 0.726
-## time             0.00    0.00 0.000
-## theta: 0.864 (id) 0 (time) 0 (total)
-## 
-## Residuals:
-##      Min.   1st Qu.    Median   3rd Qu.      Max. 
-## -177.1700  -19.7576    4.6048   19.4676  252.7596 
-## 
-## Coefficients:
-##               Estimate Std. Error z-value Pr(>|z|)    
-## (Intercept) -57.865377  29.393359 -1.9687  0.04899 *  
-## value         0.109790   0.010528 10.4285  < 2e-16 ***
-## capital       0.308190   0.017171 17.9483  < 2e-16 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Total Sum of Squares:    2376000
-## Residual Sum of Squares: 547910
-## R-Squared:      0.7694
-## Adj. R-Squared: 0.76706
-## Chisq: 657.295 on 2 DF, p-value: < 2.22e-16
-```
-
-時間効果が固定されている場合は次のコマンドを実施する.
-
-```r
-grt <- update(gr, .~. + factor(year))
-summary(grt)
-```
-
-```
-## Oneway (individual) effect Random Effect Model 
-##    (Swamy-Arora's transformation)
-## 
-## Call:
-## plm(formula = inv ~ value + capital + factor(year), data = pdata, 
-##     model = "random")
-## 
-## Balanced Panel: n = 10, T = 20, N = 200
-## 
-## Effects:
-##                   var std.dev share
-## idiosyncratic 2675.43   51.72 0.274
-## individual    7095.25   84.23 0.726
-## theta: 0.864
-## 
-## Residuals:
-##        Min.     1st Qu.      Median     3rd Qu.        Max. 
-## -160.759401  -19.805349   -0.028228   19.194961  214.295364 
-## 
-## Coefficients:
-##                    Estimate Std. Error z-value  Pr(>|z|)    
-## (Intercept)      -29.828275  32.380484 -0.9212 0.3569561    
-## value              0.113779   0.011759  9.6763 < 2.2e-16 ***
-## capital            0.354336   0.022594 15.6826 < 2.2e-16 ***
-## factor(year)1936 -17.690058  23.612087 -0.7492 0.4537397    
-## factor(year)1937 -38.006448  24.356323 -1.5604 0.1186572    
-## factor(year)1938 -38.400547  23.303431 -1.6478 0.0993836 .  
-## factor(year)1939 -67.669031  23.605147 -2.8667 0.0041477 ** 
-## factor(year)1940 -42.210436  23.716150 -1.7798 0.0751057 .  
-## factor(year)1941 -16.896674  23.640596 -0.7147 0.4747751    
-## factor(year)1942 -19.950610  23.442180 -0.8511 0.3947382    
-## factor(year)1943 -41.303361  23.564907 -1.7527 0.0796452 .  
-## factor(year)1944 -41.301975  23.603031 -1.7499 0.0801427 .  
-## factor(year)1945 -53.418089  23.807547 -2.2437 0.0248487 *  
-## factor(year)1946 -28.601243  23.973397 -1.1930 0.2328534    
-## factor(year)1947 -37.647517  23.832869 -1.5796 0.1141878    
-## factor(year)1948 -41.944013  24.029174 -1.7455 0.0808900 .  
-## factor(year)1949 -71.515032  24.236975 -2.9507 0.0031710 ** 
-## factor(year)1950 -73.609655  24.379280 -3.0194 0.0025332 ** 
-## factor(year)1951 -59.205876  24.754226 -2.3917 0.0167683 *  
-## factor(year)1952 -60.963457  25.209460 -2.4183 0.0155942 *  
-## factor(year)1953 -62.886188  26.252610 -2.3954 0.0166011 *  
-## factor(year)1954 -88.564196  26.819791 -3.3022 0.0009593 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Total Sum of Squares:    2376000
-## Residual Sum of Squares: 479720
-## R-Squared:      0.7981
-## Adj. R-Squared: 0.77428
-## Chisq: 703.627 on 21 DF, p-value: < 2.22e-16
-```
-
-固定された時間効果が有意かどうかは次の検定を実施すれば良い.
-
-```r
-pFtest(grt,gr)
-```
-
-```
-## 
-## 	F test for individual effects
-## 
-## data:  inv ~ value + capital + factor(year)
-## F = 1.3511, df1 = 19, df2 = 178, p-value = 0.1572
-## alternative hypothesis: significant effects
-```
-
 ### ハウスマン検定
+
 帰無仮説が変量効果モデル, 対立仮説が固定効果モデルの検定はハウスマン検定を実施する.
 ハウスマン検定は以下で実施する.
+
 
 ```r
 phtest(gi,gr)
@@ -657,41 +605,11 @@ phtest(gi,gr)
 ## alternative hypothesis: one model is inconsistent
 ```
 
-時間効果が確率変数である変量モデルの場合以下を実行すればよい.
-
-```r
-phtest(gi2,gr2)
-```
-
-```
-## 
-## 	Hausman Test
-## 
-## data:  inv ~ value + capital
-## chisq = 13.46, df = 2, p-value = 0.001194
-## alternative hypothesis: one model is inconsistent
-```
-
-時間効果が確率変数でない変量モデルの場合以下を実行すればよい.
-
-```r
-phtest(gi2,grt)
-```
-
-```
-## 
-## 	Hausman Test
-## 
-## data:  inv ~ value + capital
-## chisq = 6.5733, df = 2, p-value = 0.03738
-## alternative hypothesis: one model is inconsistent
-```
-
-どちらを採用するかによって結果が変わってしまうので注意されたい.
-
 ## クラスターロバスト分散
+
 固定効果モデルにおいて, 分散不均一が疑われる場合, ではクラスターロバスト分散を用いる.
 時間効果がない場合は以下の様にする.
+
 
 ```r
 coeftest(gi,vcov=vcovHC(gi,type="sss"))
@@ -711,6 +629,7 @@ coeftest(gi,vcov=vcovHC(gi,type="sss"))
 分散不均一が疑われる場合, クラスターロバスト分散を用いる.
 時間効果がある場合は以下の様にする.
 
+
 ```r
 coeftest(gi2,vcov=vcovHC(gi2,type="sss"))
 ```
@@ -727,6 +646,7 @@ coeftest(gi2,vcov=vcovHC(gi2,type="sss"))
 ```
 
 STATA の計算結果に合わせるには次のように実施する必要がある.
+
 
 ```r
 git <- update(gi, .~. + factor(year))
@@ -766,9 +686,9 @@ coeftest(git,vcov=vcovHC(git,type="sss"))
 どちらを採用するかによって結果が変わってしまうので注意されたい.
 
 ### 分散不均一の検定
-固定効果モデルにおいて, 
-分散不均一かどうかを検定するには, 
-時間効果がない場合, 以下のようにすればよい.
+
+固定効果モデルにおいて, 分散不均一かどうかを検定するには以下のようにすればよい.
+
 
 ```r
 bptest(inv ~ value + capital + factor(firm), data=pdata)
@@ -782,7 +702,8 @@ bptest(inv ~ value + capital + factor(firm), data=pdata)
 ## BP = 85.836, df = 11, p-value = 1.086e-13
 ```
 
-時間効果がある場合, 以下のようにすればよい.
+時間効果モデルの場合, 以下のようにすればよい.
+
 
 ```r
 bptest(inv ~ value + capital + factor(firm) + factor(year),data=pdata)
@@ -795,7 +716,3 @@ bptest(inv ~ value + capital + factor(firm) + factor(year),data=pdata)
 ## data:  inv ~ value + capital + factor(firm) + factor(year)
 ## BP = 97.357, df = 30, p-value = 4.833e-09
 ```
-
-
-
-

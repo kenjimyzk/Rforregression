@@ -1,11 +1,14 @@
 ---
 title: "Untitled"
 output: html_document
+date: "2022-09-27"
 ---
 
 
 
 ## R Markdown
+
+日本語
 
 This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
@@ -33,3 +36,7 @@ You can also embed plots, for example:
 <img src="test_files/figure-html/pressure-1.png" width="672" />
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+$$
+y_t =\alpha + \beta x_t + \epsilon_t
+$$
