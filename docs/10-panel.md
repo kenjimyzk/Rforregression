@@ -117,7 +117,7 @@ summary(lm(inv ~ value + capital, data = pdata))
 ## F-statistic: 426.6 on 2 and 197 DF,  p-value: < 2.2e-16
 ```
 
-## 固定効果モデル (平均差分法)
+## 固定効果 (平均差分法)
 
 次の重回帰モデルを考える.
 $$
@@ -386,7 +386,7 @@ pFtest(gi2, gi)
 ## alternative hypothesis: significant effects
 ```
 
-## 固定効果モデル (一階差分法)
+## 固定効果 (一階差分法)
 
 次のモデルを考える.
 $$
@@ -520,7 +520,7 @@ pFtest(gf2,gf)
 x_{2t}-\bar{x}_i=x_{2t}-\frac{x_{i1}+x_{i2}}{2}=\frac{x_{i2}-x_{i1}}{2}
 $$ となる.
 
-## 変量効果モデル
+## 変量効果
 
 次のモデルを考える.
 $$

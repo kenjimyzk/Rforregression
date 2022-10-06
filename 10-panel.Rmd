@@ -52,7 +52,7 @@ summary(gp)
 summary(lm(inv ~ value + capital, data = pdata))
 ```
 
-## 固定効果モデル (平均差分法)
+## 固定効果 (平均差分法)
 
 次の重回帰モデルを考える.
 $$
@@ -136,7 +136,7 @@ summary(lm(inv ~ value + capital+0+factor(firm)+factor(year), data = pdata))
 pFtest(gi2, gi)
 ```
 
-## 固定効果モデル (一階差分法)
+## 固定効果 (一階差分法)
 
 次のモデルを考える.
 $$
@@ -184,7 +184,7 @@ pFtest(gf2,gf)
 x_{2t}-\bar{x}_i=x_{2t}-\frac{x_{i1}+x_{i2}}{2}=\frac{x_{i2}-x_{i1}}{2}
 $$ となる.
 
-## 変量効果モデル
+## 変量効果
 
 次のモデルを考える.
 $$
