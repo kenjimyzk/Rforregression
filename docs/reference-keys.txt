@@ -84,7 +84,3 @@ sargan-検定
 ハウスマン検定
 クラスターロバスト分散
 分散不均一の検定-1
-r-markdown
-including-plots
-bibliography-template.bib
-はじめに

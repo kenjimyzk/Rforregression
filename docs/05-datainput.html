@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>5 データ入力 | Untitled</title>
+  <title>5 データ入力 | datawrangling</title>
   <meta name="description" content="This is a description. Please wrote a abstract this contents." />
   <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="5 データ入力 | Untitled" />
+  <meta property="og:title" content="5 データ入力 | datawrangling" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This is a description. Please wrote a abstract this contents." />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="5 データ入力 | Untitled" />
+  <meta name="twitter:title" content="5 データ入力 | datawrangling" />
   
   <meta name="twitter:description" content="This is a description. Please wrote a abstract this contents." />
   
@@ -23,7 +23,7 @@
 <meta name="author" content="宮﨑憲治" />
 
 
-<meta name="date" content="2022-09-27" />
+<meta name="date" content="2022-10-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -272,8 +272,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="10.6.1" data-path="10-panel.html"><a href="10-panel.html#分散不均一の検定-1"><i class="fa fa-check"></i><b>10.6.1</b> 分散不均一の検定</a></li>
 </ul></li>
-<li class="chapter" data-level="10.7" data-path="test.html"><a href="test.html"><i class="fa fa-check"></i><b>10.7</b> R Markdown</a></li>
-<li class="chapter" data-level="10.8" data-path="test.html"><a href="test.html#including-plots"><i class="fa fa-check"></i><b>10.8</b> Including Plots</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -287,7 +285,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Untitled</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">datawrangling</a>
           </h1>
         </div>
 
@@ -310,14 +308,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="05-datainput.html#cb125-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">rnorm</span>(<span class="dv">10</span>), <span class="at">y =</span> letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>])</span>
 <span id="cb125-2"><a href="05-datainput.html#cb125-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)</span>
 <span id="cb125-3"><a href="05-datainput.html#cb125-3" aria-hidden="true" tabindex="-1"></a><span class="do">## &#39;data.frame&#39;:    10 obs. of  2 variables:</span></span>
-<span id="cb125-4"><a href="05-datainput.html#cb125-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ x: num  1.095 0.415 -0.574 -0.311 0.885 ...</span></span>
+<span id="cb125-4"><a href="05-datainput.html#cb125-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ x: num  0.958 -1.819 1.317 1.36 -2.461 ...</span></span>
 <span id="cb125-5"><a href="05-datainput.html#cb125-5" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ y: chr  &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; ...</span></span></code></pre></div>
 <p>ただデータフレイムは自動的に文字列が因子ベクトルに変換されてしまう.
 これを避けるには次のように <code>stringsAsFactors= FALSE</code> をつける.</p>
 <div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="05-datainput.html#cb126-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">rnorm</span>(<span class="dv">10</span>), <span class="at">y =</span> letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>], <span class="at">stringsAsFactors=</span> <span class="cn">FALSE</span>)</span>
 <span id="cb126-2"><a href="05-datainput.html#cb126-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)</span>
 <span id="cb126-3"><a href="05-datainput.html#cb126-3" aria-hidden="true" tabindex="-1"></a><span class="do">## &#39;data.frame&#39;:    10 obs. of  2 variables:</span></span>
-<span id="cb126-4"><a href="05-datainput.html#cb126-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ x: num  1.117 -0.544 -0.166 0.168 1.469 ...</span></span>
+<span id="cb126-4"><a href="05-datainput.html#cb126-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ x: num  -1.69 0.878 0.959 1.15 1.861 ...</span></span>
 <span id="cb126-5"><a href="05-datainput.html#cb126-5" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ y: chr  &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; ...</span></span></code></pre></div>
 <p>もしくはライブラリ <code>dplyr</code> にある <code>data_frame</code> を用いれば, そのようなオプションを付けることなくデータフレイムを拡張したクラスを作ることができる.</p>
 <div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="05-datainput.html#cb127-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
@@ -328,7 +326,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb127-6"><a href="05-datainput.html#cb127-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.</span></span>
 <span id="cb127-7"><a href="05-datainput.html#cb127-7" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)</span>
 <span id="cb127-8"><a href="05-datainput.html#cb127-8" aria-hidden="true" tabindex="-1"></a><span class="do">## tibble [10 × 2] (S3: tbl_df/tbl/data.frame)</span></span>
-<span id="cb127-9"><a href="05-datainput.html#cb127-9" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ x: num [1:10] 0.667 -2.045 0.864 0.157 0.527 ...</span></span>
+<span id="cb127-9"><a href="05-datainput.html#cb127-9" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ x: num [1:10] -1.315 1.043 -0.981 -0.296 -0.164 ...</span></span>
 <span id="cb127-10"><a href="05-datainput.html#cb127-10" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ y: chr [1:10] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; ...</span></span></code></pre></div>
 <p>以降, それぞれのファイル形式ごとにファイル入力について説明する.
 いずれのファイル形式にせよ, 外部ファイルから入力するさいには
