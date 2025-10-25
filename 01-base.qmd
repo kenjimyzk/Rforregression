@@ -10,7 +10,8 @@ output:
 knitr::opts_chunk$set(echo = TRUE, collapse=TRUE)
 ```
 
-# 基本
+## R の基本
+
 R の基礎を学ぶには、次のオンライン教材が役立つ（2025 年時点）。
 
 - Posit Cloud Primers（旧 RStudio Primers）  

@@ -1,65 +1,32 @@
 <!DOCTYPE html>
-<html lang="ja-JP" xml:lang="ja-JP">
-<head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja"><head>
 
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>2 RStudio | datawrangling</title>
-  <meta name="description" content="This is a description. Please wrote a abstract this contents." />
-  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.552">
 
-  <meta property="og:title" content="2 RStudio | datawrangling" />
-  <meta property="og:type" content="book" />
-  
-  <meta property="og:description" content="This is a description. Please wrote a abstract this contents." />
-  
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2 RStudio | datawrangling" />
-  
-  <meta name="twitter:description" content="This is a description. Please wrote a abstract this contents." />
-  
-
-<meta name="author" content="宮﨑憲治" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<meta name="date" content="2022-10-06" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  
-  
-<link rel="prev" href="01-base.html"/>
-<link rel="next" href="03-vector.html"/>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
-
-
-
-
-
-
-
-<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
-<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-
-
-<style type="text/css">
+<title>R と RStudio - 3&nbsp; RStudio</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -80,412 +47,965 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
-<link rel="stylesheet" href="style.css" type="text/css" />
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./03-vector.html" rel="next">
+<link href="./01-base.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "一致なし",
+    "search-matching-documents-text": "一致した文書",
+    "search-copy-link-title": "検索へのリンクをコピー",
+    "search-hide-matches-text": "追加の検索結果を非表示",
+    "search-more-match-text": "追加の検索結果",
+    "search-more-matches-text": "追加の検索結果",
+    "search-clear-button-title": "消去",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "検索",
+    "search-label": "サーチ"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body class="nav-sidebar floating">
 
-
-
-  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
-
-    <div class="book-summary">
-      <nav role="navigation">
-
-<ul class="summary">
-<li><a href="./">R & RStudio</a></li>
-
-<li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>はじめに</a>
-<ul>
-<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#r-とは"><i class="fa fa-check"></i><b>0.1</b> R とは</a></li>
-<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#r-のインストール"><i class="fa fa-check"></i><b>0.2</b> R のインストール</a></li>
-<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#r-の設定"><i class="fa fa-check"></i><b>0.3</b> R の設定</a></li>
-<li class="chapter" data-level="0.4" data-path="index.html"><a href="index.html#r-の使い方"><i class="fa fa-check"></i><b>0.4</b> R の使い方</a></li>
-</ul></li>
-<li class="chapter" data-level="1" data-path="01-base.html"><a href="01-base.html"><i class="fa fa-check"></i><b>1</b> 基本</a>
-<ul>
-<li class="chapter" data-level="1.1" data-path="01-base.html"><a href="01-base.html#電卓としての-r"><i class="fa fa-check"></i><b>1.1</b> 電卓としての R</a></li>
-<li class="chapter" data-level="1.2" data-path="01-base.html"><a href="01-base.html#関数電卓としてのr"><i class="fa fa-check"></i><b>1.2</b> 関数電卓としてのR</a></li>
-<li class="chapter" data-level="1.3" data-path="01-base.html"><a href="01-base.html#r-の型"><i class="fa fa-check"></i><b>1.3</b> R の型</a></li>
-<li class="chapter" data-level="1.4" data-path="01-base.html"><a href="01-base.html#変数"><i class="fa fa-check"></i><b>1.4</b> 変数</a></li>
-<li class="chapter" data-level="1.5" data-path="01-base.html"><a href="01-base.html#パッケージ"><i class="fa fa-check"></i><b>1.5</b> パッケージ</a></li>
-</ul></li>
-<li class="chapter" data-level="2" data-path="02-rstudio.html"><a href="02-rstudio.html"><i class="fa fa-check"></i><b>2</b> RStudio</a>
-<ul>
-<li class="chapter" data-level="2.1" data-path="02-rstudio.html"><a href="02-rstudio.html#rstudio-とは"><i class="fa fa-check"></i><b>2.1</b> RStudio とは</a></li>
-<li class="chapter" data-level="2.2" data-path="02-rstudio.html"><a href="02-rstudio.html#rstudio-のインストール"><i class="fa fa-check"></i><b>2.2</b> RStudio のインストール</a></li>
-<li class="chapter" data-level="2.3" data-path="02-rstudio.html"><a href="02-rstudio.html#rstudio-の設定"><i class="fa fa-check"></i><b>2.3</b> RStudio の設定</a></li>
-<li class="chapter" data-level="2.4" data-path="02-rstudio.html"><a href="02-rstudio.html#rstudio-の使い方"><i class="fa fa-check"></i><b>2.4</b> RStudio の使い方</a></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="03-vector.html"><a href="03-vector.html"><i class="fa fa-check"></i><b>3</b> ベクトル</a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="03-vector.html"><a href="03-vector.html#ベクトル-1"><i class="fa fa-check"></i><b>3.1</b> ベクトル</a></li>
-<li class="chapter" data-level="3.2" data-path="03-vector.html"><a href="03-vector.html#算術演算子"><i class="fa fa-check"></i><b>3.2</b> 算術演算子</a></li>
-<li class="chapter" data-level="3.3" data-path="03-vector.html"><a href="03-vector.html#論理演算子"><i class="fa fa-check"></i><b>3.3</b> 論理演算子</a></li>
-<li class="chapter" data-level="3.4" data-path="03-vector.html"><a href="03-vector.html#比較演算子"><i class="fa fa-check"></i><b>3.4</b> 比較演算子</a></li>
-<li class="chapter" data-level="3.5" data-path="03-vector.html"><a href="03-vector.html#要素"><i class="fa fa-check"></i><b>3.5</b> 要素</a></li>
-<li class="chapter" data-level="3.6" data-path="03-vector.html"><a href="03-vector.html#関数"><i class="fa fa-check"></i><b>3.6</b> 関数</a></li>
-<li class="chapter" data-level="3.7" data-path="03-vector.html"><a href="03-vector.html#規則的なベクトル"><i class="fa fa-check"></i><b>3.7</b> 規則的なベクトル</a></li>
-<li class="chapter" data-level="3.8" data-path="03-vector.html"><a href="03-vector.html#乱数ベクトル"><i class="fa fa-check"></i><b>3.8</b> 乱数ベクトル</a></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="04-dataframe.html"><a href="04-dataframe.html"><i class="fa fa-check"></i><b>4</b> データ構造</a>
-<ul>
-<li class="chapter" data-level="4.1" data-path="04-dataframe.html"><a href="04-dataframe.html#ベクトル-2"><i class="fa fa-check"></i><b>4.1</b> ベクトル</a>
-<ul>
-<li class="chapter" data-level="4.1.1" data-path="04-dataframe.html"><a href="04-dataframe.html#ベクトルのアクセス"><i class="fa fa-check"></i><b>4.1.1</b> ベクトルのアクセス</a></li>
-</ul></li>
-<li class="chapter" data-level="4.2" data-path="04-dataframe.html"><a href="04-dataframe.html#リスト"><i class="fa fa-check"></i><b>4.2</b> リスト</a>
-<ul>
-<li class="chapter" data-level="4.2.1" data-path="04-dataframe.html"><a href="04-dataframe.html#リストのアクセス"><i class="fa fa-check"></i><b>4.2.1</b> リストのアクセス</a></li>
-</ul></li>
-<li class="chapter" data-level="4.3" data-path="04-dataframe.html"><a href="04-dataframe.html#因子ベクトル"><i class="fa fa-check"></i><b>4.3</b> 因子ベクトル</a>
-<ul>
-<li class="chapter" data-level="4.3.1" data-path="04-dataframe.html"><a href="04-dataframe.html#factor"><i class="fa fa-check"></i><b>4.3.1</b> factor</a></li>
-<li class="chapter" data-level="4.3.2" data-path="04-dataframe.html"><a href="04-dataframe.html#cut"><i class="fa fa-check"></i><b>4.3.2</b> cut</a></li>
-</ul></li>
-<li class="chapter" data-level="4.4" data-path="04-dataframe.html"><a href="04-dataframe.html#行列"><i class="fa fa-check"></i><b>4.4</b> 行列</a>
-<ul>
-<li class="chapter" data-level="4.4.1" data-path="04-dataframe.html"><a href="04-dataframe.html#行列の演算"><i class="fa fa-check"></i><b>4.4.1</b> 行列の演算</a></li>
-<li class="chapter" data-level="4.4.2" data-path="04-dataframe.html"><a href="04-dataframe.html#行列のアクセス"><i class="fa fa-check"></i><b>4.4.2</b> 行列のアクセス</a></li>
-</ul></li>
-<li class="chapter" data-level="4.5" data-path="04-dataframe.html"><a href="04-dataframe.html#データフレイム"><i class="fa fa-check"></i><b>4.5</b> データフレイム</a>
-<ul>
-<li class="chapter" data-level="4.5.1" data-path="04-dataframe.html"><a href="04-dataframe.html#データフレイムの演算"><i class="fa fa-check"></i><b>4.5.1</b> データフレイムの演算</a></li>
-<li class="chapter" data-level="4.5.2" data-path="04-dataframe.html"><a href="04-dataframe.html#データフレイムのアクセス"><i class="fa fa-check"></i><b>4.5.2</b> データフレイムのアクセス</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="05-datainput.html"><a href="05-datainput.html"><i class="fa fa-check"></i><b>5</b> データ入力</a>
-<ul>
-<li class="chapter" data-level="5.1" data-path="05-datainput.html"><a href="05-datainput.html#はじめに-1"><i class="fa fa-check"></i><b>5.1</b> はじめに</a></li>
-<li class="chapter" data-level="5.2" data-path="05-datainput.html"><a href="05-datainput.html#csv-ファイル"><i class="fa fa-check"></i><b>5.2</b> csv ファイル</a></li>
-<li class="chapter" data-level="5.3" data-path="05-datainput.html"><a href="05-datainput.html#excel-ファイル"><i class="fa fa-check"></i><b>5.3</b> EXCEL ファイル</a></li>
-<li class="chapter" data-level="5.4" data-path="05-datainput.html"><a href="05-datainput.html#stata"><i class="fa fa-check"></i><b>5.4</b> STATA</a></li>
-<li class="chapter" data-level="5.5" data-path="05-datainput.html"><a href="05-datainput.html#r-に入っているデータ"><i class="fa fa-check"></i><b>5.5</b> R に入っているデータ</a></li>
-<li class="chapter" data-level="5.6" data-path="05-datainput.html"><a href="05-datainput.html#インターネットからデータ入力"><i class="fa fa-check"></i><b>5.6</b> インターネットからデータ入力</a></li>
-<li class="chapter" data-level="5.7" data-path="05-datainput.html"><a href="05-datainput.html#その他のデータ入力"><i class="fa fa-check"></i><b>5.7</b> その他のデータ入力</a></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="06-datawrangling.html"><a href="06-datawrangling.html"><i class="fa fa-check"></i><b>6</b> 整然データ</a>
-<ul>
-<li class="chapter" data-level="6.1" data-path="06-datawrangling.html"><a href="06-datawrangling.html#データ整形"><i class="fa fa-check"></i><b>6.1</b> データ整形</a></li>
-<li class="chapter" data-level="6.2" data-path="06-datawrangling.html"><a href="06-datawrangling.html#データ結合"><i class="fa fa-check"></i><b>6.2</b> データ結合</a></li>
-<li class="chapter" data-level="6.3" data-path="06-datawrangling.html"><a href="06-datawrangling.html#tidyr"><i class="fa fa-check"></i><b>6.3</b> tidyr</a></li>
-<li class="chapter" data-level="6.4" data-path="06-datawrangling.html"><a href="06-datawrangling.html#実践例"><i class="fa fa-check"></i><b>6.4</b> 実践例</a></li>
-</ul></li>
-<li class="chapter" data-level="7" data-path="07-regression1.html"><a href="07-regression1.html"><i class="fa fa-check"></i><b>7</b> 古典的仮定のもとでの最小二乗法</a>
-<ul>
-<li class="chapter" data-level="7.1" data-path="07-regression1.html"><a href="07-regression1.html#単回帰モデル"><i class="fa fa-check"></i><b>7.1</b> 単回帰モデル</a>
-<ul>
-<li class="chapter" data-level="7.1.1" data-path="07-regression1.html"><a href="07-regression1.html#ティー検定"><i class="fa fa-check"></i><b>7.1.1</b> ティー検定</a></li>
-<li class="chapter" data-level="7.1.2" data-path="07-regression1.html"><a href="07-regression1.html#対数変換"><i class="fa fa-check"></i><b>7.1.2</b> 対数変換</a></li>
-<li class="chapter" data-level="7.1.3" data-path="07-regression1.html"><a href="07-regression1.html#切片なし回帰モデル"><i class="fa fa-check"></i><b>7.1.3</b> 切片なし回帰モデル</a></li>
-</ul></li>
-<li class="chapter" data-level="7.2" data-path="07-regression1.html"><a href="07-regression1.html#重回帰モデル"><i class="fa fa-check"></i><b>7.2</b> 重回帰モデル</a>
-<ul>
-<li class="chapter" data-level="7.2.1" data-path="07-regression1.html"><a href="07-regression1.html#自乗項"><i class="fa fa-check"></i><b>7.2.1</b> 自乗項</a></li>
-<li class="chapter" data-level="7.2.2" data-path="07-regression1.html"><a href="07-regression1.html#交差項"><i class="fa fa-check"></i><b>7.2.2</b> 交差項</a></li>
-<li class="chapter" data-level="7.2.3" data-path="07-regression1.html"><a href="07-regression1.html#エフ検定"><i class="fa fa-check"></i><b>7.2.3</b> エフ検定</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="8" data-path="08-regression2.html"><a href="08-regression2.html"><i class="fa fa-check"></i><b>8</b> 現代的仮定のもとでの最小二乗法</a>
-<ul>
-<li class="chapter" data-level="8.1" data-path="08-regression2.html"><a href="08-regression2.html#正規性の仮定について"><i class="fa fa-check"></i><b>8.1</b> 正規性の仮定について</a></li>
-<li class="chapter" data-level="8.2" data-path="08-regression2.html"><a href="08-regression2.html#誤差項と説明変数が独立の仮定について"><i class="fa fa-check"></i><b>8.2</b> 誤差項と説明変数が独立の仮定について</a></li>
-<li class="chapter" data-level="8.3" data-path="08-regression2.html"><a href="08-regression2.html#分散均一の検定"><i class="fa fa-check"></i><b>8.3</b> 分散均一の検定</a></li>
-</ul></li>
-<li class="chapter" data-level="9" data-path="09-ivreg.html"><a href="09-ivreg.html"><i class="fa fa-check"></i><b>9</b> 操作変数法</a>
-<ul>
-<li class="chapter" data-level="9.1" data-path="09-ivreg.html"><a href="09-ivreg.html#データ"><i class="fa fa-check"></i><b>9.1</b> データ</a></li>
-<li class="chapter" data-level="9.2" data-path="09-ivreg.html"><a href="09-ivreg.html#操作変数"><i class="fa fa-check"></i><b>9.2</b> 操作変数</a></li>
-<li class="chapter" data-level="9.3" data-path="09-ivreg.html"><a href="09-ivreg.html#段階最小二乗法"><i class="fa fa-check"></i><b>9.3</b> 2段階最小二乗法</a>
-<ul>
-<li class="chapter" data-level="9.3.1" data-path="09-ivreg.html"><a href="09-ivreg.html#複数制約の検定"><i class="fa fa-check"></i><b>9.3.1</b> 複数制約の検定</a></li>
-</ul></li>
-<li class="chapter" data-level="9.4" data-path="09-ivreg.html"><a href="09-ivreg.html#特定化検定"><i class="fa fa-check"></i><b>9.4</b> 特定化検定</a>
-<ul>
-<li class="chapter" data-level="9.4.1" data-path="09-ivreg.html"><a href="09-ivreg.html#weak-instruments"><i class="fa fa-check"></i><b>9.4.1</b> Weak instruments</a></li>
-<li class="chapter" data-level="9.4.2" data-path="09-ivreg.html"><a href="09-ivreg.html#wu-hausman-検定"><i class="fa fa-check"></i><b>9.4.2</b> Wu-Hausman 検定</a></li>
-<li class="chapter" data-level="9.4.3" data-path="09-ivreg.html"><a href="09-ivreg.html#sargan-検定"><i class="fa fa-check"></i><b>9.4.3</b> Sargan 検定</a></li>
-</ul></li>
-<li class="chapter" data-level="9.5" data-path="09-ivreg.html"><a href="09-ivreg.html#ロバスト分散"><i class="fa fa-check"></i><b>9.5</b> ロバスト分散</a>
-<ul>
-<li class="chapter" data-level="9.5.1" data-path="09-ivreg.html"><a href="09-ivreg.html#分散不均一の検定"><i class="fa fa-check"></i><b>9.5.1</b> 分散不均一の検定</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="10" data-path="10-panel.html"><a href="10-panel.html"><i class="fa fa-check"></i><b>10</b> パネル分析</a>
-<ul>
-<li class="chapter" data-level="10.1" data-path="10-panel.html"><a href="10-panel.html#データ-1"><i class="fa fa-check"></i><b>10.1</b> データ</a></li>
-<li class="chapter" data-level="10.2" data-path="10-panel.html"><a href="10-panel.html#プーリングols"><i class="fa fa-check"></i><b>10.2</b> プーリングOLS</a></li>
-<li class="chapter" data-level="10.3" data-path="10-panel.html"><a href="10-panel.html#固定効果-平均差分法"><i class="fa fa-check"></i><b>10.3</b> 固定効果 (平均差分法)</a>
-<ul>
-<li class="chapter" data-level="10.3.1" data-path="10-panel.html"><a href="10-panel.html#時間効果モデル"><i class="fa fa-check"></i><b>10.3.1</b> 時間効果モデル</a></li>
-</ul></li>
-<li class="chapter" data-level="10.4" data-path="10-panel.html"><a href="10-panel.html#固定効果-一階差分法"><i class="fa fa-check"></i><b>10.4</b> 固定効果 (一階差分法)</a>
-<ul>
-<li class="chapter" data-level="10.4.1" data-path="10-panel.html"><a href="10-panel.html#平均差分法と一階差分法"><i class="fa fa-check"></i><b>10.4.1</b> 平均差分法と一階差分法</a></li>
-</ul></li>
-<li class="chapter" data-level="10.5" data-path="10-panel.html"><a href="10-panel.html#変量効果"><i class="fa fa-check"></i><b>10.5</b> 変量効果</a>
-<ul>
-<li class="chapter" data-level="10.5.1" data-path="10-panel.html"><a href="10-panel.html#ハウスマン検定"><i class="fa fa-check"></i><b>10.5.1</b> ハウスマン検定</a></li>
-</ul></li>
-<li class="chapter" data-level="10.6" data-path="10-panel.html"><a href="10-panel.html#クラスターロバスト分散"><i class="fa fa-check"></i><b>10.6</b> クラスターロバスト分散</a>
-<ul>
-<li class="chapter" data-level="10.6.1" data-path="10-panel.html"><a href="10-panel.html#分散不均一の検定-1"><i class="fa fa-check"></i><b>10.6.1</b> 分散不均一の検定</a></li>
-</ul></li>
-</ul></li>
-<li class="divider"></li>
-<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-
-</ul>
-
-      </nav>
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="サイドバーを切り替える" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02-rstudio.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">RStudio</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="サイドバーを切り替える" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
     </div>
-
-    <div class="book-body">
-      <div class="body-inner">
-        <div class="book-header" role="navigation">
-          <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">datawrangling</a>
-          </h1>
-        </div>
-
-        <div class="page-wrapper" tabindex="-1" role="main">
-          <div class="page-inner">
-
-            <section class="normal" id="section-">
-<div id="rstudio" class="section level1 hasAnchor" number="2">
-<h1><span class="header-section-number">2</span> RStudio<a href="02-rstudio.html#rstudio" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="rstudio-とは" class="section level2 hasAnchor" number="2.1">
-<h2><span class="header-section-number">2.1</span> RStudio とは<a href="02-rstudio.html#rstudio-とは" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>RStudio は R の統合開発環境 (IDE, Integrated Development Enviroment) の一つである.
-オープンソース版が存在する.</p>
-<p><a href="https://ja.wikipedia.org/wiki/R-Studio" class="uri">https://ja.wikipedia.org/wiki/R-Studio</a></p>
-</div>
-<div id="rstudio-のインストール" class="section level2 hasAnchor" number="2.2">
-<h2><span class="header-section-number">2.2</span> RStudio のインストール<a href="02-rstudio.html#rstudio-のインストール" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>オープンソース版のRStudio のインストールは</p>
-<p><a href="https://www.rstudio.com/products/rstudio/download/" class="uri">https://www.rstudio.com/products/rstudio/download/</a></p>
-<p>にいき, 該当機種のファイルをダウンロードする.
-ダウンロードしたあとに実行すればインストールされる.</p>
-<p>Ubuntu ならサーバー版を導入するとよい.</p>
-<p><a href="https://www.rstudio.com/products/rstudio/download-server/" class="uri">https://www.rstudio.com/products/rstudio/download-server/</a></p>
-</div>
-<div id="rstudio-の設定" class="section level2 hasAnchor" number="2.3">
-<h2><span class="header-section-number">2.3</span> RStudio の設定<a href="02-rstudio.html#rstudio-の設定" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>メニューバーの [Tools] から [Global Options…] を選択することで設定を変更できる.</p>
-<p>[General] で以下のように
-[Restore .RData …] のチェックを外していいて,
-その下を <code>Never</code> にしている.
-これは, 立ち上げたきに環境をクリーンし,
-終了時に, データの保存を聞かれないようにするためである.</p>
-<p><img src="figs/rstudio-general.PNG" width="292" /></p>
-<p>次に, [Code] の タブ [Saving] で.
-[Default text encoding] を <code>UTF-8</code> とする.
-Windows 以外だとOSのシステムフォントが同じなので問題ない.
-しかし Windows は SJIS を拡張した CP932 なので, 注意が必要である.</p>
-<p>Windows のRは UTF-8 を選択してもR自身はCP932処理している.
-ただ, 他のOSとの併用の場合, UTF-8 にしたほうがよいだろう.
-またHTMLファイルは UTF-8 でのファイルが前提になりつつあるので,
-HTML として出力を考えているなら, <code>UTF-8</code> としたほうが無難である.</p>
-<p>またインターネットで公開されている日本語のRファイルは
-Windows の使用が前提となっているため, 文字コードが CP932 であることが多い. Windows 以外を使っている場合, 一時的に文字コードを SJIS を選択する必要がある.</p>
-<p><img src="figs/rstudio-utf8.PNG" width="296" /></p>
-<p>あと, [R Markdown] で 真ん中あたりの [Show output preview in:] を <code>View Pane</code> に変更する</p>
-<p><img src="figs/rstudio-rmd.PNG" width="292" /></p>
-</div>
-<div id="rstudio-の使い方" class="section level2 hasAnchor" number="2.4">
-<h2><span class="header-section-number">2.4</span> RStudio の使い方<a href="02-rstudio.html#rstudio-の使い方" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>RStudio の使い方として日本語版のチートシートがある.</p>
-<p><a href="https://github.com/rstudio/cheatsheets/raw/master/translations/japanese/rstudio-IDE-cheatsheet_ja.pdf" class="uri">https://github.com/rstudio/cheatsheets/raw/master/translations/japanese/rstudio-IDE-cheatsheet_ja.pdf</a></p>
-<p>英語であるがこの動画も有益である.
-第一章だけ公開されている.</p>
-<p><a href="https://www.datacamp.com/courses/working-with-the-rstudio-ide-part-1" class="uri">https://www.datacamp.com/courses/working-with-the-rstudio-ide-part-1</a></p>
-<p>RStudio プロジェクト単位で複数のソースコードを管理するのことが推奨される.
-そうするとプロジェクトごとに作業ディレクトリが設定される.
-プロジェクトはメニューバー の [File] から [New Project] を選択する.
-そうすると新たに新たにディレクトリを作成するか, 既存のディレクトリを採用するかなどが選べる.
-また, バージョン管理ソフトを導入していればそこから取り入れることも可能となる.</p>
-<p><img src="figs/rstudio_project.gif" /><!-- --></p>
-<p>プロジェクトを立ち上げると左にコンソールペイン (Console Pane) が, 右側に上下に二分割されたペインが現れる.
-この配置は メニューバーの [Tools] から [Project Options -&gt; Pane Layout] を選べば変更可能である.
-コンソールペインにコマンドを入力するとその結果が直下に返される.
-何か入力した後に, Ctrl + l (Cmd + l) を押すと, 画面が更新される.
-上下の矢印キーで過去に実行したコマンドを選択できる.</p>
-<p>メニューバー の [File] から [New File -&gt; RScript] を選択するか,
-Ctrl + Shift + n (Cmd + Shift + n) と入力するか, メニューバー下の一番左の白紙のアイコンをクリックすると,
-Rのスクリプトファイルが新規に作られる.
-スクリプフォファイルを開くと左側のコンソール画面の上にソースペインが登場する.
-ここにソースコードを書く.</p>
-<p>ソースペインで何かコマンドを書いていきながら,
-ソースコードの該当行で Ctrl + Enter (Cmd + Return) と入力するか, ソースペインの上側の右に並んでいるアイコンのうち, 左側のRunと書かれたアイコンをクリックすると, 該当行がコンソール画面で実行される.
-複数行選択した後に, メニューバー の [Code] から [Run Selected line(s)] を選ぶか,
-Ctrl + Shift + Enter (Cmd + Shift + Enter) と入力すると複数行をまとめて実行させることも可能である.</p>
-<p>メニューバー の [File] から [Save] を選択するか, Ctrl + s (Cmd + s) と入力するか, メニューバー下の左から3番目のフロッピーディスクアイコンをクリック
-すると, スクリプトファイルを保存することができる.
-またメニューバー の [File] から [Open] を選択するか,
-Ctrl + o (Cmd + o) と入力するか, メニューバー下の左から2番めのフォルダを開くアイコンをクリックすると,
-既存のスクリプトファイルを開くことができる.</p>
-<p><img src="figs/rstudio_file.gif" /><!-- --></p>
-<p>右上のペインには Environment と History のタブがある.
-Environment は現在使っているオブジェクトが表示される.
-最初は空白である.
-変数に数値を代入 (R の言い方ではオブジェクトに付値) することによって,
-値が付け加わっている.
-History はこれまでの履歴が記録される.
-履歴の一部ををエディトペインかコンソールペインに挿入することができる.</p>
-<p>右下のペインには Files, Plots, Packages, Help, Viewer のタブがある.
-Files ペインはWindowsではエクスプローラーのようなもので,
-Mac はFinder のようなもので, ファイル管理をおこなう.
-ファイル管理として新たなフォルダを作成したり, ファイルを削除したり,
-ファイル名を変更したりする.</p>
-<p>またワーキングディレクトリを直感的に設定することもできる.
-ワーキングを設定したい場所に移動して,
-Files ペインの上に並んでいるアイコンのうち, Moreをクリックし,
-[Set As Working Directory] をクリックすればよい.</p>
-<p>Plots ペインはコンソール画面で作図をコマンドの実行したら, 表示されるペインである. そこで作成した図をコマンドを使わずに保存したりすることができる.
-Packages ペインは現在Rに導入されているパッケージリストが表示される.
-そこに無いパッケージはメニューバーの [Tools] から [Install Packages…] を選択して実行すればよい.
-すでにあるパッケージは, パッケージ名の左側のボックスをチェックすれば,
-ライブライリ名を付けずにコマンドを実行させることができる.</p>
-<p>Help ペインはその名の通り, ヘルプ画面が表示される.
-コンソールペインから <code>help (コマンド)</code> もしくは <code>?コマンド</code> と入力するとそのコマンドのヘルプがこのペインに表示される.
-R ではソースペインやコンソールペインで, コマンド入力していると, コマンドの後補があらわてくる. [TAB] でコマンドを補完できる.
-さらにそのコマンドでどのような引数が使われるのかも示される.
-さらに [TAB] を押せば, 引数を選べるだけでなく, 簡単なコマンドの説明がある.
-そのときに [F1] を押せば, より詳細なヘルプが立ち上がる.
-また Packages パインから該当パッケージをクリックするとそのパッケージのコマンド一覧が Help ペインに表示される.</p>
-<p><img src="figs/rstudio_help.gif" /><!-- --></p>
-<p>最後のViewer ペインは R Markdown で作成したファイルを HTMLで出力したときに表示されるペインである.
-最初の設定だと別のウィンドウ画面として結果が表示される.
-このペインに出力されるためには [Tools -&gt; R Markdown] にいき, 真ん中あたりの
-[Show output preview in:] を View Pane に変更する必要がある.
-その上でソースペインから [Ctrl + Shift + k] とするか, ソースペインの左側のアイコン群の一番右側のノートのアイコンをクリックすると,
-確認画面が現れるので <code>HTML</code> を押す.
-そうするとそのコードがすべて実行されて, 実行結果が作図も含めてHTMLファイルに出力される.
-もしくはメニューバーの [File] から [Knit Document…] としを選択するとよい.</p>
-<p><img src="figs/rstudio_knit.gif" /><!-- --></p>
-<p>これは knitr と rmarkdown いわれるパッケージを利用したもので, Rのコードを埋め込んだマークダウンファイルを作成し,
-そこからHTMLファイルを作成する.
-他にも word ファイル や pdf ファイル生成することも適切に設定していれば可能である.
-ソースコードだけでなく, マークダウンファイルに <code>R</code> コマンドを埋め込んだ <code>Rmd</code> ファイルを作成することができる
-それは新規作成でRスクリプトでなく, R Notebook や R Markdown を選択すればよい.</p>
-
-</div>
-</div>
-            </section>
-
-          </div>
-        </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">R と RStudio</a> 
+    </div>
       </div>
-<a href="01-base.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="03-vector.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
-    </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="サーチ"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">R と RStudio</span></span></a>
   </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
-<script>
-gitbook.require(["gitbook"], function(gitbook) {
-gitbook.start({
-"sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/02-rstudio.Rmd",
-"text": "Edit"
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": null,
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "subsection"
-}
-});
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-base.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">基本</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-rstudio.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">RStudio</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-vector.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">vector</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-dataframe.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">データ構造</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-datainput.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">データ入力</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-datawrangling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">datawrangling</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-regression1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">古典的仮定のもとでの最小二乗法</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-regression2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">現代的仮定のもとでの最小二乗法</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-ivreg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">操作変数法</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-panel.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">パネル分析</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">目次</h2>
+   
+  <ul>
+  <li><a href="#rstudio-とは" id="toc-rstudio-とは" class="nav-link active" data-scroll-target="#rstudio-とは"><span class="header-section-number">3.1</span> RStudio とは</a></li>
+  <li><a href="#rstudio-のインストール" id="toc-rstudio-のインストール" class="nav-link" data-scroll-target="#rstudio-のインストール"><span class="header-section-number">3.2</span> RStudio のインストール</a></li>
+  <li><a href="#rstudio-の設定" id="toc-rstudio-の設定" class="nav-link" data-scroll-target="#rstudio-の設定"><span class="header-section-number">3.3</span> RStudio の設定</a></li>
+  <li><a href="#rstudio-の使い方" id="toc-rstudio-の使い方" class="nav-link" data-scroll-target="#rstudio-の使い方"><span class="header-section-number">3.4</span> RStudio の使い方</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">RStudio</span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> コード</button></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="rstudio-とは" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="rstudio-とは"><span class="header-section-number">3.1</span> RStudio とは</h2>
+<p>RStudio は R の統合開発環境 (IDE, Integrated Development Enviroment) の一つである. オープンソース版が存在する.</p>
+<p>https://ja.wikipedia.org/wiki/R-Studio</p>
+</section>
+<section id="rstudio-のインストール" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="rstudio-のインストール"><span class="header-section-number">3.2</span> RStudio のインストール</h2>
+<p>オープンソース版のRStudio のインストールは</p>
+<p>https://www.rstudio.com/products/rstudio/download/</p>
+<p>にいき, 該当機種のファイルをダウンロードする. ダウンロードしたあとに実行すればインストールされる.</p>
+<p>Ubuntu ならサーバー版を導入するとよい.</p>
+<p>https://www.rstudio.com/products/rstudio/download-server/</p>
+</section>
+<section id="rstudio-の設定" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="rstudio-の設定"><span class="header-section-number">3.3</span> RStudio の設定</h2>
+<p>メニューバーの [Tools] から [Global Options…] を選択することで設定を変更できる.</p>
+<p>[General] で以下のように [Restore .RData …] のチェックを外していいて, その下を <code>Never</code> にしている. これは, 立ち上げたきに環境をクリーンし, 終了時に, データの保存を聞かれないようにするためである.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="figs/rstudio-general.PNG" class="img-fluid figure-img" width="292"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>次に, [Code] の タブ [Saving] で. [Default text encoding] を <code>UTF-8</code> とする. Windows 以外だとOSのシステムフォントが同じなので問題ない. しかし Windows は SJIS を拡張した CP932 なので, 注意が必要である.</p>
+<p>Windows のRは UTF-8 を選択してもR自身はCP932処理している. ただ, 他のOSとの併用の場合, UTF-8 にしたほうがよいだろう. またHTMLファイルは UTF-8 でのファイルが前提になりつつあるので, HTML として出力を考えているなら, <code>UTF-8</code> としたほうが無難である.</p>
+<p>またインターネットで公開されている日本語のRファイルは Windows の使用が前提となっているため, 文字コードが CP932 であることが多い. Windows 以外を使っている場合, 一時的に文字コードを SJIS を選択する必要がある.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="figs/rstudio-utf8.PNG" class="img-fluid figure-img" width="296"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>あと, [R Markdown] で 真ん中あたりの [Show output preview in:] を <code>View Pane</code> に変更する</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="figs/rstudio-rmd.PNG" class="img-fluid figure-img" width="292"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="rstudio-の使い方" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="rstudio-の使い方"><span class="header-section-number">3.4</span> RStudio の使い方</h2>
+<p>RStudio の使い方として日本語版のチートシートがある.</p>
+<p>https://github.com/rstudio/cheatsheets/raw/master/translations/japanese/rstudio-IDE-cheatsheet_ja.pdf</p>
+<p>英語であるがこの動画も有益である. 第一章だけ公開されている.</p>
+<p>https://www.datacamp.com/courses/working-with-the-rstudio-ide-part-1</p>
+<p>RStudio プロジェクト単位で複数のソースコードを管理するのことが推奨される. そうするとプロジェクトごとに作業ディレクトリが設定される. プロジェクトはメニューバー の [File] から [New Project] を選択する. そうすると新たに新たにディレクトリを作成するか, 既存のディレクトリを採用するかなどが選べる. また, バージョン管理ソフトを導入していればそこから取り入れることも可能となる.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="figs/rstudio_project.gif" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>プロジェクトを立ち上げると左にコンソールペイン (Console Pane) が, 右側に上下に二分割されたペインが現れる. この配置は メニューバーの [Tools] から [Project Options -&gt; Pane Layout] を選べば変更可能である. コンソールペインにコマンドを入力するとその結果が直下に返される. 何か入力した後に, Ctrl + l (Cmd + l) を押すと, 画面が更新される. 上下の矢印キーで過去に実行したコマンドを選択できる.</p>
+<p>メニューバー の [File] から [New File -&gt; RScript] を選択するか, Ctrl + Shift + n (Cmd + Shift + n) と入力するか, メニューバー下の一番左の白紙のアイコンをクリックすると, Rのスクリプトファイルが新規に作られる. スクリプフォファイルを開くと左側のコンソール画面の上にソースペインが登場する. ここにソースコードを書く.</p>
+<p>ソースペインで何かコマンドを書いていきながら, ソースコードの該当行で Ctrl + Enter (Cmd + Return) と入力するか, ソースペインの上側の右に並んでいるアイコンのうち, 左側のRunと書かれたアイコンをクリックすると, 該当行がコンソール画面で実行される. 複数行選択した後に, メニューバー の [Code] から [Run Selected line(s)] を選ぶか, Ctrl + Shift + Enter (Cmd + Shift + Enter) と入力すると複数行をまとめて実行させることも可能である.</p>
+<p>メニューバー の [File] から [Save] を選択するか, Ctrl + s (Cmd + s) と入力するか, メニューバー下の左から3番目のフロッピーディスクアイコンをクリック すると, スクリプトファイルを保存することができる. またメニューバー の [File] から [Open] を選択するか, Ctrl + o (Cmd + o) と入力するか, メニューバー下の左から2番めのフォルダを開くアイコンをクリックすると, 既存のスクリプトファイルを開くことができる.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="figs/rstudio_file.gif" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>右上のペインには Environment と History のタブがある. Environment は現在使っているオブジェクトが表示される. 最初は空白である. 変数に数値を代入 (R の言い方ではオブジェクトに付値) することによって, 値が付け加わっている. History はこれまでの履歴が記録される. 履歴の一部ををエディトペインかコンソールペインに挿入することができる.</p>
+<p>右下のペインには Files, Plots, Packages, Help, Viewer のタブがある. Files ペインはWindowsではエクスプローラーのようなもので, Mac はFinder のようなもので, ファイル管理をおこなう. ファイル管理として新たなフォルダを作成したり, ファイルを削除したり, ファイル名を変更したりする.</p>
+<p>またワーキングディレクトリを直感的に設定することもできる. ワーキングを設定したい場所に移動して, Files ペインの上に並んでいるアイコンのうち, Moreをクリックし, [Set As Working Directory] をクリックすればよい.</p>
+<p>Plots ペインはコンソール画面で作図をコマンドの実行したら, 表示されるペインである. そこで作成した図をコマンドを使わずに保存したりすることができる. Packages ペインは現在Rに導入されているパッケージリストが表示される. そこに無いパッケージはメニューバーの [Tools] から [Install Packages…] を選択して実行すればよい. すでにあるパッケージは, パッケージ名の左側のボックスをチェックすれば, ライブライリ名を付けずにコマンドを実行させることができる.</p>
+<p>Help ペインはその名の通り, ヘルプ画面が表示される. コンソールペインから <code>help (コマンド)</code> もしくは <code>?コマンド</code> と入力するとそのコマンドのヘルプがこのペインに表示される. R ではソースペインやコンソールペインで, コマンド入力していると, コマンドの後補があらわてくる. [TAB] でコマンドを補完できる. さらにそのコマンドでどのような引数が使われるのかも示される. さらに [TAB] を押せば, 引数を選べるだけでなく, 簡単なコマンドの説明がある. そのときに [F1] を押せば, より詳細なヘルプが立ち上がる. また Packages パインから該当パッケージをクリックするとそのパッケージのコマンド一覧が Help ペインに表示される.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="figs/rstudio_help.gif" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>最後のViewer ペインは R Markdown で作成したファイルを HTMLで出力したときに表示されるペインである. 最初の設定だと別のウィンドウ画面として結果が表示される. このペインに出力されるためには [Tools -&gt; R Markdown] にいき, 真ん中あたりの [Show output preview in:] を View Pane に変更する必要がある. その上でソースペインから [Ctrl + Shift + k] とするか, ソースペインの左側のアイコン群の一番右側のノートのアイコンをクリックすると, 確認画面が現れるので <code>HTML</code> を押す. そうするとそのコードがすべて実行されて, 実行結果が作図も含めてHTMLファイルに出力される. もしくはメニューバーの [File] から [Knit Document…] としを選択するとよい.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="figs/rstudio_knit.gif" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>これは knitr と rmarkdown いわれるパッケージを利用したもので, Rのコードを埋め込んだマークダウンファイルを作成し, そこからHTMLファイルを作成する. 他にも word ファイル や pdf ファイル生成することも適切に設定していれば可能である. ソースコードだけでなく, マークダウンファイルに <code>R</code> コマンドを埋め込んだ <code>Rmd</code> ファイルを作成することができる それは新規作成でRスクリプトでなく, R Notebook や R Markdown を選択すればよい.</p>
+
+
+<!-- -->
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "コピーしました");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "コピーしました");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
 });
 </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./01-base.html" class="pagination-link" aria-label="基本">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">基本</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./03-vector.html" class="pagination-link" aria-label="vector">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">vector</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">ソースコード</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">  html_document: default</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">  html_notebook: default</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">echo =</span> <span class="cn">FALSE</span>, <span class="at">collapse=</span><span class="cn">TRUE</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu"># RStudio</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">## RStudio とは</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>RStudio は R の統合開発環境 (IDE, Integrated Development Enviroment) の一つである.</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>オープンソース版が存在する.</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>https://ja.wikipedia.org/wiki/R-Studio</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="fu">## RStudio のインストール</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>オープンソース版のRStudio のインストールは</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>https://www.rstudio.com/products/rstudio/download/</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>にいき, 該当機種のファイルをダウンロードする.</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>ダウンロードしたあとに実行すればインストールされる.</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>Ubuntu ならサーバー版を導入するとよい.</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>https://www.rstudio.com/products/rstudio/download-server/</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="fu">## RStudio の設定</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>メニューバーの <span class="co">[</span><span class="ot">Tools</span><span class="co">]</span> から <span class="co">[</span><span class="ot">Global Options...</span><span class="co">]</span> を選択することで設定を変更できる.</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">General</span><span class="co">]</span> で以下のように</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Restore .RData ...</span><span class="co">]</span> のチェックを外していいて,</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>その下を <span class="in">`Never`</span> にしている. </span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>これは, 立ち上げたきに環境をクリーンし,</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>終了時に, データの保存を聞かれないようにするためである.</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"figs/rstudio-general.PNG"</span>)</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>次に, <span class="co">[</span><span class="ot">Code</span><span class="co">]</span> の タブ <span class="co">[</span><span class="ot">Saving</span><span class="co">]</span> で. </span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Default text encoding</span><span class="co">]</span> を <span class="in">`UTF-8`</span> とする.</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>Windows 以外だとOSのシステムフォントが同じなので問題ない.</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>しかし Windows は SJIS を拡張した CP932 なので, 注意が必要である.</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>Windows のRは UTF-8 を選択してもR自身はCP932処理している.</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>ただ, 他のOSとの併用の場合, UTF-8 にしたほうがよいだろう.</span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>またHTMLファイルは UTF-8 でのファイルが前提になりつつあるので,</span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>HTML として出力を考えているなら, <span class="in">`UTF-8`</span> としたほうが無難である.</span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>またインターネットで公開されている日本語のRファイルは</span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>Windows の使用が前提となっているため, 文字コードが CP932 であることが多い. Windows 以外を使っている場合, 一時的に文字コードを SJIS を選択する必要がある.</span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"figs/rstudio-utf8.PNG"</span>)</span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>あと, <span class="co">[</span><span class="ot">R Markdown</span><span class="co">]</span> で 真ん中あたりの <span class="co">[</span><span class="ot">Show output preview in:</span><span class="co">]</span> を <span class="in">`View Pane`</span> に変更する</span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"figs/rstudio-rmd.PNG"</span>)</span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a><span class="fu">## RStudio の使い方</span></span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a>RStudio の使い方として日本語版のチートシートがある.</span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a>https://github.com/rstudio/cheatsheets/raw/master/translations/japanese/rstudio-IDE-cheatsheet_ja.pdf</span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a>英語であるがこの動画も有益である.</span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a>第一章だけ公開されている.</span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a>https://www.datacamp.com/courses/working-with-the-rstudio-ide-part-1</span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a>RStudio プロジェクト単位で複数のソースコードを管理するのことが推奨される.</span>
+<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a>そうするとプロジェクトごとに作業ディレクトリが設定される.</span>
+<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a>プロジェクトはメニューバー の <span class="co">[</span><span class="ot">File</span><span class="co">]</span> から <span class="co">[</span><span class="ot">New Project</span><span class="co">]</span> を選択する.</span>
+<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a>そうすると新たに新たにディレクトリを作成するか, 既存のディレクトリを採用するかなどが選べる.</span>
+<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a>また, バージョン管理ソフトを導入していればそこから取り入れることも可能となる.</span>
+<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"figs/rstudio_project.gif"</span>)</span>
+<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a>プロジェクトを立ち上げると左にコンソールペイン (Console Pane) が, 右側に上下に二分割されたペインが現れる.</span>
+<span id="cb1-102"><a href="#cb1-102" aria-hidden="true" tabindex="-1"></a>この配置は メニューバーの <span class="co">[</span><span class="ot">Tools</span><span class="co">]</span> から <span class="co">[</span><span class="ot">Project Options -&gt; Pane Layout</span><span class="co">]</span> を選べば変更可能である.</span>
+<span id="cb1-103"><a href="#cb1-103" aria-hidden="true" tabindex="-1"></a>コンソールペインにコマンドを入力するとその結果が直下に返される.</span>
+<span id="cb1-104"><a href="#cb1-104" aria-hidden="true" tabindex="-1"></a>何か入力した後に, Ctrl + l (Cmd + l) を押すと, 画面が更新される.</span>
+<span id="cb1-105"><a href="#cb1-105" aria-hidden="true" tabindex="-1"></a>上下の矢印キーで過去に実行したコマンドを選択できる.</span>
+<span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a>メニューバー の <span class="co">[</span><span class="ot">File</span><span class="co">]</span> から <span class="co">[</span><span class="ot">New File -&gt; RScript</span><span class="co">]</span> を選択するか,</span>
+<span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a>Ctrl + Shift + n (Cmd + Shift + n) と入力するか, メニューバー下の一番左の白紙のアイコンをクリックすると,</span>
+<span id="cb1-109"><a href="#cb1-109" aria-hidden="true" tabindex="-1"></a>Rのスクリプトファイルが新規に作られる. </span>
+<span id="cb1-110"><a href="#cb1-110" aria-hidden="true" tabindex="-1"></a>スクリプフォファイルを開くと左側のコンソール画面の上にソースペインが登場する. </span>
+<span id="cb1-111"><a href="#cb1-111" aria-hidden="true" tabindex="-1"></a>ここにソースコードを書く.</span>
+<span id="cb1-112"><a href="#cb1-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-113"><a href="#cb1-113" aria-hidden="true" tabindex="-1"></a>ソースペインで何かコマンドを書いていきながら,</span>
+<span id="cb1-114"><a href="#cb1-114" aria-hidden="true" tabindex="-1"></a>ソースコードの該当行で Ctrl + Enter (Cmd + Return) と入力するか, ソースペインの上側の右に並んでいるアイコンのうち, 左側のRunと書かれたアイコンをクリックすると, 該当行がコンソール画面で実行される.</span>
+<span id="cb1-115"><a href="#cb1-115" aria-hidden="true" tabindex="-1"></a>複数行選択した後に, メニューバー の <span class="co">[</span><span class="ot">Code</span><span class="co">]</span> から <span class="co">[</span><span class="ot">Run Selected line(s)</span><span class="co">]</span> を選ぶか,</span>
+<span id="cb1-116"><a href="#cb1-116" aria-hidden="true" tabindex="-1"></a>Ctrl + Shift + Enter  (Cmd + Shift + Enter) と入力すると複数行をまとめて実行させることも可能である.</span>
+<span id="cb1-117"><a href="#cb1-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-118"><a href="#cb1-118" aria-hidden="true" tabindex="-1"></a>メニューバー の <span class="co">[</span><span class="ot">File</span><span class="co">]</span> から <span class="co">[</span><span class="ot">Save</span><span class="co">]</span> を選択するか, Ctrl + s (Cmd + s) と入力するか, メニューバー下の左から3番目のフロッピーディスクアイコンをクリック</span>
+<span id="cb1-119"><a href="#cb1-119" aria-hidden="true" tabindex="-1"></a>すると, スクリプトファイルを保存することができる.</span>
+<span id="cb1-120"><a href="#cb1-120" aria-hidden="true" tabindex="-1"></a>またメニューバー の <span class="co">[</span><span class="ot">File</span><span class="co">]</span> から <span class="co">[</span><span class="ot">Open</span><span class="co">]</span> を選択するか,</span>
+<span id="cb1-121"><a href="#cb1-121" aria-hidden="true" tabindex="-1"></a>Ctrl + o (Cmd + o) と入力するか, メニューバー下の左から2番めのフォルダを開くアイコンをクリックすると, </span>
+<span id="cb1-122"><a href="#cb1-122" aria-hidden="true" tabindex="-1"></a>既存のスクリプトファイルを開くことができる.</span>
+<span id="cb1-123"><a href="#cb1-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-126"><a href="#cb1-126" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb1-127"><a href="#cb1-127" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"figs/rstudio_file.gif"</span>)</span>
+<span id="cb1-128"><a href="#cb1-128" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb1-129"><a href="#cb1-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-130"><a href="#cb1-130" aria-hidden="true" tabindex="-1"></a>右上のペインには Environment と History のタブがある.</span>
+<span id="cb1-131"><a href="#cb1-131" aria-hidden="true" tabindex="-1"></a>Environment は現在使っているオブジェクトが表示される.</span>
+<span id="cb1-132"><a href="#cb1-132" aria-hidden="true" tabindex="-1"></a>最初は空白である. </span>
+<span id="cb1-133"><a href="#cb1-133" aria-hidden="true" tabindex="-1"></a>変数に数値を代入 (R の言い方ではオブジェクトに付値) することによって,</span>
+<span id="cb1-134"><a href="#cb1-134" aria-hidden="true" tabindex="-1"></a>値が付け加わっている.</span>
+<span id="cb1-135"><a href="#cb1-135" aria-hidden="true" tabindex="-1"></a>History はこれまでの履歴が記録される.</span>
+<span id="cb1-136"><a href="#cb1-136" aria-hidden="true" tabindex="-1"></a>履歴の一部ををエディトペインかコンソールペインに挿入することができる.</span>
+<span id="cb1-137"><a href="#cb1-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-138"><a href="#cb1-138" aria-hidden="true" tabindex="-1"></a>右下のペインには Files, Plots, Packages, Help, Viewer のタブがある.</span>
+<span id="cb1-139"><a href="#cb1-139" aria-hidden="true" tabindex="-1"></a>Files ペインはWindowsではエクスプローラーのようなもので,</span>
+<span id="cb1-140"><a href="#cb1-140" aria-hidden="true" tabindex="-1"></a>Mac はFinder のようなもので, ファイル管理をおこなう.</span>
+<span id="cb1-141"><a href="#cb1-141" aria-hidden="true" tabindex="-1"></a>ファイル管理として新たなフォルダを作成したり, ファイルを削除したり,</span>
+<span id="cb1-142"><a href="#cb1-142" aria-hidden="true" tabindex="-1"></a>ファイル名を変更したりする.</span>
+<span id="cb1-143"><a href="#cb1-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-144"><a href="#cb1-144" aria-hidden="true" tabindex="-1"></a>またワーキングディレクトリを直感的に設定することもできる.</span>
+<span id="cb1-145"><a href="#cb1-145" aria-hidden="true" tabindex="-1"></a>ワーキングを設定したい場所に移動して,</span>
+<span id="cb1-146"><a href="#cb1-146" aria-hidden="true" tabindex="-1"></a>Files ペインの上に並んでいるアイコンのうち, Moreをクリックし,</span>
+<span id="cb1-147"><a href="#cb1-147" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Set As Working Directory</span><span class="co">]</span> をクリックすればよい.</span>
+<span id="cb1-148"><a href="#cb1-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-149"><a href="#cb1-149" aria-hidden="true" tabindex="-1"></a>Plots ペインはコンソール画面で作図をコマンドの実行したら, 表示されるペインである. そこで作成した図をコマンドを使わずに保存したりすることができる.</span>
+<span id="cb1-150"><a href="#cb1-150" aria-hidden="true" tabindex="-1"></a>Packages ペインは現在Rに導入されているパッケージリストが表示される.</span>
+<span id="cb1-151"><a href="#cb1-151" aria-hidden="true" tabindex="-1"></a>そこに無いパッケージはメニューバーの <span class="co">[</span><span class="ot">Tools</span><span class="co">]</span> から <span class="co">[</span><span class="ot">Install Packages...</span><span class="co">]</span> を選択して実行すればよい.</span>
+<span id="cb1-152"><a href="#cb1-152" aria-hidden="true" tabindex="-1"></a>すでにあるパッケージは, パッケージ名の左側のボックスをチェックすれば,</span>
+<span id="cb1-153"><a href="#cb1-153" aria-hidden="true" tabindex="-1"></a>ライブライリ名を付けずにコマンドを実行させることができる.</span>
+<span id="cb1-154"><a href="#cb1-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-155"><a href="#cb1-155" aria-hidden="true" tabindex="-1"></a>Help ペインはその名の通り, ヘルプ画面が表示される. </span>
+<span id="cb1-156"><a href="#cb1-156" aria-hidden="true" tabindex="-1"></a>コンソールペインから <span class="in">`help (コマンド)`</span> もしくは <span class="in">`?コマンド`</span> と入力するとそのコマンドのヘルプがこのペインに表示される.</span>
+<span id="cb1-157"><a href="#cb1-157" aria-hidden="true" tabindex="-1"></a>R ではソースペインやコンソールペインで, コマンド入力していると, コマンドの後補があらわてくる. <span class="co">[</span><span class="ot">TAB</span><span class="co">]</span> でコマンドを補完できる.</span>
+<span id="cb1-158"><a href="#cb1-158" aria-hidden="true" tabindex="-1"></a>さらにそのコマンドでどのような引数が使われるのかも示される.</span>
+<span id="cb1-159"><a href="#cb1-159" aria-hidden="true" tabindex="-1"></a>さらに <span class="co">[</span><span class="ot">TAB</span><span class="co">]</span> を押せば, 引数を選べるだけでなく, 簡単なコマンドの説明がある.</span>
+<span id="cb1-160"><a href="#cb1-160" aria-hidden="true" tabindex="-1"></a>そのときに <span class="co">[</span><span class="ot">F1</span><span class="co">]</span> を押せば, より詳細なヘルプが立ち上がる.</span>
+<span id="cb1-161"><a href="#cb1-161" aria-hidden="true" tabindex="-1"></a>また Packages パインから該当パッケージをクリックするとそのパッケージのコマンド一覧が Help ペインに表示される.</span>
+<span id="cb1-162"><a href="#cb1-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-165"><a href="#cb1-165" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb1-166"><a href="#cb1-166" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"figs/rstudio_help.gif"</span>)</span>
+<span id="cb1-167"><a href="#cb1-167" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb1-168"><a href="#cb1-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-169"><a href="#cb1-169" aria-hidden="true" tabindex="-1"></a>最後のViewer ペインは R Markdown で作成したファイルを HTMLで出力したときに表示されるペインである.</span>
+<span id="cb1-170"><a href="#cb1-170" aria-hidden="true" tabindex="-1"></a>最初の設定だと別のウィンドウ画面として結果が表示される.</span>
+<span id="cb1-171"><a href="#cb1-171" aria-hidden="true" tabindex="-1"></a>このペインに出力されるためには <span class="co">[</span><span class="ot">Tools -&gt; R Markdown</span><span class="co">]</span> にいき, 真ん中あたりの</span>
+<span id="cb1-172"><a href="#cb1-172" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Show output preview in:</span><span class="co">]</span> を View Pane に変更する必要がある. </span>
+<span id="cb1-173"><a href="#cb1-173" aria-hidden="true" tabindex="-1"></a>その上でソースペインから <span class="co">[</span><span class="ot">Ctrl + Shift + k</span><span class="co">]</span> とするか, ソースペインの左側のアイコン群の一番右側のノートのアイコンをクリックすると,</span>
+<span id="cb1-174"><a href="#cb1-174" aria-hidden="true" tabindex="-1"></a>確認画面が現れるので <span class="in">`HTML`</span> を押す. </span>
+<span id="cb1-175"><a href="#cb1-175" aria-hidden="true" tabindex="-1"></a>そうするとそのコードがすべて実行されて, 実行結果が作図も含めてHTMLファイルに出力される.</span>
+<span id="cb1-176"><a href="#cb1-176" aria-hidden="true" tabindex="-1"></a>もしくはメニューバーの <span class="co">[</span><span class="ot">File</span><span class="co">]</span> から <span class="co">[</span><span class="ot">Knit Document...</span><span class="co">]</span> としを選択するとよい.</span>
+<span id="cb1-177"><a href="#cb1-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-178"><a href="#cb1-178" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-181"><a href="#cb1-181" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb1-182"><a href="#cb1-182" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"figs/rstudio_knit.gif"</span>)</span>
+<span id="cb1-183"><a href="#cb1-183" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb1-184"><a href="#cb1-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-185"><a href="#cb1-185" aria-hidden="true" tabindex="-1"></a>これは knitr と rmarkdown いわれるパッケージを利用したもので, Rのコードを埋め込んだマークダウンファイルを作成し,</span>
+<span id="cb1-186"><a href="#cb1-186" aria-hidden="true" tabindex="-1"></a>そこからHTMLファイルを作成する.</span>
+<span id="cb1-187"><a href="#cb1-187" aria-hidden="true" tabindex="-1"></a>他にも word ファイル や pdf ファイル生成することも適切に設定していれば可能である.</span>
+<span id="cb1-188"><a href="#cb1-188" aria-hidden="true" tabindex="-1"></a>ソースコードだけでなく, マークダウンファイルに <span class="in">`R`</span> コマンドを埋め込んだ <span class="in">`Rmd`</span> ファイルを作成することができる</span>
+<span id="cb1-189"><a href="#cb1-189" aria-hidden="true" tabindex="-1"></a>それは新規作成でRスクリプトでなく, R Notebook や R Markdown を選択すればよい.</span>
+</code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
-</body>
 
-</html>
+
+
+</body></html>

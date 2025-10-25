@@ -1,65 +1,32 @@
 <!DOCTYPE html>
-<html lang="ja-JP" xml:lang="ja-JP">
-<head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja"><head>
 
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>1 基本 | datawrangling</title>
-  <meta name="description" content="This is a description. Please wrote a abstract this contents." />
-  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.552">
 
-  <meta property="og:title" content="1 基本 | datawrangling" />
-  <meta property="og:type" content="book" />
-  
-  <meta property="og:description" content="This is a description. Please wrote a abstract this contents." />
-  
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="1 基本 | datawrangling" />
-  
-  <meta name="twitter:description" content="This is a description. Please wrote a abstract this contents." />
-  
-
-<meta name="author" content="宮﨑憲治" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<meta name="date" content="2022-10-06" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  
-  
-<link rel="prev" href="index.html"/>
-<link rel="next" href="02-rstudio.html"/>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
-
-
-
-
-
-
-
-<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
-<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-
-
-<style type="text/css">
+<title>R と RStudio - 2&nbsp; R の基本</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -80,234 +47,269 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
-<link rel="stylesheet" href="style.css" type="text/css" />
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./02-rstudio.html" rel="next">
+<link href="./index.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "一致なし",
+    "search-matching-documents-text": "一致した文書",
+    "search-copy-link-title": "検索へのリンクをコピー",
+    "search-hide-matches-text": "追加の検索結果を非表示",
+    "search-more-match-text": "追加の検索結果",
+    "search-more-matches-text": "追加の検索結果",
+    "search-clear-button-title": "消去",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "検索",
+    "search-label": "サーチ"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body class="nav-sidebar floating">
 
-
-
-  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
-
-    <div class="book-summary">
-      <nav role="navigation">
-
-<ul class="summary">
-<li><a href="./">R & RStudio</a></li>
-
-<li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>はじめに</a>
-<ul>
-<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#r-とは"><i class="fa fa-check"></i><b>0.1</b> R とは</a></li>
-<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#r-のインストール"><i class="fa fa-check"></i><b>0.2</b> R のインストール</a></li>
-<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#r-の設定"><i class="fa fa-check"></i><b>0.3</b> R の設定</a></li>
-<li class="chapter" data-level="0.4" data-path="index.html"><a href="index.html#r-の使い方"><i class="fa fa-check"></i><b>0.4</b> R の使い方</a></li>
-</ul></li>
-<li class="chapter" data-level="1" data-path="01-base.html"><a href="01-base.html"><i class="fa fa-check"></i><b>1</b> 基本</a>
-<ul>
-<li class="chapter" data-level="1.1" data-path="01-base.html"><a href="01-base.html#電卓としての-r"><i class="fa fa-check"></i><b>1.1</b> 電卓としての R</a></li>
-<li class="chapter" data-level="1.2" data-path="01-base.html"><a href="01-base.html#関数電卓としてのr"><i class="fa fa-check"></i><b>1.2</b> 関数電卓としてのR</a></li>
-<li class="chapter" data-level="1.3" data-path="01-base.html"><a href="01-base.html#r-の型"><i class="fa fa-check"></i><b>1.3</b> R の型</a></li>
-<li class="chapter" data-level="1.4" data-path="01-base.html"><a href="01-base.html#変数"><i class="fa fa-check"></i><b>1.4</b> 変数</a></li>
-<li class="chapter" data-level="1.5" data-path="01-base.html"><a href="01-base.html#パッケージ"><i class="fa fa-check"></i><b>1.5</b> パッケージ</a></li>
-</ul></li>
-<li class="chapter" data-level="2" data-path="02-rstudio.html"><a href="02-rstudio.html"><i class="fa fa-check"></i><b>2</b> RStudio</a>
-<ul>
-<li class="chapter" data-level="2.1" data-path="02-rstudio.html"><a href="02-rstudio.html#rstudio-とは"><i class="fa fa-check"></i><b>2.1</b> RStudio とは</a></li>
-<li class="chapter" data-level="2.2" data-path="02-rstudio.html"><a href="02-rstudio.html#rstudio-のインストール"><i class="fa fa-check"></i><b>2.2</b> RStudio のインストール</a></li>
-<li class="chapter" data-level="2.3" data-path="02-rstudio.html"><a href="02-rstudio.html#rstudio-の設定"><i class="fa fa-check"></i><b>2.3</b> RStudio の設定</a></li>
-<li class="chapter" data-level="2.4" data-path="02-rstudio.html"><a href="02-rstudio.html#rstudio-の使い方"><i class="fa fa-check"></i><b>2.4</b> RStudio の使い方</a></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="03-vector.html"><a href="03-vector.html"><i class="fa fa-check"></i><b>3</b> ベクトル</a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="03-vector.html"><a href="03-vector.html#ベクトル-1"><i class="fa fa-check"></i><b>3.1</b> ベクトル</a></li>
-<li class="chapter" data-level="3.2" data-path="03-vector.html"><a href="03-vector.html#算術演算子"><i class="fa fa-check"></i><b>3.2</b> 算術演算子</a></li>
-<li class="chapter" data-level="3.3" data-path="03-vector.html"><a href="03-vector.html#論理演算子"><i class="fa fa-check"></i><b>3.3</b> 論理演算子</a></li>
-<li class="chapter" data-level="3.4" data-path="03-vector.html"><a href="03-vector.html#比較演算子"><i class="fa fa-check"></i><b>3.4</b> 比較演算子</a></li>
-<li class="chapter" data-level="3.5" data-path="03-vector.html"><a href="03-vector.html#要素"><i class="fa fa-check"></i><b>3.5</b> 要素</a></li>
-<li class="chapter" data-level="3.6" data-path="03-vector.html"><a href="03-vector.html#関数"><i class="fa fa-check"></i><b>3.6</b> 関数</a></li>
-<li class="chapter" data-level="3.7" data-path="03-vector.html"><a href="03-vector.html#規則的なベクトル"><i class="fa fa-check"></i><b>3.7</b> 規則的なベクトル</a></li>
-<li class="chapter" data-level="3.8" data-path="03-vector.html"><a href="03-vector.html#乱数ベクトル"><i class="fa fa-check"></i><b>3.8</b> 乱数ベクトル</a></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="04-dataframe.html"><a href="04-dataframe.html"><i class="fa fa-check"></i><b>4</b> データ構造</a>
-<ul>
-<li class="chapter" data-level="4.1" data-path="04-dataframe.html"><a href="04-dataframe.html#ベクトル-2"><i class="fa fa-check"></i><b>4.1</b> ベクトル</a>
-<ul>
-<li class="chapter" data-level="4.1.1" data-path="04-dataframe.html"><a href="04-dataframe.html#ベクトルのアクセス"><i class="fa fa-check"></i><b>4.1.1</b> ベクトルのアクセス</a></li>
-</ul></li>
-<li class="chapter" data-level="4.2" data-path="04-dataframe.html"><a href="04-dataframe.html#リスト"><i class="fa fa-check"></i><b>4.2</b> リスト</a>
-<ul>
-<li class="chapter" data-level="4.2.1" data-path="04-dataframe.html"><a href="04-dataframe.html#リストのアクセス"><i class="fa fa-check"></i><b>4.2.1</b> リストのアクセス</a></li>
-</ul></li>
-<li class="chapter" data-level="4.3" data-path="04-dataframe.html"><a href="04-dataframe.html#因子ベクトル"><i class="fa fa-check"></i><b>4.3</b> 因子ベクトル</a>
-<ul>
-<li class="chapter" data-level="4.3.1" data-path="04-dataframe.html"><a href="04-dataframe.html#factor"><i class="fa fa-check"></i><b>4.3.1</b> factor</a></li>
-<li class="chapter" data-level="4.3.2" data-path="04-dataframe.html"><a href="04-dataframe.html#cut"><i class="fa fa-check"></i><b>4.3.2</b> cut</a></li>
-</ul></li>
-<li class="chapter" data-level="4.4" data-path="04-dataframe.html"><a href="04-dataframe.html#行列"><i class="fa fa-check"></i><b>4.4</b> 行列</a>
-<ul>
-<li class="chapter" data-level="4.4.1" data-path="04-dataframe.html"><a href="04-dataframe.html#行列の演算"><i class="fa fa-check"></i><b>4.4.1</b> 行列の演算</a></li>
-<li class="chapter" data-level="4.4.2" data-path="04-dataframe.html"><a href="04-dataframe.html#行列のアクセス"><i class="fa fa-check"></i><b>4.4.2</b> 行列のアクセス</a></li>
-</ul></li>
-<li class="chapter" data-level="4.5" data-path="04-dataframe.html"><a href="04-dataframe.html#データフレイム"><i class="fa fa-check"></i><b>4.5</b> データフレイム</a>
-<ul>
-<li class="chapter" data-level="4.5.1" data-path="04-dataframe.html"><a href="04-dataframe.html#データフレイムの演算"><i class="fa fa-check"></i><b>4.5.1</b> データフレイムの演算</a></li>
-<li class="chapter" data-level="4.5.2" data-path="04-dataframe.html"><a href="04-dataframe.html#データフレイムのアクセス"><i class="fa fa-check"></i><b>4.5.2</b> データフレイムのアクセス</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="05-datainput.html"><a href="05-datainput.html"><i class="fa fa-check"></i><b>5</b> データ入力</a>
-<ul>
-<li class="chapter" data-level="5.1" data-path="05-datainput.html"><a href="05-datainput.html#はじめに-1"><i class="fa fa-check"></i><b>5.1</b> はじめに</a></li>
-<li class="chapter" data-level="5.2" data-path="05-datainput.html"><a href="05-datainput.html#csv-ファイル"><i class="fa fa-check"></i><b>5.2</b> csv ファイル</a></li>
-<li class="chapter" data-level="5.3" data-path="05-datainput.html"><a href="05-datainput.html#excel-ファイル"><i class="fa fa-check"></i><b>5.3</b> EXCEL ファイル</a></li>
-<li class="chapter" data-level="5.4" data-path="05-datainput.html"><a href="05-datainput.html#stata"><i class="fa fa-check"></i><b>5.4</b> STATA</a></li>
-<li class="chapter" data-level="5.5" data-path="05-datainput.html"><a href="05-datainput.html#r-に入っているデータ"><i class="fa fa-check"></i><b>5.5</b> R に入っているデータ</a></li>
-<li class="chapter" data-level="5.6" data-path="05-datainput.html"><a href="05-datainput.html#インターネットからデータ入力"><i class="fa fa-check"></i><b>5.6</b> インターネットからデータ入力</a></li>
-<li class="chapter" data-level="5.7" data-path="05-datainput.html"><a href="05-datainput.html#その他のデータ入力"><i class="fa fa-check"></i><b>5.7</b> その他のデータ入力</a></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="06-datawrangling.html"><a href="06-datawrangling.html"><i class="fa fa-check"></i><b>6</b> 整然データ</a>
-<ul>
-<li class="chapter" data-level="6.1" data-path="06-datawrangling.html"><a href="06-datawrangling.html#データ整形"><i class="fa fa-check"></i><b>6.1</b> データ整形</a></li>
-<li class="chapter" data-level="6.2" data-path="06-datawrangling.html"><a href="06-datawrangling.html#データ結合"><i class="fa fa-check"></i><b>6.2</b> データ結合</a></li>
-<li class="chapter" data-level="6.3" data-path="06-datawrangling.html"><a href="06-datawrangling.html#tidyr"><i class="fa fa-check"></i><b>6.3</b> tidyr</a></li>
-<li class="chapter" data-level="6.4" data-path="06-datawrangling.html"><a href="06-datawrangling.html#実践例"><i class="fa fa-check"></i><b>6.4</b> 実践例</a></li>
-</ul></li>
-<li class="chapter" data-level="7" data-path="07-regression1.html"><a href="07-regression1.html"><i class="fa fa-check"></i><b>7</b> 古典的仮定のもとでの最小二乗法</a>
-<ul>
-<li class="chapter" data-level="7.1" data-path="07-regression1.html"><a href="07-regression1.html#単回帰モデル"><i class="fa fa-check"></i><b>7.1</b> 単回帰モデル</a>
-<ul>
-<li class="chapter" data-level="7.1.1" data-path="07-regression1.html"><a href="07-regression1.html#ティー検定"><i class="fa fa-check"></i><b>7.1.1</b> ティー検定</a></li>
-<li class="chapter" data-level="7.1.2" data-path="07-regression1.html"><a href="07-regression1.html#対数変換"><i class="fa fa-check"></i><b>7.1.2</b> 対数変換</a></li>
-<li class="chapter" data-level="7.1.3" data-path="07-regression1.html"><a href="07-regression1.html#切片なし回帰モデル"><i class="fa fa-check"></i><b>7.1.3</b> 切片なし回帰モデル</a></li>
-</ul></li>
-<li class="chapter" data-level="7.2" data-path="07-regression1.html"><a href="07-regression1.html#重回帰モデル"><i class="fa fa-check"></i><b>7.2</b> 重回帰モデル</a>
-<ul>
-<li class="chapter" data-level="7.2.1" data-path="07-regression1.html"><a href="07-regression1.html#自乗項"><i class="fa fa-check"></i><b>7.2.1</b> 自乗項</a></li>
-<li class="chapter" data-level="7.2.2" data-path="07-regression1.html"><a href="07-regression1.html#交差項"><i class="fa fa-check"></i><b>7.2.2</b> 交差項</a></li>
-<li class="chapter" data-level="7.2.3" data-path="07-regression1.html"><a href="07-regression1.html#エフ検定"><i class="fa fa-check"></i><b>7.2.3</b> エフ検定</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="8" data-path="08-regression2.html"><a href="08-regression2.html"><i class="fa fa-check"></i><b>8</b> 現代的仮定のもとでの最小二乗法</a>
-<ul>
-<li class="chapter" data-level="8.1" data-path="08-regression2.html"><a href="08-regression2.html#正規性の仮定について"><i class="fa fa-check"></i><b>8.1</b> 正規性の仮定について</a></li>
-<li class="chapter" data-level="8.2" data-path="08-regression2.html"><a href="08-regression2.html#誤差項と説明変数が独立の仮定について"><i class="fa fa-check"></i><b>8.2</b> 誤差項と説明変数が独立の仮定について</a></li>
-<li class="chapter" data-level="8.3" data-path="08-regression2.html"><a href="08-regression2.html#分散均一の検定"><i class="fa fa-check"></i><b>8.3</b> 分散均一の検定</a></li>
-</ul></li>
-<li class="chapter" data-level="9" data-path="09-ivreg.html"><a href="09-ivreg.html"><i class="fa fa-check"></i><b>9</b> 操作変数法</a>
-<ul>
-<li class="chapter" data-level="9.1" data-path="09-ivreg.html"><a href="09-ivreg.html#データ"><i class="fa fa-check"></i><b>9.1</b> データ</a></li>
-<li class="chapter" data-level="9.2" data-path="09-ivreg.html"><a href="09-ivreg.html#操作変数"><i class="fa fa-check"></i><b>9.2</b> 操作変数</a></li>
-<li class="chapter" data-level="9.3" data-path="09-ivreg.html"><a href="09-ivreg.html#段階最小二乗法"><i class="fa fa-check"></i><b>9.3</b> 2段階最小二乗法</a>
-<ul>
-<li class="chapter" data-level="9.3.1" data-path="09-ivreg.html"><a href="09-ivreg.html#複数制約の検定"><i class="fa fa-check"></i><b>9.3.1</b> 複数制約の検定</a></li>
-</ul></li>
-<li class="chapter" data-level="9.4" data-path="09-ivreg.html"><a href="09-ivreg.html#特定化検定"><i class="fa fa-check"></i><b>9.4</b> 特定化検定</a>
-<ul>
-<li class="chapter" data-level="9.4.1" data-path="09-ivreg.html"><a href="09-ivreg.html#weak-instruments"><i class="fa fa-check"></i><b>9.4.1</b> Weak instruments</a></li>
-<li class="chapter" data-level="9.4.2" data-path="09-ivreg.html"><a href="09-ivreg.html#wu-hausman-検定"><i class="fa fa-check"></i><b>9.4.2</b> Wu-Hausman 検定</a></li>
-<li class="chapter" data-level="9.4.3" data-path="09-ivreg.html"><a href="09-ivreg.html#sargan-検定"><i class="fa fa-check"></i><b>9.4.3</b> Sargan 検定</a></li>
-</ul></li>
-<li class="chapter" data-level="9.5" data-path="09-ivreg.html"><a href="09-ivreg.html#ロバスト分散"><i class="fa fa-check"></i><b>9.5</b> ロバスト分散</a>
-<ul>
-<li class="chapter" data-level="9.5.1" data-path="09-ivreg.html"><a href="09-ivreg.html#分散不均一の検定"><i class="fa fa-check"></i><b>9.5.1</b> 分散不均一の検定</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="10" data-path="10-panel.html"><a href="10-panel.html"><i class="fa fa-check"></i><b>10</b> パネル分析</a>
-<ul>
-<li class="chapter" data-level="10.1" data-path="10-panel.html"><a href="10-panel.html#データ-1"><i class="fa fa-check"></i><b>10.1</b> データ</a></li>
-<li class="chapter" data-level="10.2" data-path="10-panel.html"><a href="10-panel.html#プーリングols"><i class="fa fa-check"></i><b>10.2</b> プーリングOLS</a></li>
-<li class="chapter" data-level="10.3" data-path="10-panel.html"><a href="10-panel.html#固定効果-平均差分法"><i class="fa fa-check"></i><b>10.3</b> 固定効果 (平均差分法)</a>
-<ul>
-<li class="chapter" data-level="10.3.1" data-path="10-panel.html"><a href="10-panel.html#時間効果モデル"><i class="fa fa-check"></i><b>10.3.1</b> 時間効果モデル</a></li>
-</ul></li>
-<li class="chapter" data-level="10.4" data-path="10-panel.html"><a href="10-panel.html#固定効果-一階差分法"><i class="fa fa-check"></i><b>10.4</b> 固定効果 (一階差分法)</a>
-<ul>
-<li class="chapter" data-level="10.4.1" data-path="10-panel.html"><a href="10-panel.html#平均差分法と一階差分法"><i class="fa fa-check"></i><b>10.4.1</b> 平均差分法と一階差分法</a></li>
-</ul></li>
-<li class="chapter" data-level="10.5" data-path="10-panel.html"><a href="10-panel.html#変量効果"><i class="fa fa-check"></i><b>10.5</b> 変量効果</a>
-<ul>
-<li class="chapter" data-level="10.5.1" data-path="10-panel.html"><a href="10-panel.html#ハウスマン検定"><i class="fa fa-check"></i><b>10.5.1</b> ハウスマン検定</a></li>
-</ul></li>
-<li class="chapter" data-level="10.6" data-path="10-panel.html"><a href="10-panel.html#クラスターロバスト分散"><i class="fa fa-check"></i><b>10.6</b> クラスターロバスト分散</a>
-<ul>
-<li class="chapter" data-level="10.6.1" data-path="10-panel.html"><a href="10-panel.html#分散不均一の検定-1"><i class="fa fa-check"></i><b>10.6.1</b> 分散不均一の検定</a></li>
-</ul></li>
-</ul></li>
-<li class="divider"></li>
-<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-
-</ul>
-
-      </nav>
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="サイドバーを切り替える" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-base.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">R の基本</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="サイドバーを切り替える" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
     </div>
-
-    <div class="book-body">
-      <div class="body-inner">
-        <div class="book-header" role="navigation">
-          <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">datawrangling</a>
-          </h1>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">R と RStudio</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="サーチ"></div>
         </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">R と RStudio</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-base.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">R の基本</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-rstudio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">RStudio</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-vector.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">vector</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-dataframe.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">データ構造</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-datainput.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">データ入力</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-datawrangling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">整然データ</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-regression1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">古典的仮定のもとでの最小二乗法</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-regression2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">現代的仮定のもとでの最小二乗法</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-ivreg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">操作変数法</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-panel.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">パネル分析</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">目次</h2>
+   
+  <ul>
+  <li><a href="#電卓としての-r" id="toc-電卓としての-r" class="nav-link active" data-scroll-target="#電卓としての-r"><span class="header-section-number">2.1</span> 電卓としての R</a></li>
+  <li><a href="#関数電卓としての-r" id="toc-関数電卓としての-r" class="nav-link" data-scroll-target="#関数電卓としての-r"><span class="header-section-number">2.2</span> 関数電卓としての R</a></li>
+  <li><a href="#r-の型" id="toc-r-の型" class="nav-link" data-scroll-target="#r-の型"><span class="header-section-number">2.3</span> R の型</a></li>
+  <li><a href="#変数" id="toc-変数" class="nav-link" data-scroll-target="#変数"><span class="header-section-number">2.4</span> 変数</a></li>
+  <li><a href="#パッケージ" id="toc-パッケージ" class="nav-link" data-scroll-target="#パッケージ"><span class="header-section-number">2.5</span> パッケージ</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
 
-        <div class="page-wrapper" tabindex="-1" role="main">
-          <div class="page-inner">
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">R の基本</span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> コード</button></div></div>
+</div>
 
-            <section class="normal" id="section-">
-<div id="基本" class="section level1 hasAnchor" number="1">
-<h1><span class="header-section-number">1</span> 基本<a href="01-base.html#基本" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>R の基本として以下の2つのサイトでオンラインで学習することをオススメする.</p>
-<p><a href="https://rstudio.cloud/learn/primers" class="uri">https://rstudio.cloud/learn/primers</a></p>
-<p>ただし英語である.</p>
-<p>また以下の日本語版のチートシートが有用である.</p>
-<p><a href="https://www.rstudio.com/wp-content/uploads/2016/10/r-cheat-sheet-ja.pdf" class="uri">https://www.rstudio.com/wp-content/uploads/2016/10/r-cheat-sheet-ja.pdf</a></p>
-<p>R についての動画はまず以下を見ていただきたいと言っていたが，現時点（20201025）では一部しか無料公開されていない．日本語で合計40分くらいで13分割して配信している.　</p>
-<p><a href="http://dotinstall.com/lessons/basic_r" class="uri">http://dotinstall.com/lessons/basic_r</a></p>
-<p>他にも Youtube にいけば，動画が多数ある.</p>
-<div id="電卓としての-r" class="section level2 hasAnchor" number="1.1">
-<h2><span class="header-section-number">1.1</span> 電卓としての R<a href="01-base.html#電卓としての-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>R は電卓してとして使える.
-数値を扱う算術演算子として以下のものが代表的である.</p>
-<table>
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>R の基礎を学ぶには、次のオンライン教材が役立つ（2025 年時点）。</p>
+<ul>
+<li>Posit Cloud Primers（旧 RStudio Primers）<br>
+https://posit.cloud/learn/primers<br>
+インタラクティブな演習を通じて R の基礎から tidyverse まで幅広く学べる。英語のみの提供だが、無料アカウントで主要コンテンツを利用できる。</li>
+<li>Posit Academy<br>
+https://academy.posit.co/<br>
+Posit 社が提供する体系的な e ラーニングプログラム。動画とハンズオン課題で R とデータサイエンスを段階的に学べる（英語、要アカウント）。</li>
+<li>swirl（R コンソール内で動作する対話型チュートリアル）<br>
+https://swirlstats.com/<br>
+R のコンソールに組み込んで利用する教材で、コマンドを入力しながら学習できる。コミュニティ制作のレッスンには日本語訳もある。</li>
+<li>R for Data Science, 2nd Edition（オンライン書籍）<br>
+https://r4ds.hadley.nz/<br>
+R と tidyverse のモダンな実践書。ブラウザで無料公開され、Posit Cloud のサンプルプロジェクトからコードをすぐ試せる。</li>
+</ul>
+<p>日本語で要点を確認したい場合は、以下のリソースが便利である。</p>
+<ul>
+<li>R for Data Science 日本語版（第 1 版）<br>
+https://r4ds-jp.netlify.app/<br>
+コミュニティによる翻訳。基礎からデータ可視化、tidyverse の使い方まで日本語で学べる。</li>
+<li>Posit のチートシート集<br>
+https://posit.co/resources/cheatsheets/<br>
+公式の英語版に加え、従来の日本語版 PDF（例: https://www.rstudio.com/wp-content/uploads/2016/10/r-cheat-sheet-ja.pdf）も引き続き利用できる。</li>
+<li>統計 Web（統計数理研究所による解説サイト）<br>
+https://statistics.co.jp/learning/<br>
+R の導入から基本操作、グラフ作成までを日本語で丁寧に解説している。</li>
+</ul>
+<p>動画教材としては、ドットインストールの「はじめての R プログラミング」講座（13 本、合計約 40 分）が 2024 年以降も公開されており、基本編は無料で視聴できる。　</p>
+<p>http://dotinstall.com/lessons/basic_r</p>
+<p>このほかにも、Posit 公式チャンネルや国内コミュニティが公開する YouTube 動画が随時更新されているため、興味のあるトピックで検索してみるとよい。</p>
+<section id="電卓としての-r" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="電卓としての-r"><span class="header-section-number">2.1</span> 電卓としての R</h2>
+<p>R は電卓としても利用できる。 代表的な算術演算子を以下に示す。</p>
+<table class="table">
 <thead>
 <tr class="header">
 <th>演算子</th>
@@ -353,27 +355,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="01-base.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">+</span> <span class="dv">2</span></span>
-<span id="cb7-2"><a href="01-base.html#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 7</span></span>
-<span id="cb7-3"><a href="01-base.html#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">-</span> <span class="dv">2</span></span>
-<span id="cb7-4"><a href="01-base.html#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 3</span></span>
-<span id="cb7-5"><a href="01-base.html#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">*</span> <span class="dv">2</span></span>
-<span id="cb7-6"><a href="01-base.html#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 10</span></span>
-<span id="cb7-7"><a href="01-base.html#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">/</span> <span class="dv">2</span></span>
-<span id="cb7-8"><a href="01-base.html#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 2.5</span></span>
-<span id="cb7-9"><a href="01-base.html#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">^</span> <span class="dv">2</span></span>
-<span id="cb7-10"><a href="01-base.html#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 25</span></span>
-<span id="cb7-11"><a href="01-base.html#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">**</span> <span class="dv">2</span></span>
-<span id="cb7-12"><a href="01-base.html#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 25</span></span>
-<span id="cb7-13"><a href="01-base.html#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">%%</span> <span class="dv">2</span></span>
-<span id="cb7-14"><a href="01-base.html#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 1</span></span>
-<span id="cb7-15"><a href="01-base.html#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">%/%</span> <span class="dv">2</span></span>
-<span id="cb7-16"><a href="01-base.html#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 2</span></span></code></pre></div>
+<p>演算は一般的な優先順位に従って処理されるが、<code>()</code> で囲めば計算の順序を明示的に指定できる。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">+</span> <span class="dv">2</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 7</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">-</span> <span class="dv">2</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 3</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">*</span> <span class="dv">2</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 10</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">/</span> <span class="dv">2</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 2.5</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">^</span> <span class="dv">2</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 25</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">**</span> <span class="dv">2</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 25</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">%%</span> <span class="dv">2</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 1</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">%/%</span> <span class="dv">2</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 2</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="関数電卓としてのr" class="section level2 hasAnchor" number="1.2">
-<h2><span class="header-section-number">1.2</span> 関数電卓としてのR<a href="01-base.html#関数電卓としてのr" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>R は関数として使える. たとえば以下の関数がある.</p>
-<table>
+</section>
+<section id="関数電卓としての-r" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="関数電卓としての-r"><span class="header-section-number">2.2</span> 関数電卓としての R</h2>
+<p>R は関数電卓のようにさまざまな関数を呼び出して計算できる。たとえば以下の関数がある。</p>
+<table class="table">
 <thead>
 <tr class="header">
 <th>関数</th>
@@ -419,222 +424,878 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="01-base.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="dv">10</span>)</span>
-<span id="cb8-2"><a href="01-base.html#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 3.162278</span></span>
-<span id="cb8-3"><a href="01-base.html#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="dv">10</span>)</span>
-<span id="cb8-4"><a href="01-base.html#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 22026.47</span></span>
-<span id="cb8-5"><a href="01-base.html#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="dv">10</span>)</span>
-<span id="cb8-6"><a href="01-base.html#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 2.302585</span></span>
-<span id="cb8-7"><a href="01-base.html#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">factorial</span>(<span class="dv">4</span>)</span>
-<span id="cb8-8"><a href="01-base.html#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 24</span></span>
-<span id="cb8-9"><a href="01-base.html#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="fu">choose</span>(<span class="dv">4</span>,<span class="dv">2</span>)</span>
-<span id="cb8-10"><a href="01-base.html#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 6</span></span>
-<span id="cb8-11"><a href="01-base.html#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="fu">abs</span>(<span class="sc">-</span><span class="dv">10</span>)</span>
-<span id="cb8-12"><a href="01-base.html#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 10</span></span>
-<span id="cb8-13"><a href="01-base.html#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fl">3.5</span>)</span>
-<span id="cb8-14"><a href="01-base.html#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 4</span></span>
-<span id="cb8-15"><a href="01-base.html#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="fu">floor</span>(<span class="fl">3.5</span>)</span>
-<span id="cb8-16"><a href="01-base.html#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 3</span></span>
-<span id="cb8-17"><a href="01-base.html#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="fu">ceiling</span>(<span class="fl">3.5</span>)</span>
-<span id="cb8-18"><a href="01-base.html#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 4</span></span></code></pre></div>
-<p>関数の括弧に入る数値を引数という.
-組み合せを計算する関数 <code>choose</code> の引数は2つある.
-複数の引数は <code>,</code> で区切る.
-引数の順序は指定すれば変更可能である.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="01-base.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">choose</span>(<span class="dv">4</span>, <span class="dv">2</span>)</span>
-<span id="cb9-2"><a href="01-base.html#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 6</span></span>
-<span id="cb9-3"><a href="01-base.html#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">choose</span>(<span class="at">n=</span><span class="dv">4</span>, <span class="at">k=</span><span class="dv">2</span>)</span>
-<span id="cb9-4"><a href="01-base.html#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 6</span></span>
-<span id="cb9-5"><a href="01-base.html#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">choose</span>(<span class="at">k=</span><span class="dv">2</span>, <span class="at">n=</span><span class="dv">4</span>)</span>
-<span id="cb9-6"><a href="01-base.html#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 6</span></span></code></pre></div>
-<p>また幾つかの引数は入力しなくても. デフォルトで設定してあることがある.
-それぞれの関数のヘルプを確認されたい.</p>
-<p>関数のヘルプはコマンド <code>choose</code> の場合</p>
-<pre><code>help(choose)
-?choose</code></pre>
-<p>で調べることができる.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="dv">10</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 3.162278</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="dv">10</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 22026.47</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="dv">10</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 2.302585</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">factorial</span>(<span class="dv">4</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 24</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">choose</span>(<span class="dv">4</span>,<span class="dv">2</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 6</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">abs</span>(<span class="sc">-</span><span class="dv">10</span>)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 10</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fl">3.5</span>)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 4</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="fu">floor</span>(<span class="fl">3.5</span>)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 3</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="fu">ceiling</span>(<span class="fl">3.5</span>)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 4</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="r-の型" class="section level2 hasAnchor" number="1.3">
-<h2><span class="header-section-number">1.3</span> R の型<a href="01-base.html#r-の型" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Rにおいて値は型 (type) をもち, 型として数値 (numeric) と文字列 (character) と論理値 (logical) など<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>がある.
-多くの言語と違い, あらかじめ宣言する必要なく, 自動的に決定される.</p>
-<p>数値には整数 (integer) と, 実数をコンピュータ的に扱っている倍数精度小数 (double) など<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>がある.
-整数か倍数精度小数かは自動的に振り分けられるが, 明示的に数字の後に <code>L</code> をつけて整数を指定することができる.</p>
-<p>文字は <code>"</code> (ダブルクオーテーション) もしくは <code>'</code> (シングルクォーテーション) で区切られる.
-<code>TRUE</code> もしくは <code>FALSE</code> を取る値を論理値 (logical) という. 省略して <code>T</code> と <code>F</code> とあわらせることもできるが混乱するので個人的に推奨しない.</p>
-<p>値の型は関数 <code>typeof()</code> で確認できる.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="01-base.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="dv">3</span>)</span>
-<span id="cb11-2"><a href="01-base.html#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;double&quot;</span></span>
-<span id="cb11-3"><a href="01-base.html#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(3L)</span>
-<span id="cb11-4"><a href="01-base.html#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;integer&quot;</span></span>
-<span id="cb11-5"><a href="01-base.html#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="st">&quot;3&quot;</span>)</span>
-<span id="cb11-6"><a href="01-base.html#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;character&quot;</span></span>
-<span id="cb11-7"><a href="01-base.html#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="cn">TRUE</span>)</span>
-<span id="cb11-8"><a href="01-base.html#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;logical&quot;</span></span>
-<span id="cb11-9"><a href="01-base.html#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="cn">FALSE</span>)</span>
-<span id="cb11-10"><a href="01-base.html#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;logical&quot;</span></span>
-<span id="cb11-11"><a href="01-base.html#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(T)</span>
-<span id="cb11-12"><a href="01-base.html#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;logical&quot;</span></span>
-<span id="cb11-13"><a href="01-base.html#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(F)</span>
-<span id="cb11-14"><a href="01-base.html#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;logical&quot;</span></span></code></pre></div>
-<p>特殊な値として, 無限大を意味する <code>Inf</code>, 非数を意味する <code>NaN</code>, 欠損値を意味する <code>NA</code> , 空を意味する <code>NULL</code> がある.
-<code>Inf</code> と <code>Nan</code> の型は数値として分類され, <code>NA</code> の型は論理値として分類される.
-また <code>NULL</code> は <code>NULL</code> という特別な型である.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="01-base.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">/</span><span class="dv">0</span></span>
-<span id="cb12-2"><a href="01-base.html#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] Inf</span></span>
-<span id="cb12-3"><a href="01-base.html#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">0</span>)</span>
-<span id="cb12-4"><a href="01-base.html#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;double&quot;</span></span>
-<span id="cb12-5"><a href="01-base.html#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span><span class="sc">/</span><span class="dv">0</span></span>
-<span id="cb12-6"><a href="01-base.html#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] NaN</span></span>
-<span id="cb12-7"><a href="01-base.html#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="dv">0</span><span class="sc">/</span><span class="dv">0</span>)</span>
-<span id="cb12-8"><a href="01-base.html#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;double&quot;</span></span>
-<span id="cb12-9"><a href="01-base.html#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="cn">NA</span>)</span>
-<span id="cb12-10"><a href="01-base.html#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;logical&quot;</span></span>
-<span id="cb12-11"><a href="01-base.html#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="cn">NULL</span>)</span>
-<span id="cb12-12"><a href="01-base.html#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;NULL&quot;</span></span></code></pre></div>
+<p>関数に渡す値は引数と呼ばれる。 組み合わせを計算する関数 <code>choose</code> の引数は 2 つあり、複数の引数は <code>,</code> で区切る。 引数の順序は、名前を明示すれば入れ替えられる。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">choose</span>(<span class="dv">4</span>, <span class="dv">2</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 6</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">choose</span>(<span class="at">n=</span><span class="dv">4</span>, <span class="at">k=</span><span class="dv">2</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 6</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">choose</span>(<span class="at">k=</span><span class="dv">2</span>, <span class="at">n=</span><span class="dv">4</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 6</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="変数" class="section level2 hasAnchor" number="1.4">
-<h2><span class="header-section-number">1.4</span> 変数<a href="01-base.html#変数" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>値は変数 (variable) に代入することによって再利用が可能になる.
-Rでは代入のことを付値 (assign) といい, 以下のように実行される.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="01-base.html#cb13-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">4</span> </span>
-<span id="cb13-2"><a href="01-base.html#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span> <span class="ot">-&gt;</span> x</span>
-<span id="cb13-3"><a href="01-base.html#cb13-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="dv">4</span></span>
-<span id="cb13-4"><a href="01-base.html#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">assign</span>(<span class="st">&quot;x&quot;</span>,<span class="dv">4</span>)</span></code></pre></div>
-<p>多くのプログラム言語では3番目のやり方をだけであるが,
-R では最初のやり方を推奨している.<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></p>
-<p>代入した値を確認するには単にその変数を入力すればよい.
-代入と同時に確認するには丸括弧をつけるとよい.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="01-base.html#cb14-1" aria-hidden="true" tabindex="-1"></a>x</span>
-<span id="cb14-2"><a href="01-base.html#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 4</span></span>
-<span id="cb14-3"><a href="01-base.html#cb14-3" aria-hidden="true" tabindex="-1"></a>(x<span class="ot">&lt;-</span><span class="dv">3</span>)</span>
-<span id="cb14-4"><a href="01-base.html#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 3</span></span></code></pre></div>
-<p>付値される変数として, 記号と数字からはじまらなければ, ほぼ自由に作れる.
-アルファベットについて大文字と小文字が区別されることに注意されたい.
-また日本語も変数に使えるが, 機種によって文字コードが違うため, 避けて使うほうが望ましい.</p>
-<p>扱える変数は <code>if</code> などいくつか<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>はエラーになるが,
-<code>pi</code> のようにすでに組み込まれている変数も変更して指定することができる.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="01-base.html#cb15-1" aria-hidden="true" tabindex="-1"></a>pi</span>
-<span id="cb15-2"><a href="01-base.html#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 3.141593</span></span>
-<span id="cb15-3"><a href="01-base.html#cb15-3" aria-hidden="true" tabindex="-1"></a>pi <span class="ot">&lt;-</span> <span class="dv">3</span></span>
-<span id="cb15-4"><a href="01-base.html#cb15-4" aria-hidden="true" tabindex="-1"></a>pi</span>
-<span id="cb15-5"><a href="01-base.html#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 3</span></span></code></pre></div>
-<p>関数 <code>objects()</code> を使うことで，現在どんなオブジェクトがあるかを調べられる．
-R は変数や関数を全てオブジェクトとして扱う言語である.
-また，前に定義したオブジェクトを消す場合 <code>rm()</code> を用いる．
-すでに組み込まれた変数を上書きした <code>pi</code> を削除するともとの変数が復活する.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="01-base.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(pi)</span>
-<span id="cb16-2"><a href="01-base.html#cb16-2" aria-hidden="true" tabindex="-1"></a>pi</span>
-<span id="cb16-3"><a href="01-base.html#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 3.141593</span></span></code></pre></div>
-<p>さらに，全てのオブジェクトを消す場合は <code>rm(list=ls(all=TRUE))</code> とすればよい．</p>
+<p>引数によっては省略しても既定値が自動的に補われることがある。 詳細は関数ごとのヘルプを参照するとよい。</p>
+<p>たとえば <code>choose</code> のヘルプは次のように参照できる。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(choose)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>?choose</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="パッケージ" class="section level2 hasAnchor" number="1.5">
-<h2><span class="header-section-number">1.5</span> パッケージ<a href="01-base.html#パッケージ" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>R においてパッケージを導入することによって, 機能を拡張させることができる.</p>
-<p>パッケージ <code>pkg</code> を導入するため一度だけ以下を実行する.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="01-base.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;pkg&quot;</span>)</span></code></pre></div>
-<p>とする. なおオプション <code>dependencies = TRUE</code> とすれば依存するパッケージを全て導入してくれる.</p>
-<p>パッケージ <code>pkg</code> が導入していれば, そのパッケージにあるコマンド <code>cmd</code> を実行するには</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="01-base.html#cb18-1" aria-hidden="true" tabindex="-1"></a>pkg<span class="sc">::</span>cmd</span></code></pre></div>
-<p>とパッケージとコマンドの間に <code>::</code> とする必要がある.</p>
-<p>もしくは <code>library(pkg)</code> もしくは <code>require(pkg)</code> 予め入力しておけば,
-最初の <code>pkg::</code> を省略することができる.
-なお複数のパッケージで同じ名前のコマンドがある場合,
-あとで <code>library</code> もしくは <code>require</code> としたパッケージの方が優先させるので注意されたい.</p>
-<p>なお <code>library</code> と <code>require</code> に使い方にほとんど違いがないが,
-<code>require</code> だと以下のように存在しなければインストールするように設定できる.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="01-base.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(lattice)){</span>
-<span id="cb19-2"><a href="01-base.html#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;lattice&quot;</span>)</span>
-<span id="cb19-3"><a href="01-base.html#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">require</span>(lattice)</span>
-<span id="cb19-4"><a href="01-base.html#cb19-4" aria-hidden="true" tabindex="-1"></a>} </span></code></pre></div>
-<p>ただ私は昔からの癖で <code>library</code> を使っている.</p>
+<p>で確認できる。</p>
+<p>ヘルプには関数の説明、使用例、引数の既定値などがまとまっている。 RStudio を利用している場合は、ヘルプペインに整形されたドキュメントが表示される。</p>
+</section>
+<section id="r-の型" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="r-の型"><span class="header-section-number">2.3</span> R の型</h2>
+<p>R では値に型 (type) があり、数値 (numeric)、文字列 (character)、論理値 (logical) など<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>が用意されている。 多くの言語と異なり、型をあらかじめ宣言しなくても自動的に決まる。</p>
+<p>数値には整数 (integer) や、実数をコンピュータ上で扱う倍精度浮動小数点数 (double) など<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>が含まれる。 整数か倍精度浮動小数点数かは自動的に振り分けられるが、数字の後ろに <code>L</code> を付けて整数を明示することもできる。</p>
+<p>文字列は <code>"</code> (ダブルクォーテーション) もしくは <code>'</code> (シングルクォーテーション) で囲む。 <code>TRUE</code> もしくは <code>FALSE</code> を取る値は論理値 (logical) と呼ばれる。省略して <code>T</code> や <code>F</code> と表せるが、混乱を招きやすいので推奨しない。</p>
+<p>値の型は関数 <code>typeof()</code> で確認できる。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="dv">3</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] "double"</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="dv">3</span>L)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] "integer"</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="st">"3"</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] "character"</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="cn">TRUE</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] "logical"</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="cn">FALSE</span>)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] "logical"</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(T)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] "logical"</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(F)</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] "logical"</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>オブジェクトのクラス（統計的な型付け）を確認するには <code>class()</code> を使う。 より複雑なオブジェクトでは <code>typeof()</code> と <code>class()</code> の結果が異なることもある点を覚えておきたい。</p>
+<p>特殊な値として、無限大を表す <code>Inf</code>、非数を表す <code>NaN</code>、欠損値を表す <code>NA</code>、空を表す <code>NULL</code> がある。 <code>Inf</code> と <code>NaN</code> は数値として分類され、<code>NA</code> の型は論理値として扱われる。 また、<code>NULL</code> は独自の型として扱われる。 <code>NaN</code> は 0 を 0 で割ったときのように値が定まらない計算で現れる。 <code>NA</code> はデータが欠損している場合に使われ、数値・文字列など別の型の <code>NA</code> も存在する。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">/</span><span class="dv">0</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] Inf</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">0</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] "double"</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span><span class="sc">/</span><span class="dv">0</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] NaN</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="dv">0</span><span class="sc">/</span><span class="dv">0</span>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] "double"</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="cn">NA</span>)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] "logical"</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="cn">NULL</span>)</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] "NULL"</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="変数" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="変数"><span class="header-section-number">2.4</span> 変数</h2>
+<p>値は変数 (variable) に代入すると再利用できる。 R では代入のことを付値 (assign) といい、次のように実行する。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">4</span> </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span> <span class="ot">-&gt;</span> x</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="dv">4</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">assign</span>(<span class="st">"x"</span>,<span class="dv">4</span>)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>多くのプログラミング言語では 3 番目の方法のみが一般的だが、 R では最初の方法が推奨されている。<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+<p>代入した値は、その変数名を入力すれば確認できる。 代入と同時に確認したい場合は式全体を丸括弧で囲む。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>x</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 4</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>(x<span class="ot">&lt;-</span><span class="dv">3</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 3</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>変数名は記号や数字で始まらなければ、ほぼ自由に付けられる。 アルファベットは大文字と小文字が区別される点に注意する。 日本語も変数名に使えるが、環境によって文字コードが異なるため避けるのが無難である。 アンダースコア <code>_</code> やピリオド <code>.</code> は途中に入れられるが、<code>a.b</code> と <code>a_b</code> は別の名前として扱われる。</p>
+<p>予約語である <code>if</code> など一部の名前<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>は変数名に使えずエラーになる。 一方で <code>pi</code> のように既存の組み込み変数を上書きすることは可能である。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>pi</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 3.141593</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>pi <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>pi</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 3</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>関数 <code>objects()</code> を使うと、現在存在するオブジェクトを確認できる。 <code>ls()</code> も同じ結果を返すエイリアスである。 R は変数や関数をすべてオブジェクトとして扱う言語である。 既存のオブジェクトを削除するには <code>rm()</code> を使う。 組み込み変数を上書きしていても、<code>pi</code> を削除すれば元の値が復活する。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(pi)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>pi</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 3.141593</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>さらに、すべてのオブジェクトを削除したい場合は <code>rm(list=ls(all=TRUE))</code> と入力する。</p>
+</section>
+<section id="パッケージ" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="パッケージ"><span class="header-section-number">2.5</span> パッケージ</h2>
+<p>R ではパッケージを導入することで機能を拡張できる。</p>
+<p>パッケージ <code>pkg</code> を導入する際は次を 1 度だけ実行する。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"pkg"</span>)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>オプション <code>dependencies = TRUE</code> を指定すると、依存パッケージもまとめて導入される。 インストールは 1 度実行すればよいが、R を起動し直すたびに <code>library()</code> などで読み込む必要がある点に注意する。</p>
+<p>パッケージ <code>pkg</code> が導入済みであれば、そのパッケージ内のコマンド <code>cmd</code> を実行するには</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>pkg<span class="sc">::</span>cmd</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>と、パッケージ名とコマンド名の間に <code>::</code> を挟む必要がある。 この書き方は、パッケージを読み込まずに特定の関数だけを呼び出したいときや、名前が衝突したときに便利である。</p>
+<p>また、事前に <code>library(pkg)</code> や <code>require(pkg)</code> を実行しておけば、 関数呼び出し時の <code>pkg::</code> を省略できる。 複数のパッケージに同名のコマンドが含まれる場合は、 後から <code>library</code> や <code>require</code> で読み込んだパッケージが優先される点に注意する。</p>
+<p><code>library</code> と <code>require</code> の使い方はほとんど同じだが、 <code>require</code> では次のようにパッケージがなければインストールするといった書き方ができる。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(lattice)){</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">"lattice"</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">require</span>(lattice)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>} </span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><code>library()</code> はパッケージが見つからない場合にエラーで処理を止めるのに対し、<code>require()</code> は失敗すると <code>FALSE</code> を返し、処理を続行できる。 私自身は慣れもあって <code>library</code> を使うことが多い。</p>
 
-</div>
-</div>
-<div class="footnotes">
-<hr />
-<ol start="1">
-<li id="fn1"><p>他にも日付 (Date) やバイナリ (raw) がある.<a href="01-base.html#fnref1" class="footnote-back">↩︎</a></p></li>
-<li id="fn2"><p>他にも複素数 (complex) がある.<a href="01-base.html#fnref2" class="footnote-back">↩︎</a></p></li>
-<li id="fn3"><p>
-例えば以下を参照されたい: <a href="http://adv-r.had.co.nz/Style.html" class="uri">http://adv-r.had.co.nz/Style.html</a><a href="01-base.html#fnref3" class="footnote-back">↩︎</a></p></li>
-<li id="fn4"><p><code>break, else, FALSE, for, function, if, in, Inf, NA, NaN, next NULL, repeat, TRUE, while</code> など<a href="01-base.html#fnref4" class="footnote-back">↩︎</a></p></li>
+
+<!-- -->
+
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>他にも日付 (Date) やバイナリ (raw) がある。<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>他にも複素数 (complex) がある。<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p> 例えば以下を参照されたい: http://adv-r.had.co.nz/Style.html<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p><code>break, else, FALSE, for, function, if, in, Inf, NA, NaN, next, NULL, repeat, TRUE, while</code> など<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
-</div>
-            </section>
+</section>
 
-          </div>
-        </div>
-      </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="02-rstudio.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
-    </div>
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "コピーしました");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "コピーしました");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link" aria-label="R と RStudio">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">R と RStudio</span></span>
+      </a>          
   </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
-<script>
-gitbook.require(["gitbook"], function(gitbook) {
-gitbook.start({
-"sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/01-base.Rmd",
-"text": "Edit"
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": null,
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "subsection"
-}
-});
-});
-</script>
+  <div class="nav-page nav-page-next">
+      <a href="./02-rstudio.html" class="pagination-link" aria-label="RStudio">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">RStudio</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">ソースコード</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb14" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co">  html_document: default</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">  html_notebook: default</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">echo =</span> <span class="cn">TRUE</span>, <span class="at">collapse=</span><span class="cn">TRUE</span>)</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="fu">## R の基本</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>R の基礎を学ぶには、次のオンライン教材が役立つ（2025 年時点）。</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Posit Cloud Primers（旧 RStudio Primers）  </span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>  https://posit.cloud/learn/primers  </span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>  インタラクティブな演習を通じて R の基礎から tidyverse まで幅広く学べる。英語のみの提供だが、無料アカウントで主要コンテンツを利用できる。</span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Posit Academy  </span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>  https://academy.posit.co/  </span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>  Posit 社が提供する体系的な e ラーニングプログラム。動画とハンズオン課題で R とデータサイエンスを段階的に学べる（英語、要アカウント）。</span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>swirl（R コンソール内で動作する対話型チュートリアル）  </span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>  https://swirlstats.com/  </span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>  R のコンソールに組み込んで利用する教材で、コマンドを入力しながら学習できる。コミュニティ制作のレッスンには日本語訳もある。</span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>R for Data Science, 2nd Edition（オンライン書籍）  </span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>  https://r4ds.hadley.nz/  </span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>  R と tidyverse のモダンな実践書。ブラウザで無料公開され、Posit Cloud のサンプルプロジェクトからコードをすぐ試せる。</span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a>日本語で要点を確認したい場合は、以下のリソースが便利である。</span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>R for Data Science 日本語版（第 1 版）  </span>
+<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a>  https://r4ds-jp.netlify.app/  </span>
+<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a>  コミュニティによる翻訳。基礎からデータ可視化、tidyverse の使い方まで日本語で学べる。</span>
+<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Posit のチートシート集  </span>
+<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a>  https://posit.co/resources/cheatsheets/  </span>
+<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a>  公式の英語版に加え、従来の日本語版 PDF（例: https://www.rstudio.com/wp-content/uploads/2016/10/r-cheat-sheet-ja.pdf）も引き続き利用できる。</span>
+<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>統計 Web（統計数理研究所による解説サイト）  </span>
+<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a>  https://statistics.co.jp/learning/  </span>
+<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a>  R の導入から基本操作、グラフ作成までを日本語で丁寧に解説している。</span>
+<span id="cb14-43"><a href="#cb14-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-44"><a href="#cb14-44" aria-hidden="true" tabindex="-1"></a>動画教材としては、ドットインストールの「はじめての R プログラミング」講座（13 本、合計約 40 分）が 2024 年以降も公開されており、基本編は無料で視聴できる。　</span>
+<span id="cb14-45"><a href="#cb14-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-46"><a href="#cb14-46" aria-hidden="true" tabindex="-1"></a>http://dotinstall.com/lessons/basic_r</span>
+<span id="cb14-47"><a href="#cb14-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-48"><a href="#cb14-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-49"><a href="#cb14-49" aria-hidden="true" tabindex="-1"></a>このほかにも、Posit 公式チャンネルや国内コミュニティが公開する YouTube 動画が随時更新されているため、興味のあるトピックで検索してみるとよい。</span>
+<span id="cb14-50"><a href="#cb14-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-51"><a href="#cb14-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-52"><a href="#cb14-52" aria-hidden="true" tabindex="-1"></a><span class="fu">## 電卓としての R</span></span>
+<span id="cb14-53"><a href="#cb14-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-54"><a href="#cb14-54" aria-hidden="true" tabindex="-1"></a>R は電卓としても利用できる。</span>
+<span id="cb14-55"><a href="#cb14-55" aria-hidden="true" tabindex="-1"></a>代表的な算術演算子を以下に示す。</span>
+<span id="cb14-56"><a href="#cb14-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-57"><a href="#cb14-57" aria-hidden="true" tabindex="-1"></a>演算子  | 説明          | 例</span>
+<span id="cb14-58"><a href="#cb14-58" aria-hidden="true" tabindex="-1"></a>------- | ------------- | ----------</span>
+<span id="cb14-59"><a href="#cb14-59" aria-hidden="true" tabindex="-1"></a><span class="in">`+`</span>     | 足し算        | <span class="in">`5 + 2 = 7`</span></span>
+<span id="cb14-60"><a href="#cb14-60" aria-hidden="true" tabindex="-1"></a><span class="in">`-`</span>     | 引き算        | <span class="in">`5 - 2 = 3`</span></span>
+<span id="cb14-61"><a href="#cb14-61" aria-hidden="true" tabindex="-1"></a><span class="in">`*`</span>     | 掛け算        | <span class="in">`5 * 2 = 10`</span></span>
+<span id="cb14-62"><a href="#cb14-62" aria-hidden="true" tabindex="-1"></a><span class="in">`/`</span>     | 割り算        | <span class="in">`5 / 2 = 2.5`</span></span>
+<span id="cb14-63"><a href="#cb14-63" aria-hidden="true" tabindex="-1"></a><span class="in">`^`</span>, <span class="in">`**`</span>| べき算        | <span class="in">`5 ^ 2 = 25`</span>, <span class="in">`5 ** 2 = 25`</span></span>
+<span id="cb14-64"><a href="#cb14-64" aria-hidden="true" tabindex="-1"></a><span class="in">`%%`</span>     | 割り算の余り | <span class="in">`5 %% 2 = 1`</span></span>
+<span id="cb14-65"><a href="#cb14-65" aria-hidden="true" tabindex="-1"></a><span class="in">`%/%`</span>     | 割り算の切り下げ  | <span class="in">`5 %/% 2 = 2`</span></span>
+<span id="cb14-66"><a href="#cb14-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-67"><a href="#cb14-67" aria-hidden="true" tabindex="-1"></a>演算は一般的な優先順位に従って処理されるが、<span class="in">`()`</span> で囲めば計算の順序を明示的に指定できる。</span>
+<span id="cb14-68"><a href="#cb14-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-71"><a href="#cb14-71" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb14-72"><a href="#cb14-72" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">+</span> <span class="dv">2</span></span>
+<span id="cb14-73"><a href="#cb14-73" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">-</span> <span class="dv">2</span></span>
+<span id="cb14-74"><a href="#cb14-74" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">*</span> <span class="dv">2</span></span>
+<span id="cb14-75"><a href="#cb14-75" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">/</span> <span class="dv">2</span></span>
+<span id="cb14-76"><a href="#cb14-76" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">^</span> <span class="dv">2</span></span>
+<span id="cb14-77"><a href="#cb14-77" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">**</span> <span class="dv">2</span></span>
+<span id="cb14-78"><a href="#cb14-78" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">%%</span> <span class="dv">2</span></span>
+<span id="cb14-79"><a href="#cb14-79" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">%/%</span> <span class="dv">2</span></span>
+<span id="cb14-80"><a href="#cb14-80" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-81"><a href="#cb14-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-82"><a href="#cb14-82" aria-hidden="true" tabindex="-1"></a><span class="fu">## 関数電卓としての R</span></span>
+<span id="cb14-83"><a href="#cb14-83" aria-hidden="true" tabindex="-1"></a>R は関数電卓のようにさまざまな関数を呼び出して計算できる。たとえば以下の関数がある。</span>
+<span id="cb14-84"><a href="#cb14-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-85"><a href="#cb14-85" aria-hidden="true" tabindex="-1"></a>関数    | 説明          </span>
+<span id="cb14-86"><a href="#cb14-86" aria-hidden="true" tabindex="-1"></a>------- | -------------</span>
+<span id="cb14-87"><a href="#cb14-87" aria-hidden="true" tabindex="-1"></a><span class="in">`sqrt()`</span>    | 平方根 $\sqrt{\cdot}$    </span>
+<span id="cb14-88"><a href="#cb14-88" aria-hidden="true" tabindex="-1"></a><span class="in">`exp()`</span>     | 指数    </span>
+<span id="cb14-89"><a href="#cb14-89" aria-hidden="true" tabindex="-1"></a><span class="in">`log()`</span>     | 対数    </span>
+<span id="cb14-90"><a href="#cb14-90" aria-hidden="true" tabindex="-1"></a><span class="in">`factorial()`</span>     | 階乗    </span>
+<span id="cb14-91"><a href="#cb14-91" aria-hidden="true" tabindex="-1"></a><span class="in">`choose()`</span>     | 組み合わせ    </span>
+<span id="cb14-92"><a href="#cb14-92" aria-hidden="true" tabindex="-1"></a><span class="in">`abs()`</span>     | 絶対値    </span>
+<span id="cb14-93"><a href="#cb14-93" aria-hidden="true" tabindex="-1"></a><span class="in">`round()`</span>   | 四捨五入    </span>
+<span id="cb14-94"><a href="#cb14-94" aria-hidden="true" tabindex="-1"></a><span class="in">`floor()`</span>   | 切り下げ    </span>
+<span id="cb14-95"><a href="#cb14-95" aria-hidden="true" tabindex="-1"></a><span class="in">`ceiling()`</span> | 切り上げ    </span>
+<span id="cb14-96"><a href="#cb14-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-99"><a href="#cb14-99" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb14-100"><a href="#cb14-100" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="dv">10</span>)</span>
+<span id="cb14-101"><a href="#cb14-101" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="dv">10</span>)</span>
+<span id="cb14-102"><a href="#cb14-102" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="dv">10</span>)</span>
+<span id="cb14-103"><a href="#cb14-103" aria-hidden="true" tabindex="-1"></a><span class="fu">factorial</span>(<span class="dv">4</span>)</span>
+<span id="cb14-104"><a href="#cb14-104" aria-hidden="true" tabindex="-1"></a><span class="fu">choose</span>(<span class="dv">4</span>,<span class="dv">2</span>)</span>
+<span id="cb14-105"><a href="#cb14-105" aria-hidden="true" tabindex="-1"></a><span class="fu">abs</span>(<span class="sc">-</span><span class="dv">10</span>)</span>
+<span id="cb14-106"><a href="#cb14-106" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fl">3.5</span>)</span>
+<span id="cb14-107"><a href="#cb14-107" aria-hidden="true" tabindex="-1"></a><span class="fu">floor</span>(<span class="fl">3.5</span>)</span>
+<span id="cb14-108"><a href="#cb14-108" aria-hidden="true" tabindex="-1"></a><span class="fu">ceiling</span>(<span class="fl">3.5</span>)</span>
+<span id="cb14-109"><a href="#cb14-109" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-110"><a href="#cb14-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-111"><a href="#cb14-111" aria-hidden="true" tabindex="-1"></a>関数に渡す値は引数と呼ばれる。</span>
+<span id="cb14-112"><a href="#cb14-112" aria-hidden="true" tabindex="-1"></a>組み合わせを計算する関数 <span class="in">`choose`</span> の引数は 2 つあり、複数の引数は <span class="in">`,`</span> で区切る。</span>
+<span id="cb14-113"><a href="#cb14-113" aria-hidden="true" tabindex="-1"></a>引数の順序は、名前を明示すれば入れ替えられる。</span>
+<span id="cb14-116"><a href="#cb14-116" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb14-117"><a href="#cb14-117" aria-hidden="true" tabindex="-1"></a><span class="fu">choose</span>(<span class="dv">4</span>, <span class="dv">2</span>)</span>
+<span id="cb14-118"><a href="#cb14-118" aria-hidden="true" tabindex="-1"></a><span class="fu">choose</span>(<span class="at">n=</span><span class="dv">4</span>, <span class="at">k=</span><span class="dv">2</span>)</span>
+<span id="cb14-119"><a href="#cb14-119" aria-hidden="true" tabindex="-1"></a><span class="fu">choose</span>(<span class="at">k=</span><span class="dv">2</span>, <span class="at">n=</span><span class="dv">4</span>)</span>
+<span id="cb14-120"><a href="#cb14-120" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-121"><a href="#cb14-121" aria-hidden="true" tabindex="-1"></a>引数によっては省略しても既定値が自動的に補われることがある。</span>
+<span id="cb14-122"><a href="#cb14-122" aria-hidden="true" tabindex="-1"></a>詳細は関数ごとのヘルプを参照するとよい。</span>
+<span id="cb14-123"><a href="#cb14-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-124"><a href="#cb14-124" aria-hidden="true" tabindex="-1"></a>たとえば <span class="in">`choose`</span> のヘルプは次のように参照できる。</span>
+<span id="cb14-127"><a href="#cb14-127" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb14-128"><a href="#cb14-128" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb14-129"><a href="#cb14-129" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(choose)</span>
+<span id="cb14-130"><a href="#cb14-130" aria-hidden="true" tabindex="-1"></a>?choose</span>
+<span id="cb14-131"><a href="#cb14-131" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-132"><a href="#cb14-132" aria-hidden="true" tabindex="-1"></a>で確認できる。</span>
+<span id="cb14-133"><a href="#cb14-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-134"><a href="#cb14-134" aria-hidden="true" tabindex="-1"></a>ヘルプには関数の説明、使用例、引数の既定値などがまとまっている。</span>
+<span id="cb14-135"><a href="#cb14-135" aria-hidden="true" tabindex="-1"></a>RStudio を利用している場合は、ヘルプペインに整形されたドキュメントが表示される。</span>
+<span id="cb14-136"><a href="#cb14-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-137"><a href="#cb14-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-138"><a href="#cb14-138" aria-hidden="true" tabindex="-1"></a><span class="fu">## R の型</span></span>
+<span id="cb14-139"><a href="#cb14-139" aria-hidden="true" tabindex="-1"></a>R では値に型 (type) があり、数値 (numeric)、文字列 (character)、論理値 (logical) など^<span class="co">[</span><span class="ot">他にも日付 (Date) やバイナリ (raw) がある。</span><span class="co">]</span>が用意されている。</span>
+<span id="cb14-140"><a href="#cb14-140" aria-hidden="true" tabindex="-1"></a>多くの言語と異なり、型をあらかじめ宣言しなくても自動的に決まる。</span>
+<span id="cb14-141"><a href="#cb14-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-142"><a href="#cb14-142" aria-hidden="true" tabindex="-1"></a>数値には整数 (integer) や、実数をコンピュータ上で扱う倍精度浮動小数点数 (double) など^<span class="co">[</span><span class="ot">他にも複素数 (complex) がある。</span><span class="co">]</span>が含まれる。</span>
+<span id="cb14-143"><a href="#cb14-143" aria-hidden="true" tabindex="-1"></a>整数か倍精度浮動小数点数かは自動的に振り分けられるが、数字の後ろに <span class="in">`L`</span> を付けて整数を明示することもできる。</span>
+<span id="cb14-144"><a href="#cb14-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-145"><a href="#cb14-145" aria-hidden="true" tabindex="-1"></a>文字列は <span class="in">`"`</span> (ダブルクォーテーション) もしくは <span class="in">`'`</span> (シングルクォーテーション) で囲む。</span>
+<span id="cb14-146"><a href="#cb14-146" aria-hidden="true" tabindex="-1"></a><span class="in">`TRUE`</span> もしくは <span class="in">`FALSE`</span> を取る値は論理値 (logical) と呼ばれる。省略して <span class="in">`T`</span> や <span class="in">`F`</span> と表せるが、混乱を招きやすいので推奨しない。</span>
+<span id="cb14-147"><a href="#cb14-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-148"><a href="#cb14-148" aria-hidden="true" tabindex="-1"></a>値の型は関数 <span class="in">`typeof()`</span> で確認できる。</span>
+<span id="cb14-151"><a href="#cb14-151" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb14-152"><a href="#cb14-152" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="dv">3</span>)</span>
+<span id="cb14-153"><a href="#cb14-153" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="dv">3</span>L)</span>
+<span id="cb14-154"><a href="#cb14-154" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="st">"3"</span>)</span>
+<span id="cb14-155"><a href="#cb14-155" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="cn">TRUE</span>)</span>
+<span id="cb14-156"><a href="#cb14-156" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="cn">FALSE</span>)</span>
+<span id="cb14-157"><a href="#cb14-157" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(T)</span>
+<span id="cb14-158"><a href="#cb14-158" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(F)</span>
+<span id="cb14-159"><a href="#cb14-159" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-160"><a href="#cb14-160" aria-hidden="true" tabindex="-1"></a>オブジェクトのクラス（統計的な型付け）を確認するには <span class="in">`class()`</span> を使う。</span>
+<span id="cb14-161"><a href="#cb14-161" aria-hidden="true" tabindex="-1"></a>より複雑なオブジェクトでは <span class="in">`typeof()`</span> と <span class="in">`class()`</span> の結果が異なることもある点を覚えておきたい。</span>
+<span id="cb14-162"><a href="#cb14-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-163"><a href="#cb14-163" aria-hidden="true" tabindex="-1"></a>特殊な値として、無限大を表す <span class="in">`Inf`</span>、非数を表す <span class="in">`NaN`</span>、欠損値を表す <span class="in">`NA`</span>、空を表す <span class="in">`NULL`</span> がある。</span>
+<span id="cb14-164"><a href="#cb14-164" aria-hidden="true" tabindex="-1"></a><span class="in">`Inf`</span> と <span class="in">`NaN`</span> は数値として分類され、<span class="in">`NA`</span> の型は論理値として扱われる。</span>
+<span id="cb14-165"><a href="#cb14-165" aria-hidden="true" tabindex="-1"></a>また、<span class="in">`NULL`</span> は独自の型として扱われる。</span>
+<span id="cb14-166"><a href="#cb14-166" aria-hidden="true" tabindex="-1"></a><span class="in">`NaN`</span> は 0 を 0 で割ったときのように値が定まらない計算で現れる。</span>
+<span id="cb14-167"><a href="#cb14-167" aria-hidden="true" tabindex="-1"></a><span class="in">`NA`</span> はデータが欠損している場合に使われ、数値・文字列など別の型の <span class="in">`NA`</span> も存在する。</span>
+<span id="cb14-170"><a href="#cb14-170" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb14-171"><a href="#cb14-171" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">/</span><span class="dv">0</span></span>
+<span id="cb14-172"><a href="#cb14-172" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">0</span>)</span>
+<span id="cb14-173"><a href="#cb14-173" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span><span class="sc">/</span><span class="dv">0</span></span>
+<span id="cb14-174"><a href="#cb14-174" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="dv">0</span><span class="sc">/</span><span class="dv">0</span>)</span>
+<span id="cb14-175"><a href="#cb14-175" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="cn">NA</span>)</span>
+<span id="cb14-176"><a href="#cb14-176" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="cn">NULL</span>)</span>
+<span id="cb14-177"><a href="#cb14-177" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-178"><a href="#cb14-178" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-179"><a href="#cb14-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-180"><a href="#cb14-180" aria-hidden="true" tabindex="-1"></a><span class="fu">## 変数</span></span>
+<span id="cb14-181"><a href="#cb14-181" aria-hidden="true" tabindex="-1"></a>値は変数 (variable) に代入すると再利用できる。</span>
+<span id="cb14-182"><a href="#cb14-182" aria-hidden="true" tabindex="-1"></a>R では代入のことを付値 (assign) といい、次のように実行する。</span>
+<span id="cb14-185"><a href="#cb14-185" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb14-186"><a href="#cb14-186" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">4</span> </span>
+<span id="cb14-187"><a href="#cb14-187" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span> <span class="ot">-&gt;</span> x</span>
+<span id="cb14-188"><a href="#cb14-188" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="dv">4</span></span>
+<span id="cb14-189"><a href="#cb14-189" aria-hidden="true" tabindex="-1"></a><span class="fu">assign</span>(<span class="st">"x"</span>,<span class="dv">4</span>)</span>
+<span id="cb14-190"><a href="#cb14-190" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-191"><a href="#cb14-191" aria-hidden="true" tabindex="-1"></a>多くのプログラミング言語では 3 番目の方法のみが一般的だが、</span>
+<span id="cb14-192"><a href="#cb14-192" aria-hidden="true" tabindex="-1"></a>R では最初の方法が推奨されている。^[</span>
+<span id="cb14-193"><a href="#cb14-193" aria-hidden="true" tabindex="-1"></a>例えば以下を参照されたい: http://adv-r.had.co.nz/Style.html</span>
+<span id="cb14-194"><a href="#cb14-194" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb14-195"><a href="#cb14-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-196"><a href="#cb14-196" aria-hidden="true" tabindex="-1"></a>代入した値は、その変数名を入力すれば確認できる。</span>
+<span id="cb14-197"><a href="#cb14-197" aria-hidden="true" tabindex="-1"></a>代入と同時に確認したい場合は式全体を丸括弧で囲む。</span>
+<span id="cb14-200"><a href="#cb14-200" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb14-201"><a href="#cb14-201" aria-hidden="true" tabindex="-1"></a>x</span>
+<span id="cb14-202"><a href="#cb14-202" aria-hidden="true" tabindex="-1"></a>(x<span class="ot">&lt;-</span><span class="dv">3</span>)</span>
+<span id="cb14-203"><a href="#cb14-203" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-204"><a href="#cb14-204" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-205"><a href="#cb14-205" aria-hidden="true" tabindex="-1"></a>変数名は記号や数字で始まらなければ、ほぼ自由に付けられる。</span>
+<span id="cb14-206"><a href="#cb14-206" aria-hidden="true" tabindex="-1"></a>アルファベットは大文字と小文字が区別される点に注意する。</span>
+<span id="cb14-207"><a href="#cb14-207" aria-hidden="true" tabindex="-1"></a>日本語も変数名に使えるが、環境によって文字コードが異なるため避けるのが無難である。</span>
+<span id="cb14-208"><a href="#cb14-208" aria-hidden="true" tabindex="-1"></a>アンダースコア <span class="in">`_`</span> やピリオド <span class="in">`.`</span> は途中に入れられるが、<span class="in">`a.b`</span> と <span class="in">`a_b`</span> は別の名前として扱われる。</span>
+<span id="cb14-209"><a href="#cb14-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-210"><a href="#cb14-210" aria-hidden="true" tabindex="-1"></a>予約語である <span class="in">`if`</span> など一部の名前^<span class="co">[</span><span class="ot">`break, else, FALSE, for, function, if, in, Inf, NA, NaN, next, NULL, repeat, TRUE, while` など</span><span class="co">]</span>は変数名に使えずエラーになる。</span>
+<span id="cb14-211"><a href="#cb14-211" aria-hidden="true" tabindex="-1"></a>一方で <span class="in">`pi`</span> のように既存の組み込み変数を上書きすることは可能である。</span>
+<span id="cb14-214"><a href="#cb14-214" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb14-215"><a href="#cb14-215" aria-hidden="true" tabindex="-1"></a>pi</span>
+<span id="cb14-216"><a href="#cb14-216" aria-hidden="true" tabindex="-1"></a>pi <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb14-217"><a href="#cb14-217" aria-hidden="true" tabindex="-1"></a>pi</span>
+<span id="cb14-218"><a href="#cb14-218" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-219"><a href="#cb14-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-220"><a href="#cb14-220" aria-hidden="true" tabindex="-1"></a>関数 <span class="in">`objects()`</span> を使うと、現在存在するオブジェクトを確認できる。</span>
+<span id="cb14-221"><a href="#cb14-221" aria-hidden="true" tabindex="-1"></a><span class="in">`ls()`</span> も同じ結果を返すエイリアスである。</span>
+<span id="cb14-222"><a href="#cb14-222" aria-hidden="true" tabindex="-1"></a>R は変数や関数をすべてオブジェクトとして扱う言語である。</span>
+<span id="cb14-223"><a href="#cb14-223" aria-hidden="true" tabindex="-1"></a>既存のオブジェクトを削除するには <span class="in">`rm()`</span> を使う。</span>
+<span id="cb14-224"><a href="#cb14-224" aria-hidden="true" tabindex="-1"></a>組み込み変数を上書きしていても、<span class="in">`pi`</span> を削除すれば元の値が復活する。</span>
+<span id="cb14-227"><a href="#cb14-227" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb14-228"><a href="#cb14-228" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(pi)</span>
+<span id="cb14-229"><a href="#cb14-229" aria-hidden="true" tabindex="-1"></a>pi</span>
+<span id="cb14-230"><a href="#cb14-230" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-231"><a href="#cb14-231" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-232"><a href="#cb14-232" aria-hidden="true" tabindex="-1"></a>さらに、すべてのオブジェクトを削除したい場合は <span class="in">`rm(list=ls(all=TRUE))`</span> と入力する。</span>
+<span id="cb14-233"><a href="#cb14-233" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-234"><a href="#cb14-234" aria-hidden="true" tabindex="-1"></a><span class="fu">## パッケージ</span></span>
+<span id="cb14-235"><a href="#cb14-235" aria-hidden="true" tabindex="-1"></a>R ではパッケージを導入することで機能を拡張できる。</span>
+<span id="cb14-236"><a href="#cb14-236" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-237"><a href="#cb14-237" aria-hidden="true" tabindex="-1"></a>パッケージ <span class="in">`pkg`</span> を導入する際は次を 1 度だけ実行する。</span>
+<span id="cb14-240"><a href="#cb14-240" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb14-241"><a href="#cb14-241" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb14-242"><a href="#cb14-242" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"pkg"</span>)</span>
+<span id="cb14-243"><a href="#cb14-243" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-244"><a href="#cb14-244" aria-hidden="true" tabindex="-1"></a>オプション <span class="in">`dependencies = TRUE`</span> を指定すると、依存パッケージもまとめて導入される。</span>
+<span id="cb14-245"><a href="#cb14-245" aria-hidden="true" tabindex="-1"></a>インストールは 1 度実行すればよいが、R を起動し直すたびに <span class="in">`library()`</span> などで読み込む必要がある点に注意する。</span>
+<span id="cb14-246"><a href="#cb14-246" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-247"><a href="#cb14-247" aria-hidden="true" tabindex="-1"></a>パッケージ <span class="in">`pkg`</span> が導入済みであれば、そのパッケージ内のコマンド <span class="in">`cmd`</span> を実行するには</span>
+<span id="cb14-250"><a href="#cb14-250" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb14-251"><a href="#cb14-251" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb14-252"><a href="#cb14-252" aria-hidden="true" tabindex="-1"></a>pkg<span class="sc">::</span>cmd</span>
+<span id="cb14-253"><a href="#cb14-253" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-254"><a href="#cb14-254" aria-hidden="true" tabindex="-1"></a>と、パッケージ名とコマンド名の間に <span class="in">`::`</span> を挟む必要がある。 </span>
+<span id="cb14-255"><a href="#cb14-255" aria-hidden="true" tabindex="-1"></a>この書き方は、パッケージを読み込まずに特定の関数だけを呼び出したいときや、名前が衝突したときに便利である。</span>
+<span id="cb14-256"><a href="#cb14-256" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-257"><a href="#cb14-257" aria-hidden="true" tabindex="-1"></a>また、事前に <span class="in">`library(pkg)`</span> や <span class="in">`require(pkg)`</span> を実行しておけば、</span>
+<span id="cb14-258"><a href="#cb14-258" aria-hidden="true" tabindex="-1"></a>関数呼び出し時の <span class="in">`pkg::`</span> を省略できる。</span>
+<span id="cb14-259"><a href="#cb14-259" aria-hidden="true" tabindex="-1"></a>複数のパッケージに同名のコマンドが含まれる場合は、</span>
+<span id="cb14-260"><a href="#cb14-260" aria-hidden="true" tabindex="-1"></a>後から <span class="in">`library`</span> や <span class="in">`require`</span> で読み込んだパッケージが優先される点に注意する。</span>
+<span id="cb14-261"><a href="#cb14-261" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-262"><a href="#cb14-262" aria-hidden="true" tabindex="-1"></a><span class="in">`library`</span> と <span class="in">`require`</span> の使い方はほとんど同じだが、</span>
+<span id="cb14-263"><a href="#cb14-263" aria-hidden="true" tabindex="-1"></a><span class="in">`require`</span> では次のようにパッケージがなければインストールするといった書き方ができる。</span>
+<span id="cb14-266"><a href="#cb14-266" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb14-267"><a href="#cb14-267" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb14-268"><a href="#cb14-268" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(lattice)){</span>
+<span id="cb14-269"><a href="#cb14-269" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">"lattice"</span>)</span>
+<span id="cb14-270"><a href="#cb14-270" aria-hidden="true" tabindex="-1"></a>  <span class="fu">require</span>(lattice)</span>
+<span id="cb14-271"><a href="#cb14-271" aria-hidden="true" tabindex="-1"></a>} </span>
+<span id="cb14-272"><a href="#cb14-272" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-273"><a href="#cb14-273" aria-hidden="true" tabindex="-1"></a><span class="in">`library()`</span> はパッケージが見つからない場合にエラーで処理を止めるのに対し、<span class="in">`require()`</span> は失敗すると <span class="in">`FALSE`</span> を返し、処理を続行できる。</span>
+<span id="cb14-274"><a href="#cb14-274" aria-hidden="true" tabindex="-1"></a>私自身は慣れもあって <span class="in">`library`</span> を使うことが多い。</span>
+</code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
-</body>
 
-</html>
+
+
+</body></html>
