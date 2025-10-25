@@ -290,7 +290,7 @@ window.Quarto = {
 
 <section id="データ" class="level2" data-number="11.1">
 <h2 data-number="11.1" class="anchored" data-anchor-id="データ"><span class="header-section-number">11.1</span> データ</h2>
-<p>パネル分析に必要なパッケージを読み込み, データセットを準備する. <code>library(AER)</code> コマンドで AER パッケージを, <code>library(plm)</code> コマンドで plm パッケージを読み込む. 次に <code>data("Grunfeld", package = "plm")</code> コマンドで Grunfeld データセットを読み込む. Grunfeld データは企業の投資, 企業価値, 資本ストックに関するパネルデータである. <code>head(Grunfeld)</code> コマンドでデータの最初の数行を表示する.</p>
+<p>パネル分析に必要なパッケージを読み込み、データセットを準備する。 <code>library(AER)</code> コマンドで AER パッケージを、<code>library(plm)</code> コマンドで plm パッケージを読み込む。 次に <code>data("Grunfeld", package = "plm")</code> コマンドで Grunfeld データセットを読み込む。 Grunfeld データは企業の投資、企業価値、資本ストックに関するパネルデータである。 <code>head(Grunfeld)</code> コマンドでデータの最初の数行を表示する。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(AER)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plm)</span>
@@ -304,7 +304,7 @@ window.Quarto = {
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="do">## 5    1 1939 330.8 4313.2   203.4</span></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="do">## 6    1 1940 461.2 4643.9   207.2</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>次にパネルデータとして扱うために, <code>pdata.frame()</code> 関数を使用する. <code>pdata.frame(Grunfeld, index = c("firm", "year"))</code> コマンドで, firm (企業) と year (年) をインデックスとしてパネルデータフレームを作成し, <code>pdata</code> に格納する. <code>pdim(pdata)</code> コマンドでパネルデータの次元 (企業数, 時間数, 総観測数) を確認する.</p>
+<p>次にパネルデータとして扱うために、<code>pdata.frame()</code> 関数を使用する。 <code>pdata.frame(Grunfeld, index = c("firm", "year"))</code> コマンドで、firm (企業) と year (年) をインデックスとしてパネルデータフレームを作成し、<code>pdata</code> に格納する。 <code>pdim(pdata)</code> コマンドでパネルデータの次元 (企業数、時間数、総観測数) を確認する。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>pdata <span class="ot">&lt;-</span> <span class="fu">pdata.frame</span>(Grunfeld, <span class="at">index =</span> <span class="fu">c</span>(<span class="st">"firm"</span>, <span class="st">"year"</span>))</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pdim</span>(pdata)</span>
@@ -313,12 +313,12 @@ window.Quarto = {
 </section>
 <section id="プーリングols" class="level2" data-number="11.2">
 <h2 data-number="11.2" class="anchored" data-anchor-id="プーリングols"><span class="header-section-number">11.2</span> プーリングOLS</h2>
-<p>次の重回帰モデルを考える.</p>
+<p>次の重回帰モデルを考える。</p>
 <p><span class="math display">\[
 inv_{it} = \beta_0 + \beta_1 value_{it} + \beta_2 capital_{it} + u_{it}
 \]</span></p>
-<p>誤差項 <span class="math inline">\(u_{it}\)</span> は <span class="math inline">\(i\)</span> についても <span class="math inline">\(t\)</span> についても独立同一分布と仮定する. さらに誤差項は説明変数と独立である. この時、パネルデータにおいてもOLS推定法でパラメータは不偏である. ここでの重回帰モデルをプーリングOLSモデルと呼ぶことにする.</p>
-<p>プーリングOLS推定を実行するには, <code>plm()</code> 関数で <code>model = "pooling"</code> を指定する. <code>plm(inv ~ value + capital, data = pdata, model = "pooling")</code> コマンドで, inv を被説明変数, value と capital を説明変数としてプーリングOLS推定を行い, 結果を <code>gp</code> に格納する. <code>summary(gp)</code> コマンドで推定結果の詳細を表示する.</p>
+<p>誤差項 <span class="math inline">\(u_{it}\)</span> は <span class="math inline">\(i\)</span> についても<span class="math inline">\(t\)</span> についても独立同一分布と仮定する。 さらに誤差項は説明変数と独立である。 この時、パネルデータにおいてもOLS推定法でパラメータは不偏である。 ここでの重回帰モデルをプーリングOLSモデルと呼ぶことにする。</p>
+<p>プーリングOLS推定を実行するには、<code>plm()</code> 関数で <code>model = "pooling"</code> を指定する。 <code>plm(inv ~ value + capital, data = pdata, model = "pooling")</code> コマンドで、inv を被説明変数、value と capital を説明変数としてプーリングOLS推定を行い、結果を <code>gp</code> に格納する。 <code>summary(gp)</code> コマンドで推定結果の詳細を表示する。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>gp <span class="ot">&lt;-</span> <span class="fu">plm</span>(inv <span class="sc">~</span> value <span class="sc">+</span> capital, <span class="at">data =</span> pdata, <span class="at">model =</span> <span class="st">"pooling"</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(gp)</span>
@@ -347,7 +347,7 @@ inv_{it} = \beta_0 + \beta_1 value_{it} + \beta_2 capital_{it} + u_{it}
 <span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="do">## Adj. R-Squared: 0.8105</span></span>
 <span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic: 426.576 on 2 and 197 DF, p-value: &lt; 2.22e-16</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>このプーリングOLS推定は, 通常の <code>lm()</code> 関数を使った回帰分析と同じ結果を得る. <code>lm(inv ~ value + capital, data = pdata)</code> コマンドで通常のOLS推定を行い, <code>summary()</code> コマンドで結果を表示すると, 上記の <code>plm()</code> による結果と同一であることが確認できる.</p>
+<p>このプーリングOLS推定は、通常の <code>lm()</code> 関数を使った回帰分析と同じ結果を得る。 <code>lm(inv ~ value + capital, data = pdata)</code> コマンドで通常のOLS推定を行い、<code>summary()</code> コマンドで結果を表示すると、上記の <code>plm()</code> による結果と同一であることが確認できる。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(inv <span class="sc">~</span> value <span class="sc">+</span> capital, <span class="at">data =</span> pdata))</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
@@ -373,16 +373,16 @@ inv_{it} = \beta_0 + \beta_1 value_{it} + \beta_2 capital_{it} + u_{it}
 </section>
 <section id="固定効果-平均差分法" class="level2" data-number="11.3">
 <h2 data-number="11.3" class="anchored" data-anchor-id="固定効果-平均差分法"><span class="header-section-number">11.3</span> 固定効果 (平均差分法)</h2>
-<p>次の重回帰モデルを考える. <span class="math display">\[
+<p>次の重回帰モデルを考える。 <span class="math display">\[
 inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}
-\]</span> この <span class="math inline">\(\alpha_i\)</span> は個別固定効果と呼ばれている. <span class="math inline">\(\alpha_i\)</span> は時間 <span class="math inline">\(t\)</span> に対して一定である. <span class="math inline">\(\alpha_i\)</span> は誤差項と相関があるもしれない. この個別固定効果を持つ重回帰モデルを固定効果モデルと呼ぶことにする.</p>
-<p>それぞれの時間平均をとれば以下になる. <span class="math display">\[
+\]</span> この <span class="math inline">\(\alpha_i\)</span> は個別固定効果と呼ばれている。 <span class="math inline">\(\alpha_i\)</span> は時間 <span class="math inline">\(t\)</span> に対して一定である。 <span class="math inline">\(\alpha_i\)</span> は誤差項と相関があるもしれない。 この個別固定効果を持つ重回帰モデルを固定効果モデルと呼ぶことにする。</p>
+<p>それぞれの時間平均をとれば以下になる。 <span class="math display">\[
 \bar{inv}_{i} = \beta_1 \bar{value}_{i} + \beta_2 \bar{capital}_{i} +\alpha_i  + \bar{u}_{i}
 \]</span></p>
-<p>そして、それぞれの観測値を時間平均で差し引けば以下のように <span class="math inline">\(\alpha_i\)</span> は消去される. <span class="math display">\[
+<p>そして、それぞれの観測値を時間平均で差し引けば以下のように <span class="math inline">\(\alpha_i\)</span> は消去される。 <span class="math display">\[
 inv_{it}-\overline{inv}_{i} = \beta_1 (value_{it}-\overline{value}_{i}) + \beta_2 (capital_{it}-\overline{capital}_{i})  + \bar{u}_{i} -\bar{u}_{i}
-\]</span> このように変換して回帰分析すれば <span class="math inline">\(\alpha_i\)</span> は誤差項と相関があっても一致推定量である. このような推定方法を<strong>平均差分法</strong>という.</p>
-<p>固定効果モデルを平均差分法で推定するには, <code>plm()</code> 関数で <code>model = "within"</code> を指定する. <code>plm(inv ~ value + capital, data = pdata, model = "within")</code> コマンドで固定効果推定を行い, 結果を <code>gi</code> に格納する. <code>summary(gi)</code> コマンドで推定結果の詳細を表示する.</p>
+\]</span> このように変換して回帰分析すれば <span class="math inline">\(\alpha_i\)</span> は誤差項と相関があっても一致推定量である。 このような推定方法を<strong>平均差分法</strong>という。</p>
+<p>固定効果モデルを平均差分法で推定するには、<code>plm()</code> 関数で <code>model = "within"</code> を指定する。 <code>plm(inv ~ value + capital, data = pdata, model = "within")</code> コマンドで固定効果推定を行い、結果を <code>gi</code> に格納する。 <code>summary(gi)</code> コマンドで推定結果の詳細を表示する。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>gi <span class="ot">&lt;-</span> <span class="fu">plm</span>(inv <span class="sc">~</span> value <span class="sc">+</span> capital, <span class="at">data =</span> pdata, <span class="at">model =</span> <span class="st">"within"</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(gi)</span>
@@ -410,7 +410,7 @@ inv_{it}-\overline{inv}_{i} = \beta_1 (value_{it}-\overline{value}_{i}) + \beta_
 <span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="do">## Adj. R-Squared: 0.75311</span></span>
 <span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic: 309.014 on 2 and 188 DF, p-value: &lt; 2.22e-16</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>推定された個別固定効果 <span class="math inline">\(\alpha_i\)</span> の値を確認するには, <code>fixef()</code> 関数を使用する. <code>fixef(gi)</code> コマンドで各企業の固定効果の推定値を表示する.</p>
+<p>推定された個別固定効果 <span class="math inline">\(\alpha_i\)</span> の値を確認するには、<code>fixef()</code> 関数を使用する。 <code>fixef(gi)</code> コマンドで各企業の固定効果の推定値を表示する。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fixef</span>(gi)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="do">##         1         2         3         4         5         6         7         8 </span></span>
@@ -418,7 +418,7 @@ inv_{it}-\overline{inv}_{i} = \beta_1 (value_{it}-\overline{value}_{i}) + \beta_
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="do">##         9        10 </span></span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="do">##  -87.2223   -6.5678</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>この固定効果推定は, <code>lm()</code> 関数で企業ダミーを含めた回帰分析と同等である. <code>lm(inv ~ value + capital+0+factor(firm), data = pdata)</code> コマンドで, 定数項を除外 (<code>+0</code>) し企業ダミー (<code>factor(firm)</code>) を含めた推定を行い, <code>summary()</code> コマンドで結果を表示する. 係数の推定値は同じであるが, 決定係数が大きく異なっていることに注意されたい.</p>
+<p>この固定効果推定は、<code>lm()</code> 関数で企業ダミーを含めた回帰分析と同等である。 <code>lm(inv ~ value + capital+0+factor(firm), data = pdata)</code> コマンドで、定数項を除外 (<code>+0</code>) し企業ダミー (<code>factor(firm)</code>) を含めた推定を行い、<code>summary()</code> コマンドで結果を表示する。 係数の推定値は同じであるが、決定係数が大きく異なっていることに注意されたい。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(inv <span class="sc">~</span> value <span class="sc">+</span> capital<span class="sc">+</span><span class="dv">0</span><span class="sc">+</span><span class="fu">factor</span>(firm), <span class="at">data =</span> pdata))</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
@@ -450,7 +450,7 @@ inv_{it}-\overline{inv}_{i} = \beta_1 (value_{it}-\overline{value}_{i}) + \beta_
 <span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.9616, Adjusted R-squared:  0.9591 </span></span>
 <span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic:   392 on 12 and 188 DF,  p-value: &lt; 2.2e-16</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>個別固定効果が統計的に有効かどうか (すなわち, 固定効果モデルとプーリングOLSモデルのどちらが適切か) を検定するには, F検定を実施する. <code>pFtest(gi,gp)</code> コマンドで, 固定効果モデル (<code>gi</code>) とプーリングOLSモデル (<code>gp</code>) を比較するF検定を実行する.</p>
+<p>個別固定効果が統計的に有効かどうか (すなわち、固定効果モデルとプーリングOLSモデルのどちらが適切か) を検定するには、F検定を実施する。 <code>pFtest(gi,gp)</code> コマンドで、固定効果モデル (<code>gi</code>) とプーリングOLSモデル (<code>gp</code>) を比較するF検定を実行する。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pFtest</span>(gi,gp)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
@@ -462,10 +462,10 @@ inv_{it}-\overline{inv}_{i} = \beta_1 (value_{it}-\overline{value}_{i}) + \beta_
 </div>
 <section id="時間効果モデル" class="level3" data-number="11.3.1">
 <h3 data-number="11.3.1" class="anchored" data-anchor-id="時間効果モデル"><span class="header-section-number">11.3.1</span> 時間効果モデル</h3>
-<p>次のモデルを考える. <span class="math display">\[
+<p>次のモデルを考える。 <span class="math display">\[
 inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it}+ \gamma_t +\alpha_i + u_{it}
-\]</span> この <span class="math inline">\(\gamma_t\)</span> は時間固定効果と呼ばれている. ここでは個別固定効果と時間固定効果の2つの固定効果を持つ重回帰モデルを<strong>時間効果モデル</strong>と呼ぶことにする.</p>
-<p>時間効果モデルを推定するには, <code>plm()</code> 関数で <code>effect="twoways"</code> と <code>model = "within"</code> を指定する. <code>plm(inv ~ value + capital, data = pdata, effect="twoways", model = "within")</code> コマンドで, 個別固定効果と時間固定効果の両方を含むモデルを推定し, 結果を <code>gi2</code> に格納する. <code>summary(gi2)</code> コマンドで推定結果の詳細を表示する.</p>
+\]</span> この <span class="math inline">\(\gamma_t\)</span> は時間固定効果と呼ばれている。 ここでは個別固定効果と時間固定効果の2つの固定効果を持つ重回帰モデルを<strong>時間効果モデル</strong>と呼ぶことにする。</p>
+<p>時間効果モデルを推定するには、<code>plm()</code> 関数で <code>effect="twoways"</code> と <code>model = "within"</code> を指定する。 <code>plm(inv ~ value + capital, data = pdata, effect="twoways", model = "within")</code> コマンドで、個別固定効果と時間固定効果の両方を含むモデルを推定し、結果を <code>gi2</code> に格納する。 <code>summary(gi2)</code> コマンドで推定結果の詳細を表示する。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>gi2 <span class="ot">&lt;-</span> <span class="fu">plm</span>(inv <span class="sc">~</span> value <span class="sc">+</span> capital, <span class="at">data =</span> pdata, <span class="at">effect=</span><span class="st">"twoways"</span>,<span class="at">model =</span> <span class="st">"within"</span>)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(gi2)</span>
@@ -494,7 +494,7 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it}+ \gamma_t +\alpha_i + u_{it
 <span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="do">## Adj. R-Squared: 0.67047</span></span>
 <span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic: 217.442 on 2 and 169 DF, p-value: &lt; 2.22e-16</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>推定された個別固定効果と時間固定効果をそれぞれ確認するには, <code>fixef()</code> 関数で <code>effect</code> 引数を指定する. <code>fixef(gi2, effect = "individual")</code> コマンドで各企業の固定効果を, <code>fixef(gi2, effect = "time")</code> コマンドで各年の固定効果を表示する.</p>
+<p>推定された個別固定効果と時間固定効果をそれぞれ確認するには、<code>fixef()</code> 関数で <code>effect</code> 引数を指定する。 <code>fixef(gi2, effect = "individual")</code> コマンドで各企業の固定効果を、<code>fixef(gi2, effect = "time")</code> コマンドで各年の固定効果を表示する。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fixef</span>(gi2, <span class="at">effect =</span> <span class="st">"individual"</span>)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="do">##         1         2         3         4         5         6         7         8 </span></span>
@@ -507,7 +507,7 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it}+ \gamma_t +\alpha_i + u_{it
 <span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="do">##    1945    1946    1947    1948    1949    1950    1951    1952    1953    1954 </span></span>
 <span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="do">## -142.58 -118.07 -126.29 -130.62 -160.40 -162.80 -149.38 -151.53 -154.62 -180.43</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>この時間効果モデルの推定は, <code>lm()</code> 関数で企業ダミーと年ダミーの両方を含めた回帰分析と同等である. <code>lm(inv ~ value + capital+0+factor(firm)+factor(year), data = pdata)</code> コマンドで, 定数項を除外し企業ダミーと年ダミーを含めた推定を行い, <code>summary()</code> コマンドで結果を表示する. 係数の推定値は同じであるが, 決定係数が大きく異なっていることに注意されたい.</p>
+<p>この時間効果モデルの推定は、<code>lm()</code> 関数で企業ダミーと年ダミーの両方を含めた回帰分析と同等である。 <code>lm(inv ~ value + capital+0+factor(firm)+factor(year), data = pdata)</code> コマンドで、定数項を除外し企業ダミーと年ダミーを含めた推定を行い、<code>summary()</code> コマンドで結果を表示する。 係数の推定値は同じであるが、決定係数が大きく異なっていることに注意されたい。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(inv <span class="sc">~</span> value <span class="sc">+</span> capital<span class="sc">+</span><span class="dv">0</span><span class="sc">+</span><span class="fu">factor</span>(firm)<span class="sc">+</span><span class="fu">factor</span>(year), <span class="at">data =</span> pdata))</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
@@ -559,7 +559,7 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it}+ \gamma_t +\alpha_i + u_{it
 <span id="cb11-48"><a href="#cb11-48" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.9668, Adjusted R-squared:  0.9607 </span></span>
 <span id="cb11-49"><a href="#cb11-49" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic: 158.8 on 31 and 169 DF,  p-value: &lt; 2.2e-16</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>時間固定効果が統計的に有効かどうか (すなわち, 時間効果モデルと個別固定効果のみのモデルのどちらが適切か) を検定するには, F検定を実施する. <code>pFtest(gi2, gi)</code> コマンドで, 時間効果モデル (<code>gi2</code>) と個別固定効果のみのモデル (<code>gi</code>) を比較するF検定を実行する.</p>
+<p>時間固定効果が統計的に有効かどうか (すなわち、時間効果モデルと個別固定効果のみのモデルのどちらが適切か) を検定するには、F検定を実施する。 <code>pFtest(gi2, gi)</code> コマンドで、時間効果モデル (<code>gi2</code>) と個別固定効果のみのモデル (<code>gi</code>) を比較するF検定を実行する。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pFtest</span>(gi2, gi)</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
@@ -573,14 +573,14 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it}+ \gamma_t +\alpha_i + u_{it
 </section>
 <section id="固定効果-一階差分法" class="level2" data-number="11.4">
 <h2 data-number="11.4" class="anchored" data-anchor-id="固定効果-一階差分法"><span class="header-section-number">11.4</span> 固定効果 (一階差分法)</h2>
-<p>次のモデルを考える. <span class="math display">\[
+<p>次のモデルを考える。 <span class="math display">\[
 inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}
-\]</span> この <span class="math inline">\(\alpha_i\)</span> は固定効果と呼ばれている. <span class="math inline">\(\alpha_i\)</span> は時間 <span class="math inline">\(t\)</span> に対して一定である. <span class="math inline">\(\alpha_i\)</span> は誤差項と相関があるもしれない.</p>
-<p>それぞれの階差をとれば <span class="math inline">\(\alpha_i\)</span> は消去できる. <span class="math display">\[
+\]</span> この <span class="math inline">\(\alpha_i\)</span> は固定効果と呼ばれている。 <span class="math inline">\(\alpha_i\)</span> は時間 <span class="math inline">\(t\)</span> に対して一定である。 <span class="math inline">\(\alpha_i\)</span> は誤差項と相関があるもしれない。</p>
+<p>それぞれの階差をとれば <span class="math inline">\(\alpha_i\)</span> は消去できる。 <span class="math display">\[
 \Delta inv_{it} = \beta_1 \Delta value_{it} + \beta_2 \Delta capital_{it} + \Delta u_{it}
 \]</span></p>
-<p>このように変換して回帰分析すれば <span class="math inline">\(\alpha_i\)</span> は誤差項と相関があっても一致推定量である.</p>
-<p>一階差分法による固定効果推定を実行するには, <code>plm()</code> 関数で <code>model = "fd"</code> を指定する. <code>plm(inv ~ value + capital+0, data = pdata, model = "fd")</code> コマンドで, 定数項を除外 (<code>+0</code>) して一階差分推定を行い, 結果を <code>gf</code> に格納する. <code>summary(gf)</code> コマンドで推定結果の詳細を表示する.</p>
+<p>このように変換して回帰分析すれば <span class="math inline">\(\alpha_i\)</span> は誤差項と相関があっても一致推定量である。</p>
+<p>一階差分法による固定効果推定を実行するには、<code>plm()</code> 関数で <code>model = "fd"</code> を指定する。 <code>plm(inv ~ value + capital+0, data = pdata, model = "fd")</code> コマンドで、定数項を除外 (<code>+0</code>) して一階差分推定を行い、結果を <code>gf</code> に格納する。 <code>summary(gf)</code> コマンドで推定結果の詳細を表示する。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>gf <span class="ot">&lt;-</span> <span class="fu">plm</span>(inv <span class="sc">~</span> value <span class="sc">+</span> capital<span class="sc">+</span><span class="dv">0</span>, <span class="at">data =</span> pdata, <span class="at">model =</span> <span class="st">"fd"</span>)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(gf)</span>
@@ -609,7 +609,7 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}
 <span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a><span class="do">## Adj. R-Squared: 0.40561</span></span>
 <span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic: 70.5784 on 2 and 188 DF, p-value: &lt; 2.22e-16</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>時間固定効果を含む一階差分モデルを推定する場合は, 年ダミーを追加する. <code>plm(inv ~ value + capital+0+factor(year), data = pdata, model = "fd")</code> コマンドで, 年ダミー (<code>factor(year)</code>) を含む一階差分推定を行い, 結果を <code>gf2</code> に格納する. <code>summary(gf2)</code> コマンドで推定結果の詳細を表示する.</p>
+<p>時間固定効果を含む一階差分モデルを推定する場合は、年ダミーを追加する。 <code>plm(inv ~ value + capital+0+factor(year), data = pdata, model = "fd")</code> コマンドで、年ダミー (<code>factor(year)</code>) を含む一階差分推定を行い、結果を <code>gf2</code> に格納する。 <code>summary(gf2)</code> コマンドで推定結果の詳細を表示する。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>gf2 <span class="ot">&lt;-</span><span class="fu">plm</span>(inv <span class="sc">~</span> value <span class="sc">+</span> capital<span class="sc">+</span><span class="dv">0</span><span class="sc">+</span><span class="fu">factor</span>(year), <span class="at">data =</span> pdata, <span class="at">model =</span> <span class="st">"fd"</span>)</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(gf2)</span>
@@ -658,7 +658,7 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}
 <span id="cb14-45"><a href="#cb14-45" aria-hidden="true" tabindex="-1"></a><span class="do">## Adj. R-Squared: 0.4393</span></span>
 <span id="cb14-46"><a href="#cb14-46" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic: 8.5881 on 21 and 169 DF, p-value: &lt; 2.22e-16</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>時間固定効果が統計的に有効かどうかを検定するには, F検定を実施する. <code>pFtest(gf2,gf)</code> コマンドで, 時間効果を含むモデル (<code>gf2</code>) と含まないモデル (<code>gf</code>) を比較するF検定を実行する.</p>
+<p>時間固定効果が統計的に有効かどうかを検定するには、F検定を実施する。 <code>pFtest(gf2,gf)</code> コマンドで、時間効果を含むモデル (<code>gf2</code>) と含まないモデル (<code>gf</code>) を比較するF検定を実行する。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pFtest</span>(gf2,gf)</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
@@ -670,18 +670,18 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}
 </div>
 <section id="平均差分法と一階差分法" class="level3" data-number="11.4.1">
 <h3 data-number="11.4.1" class="anchored" data-anchor-id="平均差分法と一階差分法"><span class="header-section-number">11.4.1</span> 平均差分法と一階差分法</h3>
-<p>平均差分法と一階差分法は誤差項の仮定をどのようにおくかによって変わってくる. 誤差項の階差をとることによって時間を通じて無相関になるなら一階差分法が望ましいであろう. しかしながら, 固定効果, 時間効果の値がきちんと計算して, それが経済学的解釈が可能なら, 平均差分法が望ましい. さらに他のプーリングOLSの仮定と変量効果モデルとの比較の意味でも平均差分法がよく使われる.</p>
-<p>なお時間が2期間のパネルデータのとき, 平均差分法も一階差分法も計算値は同じである. たとえば <span class="math inline">\(t=2\)</span>のときの変数 <span class="math inline">\(x_{it}\)</span> の平均差分値は <span class="math display">\[
+<p>平均差分法と一階差分法は誤差項の仮定をどのようにおくかによって変わってくる。 誤差項の階差をとることによって時間を通じて無相関になるなら一階差分法が望ましいであろう。 しかしながら、固定効果、時間効果の値がきちんと計算して、それが経済学的解釈が可能なら、平均差分法が望ましい。 さらに他のプーリングOLSの仮定と変量効果モデルとの比較の意味でも平均差分法がよく使われる。</p>
+<p>なお時間が2期間のパネルデータのとき、平均差分法も一階差分法も計算値は同じである。 たとえば <span class="math inline">\(t=2\)</span>のときの変数 <span class="math inline">\(x_{it}\)</span> の平均差分値は <span class="math display">\[
 x_{2t}-\bar{x}_i=x_{2t}-\frac{x_{i1}+x_{i2}}{2}=\frac{x_{i2}-x_{i1}}{2}
-\]</span> となる.</p>
+\]</span> となる。</p>
 </section>
 </section>
 <section id="変量効果" class="level2" data-number="11.5">
 <h2 data-number="11.5" class="anchored" data-anchor-id="変量効果"><span class="header-section-number">11.5</span> 変量効果</h2>
-<p>次のモデルを考える. <span class="math display">\[
+<p>次のモデルを考える。 <span class="math display">\[
 inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}
-\]</span> この <span class="math inline">\(\alpha_i\)</span> は時間 <span class="math inline">\(t\)</span> について一定であるが, <span class="math inline">\(i\)</span> について独立同一分布の確率変数にしたがう. さらに <span class="math inline">\(\alpha_i\)</span> は説明変数と無相関である時, この <span class="math inline">\(\alpha_i\)</span> は個別変量効果と呼ばれている. 個別固定効果は説明変数と無相関を仮定していない. この個別変量効果を持つ重回帰モデルを変量効果モデルと呼ぶことにする.</p>
-<p>変量効果モデルを推定するには, <code>plm()</code> 関数で <code>model = "random"</code> を指定する. <code>plm(inv ~ value + capital, data = pdata, model = "random")</code> コマンドで変量効果推定を行い, 結果を <code>gr</code> に格納する. <code>summary(gr)</code> コマンドで推定結果の詳細を表示する.</p>
+\]</span> この <span class="math inline">\(\alpha_i\)</span> は時間 <span class="math inline">\(t\)</span> について一定であるが、<span class="math inline">\(i\)</span> について独立同一分布の確率変数にしたがう。 さらに <span class="math inline">\(\alpha_i\)</span> は説明変数と無相関である時、この <span class="math inline">\(\alpha_i\)</span> は個別変量効果と呼ばれている。 個別固定効果は説明変数と無相関を仮定していない。 この個別変量効果を持つ重回帰モデルを変量効果モデルと呼ぶことにする。</p>
+<p>変量効果モデルを推定するには、<code>plm()</code> 関数で <code>model = "random"</code> を指定する。 <code>plm(inv ~ value + capital, data = pdata, model = "random")</code> コマンドで変量効果推定を行い、結果を <code>gr</code> に格納する。 <code>summary(gr)</code> コマンドで推定結果の詳細を表示する。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>gr <span class="ot">&lt;-</span> <span class="fu">plm</span>(inv <span class="sc">~</span> value <span class="sc">+</span> capital, <span class="at">data =</span> pdata, <span class="at">model =</span> <span class="st">"random"</span>)</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(gr)</span>
@@ -717,7 +717,7 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}
 <span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a><span class="do">## Adj. R-Squared: 0.76716</span></span>
 <span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a><span class="do">## Chisq: 657.674 on 2 DF, p-value: &lt; 2.22e-16</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>推定された変量効果の値を確認するには, <code>ranef()</code> 関数を使用する. <code>ranef(gr)</code> コマンドで各企業の変量効果の推定値を表示する.</p>
+<p>推定された変量効果の値を確認するには、<code>ranef()</code> 関数を使用する。 <code>ranef(gr)</code> コマンドで各企業の変量効果の推定値を表示する。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ranef</span>(gr)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="do">##            1            2            3            4            5            6 </span></span>
@@ -727,7 +727,7 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}
 </div>
 <section id="ハウスマン検定" class="level3" data-number="11.5.1">
 <h3 data-number="11.5.1" class="anchored" data-anchor-id="ハウスマン検定"><span class="header-section-number">11.5.1</span> ハウスマン検定</h3>
-<p>帰無仮説が変量効果モデル, 対立仮説が固定効果モデルの検定はハウスマン検定を実施する. ハウスマン検定では, 変量効果モデルと固定効果モデルの係数の差が統計的に有意かどうかを検定する. <code>phtest(gi,gr)</code> コマンドで, 固定効果モデル (<code>gi</code>) と変量効果モデル (<code>gr</code>) のハウスマン検定を実行する.</p>
+<p>帰無仮説が変量効果モデル、対立仮説が固定効果モデルの検定はハウスマン検定を実施する。 ハウスマン検定では、変量効果モデルと固定効果モデルの係数の差が統計的に有意かどうかを検定する。 <code>phtest(gi,gr)</code> コマンドで、固定効果モデル (<code>gi</code>) と変量効果モデル (<code>gr</code>) のハウスマン検定を実行する。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">phtest</span>(gi,gr)</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
@@ -741,7 +741,7 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}
 </section>
 <section id="クラスターロバスト分散" class="level2" data-number="11.6">
 <h2 data-number="11.6" class="anchored" data-anchor-id="クラスターロバスト分散"><span class="header-section-number">11.6</span> クラスターロバスト分散</h2>
-<p>固定効果モデルにおいて, 分散不均一が疑われる場合, クラスターロバスト分散を用いる. 時間効果がない固定効果モデル (<code>gi</code>) について, クラスターロバスト標準誤差を計算するには, <code>coeftest()</code> 関数と <code>vcovHC()</code> 関数を組み合わせて使用する. <code>coeftest(gi, vcov=vcovHC(gi, type="sss"))</code> コマンドで, <code>type="sss"</code> を指定したクラスターロバスト分散を用いた係数検定を実行する.</p>
+<p>固定効果モデルにおいて、分散不均一が疑われる場合、クラスターロバスト分散を用いる。 時間効果がない固定効果モデル (<code>gi</code>) について、クラスターロバスト標準誤差を計算するには、<code>coeftest()</code> 関数と <code>vcovHC()</code> 関数を組み合わせて使用する。 <code>coeftest(gi, vcov=vcovHC(gi, type="sss"))</code> コマンドで、<code>type="sss"</code> を指定したクラスターロバスト分散を用いた係数検定を実行する。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coeftest</span>(gi,<span class="at">vcov=</span><span class="fu">vcovHC</span>(gi,<span class="at">type=</span><span class="st">"sss"</span>))</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
@@ -753,7 +753,7 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}
 <span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
 <span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>時間効果モデル (<code>gi2</code>) についても同様に, クラスターロバスト標準誤差を計算できる. <code>coeftest(gi2, vcov=vcovHC(gi2, type="sss"))</code> コマンドで, 時間効果モデルにおけるクラスターロバスト分散を用いた係数検定を実行する.</p>
+<p>時間効果モデル (<code>gi2</code>) についても同様に、クラスターロバスト標準誤差を計算できる。 <code>coeftest(gi2, vcov=vcovHC(gi2, type="sss"))</code> コマンドで、時間効果モデルにおけるクラスターロバスト分散を用いた係数検定を実行する。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coeftest</span>(gi2,<span class="at">vcov=</span><span class="fu">vcovHC</span>(gi2,<span class="at">type=</span><span class="st">"sss"</span>))</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
@@ -765,7 +765,7 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}
 <span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
 <span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>STATA の計算結果に合わせるには, 個別固定効果モデルに年ダミーを明示的に追加する必要がある. <code>update(gi, .~. + factor(year))</code> コマンドで, モデル <code>gi</code> に年ダミーを追加して更新し, <code>git</code> に格納する. その後 <code>coeftest(git, vcov=vcovHC(git, type="sss"))</code> コマンドで, クラスターロバスト分散を用いた係数検定を実行する. <code>gi2</code> と <code>git</code> のどちらを採用するかによって結果が変わってしまうので注意されたい.</p>
+<p>STATA の計算結果に合わせるには、個別固定効果モデルに年ダミーを明示的に追加する必要がある。 <code>update(gi, .~. + factor(year))</code> コマンドで、モデル <code>gi</code> に年ダミーを追加して更新し、<code>git</code> に格納する。 その後 <code>coeftest(git, vcov=vcovHC(git, type="sss"))</code> コマンドで、クラスターロバスト分散を用いた係数検定を実行する。 <code>gi2</code> と <code>git</code> のどちらを採用するかによって結果が変わってしまうので注意されたい。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>git <span class="ot">&lt;-</span> <span class="fu">update</span>(gi, .<span class="sc">~</span>. <span class="sc">+</span> <span class="fu">factor</span>(year))</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coeftest</span>(git,<span class="at">vcov=</span><span class="fu">vcovHC</span>(git,<span class="at">type=</span><span class="st">"sss"</span>))</span>
@@ -799,7 +799,7 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}
 </div>
 <section id="分散不均一の検定" class="level3" data-number="11.6.1">
 <h3 data-number="11.6.1" class="anchored" data-anchor-id="分散不均一の検定"><span class="header-section-number">11.6.1</span> 分散不均一の検定</h3>
-<p>固定効果モデルにおいて, 分散不均一かどうかを検定するには, Breusch-Pagan 検定を実施する. <code>bptest()</code> 関数を使用して, 企業ダミーを含むモデルで検定を行う. <code>bptest(inv ~ value + capital + factor(firm), data=pdata)</code> コマンドで, 個別固定効果モデルの分散不均一性を検定する.</p>
+<p>固定効果モデルにおいて、分散不均一かどうかを検定するには、Breusch-Pagan 検定を実施する。 <code>bptest()</code> 関数を使用して、企業ダミーを含むモデルで検定を行う。 <code>bptest(inv ~ value + capital + factor(firm), data=pdata)</code> コマンドで、個別固定効果モデルの分散不均一性を検定する。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bptest</span>(inv <span class="sc">~</span> value <span class="sc">+</span> capital <span class="sc">+</span> <span class="fu">factor</span>(firm), <span class="at">data=</span>pdata)</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
@@ -808,7 +808,7 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}
 <span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="do">## data:  inv ~ value + capital + factor(firm)</span></span>
 <span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="do">## BP = 85.836, df = 11, p-value = 1.086e-13</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>時間効果モデルの場合, 企業ダミーと年ダミーの両方を含めて検定を行う. <code>bptest(inv ~ value + capital + factor(firm) + factor(year), data=pdata)</code> コマンドで, 時間効果モデルの分散不均一性を検定する.</p>
+<p>時間効果モデルの場合、企業ダミーと年ダミーの両方を含めて検定を行う。 <code>bptest(inv ~ value + capital + factor(firm) + factor(year), data=pdata)</code> コマンドで、時間効果モデルの分散不均一性を検定する。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bptest</span>(inv <span class="sc">~</span> value <span class="sc">+</span> capital <span class="sc">+</span> <span class="fu">factor</span>(firm) <span class="sc">+</span> <span class="fu">factor</span>(year),<span class="at">data=</span>pdata)</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
@@ -1312,11 +1312,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a><span class="fu">## データ</span></span>
 <span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a>パネル分析に必要なパッケージを読み込み, データセットを準備する.</span>
-<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a><span class="in">`library(AER)`</span> コマンドで AER パッケージを, <span class="in">`library(plm)`</span> コマンドで plm パッケージを読み込む.</span>
-<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>次に <span class="in">`data("Grunfeld", package = "plm")`</span> コマンドで Grunfeld データセットを読み込む.</span>
-<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a>Grunfeld データは企業の投資, 企業価値, 資本ストックに関するパネルデータである.</span>
-<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a><span class="in">`head(Grunfeld)`</span> コマンドでデータの最初の数行を表示する.</span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a>パネル分析に必要なパッケージを読み込み、データセットを準備する。</span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a><span class="in">`library(AER)`</span> コマンドで AER パッケージを、<span class="in">`library(plm)`</span> コマンドで plm パッケージを読み込む。</span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>次に <span class="in">`data("Grunfeld", package = "plm")`</span> コマンドで Grunfeld データセットを読み込む。</span>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a>Grunfeld データは企業の投資、企業価値、資本ストックに関するパネルデータである。</span>
+<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a><span class="in">`head(Grunfeld)`</span> コマンドでデータの最初の数行を表示する。</span>
 <span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
@@ -1327,9 +1327,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb24-35"><a href="#cb24-35" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(Grunfeld)</span>
 <span id="cb24-36"><a href="#cb24-36" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb24-37"><a href="#cb24-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-38"><a href="#cb24-38" aria-hidden="true" tabindex="-1"></a>次にパネルデータとして扱うために, <span class="in">`pdata.frame()`</span> 関数を使用する.</span>
-<span id="cb24-39"><a href="#cb24-39" aria-hidden="true" tabindex="-1"></a><span class="in">`pdata.frame(Grunfeld, index = c("firm", "year"))`</span> コマンドで, firm (企業) と year (年) をインデックスとしてパネルデータフレームを作成し, <span class="in">`pdata`</span> に格納する.</span>
-<span id="cb24-40"><a href="#cb24-40" aria-hidden="true" tabindex="-1"></a><span class="in">`pdim(pdata)`</span> コマンドでパネルデータの次元 (企業数, 時間数, 総観測数) を確認する.</span>
+<span id="cb24-38"><a href="#cb24-38" aria-hidden="true" tabindex="-1"></a>次にパネルデータとして扱うために、<span class="in">`pdata.frame()`</span> 関数を使用する。</span>
+<span id="cb24-39"><a href="#cb24-39" aria-hidden="true" tabindex="-1"></a><span class="in">`pdata.frame(Grunfeld, index = c("firm", "year"))`</span> コマンドで、firm (企業) と year (年) をインデックスとしてパネルデータフレームを作成し、<span class="in">`pdata`</span> に格納する。</span>
+<span id="cb24-40"><a href="#cb24-40" aria-hidden="true" tabindex="-1"></a><span class="in">`pdim(pdata)`</span> コマンドでパネルデータの次元 (企業数、時間数、総観測数) を確認する。</span>
 <span id="cb24-41"><a href="#cb24-41" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-44"><a href="#cb24-44" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb24-45"><a href="#cb24-45" aria-hidden="true" tabindex="-1"></a>pdata <span class="ot">&lt;-</span> <span class="fu">pdata.frame</span>(Grunfeld, <span class="at">index =</span> <span class="fu">c</span>(<span class="st">"firm"</span>, <span class="st">"year"</span>))</span>
@@ -1338,28 +1338,28 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb24-48"><a href="#cb24-48" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-49"><a href="#cb24-49" aria-hidden="true" tabindex="-1"></a><span class="fu">## プーリングOLS</span></span>
 <span id="cb24-50"><a href="#cb24-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-51"><a href="#cb24-51" aria-hidden="true" tabindex="-1"></a>次の重回帰モデルを考える.</span>
+<span id="cb24-51"><a href="#cb24-51" aria-hidden="true" tabindex="-1"></a>次の重回帰モデルを考える。</span>
 <span id="cb24-52"><a href="#cb24-52" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-53"><a href="#cb24-53" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb24-54"><a href="#cb24-54" aria-hidden="true" tabindex="-1"></a>inv_{it} = \beta_0 + \beta_1 value_{it} + \beta_2 capital_{it} + u_{it}</span>
 <span id="cb24-55"><a href="#cb24-55" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb24-56"><a href="#cb24-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-57"><a href="#cb24-57" aria-hidden="true" tabindex="-1"></a>誤差項 $u_{it}$ は $i$ についても $t$ についても独立同一分布と仮定する.</span>
-<span id="cb24-58"><a href="#cb24-58" aria-hidden="true" tabindex="-1"></a>さらに誤差項は説明変数と独立である.</span>
-<span id="cb24-59"><a href="#cb24-59" aria-hidden="true" tabindex="-1"></a>この時、パネルデータにおいてもOLS推定法でパラメータは不偏である.</span>
-<span id="cb24-60"><a href="#cb24-60" aria-hidden="true" tabindex="-1"></a>ここでの重回帰モデルをプーリングOLSモデルと呼ぶことにする.</span>
+<span id="cb24-57"><a href="#cb24-57" aria-hidden="true" tabindex="-1"></a>誤差項 $u_{it}$ は $i$ についても$t$ についても独立同一分布と仮定する。</span>
+<span id="cb24-58"><a href="#cb24-58" aria-hidden="true" tabindex="-1"></a>さらに誤差項は説明変数と独立である。</span>
+<span id="cb24-59"><a href="#cb24-59" aria-hidden="true" tabindex="-1"></a>この時、パネルデータにおいてもOLS推定法でパラメータは不偏である。</span>
+<span id="cb24-60"><a href="#cb24-60" aria-hidden="true" tabindex="-1"></a>ここでの重回帰モデルをプーリングOLSモデルと呼ぶことにする。</span>
 <span id="cb24-61"><a href="#cb24-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-62"><a href="#cb24-62" aria-hidden="true" tabindex="-1"></a>プーリングOLS推定を実行するには, <span class="in">`plm()`</span> 関数で <span class="in">`model = "pooling"`</span> を指定する.</span>
-<span id="cb24-63"><a href="#cb24-63" aria-hidden="true" tabindex="-1"></a><span class="in">`plm(inv ~ value + capital, data = pdata, model = "pooling")`</span> コマンドで, inv を被説明変数, value と capital を説明変数としてプーリングOLS推定を行い, 結果を <span class="in">`gp`</span> に格納する.</span>
-<span id="cb24-64"><a href="#cb24-64" aria-hidden="true" tabindex="-1"></a><span class="in">`summary(gp)`</span> コマンドで推定結果の詳細を表示する.</span>
+<span id="cb24-62"><a href="#cb24-62" aria-hidden="true" tabindex="-1"></a>プーリングOLS推定を実行するには、<span class="in">`plm()`</span> 関数で <span class="in">`model = "pooling"`</span> を指定する。</span>
+<span id="cb24-63"><a href="#cb24-63" aria-hidden="true" tabindex="-1"></a><span class="in">`plm(inv ~ value + capital, data = pdata, model = "pooling")`</span> コマンドで、inv を被説明変数、value と capital を説明変数としてプーリングOLS推定を行い、結果を <span class="in">`gp`</span> に格納する。</span>
+<span id="cb24-64"><a href="#cb24-64" aria-hidden="true" tabindex="-1"></a><span class="in">`summary(gp)`</span> コマンドで推定結果の詳細を表示する。</span>
 <span id="cb24-65"><a href="#cb24-65" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-68"><a href="#cb24-68" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb24-69"><a href="#cb24-69" aria-hidden="true" tabindex="-1"></a>gp <span class="ot">&lt;-</span> <span class="fu">plm</span>(inv <span class="sc">~</span> value <span class="sc">+</span> capital, <span class="at">data =</span> pdata, <span class="at">model =</span> <span class="st">"pooling"</span>)</span>
 <span id="cb24-70"><a href="#cb24-70" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(gp)</span>
 <span id="cb24-71"><a href="#cb24-71" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb24-72"><a href="#cb24-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-73"><a href="#cb24-73" aria-hidden="true" tabindex="-1"></a>このプーリングOLS推定は, 通常の <span class="in">`lm()`</span> 関数を使った回帰分析と同じ結果を得る.</span>
-<span id="cb24-74"><a href="#cb24-74" aria-hidden="true" tabindex="-1"></a><span class="in">`lm(inv ~ value + capital, data = pdata)`</span> コマンドで通常のOLS推定を行い, <span class="in">`summary()`</span> コマンドで結果を表示すると, 上記の <span class="in">`plm()`</span> による結果と同一であることが確認できる.</span>
+<span id="cb24-73"><a href="#cb24-73" aria-hidden="true" tabindex="-1"></a>このプーリングOLS推定は、通常の <span class="in">`lm()`</span> 関数を使った回帰分析と同じ結果を得る。</span>
+<span id="cb24-74"><a href="#cb24-74" aria-hidden="true" tabindex="-1"></a><span class="in">`lm(inv ~ value + capital, data = pdata)`</span> コマンドで通常のOLS推定を行い、<span class="in">`summary()`</span> コマンドで結果を表示すると、上記の <span class="in">`plm()`</span> による結果と同一であることが確認できる。</span>
 <span id="cb24-75"><a href="#cb24-75" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-78"><a href="#cb24-78" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb24-79"><a href="#cb24-79" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(inv <span class="sc">~</span> value <span class="sc">+</span> capital, <span class="at">data =</span> pdata))</span>
@@ -1367,51 +1367,51 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb24-81"><a href="#cb24-81" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-82"><a href="#cb24-82" aria-hidden="true" tabindex="-1"></a><span class="fu">## 固定効果 (平均差分法)</span></span>
 <span id="cb24-83"><a href="#cb24-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-84"><a href="#cb24-84" aria-hidden="true" tabindex="-1"></a>次の重回帰モデルを考える.</span>
+<span id="cb24-84"><a href="#cb24-84" aria-hidden="true" tabindex="-1"></a>次の重回帰モデルを考える。</span>
 <span id="cb24-85"><a href="#cb24-85" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb24-86"><a href="#cb24-86" aria-hidden="true" tabindex="-1"></a>inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}</span>
-<span id="cb24-87"><a href="#cb24-87" aria-hidden="true" tabindex="-1"></a>$$ この $\alpha_i$ は個別固定効果と呼ばれている.</span>
-<span id="cb24-88"><a href="#cb24-88" aria-hidden="true" tabindex="-1"></a>$\alpha_i$ は時間 $t$ に対して一定である.</span>
-<span id="cb24-89"><a href="#cb24-89" aria-hidden="true" tabindex="-1"></a>$\alpha_i$ は誤差項と相関があるもしれない.</span>
-<span id="cb24-90"><a href="#cb24-90" aria-hidden="true" tabindex="-1"></a>この個別固定効果を持つ重回帰モデルを固定効果モデルと呼ぶことにする.</span>
+<span id="cb24-87"><a href="#cb24-87" aria-hidden="true" tabindex="-1"></a>$$ この $\alpha_i$ は個別固定効果と呼ばれている。</span>
+<span id="cb24-88"><a href="#cb24-88" aria-hidden="true" tabindex="-1"></a>$\alpha_i$ は時間 $t$ に対して一定である。</span>
+<span id="cb24-89"><a href="#cb24-89" aria-hidden="true" tabindex="-1"></a>$\alpha_i$ は誤差項と相関があるもしれない。</span>
+<span id="cb24-90"><a href="#cb24-90" aria-hidden="true" tabindex="-1"></a>この個別固定効果を持つ重回帰モデルを固定効果モデルと呼ぶことにする。</span>
 <span id="cb24-91"><a href="#cb24-91" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-92"><a href="#cb24-92" aria-hidden="true" tabindex="-1"></a>それぞれの時間平均をとれば以下になる.</span>
+<span id="cb24-92"><a href="#cb24-92" aria-hidden="true" tabindex="-1"></a>それぞれの時間平均をとれば以下になる。</span>
 <span id="cb24-93"><a href="#cb24-93" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb24-94"><a href="#cb24-94" aria-hidden="true" tabindex="-1"></a>\bar{inv}_{i} = \beta_1 \bar{value}_{i} + \beta_2 \bar{capital}_{i} +\alpha_i  + \bar{u}_{i}</span>
 <span id="cb24-95"><a href="#cb24-95" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb24-96"><a href="#cb24-96" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-97"><a href="#cb24-97" aria-hidden="true" tabindex="-1"></a>そして、それぞれの観測値を時間平均で差し引けば以下のように $\alpha_i$ は消去される.</span>
+<span id="cb24-97"><a href="#cb24-97" aria-hidden="true" tabindex="-1"></a>そして、それぞれの観測値を時間平均で差し引けば以下のように $\alpha_i$ は消去される。</span>
 <span id="cb24-98"><a href="#cb24-98" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb24-99"><a href="#cb24-99" aria-hidden="true" tabindex="-1"></a>inv_{it}-\overline{inv}_{i} = \beta_1 (value_{it}-\overline{value}_{i}) + \beta_2 (capital_{it}-\overline{capital}_{i})  + \bar{u}_{i} -\bar{u}_{i}</span>
-<span id="cb24-100"><a href="#cb24-100" aria-hidden="true" tabindex="-1"></a>$$ このように変換して回帰分析すれば $\alpha_i$ は誤差項と相関があっても一致推定量である.</span>
-<span id="cb24-101"><a href="#cb24-101" aria-hidden="true" tabindex="-1"></a>このような推定方法を**平均差分法**という.</span>
+<span id="cb24-100"><a href="#cb24-100" aria-hidden="true" tabindex="-1"></a>$$ このように変換して回帰分析すれば $\alpha_i$ は誤差項と相関があっても一致推定量である。</span>
+<span id="cb24-101"><a href="#cb24-101" aria-hidden="true" tabindex="-1"></a>このような推定方法を**平均差分法**という。</span>
 <span id="cb24-102"><a href="#cb24-102" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-103"><a href="#cb24-103" aria-hidden="true" tabindex="-1"></a>固定効果モデルを平均差分法で推定するには, <span class="in">`plm()`</span> 関数で <span class="in">`model = "within"`</span> を指定する.</span>
-<span id="cb24-104"><a href="#cb24-104" aria-hidden="true" tabindex="-1"></a><span class="in">`plm(inv ~ value + capital, data = pdata, model = "within")`</span> コマンドで固定効果推定を行い, 結果を <span class="in">`gi`</span> に格納する.</span>
-<span id="cb24-105"><a href="#cb24-105" aria-hidden="true" tabindex="-1"></a><span class="in">`summary(gi)`</span> コマンドで推定結果の詳細を表示する.</span>
+<span id="cb24-103"><a href="#cb24-103" aria-hidden="true" tabindex="-1"></a>固定効果モデルを平均差分法で推定するには、<span class="in">`plm()`</span> 関数で <span class="in">`model = "within"`</span> を指定する。</span>
+<span id="cb24-104"><a href="#cb24-104" aria-hidden="true" tabindex="-1"></a><span class="in">`plm(inv ~ value + capital, data = pdata, model = "within")`</span> コマンドで固定効果推定を行い、結果を <span class="in">`gi`</span> に格納する。</span>
+<span id="cb24-105"><a href="#cb24-105" aria-hidden="true" tabindex="-1"></a><span class="in">`summary(gi)`</span> コマンドで推定結果の詳細を表示する。</span>
 <span id="cb24-106"><a href="#cb24-106" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-109"><a href="#cb24-109" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb24-110"><a href="#cb24-110" aria-hidden="true" tabindex="-1"></a>gi <span class="ot">&lt;-</span> <span class="fu">plm</span>(inv <span class="sc">~</span> value <span class="sc">+</span> capital, <span class="at">data =</span> pdata, <span class="at">model =</span> <span class="st">"within"</span>)</span>
 <span id="cb24-111"><a href="#cb24-111" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(gi)</span>
 <span id="cb24-112"><a href="#cb24-112" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb24-113"><a href="#cb24-113" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-114"><a href="#cb24-114" aria-hidden="true" tabindex="-1"></a>推定された個別固定効果 $\alpha_i$ の値を確認するには, <span class="in">`fixef()`</span> 関数を使用する.</span>
-<span id="cb24-115"><a href="#cb24-115" aria-hidden="true" tabindex="-1"></a><span class="in">`fixef(gi)`</span> コマンドで各企業の固定効果の推定値を表示する.</span>
+<span id="cb24-114"><a href="#cb24-114" aria-hidden="true" tabindex="-1"></a>推定された個別固定効果 $\alpha_i$ の値を確認するには、<span class="in">`fixef()`</span> 関数を使用する。</span>
+<span id="cb24-115"><a href="#cb24-115" aria-hidden="true" tabindex="-1"></a><span class="in">`fixef(gi)`</span> コマンドで各企業の固定効果の推定値を表示する。</span>
 <span id="cb24-116"><a href="#cb24-116" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-119"><a href="#cb24-119" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb24-120"><a href="#cb24-120" aria-hidden="true" tabindex="-1"></a><span class="fu">fixef</span>(gi)</span>
 <span id="cb24-121"><a href="#cb24-121" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb24-122"><a href="#cb24-122" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-123"><a href="#cb24-123" aria-hidden="true" tabindex="-1"></a>この固定効果推定は, <span class="in">`lm()`</span> 関数で企業ダミーを含めた回帰分析と同等である.</span>
-<span id="cb24-124"><a href="#cb24-124" aria-hidden="true" tabindex="-1"></a><span class="in">`lm(inv ~ value + capital+0+factor(firm), data = pdata)`</span> コマンドで, 定数項を除外 (<span class="in">`+0`</span>) し企業ダミー (<span class="in">`factor(firm)`</span>) を含めた推定を行い, <span class="in">`summary()`</span> コマンドで結果を表示する.</span>
-<span id="cb24-125"><a href="#cb24-125" aria-hidden="true" tabindex="-1"></a>係数の推定値は同じであるが, 決定係数が大きく異なっていることに注意されたい.</span>
+<span id="cb24-123"><a href="#cb24-123" aria-hidden="true" tabindex="-1"></a>この固定効果推定は、<span class="in">`lm()`</span> 関数で企業ダミーを含めた回帰分析と同等である。</span>
+<span id="cb24-124"><a href="#cb24-124" aria-hidden="true" tabindex="-1"></a><span class="in">`lm(inv ~ value + capital+0+factor(firm), data = pdata)`</span> コマンドで、定数項を除外 (<span class="in">`+0`</span>) し企業ダミー (<span class="in">`factor(firm)`</span>) を含めた推定を行い、<span class="in">`summary()`</span> コマンドで結果を表示する。</span>
+<span id="cb24-125"><a href="#cb24-125" aria-hidden="true" tabindex="-1"></a>係数の推定値は同じであるが、決定係数が大きく異なっていることに注意されたい。</span>
 <span id="cb24-126"><a href="#cb24-126" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-129"><a href="#cb24-129" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb24-130"><a href="#cb24-130" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(inv <span class="sc">~</span> value <span class="sc">+</span> capital<span class="sc">+</span><span class="dv">0</span><span class="sc">+</span><span class="fu">factor</span>(firm), <span class="at">data =</span> pdata))</span>
 <span id="cb24-131"><a href="#cb24-131" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb24-132"><a href="#cb24-132" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-133"><a href="#cb24-133" aria-hidden="true" tabindex="-1"></a>個別固定効果が統計的に有効かどうか (すなわち, 固定効果モデルとプーリングOLSモデルのどちらが適切か) を検定するには, F検定を実施する.</span>
-<span id="cb24-134"><a href="#cb24-134" aria-hidden="true" tabindex="-1"></a><span class="in">`pFtest(gi,gp)`</span> コマンドで, 固定効果モデル (<span class="in">`gi`</span>) とプーリングOLSモデル (<span class="in">`gp`</span>) を比較するF検定を実行する.</span>
+<span id="cb24-133"><a href="#cb24-133" aria-hidden="true" tabindex="-1"></a>個別固定効果が統計的に有効かどうか (すなわち、固定効果モデルとプーリングOLSモデルのどちらが適切か) を検定するには、F検定を実施する。</span>
+<span id="cb24-134"><a href="#cb24-134" aria-hidden="true" tabindex="-1"></a><span class="in">`pFtest(gi,gp)`</span> コマンドで、固定効果モデル (<span class="in">`gi`</span>) とプーリングOLSモデル (<span class="in">`gp`</span>) を比較するF検定を実行する。</span>
 <span id="cb24-135"><a href="#cb24-135" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-138"><a href="#cb24-138" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb24-139"><a href="#cb24-139" aria-hidden="true" tabindex="-1"></a><span class="fu">pFtest</span>(gi,gp)</span>
@@ -1419,39 +1419,39 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb24-141"><a href="#cb24-141" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-142"><a href="#cb24-142" aria-hidden="true" tabindex="-1"></a><span class="fu">### 時間効果モデル</span></span>
 <span id="cb24-143"><a href="#cb24-143" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-144"><a href="#cb24-144" aria-hidden="true" tabindex="-1"></a>次のモデルを考える.</span>
+<span id="cb24-144"><a href="#cb24-144" aria-hidden="true" tabindex="-1"></a>次のモデルを考える。</span>
 <span id="cb24-145"><a href="#cb24-145" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb24-146"><a href="#cb24-146" aria-hidden="true" tabindex="-1"></a>inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it}+ \gamma_t +\alpha_i + u_{it}</span>
-<span id="cb24-147"><a href="#cb24-147" aria-hidden="true" tabindex="-1"></a>$$ この $\gamma_t$ は時間固定効果と呼ばれている.</span>
-<span id="cb24-148"><a href="#cb24-148" aria-hidden="true" tabindex="-1"></a>ここでは個別固定効果と時間固定効果の2つの固定効果を持つ重回帰モデルを**時間効果モデル**と呼ぶことにする.</span>
+<span id="cb24-147"><a href="#cb24-147" aria-hidden="true" tabindex="-1"></a>$$ この $\gamma_t$ は時間固定効果と呼ばれている。</span>
+<span id="cb24-148"><a href="#cb24-148" aria-hidden="true" tabindex="-1"></a>ここでは個別固定効果と時間固定効果の2つの固定効果を持つ重回帰モデルを**時間効果モデル**と呼ぶことにする。</span>
 <span id="cb24-149"><a href="#cb24-149" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-150"><a href="#cb24-150" aria-hidden="true" tabindex="-1"></a>時間効果モデルを推定するには, <span class="in">`plm()`</span> 関数で <span class="in">`effect="twoways"`</span> と <span class="in">`model = "within"`</span> を指定する.</span>
-<span id="cb24-151"><a href="#cb24-151" aria-hidden="true" tabindex="-1"></a><span class="in">`plm(inv ~ value + capital, data = pdata, effect="twoways", model = "within")`</span> コマンドで, 個別固定効果と時間固定効果の両方を含むモデルを推定し, 結果を <span class="in">`gi2`</span> に格納する.</span>
-<span id="cb24-152"><a href="#cb24-152" aria-hidden="true" tabindex="-1"></a><span class="in">`summary(gi2)`</span> コマンドで推定結果の詳細を表示する.</span>
+<span id="cb24-150"><a href="#cb24-150" aria-hidden="true" tabindex="-1"></a>時間効果モデルを推定するには、<span class="in">`plm()`</span> 関数で <span class="in">`effect="twoways"`</span> と <span class="in">`model = "within"`</span> を指定する。</span>
+<span id="cb24-151"><a href="#cb24-151" aria-hidden="true" tabindex="-1"></a><span class="in">`plm(inv ~ value + capital, data = pdata, effect="twoways", model = "within")`</span> コマンドで、個別固定効果と時間固定効果の両方を含むモデルを推定し、結果を <span class="in">`gi2`</span> に格納する。</span>
+<span id="cb24-152"><a href="#cb24-152" aria-hidden="true" tabindex="-1"></a><span class="in">`summary(gi2)`</span> コマンドで推定結果の詳細を表示する。</span>
 <span id="cb24-153"><a href="#cb24-153" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-156"><a href="#cb24-156" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb24-157"><a href="#cb24-157" aria-hidden="true" tabindex="-1"></a>gi2 <span class="ot">&lt;-</span> <span class="fu">plm</span>(inv <span class="sc">~</span> value <span class="sc">+</span> capital, <span class="at">data =</span> pdata, <span class="at">effect=</span><span class="st">"twoways"</span>,<span class="at">model =</span> <span class="st">"within"</span>)</span>
 <span id="cb24-158"><a href="#cb24-158" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(gi2)</span>
 <span id="cb24-159"><a href="#cb24-159" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb24-160"><a href="#cb24-160" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-161"><a href="#cb24-161" aria-hidden="true" tabindex="-1"></a>推定された個別固定効果と時間固定効果をそれぞれ確認するには, <span class="in">`fixef()`</span> 関数で <span class="in">`effect`</span> 引数を指定する.</span>
-<span id="cb24-162"><a href="#cb24-162" aria-hidden="true" tabindex="-1"></a><span class="in">`fixef(gi2, effect = "individual")`</span> コマンドで各企業の固定効果を, <span class="in">`fixef(gi2, effect = "time")`</span> コマンドで各年の固定効果を表示する.</span>
+<span id="cb24-161"><a href="#cb24-161" aria-hidden="true" tabindex="-1"></a>推定された個別固定効果と時間固定効果をそれぞれ確認するには、<span class="in">`fixef()`</span> 関数で <span class="in">`effect`</span> 引数を指定する。</span>
+<span id="cb24-162"><a href="#cb24-162" aria-hidden="true" tabindex="-1"></a><span class="in">`fixef(gi2, effect = "individual")`</span> コマンドで各企業の固定効果を、<span class="in">`fixef(gi2, effect = "time")`</span> コマンドで各年の固定効果を表示する。</span>
 <span id="cb24-163"><a href="#cb24-163" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-166"><a href="#cb24-166" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb24-167"><a href="#cb24-167" aria-hidden="true" tabindex="-1"></a><span class="fu">fixef</span>(gi2, <span class="at">effect =</span> <span class="st">"individual"</span>)</span>
 <span id="cb24-168"><a href="#cb24-168" aria-hidden="true" tabindex="-1"></a><span class="fu">fixef</span>(gi2, <span class="at">effect =</span> <span class="st">"time"</span>)</span>
 <span id="cb24-169"><a href="#cb24-169" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb24-170"><a href="#cb24-170" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-171"><a href="#cb24-171" aria-hidden="true" tabindex="-1"></a>この時間効果モデルの推定は, <span class="in">`lm()`</span> 関数で企業ダミーと年ダミーの両方を含めた回帰分析と同等である.</span>
-<span id="cb24-172"><a href="#cb24-172" aria-hidden="true" tabindex="-1"></a><span class="in">`lm(inv ~ value + capital+0+factor(firm)+factor(year), data = pdata)`</span> コマンドで, 定数項を除外し企業ダミーと年ダミーを含めた推定を行い, <span class="in">`summary()`</span> コマンドで結果を表示する.</span>
-<span id="cb24-173"><a href="#cb24-173" aria-hidden="true" tabindex="-1"></a>係数の推定値は同じであるが, 決定係数が大きく異なっていることに注意されたい.</span>
+<span id="cb24-171"><a href="#cb24-171" aria-hidden="true" tabindex="-1"></a>この時間効果モデルの推定は、<span class="in">`lm()`</span> 関数で企業ダミーと年ダミーの両方を含めた回帰分析と同等である。</span>
+<span id="cb24-172"><a href="#cb24-172" aria-hidden="true" tabindex="-1"></a><span class="in">`lm(inv ~ value + capital+0+factor(firm)+factor(year), data = pdata)`</span> コマンドで、定数項を除外し企業ダミーと年ダミーを含めた推定を行い、<span class="in">`summary()`</span> コマンドで結果を表示する。</span>
+<span id="cb24-173"><a href="#cb24-173" aria-hidden="true" tabindex="-1"></a>係数の推定値は同じであるが、決定係数が大きく異なっていることに注意されたい。</span>
 <span id="cb24-174"><a href="#cb24-174" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-177"><a href="#cb24-177" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb24-178"><a href="#cb24-178" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(inv <span class="sc">~</span> value <span class="sc">+</span> capital<span class="sc">+</span><span class="dv">0</span><span class="sc">+</span><span class="fu">factor</span>(firm)<span class="sc">+</span><span class="fu">factor</span>(year), <span class="at">data =</span> pdata))</span>
 <span id="cb24-179"><a href="#cb24-179" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb24-180"><a href="#cb24-180" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-181"><a href="#cb24-181" aria-hidden="true" tabindex="-1"></a>時間固定効果が統計的に有効かどうか (すなわち, 時間効果モデルと個別固定効果のみのモデルのどちらが適切か) を検定するには, F検定を実施する.</span>
-<span id="cb24-182"><a href="#cb24-182" aria-hidden="true" tabindex="-1"></a><span class="in">`pFtest(gi2, gi)`</span> コマンドで, 時間効果モデル (<span class="in">`gi2`</span>) と個別固定効果のみのモデル (<span class="in">`gi`</span>) を比較するF検定を実行する.</span>
+<span id="cb24-181"><a href="#cb24-181" aria-hidden="true" tabindex="-1"></a>時間固定効果が統計的に有効かどうか (すなわち、時間効果モデルと個別固定効果のみのモデルのどちらが適切か) を検定するには、F検定を実施する。</span>
+<span id="cb24-182"><a href="#cb24-182" aria-hidden="true" tabindex="-1"></a><span class="in">`pFtest(gi2, gi)`</span> コマンドで、時間効果モデル (<span class="in">`gi2`</span>) と個別固定効果のみのモデル (<span class="in">`gi`</span>) を比較するF検定を実行する。</span>
 <span id="cb24-183"><a href="#cb24-183" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-186"><a href="#cb24-186" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb24-187"><a href="#cb24-187" aria-hidden="true" tabindex="-1"></a><span class="fu">pFtest</span>(gi2, gi)</span>
@@ -1459,40 +1459,40 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb24-189"><a href="#cb24-189" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-190"><a href="#cb24-190" aria-hidden="true" tabindex="-1"></a><span class="fu">## 固定効果 (一階差分法)</span></span>
 <span id="cb24-191"><a href="#cb24-191" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-192"><a href="#cb24-192" aria-hidden="true" tabindex="-1"></a>次のモデルを考える.</span>
+<span id="cb24-192"><a href="#cb24-192" aria-hidden="true" tabindex="-1"></a>次のモデルを考える。</span>
 <span id="cb24-193"><a href="#cb24-193" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb24-194"><a href="#cb24-194" aria-hidden="true" tabindex="-1"></a>inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}</span>
-<span id="cb24-195"><a href="#cb24-195" aria-hidden="true" tabindex="-1"></a>$$ この $\alpha_i$ は固定効果と呼ばれている.</span>
-<span id="cb24-196"><a href="#cb24-196" aria-hidden="true" tabindex="-1"></a>$\alpha_i$ は時間 $t$ に対して一定である.</span>
-<span id="cb24-197"><a href="#cb24-197" aria-hidden="true" tabindex="-1"></a>$\alpha_i$ は誤差項と相関があるもしれない.</span>
+<span id="cb24-195"><a href="#cb24-195" aria-hidden="true" tabindex="-1"></a>$$ この $\alpha_i$ は固定効果と呼ばれている。</span>
+<span id="cb24-196"><a href="#cb24-196" aria-hidden="true" tabindex="-1"></a>$\alpha_i$ は時間 $t$ に対して一定である。</span>
+<span id="cb24-197"><a href="#cb24-197" aria-hidden="true" tabindex="-1"></a>$\alpha_i$ は誤差項と相関があるもしれない。</span>
 <span id="cb24-198"><a href="#cb24-198" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-199"><a href="#cb24-199" aria-hidden="true" tabindex="-1"></a>それぞれの階差をとれば $\alpha_i$ は消去できる.</span>
+<span id="cb24-199"><a href="#cb24-199" aria-hidden="true" tabindex="-1"></a>それぞれの階差をとれば $\alpha_i$ は消去できる。</span>
 <span id="cb24-200"><a href="#cb24-200" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb24-201"><a href="#cb24-201" aria-hidden="true" tabindex="-1"></a>\Delta inv_{it} = \beta_1 \Delta value_{it} + \beta_2 \Delta capital_{it} + \Delta u_{it}</span>
 <span id="cb24-202"><a href="#cb24-202" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb24-203"><a href="#cb24-203" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-204"><a href="#cb24-204" aria-hidden="true" tabindex="-1"></a>このように変換して回帰分析すれば $\alpha_i$ は誤差項と相関があっても一致推定量である.</span>
+<span id="cb24-204"><a href="#cb24-204" aria-hidden="true" tabindex="-1"></a>このように変換して回帰分析すれば $\alpha_i$ は誤差項と相関があっても一致推定量である。</span>
 <span id="cb24-205"><a href="#cb24-205" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-206"><a href="#cb24-206" aria-hidden="true" tabindex="-1"></a>一階差分法による固定効果推定を実行するには, <span class="in">`plm()`</span> 関数で <span class="in">`model = "fd"`</span> を指定する.</span>
-<span id="cb24-207"><a href="#cb24-207" aria-hidden="true" tabindex="-1"></a><span class="in">`plm(inv ~ value + capital+0, data = pdata, model = "fd")`</span> コマンドで, 定数項を除外 (<span class="in">`+0`</span>) して一階差分推定を行い, 結果を <span class="in">`gf`</span> に格納する.</span>
-<span id="cb24-208"><a href="#cb24-208" aria-hidden="true" tabindex="-1"></a><span class="in">`summary(gf)`</span> コマンドで推定結果の詳細を表示する.</span>
+<span id="cb24-206"><a href="#cb24-206" aria-hidden="true" tabindex="-1"></a>一階差分法による固定効果推定を実行するには、<span class="in">`plm()`</span> 関数で <span class="in">`model = "fd"`</span> を指定する。</span>
+<span id="cb24-207"><a href="#cb24-207" aria-hidden="true" tabindex="-1"></a><span class="in">`plm(inv ~ value + capital+0, data = pdata, model = "fd")`</span> コマンドで、定数項を除外 (<span class="in">`+0`</span>) して一階差分推定を行い、結果を <span class="in">`gf`</span> に格納する。</span>
+<span id="cb24-208"><a href="#cb24-208" aria-hidden="true" tabindex="-1"></a><span class="in">`summary(gf)`</span> コマンドで推定結果の詳細を表示する。</span>
 <span id="cb24-209"><a href="#cb24-209" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-212"><a href="#cb24-212" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb24-213"><a href="#cb24-213" aria-hidden="true" tabindex="-1"></a>gf <span class="ot">&lt;-</span> <span class="fu">plm</span>(inv <span class="sc">~</span> value <span class="sc">+</span> capital<span class="sc">+</span><span class="dv">0</span>, <span class="at">data =</span> pdata, <span class="at">model =</span> <span class="st">"fd"</span>)</span>
 <span id="cb24-214"><a href="#cb24-214" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(gf)</span>
 <span id="cb24-215"><a href="#cb24-215" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb24-216"><a href="#cb24-216" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-217"><a href="#cb24-217" aria-hidden="true" tabindex="-1"></a>時間固定効果を含む一階差分モデルを推定する場合は, 年ダミーを追加する.</span>
-<span id="cb24-218"><a href="#cb24-218" aria-hidden="true" tabindex="-1"></a><span class="in">`plm(inv ~ value + capital+0+factor(year), data = pdata, model = "fd")`</span> コマンドで, 年ダミー (<span class="in">`factor(year)`</span>) を含む一階差分推定を行い, 結果を <span class="in">`gf2`</span> に格納する.</span>
-<span id="cb24-219"><a href="#cb24-219" aria-hidden="true" tabindex="-1"></a><span class="in">`summary(gf2)`</span> コマンドで推定結果の詳細を表示する.</span>
+<span id="cb24-217"><a href="#cb24-217" aria-hidden="true" tabindex="-1"></a>時間固定効果を含む一階差分モデルを推定する場合は、年ダミーを追加する。</span>
+<span id="cb24-218"><a href="#cb24-218" aria-hidden="true" tabindex="-1"></a><span class="in">`plm(inv ~ value + capital+0+factor(year), data = pdata, model = "fd")`</span> コマンドで、年ダミー (<span class="in">`factor(year)`</span>) を含む一階差分推定を行い、結果を <span class="in">`gf2`</span> に格納する。</span>
+<span id="cb24-219"><a href="#cb24-219" aria-hidden="true" tabindex="-1"></a><span class="in">`summary(gf2)`</span> コマンドで推定結果の詳細を表示する。</span>
 <span id="cb24-220"><a href="#cb24-220" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-223"><a href="#cb24-223" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb24-224"><a href="#cb24-224" aria-hidden="true" tabindex="-1"></a>gf2 <span class="ot">&lt;-</span><span class="fu">plm</span>(inv <span class="sc">~</span> value <span class="sc">+</span> capital<span class="sc">+</span><span class="dv">0</span><span class="sc">+</span><span class="fu">factor</span>(year), <span class="at">data =</span> pdata, <span class="at">model =</span> <span class="st">"fd"</span>)</span>
 <span id="cb24-225"><a href="#cb24-225" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(gf2)</span>
 <span id="cb24-226"><a href="#cb24-226" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb24-227"><a href="#cb24-227" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-228"><a href="#cb24-228" aria-hidden="true" tabindex="-1"></a>時間固定効果が統計的に有効かどうかを検定するには, F検定を実施する.</span>
-<span id="cb24-229"><a href="#cb24-229" aria-hidden="true" tabindex="-1"></a><span class="in">`pFtest(gf2,gf)`</span> コマンドで, 時間効果を含むモデル (<span class="in">`gf2`</span>) と含まないモデル (<span class="in">`gf`</span>) を比較するF検定を実行する.</span>
+<span id="cb24-228"><a href="#cb24-228" aria-hidden="true" tabindex="-1"></a>時間固定効果が統計的に有効かどうかを検定するには、F検定を実施する。</span>
+<span id="cb24-229"><a href="#cb24-229" aria-hidden="true" tabindex="-1"></a><span class="in">`pFtest(gf2,gf)`</span> コマンドで、時間効果を含むモデル (<span class="in">`gf2`</span>) と含まないモデル (<span class="in">`gf`</span>) を比較するF検定を実行する。</span>
 <span id="cb24-230"><a href="#cb24-230" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-233"><a href="#cb24-233" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb24-234"><a href="#cb24-234" aria-hidden="true" tabindex="-1"></a><span class="fu">pFtest</span>(gf2,gf)</span>
@@ -1500,37 +1500,37 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb24-236"><a href="#cb24-236" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-237"><a href="#cb24-237" aria-hidden="true" tabindex="-1"></a><span class="fu">### 平均差分法と一階差分法</span></span>
 <span id="cb24-238"><a href="#cb24-238" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-239"><a href="#cb24-239" aria-hidden="true" tabindex="-1"></a>平均差分法と一階差分法は誤差項の仮定をどのようにおくかによって変わってくる.</span>
-<span id="cb24-240"><a href="#cb24-240" aria-hidden="true" tabindex="-1"></a>誤差項の階差をとることによって時間を通じて無相関になるなら一階差分法が望ましいであろう.</span>
-<span id="cb24-241"><a href="#cb24-241" aria-hidden="true" tabindex="-1"></a>しかしながら, 固定効果, 時間効果の値がきちんと計算して, それが経済学的解釈が可能なら, 平均差分法が望ましい.</span>
-<span id="cb24-242"><a href="#cb24-242" aria-hidden="true" tabindex="-1"></a>さらに他のプーリングOLSの仮定と変量効果モデルとの比較の意味でも平均差分法がよく使われる.</span>
+<span id="cb24-239"><a href="#cb24-239" aria-hidden="true" tabindex="-1"></a>平均差分法と一階差分法は誤差項の仮定をどのようにおくかによって変わってくる。</span>
+<span id="cb24-240"><a href="#cb24-240" aria-hidden="true" tabindex="-1"></a>誤差項の階差をとることによって時間を通じて無相関になるなら一階差分法が望ましいであろう。</span>
+<span id="cb24-241"><a href="#cb24-241" aria-hidden="true" tabindex="-1"></a>しかしながら、固定効果、時間効果の値がきちんと計算して、それが経済学的解釈が可能なら、平均差分法が望ましい。</span>
+<span id="cb24-242"><a href="#cb24-242" aria-hidden="true" tabindex="-1"></a>さらに他のプーリングOLSの仮定と変量効果モデルとの比較の意味でも平均差分法がよく使われる。</span>
 <span id="cb24-243"><a href="#cb24-243" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-244"><a href="#cb24-244" aria-hidden="true" tabindex="-1"></a>なお時間が2期間のパネルデータのとき, 平均差分法も一階差分法も計算値は同じである.</span>
+<span id="cb24-244"><a href="#cb24-244" aria-hidden="true" tabindex="-1"></a>なお時間が2期間のパネルデータのとき、平均差分法も一階差分法も計算値は同じである。</span>
 <span id="cb24-245"><a href="#cb24-245" aria-hidden="true" tabindex="-1"></a>たとえば $t=2$のときの変数 $x_{it}$ の平均差分値は $$</span>
 <span id="cb24-246"><a href="#cb24-246" aria-hidden="true" tabindex="-1"></a>x_{2t}-\bar{x}_i=x_{2t}-\frac{x_{i1}+x_{i2}}{2}=\frac{x_{i2}-x_{i1}}{2}</span>
-<span id="cb24-247"><a href="#cb24-247" aria-hidden="true" tabindex="-1"></a>$$ となる.</span>
+<span id="cb24-247"><a href="#cb24-247" aria-hidden="true" tabindex="-1"></a>$$ となる。</span>
 <span id="cb24-248"><a href="#cb24-248" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-249"><a href="#cb24-249" aria-hidden="true" tabindex="-1"></a><span class="fu">## 変量効果</span></span>
 <span id="cb24-250"><a href="#cb24-250" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-251"><a href="#cb24-251" aria-hidden="true" tabindex="-1"></a>次のモデルを考える.</span>
+<span id="cb24-251"><a href="#cb24-251" aria-hidden="true" tabindex="-1"></a>次のモデルを考える。</span>
 <span id="cb24-252"><a href="#cb24-252" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb24-253"><a href="#cb24-253" aria-hidden="true" tabindex="-1"></a>inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}</span>
-<span id="cb24-254"><a href="#cb24-254" aria-hidden="true" tabindex="-1"></a>$$ この $\alpha_i$ は時間 $t$ について一定であるが, $i$ について独立同一分布の確率変数にしたがう.</span>
-<span id="cb24-255"><a href="#cb24-255" aria-hidden="true" tabindex="-1"></a>さらに $\alpha_i$ は説明変数と無相関である時, この $\alpha_i$ は個別変量効果と呼ばれている.</span>
-<span id="cb24-256"><a href="#cb24-256" aria-hidden="true" tabindex="-1"></a>個別固定効果は説明変数と無相関を仮定していない.</span>
-<span id="cb24-257"><a href="#cb24-257" aria-hidden="true" tabindex="-1"></a>この個別変量効果を持つ重回帰モデルを変量効果モデルと呼ぶことにする.</span>
+<span id="cb24-254"><a href="#cb24-254" aria-hidden="true" tabindex="-1"></a>$$ この $\alpha_i$ は時間 $t$ について一定であるが、$i$ について独立同一分布の確率変数にしたがう。</span>
+<span id="cb24-255"><a href="#cb24-255" aria-hidden="true" tabindex="-1"></a>さらに $\alpha_i$ は説明変数と無相関である時、この $\alpha_i$ は個別変量効果と呼ばれている。</span>
+<span id="cb24-256"><a href="#cb24-256" aria-hidden="true" tabindex="-1"></a>個別固定効果は説明変数と無相関を仮定していない。</span>
+<span id="cb24-257"><a href="#cb24-257" aria-hidden="true" tabindex="-1"></a>この個別変量効果を持つ重回帰モデルを変量効果モデルと呼ぶことにする。</span>
 <span id="cb24-258"><a href="#cb24-258" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-259"><a href="#cb24-259" aria-hidden="true" tabindex="-1"></a>変量効果モデルを推定するには, <span class="in">`plm()`</span> 関数で <span class="in">`model = "random"`</span> を指定する.</span>
-<span id="cb24-260"><a href="#cb24-260" aria-hidden="true" tabindex="-1"></a><span class="in">`plm(inv ~ value + capital, data = pdata, model = "random")`</span> コマンドで変量効果推定を行い, 結果を <span class="in">`gr`</span> に格納する.</span>
-<span id="cb24-261"><a href="#cb24-261" aria-hidden="true" tabindex="-1"></a><span class="in">`summary(gr)`</span> コマンドで推定結果の詳細を表示する.</span>
+<span id="cb24-259"><a href="#cb24-259" aria-hidden="true" tabindex="-1"></a>変量効果モデルを推定するには、<span class="in">`plm()`</span> 関数で <span class="in">`model = "random"`</span> を指定する。</span>
+<span id="cb24-260"><a href="#cb24-260" aria-hidden="true" tabindex="-1"></a><span class="in">`plm(inv ~ value + capital, data = pdata, model = "random")`</span> コマンドで変量効果推定を行い、結果を <span class="in">`gr`</span> に格納する。</span>
+<span id="cb24-261"><a href="#cb24-261" aria-hidden="true" tabindex="-1"></a><span class="in">`summary(gr)`</span> コマンドで推定結果の詳細を表示する。</span>
 <span id="cb24-262"><a href="#cb24-262" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-265"><a href="#cb24-265" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb24-266"><a href="#cb24-266" aria-hidden="true" tabindex="-1"></a>gr <span class="ot">&lt;-</span> <span class="fu">plm</span>(inv <span class="sc">~</span> value <span class="sc">+</span> capital, <span class="at">data =</span> pdata, <span class="at">model =</span> <span class="st">"random"</span>)</span>
 <span id="cb24-267"><a href="#cb24-267" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(gr)</span>
 <span id="cb24-268"><a href="#cb24-268" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb24-269"><a href="#cb24-269" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-270"><a href="#cb24-270" aria-hidden="true" tabindex="-1"></a>推定された変量効果の値を確認するには, <span class="in">`ranef()`</span> 関数を使用する.</span>
-<span id="cb24-271"><a href="#cb24-271" aria-hidden="true" tabindex="-1"></a><span class="in">`ranef(gr)`</span> コマンドで各企業の変量効果の推定値を表示する.</span>
+<span id="cb24-270"><a href="#cb24-270" aria-hidden="true" tabindex="-1"></a>推定された変量効果の値を確認するには、<span class="in">`ranef()`</span> 関数を使用する。</span>
+<span id="cb24-271"><a href="#cb24-271" aria-hidden="true" tabindex="-1"></a><span class="in">`ranef(gr)`</span> コマンドで各企業の変量効果の推定値を表示する。</span>
 <span id="cb24-272"><a href="#cb24-272" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-275"><a href="#cb24-275" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb24-276"><a href="#cb24-276" aria-hidden="true" tabindex="-1"></a><span class="fu">ranef</span>(gr)</span>
@@ -1538,9 +1538,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb24-278"><a href="#cb24-278" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-279"><a href="#cb24-279" aria-hidden="true" tabindex="-1"></a><span class="fu">### ハウスマン検定</span></span>
 <span id="cb24-280"><a href="#cb24-280" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-281"><a href="#cb24-281" aria-hidden="true" tabindex="-1"></a>帰無仮説が変量効果モデル, 対立仮説が固定効果モデルの検定はハウスマン検定を実施する.</span>
-<span id="cb24-282"><a href="#cb24-282" aria-hidden="true" tabindex="-1"></a>ハウスマン検定では, 変量効果モデルと固定効果モデルの係数の差が統計的に有意かどうかを検定する.</span>
-<span id="cb24-283"><a href="#cb24-283" aria-hidden="true" tabindex="-1"></a><span class="in">`phtest(gi,gr)`</span> コマンドで, 固定効果モデル (<span class="in">`gi`</span>) と変量効果モデル (<span class="in">`gr`</span>) のハウスマン検定を実行する.</span>
+<span id="cb24-281"><a href="#cb24-281" aria-hidden="true" tabindex="-1"></a>帰無仮説が変量効果モデル、対立仮説が固定効果モデルの検定はハウスマン検定を実施する。</span>
+<span id="cb24-282"><a href="#cb24-282" aria-hidden="true" tabindex="-1"></a>ハウスマン検定では、変量効果モデルと固定効果モデルの係数の差が統計的に有意かどうかを検定する。</span>
+<span id="cb24-283"><a href="#cb24-283" aria-hidden="true" tabindex="-1"></a><span class="in">`phtest(gi,gr)`</span> コマンドで、固定効果モデル (<span class="in">`gi`</span>) と変量効果モデル (<span class="in">`gr`</span>) のハウスマン検定を実行する。</span>
 <span id="cb24-284"><a href="#cb24-284" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-287"><a href="#cb24-287" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb24-288"><a href="#cb24-288" aria-hidden="true" tabindex="-1"></a><span class="fu">phtest</span>(gi,gr)</span>
@@ -1548,25 +1548,25 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb24-290"><a href="#cb24-290" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-291"><a href="#cb24-291" aria-hidden="true" tabindex="-1"></a><span class="fu">## クラスターロバスト分散</span></span>
 <span id="cb24-292"><a href="#cb24-292" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-293"><a href="#cb24-293" aria-hidden="true" tabindex="-1"></a>固定効果モデルにおいて, 分散不均一が疑われる場合, クラスターロバスト分散を用いる.</span>
-<span id="cb24-294"><a href="#cb24-294" aria-hidden="true" tabindex="-1"></a>時間効果がない固定効果モデル (<span class="in">`gi`</span>) について, クラスターロバスト標準誤差を計算するには, <span class="in">`coeftest()`</span> 関数と <span class="in">`vcovHC()`</span> 関数を組み合わせて使用する.</span>
-<span id="cb24-295"><a href="#cb24-295" aria-hidden="true" tabindex="-1"></a><span class="in">`coeftest(gi, vcov=vcovHC(gi, type="sss"))`</span> コマンドで, <span class="in">`type="sss"`</span> を指定したクラスターロバスト分散を用いた係数検定を実行する.</span>
+<span id="cb24-293"><a href="#cb24-293" aria-hidden="true" tabindex="-1"></a>固定効果モデルにおいて、分散不均一が疑われる場合、クラスターロバスト分散を用いる。</span>
+<span id="cb24-294"><a href="#cb24-294" aria-hidden="true" tabindex="-1"></a>時間効果がない固定効果モデル (<span class="in">`gi`</span>) について、クラスターロバスト標準誤差を計算するには、<span class="in">`coeftest()`</span> 関数と <span class="in">`vcovHC()`</span> 関数を組み合わせて使用する。</span>
+<span id="cb24-295"><a href="#cb24-295" aria-hidden="true" tabindex="-1"></a><span class="in">`coeftest(gi, vcov=vcovHC(gi, type="sss"))`</span> コマンドで、<span class="in">`type="sss"`</span> を指定したクラスターロバスト分散を用いた係数検定を実行する。</span>
 <span id="cb24-296"><a href="#cb24-296" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-299"><a href="#cb24-299" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb24-300"><a href="#cb24-300" aria-hidden="true" tabindex="-1"></a><span class="fu">coeftest</span>(gi,<span class="at">vcov=</span><span class="fu">vcovHC</span>(gi,<span class="at">type=</span><span class="st">"sss"</span>))</span>
 <span id="cb24-301"><a href="#cb24-301" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb24-302"><a href="#cb24-302" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-303"><a href="#cb24-303" aria-hidden="true" tabindex="-1"></a>時間効果モデル (<span class="in">`gi2`</span>) についても同様に, クラスターロバスト標準誤差を計算できる.</span>
-<span id="cb24-304"><a href="#cb24-304" aria-hidden="true" tabindex="-1"></a><span class="in">`coeftest(gi2, vcov=vcovHC(gi2, type="sss"))`</span> コマンドで, 時間効果モデルにおけるクラスターロバスト分散を用いた係数検定を実行する.</span>
+<span id="cb24-303"><a href="#cb24-303" aria-hidden="true" tabindex="-1"></a>時間効果モデル (<span class="in">`gi2`</span>) についても同様に、クラスターロバスト標準誤差を計算できる。</span>
+<span id="cb24-304"><a href="#cb24-304" aria-hidden="true" tabindex="-1"></a><span class="in">`coeftest(gi2, vcov=vcovHC(gi2, type="sss"))`</span> コマンドで、時間効果モデルにおけるクラスターロバスト分散を用いた係数検定を実行する。</span>
 <span id="cb24-305"><a href="#cb24-305" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-308"><a href="#cb24-308" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb24-309"><a href="#cb24-309" aria-hidden="true" tabindex="-1"></a><span class="fu">coeftest</span>(gi2,<span class="at">vcov=</span><span class="fu">vcovHC</span>(gi2,<span class="at">type=</span><span class="st">"sss"</span>))</span>
 <span id="cb24-310"><a href="#cb24-310" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb24-311"><a href="#cb24-311" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-312"><a href="#cb24-312" aria-hidden="true" tabindex="-1"></a>STATA の計算結果に合わせるには, 個別固定効果モデルに年ダミーを明示的に追加する必要がある.</span>
-<span id="cb24-313"><a href="#cb24-313" aria-hidden="true" tabindex="-1"></a><span class="in">`update(gi, .~. + factor(year))`</span> コマンドで, モデル <span class="in">`gi`</span> に年ダミーを追加して更新し, <span class="in">`git`</span> に格納する.</span>
-<span id="cb24-314"><a href="#cb24-314" aria-hidden="true" tabindex="-1"></a>その後 <span class="in">`coeftest(git, vcov=vcovHC(git, type="sss"))`</span> コマンドで, クラスターロバスト分散を用いた係数検定を実行する.</span>
-<span id="cb24-315"><a href="#cb24-315" aria-hidden="true" tabindex="-1"></a><span class="in">`gi2`</span> と <span class="in">`git`</span> のどちらを採用するかによって結果が変わってしまうので注意されたい.</span>
+<span id="cb24-312"><a href="#cb24-312" aria-hidden="true" tabindex="-1"></a>STATA の計算結果に合わせるには、個別固定効果モデルに年ダミーを明示的に追加する必要がある。</span>
+<span id="cb24-313"><a href="#cb24-313" aria-hidden="true" tabindex="-1"></a><span class="in">`update(gi, .~. + factor(year))`</span> コマンドで、モデル <span class="in">`gi`</span> に年ダミーを追加して更新し、<span class="in">`git`</span> に格納する。</span>
+<span id="cb24-314"><a href="#cb24-314" aria-hidden="true" tabindex="-1"></a>その後 <span class="in">`coeftest(git, vcov=vcovHC(git, type="sss"))`</span> コマンドで、クラスターロバスト分散を用いた係数検定を実行する。</span>
+<span id="cb24-315"><a href="#cb24-315" aria-hidden="true" tabindex="-1"></a><span class="in">`gi2`</span> と <span class="in">`git`</span> のどちらを採用するかによって結果が変わってしまうので注意されたい。</span>
 <span id="cb24-316"><a href="#cb24-316" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-319"><a href="#cb24-319" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb24-320"><a href="#cb24-320" aria-hidden="true" tabindex="-1"></a>git <span class="ot">&lt;-</span> <span class="fu">update</span>(gi, .<span class="sc">~</span>. <span class="sc">+</span> <span class="fu">factor</span>(year))</span>
@@ -1575,16 +1575,16 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb24-323"><a href="#cb24-323" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-324"><a href="#cb24-324" aria-hidden="true" tabindex="-1"></a><span class="fu">### 分散不均一の検定</span></span>
 <span id="cb24-325"><a href="#cb24-325" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-326"><a href="#cb24-326" aria-hidden="true" tabindex="-1"></a>固定効果モデルにおいて, 分散不均一かどうかを検定するには, Breusch-Pagan 検定を実施する.</span>
-<span id="cb24-327"><a href="#cb24-327" aria-hidden="true" tabindex="-1"></a><span class="in">`bptest()`</span> 関数を使用して, 企業ダミーを含むモデルで検定を行う.</span>
-<span id="cb24-328"><a href="#cb24-328" aria-hidden="true" tabindex="-1"></a><span class="in">`bptest(inv ~ value + capital + factor(firm), data=pdata)`</span> コマンドで, 個別固定効果モデルの分散不均一性を検定する.</span>
+<span id="cb24-326"><a href="#cb24-326" aria-hidden="true" tabindex="-1"></a>固定効果モデルにおいて、分散不均一かどうかを検定するには、Breusch-Pagan 検定を実施する。</span>
+<span id="cb24-327"><a href="#cb24-327" aria-hidden="true" tabindex="-1"></a><span class="in">`bptest()`</span> 関数を使用して、企業ダミーを含むモデルで検定を行う。</span>
+<span id="cb24-328"><a href="#cb24-328" aria-hidden="true" tabindex="-1"></a><span class="in">`bptest(inv ~ value + capital + factor(firm), data=pdata)`</span> コマンドで、個別固定効果モデルの分散不均一性を検定する。</span>
 <span id="cb24-329"><a href="#cb24-329" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-332"><a href="#cb24-332" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb24-333"><a href="#cb24-333" aria-hidden="true" tabindex="-1"></a><span class="fu">bptest</span>(inv <span class="sc">~</span> value <span class="sc">+</span> capital <span class="sc">+</span> <span class="fu">factor</span>(firm), <span class="at">data=</span>pdata)</span>
 <span id="cb24-334"><a href="#cb24-334" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb24-335"><a href="#cb24-335" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-336"><a href="#cb24-336" aria-hidden="true" tabindex="-1"></a>時間効果モデルの場合, 企業ダミーと年ダミーの両方を含めて検定を行う.</span>
-<span id="cb24-337"><a href="#cb24-337" aria-hidden="true" tabindex="-1"></a><span class="in">`bptest(inv ~ value + capital + factor(firm) + factor(year), data=pdata)`</span> コマンドで, 時間効果モデルの分散不均一性を検定する.</span>
+<span id="cb24-336"><a href="#cb24-336" aria-hidden="true" tabindex="-1"></a>時間効果モデルの場合、企業ダミーと年ダミーの両方を含めて検定を行う。</span>
+<span id="cb24-337"><a href="#cb24-337" aria-hidden="true" tabindex="-1"></a><span class="in">`bptest(inv ~ value + capital + factor(firm) + factor(year), data=pdata)`</span> コマンドで、時間効果モデルの分散不均一性を検定する。</span>
 <span id="cb24-338"><a href="#cb24-338" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-341"><a href="#cb24-341" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb24-342"><a href="#cb24-342" aria-hidden="true" tabindex="-1"></a><span class="fu">bptest</span>(inv <span class="sc">~</span> value <span class="sc">+</span> capital <span class="sc">+</span> <span class="fu">factor</span>(firm) <span class="sc">+</span> <span class="fu">factor</span>(year),<span class="at">data=</span>pdata)</span>

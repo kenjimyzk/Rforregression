@@ -291,7 +291,7 @@ window.Quarto = {
 <p>まず次の単回帰モデルを考える。</p>
 <p><span class="math display">\[
 y = \alpha + \beta x + u
-\]</span> ここで <span class="math inline">\(x\)</span> は説明変数、<span class="math inline">\(y\)</span> は被説明変数、<span class="math inline">\(u\)</span> は誤差項である。 パラメータとして <span class="math inline">\(\alpha\)</span> は切片パラメータ, <span class="math inline">\(\beta\)</span> は傾きパラメータである.</p>
+\]</span> ここで <span class="math inline">\(x\)</span> は説明変数、<span class="math inline">\(y\)</span> は被説明変数、<span class="math inline">\(u\)</span> は誤差項である。 パラメータとして <span class="math inline">\(\alpha\)</span> は切片パラメータ、<span class="math inline">\(\beta\)</span> は傾きパラメータである。</p>
 <p>以下の仮定を置く。</p>
 <ul>
 <li><span class="math inline">\((x_i, y_i)\)</span> は独立同一分布に従う。</li>
@@ -300,7 +300,7 @@ y = \alpha + \beta x + u
 <li><span class="math inline">\(u_i\)</span> は正規分布に従う。</li>
 </ul>
 <p>これらの仮定の下では、最小二乗推定量は一致性と不偏性を持ち、さらに正規分布に従う。 一致（consistency）とは、観測数が多くなるにつれて推定量が真のパラメータに確率収束する性質である。 不偏性とは、推定量の期待値が真のパラメータに等しくなることである。 さらに、他の線形不偏推定量の中で最小の分散を持つ（BLUE: best linear unbiased estimator）。</p>
-<p>以降ではシミュレーションデータを用いて具体的に確認する。 ここでは標本サイズを100とし, 説明変数 <span class="math inline">\(x\)</span> は0から1の一様分布から生成する. 被説明変数 <span class="math inline">\(y\)</span> は真の切片パラメータを10, 真の傾きパラメータを2として, 正規分布の誤差項を加えて生成する. 最後にこれらのデータを <code>data.frame</code> 関数でデータフレームにまとめる.</p>
+<p>以降ではシミュレーションデータを用いて具体的に確認する。 ここでは標本サイズを100とし、説明変数 <span class="math inline">\(x\)</span> は0から1の一様分布から生成する。 被説明変数 <span class="math inline">\(y\)</span> は真の切片パラメータを10, 真の傾きパラメータを2として、正規分布の誤差項を加えて生成する。 最後にこれらのデータを <code>data.frame</code> 関数でデータフレームにまとめる。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">100</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">runif</span>(N)</span>
@@ -318,7 +318,7 @@ y = \alpha + \beta x + u
 </div>
 </div>
 </div>
-<p>R で回帰分析を実施するには <code>lm</code> 関数を使用する. 第一引数には回帰式を <code>y ~ x</code> という形式で指定し, <code>data</code> 引数にはデータフレームを指定する. 推定結果は <code>fm</code> というオブジェクトに保存する.</p>
+<p>R で回帰分析を実施するには <code>lm</code> 関数を使用する。 第一引数には回帰式を <code>y ~ x</code> という形式で指定し、<code>data</code> 引数にはデータフレームを指定する。 推定結果は <code>fm</code> というオブジェクトに保存する。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>fm <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">data=</span>df)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -331,19 +331,19 @@ y = \alpha + \beta x + u
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="do">##  [5] "fitted.values" "assign"        "qr"            "df.residual"  </span></span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="do">##  [9] "xlevels"       "call"          "terms"         "model"</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>推定された係数 (切片と傾き) を取り出すには <code>coef</code> 関数を使用する. <code>coefficients</code> 関数でも同じ結果が得られる (コメントアウトしている).</p>
+<p>推定された係数 (切片と傾き) を取り出すには <code>coef</code> 関数を使用する。 <code>coefficients</code> 関数でも同じ結果が得られる (コメントアウトしている).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(fm)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)           x </span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="do">##   10.266674    1.631565</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="do">##    9.835228    2.508042</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># coefficients(fm)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>傾きの推定値は、説明変数と被説明変数の共分散を説明変数の分散で割ることで求められる。 <code>with</code> 関数を使ってデータフレーム内の変数を直接参照し, <code>cov</code> 関数で共分散, <code>var</code> 関数で分散を計算する.</p>
+<p>傾きの推定値は、説明変数と被説明変数の共分散を説明変数の分散で割ることで求められる。 <code>with</code> 関数を使ってデータフレーム内の変数を直接参照し、<code>cov</code> 関数で共分散、<code>var</code> 関数で分散を計算する。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(df, <span class="fu">cov</span>(x,y)<span class="sc">/</span><span class="fu">var</span>(x))</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 1.631565</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 2.508042</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>散布図に推定直線を重ねるには、まず <code>plot()</code> で散布図を描き、続いて <code>abline()</code> に <code>lm</code> オブジェクトを渡す。 <code>abline</code> 関数に <code>lm</code> オブジェクトを渡すと自動的に回帰直線が描画される.</p>
+<p>散布図に推定直線を重ねるには、まず <code>plot()</code> で散布図を描き、続いて <code>abline()</code> に <code>lm</code> オブジェクトを渡す。 <code>abline</code> 関数に <code>lm</code> オブジェクトを渡すと自動的に回帰直線が描画される。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(y<span class="sc">~</span>x,<span class="at">data=</span>df)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(fm)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -355,46 +355,46 @@ y = \alpha + \beta x + u
 </div>
 </div>
 </div>
-<p>残差（実際の値と予測値の差）は <code>resid()</code> で取得できる。 ここでは <code>head</code> 関数で最初の6つの値のみを表示している. <code>residuals</code> 関数でも同じ結果が得られる (コメントアウトしている).</p>
+<p>残差（実際の値と予測値の差）は <code>resid()</code> で取得できる。 ここでは <code>head</code> 関数で最初の6つの値のみを表示している。 <code>residuals</code> 関数でも同じ結果が得られる (コメントアウトしている).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">resid</span>(fm))</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="do">##          1          2          3          4          5          6 </span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="do">##  1.1131733  0.3094106  0.9422369  0.4219685 -0.7210639  0.6737813</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="do">## -0.6337348 -2.4277466  0.3713497  0.7070877  0.5673771  0.1244435</span></span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># residuals(fm)</span></span>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># with(fm, residuals)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>予測値（<span class="math inline">\(38\)</span>hat{y}$）は <code>fitted()</code> によって得られる。 ここでは <code>head</code> 関数で最初の6つの値のみを表示している. <code>fitted.values</code> でも同じ結果が得られる (コメントアウトしている).</p>
+<p>予測値（<span class="math inline">\(\hat{y}\)</span>）は <code>fitted()</code> によって得られる。 ここでは <code>head</code> 関数で最初の6つの値のみを表示している。 <code>fitted.values</code> でも同じ結果が得られる (コメントアウトしている).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">fitted</span>(fm))</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="do">##        1        2        3        4        5        6 </span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="do">## 10.96921 11.50967 11.16158 11.07529 11.03128 10.89455</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="do">## 10.53067 10.23299 10.05414 10.76025 11.40851 11.01130</span></span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># fitted.values(fm)</span></span>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># with(fm, fitted.values)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>最小二乗法の性質として, 予測値の平均は被説明変数の平均と等しいことが知られている. 以下のコマンドで両者が一致することを確認できる.</p>
+<p>最小二乗法の性質として、予測値の平均は被説明変数の平均と等しいことが知られている。 以下のコマンドで両者が一致することを確認できる。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">fitted</span>(fm))</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 11.10896</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 10.94087</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(df<span class="sc">$</span>y)</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 11.10896</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 10.94087</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>残差自乗和 (residual sum of squares) を計算するには <code>deviance</code> 関数を使用する. これは残差を二乗して合計した値であり, <code>sum(resid(fm)^2)</code> で直接計算することもできる.</p>
+<p>残差自乗和 (residual sum of squares) を計算するには <code>deviance</code> 関数を使用する。 これは残差を二乗して合計した値であり、<code>sum(resid(fm)^2)</code> で直接計算することもできる。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">deviance</span>(fm)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 94.83319</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 90.27562</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">resid</span>(fm)<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 94.83319</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 90.27562</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>残差自乗和は残差変動とも呼ばれる。 予測値の偏差の自乗和を回帰変動、被説明変数の偏差の自乗和を全変動という。 全変動は回帰変動と残差変動に分解できる（変動の分解）。 以下のコマンドで, 左辺の全変動が右辺の回帰変動と残差変動の和に等しいことを確認できる.</p>
+<p>残差自乗和は残差変動とも呼ばれる。 予測値の偏差の自乗和を回帰変動、被説明変数の偏差の自乗和を全変動という。 全変動は回帰変動と残差変動に分解できる（変動の分解）。 以下のコマンドで、左辺の全変動が右辺の回帰変動と残差変動の和に等しいことを確認できる。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>((df<span class="sc">$</span>y<span class="sc">-</span><span class="fu">mean</span>(df<span class="sc">$</span>y))<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 112.8928</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 144.0484</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>((<span class="fu">fitted</span>(fm)<span class="sc">-</span><span class="fu">mean</span>(df<span class="sc">$</span>y))<span class="sc">^</span><span class="dv">2</span>)<span class="sc">+</span><span class="fu">deviance</span>(fm)</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 112.8928</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 144.0484</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="ティー検定" class="level3" data-number="8.1.1">
 <h3 data-number="8.1.1" class="anchored" data-anchor-id="ティー検定"><span class="header-section-number">8.1.1</span> ティー検定</h3>
-<p>推定結果を詳しく確認するには <code>summary()</code> を利用する。 これにより係数の推定値, 標準誤差, t値, p値などが表示される.</p>
+<p>推定結果を詳しく確認するには <code>summary()</code> を利用する。 これにより係数の推定値、標準誤差、t値、p値などが表示される。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fm)</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
@@ -403,18 +403,18 @@ y = \alpha + \beta x + u
 <span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
 <span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Residuals:</span></span>
 <span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="do">##      Min       1Q   Median       3Q      Max </span></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="do">## -2.88821 -0.64129 -0.01223  0.80338  2.42671 </span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="do">## -2.42775 -0.81090  0.06764  0.62597  2.38284 </span></span>
 <span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
 <span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
 <span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="do">##             Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)  10.2667     0.2184   47.01  &lt; 2e-16 ***</span></span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="do">## x             1.6316     0.3777    4.32 3.74e-05 ***</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)   9.8352     0.1736   56.64  &lt; 2e-16 ***</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="do">## x             2.5080     0.3283    7.64 1.47e-11 ***</span></span>
 <span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
 <span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="do">## Residual standard error: 0.9837 on 98 degrees of freedom</span></span>
-<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiple R-squared:   0.16,  Adjusted R-squared:  0.1514 </span></span>
-<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic: 18.66 on 1 and 98 DF,  p-value: 3.743e-05</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="do">## Residual standard error: 0.9598 on 98 degrees of freedom</span></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.3733, Adjusted R-squared:  0.3669 </span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic: 58.37 on 1 and 98 DF,  p-value: 1.473e-11</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>出力には主に次の指標が含まれる。</p>
 <ul>
@@ -424,7 +424,7 @@ y = \alpha + \beta x + u
 <li>Adjusted R-squared: 修正済み決定係数（説明変数の数を考慮した指標）</li>
 <li>F-statistic: 全係数がゼロであるとの仮説に対する F 検定</li>
 </ul>
-<p><code>summary(fm)</code> もリストであり, <code>typeof</code> 関数と <code>names</code> 関数でその構造を確認できる.</p>
+<p><code>summary(fm)</code> もリストであり、<code>typeof</code> 関数と <code>names</code> 関数でその構造を確認できる。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="fu">summary</span>(fm))</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] "list"</span></span>
@@ -433,42 +433,42 @@ y = \alpha + \beta x + u
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="do">##  [5] "aliased"       "sigma"         "df"            "r.squared"    </span></span>
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="do">##  [9] "adj.r.squared" "fstatistic"    "cov.unscaled"</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>単なる <code>fm</code> と同じ名前の要素もあるが, 中身が違っている場合がある. たとえば <code>residuals</code> は同じだが、係数には標準誤差や t 値などの情報が付与される。 <code>coef</code> 関数を <code>summary(fm)</code> に適用すると, これらの情報を含む行列が得られる.</p>
+<p>単なる <code>fm</code> と同じ名前の要素もあるが、中身が違っている場合がある。 たとえば <code>residuals</code> は同じだが、係数には標準誤差や t 値などの情報が付与される。 <code>coef</code> 関数を <code>summary(fm)</code> に適用すると、これらの情報を含む行列が得られる。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(<span class="fu">summary</span>(fm))</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="do">##              Estimate Std. Error   t value     Pr(&gt;|t|)</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept) 10.266674  0.2183823 47.012392 4.835591e-69</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="do">## x            1.631565  0.3776746  4.320028 3.742747e-05</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="do">##             Estimate Std. Error   t value     Pr(&gt;|t|)</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept) 9.835228  0.1736471 56.639184 1.086118e-76</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="do">## x           2.508042  0.3282659  7.640274 1.473068e-11</span></span>
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co"># coefficients(summary(fm))</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>残差標準誤差（residual standard error）は <code>summary(fm)$sigma</code> から取得できる。 これは残差自乗和を残差の自由度で割った値の平方根である。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(<span class="fu">summary</span>(fm),sigma)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.9837101</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.9597811</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">deviance</span>(fm)<span class="sc">/</span><span class="fu">df.residual</span>(fm))</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.9837101</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.9597811</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>決定係数（R-squared）は <code>summary(fm)$r.squared</code> に格納されている。 これは 1 から (残差変動/全変動) を引いた値として計算される.</p>
+<p>決定係数（R-squared）は <code>summary(fm)$r.squared</code> に格納されている。 これは 1 から (残差変動/全変動) を引いた値として計算される。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(<span class="fu">summary</span>(fm),r.squared)</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.159971</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.3732965</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">deviance</span>(fm)<span class="sc">/</span><span class="fu">with</span>(df, <span class="fu">sum</span>((y<span class="sc">-</span><span class="fu">mean</span>(y))<span class="sc">^</span><span class="dv">2</span>))</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.159971</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.3732965</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>調整済み決定係数（adjusted R-squared）は <code>summary(fm)$adj.r.squared</code> から得られる。 これは決定係数を自由度で調整した値であり, 説明変数の数が増えても必ずしも増加しない性質を持つ.</p>
+<p>調整済み決定係数（adjusted R-squared）は <code>summary(fm)$adj.r.squared</code> から得られる。 これは決定係数を自由度で調整した値であり、説明変数の数が増えても必ずしも増加しない性質を持つ。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(<span class="fu">summary</span>(fm),adj.r.squared)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.1513993</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.3669016</span></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span>(<span class="fu">deviance</span>(fm)<span class="sc">/</span><span class="fu">df.residual</span>(fm))<span class="sc">/</span><span class="fu">with</span>(df, <span class="fu">sum</span>((y<span class="sc">-</span><span class="fu">mean</span>(y))<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>(<span class="fu">nrow</span>(df)<span class="sc">-</span><span class="dv">1</span>)))</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.1513993</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.3669016</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="対数変換" class="level3" data-number="8.1.2">
 <h3 data-number="8.1.2" class="anchored" data-anchor-id="対数変換"><span class="header-section-number">8.1.2</span> 対数変換</h3>
-<p>次のモデルを考える. <span class="math display">\[
+<p>次のモデルを考える。 <span class="math display">\[
 y = \alpha + \beta \log(x) + u
 \]</span></p>
-<p>説明変数を対数変換する場合, <code>lm</code> 関数の式の中で直接 <code>log</code> 関数を使用できる. この場合, 係数 <span class="math inline">\(\beta\)</span> は <span class="math inline">\(x\)</span> が1%変化したときの <span class="math inline">\(y\)</span> の変化量 (の近似値) を表す.</p>
+<p>説明変数を対数変換する場合、<code>lm</code> 関数の式の中で直接 <code>log</code> 関数を使用できる。 この場合、係数 <span class="math inline">\(\beta\)</span> は <span class="math inline">\(x\)</span> が1%変化したときの <span class="math inline">\(y\)</span> の変化量 (の近似値) を表す。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>fm <span class="ot">&lt;-</span> <span class="fu">lm</span>(y<span class="sc">~</span><span class="fu">log</span>(x),<span class="at">data=</span>df)</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fm)</span>
@@ -478,20 +478,20 @@ y = \alpha + \beta \log(x) + u
 <span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
 <span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Residuals:</span></span>
 <span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="do">##      Min       1Q   Median       3Q      Max </span></span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="do">## -2.18710 -0.70767  0.08182  0.68764  2.51491 </span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="do">## -2.75892 -0.78470  0.02281  0.69824  2.27631 </span></span>
 <span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
 <span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
 <span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="do">##             Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)  11.5827     0.1431  80.935  &lt; 2e-16 ***</span></span>
-<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="do">## log(x)        0.5346     0.1181   4.527 1.69e-05 ***</span></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept) 11.65599    0.14880  78.335  &lt; 2e-16 ***</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="do">## log(x)       0.59294    0.09051   6.551 2.66e-09 ***</span></span>
 <span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
 <span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a><span class="do">## Residual standard error: 0.9761 on 98 degrees of freedom</span></span>
-<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.1729, Adjusted R-squared:  0.1645 </span></span>
-<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic: 20.49 on 1 and 98 DF,  p-value: 1.687e-05</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a><span class="do">## Residual standard error: 1.011 on 98 degrees of freedom</span></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.3045, Adjusted R-squared:  0.2974 </span></span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic: 42.91 on 1 and 98 DF,  p-value: 2.665e-09</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>散布図と回帰直線を描くと以下のようになる. 横軸が対数変換された <span class="math inline">\(x\)</span> になっている点に注意.</p>
+<p>散布図と回帰直線を描くと以下のようになる。 横軸が対数変換された <span class="math inline">\(x\)</span> になっている点に注意。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(y<span class="sc">~</span><span class="fu">log</span>(x),<span class="at">data=</span>df)</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(fm)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -503,7 +503,7 @@ y = \alpha + \beta \log(x) + u
 </div>
 </div>
 </div>
-<p>被説明変数を対数変換する場合も同様に, <code>lm</code> 関数の式の中で <code>log</code> 関数を使用する. この場合, 係数 <span class="math inline">\(\beta\)</span> は <span class="math inline">\(x\)</span> が1単位変化したときの <span class="math inline">\(y\)</span> の変化率 (%) の近似値を表す.</p>
+<p>被説明変数を対数変換する場合も同様に、<code>lm</code> 関数の式の中で <code>log</code> 関数を使用する。 この場合、係数 <span class="math inline">\(\beta\)</span> は <span class="math inline">\(x\)</span> が1単位変化したときの <span class="math inline">\(y\)</span> の変化率 (%) の近似値を表す。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>fm <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log</span>(y)<span class="sc">~</span>x,<span class="at">data=</span>df)</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fm)</span>
@@ -512,21 +512,21 @@ y = \alpha + \beta \log(x) + u
 <span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="do">## lm(formula = log(y) ~ x, data = df)</span></span>
 <span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
 <span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Residuals:</span></span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="do">##      Min       1Q   Median       3Q      Max </span></span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="do">## -0.32317 -0.05568  0.00373  0.07433  0.19306 </span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="do">##       Min        1Q    Median        3Q       Max </span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="do">## -0.265774 -0.071626  0.006737  0.060570  0.205371 </span></span>
 <span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
 <span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
 <span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a><span class="do">##             Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)  2.32338    0.02036 114.123   &lt;2e-16 ***</span></span>
-<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a><span class="do">## x            0.15415    0.03521   4.378    3e-05 ***</span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)  2.28362    0.01629 140.190  &lt; 2e-16 ***</span></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a><span class="do">## x            0.23295    0.03079   7.565 2.13e-11 ***</span></span>
 <span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
 <span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a><span class="do">## Residual standard error: 0.09171 on 98 degrees of freedom</span></span>
-<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.1636, Adjusted R-squared:  0.1551 </span></span>
-<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic: 19.17 on 1 and 98 DF,  p-value: 2.997e-05</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a><span class="do">## Residual standard error: 0.09004 on 98 degrees of freedom</span></span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.3687, Adjusted R-squared:  0.3622 </span></span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic: 57.23 on 1 and 98 DF,  p-value: 2.126e-11</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>散布図と回帰直線を描くと以下のようになる. 縦軸が対数変換された <span class="math inline">\(y\)</span> になっている点に注意.</p>
+<p>散布図と回帰直線を描くと以下のようになる。 縦軸が対数変換された <span class="math inline">\(y\)</span> になっている点に注意。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">log</span>(y)<span class="sc">~</span>x,<span class="at">data=</span>df)</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(fm)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -538,7 +538,7 @@ y = \alpha + \beta \log(x) + u
 </div>
 </div>
 </div>
-<p>被説明変数と説明変数の両方を対数変換する場合 (対数線形モデル) は以下のようにする. この場合, 係数 <span class="math inline">\(\beta\)</span> は弾力性を表し, <span class="math inline">\(x\)</span> が1%変化したときの <span class="math inline">\(y\)</span> の変化率 (%) を表す.</p>
+<p>被説明変数と説明変数の両方を対数変換する場合 (対数線形モデル) は以下のようにする。 この場合、係数 <span class="math inline">\(\beta\)</span> は弾力性を表し、<span class="math inline">\(x\)</span> が1%変化したときの <span class="math inline">\(y\)</span> の変化率 (%) を表す。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>fm <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log</span>(y)<span class="sc">~</span><span class="fu">log</span>(x),<span class="at">data=</span>df)</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fm)</span>
@@ -547,21 +547,21 @@ y = \alpha + \beta \log(x) + u
 <span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="do">## lm(formula = log(y) ~ log(x), data = df)</span></span>
 <span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
 <span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Residuals:</span></span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="do">##      Min       1Q   Median       3Q      Max </span></span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="do">## -0.25339 -0.06118  0.01081  0.06794  0.20059 </span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="do">##       Min        1Q    Median        3Q       Max </span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="do">## -0.295898 -0.067529  0.006999  0.061505  0.203809 </span></span>
 <span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
 <span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
 <span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a><span class="do">##             Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)  2.44883    0.01327 184.591  &lt; 2e-16 ***</span></span>
-<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a><span class="do">## log(x)       0.05177    0.01095   4.728 7.59e-06 ***</span></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept) 2.453947   0.013834 177.381  &lt; 2e-16 ***</span></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a><span class="do">## log(x)      0.056074   0.008416   6.663 1.58e-09 ***</span></span>
 <span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
 <span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a><span class="do">## Residual standard error: 0.09048 on 98 degrees of freedom</span></span>
-<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.1858, Adjusted R-squared:  0.1775 </span></span>
-<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic: 22.36 on 1 and 98 DF,  p-value: 7.589e-06</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a><span class="do">## Residual standard error: 0.094 on 98 degrees of freedom</span></span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.3118, Adjusted R-squared:  0.3048 </span></span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic:  44.4 on 1 and 98 DF,  p-value: 1.577e-09</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>散布図と回帰直線を描くと以下のようになる. 両軸とも対数変換されている点に注意.</p>
+<p>散布図と回帰直線を描くと以下のようになる。 両軸とも対数変換されている点に注意。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">log</span>(y)<span class="sc">~</span><span class="fu">log</span>(x),<span class="at">data=</span>df)</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(fm)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -576,10 +576,10 @@ y = \alpha + \beta \log(x) + u
 </section>
 <section id="切片なし回帰モデル" class="level3" data-number="8.1.3">
 <h3 data-number="8.1.3" class="anchored" data-anchor-id="切片なし回帰モデル"><span class="header-section-number">8.1.3</span> 切片なし回帰モデル</h3>
-<p>次のモデルを考える. <span class="math display">\[
+<p>次のモデルを考える。 <span class="math display">\[
 y = \beta x + u
 \]</span></p>
-<p>切片を含まないモデルを推定したい場合は, 式の中に <code>-1</code> を加える. これにより切片項が除外され, 原点を通る回帰直線が推定される.</p>
+<p>切片を含まないモデルを推定したい場合は、式の中に <code>-1</code> を加える。 これにより切片項が除外され、原点を通る回帰直線が推定される。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>fm <span class="ot">&lt;-</span> <span class="fu">lm</span>(y<span class="sc">~</span>x<span class="dv">-1</span>,<span class="at">data=</span>df)</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fm)</span>
@@ -588,18 +588,18 @@ y = \beta x + u
 <span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="do">## lm(formula = y ~ x - 1, data = df)</span></span>
 <span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
 <span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Residuals:</span></span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="do">##    Min     1Q Median     3Q    Max </span></span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="do">## -6.922 -1.429  2.137  5.242 10.930 </span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="do">##     Min      1Q  Median      3Q     Max </span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="do">## -6.7567 -0.4621  3.4389  6.9656 11.1891 </span></span>
 <span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
 <span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
 <span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a><span class="do">##   Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a><span class="do">## x  17.4836     0.8215   21.28   &lt;2e-16 ***</span></span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a><span class="do">## x   18.003      1.048   17.17   &lt;2e-16 ***</span></span>
 <span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
 <span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a><span class="do">## Residual standard error: 4.75 on 99 degrees of freedom</span></span>
-<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.8207, Adjusted R-squared:  0.8188 </span></span>
-<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic:   453 on 1 and 99 DF,  p-value: &lt; 2.2e-16</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a><span class="do">## Residual standard error: 5.546 on 99 degrees of freedom</span></span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.7486, Adjusted R-squared:  0.7461 </span></span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic: 294.8 on 1 and 99 DF,  p-value: &lt; 2.2e-16</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><code>+0</code> を加えても同じ効果が得られる。</p>
 <div class="cell">
@@ -610,35 +610,35 @@ y = \beta x + u
 <span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="do">## lm(formula = y ~ x + 0, data = df)</span></span>
 <span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
 <span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Residuals:</span></span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="do">##    Min     1Q Median     3Q    Max </span></span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="do">## -6.922 -1.429  2.137  5.242 10.930 </span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="do">##     Min      1Q  Median      3Q     Max </span></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="do">## -6.7567 -0.4621  3.4389  6.9656 11.1891 </span></span>
 <span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
 <span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
 <span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a><span class="do">##   Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a><span class="do">## x  17.4836     0.8215   21.28   &lt;2e-16 ***</span></span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a><span class="do">## x   18.003      1.048   17.17   &lt;2e-16 ***</span></span>
 <span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
 <span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a><span class="do">## Residual standard error: 4.75 on 99 degrees of freedom</span></span>
-<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.8207, Adjusted R-squared:  0.8188 </span></span>
-<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic:   453 on 1 and 99 DF,  p-value: &lt; 2.2e-16</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a><span class="do">## Residual standard error: 5.546 on 99 degrees of freedom</span></span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.7486, Adjusted R-squared:  0.7461 </span></span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic: 294.8 on 1 and 99 DF,  p-value: &lt; 2.2e-16</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
 <section id="重回帰モデル" class="level2" data-number="8.2">
 <h2 data-number="8.2" class="anchored" data-anchor-id="重回帰モデル"><span class="header-section-number">8.2</span> 重回帰モデル</h2>
-<p>説明変数として <span class="math inline">\(w\)</span> を加えたモデルを考える. <span class="math display">\[
+<p>説明変数として <span class="math inline">\(w\)</span> を加えたモデルを考える。 <span class="math display">\[
 y = \alpha + \beta x +\gamma w+ u
 \]</span></p>
 <p>暗黙に以下の仮定を置く。</p>
 <ul>
-<li><span class="math inline">\((w_i, x_i,y_i)\)</span> は独立同一分布にしたがう.</li>
-<li>誤差項の期待値はゼロである. <span class="math inline">\(E[u_i]=0\)</span> である.</li>
-<li>誤差項 <span class="math inline">\(u_i\)</span> は説明変数 <span class="math inline">\((x_i, w_i)\)</span> に対して独立である.</li>
-<li>誤差項 <span class="math inline">\(u_i\)</span> は正規分布にしたがう.</li>
-<li>説明変数間に多重共線性は存在しない. つまり <span class="math inline">\(x_i\)</span> は <span class="math inline">\(w_i\)</span> の一次変換で表せない.</li>
+<li><span class="math inline">\((w_i, x_i,y_i)\)</span> は独立同一分布にしたがう。</li>
+<li>誤差項の期待値はゼロである。<span class="math inline">\(E[u_i]=0\)</span> である。</li>
+<li>誤差項 <span class="math inline">\(u_i\)</span> は説明変数 <span class="math inline">\((x_i, w_i)\)</span> に対して独立である。</li>
+<li>誤差項 <span class="math inline">\(u_i\)</span> は正規分布にしたがう。</li>
+<li>説明変数間に多重共線性は存在しない。つまり <span class="math inline">\(x_i\)</span> は <span class="math inline">\(w_i\)</span> の一次変換で表せない。</li>
 </ul>
-<p>以降ではシミュレーションデータを用いて具体的に確認する。 標本サイズを100とし, 説明変数 <span class="math inline">\(x\)</span> は0から1の一様分布から, <span class="math inline">\(w\)</span> は「H」と「T」からランダムに生成する. 被説明変数 <span class="math inline">\(y\)</span> は, 真の切片を10, <span class="math inline">\(x\)</span> の係数を2, <span class="math inline">\(w\)</span> が「H」のときに1を加算し, 正規分布の誤差項を加えて生成する.</p>
+<p>以降ではシミュレーションデータを用いて具体的に確認する。 標本サイズを100とし、説明変数 <span class="math inline">\(x\)</span> は0から1の一様分布から、<span class="math inline">\(w\)</span> は「H」と「T」からランダムに生成する。 被説明変数 <span class="math inline">\(y\)</span> は、真の切片を10, <span class="math inline">\(x\)</span> の係数を2, <span class="math inline">\(w\)</span> が「H」のときに1を加算し、正規分布の誤差項を加えて生成する。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">100</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>x<span class="ot">&lt;-</span><span class="fu">runif</span>(N)</span>
@@ -646,7 +646,7 @@ y = \alpha + \beta x +\gamma w+ u
 <span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">10</span> <span class="sc">+</span> <span class="dv">2</span><span class="sc">*</span>x <span class="sc">+</span> <span class="fu">ifelse</span>(w<span class="sc">==</span><span class="st">"H"</span>,<span class="dv">1</span>,<span class="dv">0</span>) <span class="sc">+</span> <span class="fu">rnorm</span>(N)</span>
 <span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(w,x,y)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>複数の説明変数を含むモデルを推定するには, <code>+</code> 記号で変数を連結する. 式 <code>y~x+w</code> は被説明変数 <span class="math inline">\(y\)</span> を説明変数 <span class="math inline">\(x\)</span> と <span class="math inline">\(w\)</span> で回帰することを意味する.</p>
+<p>複数の説明変数を含むモデルを推定するには、<code>+</code> 記号で変数を連結する。 式 <code>y~x+w</code> は被説明変数 <span class="math inline">\(y\)</span> を説明変数 <span class="math inline">\(x\)</span> と <span class="math inline">\(w\)</span> で回帰することを意味する。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>fm <span class="ot">&lt;-</span> <span class="fu">lm</span>(y<span class="sc">~</span>x<span class="sc">+</span>w,<span class="at">data=</span>df)</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fm)</span>
@@ -655,25 +655,25 @@ y = \alpha + \beta x +\gamma w+ u
 <span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="do">## lm(formula = y ~ x + w, data = df)</span></span>
 <span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
 <span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Residuals:</span></span>
-<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="do">##     Min      1Q  Median      3Q     Max </span></span>
-<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="do">## -2.8696 -0.6141 -0.0500  0.6985  3.9215 </span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="do">##      Min       1Q   Median       3Q      Max </span></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="do">## -2.46767 -0.92986 -0.01811  0.72531  2.83076 </span></span>
 <span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
 <span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
 <span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a><span class="do">##             Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)  10.9585     0.2456  44.619  &lt; 2e-16 ***</span></span>
-<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a><span class="do">## x             1.8296     0.3952   4.630 1.14e-05 ***</span></span>
-<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a><span class="do">## wT           -0.8714     0.2289  -3.806 0.000247 ***</span></span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)  10.8056     0.2365  45.685  &lt; 2e-16 ***</span></span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a><span class="do">## x             2.3071     0.3746   6.159 1.66e-08 ***</span></span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a><span class="do">## wT           -1.1063     0.2232  -4.956 3.05e-06 ***</span></span>
 <span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
 <span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a><span class="do">## Residual standard error: 1.143 on 97 degrees of freedom</span></span>
-<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.2626, Adjusted R-squared:  0.2474 </span></span>
-<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic: 17.27 on 2 and 97 DF,  p-value: 3.832e-07</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a><span class="do">## Residual standard error: 1.109 on 97 degrees of freedom</span></span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.3752, Adjusted R-squared:  0.3623 </span></span>
+<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic: 29.12 on 2 and 97 DF,  p-value: 1.244e-10</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>R の特徴として, 因子型 (factor) やカテゴリカル変数 (文字列) を特に変換することなく自動的にダミー変数として扱える. ここでは <span class="math inline">\(w\)</span> が「H」と「T」の2値をとるが, 自動的に一方 (「H」) のダミー変数が作成され, 「T」が基準カテゴリとなる.</p>
+<p>R の特徴として、因子型 (factor) やカテゴリカル変数 (文字列) を特に変換することなく自動的にダミー変数として扱える。 ここでは <span class="math inline">\(w\)</span> が「H」と「T」の2値をとるが、自動的に一方 (「H」) のダミー変数が作成され、「T」が基準カテゴリとなる。</p>
 <section id="自乗項" class="level3" data-number="8.2.1">
 <h3 data-number="8.2.1" class="anchored" data-anchor-id="自乗項"><span class="header-section-number">8.2.1</span> 自乗項</h3>
-<p>説明変数として自乗項を加えたモデルを考える. <span class="math display">\[
+<p>説明変数として自乗項を加えたモデルを考える。 <span class="math display">\[
 y = \alpha + \beta x + \gamma x^2 + u
 \]</span></p>
 <p>自乗項を含めるときは <code>I(x^2)</code> のように <code>I()</code> で囲む。 これは <code>^</code> が式中で特別扱いされるため、通常の演算として解釈させる工夫である。</p>
@@ -686,27 +686,27 @@ y = \alpha + \beta x + \gamma x^2 + u
 <span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
 <span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Residuals:</span></span>
 <span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="do">##     Min      1Q  Median      3Q     Max </span></span>
-<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a><span class="do">## -3.2032 -0.8416 -0.0320  0.7675  3.5877 </span></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a><span class="do">## -2.5598 -0.8869 -0.0821  0.8998  2.7395 </span></span>
 <span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
 <span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
 <span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a><span class="do">##             Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)  10.6942     0.3418  31.290   &lt;2e-16 ***</span></span>
-<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a><span class="do">## x             0.7415     1.6548   0.448    0.655    </span></span>
-<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a><span class="do">## I(x^2)        1.0600     1.6515   0.642    0.523    </span></span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)  10.6581     0.3476  30.664   &lt;2e-16 ***</span></span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a><span class="do">## x            -0.2292     1.6639  -0.138    0.891    </span></span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a><span class="do">## I(x^2)        2.4092     1.6202   1.487    0.140    </span></span>
 <span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
 <span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a><span class="do">## Residual standard error: 1.223 on 97 degrees of freedom</span></span>
-<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.1561, Adjusted R-squared:  0.1387 </span></span>
-<span id="cb30-21"><a href="#cb30-21" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic: 8.968 on 2 and 97 DF,  p-value: 0.0002669</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a><span class="do">## Residual standard error: 1.228 on 97 degrees of freedom</span></span>
+<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.2344, Adjusted R-squared:  0.2186 </span></span>
+<span id="cb30-21"><a href="#cb30-21" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic: 14.85 on 2 and 97 DF,  p-value: 2.372e-06</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="交差項" class="level3" data-number="8.2.2">
 <h3 data-number="8.2.2" class="anchored" data-anchor-id="交差項"><span class="header-section-number">8.2.2</span> 交差項</h3>
-<p>説明変数として交差項 (interaction term) を加えたモデルを考える. <span class="math display">\[
+<p>説明変数として交差項 (interaction term) を加えたモデルを考える。 <span class="math display">\[
 y = \alpha + \beta x + \gamma w + \delta xw + u
 \]</span></p>
-<p>交差項（interaction）は <code>:</code> を使って <code>x:w</code> と表記する。 このモデルでは主効果 <code>x</code> と <code>w</code> に加えて, 交差項 <code>x:w</code> を明示的に指定している.</p>
+<p>交差項（interaction）は <code>:</code> を使って <code>x:w</code> と表記する。 このモデルでは主効果 <code>x</code> と <code>w</code> に加えて、交差項 <code>x:w</code> を明示的に指定している。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>fm<span class="ot">&lt;-</span><span class="fu">lm</span>(y<span class="sc">~</span>x<span class="sc">+</span>w<span class="sc">+</span>x<span class="sc">:</span>w,<span class="at">data=</span>df)</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fm)</span>
@@ -715,23 +715,23 @@ y = \alpha + \beta x + \gamma w + \delta xw + u
 <span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="do">## lm(formula = y ~ x + w + x:w, data = df)</span></span>
 <span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
 <span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Residuals:</span></span>
-<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="do">##     Min      1Q  Median      3Q     Max </span></span>
-<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a><span class="do">## -2.8028 -0.7058 -0.0191  0.7830  3.9890 </span></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="do">##      Min       1Q   Median       3Q      Max </span></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a><span class="do">## -2.45387 -0.94699 -0.02206  0.71598  2.86071 </span></span>
 <span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
 <span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
 <span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a><span class="do">##             Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)  10.6680     0.3019  35.337  &lt; 2e-16 ***</span></span>
-<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a><span class="do">## x             2.4606     0.5511   4.465 2.18e-05 ***</span></span>
-<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a><span class="do">## wT           -0.2683     0.4343  -0.618    0.538    </span></span>
-<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a><span class="do">## x:wT         -1.2766     0.7838  -1.629    0.107    </span></span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)  10.8345     0.2869  37.762  &lt; 2e-16 ***</span></span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a><span class="do">## x             2.2436     0.5155   4.352 3.37e-05 ***</span></span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a><span class="do">## wT           -1.1715     0.4261  -2.750  0.00713 ** </span></span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a><span class="do">## x:wT          0.1360     0.7546   0.180  0.85738    </span></span>
 <span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
 <span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a><span class="do">## Residual standard error: 1.133 on 96 degrees of freedom</span></span>
-<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.2824, Adjusted R-squared:   0.26 </span></span>
-<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic:  12.6 on 3 and 96 DF,  p-value: 5.178e-07</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a><span class="do">## Residual standard error: 1.115 on 96 degrees of freedom</span></span>
+<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.3754, Adjusted R-squared:  0.3559 </span></span>
+<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic: 19.23 on 3 and 96 DF,  p-value: 7.597e-10</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><code>*</code> を使えば主要効果と交差項をまとめて指定できる。 <code>x*w</code> は自動的に <code>x + w + x:w</code> に展開される.</p>
+<p><code>*</code> を使えば主要効果と交差項をまとめて指定できる。 <code>x*w</code> は自動的に <code>x + w + x:w</code> に展開される。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>fm <span class="ot">&lt;-</span> <span class="fu">lm</span>(y<span class="sc">~</span>x<span class="sc">*</span>w,<span class="at">data=</span>df)</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fm)</span>
@@ -740,34 +740,34 @@ y = \alpha + \beta x + \gamma w + \delta xw + u
 <span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="do">## lm(formula = y ~ x * w, data = df)</span></span>
 <span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
 <span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Residuals:</span></span>
-<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="do">##     Min      1Q  Median      3Q     Max </span></span>
-<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a><span class="do">## -2.8028 -0.7058 -0.0191  0.7830  3.9890 </span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="do">##      Min       1Q   Median       3Q      Max </span></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a><span class="do">## -2.45387 -0.94699 -0.02206  0.71598  2.86071 </span></span>
 <span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
 <span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
 <span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a><span class="do">##             Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)  10.6680     0.3019  35.337  &lt; 2e-16 ***</span></span>
-<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a><span class="do">## x             2.4606     0.5511   4.465 2.18e-05 ***</span></span>
-<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a><span class="do">## wT           -0.2683     0.4343  -0.618    0.538    </span></span>
-<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a><span class="do">## x:wT         -1.2766     0.7838  -1.629    0.107    </span></span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)  10.8345     0.2869  37.762  &lt; 2e-16 ***</span></span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a><span class="do">## x             2.2436     0.5155   4.352 3.37e-05 ***</span></span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a><span class="do">## wT           -1.1715     0.4261  -2.750  0.00713 ** </span></span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a><span class="do">## x:wT          0.1360     0.7546   0.180  0.85738    </span></span>
 <span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
 <span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a><span class="do">## Residual standard error: 1.133 on 96 degrees of freedom</span></span>
-<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.2824, Adjusted R-squared:   0.26 </span></span>
-<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic:  12.6 on 3 and 96 DF,  p-value: 5.178e-07</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a><span class="do">## Residual standard error: 1.115 on 96 degrees of freedom</span></span>
+<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.3754, Adjusted R-squared:  0.3559 </span></span>
+<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic: 19.23 on 3 and 96 DF,  p-value: 7.597e-10</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="エフ検定" class="level3" data-number="8.2.3">
 <h3 data-number="8.2.3" class="anchored" data-anchor-id="エフ検定"><span class="header-section-number">8.2.3</span> エフ検定</h3>
-<p>今, 帰無仮説が <span class="math display">\[
+<p>今、帰無仮説が <span class="math display">\[
 y = \alpha + \beta x + u
-\]</span> で, 対立仮説が <span class="math display">\[
+\]</span> で、対立仮説が <span class="math display">\[
 y = \alpha + \beta x + \gamma w + \delta xw + u
-\]</span> となる検定を実施したい.</p>
-<p>これは複数の係数（ここでは <span class="math inline">\(\gamma\)</span> と <span class="math inline">\(\delta\)</span>）が同時にゼロかどうかを調べる F 検定である。 制約付き検定は、制約のあるモデル（帰無仮説）とないモデル（対立仮説）の残差自乗和を比較することで実施できる。 対立仮説（制約なしモデル）の残差自乗和を <span class="math inline">\(SSR\)</span>、自由度を <span class="math inline">\(df\)</span> とする。 自由度は観測数から推定されるパラメータの数 (説明変数の数と切片) を減じた数である. 帰無仮説（制約付きモデル）の残差自乗和を <span class="math inline">\(SSR_0\)</span>、制約の数を <span class="math inline">\(q\)</span> とする。 制約の数は帰無仮説の自由度から対立仮説の自由度を差し引いた数である. このとき, 以下のF値は帰無仮説が正しいもとで自由度 <span class="math inline">\((q, df)\)</span> のF分布にしたがう. <span class="math display">\[
+\]</span> となる検定を実施したい。</p>
+<p>これは複数の係数（ここでは <span class="math inline">\(\gamma\)</span> と <span class="math inline">\(\delta\)</span>）が同時にゼロかどうかを調べる F 検定である。 制約付き検定は、制約のあるモデル（帰無仮説）とないモデル（対立仮説）の残差自乗和を比較することで実施できる。 対立仮説（制約なしモデル）の残差自乗和を <span class="math inline">\(SSR\)</span>、自由度を <span class="math inline">\(df\)</span> とする。 自由度は観測数から推定されるパラメータの数 (説明変数の数と切片) を減じた数である。 帰無仮説（制約付きモデル）の残差自乗和を <span class="math inline">\(SSR_0\)</span>、制約の数を <span class="math inline">\(q\)</span> とする。 制約の数は帰無仮説の自由度から対立仮説の自由度を差し引いた数である。 このとき、以下のF値は帰無仮説が正しいもとで自由度 <span class="math inline">\((q, df)\)</span> のF分布にしたがう。 <span class="math display">\[
 F = \frac{(SSR_0-SSR)/q}{SSR/df}
 \]</span></p>
-<p>R でF値を手動で計算するには以下のようにする. まず両方のモデルを推定し, それぞれの自由度 (<code>$df</code>) と残差自乗和 (<code>deviance</code>) を取り出す. 制約の数 <span class="math inline">\(q\)</span> は両モデルの自由度の差である. F値は上記の式に従って計算する.</p>
+<p>R でF値を手動で計算するには以下のようにする。 まず両方のモデルを推定し、それぞれの自由度 (<code>$df</code>) と残差自乗和 (<code>deviance</code>) を取り出す。 制約の数 <span class="math inline">\(q\)</span> は両モデルの自由度の差である。 F値は上記の式に従って計算する。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>fm0 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y<span class="sc">~</span>x,<span class="at">data=</span>df)</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>fm1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y<span class="sc">~</span>x<span class="sc">*</span>w,<span class="at">data=</span>df)</span>
@@ -776,14 +776,14 @@ F = \frac{(SSR_0-SSR)/q}{SSR/df}
 <span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>SSR0 <span class="ot">&lt;-</span> <span class="fu">deviance</span>(fm0)</span>
 <span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>SSR <span class="ot">&lt;-</span> <span class="fu">deviance</span>(fm1)</span>
 <span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>(F <span class="ot">&lt;-</span> ((SSR0<span class="sc">-</span>SSR)<span class="sc">/</span>q)<span class="sc">/</span>(SSR<span class="sc">/</span>dof))</span>
-<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 8.693839</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 12.17708</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>F 値に対する p 値は <code>pf()</code> で計算できる。 <code>pf()</code> は F 分布の累積分布関数で、<code>1 - pf(F, df1, df2)</code> が上側確率（p 値）となる。 第一自由度 (<code>df1</code>) は制約の数 <span class="math inline">\(q\)</span>, 第二自由度 (<code>df2</code>) は対立仮説の自由度である.</p>
+<p>F 値に対する p 値は <code>pf()</code> で計算できる。 <code>pf()</code> は F 分布の累積分布関数で、<code>1 - pf(F, df1, df2)</code> が上側確率（p 値）となる。 第一自由度 (<code>df1</code>) は制約の数 <span class="math inline">\(q\)</span>, 第二自由度 (<code>df2</code>) は対立仮説の自由度である。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pf</span>(F,<span class="at">df1=</span>q,<span class="at">df2=</span>dof)</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.0003387333</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 1.935916e-05</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>これらの手順は <code>anova()</code> を使えば自動で計算できる。 <code>anova</code> 関数に2つのモデルを渡すと, 自動的にエフ検定を実施し, F値とp値を表示してくれる.</p>
+<p>これらの手順は <code>anova()</code> を使えば自動で計算できる。 <code>anova</code> 関数に2つのモデルを渡すと、自動的にエフ検定を実施し、F値とp値を表示してくれる。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(fm0,fm1)</span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Analysis of Variance Table</span></span>
@@ -791,8 +791,8 @@ F = \frac{(SSR_0-SSR)/q}{SSR/df}
 <span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Model 1: y ~ x</span></span>
 <span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Model 2: y ~ x * w</span></span>
 <span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="do">##   Res.Df    RSS Df Sum of Sq      F    Pr(&gt;F)    </span></span>
-<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 1     98 145.59                                  </span></span>
-<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 2     96 123.26  2    22.326 8.6938 0.0003387 ***</span></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 1     98 149.58                                  </span></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 2     96 119.31  2    30.268 12.177 1.936e-05 ***</span></span>
 <span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
 <span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -804,8 +804,8 @@ F = \frac{(SSR_0-SSR)/q}{SSR/df}
 <span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Model 1: y ~ x * w</span></span>
 <span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Model 2: y ~ x</span></span>
 <span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="do">##   Res.Df    RSS Df Sum of Sq      F    Pr(&gt;F)    </span></span>
-<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 1     96 123.26                                  </span></span>
-<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 2     98 145.59 -2   -22.326 8.6938 0.0003387 ***</span></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 1     96 119.31                                  </span></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 2     98 149.58 -2   -30.268 12.177 1.936e-05 ***</span></span>
 <span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
 <span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -1317,7 +1317,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb37-30"><a href="#cb37-30" aria-hidden="true" tabindex="-1"></a>y = \alpha + \beta x + u</span>
 <span id="cb37-31"><a href="#cb37-31" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb37-32"><a href="#cb37-32" aria-hidden="true" tabindex="-1"></a>ここで $x$ は説明変数、$y$ は被説明変数、$u$ は誤差項である。</span>
-<span id="cb37-33"><a href="#cb37-33" aria-hidden="true" tabindex="-1"></a>パラメータとして $\alpha$ は切片パラメータ, $\beta$ は傾きパラメータである.</span>
+<span id="cb37-33"><a href="#cb37-33" aria-hidden="true" tabindex="-1"></a>パラメータとして $\alpha$ は切片パラメータ、$\beta$ は傾きパラメータである。</span>
 <span id="cb37-34"><a href="#cb37-34" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-35"><a href="#cb37-35" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-36"><a href="#cb37-36" aria-hidden="true" tabindex="-1"></a>以下の仮定を置く。</span>
@@ -1334,9 +1334,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb37-47"><a href="#cb37-47" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-48"><a href="#cb37-48" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-49"><a href="#cb37-49" aria-hidden="true" tabindex="-1"></a>以降ではシミュレーションデータを用いて具体的に確認する。</span>
-<span id="cb37-50"><a href="#cb37-50" aria-hidden="true" tabindex="-1"></a>ここでは標本サイズを100とし, 説明変数 $x$ は0から1の一様分布から生成する.</span>
-<span id="cb37-51"><a href="#cb37-51" aria-hidden="true" tabindex="-1"></a>被説明変数 $y$ は真の切片パラメータを10, 真の傾きパラメータを2として, 正規分布の誤差項を加えて生成する.</span>
-<span id="cb37-52"><a href="#cb37-52" aria-hidden="true" tabindex="-1"></a>最後にこれらのデータを <span class="in">`data.frame`</span> 関数でデータフレームにまとめる.</span>
+<span id="cb37-50"><a href="#cb37-50" aria-hidden="true" tabindex="-1"></a>ここでは標本サイズを100とし、説明変数 $x$ は0から1の一様分布から生成する。</span>
+<span id="cb37-51"><a href="#cb37-51" aria-hidden="true" tabindex="-1"></a>被説明変数 $y$ は真の切片パラメータを10, 真の傾きパラメータを2として、正規分布の誤差項を加えて生成する。</span>
+<span id="cb37-52"><a href="#cb37-52" aria-hidden="true" tabindex="-1"></a>最後にこれらのデータを <span class="in">`data.frame`</span> 関数でデータフレームにまとめる。</span>
 <span id="cb37-55"><a href="#cb37-55" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb37-56"><a href="#cb37-56" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">100</span></span>
 <span id="cb37-57"><a href="#cb37-57" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">runif</span>(N)</span>
@@ -1349,9 +1349,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb37-66"><a href="#cb37-66" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(y<span class="sc">~</span>x)</span>
 <span id="cb37-67"><a href="#cb37-67" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb37-68"><a href="#cb37-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-69"><a href="#cb37-69" aria-hidden="true" tabindex="-1"></a>R で回帰分析を実施するには <span class="in">`lm`</span> 関数を使用する.</span>
-<span id="cb37-70"><a href="#cb37-70" aria-hidden="true" tabindex="-1"></a>第一引数には回帰式を <span class="in">`y ~ x`</span> という形式で指定し, <span class="in">`data`</span> 引数にはデータフレームを指定する.</span>
-<span id="cb37-71"><a href="#cb37-71" aria-hidden="true" tabindex="-1"></a>推定結果は <span class="in">`fm`</span> というオブジェクトに保存する.</span>
+<span id="cb37-69"><a href="#cb37-69" aria-hidden="true" tabindex="-1"></a>R で回帰分析を実施するには <span class="in">`lm`</span> 関数を使用する。</span>
+<span id="cb37-70"><a href="#cb37-70" aria-hidden="true" tabindex="-1"></a>第一引数には回帰式を <span class="in">`y ~ x`</span> という形式で指定し、<span class="in">`data`</span> 引数にはデータフレームを指定する。</span>
+<span id="cb37-71"><a href="#cb37-71" aria-hidden="true" tabindex="-1"></a>推定結果は <span class="in">`fm`</span> というオブジェクトに保存する。</span>
 <span id="cb37-74"><a href="#cb37-74" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb37-75"><a href="#cb37-75" aria-hidden="true" tabindex="-1"></a>fm <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">data=</span>df)</span>
 <span id="cb37-76"><a href="#cb37-76" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
@@ -1363,7 +1363,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb37-84"><a href="#cb37-84" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(fm)</span>
 <span id="cb37-85"><a href="#cb37-85" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb37-86"><a href="#cb37-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-87"><a href="#cb37-87" aria-hidden="true" tabindex="-1"></a>推定された係数 (切片と傾き) を取り出すには <span class="in">`coef`</span> 関数を使用する.</span>
+<span id="cb37-87"><a href="#cb37-87" aria-hidden="true" tabindex="-1"></a>推定された係数 (切片と傾き) を取り出すには <span class="in">`coef`</span> 関数を使用する。</span>
 <span id="cb37-88"><a href="#cb37-88" aria-hidden="true" tabindex="-1"></a><span class="in">`coefficients`</span> 関数でも同じ結果が得られる (コメントアウトしている).</span>
 <span id="cb37-91"><a href="#cb37-91" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb37-92"><a href="#cb37-92" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(fm)</span>
@@ -1371,21 +1371,21 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb37-94"><a href="#cb37-94" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb37-95"><a href="#cb37-95" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-96"><a href="#cb37-96" aria-hidden="true" tabindex="-1"></a>傾きの推定値は、説明変数と被説明変数の共分散を説明変数の分散で割ることで求められる。</span>
-<span id="cb37-97"><a href="#cb37-97" aria-hidden="true" tabindex="-1"></a><span class="in">`with`</span> 関数を使ってデータフレーム内の変数を直接参照し, <span class="in">`cov`</span> 関数で共分散, <span class="in">`var`</span> 関数で分散を計算する.</span>
+<span id="cb37-97"><a href="#cb37-97" aria-hidden="true" tabindex="-1"></a><span class="in">`with`</span> 関数を使ってデータフレーム内の変数を直接参照し、<span class="in">`cov`</span> 関数で共分散、<span class="in">`var`</span> 関数で分散を計算する。</span>
 <span id="cb37-100"><a href="#cb37-100" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb37-101"><a href="#cb37-101" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(df, <span class="fu">cov</span>(x,y)<span class="sc">/</span><span class="fu">var</span>(x))</span>
 <span id="cb37-102"><a href="#cb37-102" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb37-103"><a href="#cb37-103" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-104"><a href="#cb37-104" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-105"><a href="#cb37-105" aria-hidden="true" tabindex="-1"></a>散布図に推定直線を重ねるには、まず <span class="in">`plot()`</span> で散布図を描き、続いて <span class="in">`abline()`</span> に <span class="in">`lm`</span> オブジェクトを渡す。</span>
-<span id="cb37-106"><a href="#cb37-106" aria-hidden="true" tabindex="-1"></a><span class="in">`abline`</span> 関数に <span class="in">`lm`</span> オブジェクトを渡すと自動的に回帰直線が描画される.</span>
+<span id="cb37-106"><a href="#cb37-106" aria-hidden="true" tabindex="-1"></a><span class="in">`abline`</span> 関数に <span class="in">`lm`</span> オブジェクトを渡すと自動的に回帰直線が描画される。</span>
 <span id="cb37-109"><a href="#cb37-109" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb37-110"><a href="#cb37-110" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(y<span class="sc">~</span>x,<span class="at">data=</span>df)</span>
 <span id="cb37-111"><a href="#cb37-111" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(fm)</span>
 <span id="cb37-112"><a href="#cb37-112" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb37-113"><a href="#cb37-113" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-114"><a href="#cb37-114" aria-hidden="true" tabindex="-1"></a>残差（実際の値と予測値の差）は <span class="in">`resid()`</span> で取得できる。</span>
-<span id="cb37-115"><a href="#cb37-115" aria-hidden="true" tabindex="-1"></a>ここでは <span class="in">`head`</span> 関数で最初の6つの値のみを表示している.</span>
+<span id="cb37-115"><a href="#cb37-115" aria-hidden="true" tabindex="-1"></a>ここでは <span class="in">`head`</span> 関数で最初の6つの値のみを表示している。</span>
 <span id="cb37-116"><a href="#cb37-116" aria-hidden="true" tabindex="-1"></a><span class="in">`residuals`</span> 関数でも同じ結果が得られる (コメントアウトしている).</span>
 <span id="cb37-119"><a href="#cb37-119" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb37-120"><a href="#cb37-120" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">resid</span>(fm))</span>
@@ -1393,24 +1393,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb37-122"><a href="#cb37-122" aria-hidden="true" tabindex="-1"></a><span class="co"># with(fm, residuals)</span></span>
 <span id="cb37-123"><a href="#cb37-123" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb37-124"><a href="#cb37-124" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-125"><a href="#cb37-125" aria-hidden="true" tabindex="-1"></a>予測値（$38$hat{y}$）は <span class="in">`fitted()`</span> によって得られる。</span>
-<span id="cb37-126"><a href="#cb37-126" aria-hidden="true" tabindex="-1"></a>ここでは <span class="in">`head`</span> 関数で最初の6つの値のみを表示している.</span>
+<span id="cb37-125"><a href="#cb37-125" aria-hidden="true" tabindex="-1"></a>予測値（$\hat{y}$）は <span class="in">`fitted()`</span> によって得られる。</span>
+<span id="cb37-126"><a href="#cb37-126" aria-hidden="true" tabindex="-1"></a>ここでは <span class="in">`head`</span> 関数で最初の6つの値のみを表示している。</span>
 <span id="cb37-127"><a href="#cb37-127" aria-hidden="true" tabindex="-1"></a><span class="in">`fitted.values`</span> でも同じ結果が得られる (コメントアウトしている).</span>
 <span id="cb37-130"><a href="#cb37-130" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb37-131"><a href="#cb37-131" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">fitted</span>(fm))</span>
 <span id="cb37-132"><a href="#cb37-132" aria-hidden="true" tabindex="-1"></a><span class="co"># fitted.values(fm)</span></span>
 <span id="cb37-133"><a href="#cb37-133" aria-hidden="true" tabindex="-1"></a><span class="co"># with(fm, fitted.values)</span></span>
 <span id="cb37-134"><a href="#cb37-134" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb37-135"><a href="#cb37-135" aria-hidden="true" tabindex="-1"></a>最小二乗法の性質として, 予測値の平均は被説明変数の平均と等しいことが知られている.</span>
-<span id="cb37-136"><a href="#cb37-136" aria-hidden="true" tabindex="-1"></a>以下のコマンドで両者が一致することを確認できる.</span>
+<span id="cb37-135"><a href="#cb37-135" aria-hidden="true" tabindex="-1"></a>最小二乗法の性質として、予測値の平均は被説明変数の平均と等しいことが知られている。</span>
+<span id="cb37-136"><a href="#cb37-136" aria-hidden="true" tabindex="-1"></a>以下のコマンドで両者が一致することを確認できる。</span>
 <span id="cb37-139"><a href="#cb37-139" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb37-140"><a href="#cb37-140" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">fitted</span>(fm))</span>
 <span id="cb37-141"><a href="#cb37-141" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(df<span class="sc">$</span>y)</span>
 <span id="cb37-142"><a href="#cb37-142" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb37-143"><a href="#cb37-143" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-144"><a href="#cb37-144" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-145"><a href="#cb37-145" aria-hidden="true" tabindex="-1"></a>残差自乗和 (residual sum of squares) を計算するには <span class="in">`deviance`</span> 関数を使用する.</span>
-<span id="cb37-146"><a href="#cb37-146" aria-hidden="true" tabindex="-1"></a>これは残差を二乗して合計した値であり, <span class="in">`sum(resid(fm)^2)`</span> で直接計算することもできる.</span>
+<span id="cb37-145"><a href="#cb37-145" aria-hidden="true" tabindex="-1"></a>残差自乗和 (residual sum of squares) を計算するには <span class="in">`deviance`</span> 関数を使用する。</span>
+<span id="cb37-146"><a href="#cb37-146" aria-hidden="true" tabindex="-1"></a>これは残差を二乗して合計した値であり、<span class="in">`sum(resid(fm)^2)`</span> で直接計算することもできる。</span>
 <span id="cb37-149"><a href="#cb37-149" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb37-150"><a href="#cb37-150" aria-hidden="true" tabindex="-1"></a><span class="fu">deviance</span>(fm)</span>
 <span id="cb37-151"><a href="#cb37-151" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">resid</span>(fm)<span class="sc">^</span><span class="dv">2</span>)</span>
@@ -1419,7 +1419,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb37-154"><a href="#cb37-154" aria-hidden="true" tabindex="-1"></a>残差自乗和は残差変動とも呼ばれる。</span>
 <span id="cb37-155"><a href="#cb37-155" aria-hidden="true" tabindex="-1"></a>予測値の偏差の自乗和を回帰変動、被説明変数の偏差の自乗和を全変動という。</span>
 <span id="cb37-156"><a href="#cb37-156" aria-hidden="true" tabindex="-1"></a>全変動は回帰変動と残差変動に分解できる（変動の分解）。</span>
-<span id="cb37-157"><a href="#cb37-157" aria-hidden="true" tabindex="-1"></a>以下のコマンドで, 左辺の全変動が右辺の回帰変動と残差変動の和に等しいことを確認できる.</span>
+<span id="cb37-157"><a href="#cb37-157" aria-hidden="true" tabindex="-1"></a>以下のコマンドで、左辺の全変動が右辺の回帰変動と残差変動の和に等しいことを確認できる。</span>
 <span id="cb37-160"><a href="#cb37-160" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb37-161"><a href="#cb37-161" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>((df<span class="sc">$</span>y<span class="sc">-</span><span class="fu">mean</span>(df<span class="sc">$</span>y))<span class="sc">^</span><span class="dv">2</span>)</span>
 <span id="cb37-162"><a href="#cb37-162" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>((<span class="fu">fitted</span>(fm)<span class="sc">-</span><span class="fu">mean</span>(df<span class="sc">$</span>y))<span class="sc">^</span><span class="dv">2</span>)<span class="sc">+</span><span class="fu">deviance</span>(fm)</span>
@@ -1428,7 +1428,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb37-165"><a href="#cb37-165" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-166"><a href="#cb37-166" aria-hidden="true" tabindex="-1"></a><span class="fu">### ティー検定</span></span>
 <span id="cb37-167"><a href="#cb37-167" aria-hidden="true" tabindex="-1"></a>推定結果を詳しく確認するには <span class="in">`summary()`</span> を利用する。</span>
-<span id="cb37-168"><a href="#cb37-168" aria-hidden="true" tabindex="-1"></a>これにより係数の推定値, 標準誤差, t値, p値などが表示される.</span>
+<span id="cb37-168"><a href="#cb37-168" aria-hidden="true" tabindex="-1"></a>これにより係数の推定値、標準誤差、t値、p値などが表示される。</span>
 <span id="cb37-171"><a href="#cb37-171" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb37-172"><a href="#cb37-172" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fm)</span>
 <span id="cb37-173"><a href="#cb37-173" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
@@ -1441,15 +1441,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb37-180"><a href="#cb37-180" aria-hidden="true" tabindex="-1"></a><span class="ss">+ </span>Adjusted R-squared: 修正済み決定係数（説明変数の数を考慮した指標）</span>
 <span id="cb37-181"><a href="#cb37-181" aria-hidden="true" tabindex="-1"></a><span class="ss">+ </span>F-statistic: 全係数がゼロであるとの仮説に対する F 検定</span>
 <span id="cb37-182"><a href="#cb37-182" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-183"><a href="#cb37-183" aria-hidden="true" tabindex="-1"></a><span class="in">`summary(fm)`</span> もリストであり, <span class="in">`typeof`</span> 関数と <span class="in">`names`</span> 関数でその構造を確認できる.</span>
+<span id="cb37-183"><a href="#cb37-183" aria-hidden="true" tabindex="-1"></a><span class="in">`summary(fm)`</span> もリストであり、<span class="in">`typeof`</span> 関数と <span class="in">`names`</span> 関数でその構造を確認できる。</span>
 <span id="cb37-186"><a href="#cb37-186" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb37-187"><a href="#cb37-187" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="fu">summary</span>(fm))</span>
 <span id="cb37-188"><a href="#cb37-188" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(<span class="fu">summary</span>(fm))</span>
 <span id="cb37-189"><a href="#cb37-189" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb37-190"><a href="#cb37-190" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-191"><a href="#cb37-191" aria-hidden="true" tabindex="-1"></a>単なる <span class="in">`fm`</span> と同じ名前の要素もあるが, 中身が違っている場合がある.</span>
+<span id="cb37-191"><a href="#cb37-191" aria-hidden="true" tabindex="-1"></a>単なる <span class="in">`fm`</span> と同じ名前の要素もあるが、中身が違っている場合がある。</span>
 <span id="cb37-192"><a href="#cb37-192" aria-hidden="true" tabindex="-1"></a>たとえば <span class="in">`residuals`</span> は同じだが、係数には標準誤差や t 値などの情報が付与される。</span>
-<span id="cb37-193"><a href="#cb37-193" aria-hidden="true" tabindex="-1"></a><span class="in">`coef`</span> 関数を <span class="in">`summary(fm)`</span> に適用すると, これらの情報を含む行列が得られる.</span>
+<span id="cb37-193"><a href="#cb37-193" aria-hidden="true" tabindex="-1"></a><span class="in">`coef`</span> 関数を <span class="in">`summary(fm)`</span> に適用すると、これらの情報を含む行列が得られる。</span>
 <span id="cb37-196"><a href="#cb37-196" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb37-197"><a href="#cb37-197" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(<span class="fu">summary</span>(fm))</span>
 <span id="cb37-198"><a href="#cb37-198" aria-hidden="true" tabindex="-1"></a><span class="co"># coefficients(summary(fm))</span></span>
@@ -1463,14 +1463,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb37-208"><a href="#cb37-208" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb37-209"><a href="#cb37-209" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-210"><a href="#cb37-210" aria-hidden="true" tabindex="-1"></a>決定係数（R-squared）は <span class="in">`summary(fm)$r.squared`</span> に格納されている。</span>
-<span id="cb37-211"><a href="#cb37-211" aria-hidden="true" tabindex="-1"></a>これは 1 から (残差変動/全変動) を引いた値として計算される.</span>
+<span id="cb37-211"><a href="#cb37-211" aria-hidden="true" tabindex="-1"></a>これは 1 から (残差変動/全変動) を引いた値として計算される。</span>
 <span id="cb37-214"><a href="#cb37-214" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb37-215"><a href="#cb37-215" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(<span class="fu">summary</span>(fm),r.squared)</span>
 <span id="cb37-216"><a href="#cb37-216" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">deviance</span>(fm)<span class="sc">/</span><span class="fu">with</span>(df, <span class="fu">sum</span>((y<span class="sc">-</span><span class="fu">mean</span>(y))<span class="sc">^</span><span class="dv">2</span>))</span>
 <span id="cb37-217"><a href="#cb37-217" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb37-218"><a href="#cb37-218" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-219"><a href="#cb37-219" aria-hidden="true" tabindex="-1"></a>調整済み決定係数（adjusted R-squared）は <span class="in">`summary(fm)$adj.r.squared`</span> から得られる。</span>
-<span id="cb37-220"><a href="#cb37-220" aria-hidden="true" tabindex="-1"></a>これは決定係数を自由度で調整した値であり, 説明変数の数が増えても必ずしも増加しない性質を持つ.</span>
+<span id="cb37-220"><a href="#cb37-220" aria-hidden="true" tabindex="-1"></a>これは決定係数を自由度で調整した値であり、説明変数の数が増えても必ずしも増加しない性質を持つ。</span>
 <span id="cb37-223"><a href="#cb37-223" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb37-224"><a href="#cb37-224" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(<span class="fu">summary</span>(fm),adj.r.squared)</span>
 <span id="cb37-225"><a href="#cb37-225" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span>(<span class="fu">deviance</span>(fm)<span class="sc">/</span><span class="fu">df.residual</span>(fm))<span class="sc">/</span><span class="fu">with</span>(df, <span class="fu">sum</span>((y<span class="sc">-</span><span class="fu">mean</span>(y))<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>(<span class="fu">nrow</span>(df)<span class="sc">-</span><span class="dv">1</span>)))</span>
@@ -1479,49 +1479,49 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb37-228"><a href="#cb37-228" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-229"><a href="#cb37-229" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-230"><a href="#cb37-230" aria-hidden="true" tabindex="-1"></a><span class="fu">### 対数変換</span></span>
-<span id="cb37-231"><a href="#cb37-231" aria-hidden="true" tabindex="-1"></a>次のモデルを考える.</span>
+<span id="cb37-231"><a href="#cb37-231" aria-hidden="true" tabindex="-1"></a>次のモデルを考える。</span>
 <span id="cb37-232"><a href="#cb37-232" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb37-233"><a href="#cb37-233" aria-hidden="true" tabindex="-1"></a>y = \alpha + \beta \log(x) + u</span>
 <span id="cb37-234"><a href="#cb37-234" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb37-235"><a href="#cb37-235" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-236"><a href="#cb37-236" aria-hidden="true" tabindex="-1"></a>説明変数を対数変換する場合, <span class="in">`lm`</span> 関数の式の中で直接 <span class="in">`log`</span> 関数を使用できる.</span>
-<span id="cb37-237"><a href="#cb37-237" aria-hidden="true" tabindex="-1"></a>この場合, 係数 $\beta$ は $x$ が1%変化したときの $y$ の変化量 (の近似値) を表す.</span>
+<span id="cb37-236"><a href="#cb37-236" aria-hidden="true" tabindex="-1"></a>説明変数を対数変換する場合、<span class="in">`lm`</span> 関数の式の中で直接 <span class="in">`log`</span> 関数を使用できる。</span>
+<span id="cb37-237"><a href="#cb37-237" aria-hidden="true" tabindex="-1"></a>この場合、係数 $\beta$ は $x$ が1%変化したときの $y$ の変化量 (の近似値) を表す。</span>
 <span id="cb37-240"><a href="#cb37-240" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb37-241"><a href="#cb37-241" aria-hidden="true" tabindex="-1"></a>fm <span class="ot">&lt;-</span> <span class="fu">lm</span>(y<span class="sc">~</span><span class="fu">log</span>(x),<span class="at">data=</span>df)</span>
 <span id="cb37-242"><a href="#cb37-242" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fm)</span>
 <span id="cb37-243"><a href="#cb37-243" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb37-244"><a href="#cb37-244" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-245"><a href="#cb37-245" aria-hidden="true" tabindex="-1"></a>散布図と回帰直線を描くと以下のようになる.</span>
-<span id="cb37-246"><a href="#cb37-246" aria-hidden="true" tabindex="-1"></a>横軸が対数変換された $x$ になっている点に注意.</span>
+<span id="cb37-245"><a href="#cb37-245" aria-hidden="true" tabindex="-1"></a>散布図と回帰直線を描くと以下のようになる。</span>
+<span id="cb37-246"><a href="#cb37-246" aria-hidden="true" tabindex="-1"></a>横軸が対数変換された $x$ になっている点に注意。</span>
 <span id="cb37-249"><a href="#cb37-249" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb37-250"><a href="#cb37-250" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(y<span class="sc">~</span><span class="fu">log</span>(x),<span class="at">data=</span>df)</span>
 <span id="cb37-251"><a href="#cb37-251" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(fm)</span>
 <span id="cb37-252"><a href="#cb37-252" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb37-253"><a href="#cb37-253" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-254"><a href="#cb37-254" aria-hidden="true" tabindex="-1"></a>被説明変数を対数変換する場合も同様に, <span class="in">`lm`</span> 関数の式の中で <span class="in">`log`</span> 関数を使用する.</span>
-<span id="cb37-255"><a href="#cb37-255" aria-hidden="true" tabindex="-1"></a>この場合, 係数 $\beta$ は $x$ が1単位変化したときの $y$ の変化率 (%) の近似値を表す.</span>
+<span id="cb37-254"><a href="#cb37-254" aria-hidden="true" tabindex="-1"></a>被説明変数を対数変換する場合も同様に、<span class="in">`lm`</span> 関数の式の中で <span class="in">`log`</span> 関数を使用する。</span>
+<span id="cb37-255"><a href="#cb37-255" aria-hidden="true" tabindex="-1"></a>この場合、係数 $\beta$ は $x$ が1単位変化したときの $y$ の変化率 (%) の近似値を表す。</span>
 <span id="cb37-258"><a href="#cb37-258" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb37-259"><a href="#cb37-259" aria-hidden="true" tabindex="-1"></a>fm <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log</span>(y)<span class="sc">~</span>x,<span class="at">data=</span>df)</span>
 <span id="cb37-260"><a href="#cb37-260" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fm)</span>
 <span id="cb37-261"><a href="#cb37-261" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb37-262"><a href="#cb37-262" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-263"><a href="#cb37-263" aria-hidden="true" tabindex="-1"></a>散布図と回帰直線を描くと以下のようになる.</span>
-<span id="cb37-264"><a href="#cb37-264" aria-hidden="true" tabindex="-1"></a>縦軸が対数変換された $y$ になっている点に注意.</span>
+<span id="cb37-263"><a href="#cb37-263" aria-hidden="true" tabindex="-1"></a>散布図と回帰直線を描くと以下のようになる。</span>
+<span id="cb37-264"><a href="#cb37-264" aria-hidden="true" tabindex="-1"></a>縦軸が対数変換された $y$ になっている点に注意。</span>
 <span id="cb37-267"><a href="#cb37-267" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb37-268"><a href="#cb37-268" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">log</span>(y)<span class="sc">~</span>x,<span class="at">data=</span>df)</span>
 <span id="cb37-269"><a href="#cb37-269" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(fm)</span>
 <span id="cb37-270"><a href="#cb37-270" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb37-271"><a href="#cb37-271" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-272"><a href="#cb37-272" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-273"><a href="#cb37-273" aria-hidden="true" tabindex="-1"></a>被説明変数と説明変数の両方を対数変換する場合 (対数線形モデル) は以下のようにする.</span>
-<span id="cb37-274"><a href="#cb37-274" aria-hidden="true" tabindex="-1"></a>この場合, 係数 $\beta$ は弾力性を表し, $x$ が1%変化したときの $y$ の変化率 (%) を表す.</span>
+<span id="cb37-273"><a href="#cb37-273" aria-hidden="true" tabindex="-1"></a>被説明変数と説明変数の両方を対数変換する場合 (対数線形モデル) は以下のようにする。</span>
+<span id="cb37-274"><a href="#cb37-274" aria-hidden="true" tabindex="-1"></a>この場合、係数 $\beta$ は弾力性を表し、$x$ が1%変化したときの $y$ の変化率 (%) を表す。</span>
 <span id="cb37-277"><a href="#cb37-277" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb37-278"><a href="#cb37-278" aria-hidden="true" tabindex="-1"></a>fm <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log</span>(y)<span class="sc">~</span><span class="fu">log</span>(x),<span class="at">data=</span>df)</span>
 <span id="cb37-279"><a href="#cb37-279" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fm)</span>
 <span id="cb37-280"><a href="#cb37-280" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb37-281"><a href="#cb37-281" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-282"><a href="#cb37-282" aria-hidden="true" tabindex="-1"></a>散布図と回帰直線を描くと以下のようになる.</span>
-<span id="cb37-283"><a href="#cb37-283" aria-hidden="true" tabindex="-1"></a>両軸とも対数変換されている点に注意.</span>
+<span id="cb37-282"><a href="#cb37-282" aria-hidden="true" tabindex="-1"></a>散布図と回帰直線を描くと以下のようになる。</span>
+<span id="cb37-283"><a href="#cb37-283" aria-hidden="true" tabindex="-1"></a>両軸とも対数変換されている点に注意。</span>
 <span id="cb37-286"><a href="#cb37-286" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb37-287"><a href="#cb37-287" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">log</span>(y)<span class="sc">~</span><span class="fu">log</span>(x),<span class="at">data=</span>df)</span>
 <span id="cb37-288"><a href="#cb37-288" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(fm)</span>
@@ -1530,13 +1530,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb37-291"><a href="#cb37-291" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-292"><a href="#cb37-292" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-293"><a href="#cb37-293" aria-hidden="true" tabindex="-1"></a><span class="fu">### 切片なし回帰モデル</span></span>
-<span id="cb37-294"><a href="#cb37-294" aria-hidden="true" tabindex="-1"></a>次のモデルを考える.</span>
+<span id="cb37-294"><a href="#cb37-294" aria-hidden="true" tabindex="-1"></a>次のモデルを考える。</span>
 <span id="cb37-295"><a href="#cb37-295" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb37-296"><a href="#cb37-296" aria-hidden="true" tabindex="-1"></a>y = \beta x + u</span>
 <span id="cb37-297"><a href="#cb37-297" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb37-298"><a href="#cb37-298" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-299"><a href="#cb37-299" aria-hidden="true" tabindex="-1"></a>切片を含まないモデルを推定したい場合は, 式の中に <span class="in">`-1`</span> を加える.</span>
-<span id="cb37-300"><a href="#cb37-300" aria-hidden="true" tabindex="-1"></a>これにより切片項が除外され, 原点を通る回帰直線が推定される.</span>
+<span id="cb37-299"><a href="#cb37-299" aria-hidden="true" tabindex="-1"></a>切片を含まないモデルを推定したい場合は、式の中に <span class="in">`-1`</span> を加える。</span>
+<span id="cb37-300"><a href="#cb37-300" aria-hidden="true" tabindex="-1"></a>これにより切片項が除外され、原点を通る回帰直線が推定される。</span>
 <span id="cb37-303"><a href="#cb37-303" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb37-304"><a href="#cb37-304" aria-hidden="true" tabindex="-1"></a>fm <span class="ot">&lt;-</span> <span class="fu">lm</span>(y<span class="sc">~</span>x<span class="dv">-1</span>,<span class="at">data=</span>df)</span>
 <span id="cb37-305"><a href="#cb37-305" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fm)</span>
@@ -1551,23 +1551,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb37-316"><a href="#cb37-316" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-317"><a href="#cb37-317" aria-hidden="true" tabindex="-1"></a><span class="fu">## 重回帰モデル</span></span>
 <span id="cb37-318"><a href="#cb37-318" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-319"><a href="#cb37-319" aria-hidden="true" tabindex="-1"></a>説明変数として $w$ を加えたモデルを考える.</span>
+<span id="cb37-319"><a href="#cb37-319" aria-hidden="true" tabindex="-1"></a>説明変数として $w$ を加えたモデルを考える。</span>
 <span id="cb37-320"><a href="#cb37-320" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb37-321"><a href="#cb37-321" aria-hidden="true" tabindex="-1"></a>y = \alpha + \beta x +\gamma w+ u</span>
 <span id="cb37-322"><a href="#cb37-322" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb37-323"><a href="#cb37-323" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-324"><a href="#cb37-324" aria-hidden="true" tabindex="-1"></a>暗黙に以下の仮定を置く。</span>
 <span id="cb37-325"><a href="#cb37-325" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-326"><a href="#cb37-326" aria-hidden="true" tabindex="-1"></a><span class="ss">+ </span>$(w_i, x_i,y_i)$ は独立同一分布にしたがう.</span>
-<span id="cb37-327"><a href="#cb37-327" aria-hidden="true" tabindex="-1"></a><span class="ss">+ </span>誤差項の期待値はゼロである. $E<span class="co">[</span><span class="ot">u_i</span><span class="co">]</span>=0$ である.</span>
-<span id="cb37-328"><a href="#cb37-328" aria-hidden="true" tabindex="-1"></a><span class="ss">+ </span>誤差項 $u_i$ は説明変数 $(x_i, w_i)$ に対して独立である.</span>
-<span id="cb37-329"><a href="#cb37-329" aria-hidden="true" tabindex="-1"></a><span class="ss">+ </span>誤差項 $u_i$ は正規分布にしたがう.</span>
-<span id="cb37-330"><a href="#cb37-330" aria-hidden="true" tabindex="-1"></a><span class="ss">+ </span>説明変数間に多重共線性は存在しない. つまり $x_i$ は $w_i$ の一次変換で表せない.</span>
+<span id="cb37-326"><a href="#cb37-326" aria-hidden="true" tabindex="-1"></a><span class="ss">+ </span>$(w_i, x_i,y_i)$ は独立同一分布にしたがう。</span>
+<span id="cb37-327"><a href="#cb37-327" aria-hidden="true" tabindex="-1"></a><span class="ss">+ </span>誤差項の期待値はゼロである。$E<span class="co">[</span><span class="ot">u_i</span><span class="co">]</span>=0$ である。</span>
+<span id="cb37-328"><a href="#cb37-328" aria-hidden="true" tabindex="-1"></a><span class="ss">+ </span>誤差項 $u_i$ は説明変数 $(x_i, w_i)$ に対して独立である。</span>
+<span id="cb37-329"><a href="#cb37-329" aria-hidden="true" tabindex="-1"></a><span class="ss">+ </span>誤差項 $u_i$ は正規分布にしたがう。</span>
+<span id="cb37-330"><a href="#cb37-330" aria-hidden="true" tabindex="-1"></a><span class="ss">+ </span>説明変数間に多重共線性は存在しない。つまり $x_i$ は $w_i$ の一次変換で表せない。</span>
 <span id="cb37-331"><a href="#cb37-331" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-332"><a href="#cb37-332" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-333"><a href="#cb37-333" aria-hidden="true" tabindex="-1"></a>以降ではシミュレーションデータを用いて具体的に確認する。</span>
-<span id="cb37-334"><a href="#cb37-334" aria-hidden="true" tabindex="-1"></a>標本サイズを100とし, 説明変数 $x$ は0から1の一様分布から, $w$ は「H」と「T」からランダムに生成する.</span>
-<span id="cb37-335"><a href="#cb37-335" aria-hidden="true" tabindex="-1"></a>被説明変数 $y$ は, 真の切片を10, $x$ の係数を2, $w$ が「H」のときに1を加算し, 正規分布の誤差項を加えて生成する.</span>
+<span id="cb37-334"><a href="#cb37-334" aria-hidden="true" tabindex="-1"></a>標本サイズを100とし、説明変数 $x$ は0から1の一様分布から、$w$ は「H」と「T」からランダムに生成する。</span>
+<span id="cb37-335"><a href="#cb37-335" aria-hidden="true" tabindex="-1"></a>被説明変数 $y$ は、真の切片を10, $x$ の係数を2, $w$ が「H」のときに1を加算し、正規分布の誤差項を加えて生成する。</span>
 <span id="cb37-338"><a href="#cb37-338" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb37-339"><a href="#cb37-339" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">100</span></span>
 <span id="cb37-340"><a href="#cb37-340" aria-hidden="true" tabindex="-1"></a>x<span class="ot">&lt;-</span><span class="fu">runif</span>(N)</span>
@@ -1576,18 +1576,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb37-343"><a href="#cb37-343" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(w,x,y)</span>
 <span id="cb37-344"><a href="#cb37-344" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb37-345"><a href="#cb37-345" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-346"><a href="#cb37-346" aria-hidden="true" tabindex="-1"></a>複数の説明変数を含むモデルを推定するには, <span class="in">`+`</span> 記号で変数を連結する.</span>
-<span id="cb37-347"><a href="#cb37-347" aria-hidden="true" tabindex="-1"></a>式 <span class="in">`y~x+w`</span> は被説明変数 $y$ を説明変数 $x$ と $w$ で回帰することを意味する.</span>
+<span id="cb37-346"><a href="#cb37-346" aria-hidden="true" tabindex="-1"></a>複数の説明変数を含むモデルを推定するには、<span class="in">`+`</span> 記号で変数を連結する。</span>
+<span id="cb37-347"><a href="#cb37-347" aria-hidden="true" tabindex="-1"></a>式 <span class="in">`y~x+w`</span> は被説明変数 $y$ を説明変数 $x$ と $w$ で回帰することを意味する。</span>
 <span id="cb37-350"><a href="#cb37-350" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb37-351"><a href="#cb37-351" aria-hidden="true" tabindex="-1"></a>fm <span class="ot">&lt;-</span> <span class="fu">lm</span>(y<span class="sc">~</span>x<span class="sc">+</span>w,<span class="at">data=</span>df)</span>
 <span id="cb37-352"><a href="#cb37-352" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fm)</span>
 <span id="cb37-353"><a href="#cb37-353" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb37-354"><a href="#cb37-354" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-355"><a href="#cb37-355" aria-hidden="true" tabindex="-1"></a>R の特徴として, 因子型 (factor) やカテゴリカル変数 (文字列) を特に変換することなく自動的にダミー変数として扱える.</span>
-<span id="cb37-356"><a href="#cb37-356" aria-hidden="true" tabindex="-1"></a>ここでは $w$ が「H」と「T」の2値をとるが, 自動的に一方 (「H」) のダミー変数が作成され, 「T」が基準カテゴリとなる.</span>
+<span id="cb37-355"><a href="#cb37-355" aria-hidden="true" tabindex="-1"></a>R の特徴として、因子型 (factor) やカテゴリカル変数 (文字列) を特に変換することなく自動的にダミー変数として扱える。</span>
+<span id="cb37-356"><a href="#cb37-356" aria-hidden="true" tabindex="-1"></a>ここでは $w$ が「H」と「T」の2値をとるが、自動的に一方 (「H」) のダミー変数が作成され、「T」が基準カテゴリとなる。</span>
 <span id="cb37-357"><a href="#cb37-357" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-358"><a href="#cb37-358" aria-hidden="true" tabindex="-1"></a><span class="fu">### 自乗項</span></span>
-<span id="cb37-359"><a href="#cb37-359" aria-hidden="true" tabindex="-1"></a>説明変数として自乗項を加えたモデルを考える.</span>
+<span id="cb37-359"><a href="#cb37-359" aria-hidden="true" tabindex="-1"></a>説明変数として自乗項を加えたモデルを考える。</span>
 <span id="cb37-360"><a href="#cb37-360" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb37-361"><a href="#cb37-361" aria-hidden="true" tabindex="-1"></a>y = \alpha + \beta x + \gamma x^2 + u</span>
 <span id="cb37-362"><a href="#cb37-362" aria-hidden="true" tabindex="-1"></a>$$</span>
@@ -1600,51 +1600,51 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb37-371"><a href="#cb37-371" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb37-372"><a href="#cb37-372" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-373"><a href="#cb37-373" aria-hidden="true" tabindex="-1"></a><span class="fu">### 交差項</span></span>
-<span id="cb37-374"><a href="#cb37-374" aria-hidden="true" tabindex="-1"></a>説明変数として交差項 (interaction term) を加えたモデルを考える.</span>
+<span id="cb37-374"><a href="#cb37-374" aria-hidden="true" tabindex="-1"></a>説明変数として交差項 (interaction term) を加えたモデルを考える。</span>
 <span id="cb37-375"><a href="#cb37-375" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb37-376"><a href="#cb37-376" aria-hidden="true" tabindex="-1"></a>y = \alpha + \beta x + \gamma w + \delta xw + u</span>
 <span id="cb37-377"><a href="#cb37-377" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb37-378"><a href="#cb37-378" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-379"><a href="#cb37-379" aria-hidden="true" tabindex="-1"></a>交差項（interaction）は <span class="in">`:`</span> を使って <span class="in">`x:w`</span> と表記する。</span>
-<span id="cb37-380"><a href="#cb37-380" aria-hidden="true" tabindex="-1"></a>このモデルでは主効果 <span class="in">`x`</span> と <span class="in">`w`</span> に加えて, 交差項 <span class="in">`x:w`</span> を明示的に指定している.</span>
+<span id="cb37-380"><a href="#cb37-380" aria-hidden="true" tabindex="-1"></a>このモデルでは主効果 <span class="in">`x`</span> と <span class="in">`w`</span> に加えて、交差項 <span class="in">`x:w`</span> を明示的に指定している。</span>
 <span id="cb37-383"><a href="#cb37-383" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb37-384"><a href="#cb37-384" aria-hidden="true" tabindex="-1"></a>fm<span class="ot">&lt;-</span><span class="fu">lm</span>(y<span class="sc">~</span>x<span class="sc">+</span>w<span class="sc">+</span>x<span class="sc">:</span>w,<span class="at">data=</span>df)</span>
 <span id="cb37-385"><a href="#cb37-385" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fm)</span>
 <span id="cb37-386"><a href="#cb37-386" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb37-387"><a href="#cb37-387" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-388"><a href="#cb37-388" aria-hidden="true" tabindex="-1"></a><span class="in">`*`</span> を使えば主要効果と交差項をまとめて指定できる。</span>
-<span id="cb37-389"><a href="#cb37-389" aria-hidden="true" tabindex="-1"></a><span class="in">`x*w`</span> は自動的に <span class="in">`x + w + x:w`</span> に展開される.</span>
+<span id="cb37-389"><a href="#cb37-389" aria-hidden="true" tabindex="-1"></a><span class="in">`x*w`</span> は自動的に <span class="in">`x + w + x:w`</span> に展開される。</span>
 <span id="cb37-392"><a href="#cb37-392" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb37-393"><a href="#cb37-393" aria-hidden="true" tabindex="-1"></a>fm <span class="ot">&lt;-</span> <span class="fu">lm</span>(y<span class="sc">~</span>x<span class="sc">*</span>w,<span class="at">data=</span>df)</span>
 <span id="cb37-394"><a href="#cb37-394" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fm)</span>
 <span id="cb37-395"><a href="#cb37-395" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb37-396"><a href="#cb37-396" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-397"><a href="#cb37-397" aria-hidden="true" tabindex="-1"></a><span class="fu">### エフ検定</span></span>
-<span id="cb37-398"><a href="#cb37-398" aria-hidden="true" tabindex="-1"></a>今, 帰無仮説が</span>
+<span id="cb37-398"><a href="#cb37-398" aria-hidden="true" tabindex="-1"></a>今、帰無仮説が</span>
 <span id="cb37-399"><a href="#cb37-399" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb37-400"><a href="#cb37-400" aria-hidden="true" tabindex="-1"></a>y = \alpha + \beta x + u</span>
 <span id="cb37-401"><a href="#cb37-401" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb37-402"><a href="#cb37-402" aria-hidden="true" tabindex="-1"></a>で, 対立仮説が</span>
+<span id="cb37-402"><a href="#cb37-402" aria-hidden="true" tabindex="-1"></a>で、対立仮説が</span>
 <span id="cb37-403"><a href="#cb37-403" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb37-404"><a href="#cb37-404" aria-hidden="true" tabindex="-1"></a>y = \alpha + \beta x + \gamma w + \delta xw + u</span>
 <span id="cb37-405"><a href="#cb37-405" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb37-406"><a href="#cb37-406" aria-hidden="true" tabindex="-1"></a>となる検定を実施したい.</span>
+<span id="cb37-406"><a href="#cb37-406" aria-hidden="true" tabindex="-1"></a>となる検定を実施したい。</span>
 <span id="cb37-407"><a href="#cb37-407" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-408"><a href="#cb37-408" aria-hidden="true" tabindex="-1"></a>これは複数の係数（ここでは $\gamma$ と $\delta$）が同時にゼロかどうかを調べる F 検定である。</span>
 <span id="cb37-409"><a href="#cb37-409" aria-hidden="true" tabindex="-1"></a>制約付き検定は、制約のあるモデル（帰無仮説）とないモデル（対立仮説）の残差自乗和を比較することで実施できる。</span>
 <span id="cb37-410"><a href="#cb37-410" aria-hidden="true" tabindex="-1"></a>対立仮説（制約なしモデル）の残差自乗和を $SSR$、自由度を $df$ とする。</span>
-<span id="cb37-411"><a href="#cb37-411" aria-hidden="true" tabindex="-1"></a>自由度は観測数から推定されるパラメータの数 (説明変数の数と切片) を減じた数である.</span>
+<span id="cb37-411"><a href="#cb37-411" aria-hidden="true" tabindex="-1"></a>自由度は観測数から推定されるパラメータの数 (説明変数の数と切片) を減じた数である。</span>
 <span id="cb37-412"><a href="#cb37-412" aria-hidden="true" tabindex="-1"></a>帰無仮説（制約付きモデル）の残差自乗和を $SSR_0$、制約の数を $q$ とする。</span>
-<span id="cb37-413"><a href="#cb37-413" aria-hidden="true" tabindex="-1"></a>制約の数は帰無仮説の自由度から対立仮説の自由度を差し引いた数である.</span>
-<span id="cb37-414"><a href="#cb37-414" aria-hidden="true" tabindex="-1"></a>このとき, 以下のF値は帰無仮説が正しいもとで自由度 $(q, df)$ のF分布にしたがう.</span>
+<span id="cb37-413"><a href="#cb37-413" aria-hidden="true" tabindex="-1"></a>制約の数は帰無仮説の自由度から対立仮説の自由度を差し引いた数である。</span>
+<span id="cb37-414"><a href="#cb37-414" aria-hidden="true" tabindex="-1"></a>このとき、以下のF値は帰無仮説が正しいもとで自由度 $(q, df)$ のF分布にしたがう。</span>
 <span id="cb37-415"><a href="#cb37-415" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb37-416"><a href="#cb37-416" aria-hidden="true" tabindex="-1"></a>F = \frac{(SSR_0-SSR)/q}{SSR/df}</span>
 <span id="cb37-417"><a href="#cb37-417" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb37-418"><a href="#cb37-418" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-419"><a href="#cb37-419" aria-hidden="true" tabindex="-1"></a>R でF値を手動で計算するには以下のようにする.</span>
-<span id="cb37-420"><a href="#cb37-420" aria-hidden="true" tabindex="-1"></a>まず両方のモデルを推定し, それぞれの自由度 (<span class="in">`$df`</span>) と残差自乗和 (<span class="in">`deviance`</span>) を取り出す.</span>
-<span id="cb37-421"><a href="#cb37-421" aria-hidden="true" tabindex="-1"></a>制約の数 $q$ は両モデルの自由度の差である.</span>
-<span id="cb37-422"><a href="#cb37-422" aria-hidden="true" tabindex="-1"></a>F値は上記の式に従って計算する.</span>
+<span id="cb37-419"><a href="#cb37-419" aria-hidden="true" tabindex="-1"></a>R でF値を手動で計算するには以下のようにする。</span>
+<span id="cb37-420"><a href="#cb37-420" aria-hidden="true" tabindex="-1"></a>まず両方のモデルを推定し、それぞれの自由度 (<span class="in">`$df`</span>) と残差自乗和 (<span class="in">`deviance`</span>) を取り出す。</span>
+<span id="cb37-421"><a href="#cb37-421" aria-hidden="true" tabindex="-1"></a>制約の数 $q$ は両モデルの自由度の差である。</span>
+<span id="cb37-422"><a href="#cb37-422" aria-hidden="true" tabindex="-1"></a>F値は上記の式に従って計算する。</span>
 <span id="cb37-425"><a href="#cb37-425" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb37-426"><a href="#cb37-426" aria-hidden="true" tabindex="-1"></a>fm0 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y<span class="sc">~</span>x,<span class="at">data=</span>df)</span>
 <span id="cb37-427"><a href="#cb37-427" aria-hidden="true" tabindex="-1"></a>fm1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y<span class="sc">~</span>x<span class="sc">*</span>w,<span class="at">data=</span>df)</span>
@@ -1657,13 +1657,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb37-434"><a href="#cb37-434" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-435"><a href="#cb37-435" aria-hidden="true" tabindex="-1"></a>F 値に対する p 値は <span class="in">`pf()`</span> で計算できる。</span>
 <span id="cb37-436"><a href="#cb37-436" aria-hidden="true" tabindex="-1"></a><span class="in">`pf()`</span> は F 分布の累積分布関数で、<span class="in">`1 - pf(F, df1, df2)`</span> が上側確率（p 値）となる。</span>
-<span id="cb37-437"><a href="#cb37-437" aria-hidden="true" tabindex="-1"></a>第一自由度 (<span class="in">`df1`</span>) は制約の数 $q$, 第二自由度 (<span class="in">`df2`</span>) は対立仮説の自由度である.</span>
+<span id="cb37-437"><a href="#cb37-437" aria-hidden="true" tabindex="-1"></a>第一自由度 (<span class="in">`df1`</span>) は制約の数 $q$, 第二自由度 (<span class="in">`df2`</span>) は対立仮説の自由度である。</span>
 <span id="cb37-440"><a href="#cb37-440" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb37-441"><a href="#cb37-441" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pf</span>(F,<span class="at">df1=</span>q,<span class="at">df2=</span>dof)</span>
 <span id="cb37-442"><a href="#cb37-442" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb37-443"><a href="#cb37-443" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-444"><a href="#cb37-444" aria-hidden="true" tabindex="-1"></a>これらの手順は <span class="in">`anova()`</span> を使えば自動で計算できる。</span>
-<span id="cb37-445"><a href="#cb37-445" aria-hidden="true" tabindex="-1"></a><span class="in">`anova`</span> 関数に2つのモデルを渡すと, 自動的にエフ検定を実施し, F値とp値を表示してくれる.</span>
+<span id="cb37-445"><a href="#cb37-445" aria-hidden="true" tabindex="-1"></a><span class="in">`anova`</span> 関数に2つのモデルを渡すと、自動的にエフ検定を実施し、F値とp値を表示してくれる。</span>
 <span id="cb37-448"><a href="#cb37-448" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb37-449"><a href="#cb37-449" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(fm0,fm1)</span>
 <span id="cb37-450"><a href="#cb37-450" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>

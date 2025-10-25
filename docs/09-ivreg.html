@@ -270,24 +270,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="操作変数" class="level2" data-number="10.2">
 <h2 data-number="10.2" class="anchored" data-anchor-id="操作変数"><span class="header-section-number">10.2</span> 操作変数</h2>
-<p>これまで回帰モデルで一致推定量を得るためには次の仮定が必要であった.</p>
+<p>これまで回帰モデルで一致推定量を得るためには次の仮定が必要であった。</p>
 <ol type="1">
 <li>母集団が線形モデル</li>
 <li>標本が無作為抽出</li>
 <li>誤差項が平均ゼロで説明変数と無相関</li>
 <li>説明変数に多重共線性が存在しない</li>
 </ol>
-<p>3つ目の仮定が必ずしも成立しない場合の推定方法を紹介する.</p>
-<p>そのために, 外生変数と内生変数と操作変数の3つの概念を導入する. 誤差項と相関が無い説明変数を <strong>外生変数</strong> といい, 誤差項と相関がある説明変数を <strong>内生変数</strong> という. <strong>操作変数</strong> とは, 説明変数に含まれず, 説明変数と相関をもち, 誤差項と相関をもたない変数のことである. なお操作変数の個数は内生変数の個数より多苦なければならない。</p>
-<p>R においては <code>ivreg</code> コマンドを用いて操作変数法を実行する. このコマンドは <code>AER</code> パッケージに含まれており, 基本的な書式は <code>ivreg(被説明変数 ~ 内生変数 | 操作変数, data=データフレーム)</code> である. ここで被説明変数は <code>log(wage)</code>, 内生変数は <code>educ</code>, 操作変数は <code>fatheduc</code> である.</p>
-<p>以下のコマンドで操作変数法を実行し, <code>coef</code> コマンドで推定された係数を取り出す.</p>
+<p>3つ目の仮定が必ずしも成立しない場合の推定方法を紹介する。</p>
+<p>そのために、外生変数と内生変数と操作変数の3つの概念を導入する。 誤差項と相関が無い説明変数を <strong>外生変数</strong> といい、誤差項と相関がある説明変数を <strong>内生変数</strong> という。 <strong>操作変数</strong> とは、説明変数に含まれず、説明変数と相関をもち、誤差項と相関をもたない変数のことである。 なお操作変数の個数は内生変数の個数より多苦なければならない。</p>
+<p>R においては <code>ivreg</code> コマンドを用いて操作変数法を実行する。 このコマンドは <code>AER</code> パッケージに含まれており、基本的な書式は <code>ivreg(被説明変数 ~ 内生変数 | 操作変数、data=データフレーム)</code> である。 ここで被説明変数は <code>log(wage)</code>, 内生変数は <code>educ</code>, 操作変数は <code>fatheduc</code> である。</p>
+<p>以下のコマンドで操作変数法を実行し、<code>coef</code> コマンドで推定された係数を取り出す。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>fm  <span class="ot">&lt;-</span> <span class="fu">ivreg</span>(<span class="fu">log</span>(wage)<span class="sc">~</span>educ<span class="sc">|</span>fatheduc, <span class="at">data=</span>df)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(fm)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)        educ </span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  0.44110339  0.05917348</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>傾きの推定値は操作変数推定量の公式を用いて直接計算することもできる. 具体的には, 被説明変数と操作変数の共分散を内生変数と操作変数の共分散で割ることで得られる. 以下のコマンドで <code>cov</code> 関数を用いて共分散を計算し, 同じ推定値が得られることを確認する.</p>
+<p>傾きの推定値は操作変数推定量の公式を用いて直接計算することもできる。 具体的には、被説明変数と操作変数の共分散を内生変数と操作変数の共分散で割ることで得られる。 以下のコマンドで <code>cov</code> 関数を用いて共分散を計算し、同じ推定値が得られることを確認する。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(df, <span class="fu">cov</span>(<span class="fu">log</span>(wage),fatheduc)<span class="sc">/</span><span class="fu">cov</span>(educ,fatheduc))</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.05917348</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -295,21 +295,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="段階最小二乗法" class="level2" data-number="10.3">
 <h2 data-number="10.3" class="anchored" data-anchor-id="段階最小二乗法"><span class="header-section-number">10.3</span> 2段階最小二乗法</h2>
-<p>複数の説明変数あり, 操作変数の数が内生変数の数以上のとき, 係数の一致推定量を得るには二段階最小自乗法を用いる. 二段階最小二乗法は次の手順で実行される:</p>
+<p>複数の説明変数あり、操作変数の数が内生変数の数以上のとき、係数の一致推定量を得るには二段階最小自乗法を用いる。 二段階最小二乗法は次の手順で実行される:</p>
 <ol type="1">
-<li>それぞれの内生変数を外生変数と操作変数に回帰させて, その予測値を得る.</li>
-<li>被説明変数を外生変数と内生変数の予測値に回帰させて, その係数を得る.</li>
+<li>それぞれの内生変数を外生変数と操作変数に回帰させて、その予測値を得る。</li>
+<li>被説明変数を外生変数と内生変数の予測値に回帰させて、その係数を得る。</li>
 </ol>
-<p>この係数が一致推定量になるための条件は以下である.</p>
+<p>この係数が一致推定量になるための条件は以下である。</p>
 <ul>
 <li>母集団が線形モデル</li>
 <li>標本が無作為抽出</li>
-<li>誤差項が平均ゼロで操作変数と外生変数に対して独立.</li>
-<li>操作変数は内生変数と相関をもつ.</li>
+<li>誤差項が平均ゼロで操作変数と外生変数に対して独立。</li>
+<li>操作変数は内生変数と相関をもつ。</li>
 <li>外生変数と内生変数の予測値に多重共線性が存在しない`</li>
 </ul>
-<p>R においては <code>ivreg</code> コマンドを用いて二段階最小二乗法を実行する. 複数の説明変数がある場合の書式は <code>ivreg(被説明変数 ~ 内生変数 + 外生変数 | 外生変数 + 操作変数, data=データフレーム)</code> である. ここで被説明変数は <code>log(wage)</code>, 内生変数は <code>educ</code>, 外生変数は <code>exper</code>, <code>I(exper^2)</code>, 操作変数は <code>motheduc</code>, <code>fatheduc</code> である. 注意点として, パイプ記号 <code>|</code> の右側には外生変数も含める必要がある.</p>
-<p>以下のコマンドで二段階最小二乗法を実行し, <code>summary</code> コマンドで推定結果の要約を表示する.</p>
+<p>R においては <code>ivreg</code> コマンドを用いて二段階最小二乗法を実行する。 複数の説明変数がある場合の書式は <code>ivreg(被説明変数 ~ 内生変数 + 外生変数 | 外生変数 + 操作変数、data=データフレーム)</code> である。 ここで被説明変数は <code>log(wage)</code>, 内生変数は <code>educ</code>, 外生変数は <code>exper</code>, <code>I(exper^2)</code>, 操作変数は <code>motheduc</code>, <code>fatheduc</code> である。 注意点として、パイプ記号 <code>|</code> の右側には外生変数も含める必要がある。</p>
+<p>以下のコマンドで二段階最小二乗法を実行し、<code>summary</code> コマンドで推定結果の要約を表示する。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>fm  <span class="ot">&lt;-</span> <span class="fu">ivreg</span>(<span class="fu">log</span>(wage)<span class="sc">~</span>educ<span class="sc">+</span>exper<span class="sc">+</span><span class="fu">I</span>(exper<span class="sc">^</span><span class="dv">2</span>)<span class="sc">|</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>            exper<span class="sc">+</span><span class="fu">I</span>(exper<span class="sc">^</span><span class="dv">2</span>)<span class="sc">+</span>motheduc<span class="sc">+</span>fatheduc,</span>
@@ -337,8 +337,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiple R-Squared: 0.1357,  Adjusted R-squared: 0.1296 </span></span>
 <span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="do">## Wald test: 8.141 on 3 and 424 DF,  p-value: 2.787e-05</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>二段階最小二乗法の手順を <code>lm</code> コマンドを用いて手動で実行し, 同じ係数推定値が得られることを確認できる. ただし標準誤差の値が異なっている. なぜなら残差は内生変数および外生変数から算出させる必要があるが, 以下のやりかただと内生変数の予測値および外生変数から算出するためである.</p>
-<p>以下では第一段階として <code>lm</code> コマンドで内生変数 <code>educ</code> を外生変数と操作変数に回帰し, <code>fitted</code> コマンドで予測値を取得する. 第二段階として被説明変数を外生変数と内生変数の予測値に回帰する.</p>
+<p>二段階最小二乗法の手順を <code>lm</code> コマンドを用いて手動で実行し、同じ係数推定値が得られることを確認できる。 ただし標準誤差の値が異なっている。 なぜなら残差は内生変数および外生変数から算出させる必要があるが、以下のやりかただと内生変数の予測値および外生変数から算出するためである。</p>
+<p>以下では第一段階として <code>lm</code> コマンドで内生変数 <code>educ</code> を外生変数と操作変数に回帰し、<code>fitted</code> コマンドで予測値を取得する。 第二段階として被説明変数を外生変数と内生変数の予測値に回帰する。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>ols1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(educ<span class="sc">~</span>exper<span class="sc">+</span><span class="fu">I</span>(exper<span class="sc">^</span><span class="dv">2</span>)<span class="sc">+</span>motheduc<span class="sc">+</span>fatheduc,  <span class="at">data =</span> df)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>ols2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log</span>(wage)<span class="sc">~</span><span class="fu">fitted</span>(ols1)<span class="sc">+</span>exper<span class="sc">+</span><span class="fu">I</span>(exper<span class="sc">^</span><span class="dv">2</span>),  <span class="at">data =</span> df)</span>
@@ -366,8 +366,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="複数制約の検定" class="level3" data-number="10.3.1">
 <h3 data-number="10.3.1" class="anchored" data-anchor-id="複数制約の検定"><span class="header-section-number">10.3.1</span> 複数制約の検定</h3>
-<p>帰無仮説が複数の係数制約を課す場合のワルド検定を実施する. 例えば, 2つの外生変数 <code>exper</code> と <code>I(exper^2)</code> の係数がともにゼロであるという仮説を検定する.</p>
-<p>まず <code>ivreg</code> コマンドで制約モデル（外生変数を含まないモデル）を推定し, <code>waldtest</code> コマンドで制約なしモデルと比較する. <code>waldtest</code> コマンドは2つのモデルを引数にとり, ワルド検定を実行する.</p>
+<p>帰無仮説が複数の係数制約を課す場合のワルド検定を実施する。 例えば、2つの外生変数 <code>exper</code> と <code>I(exper^2)</code> の係数がともにゼロであるという仮説を検定する。</p>
+<p>まず <code>ivreg</code> コマンドで制約モデル（外生変数を含まないモデル）を推定し、<code>waldtest</code> コマンドで制約なしモデルと比較する。 <code>waldtest</code> コマンドは2つのモデルを引数にとり、ワルド検定を実行する。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>fm0 <span class="ot">&lt;-</span> <span class="fu">ivreg</span>(<span class="fu">log</span>(wage)<span class="sc">~</span>educ<span class="sc">|</span>motheduc<span class="sc">+</span>fatheduc,<span class="at">data=</span>df)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">waldtest</span>(fm0,fm)</span>
@@ -382,7 +382,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
 <span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>LM検定（ラグランジュ乗数検定）も実行可能である. まず <code>resid</code> コマンドで制約モデルの残差を取得し, その残差を制約される説明変数に回帰する. <code>nrow</code> コマンドで観測数を取得し, 決定係数 <code>r.squared</code> を乗じてLM統計量を計算する. 最後に <code>pchisq</code> コマンドでカイ二乗分布のP値を計算する（自由度は制約の数3）.</p>
+<p>LM検定（ラグランジュ乗数検定）も実行可能である。 まず <code>resid</code> コマンドで制約モデルの残差を取得し、その残差を制約される説明変数に回帰する。 <code>nrow</code> コマンドで観測数を取得し、決定係数 <code>r.squared</code> を乗じてLM統計量を計算する。 最後に <code>pchisq</code> コマンドでカイ二乗分布のP値を計算する（自由度は制約の数3）。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>lmt <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">resid</span>(fm0)<span class="sc">~</span>educ <span class="sc">+</span> exper <span class="sc">+</span> <span class="fu">I</span>(exper<span class="sc">^</span><span class="dv">2</span>) ,<span class="at">data=</span>df)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>(lmt <span class="ot">&lt;-</span> <span class="fu">nrow</span>(df)<span class="sc">*</span><span class="fu">summary</span>(lmt)<span class="sc">$</span>r.squared)</span>
@@ -394,7 +394,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="特定化検定" class="level2" data-number="10.4">
 <h2 data-number="10.4" class="anchored" data-anchor-id="特定化検定"><span class="header-section-number">10.4</span> 特定化検定</h2>
-<p>操作変数法が妥当かどうかを検証するために, 複数の特定化検定を実施する. <code>summary</code> コマンドにオプション <code>diagnostics = TRUE</code> を追加すると, 弱操作変数検定（Weak instruments）, Wu-Hausman検定, Sargan検定を一度に実行できる. これらの検定結果から, 操作変数の妥当性, 内生性の有無, 操作変数の外生性を確認できる.</p>
+<p>操作変数法が妥当かどうかを検証するために、複数の特定化検定を実施する。 <code>summary</code> コマンドにオプション <code>diagnostics = TRUE</code> を追加すると、弱操作変数検定（Weak instruments）、Wu-Hausman検定、Sargan検定を一度に実行できる。 これらの検定結果から、操作変数の妥当性、内生性の有無、操作変数の外生性を確認できる。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fm, <span class="at">diagnostics =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
@@ -427,9 +427,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="weak-instruments" class="level3" data-number="10.4.1">
 <h3 data-number="10.4.1" class="anchored" data-anchor-id="weak-instruments"><span class="header-section-number">10.4.1</span> Weak instruments</h3>
-<p>操作変数が内生変数と弱い相関関係しかない場合, <strong>弱操作変数</strong>という. 弱操作変数の場合, 推定量の性質が悪化するため, 操作変数が十分に強い相関を持つかを検定する必要がある.</p>
-<p>検定手順は以下の通りである: それぞれの内生変数に対して, 帰無仮説を内生変数を外生変数のみに回帰させたモデルとし, 対立仮説を内生変数を外生変数および操作変数に回帰させたモデルとし, F検定を実施する.</p>
-<p>以下のコマンドで <code>lm</code> による制約モデルを推定し, <code>anova</code> コマンドで第一段階の回帰モデル <code>ols1</code> と比較してF検定を実行する. この結果が先の <code>diagnostics = TRUE</code> で得られた弱操作変数検定と同じであることを確認されたい.</p>
+<p>操作変数が内生変数と弱い相関関係しかない場合、<strong>弱操作変数</strong>という。 弱操作変数の場合、推定量の性質が悪化するため、操作変数が十分に強い相関を持つかを検定する必要がある。</p>
+<p>検定手順は以下の通りである: それぞれの内生変数に対して、帰無仮説を内生変数を外生変数のみに回帰させたモデルとし、対立仮説を内生変数を外生変数および操作変数に回帰させたモデルとし、F検定を実施する。</p>
+<p>以下のコマンドで <code>lm</code> による制約モデルを推定し、<code>anova</code> コマンドで第一段階の回帰モデル <code>ols1</code> と比較してF検定を実行する。 この結果が先の <code>diagnostics = TRUE</code> で得られた弱操作変数検定と同じであることを確認されたい。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>ols0 <span class="ot">&lt;-</span> <span class="fu">lm</span>(educ <span class="sc">~</span> exper <span class="sc">+</span> <span class="fu">I</span>(exper<span class="sc">^</span><span class="dv">2</span>), <span class="at">data =</span> df)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ols0, ols1)</span>
@@ -446,15 +446,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="wu-hausman-検定" class="level3" data-number="10.4.2">
 <h3 data-number="10.4.2" class="anchored" data-anchor-id="wu-hausman-検定"><span class="header-section-number">10.4.2</span> Wu-Hausman 検定</h3>
-<p>Wu-Hausman 検定は 帰無仮説が誤差項と説明変数が無相関, 対立仮説が誤差項と説明変数が相関ありの検定をおこなう. 帰無仮説のもとでは, OLSも2SLSも一致推定量であるが, OLSの方が効率的である. よって検定統計量のP値が十分小さいなら帰無仮説は棄却され, 内生性があることになり操作変数法（2SLS）を選択する. そうでなければより効率的な最小二乗法（OLS）を実施する.</p>
+<p>Wu-Hausman 検定は 帰無仮説が誤差項と説明変数が無相関、対立仮説が誤差項と説明変数が相関ありの検定をおこなう。 帰無仮説のもとでは、OLSも2SLSも一致推定量であるが、OLSの方が効率的である。 よって検定統計量のP値が十分小さいなら帰無仮説は棄却され、内生性があることになり操作変数法（2SLS）を選択する。 そうでなければより効率的な最小二乗法（OLS）を実施する。</p>
 <p>具体的には以下のF検定を実施する:</p>
 <ol type="1">
-<li><code>lm</code> コマンドでそれぞれの内生変数を外生変数に回帰し, <code>resid</code> コマンドで残差を得る (<code>resid(ols1)</code>)</li>
+<li><code>lm</code> コマンドでそれぞれの内生変数を外生変数に回帰し、<code>resid</code> コマンドで残差を得る (<code>resid(ols1)</code>)</li>
 <li><code>lm</code> コマンドで被説明変数を説明変数に回帰する (<code>ols3</code>)</li>
 <li><code>update</code> コマンドで被説明変数を説明変数および先程の残差に回帰する (<code>ols4</code>)</li>
 <li><code>anova</code> コマンドでこれらの残差の係数はゼロであるという帰無仮説のもとF検定を実施する</li>
 </ol>
-<p>以下のコマンドが先の <code>diagnostics = TRUE</code> で得られたWu-Hausman検定と同じであることを確認されたい.</p>
+<p>以下のコマンドが先の <code>diagnostics = TRUE</code> で得られたWu-Hausman検定と同じであることを確認されたい。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>ols3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log</span>(wage) <span class="sc">~</span> educ  <span class="sc">+</span> exper <span class="sc">+</span> <span class="fu">I</span>(exper<span class="sc">^</span><span class="dv">2</span>), <span class="at">data =</span> df)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>ols4 <span class="ot">&lt;-</span> <span class="fu">update</span>(ols3, . <span class="sc">~</span> . <span class="sc">+</span> <span class="fu">resid</span>(ols1))</span>
@@ -472,15 +472,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="sargan-検定" class="level3" data-number="10.4.3">
 <h3 data-number="10.4.3" class="anchored" data-anchor-id="sargan-検定"><span class="header-section-number">10.4.3</span> Sargan 検定</h3>
-<p>Sargan 検定は 誤差項が操作変数 (および外生変数) と相関しているかどうかを検定する. 帰無仮説は操作変数が外生的である（相関が無い）場合で, 対立仮説は操作変数が内生的である（相関がある）場合である. この検定は操作変数が過剰識別されている（操作変数の数が内生変数の数より多い）場合にのみ実施可能である.</p>
+<p>Sargan 検定は 誤差項が操作変数 (および外生変数) と相関しているかどうかを検定する。 帰無仮説は操作変数が外生的である（相関が無い）場合で、対立仮説は操作変数が内生的である（相関がある）場合である。 この検定は操作変数が過剰識別されている（操作変数の数が内生変数の数より多い）場合にのみ実施可能である。</p>
 <p>LM検定（ラグランジュ乗数検定）を以下の手順で実施する:</p>
 <ol type="1">
 <li><code>resid</code> コマンドで二段階最小二乗法を実施したときの残差を得る (<code>resid(fm)</code>)</li>
 <li><code>lm</code> コマンドで残差を外生変数および操作変数に回帰する</li>
-<li><code>nrow</code> コマンドで観測数を取得し, 回帰の決定係数 <code>r.squared</code> を乗じたLM統計量を得る</li>
-<li><code>pchisq</code> コマンドで検定統計量のP値を計算する. 検定統計量は帰無仮説のもと, 操作変数の数から内生変数の数を差し引いた自由度（この例では1）のカイ二乗分布にしたがう</li>
+<li><code>nrow</code> コマンドで観測数を取得し、回帰の決定係数 <code>r.squared</code> を乗じたLM統計量を得る</li>
+<li><code>pchisq</code> コマンドで検定統計量のP値を計算する。検定統計量は帰無仮説のもと、操作変数の数から内生変数の数を差し引いた自由度（この例では1）のカイ二乗分布にしたがう</li>
 </ol>
-<p>以下のコマンドが先の <code>diagnostics = TRUE</code> で得られたSargan検定と同じであることを確認されたい.</p>
+<p>以下のコマンドが先の <code>diagnostics = TRUE</code> で得られたSargan検定と同じであることを確認されたい。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>jt <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">resid</span>(fm)<span class="sc">~</span>exper<span class="sc">+</span><span class="fu">I</span>(exper<span class="sc">^</span><span class="dv">2</span>)<span class="sc">+</span>motheduc<span class="sc">+</span>fatheduc,<span class="at">data=</span>df)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>(jt <span class="ot">&lt;-</span> <span class="fu">nrow</span>(df)<span class="sc">*</span><span class="fu">summary</span>(jt)<span class="sc">$</span>r.squared)</span>
@@ -492,8 +492,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="ロバスト分散" class="level2" data-number="10.5">
 <h2 data-number="10.5" class="anchored" data-anchor-id="ロバスト分散"><span class="header-section-number">10.5</span> ロバスト分散</h2>
-<p>以上の分析は, 誤差項が操作変数と独立かつ均一分散の場合の分析である. 独立でない場合や分散不均一の場合, 推定量の分散が変わりうる. そうした場合に頑健な分散推定量を<strong>ロバスト分散</strong>という.</p>
-<p>ロバスト分散にもとづく推定結果を得るには, <code>summary</code> コマンドにオプション <code>vcov = vcovHC</code> を追加する. <code>vcovHC</code> は不均一分散に頑健な分散共分散行列を計算する関数である. オプション <code>df = Inf</code> は自由度を無限大とし, t分布ではなく正規分布を用いて検定を行う.</p>
+<p>以上の分析は、誤差項が操作変数と独立かつ均一分散の場合の分析である。 独立でない場合や分散不均一の場合、推定量の分散が変わりうる。 そうした場合に頑健な分散推定量を<strong>ロバスト分散</strong>という。</p>
+<p>ロバスト分散にもとづく推定結果を得るには、<code>summary</code> コマンドにオプション <code>vcov = vcovHC</code> を追加する。 <code>vcovHC</code> は不均一分散に頑健な分散共分散行列を計算する関数である。 オプション <code>df = Inf</code> は自由度を無限大とし、t分布ではなく正規分布を用いて検定を行う。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fm, <span class="at">vcov =</span> vcovHC, <span class="at">df =</span> <span class="cn">Inf</span>)</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
@@ -518,7 +518,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiple R-Squared: 0.1357,  Adjusted R-squared: 0.1296 </span></span>
 <span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a><span class="do">## Wald test: 18.11 on 3 DF,  p-value: 0.0004168</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>係数の検定結果のみを表示したい場合は, <code>coeftest</code> コマンドを用いる. このコマンドは推定されたモデルオブジェクトと分散共分散行列を引数にとり, 係数のt検定結果を表示する.</p>
+<p>係数の検定結果のみを表示したい場合は、<code>coeftest</code> コマンドを用いる。 このコマンドは推定されたモデルオブジェクトと分散共分散行列を引数にとり、係数のt検定結果を表示する。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coeftest</span>(fm, <span class="at">vcov=</span>vcovHC)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
@@ -532,7 +532,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
 <span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>ロバスト分散のもとでの複数制約のワルド検定を実施するには, <code>waldtest</code> コマンドにオプション <code>vcov=vcovHC</code> を追加する.</p>
+<p>ロバスト分散のもとでの複数制約のワルド検定を実施するには、<code>waldtest</code> コマンドにオプション <code>vcov=vcovHC</code> を追加する。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">waldtest</span>(fm0,fm, <span class="at">vcov=</span>vcovHC)</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Wald test</span></span>
@@ -546,8 +546,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
 <span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>最近開発されたパッケージ <code>estimatr</code> のコマンド <code>iv_robust</code> を用いるとロバスト分散のもとの推定値が簡単に計算できる. このコマンドはデフォルトでロバスト標準誤差（HC2型）を計算し, オプション <code>diagnostics = TRUE</code> で特定化検定も同時に実行できる. 書式は <code>ivreg</code> と同じである.</p>
-<p>以下のコマンドで <code>iv_robust</code> による推定を実行し, <code>summary</code> コマンドで結果を表示する.</p>
+<p>最近開発されたパッケージ <code>estimatr</code> のコマンド <code>iv_robust</code> を用いるとロバスト分散のもとの推定値が簡単に計算できる。 このコマンドはデフォルトでロバスト標準誤差（HC2型）を計算し、オプション <code>diagnostics = TRUE</code> で特定化検定も同時に実行できる。 書式は <code>ivreg</code> と同じである。</p>
+<p>以下のコマンドで <code>iv_robust</code> による推定を実行し、<code>summary</code> コマンドで結果を表示する。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>fm2 <span class="ot">&lt;-</span> <span class="fu">iv_robust</span>(<span class="fu">log</span>(wage)<span class="sc">~</span>educ<span class="sc">+</span>exper<span class="sc">+</span><span class="fu">I</span>(exper<span class="sc">^</span><span class="dv">2</span>)<span class="sc">|</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>            exper<span class="sc">+</span><span class="fu">I</span>(exper<span class="sc">^</span><span class="dv">2</span>)<span class="sc">+</span>motheduc<span class="sc">+</span>fatheduc,</span>
@@ -578,8 +578,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
 <span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>オプション <code>se_type = "stata"</code> を用いればSTATAと同じ標準誤差の計算が可能である. また, ロバスト分散のもとで特定化検定（弱操作変数検定, Wu-Hausman検定, Sargan検定）が実行される.</p>
-<p>分散均一性を仮定した古典的な標準誤差を計算したい場合は, オプション <code>se_type = "classical"</code> を追加する.</p>
+<p>オプション <code>se_type = "stata"</code> を用いればSTATAと同じ標準誤差の計算が可能である。 また、ロバスト分散のもとで特定化検定（弱操作変数検定、Wu-Hausman検定、Sargan検定）が実行される。</p>
+<p>分散均一性を仮定した古典的な標準誤差を計算したい場合は、オプション <code>se_type = "classical"</code> を追加する。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>fm3 <span class="ot">&lt;-</span> <span class="fu">iv_robust</span>(<span class="fu">log</span>(wage)<span class="sc">~</span>educ<span class="sc">+</span>exper<span class="sc">+</span><span class="fu">I</span>(exper<span class="sc">^</span><span class="dv">2</span>)<span class="sc">|</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>            exper<span class="sc">+</span><span class="fu">I</span>(exper<span class="sc">^</span><span class="dv">2</span>)<span class="sc">+</span>motheduc<span class="sc">+</span>fatheduc,</span>
@@ -613,13 +613,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="分散不均一の検定" class="level3" data-number="10.5.1">
 <h3 data-number="10.5.1" class="anchored" data-anchor-id="分散不均一の検定"><span class="header-section-number">10.5.1</span> 分散不均一の検定</h3>
-<p>誤差項が操作変数と独立なら条件付き分散は操作変数に無関係で均一である. これを利用して分散均一を帰無仮説に, 分散不均一を対立仮説にしたBP検定（Breusch-Pagan検定）が実行可能である. ただし, 通常のコマンド <code>bptest</code> では正しく実行できないので, 手動で実行する必要がある.</p>
+<p>誤差項が操作変数と独立なら条件付き分散は操作変数に無関係で均一である。 これを利用して分散均一を帰無仮説に、分散不均一を対立仮説にしたBP検定（Breusch-Pagan検定）が実行可能である。 ただし、通常のコマンド <code>bptest</code> では正しく実行できないので、手動で実行する必要がある。</p>
 <p>以下の手順でBP検定を実行する:</p>
 <ol type="1">
 <li><code>I</code> 関数と <code>resid</code> コマンドを用いて二段階最小二乗法の残差の二乗を計算する (<code>I(resid(fm)^2)</code>)</li>
 <li><code>lm</code> コマンドで残差の二乗を外生変数および操作変数に回帰する</li>
-<li><code>nrow</code> コマンドで観測数を取得し, 決定係数 <code>r.squared</code> を乗じてLM統計量を得る</li>
-<li><code>pchisq</code> コマンドで検定統計量のP値を計算する. 検定統計量は帰無仮説のもと, 説明変数の数（この例では4）の自由度のカイ二乗分布にしたがう</li>
+<li><code>nrow</code> コマンドで観測数を取得し、決定係数 <code>r.squared</code> を乗じてLM統計量を得る</li>
+<li><code>pchisq</code> コマンドで検定統計量のP値を計算する。検定統計量は帰無仮説のもと、説明変数の数（この例では4）の自由度のカイ二乗分布にしたがう</li>
 </ol>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>bpt <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">I</span>(<span class="fu">resid</span>(fm)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">~</span>exper <span class="sc">+</span> <span class="fu">I</span>(exper<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> motheduc <span class="sc">+</span> fatheduc,<span class="at">data=</span>df)</span>
@@ -1137,34 +1137,34 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a><span class="fu">## 操作変数</span></span>
 <span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a>これまで回帰モデルで一致推定量を得るためには次の仮定が必要であった.</span>
+<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a>これまで回帰モデルで一致推定量を得るためには次の仮定が必要であった。</span>
 <span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-36"><a href="#cb18-36" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>母集団が線形モデル</span>
 <span id="cb18-37"><a href="#cb18-37" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>標本が無作為抽出</span>
 <span id="cb18-38"><a href="#cb18-38" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>誤差項が平均ゼロで説明変数と無相関</span>
 <span id="cb18-39"><a href="#cb18-39" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>説明変数に多重共線性が存在しない</span>
 <span id="cb18-40"><a href="#cb18-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-41"><a href="#cb18-41" aria-hidden="true" tabindex="-1"></a>3つ目の仮定が必ずしも成立しない場合の推定方法を紹介する.</span>
+<span id="cb18-41"><a href="#cb18-41" aria-hidden="true" tabindex="-1"></a>3つ目の仮定が必ずしも成立しない場合の推定方法を紹介する。</span>
 <span id="cb18-42"><a href="#cb18-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-43"><a href="#cb18-43" aria-hidden="true" tabindex="-1"></a>そのために, 外生変数と内生変数と操作変数の3つの概念を導入する.</span>
-<span id="cb18-44"><a href="#cb18-44" aria-hidden="true" tabindex="-1"></a>誤差項と相関が無い説明変数を **外生変数** といい, 誤差項と相関がある説明変数を **内生変数** という.</span>
-<span id="cb18-45"><a href="#cb18-45" aria-hidden="true" tabindex="-1"></a>**操作変数** とは, 説明変数に含まれず, 説明変数と相関をもち, 誤差項と相関をもたない変数のことである.</span>
+<span id="cb18-43"><a href="#cb18-43" aria-hidden="true" tabindex="-1"></a>そのために、外生変数と内生変数と操作変数の3つの概念を導入する。</span>
+<span id="cb18-44"><a href="#cb18-44" aria-hidden="true" tabindex="-1"></a>誤差項と相関が無い説明変数を **外生変数** といい、誤差項と相関がある説明変数を **内生変数** という。</span>
+<span id="cb18-45"><a href="#cb18-45" aria-hidden="true" tabindex="-1"></a>**操作変数** とは、説明変数に含まれず、説明変数と相関をもち、誤差項と相関をもたない変数のことである。</span>
 <span id="cb18-46"><a href="#cb18-46" aria-hidden="true" tabindex="-1"></a>なお操作変数の個数は内生変数の個数より多苦なければならない。</span>
 <span id="cb18-47"><a href="#cb18-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-48"><a href="#cb18-48" aria-hidden="true" tabindex="-1"></a>R においては <span class="in">`ivreg`</span> コマンドを用いて操作変数法を実行する.</span>
-<span id="cb18-49"><a href="#cb18-49" aria-hidden="true" tabindex="-1"></a>このコマンドは <span class="in">`AER`</span> パッケージに含まれており, 基本的な書式は <span class="in">`ivreg(被説明変数 ~ 内生変数 | 操作変数, data=データフレーム)`</span> である.</span>
-<span id="cb18-50"><a href="#cb18-50" aria-hidden="true" tabindex="-1"></a>ここで被説明変数は <span class="in">`log(wage)`</span>, 内生変数は <span class="in">`educ`</span>, 操作変数は <span class="in">`fatheduc`</span> である.</span>
+<span id="cb18-48"><a href="#cb18-48" aria-hidden="true" tabindex="-1"></a>R においては <span class="in">`ivreg`</span> コマンドを用いて操作変数法を実行する。</span>
+<span id="cb18-49"><a href="#cb18-49" aria-hidden="true" tabindex="-1"></a>このコマンドは <span class="in">`AER`</span> パッケージに含まれており、基本的な書式は <span class="in">`ivreg(被説明変数 ~ 内生変数 | 操作変数、data=データフレーム)`</span> である。</span>
+<span id="cb18-50"><a href="#cb18-50" aria-hidden="true" tabindex="-1"></a>ここで被説明変数は <span class="in">`log(wage)`</span>, 内生変数は <span class="in">`educ`</span>, 操作変数は <span class="in">`fatheduc`</span> である。</span>
 <span id="cb18-51"><a href="#cb18-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-52"><a href="#cb18-52" aria-hidden="true" tabindex="-1"></a>以下のコマンドで操作変数法を実行し, <span class="in">`coef`</span> コマンドで推定された係数を取り出す.</span>
+<span id="cb18-52"><a href="#cb18-52" aria-hidden="true" tabindex="-1"></a>以下のコマンドで操作変数法を実行し、<span class="in">`coef`</span> コマンドで推定された係数を取り出す。</span>
 <span id="cb18-53"><a href="#cb18-53" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-56"><a href="#cb18-56" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb18-57"><a href="#cb18-57" aria-hidden="true" tabindex="-1"></a>fm  <span class="ot">&lt;-</span> <span class="fu">ivreg</span>(<span class="fu">log</span>(wage)<span class="sc">~</span>educ<span class="sc">|</span>fatheduc, <span class="at">data=</span>df)</span>
 <span id="cb18-58"><a href="#cb18-58" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(fm)</span>
 <span id="cb18-59"><a href="#cb18-59" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb18-60"><a href="#cb18-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-61"><a href="#cb18-61" aria-hidden="true" tabindex="-1"></a>傾きの推定値は操作変数推定量の公式を用いて直接計算することもできる.</span>
-<span id="cb18-62"><a href="#cb18-62" aria-hidden="true" tabindex="-1"></a>具体的には, 被説明変数と操作変数の共分散を内生変数と操作変数の共分散で割ることで得られる.</span>
-<span id="cb18-63"><a href="#cb18-63" aria-hidden="true" tabindex="-1"></a>以下のコマンドで <span class="in">`cov`</span> 関数を用いて共分散を計算し, 同じ推定値が得られることを確認する.</span>
+<span id="cb18-61"><a href="#cb18-61" aria-hidden="true" tabindex="-1"></a>傾きの推定値は操作変数推定量の公式を用いて直接計算することもできる。</span>
+<span id="cb18-62"><a href="#cb18-62" aria-hidden="true" tabindex="-1"></a>具体的には、被説明変数と操作変数の共分散を内生変数と操作変数の共分散で割ることで得られる。</span>
+<span id="cb18-63"><a href="#cb18-63" aria-hidden="true" tabindex="-1"></a>以下のコマンドで <span class="in">`cov`</span> 関数を用いて共分散を計算し、同じ推定値が得られることを確認する。</span>
 <span id="cb18-64"><a href="#cb18-64" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-67"><a href="#cb18-67" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb18-68"><a href="#cb18-68" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(df, <span class="fu">cov</span>(<span class="fu">log</span>(wage),fatheduc)<span class="sc">/</span><span class="fu">cov</span>(educ,fatheduc))</span>
@@ -1172,26 +1172,26 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb18-70"><a href="#cb18-70" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-71"><a href="#cb18-71" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2段階最小二乗法</span></span>
 <span id="cb18-72"><a href="#cb18-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-73"><a href="#cb18-73" aria-hidden="true" tabindex="-1"></a>複数の説明変数あり, 操作変数の数が内生変数の数以上のとき, 係数の一致推定量を得るには二段階最小自乗法を用いる.</span>
+<span id="cb18-73"><a href="#cb18-73" aria-hidden="true" tabindex="-1"></a>複数の説明変数あり、操作変数の数が内生変数の数以上のとき、係数の一致推定量を得るには二段階最小自乗法を用いる。</span>
 <span id="cb18-74"><a href="#cb18-74" aria-hidden="true" tabindex="-1"></a>二段階最小二乗法は次の手順で実行される:</span>
 <span id="cb18-75"><a href="#cb18-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-76"><a href="#cb18-76" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>それぞれの内生変数を外生変数と操作変数に回帰させて, その予測値を得る.</span>
-<span id="cb18-77"><a href="#cb18-77" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>被説明変数を外生変数と内生変数の予測値に回帰させて, その係数を得る.</span>
+<span id="cb18-76"><a href="#cb18-76" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>それぞれの内生変数を外生変数と操作変数に回帰させて、その予測値を得る。</span>
+<span id="cb18-77"><a href="#cb18-77" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>被説明変数を外生変数と内生変数の予測値に回帰させて、その係数を得る。</span>
 <span id="cb18-78"><a href="#cb18-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-79"><a href="#cb18-79" aria-hidden="true" tabindex="-1"></a>この係数が一致推定量になるための条件は以下である.</span>
+<span id="cb18-79"><a href="#cb18-79" aria-hidden="true" tabindex="-1"></a>この係数が一致推定量になるための条件は以下である。</span>
 <span id="cb18-80"><a href="#cb18-80" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-81"><a href="#cb18-81" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>母集団が線形モデル</span>
 <span id="cb18-82"><a href="#cb18-82" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>標本が無作為抽出</span>
-<span id="cb18-83"><a href="#cb18-83" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>誤差項が平均ゼロで操作変数と外生変数に対して独立.</span>
-<span id="cb18-84"><a href="#cb18-84" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>操作変数は内生変数と相関をもつ.</span>
+<span id="cb18-83"><a href="#cb18-83" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>誤差項が平均ゼロで操作変数と外生変数に対して独立。</span>
+<span id="cb18-84"><a href="#cb18-84" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>操作変数は内生変数と相関をもつ。</span>
 <span id="cb18-85"><a href="#cb18-85" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>外生変数と内生変数の予測値に多重共線性が存在しない<span class="sc">\`</span></span>
 <span id="cb18-86"><a href="#cb18-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-87"><a href="#cb18-87" aria-hidden="true" tabindex="-1"></a>R においては <span class="in">`ivreg`</span> コマンドを用いて二段階最小二乗法を実行する.</span>
-<span id="cb18-88"><a href="#cb18-88" aria-hidden="true" tabindex="-1"></a>複数の説明変数がある場合の書式は <span class="in">`ivreg(被説明変数 ~ 内生変数 + 外生変数 | 外生変数 + 操作変数, data=データフレーム)`</span> である.</span>
-<span id="cb18-89"><a href="#cb18-89" aria-hidden="true" tabindex="-1"></a>ここで被説明変数は <span class="in">`log(wage)`</span>, 内生変数は <span class="in">`educ`</span>, 外生変数は <span class="in">`exper`</span>, <span class="in">`I(exper^2)`</span>, 操作変数は <span class="in">`motheduc`</span>, <span class="in">`fatheduc`</span> である.</span>
-<span id="cb18-90"><a href="#cb18-90" aria-hidden="true" tabindex="-1"></a>注意点として, パイプ記号 <span class="in">`|`</span> の右側には外生変数も含める必要がある.</span>
+<span id="cb18-87"><a href="#cb18-87" aria-hidden="true" tabindex="-1"></a>R においては <span class="in">`ivreg`</span> コマンドを用いて二段階最小二乗法を実行する。</span>
+<span id="cb18-88"><a href="#cb18-88" aria-hidden="true" tabindex="-1"></a>複数の説明変数がある場合の書式は <span class="in">`ivreg(被説明変数 ~ 内生変数 + 外生変数 | 外生変数 + 操作変数、data=データフレーム)`</span> である。</span>
+<span id="cb18-89"><a href="#cb18-89" aria-hidden="true" tabindex="-1"></a>ここで被説明変数は <span class="in">`log(wage)`</span>, 内生変数は <span class="in">`educ`</span>, 外生変数は <span class="in">`exper`</span>, <span class="in">`I(exper^2)`</span>, 操作変数は <span class="in">`motheduc`</span>, <span class="in">`fatheduc`</span> である。</span>
+<span id="cb18-90"><a href="#cb18-90" aria-hidden="true" tabindex="-1"></a>注意点として、パイプ記号 <span class="in">`|`</span> の右側には外生変数も含める必要がある。</span>
 <span id="cb18-91"><a href="#cb18-91" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-92"><a href="#cb18-92" aria-hidden="true" tabindex="-1"></a>以下のコマンドで二段階最小二乗法を実行し, <span class="in">`summary`</span> コマンドで推定結果の要約を表示する.</span>
+<span id="cb18-92"><a href="#cb18-92" aria-hidden="true" tabindex="-1"></a>以下のコマンドで二段階最小二乗法を実行し、<span class="in">`summary`</span> コマンドで推定結果の要約を表示する。</span>
 <span id="cb18-93"><a href="#cb18-93" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-96"><a href="#cb18-96" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb18-97"><a href="#cb18-97" aria-hidden="true" tabindex="-1"></a>fm  <span class="ot">&lt;-</span> <span class="fu">ivreg</span>(<span class="fu">log</span>(wage)<span class="sc">~</span>educ<span class="sc">+</span>exper<span class="sc">+</span><span class="fu">I</span>(exper<span class="sc">^</span><span class="dv">2</span>)<span class="sc">|</span></span>
@@ -1200,12 +1200,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb18-100"><a href="#cb18-100" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fm)</span>
 <span id="cb18-101"><a href="#cb18-101" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb18-102"><a href="#cb18-102" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-103"><a href="#cb18-103" aria-hidden="true" tabindex="-1"></a>二段階最小二乗法の手順を <span class="in">`lm`</span> コマンドを用いて手動で実行し, 同じ係数推定値が得られることを確認できる.</span>
-<span id="cb18-104"><a href="#cb18-104" aria-hidden="true" tabindex="-1"></a>ただし標準誤差の値が異なっている.</span>
-<span id="cb18-105"><a href="#cb18-105" aria-hidden="true" tabindex="-1"></a>なぜなら残差は内生変数および外生変数から算出させる必要があるが, 以下のやりかただと内生変数の予測値および外生変数から算出するためである.</span>
+<span id="cb18-103"><a href="#cb18-103" aria-hidden="true" tabindex="-1"></a>二段階最小二乗法の手順を <span class="in">`lm`</span> コマンドを用いて手動で実行し、同じ係数推定値が得られることを確認できる。</span>
+<span id="cb18-104"><a href="#cb18-104" aria-hidden="true" tabindex="-1"></a>ただし標準誤差の値が異なっている。</span>
+<span id="cb18-105"><a href="#cb18-105" aria-hidden="true" tabindex="-1"></a>なぜなら残差は内生変数および外生変数から算出させる必要があるが、以下のやりかただと内生変数の予測値および外生変数から算出するためである。</span>
 <span id="cb18-106"><a href="#cb18-106" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-107"><a href="#cb18-107" aria-hidden="true" tabindex="-1"></a>以下では第一段階として <span class="in">`lm`</span> コマンドで内生変数 <span class="in">`educ`</span> を外生変数と操作変数に回帰し, <span class="in">`fitted`</span> コマンドで予測値を取得する.</span>
-<span id="cb18-108"><a href="#cb18-108" aria-hidden="true" tabindex="-1"></a>第二段階として被説明変数を外生変数と内生変数の予測値に回帰する.</span>
+<span id="cb18-107"><a href="#cb18-107" aria-hidden="true" tabindex="-1"></a>以下では第一段階として <span class="in">`lm`</span> コマンドで内生変数 <span class="in">`educ`</span> を外生変数と操作変数に回帰し、<span class="in">`fitted`</span> コマンドで予測値を取得する。</span>
+<span id="cb18-108"><a href="#cb18-108" aria-hidden="true" tabindex="-1"></a>第二段階として被説明変数を外生変数と内生変数の予測値に回帰する。</span>
 <span id="cb18-109"><a href="#cb18-109" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-112"><a href="#cb18-112" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb18-113"><a href="#cb18-113" aria-hidden="true" tabindex="-1"></a>ols1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(educ<span class="sc">~</span>exper<span class="sc">+</span><span class="fu">I</span>(exper<span class="sc">^</span><span class="dv">2</span>)<span class="sc">+</span>motheduc<span class="sc">+</span>fatheduc,  <span class="at">data =</span> df)</span>
@@ -1215,21 +1215,21 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb18-117"><a href="#cb18-117" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-118"><a href="#cb18-118" aria-hidden="true" tabindex="-1"></a><span class="fu">### 複数制約の検定</span></span>
 <span id="cb18-119"><a href="#cb18-119" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-120"><a href="#cb18-120" aria-hidden="true" tabindex="-1"></a>帰無仮説が複数の係数制約を課す場合のワルド検定を実施する.</span>
-<span id="cb18-121"><a href="#cb18-121" aria-hidden="true" tabindex="-1"></a>例えば, 2つの外生変数 <span class="in">`exper`</span> と <span class="in">`I(exper^2)`</span> の係数がともにゼロであるという仮説を検定する.</span>
+<span id="cb18-120"><a href="#cb18-120" aria-hidden="true" tabindex="-1"></a>帰無仮説が複数の係数制約を課す場合のワルド検定を実施する。</span>
+<span id="cb18-121"><a href="#cb18-121" aria-hidden="true" tabindex="-1"></a>例えば、2つの外生変数 <span class="in">`exper`</span> と <span class="in">`I(exper^2)`</span> の係数がともにゼロであるという仮説を検定する。</span>
 <span id="cb18-122"><a href="#cb18-122" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-123"><a href="#cb18-123" aria-hidden="true" tabindex="-1"></a>まず <span class="in">`ivreg`</span> コマンドで制約モデル（外生変数を含まないモデル）を推定し, <span class="in">`waldtest`</span> コマンドで制約なしモデルと比較する.</span>
-<span id="cb18-124"><a href="#cb18-124" aria-hidden="true" tabindex="-1"></a><span class="in">`waldtest`</span> コマンドは2つのモデルを引数にとり, ワルド検定を実行する.</span>
+<span id="cb18-123"><a href="#cb18-123" aria-hidden="true" tabindex="-1"></a>まず <span class="in">`ivreg`</span> コマンドで制約モデル（外生変数を含まないモデル）を推定し、<span class="in">`waldtest`</span> コマンドで制約なしモデルと比較する。</span>
+<span id="cb18-124"><a href="#cb18-124" aria-hidden="true" tabindex="-1"></a><span class="in">`waldtest`</span> コマンドは2つのモデルを引数にとり、ワルド検定を実行する。</span>
 <span id="cb18-125"><a href="#cb18-125" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-128"><a href="#cb18-128" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb18-129"><a href="#cb18-129" aria-hidden="true" tabindex="-1"></a>fm0 <span class="ot">&lt;-</span> <span class="fu">ivreg</span>(<span class="fu">log</span>(wage)<span class="sc">~</span>educ<span class="sc">|</span>motheduc<span class="sc">+</span>fatheduc,<span class="at">data=</span>df)</span>
 <span id="cb18-130"><a href="#cb18-130" aria-hidden="true" tabindex="-1"></a><span class="fu">waldtest</span>(fm0,fm)</span>
 <span id="cb18-131"><a href="#cb18-131" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb18-132"><a href="#cb18-132" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-133"><a href="#cb18-133" aria-hidden="true" tabindex="-1"></a>LM検定（ラグランジュ乗数検定）も実行可能である.</span>
-<span id="cb18-134"><a href="#cb18-134" aria-hidden="true" tabindex="-1"></a>まず <span class="in">`resid`</span> コマンドで制約モデルの残差を取得し, その残差を制約される説明変数に回帰する.</span>
-<span id="cb18-135"><a href="#cb18-135" aria-hidden="true" tabindex="-1"></a><span class="in">`nrow`</span> コマンドで観測数を取得し, 決定係数 <span class="in">`r.squared`</span> を乗じてLM統計量を計算する.</span>
-<span id="cb18-136"><a href="#cb18-136" aria-hidden="true" tabindex="-1"></a>最後に <span class="in">`pchisq`</span> コマンドでカイ二乗分布のP値を計算する（自由度は制約の数3）.</span>
+<span id="cb18-133"><a href="#cb18-133" aria-hidden="true" tabindex="-1"></a>LM検定（ラグランジュ乗数検定）も実行可能である。</span>
+<span id="cb18-134"><a href="#cb18-134" aria-hidden="true" tabindex="-1"></a>まず <span class="in">`resid`</span> コマンドで制約モデルの残差を取得し、その残差を制約される説明変数に回帰する。</span>
+<span id="cb18-135"><a href="#cb18-135" aria-hidden="true" tabindex="-1"></a><span class="in">`nrow`</span> コマンドで観測数を取得し、決定係数 <span class="in">`r.squared`</span> を乗じてLM統計量を計算する。</span>
+<span id="cb18-136"><a href="#cb18-136" aria-hidden="true" tabindex="-1"></a>最後に <span class="in">`pchisq`</span> コマンドでカイ二乗分布のP値を計算する（自由度は制約の数3）。</span>
 <span id="cb18-137"><a href="#cb18-137" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-140"><a href="#cb18-140" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb18-141"><a href="#cb18-141" aria-hidden="true" tabindex="-1"></a>lmt <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">resid</span>(fm0)<span class="sc">~</span>educ <span class="sc">+</span> exper <span class="sc">+</span> <span class="fu">I</span>(exper<span class="sc">^</span><span class="dv">2</span>) ,<span class="at">data=</span>df)</span>
@@ -1239,9 +1239,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb18-145"><a href="#cb18-145" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-146"><a href="#cb18-146" aria-hidden="true" tabindex="-1"></a><span class="fu">## 特定化検定</span></span>
 <span id="cb18-147"><a href="#cb18-147" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-148"><a href="#cb18-148" aria-hidden="true" tabindex="-1"></a>操作変数法が妥当かどうかを検証するために, 複数の特定化検定を実施する.</span>
-<span id="cb18-149"><a href="#cb18-149" aria-hidden="true" tabindex="-1"></a><span class="in">`summary`</span> コマンドにオプション <span class="in">`diagnostics = TRUE`</span> を追加すると, 弱操作変数検定（Weak instruments）, Wu-Hausman検定, Sargan検定を一度に実行できる.</span>
-<span id="cb18-150"><a href="#cb18-150" aria-hidden="true" tabindex="-1"></a>これらの検定結果から, 操作変数の妥当性, 内生性の有無, 操作変数の外生性を確認できる.</span>
+<span id="cb18-148"><a href="#cb18-148" aria-hidden="true" tabindex="-1"></a>操作変数法が妥当かどうかを検証するために、複数の特定化検定を実施する。</span>
+<span id="cb18-149"><a href="#cb18-149" aria-hidden="true" tabindex="-1"></a><span class="in">`summary`</span> コマンドにオプション <span class="in">`diagnostics = TRUE`</span> を追加すると、弱操作変数検定（Weak instruments）、Wu-Hausman検定、Sargan検定を一度に実行できる。</span>
+<span id="cb18-150"><a href="#cb18-150" aria-hidden="true" tabindex="-1"></a>これらの検定結果から、操作変数の妥当性、内生性の有無、操作変数の外生性を確認できる。</span>
 <span id="cb18-151"><a href="#cb18-151" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-154"><a href="#cb18-154" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb18-155"><a href="#cb18-155" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fm, <span class="at">diagnostics =</span> <span class="cn">TRUE</span>)</span>
@@ -1249,14 +1249,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb18-157"><a href="#cb18-157" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-158"><a href="#cb18-158" aria-hidden="true" tabindex="-1"></a><span class="fu">### Weak instruments</span></span>
 <span id="cb18-159"><a href="#cb18-159" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-160"><a href="#cb18-160" aria-hidden="true" tabindex="-1"></a>操作変数が内生変数と弱い相関関係しかない場合, **弱操作変数**という.</span>
-<span id="cb18-161"><a href="#cb18-161" aria-hidden="true" tabindex="-1"></a>弱操作変数の場合, 推定量の性質が悪化するため, 操作変数が十分に強い相関を持つかを検定する必要がある.</span>
+<span id="cb18-160"><a href="#cb18-160" aria-hidden="true" tabindex="-1"></a>操作変数が内生変数と弱い相関関係しかない場合、**弱操作変数**という。</span>
+<span id="cb18-161"><a href="#cb18-161" aria-hidden="true" tabindex="-1"></a>弱操作変数の場合、推定量の性質が悪化するため、操作変数が十分に強い相関を持つかを検定する必要がある。</span>
 <span id="cb18-162"><a href="#cb18-162" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-163"><a href="#cb18-163" aria-hidden="true" tabindex="-1"></a>検定手順は以下の通りである:</span>
-<span id="cb18-164"><a href="#cb18-164" aria-hidden="true" tabindex="-1"></a>それぞれの内生変数に対して, 帰無仮説を内生変数を外生変数のみに回帰させたモデルとし, 対立仮説を内生変数を外生変数および操作変数に回帰させたモデルとし, F検定を実施する.</span>
+<span id="cb18-164"><a href="#cb18-164" aria-hidden="true" tabindex="-1"></a>それぞれの内生変数に対して、帰無仮説を内生変数を外生変数のみに回帰させたモデルとし、対立仮説を内生変数を外生変数および操作変数に回帰させたモデルとし、F検定を実施する。</span>
 <span id="cb18-165"><a href="#cb18-165" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-166"><a href="#cb18-166" aria-hidden="true" tabindex="-1"></a>以下のコマンドで <span class="in">`lm`</span> による制約モデルを推定し, <span class="in">`anova`</span> コマンドで第一段階の回帰モデル <span class="in">`ols1`</span> と比較してF検定を実行する.</span>
-<span id="cb18-167"><a href="#cb18-167" aria-hidden="true" tabindex="-1"></a>この結果が先の <span class="in">`diagnostics = TRUE`</span> で得られた弱操作変数検定と同じであることを確認されたい.</span>
+<span id="cb18-166"><a href="#cb18-166" aria-hidden="true" tabindex="-1"></a>以下のコマンドで <span class="in">`lm`</span> による制約モデルを推定し、<span class="in">`anova`</span> コマンドで第一段階の回帰モデル <span class="in">`ols1`</span> と比較してF検定を実行する。</span>
+<span id="cb18-167"><a href="#cb18-167" aria-hidden="true" tabindex="-1"></a>この結果が先の <span class="in">`diagnostics = TRUE`</span> で得られた弱操作変数検定と同じであることを確認されたい。</span>
 <span id="cb18-168"><a href="#cb18-168" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-171"><a href="#cb18-171" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb18-172"><a href="#cb18-172" aria-hidden="true" tabindex="-1"></a>ols0 <span class="ot">&lt;-</span> <span class="fu">lm</span>(educ <span class="sc">~</span> exper <span class="sc">+</span> <span class="fu">I</span>(exper<span class="sc">^</span><span class="dv">2</span>), <span class="at">data =</span> df)</span>
@@ -1265,19 +1265,19 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb18-175"><a href="#cb18-175" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-176"><a href="#cb18-176" aria-hidden="true" tabindex="-1"></a><span class="fu">### Wu-Hausman 検定</span></span>
 <span id="cb18-177"><a href="#cb18-177" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-178"><a href="#cb18-178" aria-hidden="true" tabindex="-1"></a>Wu-Hausman 検定は 帰無仮説が誤差項と説明変数が無相関, 対立仮説が誤差項と説明変数が相関ありの検定をおこなう.</span>
-<span id="cb18-179"><a href="#cb18-179" aria-hidden="true" tabindex="-1"></a>帰無仮説のもとでは, OLSも2SLSも一致推定量であるが, OLSの方が効率的である.</span>
-<span id="cb18-180"><a href="#cb18-180" aria-hidden="true" tabindex="-1"></a>よって検定統計量のP値が十分小さいなら帰無仮説は棄却され, 内生性があることになり操作変数法（2SLS）を選択する.</span>
-<span id="cb18-181"><a href="#cb18-181" aria-hidden="true" tabindex="-1"></a>そうでなければより効率的な最小二乗法（OLS）を実施する.</span>
+<span id="cb18-178"><a href="#cb18-178" aria-hidden="true" tabindex="-1"></a>Wu-Hausman 検定は 帰無仮説が誤差項と説明変数が無相関、対立仮説が誤差項と説明変数が相関ありの検定をおこなう。</span>
+<span id="cb18-179"><a href="#cb18-179" aria-hidden="true" tabindex="-1"></a>帰無仮説のもとでは、OLSも2SLSも一致推定量であるが、OLSの方が効率的である。</span>
+<span id="cb18-180"><a href="#cb18-180" aria-hidden="true" tabindex="-1"></a>よって検定統計量のP値が十分小さいなら帰無仮説は棄却され、内生性があることになり操作変数法（2SLS）を選択する。</span>
+<span id="cb18-181"><a href="#cb18-181" aria-hidden="true" tabindex="-1"></a>そうでなければより効率的な最小二乗法（OLS）を実施する。</span>
 <span id="cb18-182"><a href="#cb18-182" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-183"><a href="#cb18-183" aria-hidden="true" tabindex="-1"></a>具体的には以下のF検定を実施する:</span>
 <span id="cb18-184"><a href="#cb18-184" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-185"><a href="#cb18-185" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span><span class="in">`lm`</span> コマンドでそれぞれの内生変数を外生変数に回帰し, <span class="in">`resid`</span> コマンドで残差を得る (<span class="in">`resid(ols1)`</span>)</span>
+<span id="cb18-185"><a href="#cb18-185" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span><span class="in">`lm`</span> コマンドでそれぞれの内生変数を外生変数に回帰し、<span class="in">`resid`</span> コマンドで残差を得る (<span class="in">`resid(ols1)`</span>)</span>
 <span id="cb18-186"><a href="#cb18-186" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span><span class="in">`lm`</span> コマンドで被説明変数を説明変数に回帰する (<span class="in">`ols3`</span>)</span>
 <span id="cb18-187"><a href="#cb18-187" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span><span class="in">`update`</span> コマンドで被説明変数を説明変数および先程の残差に回帰する (<span class="in">`ols4`</span>)</span>
 <span id="cb18-188"><a href="#cb18-188" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span><span class="in">`anova`</span> コマンドでこれらの残差の係数はゼロであるという帰無仮説のもとF検定を実施する</span>
 <span id="cb18-189"><a href="#cb18-189" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-190"><a href="#cb18-190" aria-hidden="true" tabindex="-1"></a>以下のコマンドが先の <span class="in">`diagnostics = TRUE`</span> で得られたWu-Hausman検定と同じであることを確認されたい.</span>
+<span id="cb18-190"><a href="#cb18-190" aria-hidden="true" tabindex="-1"></a>以下のコマンドが先の <span class="in">`diagnostics = TRUE`</span> で得られたWu-Hausman検定と同じであることを確認されたい。</span>
 <span id="cb18-191"><a href="#cb18-191" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-194"><a href="#cb18-194" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb18-195"><a href="#cb18-195" aria-hidden="true" tabindex="-1"></a>ols3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log</span>(wage) <span class="sc">~</span> educ  <span class="sc">+</span> exper <span class="sc">+</span> <span class="fu">I</span>(exper<span class="sc">^</span><span class="dv">2</span>), <span class="at">data =</span> df)</span>
@@ -1287,18 +1287,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb18-199"><a href="#cb18-199" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-200"><a href="#cb18-200" aria-hidden="true" tabindex="-1"></a><span class="fu">### Sargan 検定</span></span>
 <span id="cb18-201"><a href="#cb18-201" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-202"><a href="#cb18-202" aria-hidden="true" tabindex="-1"></a>Sargan 検定は 誤差項が操作変数 (および外生変数) と相関しているかどうかを検定する.</span>
-<span id="cb18-203"><a href="#cb18-203" aria-hidden="true" tabindex="-1"></a>帰無仮説は操作変数が外生的である（相関が無い）場合で, 対立仮説は操作変数が内生的である（相関がある）場合である.</span>
-<span id="cb18-204"><a href="#cb18-204" aria-hidden="true" tabindex="-1"></a>この検定は操作変数が過剰識別されている（操作変数の数が内生変数の数より多い）場合にのみ実施可能である.</span>
+<span id="cb18-202"><a href="#cb18-202" aria-hidden="true" tabindex="-1"></a>Sargan 検定は 誤差項が操作変数 (および外生変数) と相関しているかどうかを検定する。</span>
+<span id="cb18-203"><a href="#cb18-203" aria-hidden="true" tabindex="-1"></a>帰無仮説は操作変数が外生的である（相関が無い）場合で、対立仮説は操作変数が内生的である（相関がある）場合である。</span>
+<span id="cb18-204"><a href="#cb18-204" aria-hidden="true" tabindex="-1"></a>この検定は操作変数が過剰識別されている（操作変数の数が内生変数の数より多い）場合にのみ実施可能である。</span>
 <span id="cb18-205"><a href="#cb18-205" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-206"><a href="#cb18-206" aria-hidden="true" tabindex="-1"></a>LM検定（ラグランジュ乗数検定）を以下の手順で実施する:</span>
 <span id="cb18-207"><a href="#cb18-207" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-208"><a href="#cb18-208" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span><span class="in">`resid`</span> コマンドで二段階最小二乗法を実施したときの残差を得る (<span class="in">`resid(fm)`</span>)</span>
 <span id="cb18-209"><a href="#cb18-209" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span><span class="in">`lm`</span> コマンドで残差を外生変数および操作変数に回帰する</span>
-<span id="cb18-210"><a href="#cb18-210" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span><span class="in">`nrow`</span> コマンドで観測数を取得し, 回帰の決定係数 <span class="in">`r.squared`</span> を乗じたLM統計量を得る</span>
-<span id="cb18-211"><a href="#cb18-211" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span><span class="in">`pchisq`</span> コマンドで検定統計量のP値を計算する. 検定統計量は帰無仮説のもと, 操作変数の数から内生変数の数を差し引いた自由度（この例では1）のカイ二乗分布にしたがう</span>
+<span id="cb18-210"><a href="#cb18-210" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span><span class="in">`nrow`</span> コマンドで観測数を取得し、回帰の決定係数 <span class="in">`r.squared`</span> を乗じたLM統計量を得る</span>
+<span id="cb18-211"><a href="#cb18-211" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span><span class="in">`pchisq`</span> コマンドで検定統計量のP値を計算する。検定統計量は帰無仮説のもと、操作変数の数から内生変数の数を差し引いた自由度（この例では1）のカイ二乗分布にしたがう</span>
 <span id="cb18-212"><a href="#cb18-212" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-213"><a href="#cb18-213" aria-hidden="true" tabindex="-1"></a>以下のコマンドが先の <span class="in">`diagnostics = TRUE`</span> で得られたSargan検定と同じであることを確認されたい.</span>
+<span id="cb18-213"><a href="#cb18-213" aria-hidden="true" tabindex="-1"></a>以下のコマンドが先の <span class="in">`diagnostics = TRUE`</span> で得られたSargan検定と同じであることを確認されたい。</span>
 <span id="cb18-214"><a href="#cb18-214" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-217"><a href="#cb18-217" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb18-218"><a href="#cb18-218" aria-hidden="true" tabindex="-1"></a>jt <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">resid</span>(fm)<span class="sc">~</span>exper<span class="sc">+</span><span class="fu">I</span>(exper<span class="sc">^</span><span class="dv">2</span>)<span class="sc">+</span>motheduc<span class="sc">+</span>fatheduc,<span class="at">data=</span>df)</span>
@@ -1308,36 +1308,36 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb18-222"><a href="#cb18-222" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-223"><a href="#cb18-223" aria-hidden="true" tabindex="-1"></a><span class="fu">## ロバスト分散</span></span>
 <span id="cb18-224"><a href="#cb18-224" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-225"><a href="#cb18-225" aria-hidden="true" tabindex="-1"></a>以上の分析は, 誤差項が操作変数と独立かつ均一分散の場合の分析である.</span>
-<span id="cb18-226"><a href="#cb18-226" aria-hidden="true" tabindex="-1"></a>独立でない場合や分散不均一の場合, 推定量の分散が変わりうる.</span>
-<span id="cb18-227"><a href="#cb18-227" aria-hidden="true" tabindex="-1"></a>そうした場合に頑健な分散推定量を**ロバスト分散**という.</span>
+<span id="cb18-225"><a href="#cb18-225" aria-hidden="true" tabindex="-1"></a>以上の分析は、誤差項が操作変数と独立かつ均一分散の場合の分析である。</span>
+<span id="cb18-226"><a href="#cb18-226" aria-hidden="true" tabindex="-1"></a>独立でない場合や分散不均一の場合、推定量の分散が変わりうる。</span>
+<span id="cb18-227"><a href="#cb18-227" aria-hidden="true" tabindex="-1"></a>そうした場合に頑健な分散推定量を**ロバスト分散**という。</span>
 <span id="cb18-228"><a href="#cb18-228" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-229"><a href="#cb18-229" aria-hidden="true" tabindex="-1"></a>ロバスト分散にもとづく推定結果を得るには, <span class="in">`summary`</span> コマンドにオプション <span class="in">`vcov = vcovHC`</span> を追加する.</span>
-<span id="cb18-230"><a href="#cb18-230" aria-hidden="true" tabindex="-1"></a><span class="in">`vcovHC`</span> は不均一分散に頑健な分散共分散行列を計算する関数である.</span>
-<span id="cb18-231"><a href="#cb18-231" aria-hidden="true" tabindex="-1"></a>オプション <span class="in">`df = Inf`</span> は自由度を無限大とし, t分布ではなく正規分布を用いて検定を行う.</span>
+<span id="cb18-229"><a href="#cb18-229" aria-hidden="true" tabindex="-1"></a>ロバスト分散にもとづく推定結果を得るには、<span class="in">`summary`</span> コマンドにオプション <span class="in">`vcov = vcovHC`</span> を追加する。</span>
+<span id="cb18-230"><a href="#cb18-230" aria-hidden="true" tabindex="-1"></a><span class="in">`vcovHC`</span> は不均一分散に頑健な分散共分散行列を計算する関数である。</span>
+<span id="cb18-231"><a href="#cb18-231" aria-hidden="true" tabindex="-1"></a>オプション <span class="in">`df = Inf`</span> は自由度を無限大とし、t分布ではなく正規分布を用いて検定を行う。</span>
 <span id="cb18-232"><a href="#cb18-232" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-235"><a href="#cb18-235" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb18-236"><a href="#cb18-236" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fm, <span class="at">vcov =</span> vcovHC, <span class="at">df =</span> <span class="cn">Inf</span>)</span>
 <span id="cb18-237"><a href="#cb18-237" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb18-238"><a href="#cb18-238" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-239"><a href="#cb18-239" aria-hidden="true" tabindex="-1"></a>係数の検定結果のみを表示したい場合は, <span class="in">`coeftest`</span> コマンドを用いる.</span>
-<span id="cb18-240"><a href="#cb18-240" aria-hidden="true" tabindex="-1"></a>このコマンドは推定されたモデルオブジェクトと分散共分散行列を引数にとり, 係数のt検定結果を表示する.</span>
+<span id="cb18-239"><a href="#cb18-239" aria-hidden="true" tabindex="-1"></a>係数の検定結果のみを表示したい場合は、<span class="in">`coeftest`</span> コマンドを用いる。</span>
+<span id="cb18-240"><a href="#cb18-240" aria-hidden="true" tabindex="-1"></a>このコマンドは推定されたモデルオブジェクトと分散共分散行列を引数にとり、係数のt検定結果を表示する。</span>
 <span id="cb18-241"><a href="#cb18-241" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-244"><a href="#cb18-244" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb18-245"><a href="#cb18-245" aria-hidden="true" tabindex="-1"></a><span class="fu">coeftest</span>(fm, <span class="at">vcov=</span>vcovHC)</span>
 <span id="cb18-246"><a href="#cb18-246" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb18-247"><a href="#cb18-247" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-248"><a href="#cb18-248" aria-hidden="true" tabindex="-1"></a>ロバスト分散のもとでの複数制約のワルド検定を実施するには, <span class="in">`waldtest`</span> コマンドにオプション <span class="in">`vcov=vcovHC`</span> を追加する.</span>
+<span id="cb18-248"><a href="#cb18-248" aria-hidden="true" tabindex="-1"></a>ロバスト分散のもとでの複数制約のワルド検定を実施するには、<span class="in">`waldtest`</span> コマンドにオプション <span class="in">`vcov=vcovHC`</span> を追加する。</span>
 <span id="cb18-249"><a href="#cb18-249" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-252"><a href="#cb18-252" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb18-253"><a href="#cb18-253" aria-hidden="true" tabindex="-1"></a><span class="fu">waldtest</span>(fm0,fm, <span class="at">vcov=</span>vcovHC)</span>
 <span id="cb18-254"><a href="#cb18-254" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb18-255"><a href="#cb18-255" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-256"><a href="#cb18-256" aria-hidden="true" tabindex="-1"></a>最近開発されたパッケージ <span class="in">`estimatr`</span> のコマンド <span class="in">`iv_robust`</span> を用いるとロバスト分散のもとの推定値が簡単に計算できる.</span>
-<span id="cb18-257"><a href="#cb18-257" aria-hidden="true" tabindex="-1"></a>このコマンドはデフォルトでロバスト標準誤差（HC2型）を計算し, オプション <span class="in">`diagnostics = TRUE`</span> で特定化検定も同時に実行できる.</span>
-<span id="cb18-258"><a href="#cb18-258" aria-hidden="true" tabindex="-1"></a>書式は <span class="in">`ivreg`</span> と同じである.</span>
+<span id="cb18-256"><a href="#cb18-256" aria-hidden="true" tabindex="-1"></a>最近開発されたパッケージ <span class="in">`estimatr`</span> のコマンド <span class="in">`iv_robust`</span> を用いるとロバスト分散のもとの推定値が簡単に計算できる。</span>
+<span id="cb18-257"><a href="#cb18-257" aria-hidden="true" tabindex="-1"></a>このコマンドはデフォルトでロバスト標準誤差（HC2型）を計算し、オプション <span class="in">`diagnostics = TRUE`</span> で特定化検定も同時に実行できる。</span>
+<span id="cb18-258"><a href="#cb18-258" aria-hidden="true" tabindex="-1"></a>書式は <span class="in">`ivreg`</span> と同じである。</span>
 <span id="cb18-259"><a href="#cb18-259" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-260"><a href="#cb18-260" aria-hidden="true" tabindex="-1"></a>以下のコマンドで <span class="in">`iv_robust`</span> による推定を実行し, <span class="in">`summary`</span> コマンドで結果を表示する.</span>
+<span id="cb18-260"><a href="#cb18-260" aria-hidden="true" tabindex="-1"></a>以下のコマンドで <span class="in">`iv_robust`</span> による推定を実行し、<span class="in">`summary`</span> コマンドで結果を表示する。</span>
 <span id="cb18-261"><a href="#cb18-261" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-264"><a href="#cb18-264" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb18-265"><a href="#cb18-265" aria-hidden="true" tabindex="-1"></a>fm2 <span class="ot">&lt;-</span> <span class="fu">iv_robust</span>(<span class="fu">log</span>(wage)<span class="sc">~</span>educ<span class="sc">+</span>exper<span class="sc">+</span><span class="fu">I</span>(exper<span class="sc">^</span><span class="dv">2</span>)<span class="sc">|</span></span>
@@ -1346,10 +1346,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb18-268"><a href="#cb18-268" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fm2)</span>
 <span id="cb18-269"><a href="#cb18-269" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb18-270"><a href="#cb18-270" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-271"><a href="#cb18-271" aria-hidden="true" tabindex="-1"></a>オプション <span class="in">`se_type = "stata"`</span> を用いればSTATAと同じ標準誤差の計算が可能である.</span>
-<span id="cb18-272"><a href="#cb18-272" aria-hidden="true" tabindex="-1"></a>また, ロバスト分散のもとで特定化検定（弱操作変数検定, Wu-Hausman検定, Sargan検定）が実行される.</span>
+<span id="cb18-271"><a href="#cb18-271" aria-hidden="true" tabindex="-1"></a>オプション <span class="in">`se_type = "stata"`</span> を用いればSTATAと同じ標準誤差の計算が可能である。</span>
+<span id="cb18-272"><a href="#cb18-272" aria-hidden="true" tabindex="-1"></a>また、ロバスト分散のもとで特定化検定（弱操作変数検定、Wu-Hausman検定、Sargan検定）が実行される。</span>
 <span id="cb18-273"><a href="#cb18-273" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-274"><a href="#cb18-274" aria-hidden="true" tabindex="-1"></a>分散均一性を仮定した古典的な標準誤差を計算したい場合は, オプション <span class="in">`se_type = "classical"`</span> を追加する.</span>
+<span id="cb18-274"><a href="#cb18-274" aria-hidden="true" tabindex="-1"></a>分散均一性を仮定した古典的な標準誤差を計算したい場合は、オプション <span class="in">`se_type = "classical"`</span> を追加する。</span>
 <span id="cb18-275"><a href="#cb18-275" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-278"><a href="#cb18-278" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb18-279"><a href="#cb18-279" aria-hidden="true" tabindex="-1"></a>fm3 <span class="ot">&lt;-</span> <span class="fu">iv_robust</span>(<span class="fu">log</span>(wage)<span class="sc">~</span>educ<span class="sc">+</span>exper<span class="sc">+</span><span class="fu">I</span>(exper<span class="sc">^</span><span class="dv">2</span>)<span class="sc">|</span></span>
@@ -1360,16 +1360,16 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb18-284"><a href="#cb18-284" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-285"><a href="#cb18-285" aria-hidden="true" tabindex="-1"></a><span class="fu">### 分散不均一の検定</span></span>
 <span id="cb18-286"><a href="#cb18-286" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-287"><a href="#cb18-287" aria-hidden="true" tabindex="-1"></a>誤差項が操作変数と独立なら条件付き分散は操作変数に無関係で均一である.</span>
-<span id="cb18-288"><a href="#cb18-288" aria-hidden="true" tabindex="-1"></a>これを利用して分散均一を帰無仮説に, 分散不均一を対立仮説にしたBP検定（Breusch-Pagan検定）が実行可能である.</span>
-<span id="cb18-289"><a href="#cb18-289" aria-hidden="true" tabindex="-1"></a>ただし, 通常のコマンド <span class="in">`bptest`</span> では正しく実行できないので, 手動で実行する必要がある.</span>
+<span id="cb18-287"><a href="#cb18-287" aria-hidden="true" tabindex="-1"></a>誤差項が操作変数と独立なら条件付き分散は操作変数に無関係で均一である。</span>
+<span id="cb18-288"><a href="#cb18-288" aria-hidden="true" tabindex="-1"></a>これを利用して分散均一を帰無仮説に、分散不均一を対立仮説にしたBP検定（Breusch-Pagan検定）が実行可能である。</span>
+<span id="cb18-289"><a href="#cb18-289" aria-hidden="true" tabindex="-1"></a>ただし、通常のコマンド <span class="in">`bptest`</span> では正しく実行できないので、手動で実行する必要がある。</span>
 <span id="cb18-290"><a href="#cb18-290" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-291"><a href="#cb18-291" aria-hidden="true" tabindex="-1"></a>以下の手順でBP検定を実行する:</span>
 <span id="cb18-292"><a href="#cb18-292" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-293"><a href="#cb18-293" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span><span class="in">`I`</span> 関数と <span class="in">`resid`</span> コマンドを用いて二段階最小二乗法の残差の二乗を計算する (<span class="in">`I(resid(fm)^2)`</span>)</span>
 <span id="cb18-294"><a href="#cb18-294" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span><span class="in">`lm`</span> コマンドで残差の二乗を外生変数および操作変数に回帰する</span>
-<span id="cb18-295"><a href="#cb18-295" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span><span class="in">`nrow`</span> コマンドで観測数を取得し, 決定係数 <span class="in">`r.squared`</span> を乗じてLM統計量を得る</span>
-<span id="cb18-296"><a href="#cb18-296" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span><span class="in">`pchisq`</span> コマンドで検定統計量のP値を計算する. 検定統計量は帰無仮説のもと, 説明変数の数（この例では4）の自由度のカイ二乗分布にしたがう</span>
+<span id="cb18-295"><a href="#cb18-295" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span><span class="in">`nrow`</span> コマンドで観測数を取得し、決定係数 <span class="in">`r.squared`</span> を乗じてLM統計量を得る</span>
+<span id="cb18-296"><a href="#cb18-296" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span><span class="in">`pchisq`</span> コマンドで検定統計量のP値を計算する。検定統計量は帰無仮説のもと、説明変数の数（この例では4）の自由度のカイ二乗分布にしたがう</span>
 <span id="cb18-297"><a href="#cb18-297" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-300"><a href="#cb18-300" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb18-301"><a href="#cb18-301" aria-hidden="true" tabindex="-1"></a>bpt <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">I</span>(<span class="fu">resid</span>(fm)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">~</span>exper <span class="sc">+</span> <span class="fu">I</span>(exper<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> motheduc <span class="sc">+</span> fatheduc,<span class="at">data=</span>df)</span>
