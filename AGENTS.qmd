@@ -1,0 +1,29 @@
+---
+title: "Repository Guidelines"
+format:
+  html: default
+  pdf: default
+---
+
+## Project Structure & Module Organization
+The bookdown source lives in root-level R Markdown chapters (`01-base.Rmd` through `10-panel.Rmd`). `index.Rmd` orchestrates the reading order. `figs/` stores exported figures referenced in chapters; use relative paths when embedding. HTML output builds into `docs/` for GitHub Pages. Auxiliary TeX snippets (`preamble.tex`, `afterbody.tex`) adjust styling, while `_bookdown.yml` and `_output.yml` define build targets and site metadata. Keep any new datasets or code libraries grouped logically; introduce a dedicated folder if the volume grows.
+
+## Build, Test, and Development Commands
+- `Rscript -e "bookdown::render_book('index.Rmd', 'bookdown::gitbook')"` — produce the HTML site under `docs/`.
+- `Rscript -e "bookdown::render_book('index.Rmd', 'bookdown::pdf_book')"` — compile the PDF; ensure a LaTeX toolchain (TinyTeX or TeX Live) is available.
+- `Rscript -e "bookdown::serve_book(dir = '.', output_dir = 'docs')"` — run a hot-reload server for drafting; rebuilds on save.
+- `quarto render AGENTS.qmd --to html` — build a standalone HTML copy of this guide; omit `--to` to emit all configured formats.
+
+Run the bookdown commands from the project root with an R 4.x environment and the required packages (`bookdown`, `tidyverse`, `knitr`). Install the Quarto CLI locally before using `quarto render`.
+
+## Coding Style & Naming Conventions
+Write R Markdown using tidyverse style: two-space indentation within code chunks, snake_case objects, and pipe-friendly verbs. Prefer chunk labels like `chapter-topic` (e.g., `regression-plot`) so caching stays clear. Wrap explanatory prose around 100 characters and keep math in LaTeX delimiters. Update `_output.yml` if you introduce new output formats or change theme options.
+
+## Testing Guidelines
+Before pushing, render the Gitbook target and skim the console for warnings about missing packages, labels, or cross-references. Use `bookdown::check_crossrefs()` inside an R session to catch broken links early. When chapters introduce code, include reproducible examples and set `eval = FALSE` for long-running or system-dependent chunks.
+
+## Commit & Pull Request Guidelines
+Commits in this repo are concise and chapter-scoped (`10-panel.Rmd`, `Update index.Rmd Chap1`). Follow that pattern: keep each commit focused on a single chapter or configuration change, and lead the message with the affected section. Pull requests should summarise reader-facing updates, note new dependencies, and attach rendered screenshots or point reviewers to a preview build (e.g., the `docs/` artifact). Link related issues when available.
+
+## Supporting Assets & Configuration
+Keep shared styles in `style.css` and `toc.css`; adjust these rather than inlining HTML tweaks. If you modify TeX hooks, rebuild the PDF afterward to confirm typography remains intact. For new fonts or language packs, add them to `preamble.tex` and document the requirement in the PR description.

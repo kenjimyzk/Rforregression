@@ -1,0 +1,256 @@
+---
+output: 
+  html_document
+editor_options: 
+  markdown: 
+    wrap: sentence
+---
+
+# パネル分析
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## データ
+
+```{r message=FALSE, warning=FALSE}
+library(AER)
+library(plm)
+data("Grunfeld", package = "plm")
+head(Grunfeld)
+```
+
+```{r}
+pdata <- pdata.frame(Grunfeld, index = c("firm", "year"))
+pdim(pdata)
+```
+
+## プーリングOLS
+
+次の重回帰モデルを考える.
+
+$$
+inv_{it} = \beta_0 + \beta_1 value_{it} + \beta_2 capital_{it} + u_{it}
+$$
+
+誤差項 $u_{it}$ は $i$ についても $t$ についても独立同一分布と仮定する.
+さらに誤差項は説明変数と独立である.
+この時、パネルデータにおいてもOLS推定法でパラメータは不偏である.
+ここでの重回帰モデルをプーリングOLSモデルと呼ぶことにする.
+
+この推計は以下のようにする.
+
+```{r}
+gp <- plm(inv ~ value + capital, data = pdata, model = "pooling")
+summary(gp)
+```
+
+これは以下の回帰分析と同じである.
+
+```{r}
+summary(lm(inv ~ value + capital, data = pdata))
+```
+
+## 固定効果 (平均差分法)
+
+次の重回帰モデルを考える.
+$$
+inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}
+$$ この $\alpha_i$ は個別固定効果と呼ばれている.
+$\alpha_i$ は時間 $t$ に対して一定である.
+$\alpha_i$ は誤差項と相関があるもしれない.
+この個別固定効果を持つ重回帰モデルを固定効果モデルと呼ぶことにする.
+
+それぞれの時間平均をとれば以下になる.
+$$
+\bar{inv}_{i} = \beta_1 \bar{value}_{i} + \beta_2 \bar{capital}_{i} +\alpha_i  + \bar{u}_{i}
+$$
+
+そして，それぞれの観測値を時間平均で差し引けば以下のように $\alpha_i$ は消去される.
+$$
+inv_{it}-\overline{inv}_{i} = \beta_1 (value_{it}-\overline{value}_{i}) + \beta_2 (capital_{it}-\overline{capital}_{i})  + \bar{u}_{i} -\bar{u}_{i}
+$$ このように変換して回帰分析すれば $\alpha_i$ は誤差項と相関があっても一致推定量である.
+このような推定方法を**平均差分法**という.
+
+この推計は以下のようにする.
+
+```{r}
+gi <- plm(inv ~ value + capital, data = pdata, model = "within")
+summary(gi)
+```
+
+個別固定効果は以下のコマンドで確かめられる.
+
+```{r}
+fixef(gi)
+```
+
+これは以下の回帰分析と同じである.
+
+```{r}
+summary(lm(inv ~ value + capital+0+factor(firm), data = pdata))
+```
+
+決定係数が大きく異なっていることに注意されたい.
+
+個別固定効果が有効かどうかは以下の検定を実施すればよい.
+
+```{r}
+pFtest(gi,gp)
+```
+
+### 時間効果モデル
+
+次のモデルを考える.
+$$
+inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it}+ \gamma_t +\alpha_i + u_{it}
+$$ この $\gamma_t$ は時間固定効果と呼ばれている.
+ここでは個別固定効果と時間固定効果の2つの固定効果を持つ重回帰モデルを**時間効果モデル**と呼ぶことにする.
+
+この推計は以下のようにする.
+
+```{r}
+gi2 <- plm(inv ~ value + capital, data = pdata, effect="twoways",model = "within")
+summary(gi2)
+```
+
+それぞれの固定効果は以下になる.
+
+```{r}
+fixef(gi2, effect = "individual")
+fixef(gi2, effect = "time")
+```
+
+これは以下の回帰分析と同じである.
+
+```{r}
+summary(lm(inv ~ value + capital+0+factor(firm)+factor(year), data = pdata))
+```
+
+決定係数が大きく異なっていることに注意されたい.
+
+時間固定効果が有効かどうかは以下の検定を実施すればよい.
+
+```{r}
+pFtest(gi2, gi)
+```
+
+## 固定効果 (一階差分法)
+
+次のモデルを考える.
+$$
+inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}
+$$ この $\alpha_i$ は固定効果と呼ばれている.
+$\alpha_i$ は時間 $t$ に対して一定である.
+$\alpha_i$ は誤差項と相関があるもしれない.
+
+それぞれの階差をとれば $\alpha_i$ は消去できる.
+$$
+\Delta inv_{it} = \beta_1 \Delta value_{it} + \beta_2 \Delta capital_{it} + \Delta u_{it}
+$$
+
+このように変換して回帰分析すれば $\alpha_i$ は誤差項と相関があっても一致推定量である.
+
+この推計は以下のようにする.
+
+```{r}
+gf <- plm(inv ~ value + capital+0, data = pdata, model = "fd")
+summary(gf)
+```
+
+時間効果がある場合, 以下を実行する.
+
+```{r}
+gf2 <-plm(inv ~ value + capital+0+factor(year), data = pdata, model = "fd")
+summary(gf2)
+```
+
+時間固定効果が有効かどうかは以下の検定を実施すればよい.
+
+```{r}
+pFtest(gf2,gf)
+```
+
+### 平均差分法と一階差分法
+
+平均差分法と一階差分法は誤差項の仮定をどのようにおくかによって変わってくる.
+誤差項の階差をとることによって時間を通じて無相関になるなら一階差分法が望ましいであろう.
+しかしながら, 固定効果, 時間効果の値がきちんと計算して, それが経済学的解釈が可能なら, 平均差分法が望ましい.
+さらに他のプーリングOLSの仮定と変量効果モデルとの比較の意味でも平均差分法がよく使われる.
+
+なお時間が2期間のパネルデータのとき, 平均差分法も一階差分法も計算値は同じである.
+たとえば $t=2$のときの変数 $x_{it}$ の平均差分値は $$
+x_{2t}-\bar{x}_i=x_{2t}-\frac{x_{i1}+x_{i2}}{2}=\frac{x_{i2}-x_{i1}}{2}
+$$ となる.
+
+## 変量効果
+
+次のモデルを考える.
+$$
+inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}
+$$ この $\alpha_i$ は時間 $t$ について一定であるが, $i$ について独立同一分布の確率変数にしたがう.
+さらに $\alpha_i$ は説明変数と無相関である時, この $\alpha_i$ は個別変量効果と呼ばれている.
+個別固定効果は説明変数と無相関を仮定していない.
+. この個別変量効果を持つ重回帰モデルを変量効果モデルと呼ぶことにする.
+
+変量効果モデルは次のコマンドで実施する.
+
+```{r}
+gr <- plm(inv ~ value + capital, data = pdata, model = "random")
+summary(gr)
+```
+
+変量効果は以下のコマンドで確かめられる.
+
+```{r}
+ranef(gr)
+```
+
+### ハウスマン検定
+
+帰無仮説が変量効果モデル, 対立仮説が固定効果モデルの検定はハウスマン検定を実施する.
+ハウスマン検定は以下で実施する.
+
+```{r}
+phtest(gi,gr)
+```
+
+## クラスターロバスト分散
+
+固定効果モデルにおいて, 分散不均一が疑われる場合, ではクラスターロバスト分散を用いる.
+時間効果がない場合は以下の様にする.
+
+```{r}
+coeftest(gi,vcov=vcovHC(gi,type="sss"))
+```
+
+分散不均一が疑われる場合, クラスターロバスト分散を用いる.
+時間効果がある場合は以下の様にする.
+
+```{r}
+coeftest(gi2,vcov=vcovHC(gi2,type="sss"))
+```
+
+STATA の計算結果に合わせるには次のように実施する必要がある.
+
+```{r}
+git <- update(gi, .~. + factor(year))
+coeftest(git,vcov=vcovHC(git,type="sss"))
+```
+
+どちらを採用するかによって結果が変わってしまうので注意されたい.
+
+### 分散不均一の検定
+
+固定効果モデルにおいて, 分散不均一かどうかを検定するには以下のようにすればよい.
+
+```{r}
+bptest(inv ~ value + capital + factor(firm), data=pdata)
+```
+
+時間効果モデルの場合, 以下のようにすればよい.
+
+```{r}
+bptest(inv ~ value + capital + factor(firm) + factor(year),data=pdata)
+```
