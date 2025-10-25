@@ -1,0 +1,63 @@
+project:
+  type: book
+  output-dir: docs
+
+book:
+  title: "R と RStudio"
+  author: "宮﨑憲治"
+  date: today
+  language: ja
+  chapters:
+    - index.qmd
+    - 01-base.qmd
+    - 02-rstudio.qmd
+    - 03-vector.qmd
+    - 04-dataframe.qmd
+    - 05-datainput.qmd
+    - 06-datawrangling.qmd
+    - 07-regression1.qmd
+    - 08-regression2.qmd
+    - 09-ivreg.qmd
+    - 10-panel.qmd
+
+# bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+    css: style.css
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    code-fold: false
+    code-tools: true
+  pdf:
+    documentclass: bxjsbook
+    classoption:
+      - ja=standard
+      - xelatex
+    pdf-engine: xelatex
+    include-in-header: preamble.tex
+    include-after-body: afterbody.tex
+    toc: true
+    number-sections: true
+    keep-tex: true
+
+knitr:
+  opts_chunk:
+    echo: true
+    collapse: true
+    warning: false
+    message: false
+
+crossref:
+  fig-prefix: "図"
+  tbl-prefix: "表"
+  eq-prefix: "式"
+  thm-prefix: "定理"
+  lem-prefix: "補題"
+  def-prefix: "定義"
+  cor-prefix: "系"
+  prp-prefix: "命題"
+
+lang: ja
