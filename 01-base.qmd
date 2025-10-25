@@ -11,23 +11,39 @@ knitr::opts_chunk$set(echo = TRUE, collapse=TRUE)
 ```
 
 # 基本
-R の基礎を学ぶには、次の 2 つのオンライン教材がおすすめである。
+R の基礎を学ぶには、次のオンライン教材が役立つ（2025 年時点）。
 
-https://rstudio.cloud/learn/primers
+- Posit Cloud Primers（旧 RStudio Primers）  
+  https://posit.cloud/learn/primers  
+  インタラクティブな演習を通じて R の基礎から tidyverse まで幅広く学べる。英語のみの提供だが、無料アカウントで主要コンテンツを利用できる。
+- Posit Academy  
+  https://academy.posit.co/  
+  Posit 社が提供する体系的な e ラーニングプログラム。動画とハンズオン課題で R とデータサイエンスを段階的に学べる（英語、要アカウント）。
+- swirl（R コンソール内で動作する対話型チュートリアル）  
+  https://swirlstats.com/  
+  R のコンソールに組み込んで利用する教材で、コマンドを入力しながら学習できる。コミュニティ制作のレッスンには日本語訳もある。
+- R for Data Science, 2nd Edition（オンライン書籍）  
+  https://r4ds.hadley.nz/  
+  R と tidyverse のモダンな実践書。ブラウザで無料公開され、Posit Cloud のサンプルプロジェクトからコードをすぐ試せる。
 
-ただし、いずれも英語で提供されている。
+日本語で要点を確認したい場合は、以下のリソースが便利である。
 
+- R for Data Science 日本語版（第 1 版）  
+  https://r4ds-jp.netlify.app/  
+  コミュニティによる翻訳。基礎からデータ可視化、tidyverse の使い方まで日本語で学べる。
+- Posit のチートシート集  
+  https://posit.co/resources/cheatsheets/  
+  公式の英語版に加え、従来の日本語版 PDF（例: https://www.rstudio.com/wp-content/uploads/2016/10/r-cheat-sheet-ja.pdf）も引き続き利用できる。
+- 統計 Web（統計数理研究所による解説サイト）  
+  https://statistics.co.jp/learning/  
+  R の導入から基本操作、グラフ作成までを日本語で丁寧に解説している。
 
-あわせて、以下の日本語版チートシートも参考になる。
-
-https://www.rstudio.com/wp-content/uploads/2016/10/r-cheat-sheet-ja.pdf
-
-R の解説動画としては次のシリーズが推奨されていたが、2020 年 10 月 25 日時点では一部のみが無料公開されている。内容は日本語で約 40 分、13 本に分けて配信されている。　
+動画教材としては、ドットインストールの「はじめての R プログラミング」講座（13 本、合計約 40 分）が 2024 年以降も公開されており、基本編は無料で視聴できる。　
 
 http://dotinstall.com/lessons/basic_r
 
 
-このほかにも YouTube には多数の解説動画がある。
+このほかにも、Posit 公式チャンネルや国内コミュニティが公開する YouTube 動画が随時更新されているため、興味のあるトピックで検索してみるとよい。
 
 
 ## 電卓としての R
@@ -97,7 +113,8 @@ choose(k=2, n=4)
 詳細は関数ごとのヘルプを参照するとよい。
 
 たとえば `choose` のヘルプは次のように参照できる。
-```
+```{r}
+#| eval: false
 help(choose)
 ?choose
 ```
