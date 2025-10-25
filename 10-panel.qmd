@@ -14,12 +14,22 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## データ
 
+パネル分析に必要なパッケージを読み込み, データセットを準備する.
+`library(AER)` コマンドで AER パッケージを, `library(plm)` コマンドで plm パッケージを読み込む.
+次に `data("Grunfeld", package = "plm")` コマンドで Grunfeld データセットを読み込む.
+Grunfeld データは企業の投資, 企業価値, 資本ストックに関するパネルデータである.
+`head(Grunfeld)` コマンドでデータの最初の数行を表示する.
+
 ```{r message=FALSE, warning=FALSE}
 library(AER)
 library(plm)
 data("Grunfeld", package = "plm")
 head(Grunfeld)
 ```
+
+次にパネルデータとして扱うために, `pdata.frame()` 関数を使用する.
+`pdata.frame(Grunfeld, index = c("firm", "year"))` コマンドで, firm (企業) と year (年) をインデックスとしてパネルデータフレームを作成し, `pdata` に格納する.
+`pdim(pdata)` コマンドでパネルデータの次元 (企業数, 時間数, 総観測数) を確認する.
 
 ```{r}
 pdata <- pdata.frame(Grunfeld, index = c("firm", "year"))
@@ -39,14 +49,17 @@ $$
 この時、パネルデータにおいてもOLS推定法でパラメータは不偏である.
 ここでの重回帰モデルをプーリングOLSモデルと呼ぶことにする.
 
-この推計は以下のようにする.
+プーリングOLS推定を実行するには, `plm()` 関数で `model = "pooling"` を指定する.
+`plm(inv ~ value + capital, data = pdata, model = "pooling")` コマンドで, inv を被説明変数, value と capital を説明変数としてプーリングOLS推定を行い, 結果を `gp` に格納する.
+`summary(gp)` コマンドで推定結果の詳細を表示する.
 
 ```{r}
 gp <- plm(inv ~ value + capital, data = pdata, model = "pooling")
 summary(gp)
 ```
 
-これは以下の回帰分析と同じである.
+このプーリングOLS推定は, 通常の `lm()` 関数を使った回帰分析と同じ結果を得る.
+`lm(inv ~ value + capital, data = pdata)` コマンドで通常のOLS推定を行い, `summary()` コマンドで結果を表示すると, 上記の `plm()` による結果と同一であることが確認できる.
 
 ```{r}
 summary(lm(inv ~ value + capital, data = pdata))
@@ -73,28 +86,32 @@ inv_{it}-\overline{inv}_{i} = \beta_1 (value_{it}-\overline{value}_{i}) + \beta_
 $$ このように変換して回帰分析すれば $\alpha_i$ は誤差項と相関があっても一致推定量である.
 このような推定方法を**平均差分法**という.
 
-この推計は以下のようにする.
+固定効果モデルを平均差分法で推定するには, `plm()` 関数で `model = "within"` を指定する.
+`plm(inv ~ value + capital, data = pdata, model = "within")` コマンドで固定効果推定を行い, 結果を `gi` に格納する.
+`summary(gi)` コマンドで推定結果の詳細を表示する.
 
 ```{r}
 gi <- plm(inv ~ value + capital, data = pdata, model = "within")
 summary(gi)
 ```
 
-個別固定効果は以下のコマンドで確かめられる.
+推定された個別固定効果 $\alpha_i$ の値を確認するには, `fixef()` 関数を使用する.
+`fixef(gi)` コマンドで各企業の固定効果の推定値を表示する.
 
 ```{r}
 fixef(gi)
 ```
 
-これは以下の回帰分析と同じである.
+この固定効果推定は, `lm()` 関数で企業ダミーを含めた回帰分析と同等である.
+`lm(inv ~ value + capital+0+factor(firm), data = pdata)` コマンドで, 定数項を除外 (`+0`) し企業ダミー (`factor(firm)`) を含めた推定を行い, `summary()` コマンドで結果を表示する.
+係数の推定値は同じであるが, 決定係数が大きく異なっていることに注意されたい.
 
 ```{r}
 summary(lm(inv ~ value + capital+0+factor(firm), data = pdata))
 ```
 
-決定係数が大きく異なっていることに注意されたい.
-
-個別固定効果が有効かどうかは以下の検定を実施すればよい.
+個別固定効果が統計的に有効かどうか (すなわち, 固定効果モデルとプーリングOLSモデルのどちらが適切か) を検定するには, F検定を実施する.
+`pFtest(gi,gp)` コマンドで, 固定効果モデル (`gi`) とプーリングOLSモデル (`gp`) を比較するF検定を実行する.
 
 ```{r}
 pFtest(gi,gp)
@@ -108,29 +125,33 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it}+ \gamma_t +\alpha_i + u_{it
 $$ この $\gamma_t$ は時間固定効果と呼ばれている.
 ここでは個別固定効果と時間固定効果の2つの固定効果を持つ重回帰モデルを**時間効果モデル**と呼ぶことにする.
 
-この推計は以下のようにする.
+時間効果モデルを推定するには, `plm()` 関数で `effect="twoways"` と `model = "within"` を指定する.
+`plm(inv ~ value + capital, data = pdata, effect="twoways", model = "within")` コマンドで, 個別固定効果と時間固定効果の両方を含むモデルを推定し, 結果を `gi2` に格納する.
+`summary(gi2)` コマンドで推定結果の詳細を表示する.
 
 ```{r}
 gi2 <- plm(inv ~ value + capital, data = pdata, effect="twoways",model = "within")
 summary(gi2)
 ```
 
-それぞれの固定効果は以下になる.
+推定された個別固定効果と時間固定効果をそれぞれ確認するには, `fixef()` 関数で `effect` 引数を指定する.
+`fixef(gi2, effect = "individual")` コマンドで各企業の固定効果を, `fixef(gi2, effect = "time")` コマンドで各年の固定効果を表示する.
 
 ```{r}
 fixef(gi2, effect = "individual")
 fixef(gi2, effect = "time")
 ```
 
-これは以下の回帰分析と同じである.
+この時間効果モデルの推定は, `lm()` 関数で企業ダミーと年ダミーの両方を含めた回帰分析と同等である.
+`lm(inv ~ value + capital+0+factor(firm)+factor(year), data = pdata)` コマンドで, 定数項を除外し企業ダミーと年ダミーを含めた推定を行い, `summary()` コマンドで結果を表示する.
+係数の推定値は同じであるが, 決定係数が大きく異なっていることに注意されたい.
 
 ```{r}
 summary(lm(inv ~ value + capital+0+factor(firm)+factor(year), data = pdata))
 ```
 
-決定係数が大きく異なっていることに注意されたい.
-
-時間固定効果が有効かどうかは以下の検定を実施すればよい.
+時間固定効果が統計的に有効かどうか (すなわち, 時間効果モデルと個別固定効果のみのモデルのどちらが適切か) を検定するには, F検定を実施する.
+`pFtest(gi2, gi)` コマンドで, 時間効果モデル (`gi2`) と個別固定効果のみのモデル (`gi`) を比較するF検定を実行する.
 
 ```{r}
 pFtest(gi2, gi)
@@ -152,21 +173,26 @@ $$
 
 このように変換して回帰分析すれば $\alpha_i$ は誤差項と相関があっても一致推定量である.
 
-この推計は以下のようにする.
+一階差分法による固定効果推定を実行するには, `plm()` 関数で `model = "fd"` を指定する.
+`plm(inv ~ value + capital+0, data = pdata, model = "fd")` コマンドで, 定数項を除外 (`+0`) して一階差分推定を行い, 結果を `gf` に格納する.
+`summary(gf)` コマンドで推定結果の詳細を表示する.
 
 ```{r}
 gf <- plm(inv ~ value + capital+0, data = pdata, model = "fd")
 summary(gf)
 ```
 
-時間効果がある場合, 以下を実行する.
+時間固定効果を含む一階差分モデルを推定する場合は, 年ダミーを追加する.
+`plm(inv ~ value + capital+0+factor(year), data = pdata, model = "fd")` コマンドで, 年ダミー (`factor(year)`) を含む一階差分推定を行い, 結果を `gf2` に格納する.
+`summary(gf2)` コマンドで推定結果の詳細を表示する.
 
 ```{r}
 gf2 <-plm(inv ~ value + capital+0+factor(year), data = pdata, model = "fd")
 summary(gf2)
 ```
 
-時間固定効果が有効かどうかは以下の検定を実施すればよい.
+時間固定効果が統計的に有効かどうかを検定するには, F検定を実施する.
+`pFtest(gf2,gf)` コマンドで, 時間効果を含むモデル (`gf2`) と含まないモデル (`gf`) を比較するF検定を実行する.
 
 ```{r}
 pFtest(gf2,gf)
@@ -192,16 +218,19 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}
 $$ この $\alpha_i$ は時間 $t$ について一定であるが, $i$ について独立同一分布の確率変数にしたがう.
 さらに $\alpha_i$ は説明変数と無相関である時, この $\alpha_i$ は個別変量効果と呼ばれている.
 個別固定効果は説明変数と無相関を仮定していない.
-. この個別変量効果を持つ重回帰モデルを変量効果モデルと呼ぶことにする.
+この個別変量効果を持つ重回帰モデルを変量効果モデルと呼ぶことにする.
 
-変量効果モデルは次のコマンドで実施する.
+変量効果モデルを推定するには, `plm()` 関数で `model = "random"` を指定する.
+`plm(inv ~ value + capital, data = pdata, model = "random")` コマンドで変量効果推定を行い, 結果を `gr` に格納する.
+`summary(gr)` コマンドで推定結果の詳細を表示する.
 
 ```{r}
 gr <- plm(inv ~ value + capital, data = pdata, model = "random")
 summary(gr)
 ```
 
-変量効果は以下のコマンドで確かめられる.
+推定された変量効果の値を確認するには, `ranef()` 関数を使用する.
+`ranef(gr)` コマンドで各企業の変量効果の推定値を表示する.
 
 ```{r}
 ranef(gr)
@@ -210,7 +239,8 @@ ranef(gr)
 ### ハウスマン検定
 
 帰無仮説が変量効果モデル, 対立仮説が固定効果モデルの検定はハウスマン検定を実施する.
-ハウスマン検定は以下で実施する.
+ハウスマン検定では, 変量効果モデルと固定効果モデルの係数の差が統計的に有意かどうかを検定する.
+`phtest(gi,gr)` コマンドで, 固定効果モデル (`gi`) と変量効果モデル (`gr`) のハウスマン検定を実行する.
 
 ```{r}
 phtest(gi,gr)
@@ -218,38 +248,43 @@ phtest(gi,gr)
 
 ## クラスターロバスト分散
 
-固定効果モデルにおいて, 分散不均一が疑われる場合, ではクラスターロバスト分散を用いる.
-時間効果がない場合は以下の様にする.
+固定効果モデルにおいて, 分散不均一が疑われる場合, クラスターロバスト分散を用いる.
+時間効果がない固定効果モデル (`gi`) について, クラスターロバスト標準誤差を計算するには, `coeftest()` 関数と `vcovHC()` 関数を組み合わせて使用する.
+`coeftest(gi, vcov=vcovHC(gi, type="sss"))` コマンドで, `type="sss"` を指定したクラスターロバスト分散を用いた係数検定を実行する.
 
 ```{r}
 coeftest(gi,vcov=vcovHC(gi,type="sss"))
 ```
 
-分散不均一が疑われる場合, クラスターロバスト分散を用いる.
-時間効果がある場合は以下の様にする.
+時間効果モデル (`gi2`) についても同様に, クラスターロバスト標準誤差を計算できる.
+`coeftest(gi2, vcov=vcovHC(gi2, type="sss"))` コマンドで, 時間効果モデルにおけるクラスターロバスト分散を用いた係数検定を実行する.
 
 ```{r}
 coeftest(gi2,vcov=vcovHC(gi2,type="sss"))
 ```
 
-STATA の計算結果に合わせるには次のように実施する必要がある.
+STATA の計算結果に合わせるには, 個別固定効果モデルに年ダミーを明示的に追加する必要がある.
+`update(gi, .~. + factor(year))` コマンドで, モデル `gi` に年ダミーを追加して更新し, `git` に格納する.
+その後 `coeftest(git, vcov=vcovHC(git, type="sss"))` コマンドで, クラスターロバスト分散を用いた係数検定を実行する.
+`gi2` と `git` のどちらを採用するかによって結果が変わってしまうので注意されたい.
 
 ```{r}
 git <- update(gi, .~. + factor(year))
 coeftest(git,vcov=vcovHC(git,type="sss"))
 ```
 
-どちらを採用するかによって結果が変わってしまうので注意されたい.
-
 ### 分散不均一の検定
 
-固定効果モデルにおいて, 分散不均一かどうかを検定するには以下のようにすればよい.
+固定効果モデルにおいて, 分散不均一かどうかを検定するには, Breusch-Pagan 検定を実施する.
+`bptest()` 関数を使用して, 企業ダミーを含むモデルで検定を行う.
+`bptest(inv ~ value + capital + factor(firm), data=pdata)` コマンドで, 個別固定効果モデルの分散不均一性を検定する.
 
 ```{r}
 bptest(inv ~ value + capital + factor(firm), data=pdata)
 ```
 
-時間効果モデルの場合, 以下のようにすればよい.
+時間効果モデルの場合, 企業ダミーと年ダミーの両方を含めて検定を行う.
+`bptest(inv ~ value + capital + factor(firm) + factor(year), data=pdata)` コマンドで, 時間効果モデルの分散不均一性を検定する.
 
 ```{r}
 bptest(inv ~ value + capital + factor(firm) + factor(year),data=pdata)
