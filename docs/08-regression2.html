@@ -179,7 +179,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./01-base.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">基本</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">R の基本</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -191,7 +191,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./03-vector.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">vector</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">ベクトル</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -209,7 +209,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./06-datawrangling.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">datawrangling</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">整然データ</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -317,10 +317,10 @@ window.Quarto = {
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="do">## z test of coefficients:</span></span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="do">##             Estimate Std. Error z value  Pr(&gt;|z|)    </span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept) 11.02661    0.36450 30.2516 &lt; 2.2e-16 ***</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="do">## x            1.95216    0.57795  3.3777 0.0007309 ***</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="do">## wT          -0.96739    0.46740 -2.0697 0.0384767 *  </span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="do">## x:wT         0.11278    0.76777  0.1469 0.8832179    </span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept) 11.09939    0.26017 42.6622 &lt; 2.2e-16 ***</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="do">## x            1.93071    0.43035  4.4863 7.245e-06 ***</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="do">## wT          -0.92569    0.36058 -2.5672   0.01025 *  </span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="do">## x:wT        -0.27140    0.63831 -0.4252   0.67070    </span></span>
 <span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
 <span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -334,7 +334,7 @@ window.Quarto = {
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Model 2: y ~ x * w</span></span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="do">##   Res.Df Df  Chisq Pr(&gt;Chisq)    </span></span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 1     98                         </span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 2     96  2 18.643  8.947e-05 ***</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 2     96  2 32.322  9.579e-08 ***</span></span>
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -349,7 +349,7 @@ window.Quarto = {
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Model 2: y ~ x * w</span></span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="do">##   Res.Df Df      F    Pr(&gt;F)    </span></span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 1     98                        </span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 2     96  2 9.3216 0.0001997 ***</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 2     96  2 16.161 8.923e-07 ***</span></span>
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -361,9 +361,9 @@ window.Quarto = {
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Model 1: y ~ x</span></span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Model 2: y ~ x * w</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="do">##   Res.Df    RSS Df Sum of Sq      F    Pr(&gt;F)    </span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 1     98 124.04                                  </span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 2     96 103.87  2    20.171 9.3216 0.0001997 ***</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="do">##   Res.Df     RSS Df Sum of Sq      F    Pr(&gt;F)    </span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 1     98 107.855                                  </span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 2     96  80.688  2    27.167 16.161 8.923e-07 ***</span></span>
 <span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
 <span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -373,7 +373,7 @@ window.Quarto = {
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>lmt <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">I</span>(<span class="fu">resid</span>(fm1))<span class="sc">~</span>w<span class="sc">*</span>x,<span class="at">data=</span>df)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>(lmt <span class="ot">&lt;-</span> <span class="fu">nrow</span>(df)<span class="sc">*</span><span class="fu">summary</span>(lmt)<span class="sc">$</span>r.squared)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 2.62098e-29</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 2.061264e-29</span></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pchisq</span>(lmt,<span class="at">df=</span><span class="dv">1</span>)</span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 1</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -390,10 +390,10 @@ window.Quarto = {
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="do">## t test of coefficients:</span></span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="do">##             Estimate Std. Error t value  Pr(&gt;|t|)    </span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept) 11.02661    0.30141 36.5832 &lt; 2.2e-16 ***</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="do">## x            1.95216    0.51841  3.7657 0.0002863 ***</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="do">## wT          -0.96739    0.41008 -2.3590 0.0203483 *  </span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="do">## x:wT         0.11278    0.71108  0.1586 0.8743144    </span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept) 11.09939    0.23176 47.8919 &lt; 2.2e-16 ***</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="do">## x            1.93071    0.35925  5.3742 5.382e-07 ***</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="do">## wT          -0.92569    0.33875 -2.7326   0.00748 ** </span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="do">## x:wT        -0.27140    0.62498 -0.4342   0.66508    </span></span>
 <span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
 <span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -405,10 +405,10 @@ window.Quarto = {
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="do">## t test of coefficients:</span></span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="do">##             Estimate Std. Error t value  Pr(&gt;|t|)    </span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept) 11.02661    0.29272 37.6700 &lt; 2.2e-16 ***</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="do">## x            1.95216    0.50357  3.8766 0.0001938 ***</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="do">## wT          -0.96739    0.39881 -2.4257 0.0171466 *  </span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="do">## x:wT         0.11278    0.68888  0.1637 0.8703000    </span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept) 11.09939    0.22645 49.0153 &lt; 2.2e-16 ***</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="do">## x            1.93071    0.34811  5.5463  2.57e-07 ***</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="do">## wT          -0.92569    0.32974 -2.8074   0.00605 ** </span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="do">## x:wT        -0.27140    0.60031 -0.4521   0.65222    </span></span>
 <span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
 <span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -420,8 +420,8 @@ window.Quarto = {
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="do">## z test of coefficients:</span></span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="do">##             Estimate Std. Error z value  Pr(&gt;|z|)    </span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept) 10.40949    0.22906 45.4448 &lt; 2.2e-16 ***</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="do">## x            2.23572    0.39423  5.6711 1.419e-08 ***</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept) 10.55527    0.19850 53.1742 &lt; 2.2e-16 ***</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="do">## x            2.07994    0.35927  5.7893 7.068e-09 ***</span></span>
 <span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
 <span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -435,7 +435,7 @@ window.Quarto = {
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Model 2: y ~ x * w</span></span>
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="do">##   Res.Df Df      F    Pr(&gt;F)    </span></span>
 <span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 1     98                        </span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 2     96  2 9.5582 0.0001638 ***</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 2     96  2 14.906 2.304e-06 ***</span></span>
 <span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
 <span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -449,7 +449,7 @@ window.Quarto = {
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Model 2: y ~ x * w</span></span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="do">##   Res.Df Df  Chisq Pr(&gt;Chisq)    </span></span>
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 1     98                         </span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 2     96  2 19.116  7.062e-05 ***</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 2     96  2 29.811  3.361e-07 ***</span></span>
 <span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
 <span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -466,13 +466,13 @@ window.Quarto = {
 <span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
 <span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
 <span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="do">##             Estimate Std. Error t value  Pr(&gt;|t|) CI Lower CI Upper DF</span></span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)  11.0266     0.2940 37.5072 3.816e-59  10.4430  11.6102 96</span></span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="do">## x             1.9522     0.5057  3.8602 2.054e-04   0.9483   2.9560 96</span></span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="do">## wT           -0.9674     0.4003 -2.4169 1.754e-02  -1.7619  -0.1729 96</span></span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="do">## x:wT          0.1128     0.6927  0.1628 8.710e-01  -1.2623   1.4878 96</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)  11.0994     0.2267 48.9532 1.070e-69   10.649  11.5495 96</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="do">## x             1.9307     0.3500  5.5160 2.929e-07    1.236   2.6255 96</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="do">## wT           -0.9257     0.3308 -2.7985 6.206e-03   -1.582  -0.2691 96</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="do">## x:wT         -0.2714     0.6062 -0.4477 6.554e-01   -1.475   0.9320 96</span></span>
 <span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.3592 ,    Adjusted R-squared:  0.3391 </span></span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic:  18.5 on 3 and 96 DF,  p-value: 1.5e-09</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.4424 ,    Adjusted R-squared:  0.4249 </span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic: 31.23 on 3 and 96 DF,  p-value: 3.56e-14</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><code>lm_robust</code> コマンドは回帰分析を実行し, デフォルトでロバスト標準誤差を計算する. これにより <code>lm</code> と <code>coeftest</code> を別々に実行する手間が省ける.</p>
 <p>オプション　<code>se_type = "stata"</code> を用いればSTATAと同じ計算が可能である.</p>
@@ -488,13 +488,13 @@ window.Quarto = {
 <span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
 <span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
 <span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="do">##             Estimate Std. Error t value  Pr(&gt;|t|) CI Lower CI Upper DF</span></span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)  11.0266     0.3645 30.2516 7.056e-51  10.3031 11.75013 96</span></span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="do">## x             1.9522     0.5779  3.3777 1.057e-03   0.8049  3.09938 96</span></span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="do">## wT           -0.9674     0.4674 -2.0697 4.116e-02  -1.8952 -0.03961 96</span></span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="do">## x:wT          0.1128     0.7678  0.1469 8.835e-01  -1.4112  1.63680 96</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)  11.0994     0.2602 42.6622 3.266e-64   10.583  11.6158 96</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="do">## x             1.9307     0.4304  4.4863 2.011e-05    1.076   2.7849 96</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="do">## wT           -0.9257     0.3606 -2.5672 1.180e-02   -1.641  -0.2099 96</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="do">## x:wT         -0.2714     0.6383 -0.4252 6.717e-01   -1.538   0.9956 96</span></span>
 <span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.3592 ,    Adjusted R-squared:  0.3391 </span></span>
-<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic: 17.93 on 3 and 96 DF,  p-value: 2.545e-09</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.4424 ,    Adjusted R-squared:  0.4249 </span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic: 25.38 on 3 and 96 DF,  p-value: 3.55e-12</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>オプション <code>se_type = "classical"</code> を指定すると, 通常の（ロバストでない）標準誤差を計算する. これは <code>lm</code> コマンドの結果と同じである.</p>
 </section>
@@ -506,9 +506,9 @@ window.Quarto = {
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>bpt <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">I</span>(<span class="fu">resid</span>(fm1)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">~</span>w<span class="sc">*</span>x,<span class="at">data=</span>df)</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>(bpt <span class="ot">&lt;-</span><span class="fu">nrow</span>(df)<span class="sc">*</span><span class="fu">summary</span>(bpt)<span class="sc">$</span>r.squared)</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 1.521527</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.6434183</span></span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pchisq</span>(bpt,<span class="at">df=</span><span class="dv">3</span>)</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.6773109</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.8864247</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>最初の行では, <code>fm1</code> の残差の二乗（<code>resid(fm1)^2</code>）を被説明変数とし, <code>w*x</code> を説明変数として回帰分析を実行している. <code>I()</code> 関数は, 数式内で算術演算を実行するために用いる. 2行目では, その決定係数に観測数を掛けてBP検定統計量を計算している. 3行目では, 自由度3（説明変数の数）のカイ二乗分布のもとでP値を計算している.</p>
 <p>ここでの例ではP値が5%を超えているので帰無仮説を棄却できないので, 分散均一を仮定してよいことが示唆されている.</p>
@@ -519,16 +519,16 @@ window.Quarto = {
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="do">##  studentized Breusch-Pagan test</span></span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
 <span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="do">## data:  fm1</span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="do">## BP = 1.5215, df = 3, p-value = 0.6773</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="do">## BP = 0.64342, df = 3, p-value = 0.8864</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><code>bptest</code> コマンドは自動的にBP検定統計量とP値を計算してくれる.</p>
 <p>これまでのBPテストは誤差項の分散が説明変数の線形関係あることを暗黙に仮定している. 非線形性を考慮するために説明変数の二次項を導入した分散不均一性の検定をホワイト検定という. 説明変数が複数ある場合ホワイト検定は煩雑になるため, 被説明変数の予測値を使って計算することがある. そのときホワイトテストは以下で実施する.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>wht <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">I</span>(<span class="fu">resid</span>(fm1)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">~</span><span class="fu">fitted</span>(fm1)<span class="sc">+</span><span class="fu">I</span>(<span class="fu">fitted</span>(fm1)<span class="sc">^</span><span class="dv">2</span>),<span class="at">data=</span>df)</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>(wht <span class="ot">&lt;-</span> <span class="fu">nrow</span>(df)<span class="sc">*</span><span class="fu">summary</span>(wht)<span class="sc">$</span>r.squared)</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.6128075</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 1.442085</span></span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pchisq</span>(wht,<span class="at">df=</span><span class="dv">2</span>)</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.7360894</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.4862451</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>最初の行では, 残差の二乗を被説明変数とし, 予測値（<code>fitted(fm1)</code>）とその二乗を説明変数として回帰分析を実行している. これにより分散の非線形性を検出できる. 2行目では, その決定係数に観測数を掛けてホワイト検定統計量を計算している. 3行目では, 自由度2のカイ二乗分布のもとでP値を計算している.</p>
 <p>ホワイト検定でも分散均一が示唆されている.</p>
@@ -539,7 +539,7 @@ window.Quarto = {
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="do">##  studentized Breusch-Pagan test</span></span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
 <span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="do">## data:  fm1</span></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="do">## BP = 0.61281, df = 2, p-value = 0.7361</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="do">## BP = 1.4421, df = 2, p-value = 0.4862</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>このコマンドは上記の手動計算と同じ結果を返す.</p>
 <p>このように分散均一性は検定することが可能であるが, そもそも分散均一が疑われる場合は, ロバスト分散で推定するので十分であるため最近の実証分析ではこの検定は実施されない.</p>

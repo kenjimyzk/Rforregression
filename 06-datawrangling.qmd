@@ -59,7 +59,7 @@ mtcars_tbl |>
 ```{r}
 mtcars_tbl |> 
   select(model, mpg, disp) |> 
-  rename(速度 = mpg, 距離 = disp) |> 
+  rename(`速度` = mpg, `距離` = disp) |> 
   slice_head(n = 6)
 ```
 
@@ -162,8 +162,7 @@ full_join(dfx, dfy, by = "id")
 ```{r}
 inner_join(dfx, dfy, by = "id")
 ```
-より複雑な条件で結合したい場合は `join_by()` を使うと柔軟に定義できる。
-複雑な条件で結合したい場合は `join_by()` を使うと柔軟に定義できる。
+複雑な条件で結合する場合は `join_by()` を使うと柔軟に定義できる。
 
 ## tidyr
 
@@ -212,12 +211,13 @@ df_wide |>
 cars |> 
   as_tibble() |> 
   pivot_longer(everything(), names_to = "variable", values_to = "value") |> 
+  group_by(variable) |>
   summarise(
     nobs = n(),
     avg  = mean(value),
-    sd   = sd(value),
-    .by  = variable
-  )
+    sd   = sd(value)
+  ) |>
+  ungroup()
 # 欠損を除外したいときは mean(value, na.rm = TRUE) のように na.rm を付ける
 ```
 
@@ -225,13 +225,22 @@ cars |>
 ```{r}
 tab <- cars |> 
   as_tibble() |> 
-  rename(距離 = dist, 速度 = speed) |> 
-  pivot_longer(everything(), names_to = "変数", values_to = "value") |> 
+  pivot_longer(c(dist, speed), names_to = "variable", values_to = "value") |> 
+  group_by(variable) |>
   summarise(
-    観測数   = n(),
-    平均     = mean(value),
-    標準偏差 = sd(value),
-    .by      = 変数
+    nobs = n(),
+    avg  = mean(value),
+    sd   = sd(value)
+  ) |>
+  ungroup() |>
+  mutate(
+    `変数` = dplyr::recode(variable, dist = "距離", speed = "速度")
+  ) |>
+  select(
+    `変数`,
+    `観測数`   = nobs,
+    `平均`     = avg,
+    `標準偏差` = sd
   )
 tab |> slice_head(n = 6)
 ```

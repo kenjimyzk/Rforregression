@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>R と RStudio - 4&nbsp; vector</title>
+<title>R と RStudio - 4&nbsp; ベクトル</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -116,7 +116,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="サイドバーを切り替える" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./03-vector.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">vector</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./03-vector.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">ベクトル</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="サイドバーを切り替える" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -150,7 +150,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./01-base.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">基本</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">R の基本</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -162,7 +162,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./03-vector.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">vector</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">ベクトル</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -180,7 +180,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./06-datawrangling.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">datawrangling</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">整然データ</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -217,17 +217,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">目次</h2>
    
   <ul>
-  <li><a href="#ベクトル" id="toc-ベクトル" class="nav-link active" data-scroll-target="#ベクトル"><span class="header-section-number">5</span> ベクトル</a>
-  <ul class="collapse">
-  <li><a href="#ベクトル-1" id="toc-ベクトル-1" class="nav-link" data-scroll-target="#ベクトル-1"><span class="header-section-number">5.1</span> ベクトル</a></li>
-  <li><a href="#算術演算子" id="toc-算術演算子" class="nav-link" data-scroll-target="#算術演算子"><span class="header-section-number">5.2</span> 算術演算子</a></li>
-  <li><a href="#論理演算子" id="toc-論理演算子" class="nav-link" data-scroll-target="#論理演算子"><span class="header-section-number">5.3</span> 論理演算子</a></li>
-  <li><a href="#比較演算子" id="toc-比較演算子" class="nav-link" data-scroll-target="#比較演算子"><span class="header-section-number">5.4</span> 比較演算子</a></li>
-  <li><a href="#要素" id="toc-要素" class="nav-link" data-scroll-target="#要素"><span class="header-section-number">5.5</span> 要素</a></li>
-  <li><a href="#関数" id="toc-関数" class="nav-link" data-scroll-target="#関数"><span class="header-section-number">5.6</span> 関数</a></li>
-  <li><a href="#規則的なベクトル" id="toc-規則的なベクトル" class="nav-link" data-scroll-target="#規則的なベクトル"><span class="header-section-number">5.7</span> 規則的なベクトル</a></li>
-  <li><a href="#乱数ベクトル" id="toc-乱数ベクトル" class="nav-link" data-scroll-target="#乱数ベクトル"><span class="header-section-number">5.8</span> 乱数ベクトル</a></li>
-  </ul></li>
+  <li><a href="#ベクトル" id="toc-ベクトル" class="nav-link active" data-scroll-target="#ベクトル"><span class="header-section-number">4.1</span> ベクトル</a></li>
+  <li><a href="#算術演算子" id="toc-算術演算子" class="nav-link" data-scroll-target="#算術演算子"><span class="header-section-number">4.2</span> 算術演算子</a></li>
+  <li><a href="#論理演算子" id="toc-論理演算子" class="nav-link" data-scroll-target="#論理演算子"><span class="header-section-number">4.3</span> 論理演算子</a></li>
+  <li><a href="#比較演算子" id="toc-比較演算子" class="nav-link" data-scroll-target="#比較演算子"><span class="header-section-number">4.4</span> 比較演算子</a></li>
+  <li><a href="#要素" id="toc-要素" class="nav-link" data-scroll-target="#要素"><span class="header-section-number">4.5</span> 要素</a></li>
+  <li><a href="#関数" id="toc-関数" class="nav-link" data-scroll-target="#関数"><span class="header-section-number">4.6</span> 関数</a></li>
+  <li><a href="#規則的なベクトル" id="toc-規則的なベクトル" class="nav-link" data-scroll-target="#規則的なベクトル"><span class="header-section-number">4.7</span> 規則的なベクトル</a></li>
+  <li><a href="#乱数ベクトル" id="toc-乱数ベクトル" class="nav-link" data-scroll-target="#乱数ベクトル"><span class="header-section-number">4.8</span> 乱数ベクトル</a></li>
   </ul>
 </nav>
     </div>
@@ -236,7 +233,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">vector</span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> コード</button></div></div>
+<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">ベクトル</span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> コード</button></div></div>
 </div>
 
 
@@ -253,10 +250,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="ベクトル" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> ベクトル</h1>
-<section id="ベクトル-1" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="ベクトル-1"><span class="header-section-number">5.1</span> ベクトル</h2>
+<section id="ベクトル" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="ベクトル"><span class="header-section-number">4.1</span> ベクトル</h2>
 <p>R では同じ型の値を集めたものをベクトルという。 ベクトルは <code>c()</code>（concatenate の略）を用いて構成する。既存のベクトルを渡すと、ひと続きのベクトルとして結合される点にも注意する。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>(num<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">7</span>,<span class="dv">9</span>))</span>
@@ -288,8 +283,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] "double"</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="算術演算子" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="算術演算子"><span class="header-section-number">5.2</span> 算術演算子</h2>
+<section id="算術演算子" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="算術演算子"><span class="header-section-number">4.2</span> 算術演算子</h2>
 <p>四則演算などの算術演算子は要素ごとに適用される。<code>^</code> は累乗、<code>%%</code> は剰余、<code>%/%</code> は整数除算（切り捨て）を表す。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>a<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">3</span>)</span>
@@ -334,8 +329,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>ただし、短いベクトルの長さが長いベクトルの長さの約数でない場合は警告が表示される。</p>
 </section>
-<section id="論理演算子" class="level2" data-number="5.3">
-<h2 data-number="5.3" class="anchored" data-anchor-id="論理演算子"><span class="header-section-number">5.3</span> 論理演算子</h2>
+<section id="論理演算子" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="論理演算子"><span class="header-section-number">4.3</span> 論理演算子</h2>
 <p>論理値を入力に取り、論理値を返す演算子を論理演算子という。 R では、否定 (<code>!</code>)、論理和 (<code>|</code>)、論理積 (<code>&amp;</code>) などの演算子が用意されている。 これらの演算子も要素ごとに評価される。 <code>||</code> や <code>&amp;&amp;</code> といった二重記号の演算子は、最初の要素のみを評価する短絡演算子であり、条件分岐で判定回数を抑えたいときに使う。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>logic1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>)</span>
@@ -355,8 +350,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] FALSE</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="比較演算子" class="level2" data-number="5.4">
-<h2 data-number="5.4" class="anchored" data-anchor-id="比較演算子"><span class="header-section-number">5.4</span> 比較演算子</h2>
+<section id="比較演算子" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="比較演算子"><span class="header-section-number">4.4</span> 比較演算子</h2>
 <p>2 つの値を比較して論理値を返す演算子を比較演算子という。 R では等しいかどうかを判定する <code>==</code>、大小を判定する <code>&gt;</code> や <code>&lt;</code> などが用意されている。 これらもベクトルの要素ごとに評価される。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>vec1 <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span></span>
@@ -388,8 +383,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] FALSE FALSE FALSE  TRUE</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="要素" class="level2" data-number="5.5">
-<h2 data-number="5.5" class="anchored" data-anchor-id="要素"><span class="header-section-number">5.5</span> 要素</h2>
+<section id="要素" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="要素"><span class="header-section-number">4.5</span> 要素</h2>
 <p>ベクトルの要素は角括弧で取り出す。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>num <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">7</span>,<span class="dv">9</span>)</span>
@@ -451,8 +446,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>現在の名前一覧は <code>names()</code> で取得でき、不要になった場合は <code>names(num) &lt;- NULL</code> のようにして削除する。</p>
 </section>
-<section id="関数" class="level2" data-number="5.6">
-<h2 data-number="5.6" class="anchored" data-anchor-id="関数"><span class="header-section-number">5.6</span> 関数</h2>
+<section id="関数" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="関数"><span class="header-section-number">4.6</span> 関数</h2>
 <p>ベクトルを引数に取る関数も多数用意されており、和や積などを簡単に計算できる。累積和（<code>cumsum()</code>）や累積積（<code>cumprod()</code>）は系列データの推移を追跡したいときに便利である。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>x<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>)</span>
@@ -502,8 +497,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 3</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="規則的なベクトル" class="level2" data-number="5.7">
-<h2 data-number="5.7" class="anchored" data-anchor-id="規則的なベクトル"><span class="header-section-number">5.7</span> 規則的なベクトル</h2>
+<section id="規則的なベクトル" class="level2" data-number="4.7">
+<h2 data-number="4.7" class="anchored" data-anchor-id="規則的なベクトル"><span class="header-section-number">4.7</span> 規則的なベクトル</h2>
 <p><code>1:5</code> のような規則的なベクトルを柔軟に作成するのに <code>seq</code> を用いるとよい。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">5</span></span>
@@ -536,8 +531,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] "A" "B"</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="乱数ベクトル" class="level2" data-number="5.8">
-<h2 data-number="5.8" class="anchored" data-anchor-id="乱数ベクトル"><span class="header-section-number">5.8</span> 乱数ベクトル</h2>
+<section id="乱数ベクトル" class="level2" data-number="4.8">
+<h2 data-number="4.8" class="anchored" data-anchor-id="乱数ベクトル"><span class="header-section-number">4.8</span> 乱数ベクトル</h2>
 <p>ベクトルを無作為に並べ替えたり抽出したりするには <code>sample()</code> を使う。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">10</span>)</span>
@@ -575,7 +570,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <!-- -->
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -1052,281 +1046,280 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">ソースコード</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="sourceCode" id="cb35" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "vector"</span></span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span><span class="co"> html_document</span></span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="fu"># ベクトル</span></span>
-<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup</span></span>
-<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
-<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">echo =</span> <span class="cn">TRUE</span>, <span class="at">collapse=</span><span class="cn">TRUE</span>)</span>
-<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a><span class="fu">## ベクトル</span></span>
-<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a>R では同じ型の値を集めたものをベクトルという。</span>
-<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a>ベクトルは <span class="in">`c()`</span>（concatenate の略）を用いて構成する。既存のベクトルを渡すと、ひと続きのベクトルとして結合される点にも注意する。</span>
-<span id="cb35-20"><a href="#cb35-20" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-21"><a href="#cb35-21" aria-hidden="true" tabindex="-1"></a>(num<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">7</span>,<span class="dv">9</span>))</span>
-<span id="cb35-22"><a href="#cb35-22" aria-hidden="true" tabindex="-1"></a>(chr <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"cat"</span>,<span class="st">"dog"</span>,<span class="st">"cow"</span>))</span>
-<span id="cb35-23"><a href="#cb35-23" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-24"><a href="#cb35-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-25"><a href="#cb35-25" aria-hidden="true" tabindex="-1"></a>ベクトルには長さという属性 (attribute) が付く。<span class="in">`length()`</span> で要素数を取得できるほか、<span class="in">`str()`</span> を使えばオブジェクトの構造をまとめて確認できる。</span>
-<span id="cb35-28"><a href="#cb35-28" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-29"><a href="#cb35-29" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(num)</span>
-<span id="cb35-30"><a href="#cb35-30" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(chr)</span>
-<span id="cb35-31"><a href="#cb35-31" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-32"><a href="#cb35-32" aria-hidden="true" tabindex="-1"></a>ベクトルはオブジェクトの基本単位であり、単一の値も長さ 1 のベクトルとみなせる。</span>
-<span id="cb35-33"><a href="#cb35-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-34"><a href="#cb35-34" aria-hidden="true" tabindex="-1"></a>型が混在している場合は、自動的に最も表現力の高い型へ変換される。強制変換の優先順位は、おおむね「論理値 → 数値 → 文字列」の順と覚えておくとよい。</span>
-<span id="cb35-35"><a href="#cb35-35" aria-hidden="true" tabindex="-1"></a>文字列が 1 つでも含まれると、すべて文字列に変換される。</span>
-<span id="cb35-36"><a href="#cb35-36" aria-hidden="true" tabindex="-1"></a>数値と論理値が混在している場合は、論理値が数値に強制変換され、<span class="in">`TRUE`</span> は 1、<span class="in">`FALSE`</span> は 0 になる。</span>
-<span id="cb35-37"><a href="#cb35-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-40"><a href="#cb35-40" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-41"><a href="#cb35-41" aria-hidden="true" tabindex="-1"></a>(x<span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">4</span>))</span>
-<span id="cb35-42"><a href="#cb35-42" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(x)</span>
-<span id="cb35-43"><a href="#cb35-43" aria-hidden="true" tabindex="-1"></a>(y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="cn">FALSE</span>,<span class="st">"4"</span>))</span>
-<span id="cb35-44"><a href="#cb35-44" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(y)</span>
-<span id="cb35-45"><a href="#cb35-45" aria-hidden="true" tabindex="-1"></a>(z <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="cn">FALSE</span>))</span>
-<span id="cb35-46"><a href="#cb35-46" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(z)</span>
-<span id="cb35-47"><a href="#cb35-47" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-48"><a href="#cb35-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-49"><a href="#cb35-49" aria-hidden="true" tabindex="-1"></a><span class="fu">## 算術演算子</span></span>
-<span id="cb35-50"><a href="#cb35-50" aria-hidden="true" tabindex="-1"></a>四則演算などの算術演算子は要素ごとに適用される。<span class="in">`^`</span> は累乗、<span class="in">`%%`</span> は剰余、<span class="in">`%/%`</span> は整数除算（切り捨て）を表す。</span>
-<span id="cb35-53"><a href="#cb35-53" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-54"><a href="#cb35-54" aria-hidden="true" tabindex="-1"></a>a<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">3</span>)</span>
-<span id="cb35-55"><a href="#cb35-55" aria-hidden="true" tabindex="-1"></a>b<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">7</span>)</span>
-<span id="cb35-56"><a href="#cb35-56" aria-hidden="true" tabindex="-1"></a>a<span class="sc">+</span>b</span>
-<span id="cb35-57"><a href="#cb35-57" aria-hidden="true" tabindex="-1"></a>a<span class="sc">-</span>b</span>
-<span id="cb35-58"><a href="#cb35-58" aria-hidden="true" tabindex="-1"></a>a<span class="sc">*</span>b</span>
-<span id="cb35-59"><a href="#cb35-59" aria-hidden="true" tabindex="-1"></a>a<span class="sc">/</span>b</span>
-<span id="cb35-60"><a href="#cb35-60" aria-hidden="true" tabindex="-1"></a>a<span class="sc">^</span>b</span>
-<span id="cb35-61"><a href="#cb35-61" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-62"><a href="#cb35-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-63"><a href="#cb35-63" aria-hidden="true" tabindex="-1"></a>片方がスカラーであっても、同じ長さのベクトルに再利用されて演算される。</span>
-<span id="cb35-66"><a href="#cb35-66" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-67"><a href="#cb35-67" aria-hidden="true" tabindex="-1"></a>a<span class="sc">+</span><span class="dv">2</span></span>
-<span id="cb35-68"><a href="#cb35-68" aria-hidden="true" tabindex="-1"></a>a<span class="dv">-2</span></span>
-<span id="cb35-69"><a href="#cb35-69" aria-hidden="true" tabindex="-1"></a>a<span class="sc">*</span><span class="dv">2</span></span>
-<span id="cb35-70"><a href="#cb35-70" aria-hidden="true" tabindex="-1"></a>a<span class="sc">/</span><span class="dv">2</span></span>
-<span id="cb35-71"><a href="#cb35-71" aria-hidden="true" tabindex="-1"></a>a<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb35-72"><a href="#cb35-72" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-73"><a href="#cb35-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-74"><a href="#cb35-74" aria-hidden="true" tabindex="-1"></a>長さが異なるベクトル同士を演算する場合、短い方のベクトルが自動的にリサイクルされて長さを揃える。</span>
-<span id="cb35-77"><a href="#cb35-77" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-78"><a href="#cb35-78" aria-hidden="true" tabindex="-1"></a>c<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)</span>
-<span id="cb35-79"><a href="#cb35-79" aria-hidden="true" tabindex="-1"></a>a<span class="sc">+</span>c</span>
-<span id="cb35-80"><a href="#cb35-80" aria-hidden="true" tabindex="-1"></a>a<span class="sc">-</span>c</span>
-<span id="cb35-81"><a href="#cb35-81" aria-hidden="true" tabindex="-1"></a>a<span class="sc">*</span>c</span>
-<span id="cb35-82"><a href="#cb35-82" aria-hidden="true" tabindex="-1"></a>a<span class="sc">/</span>c</span>
-<span id="cb35-83"><a href="#cb35-83" aria-hidden="true" tabindex="-1"></a>a<span class="sc">^</span>c</span>
-<span id="cb35-84"><a href="#cb35-84" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-85"><a href="#cb35-85" aria-hidden="true" tabindex="-1"></a>ただし、短いベクトルの長さが長いベクトルの長さの約数でない場合は警告が表示される。</span>
-<span id="cb35-86"><a href="#cb35-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-87"><a href="#cb35-87" aria-hidden="true" tabindex="-1"></a><span class="fu">## 論理演算子</span></span>
-<span id="cb35-88"><a href="#cb35-88" aria-hidden="true" tabindex="-1"></a>論理値を入力に取り、論理値を返す演算子を論理演算子という。</span>
-<span id="cb35-89"><a href="#cb35-89" aria-hidden="true" tabindex="-1"></a>R では、否定 (<span class="in">`!`</span>)、論理和 (<span class="in">`|`</span>)、論理積 (<span class="in">`&amp;`</span>) などの演算子が用意されている。</span>
-<span id="cb35-90"><a href="#cb35-90" aria-hidden="true" tabindex="-1"></a>これらの演算子も要素ごとに評価される。</span>
-<span id="cb35-91"><a href="#cb35-91" aria-hidden="true" tabindex="-1"></a><span class="in">`||`</span> や <span class="in">`&amp;&amp;`</span> といった二重記号の演算子は、最初の要素のみを評価する短絡演算子であり、条件分岐で判定回数を抑えたいときに使う。</span>
-<span id="cb35-92"><a href="#cb35-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-95"><a href="#cb35-95" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-96"><a href="#cb35-96" aria-hidden="true" tabindex="-1"></a>logic1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>)</span>
-<span id="cb35-97"><a href="#cb35-97" aria-hidden="true" tabindex="-1"></a>logic2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>)</span>
-<span id="cb35-98"><a href="#cb35-98" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span>logic1</span>
-<span id="cb35-99"><a href="#cb35-99" aria-hidden="true" tabindex="-1"></a>logic1 <span class="sc">|</span> logic2</span>
-<span id="cb35-100"><a href="#cb35-100" aria-hidden="true" tabindex="-1"></a>logic1 <span class="sc">&amp;</span> logic2</span>
-<span id="cb35-101"><a href="#cb35-101" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-102"><a href="#cb35-102" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-103"><a href="#cb35-103" aria-hidden="true" tabindex="-1"></a><span class="in">`all()`</span> はすべての要素が <span class="in">`TRUE`</span> かどうか、<span class="in">`any()`</span> は少なくとも 1 つが <span class="in">`TRUE`</span> かどうかを判定する。</span>
-<span id="cb35-104"><a href="#cb35-104" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-107"><a href="#cb35-107" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-108"><a href="#cb35-108" aria-hidden="true" tabindex="-1"></a><span class="fu">any</span>(logic1)</span>
-<span id="cb35-109"><a href="#cb35-109" aria-hidden="true" tabindex="-1"></a><span class="fu">all</span>(logic1)</span>
-<span id="cb35-110"><a href="#cb35-110" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span><span class="co"> html_document</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="fu"># ベクトル</span></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup</span></span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">echo =</span> <span class="cn">TRUE</span>, <span class="at">collapse=</span><span class="cn">TRUE</span>)</span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a><span class="fu">## ベクトル</span></span>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a>R では同じ型の値を集めたものをベクトルという。</span>
+<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a>ベクトルは <span class="in">`c()`</span>（concatenate の略）を用いて構成する。既存のベクトルを渡すと、ひと続きのベクトルとして結合される点にも注意する。</span>
+<span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-20"><a href="#cb35-20" aria-hidden="true" tabindex="-1"></a>(num<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">7</span>,<span class="dv">9</span>))</span>
+<span id="cb35-21"><a href="#cb35-21" aria-hidden="true" tabindex="-1"></a>(chr <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"cat"</span>,<span class="st">"dog"</span>,<span class="st">"cow"</span>))</span>
+<span id="cb35-22"><a href="#cb35-22" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-23"><a href="#cb35-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-24"><a href="#cb35-24" aria-hidden="true" tabindex="-1"></a>ベクトルには長さという属性 (attribute) が付く。<span class="in">`length()`</span> で要素数を取得できるほか、<span class="in">`str()`</span> を使えばオブジェクトの構造をまとめて確認できる。</span>
+<span id="cb35-27"><a href="#cb35-27" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-28"><a href="#cb35-28" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(num)</span>
+<span id="cb35-29"><a href="#cb35-29" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(chr)</span>
+<span id="cb35-30"><a href="#cb35-30" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-31"><a href="#cb35-31" aria-hidden="true" tabindex="-1"></a>ベクトルはオブジェクトの基本単位であり、単一の値も長さ 1 のベクトルとみなせる。</span>
+<span id="cb35-32"><a href="#cb35-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-33"><a href="#cb35-33" aria-hidden="true" tabindex="-1"></a>型が混在している場合は、自動的に最も表現力の高い型へ変換される。強制変換の優先順位は、おおむね「論理値 → 数値 → 文字列」の順と覚えておくとよい。</span>
+<span id="cb35-34"><a href="#cb35-34" aria-hidden="true" tabindex="-1"></a>文字列が 1 つでも含まれると、すべて文字列に変換される。</span>
+<span id="cb35-35"><a href="#cb35-35" aria-hidden="true" tabindex="-1"></a>数値と論理値が混在している場合は、論理値が数値に強制変換され、<span class="in">`TRUE`</span> は 1、<span class="in">`FALSE`</span> は 0 になる。</span>
+<span id="cb35-36"><a href="#cb35-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-39"><a href="#cb35-39" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-40"><a href="#cb35-40" aria-hidden="true" tabindex="-1"></a>(x<span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">4</span>))</span>
+<span id="cb35-41"><a href="#cb35-41" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(x)</span>
+<span id="cb35-42"><a href="#cb35-42" aria-hidden="true" tabindex="-1"></a>(y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="cn">FALSE</span>,<span class="st">"4"</span>))</span>
+<span id="cb35-43"><a href="#cb35-43" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(y)</span>
+<span id="cb35-44"><a href="#cb35-44" aria-hidden="true" tabindex="-1"></a>(z <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="cn">FALSE</span>))</span>
+<span id="cb35-45"><a href="#cb35-45" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(z)</span>
+<span id="cb35-46"><a href="#cb35-46" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-47"><a href="#cb35-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-48"><a href="#cb35-48" aria-hidden="true" tabindex="-1"></a><span class="fu">## 算術演算子</span></span>
+<span id="cb35-49"><a href="#cb35-49" aria-hidden="true" tabindex="-1"></a>四則演算などの算術演算子は要素ごとに適用される。<span class="in">`^`</span> は累乗、<span class="in">`%%`</span> は剰余、<span class="in">`%/%`</span> は整数除算（切り捨て）を表す。</span>
+<span id="cb35-52"><a href="#cb35-52" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-53"><a href="#cb35-53" aria-hidden="true" tabindex="-1"></a>a<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">3</span>)</span>
+<span id="cb35-54"><a href="#cb35-54" aria-hidden="true" tabindex="-1"></a>b<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">7</span>)</span>
+<span id="cb35-55"><a href="#cb35-55" aria-hidden="true" tabindex="-1"></a>a<span class="sc">+</span>b</span>
+<span id="cb35-56"><a href="#cb35-56" aria-hidden="true" tabindex="-1"></a>a<span class="sc">-</span>b</span>
+<span id="cb35-57"><a href="#cb35-57" aria-hidden="true" tabindex="-1"></a>a<span class="sc">*</span>b</span>
+<span id="cb35-58"><a href="#cb35-58" aria-hidden="true" tabindex="-1"></a>a<span class="sc">/</span>b</span>
+<span id="cb35-59"><a href="#cb35-59" aria-hidden="true" tabindex="-1"></a>a<span class="sc">^</span>b</span>
+<span id="cb35-60"><a href="#cb35-60" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-61"><a href="#cb35-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-62"><a href="#cb35-62" aria-hidden="true" tabindex="-1"></a>片方がスカラーであっても、同じ長さのベクトルに再利用されて演算される。</span>
+<span id="cb35-65"><a href="#cb35-65" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-66"><a href="#cb35-66" aria-hidden="true" tabindex="-1"></a>a<span class="sc">+</span><span class="dv">2</span></span>
+<span id="cb35-67"><a href="#cb35-67" aria-hidden="true" tabindex="-1"></a>a<span class="dv">-2</span></span>
+<span id="cb35-68"><a href="#cb35-68" aria-hidden="true" tabindex="-1"></a>a<span class="sc">*</span><span class="dv">2</span></span>
+<span id="cb35-69"><a href="#cb35-69" aria-hidden="true" tabindex="-1"></a>a<span class="sc">/</span><span class="dv">2</span></span>
+<span id="cb35-70"><a href="#cb35-70" aria-hidden="true" tabindex="-1"></a>a<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb35-71"><a href="#cb35-71" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-72"><a href="#cb35-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-73"><a href="#cb35-73" aria-hidden="true" tabindex="-1"></a>長さが異なるベクトル同士を演算する場合、短い方のベクトルが自動的にリサイクルされて長さを揃える。</span>
+<span id="cb35-76"><a href="#cb35-76" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-77"><a href="#cb35-77" aria-hidden="true" tabindex="-1"></a>c<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)</span>
+<span id="cb35-78"><a href="#cb35-78" aria-hidden="true" tabindex="-1"></a>a<span class="sc">+</span>c</span>
+<span id="cb35-79"><a href="#cb35-79" aria-hidden="true" tabindex="-1"></a>a<span class="sc">-</span>c</span>
+<span id="cb35-80"><a href="#cb35-80" aria-hidden="true" tabindex="-1"></a>a<span class="sc">*</span>c</span>
+<span id="cb35-81"><a href="#cb35-81" aria-hidden="true" tabindex="-1"></a>a<span class="sc">/</span>c</span>
+<span id="cb35-82"><a href="#cb35-82" aria-hidden="true" tabindex="-1"></a>a<span class="sc">^</span>c</span>
+<span id="cb35-83"><a href="#cb35-83" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-84"><a href="#cb35-84" aria-hidden="true" tabindex="-1"></a>ただし、短いベクトルの長さが長いベクトルの長さの約数でない場合は警告が表示される。</span>
+<span id="cb35-85"><a href="#cb35-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-86"><a href="#cb35-86" aria-hidden="true" tabindex="-1"></a><span class="fu">## 論理演算子</span></span>
+<span id="cb35-87"><a href="#cb35-87" aria-hidden="true" tabindex="-1"></a>論理値を入力に取り、論理値を返す演算子を論理演算子という。</span>
+<span id="cb35-88"><a href="#cb35-88" aria-hidden="true" tabindex="-1"></a>R では、否定 (<span class="in">`!`</span>)、論理和 (<span class="in">`|`</span>)、論理積 (<span class="in">`&amp;`</span>) などの演算子が用意されている。</span>
+<span id="cb35-89"><a href="#cb35-89" aria-hidden="true" tabindex="-1"></a>これらの演算子も要素ごとに評価される。</span>
+<span id="cb35-90"><a href="#cb35-90" aria-hidden="true" tabindex="-1"></a><span class="in">`||`</span> や <span class="in">`&amp;&amp;`</span> といった二重記号の演算子は、最初の要素のみを評価する短絡演算子であり、条件分岐で判定回数を抑えたいときに使う。</span>
+<span id="cb35-91"><a href="#cb35-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-94"><a href="#cb35-94" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-95"><a href="#cb35-95" aria-hidden="true" tabindex="-1"></a>logic1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>)</span>
+<span id="cb35-96"><a href="#cb35-96" aria-hidden="true" tabindex="-1"></a>logic2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>)</span>
+<span id="cb35-97"><a href="#cb35-97" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span>logic1</span>
+<span id="cb35-98"><a href="#cb35-98" aria-hidden="true" tabindex="-1"></a>logic1 <span class="sc">|</span> logic2</span>
+<span id="cb35-99"><a href="#cb35-99" aria-hidden="true" tabindex="-1"></a>logic1 <span class="sc">&amp;</span> logic2</span>
+<span id="cb35-100"><a href="#cb35-100" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-101"><a href="#cb35-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-102"><a href="#cb35-102" aria-hidden="true" tabindex="-1"></a><span class="in">`all()`</span> はすべての要素が <span class="in">`TRUE`</span> かどうか、<span class="in">`any()`</span> は少なくとも 1 つが <span class="in">`TRUE`</span> かどうかを判定する。</span>
+<span id="cb35-103"><a href="#cb35-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-106"><a href="#cb35-106" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-107"><a href="#cb35-107" aria-hidden="true" tabindex="-1"></a><span class="fu">any</span>(logic1)</span>
+<span id="cb35-108"><a href="#cb35-108" aria-hidden="true" tabindex="-1"></a><span class="fu">all</span>(logic1)</span>
+<span id="cb35-109"><a href="#cb35-109" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-110"><a href="#cb35-110" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb35-111"><a href="#cb35-111" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-112"><a href="#cb35-112" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-113"><a href="#cb35-113" aria-hidden="true" tabindex="-1"></a><span class="fu">## 比較演算子</span></span>
-<span id="cb35-114"><a href="#cb35-114" aria-hidden="true" tabindex="-1"></a>2 つの値を比較して論理値を返す演算子を比較演算子という。</span>
-<span id="cb35-115"><a href="#cb35-115" aria-hidden="true" tabindex="-1"></a>R では等しいかどうかを判定する <span class="in">`==`</span>、大小を判定する <span class="in">`&gt;`</span> や <span class="in">`&lt;`</span> などが用意されている。</span>
-<span id="cb35-116"><a href="#cb35-116" aria-hidden="true" tabindex="-1"></a>これらもベクトルの要素ごとに評価される。</span>
-<span id="cb35-119"><a href="#cb35-119" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-120"><a href="#cb35-120" aria-hidden="true" tabindex="-1"></a>vec1 <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span></span>
-<span id="cb35-121"><a href="#cb35-121" aria-hidden="true" tabindex="-1"></a>vec2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">4</span>)</span>
-<span id="cb35-122"><a href="#cb35-122" aria-hidden="true" tabindex="-1"></a>vec1 <span class="sc">==</span> vec2</span>
-<span id="cb35-123"><a href="#cb35-123" aria-hidden="true" tabindex="-1"></a>vec1 <span class="sc">&gt;</span> vec2</span>
-<span id="cb35-124"><a href="#cb35-124" aria-hidden="true" tabindex="-1"></a>vec1 <span class="sc">&lt;</span> vec2</span>
-<span id="cb35-125"><a href="#cb35-125" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-126"><a href="#cb35-126" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-127"><a href="#cb35-127" aria-hidden="true" tabindex="-1"></a>不等号として <span class="in">`!=`</span>（等しくない）、<span class="in">`&gt;=`</span>（以上）、<span class="in">`&lt;=`</span>（以下）も利用できる。</span>
-<span id="cb35-130"><a href="#cb35-130" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-131"><a href="#cb35-131" aria-hidden="true" tabindex="-1"></a>vec1 <span class="sc">!=</span> vec2 <span class="co"># !(vec1==vec2)</span></span>
-<span id="cb35-132"><a href="#cb35-132" aria-hidden="true" tabindex="-1"></a>vec1 <span class="sc">&gt;=</span> vec2 <span class="co"># (vec1 &gt; vec2 | vec1 == vec2)</span></span>
-<span id="cb35-133"><a href="#cb35-133" aria-hidden="true" tabindex="-1"></a>vec1 <span class="sc">&lt;=</span> vec2 <span class="co"># (vec1 &lt; vec2 | vec1 == vec2)</span></span>
-<span id="cb35-134"><a href="#cb35-134" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-135"><a href="#cb35-135" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-136"><a href="#cb35-136" aria-hidden="true" tabindex="-1"></a>スカラーとベクトルを比較する場合は、スカラーが再利用されて要素ごとに評価される。</span>
-<span id="cb35-139"><a href="#cb35-139" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-140"><a href="#cb35-140" aria-hidden="true" tabindex="-1"></a>vec1 <span class="sc">&gt;</span> <span class="dv">2</span></span>
-<span id="cb35-141"><a href="#cb35-141" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-142"><a href="#cb35-142" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-143"><a href="#cb35-143" aria-hidden="true" tabindex="-1"></a><span class="in">`%in%`</span> 演算子を使うと、左側のベクトル要素が右側のベクトルに含まれているかを判定できる。返り値は論理値のベクトルで、元の長さと同じになる。</span>
-<span id="cb35-144"><a href="#cb35-144" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-147"><a href="#cb35-147" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-148"><a href="#cb35-148" aria-hidden="true" tabindex="-1"></a>vec1 <span class="sc">%in%</span> <span class="dv">4</span><span class="sc">:</span><span class="dv">5</span></span>
-<span id="cb35-149"><a href="#cb35-149" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-150"><a href="#cb35-150" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-151"><a href="#cb35-151" aria-hidden="true" tabindex="-1"></a><span class="fu">## 要素</span></span>
-<span id="cb35-152"><a href="#cb35-152" aria-hidden="true" tabindex="-1"></a>ベクトルの要素は角括弧で取り出す。</span>
-<span id="cb35-155"><a href="#cb35-155" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-156"><a href="#cb35-156" aria-hidden="true" tabindex="-1"></a>num <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">7</span>,<span class="dv">9</span>)</span>
-<span id="cb35-157"><a href="#cb35-157" aria-hidden="true" tabindex="-1"></a>num[<span class="dv">3</span>]</span>
-<span id="cb35-158"><a href="#cb35-158" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-159"><a href="#cb35-159" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-160"><a href="#cb35-160" aria-hidden="true" tabindex="-1"></a>取り出すだけでなく、新しい値を代入することもできる。</span>
-<span id="cb35-163"><a href="#cb35-163" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-164"><a href="#cb35-164" aria-hidden="true" tabindex="-1"></a>num[<span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="dv">500</span></span>
-<span id="cb35-165"><a href="#cb35-165" aria-hidden="true" tabindex="-1"></a>num</span>
-<span id="cb35-166"><a href="#cb35-166" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-167"><a href="#cb35-167" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-168"><a href="#cb35-168" aria-hidden="true" tabindex="-1"></a>負のインデックスを指定すると、その位置の要素を除いたベクトルが得られる。</span>
-<span id="cb35-171"><a href="#cb35-171" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-172"><a href="#cb35-172" aria-hidden="true" tabindex="-1"></a>num[<span class="sc">-</span><span class="dv">3</span>]</span>
-<span id="cb35-173"><a href="#cb35-173" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-174"><a href="#cb35-174" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-175"><a href="#cb35-175" aria-hidden="true" tabindex="-1"></a>複数の要素を同時に取り出すことも容易である。</span>
-<span id="cb35-178"><a href="#cb35-178" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-179"><a href="#cb35-179" aria-hidden="true" tabindex="-1"></a>num[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">4</span>)]</span>
-<span id="cb35-180"><a href="#cb35-180" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-181"><a href="#cb35-181" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-182"><a href="#cb35-182" aria-hidden="true" tabindex="-1"></a>論理値ベクトルをインデックスとして使えば、条件に合致する要素のみを抽出できる。</span>
-<span id="cb35-185"><a href="#cb35-185" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-186"><a href="#cb35-186" aria-hidden="true" tabindex="-1"></a>idx <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>,<span class="cn">FALSE</span>,<span class="cn">TRUE</span>,<span class="cn">TRUE</span>)</span>
-<span id="cb35-187"><a href="#cb35-187" aria-hidden="true" tabindex="-1"></a>num[idx]</span>
-<span id="cb35-188"><a href="#cb35-188" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-189"><a href="#cb35-189" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-190"><a href="#cb35-190" aria-hidden="true" tabindex="-1"></a>比較演算子と組み合わせれば、条件式を直接インデックスに渡してフィルタリングできる。</span>
-<span id="cb35-193"><a href="#cb35-193" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-194"><a href="#cb35-194" aria-hidden="true" tabindex="-1"></a>(num <span class="sc">&gt;</span> <span class="dv">4</span>)</span>
-<span id="cb35-195"><a href="#cb35-195" aria-hidden="true" tabindex="-1"></a>num[num <span class="sc">&gt;</span> <span class="dv">4</span>]</span>
-<span id="cb35-196"><a href="#cb35-196" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-197"><a href="#cb35-197" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-198"><a href="#cb35-198" aria-hidden="true" tabindex="-1"></a><span class="in">`:`</span> 演算子で連続した整数ベクトルを生成し、その範囲を指定して抜き出すこともできる。非整数のステップや逆順が必要な場合は <span class="in">`seq()`</span> を利用すると柔軟に制御できる。</span>
-<span id="cb35-201"><a href="#cb35-201" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-202"><a href="#cb35-202" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">:</span><span class="dv">4</span></span>
-<span id="cb35-203"><a href="#cb35-203" aria-hidden="true" tabindex="-1"></a>num[<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>]</span>
-<span id="cb35-204"><a href="#cb35-204" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-205"><a href="#cb35-205" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-206"><a href="#cb35-206" aria-hidden="true" tabindex="-1"></a>ベクトルには名前属性を付与できる。</span>
-<span id="cb35-209"><a href="#cb35-209" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-210"><a href="#cb35-210" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">x=</span> <span class="dv">3</span>, <span class="at">y =</span><span class="dv">3</span>, <span class="at">z =</span> <span class="dv">4</span>)</span>
-<span id="cb35-211"><a href="#cb35-211" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-212"><a href="#cb35-212" aria-hidden="true" tabindex="-1"></a>別の方法として次のように設定できる。</span>
-<span id="cb35-215"><a href="#cb35-215" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-216"><a href="#cb35-216" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(num) <span class="ot">&lt;-</span> letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]</span>
-<span id="cb35-217"><a href="#cb35-217" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-218"><a href="#cb35-218" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-219"><a href="#cb35-219" aria-hidden="true" tabindex="-1"></a>名前を付けると、文字列で要素を参照できる。</span>
-<span id="cb35-222"><a href="#cb35-222" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-223"><a href="#cb35-223" aria-hidden="true" tabindex="-1"></a>vec[<span class="st">"x"</span>]</span>
-<span id="cb35-224"><a href="#cb35-224" aria-hidden="true" tabindex="-1"></a>num[<span class="st">"d"</span>]</span>
-<span id="cb35-225"><a href="#cb35-225" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-226"><a href="#cb35-226" aria-hidden="true" tabindex="-1"></a>現在の名前一覧は <span class="in">`names()`</span> で取得でき、不要になった場合は <span class="in">`names(num) &lt;- NULL`</span> のようにして削除する。</span>
+<span id="cb35-112"><a href="#cb35-112" aria-hidden="true" tabindex="-1"></a><span class="fu">## 比較演算子</span></span>
+<span id="cb35-113"><a href="#cb35-113" aria-hidden="true" tabindex="-1"></a>2 つの値を比較して論理値を返す演算子を比較演算子という。</span>
+<span id="cb35-114"><a href="#cb35-114" aria-hidden="true" tabindex="-1"></a>R では等しいかどうかを判定する <span class="in">`==`</span>、大小を判定する <span class="in">`&gt;`</span> や <span class="in">`&lt;`</span> などが用意されている。</span>
+<span id="cb35-115"><a href="#cb35-115" aria-hidden="true" tabindex="-1"></a>これらもベクトルの要素ごとに評価される。</span>
+<span id="cb35-118"><a href="#cb35-118" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-119"><a href="#cb35-119" aria-hidden="true" tabindex="-1"></a>vec1 <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span></span>
+<span id="cb35-120"><a href="#cb35-120" aria-hidden="true" tabindex="-1"></a>vec2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">4</span>)</span>
+<span id="cb35-121"><a href="#cb35-121" aria-hidden="true" tabindex="-1"></a>vec1 <span class="sc">==</span> vec2</span>
+<span id="cb35-122"><a href="#cb35-122" aria-hidden="true" tabindex="-1"></a>vec1 <span class="sc">&gt;</span> vec2</span>
+<span id="cb35-123"><a href="#cb35-123" aria-hidden="true" tabindex="-1"></a>vec1 <span class="sc">&lt;</span> vec2</span>
+<span id="cb35-124"><a href="#cb35-124" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-125"><a href="#cb35-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-126"><a href="#cb35-126" aria-hidden="true" tabindex="-1"></a>不等号として <span class="in">`!=`</span>（等しくない）、<span class="in">`&gt;=`</span>（以上）、<span class="in">`&lt;=`</span>（以下）も利用できる。</span>
+<span id="cb35-129"><a href="#cb35-129" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-130"><a href="#cb35-130" aria-hidden="true" tabindex="-1"></a>vec1 <span class="sc">!=</span> vec2 <span class="co"># !(vec1==vec2)</span></span>
+<span id="cb35-131"><a href="#cb35-131" aria-hidden="true" tabindex="-1"></a>vec1 <span class="sc">&gt;=</span> vec2 <span class="co"># (vec1 &gt; vec2 | vec1 == vec2)</span></span>
+<span id="cb35-132"><a href="#cb35-132" aria-hidden="true" tabindex="-1"></a>vec1 <span class="sc">&lt;=</span> vec2 <span class="co"># (vec1 &lt; vec2 | vec1 == vec2)</span></span>
+<span id="cb35-133"><a href="#cb35-133" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-134"><a href="#cb35-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-135"><a href="#cb35-135" aria-hidden="true" tabindex="-1"></a>スカラーとベクトルを比較する場合は、スカラーが再利用されて要素ごとに評価される。</span>
+<span id="cb35-138"><a href="#cb35-138" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-139"><a href="#cb35-139" aria-hidden="true" tabindex="-1"></a>vec1 <span class="sc">&gt;</span> <span class="dv">2</span></span>
+<span id="cb35-140"><a href="#cb35-140" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-141"><a href="#cb35-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-142"><a href="#cb35-142" aria-hidden="true" tabindex="-1"></a><span class="in">`%in%`</span> 演算子を使うと、左側のベクトル要素が右側のベクトルに含まれているかを判定できる。返り値は論理値のベクトルで、元の長さと同じになる。</span>
+<span id="cb35-143"><a href="#cb35-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-146"><a href="#cb35-146" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-147"><a href="#cb35-147" aria-hidden="true" tabindex="-1"></a>vec1 <span class="sc">%in%</span> <span class="dv">4</span><span class="sc">:</span><span class="dv">5</span></span>
+<span id="cb35-148"><a href="#cb35-148" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-149"><a href="#cb35-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-150"><a href="#cb35-150" aria-hidden="true" tabindex="-1"></a><span class="fu">## 要素</span></span>
+<span id="cb35-151"><a href="#cb35-151" aria-hidden="true" tabindex="-1"></a>ベクトルの要素は角括弧で取り出す。</span>
+<span id="cb35-154"><a href="#cb35-154" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-155"><a href="#cb35-155" aria-hidden="true" tabindex="-1"></a>num <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">7</span>,<span class="dv">9</span>)</span>
+<span id="cb35-156"><a href="#cb35-156" aria-hidden="true" tabindex="-1"></a>num[<span class="dv">3</span>]</span>
+<span id="cb35-157"><a href="#cb35-157" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-158"><a href="#cb35-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-159"><a href="#cb35-159" aria-hidden="true" tabindex="-1"></a>取り出すだけでなく、新しい値を代入することもできる。</span>
+<span id="cb35-162"><a href="#cb35-162" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-163"><a href="#cb35-163" aria-hidden="true" tabindex="-1"></a>num[<span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="dv">500</span></span>
+<span id="cb35-164"><a href="#cb35-164" aria-hidden="true" tabindex="-1"></a>num</span>
+<span id="cb35-165"><a href="#cb35-165" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-166"><a href="#cb35-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-167"><a href="#cb35-167" aria-hidden="true" tabindex="-1"></a>負のインデックスを指定すると、その位置の要素を除いたベクトルが得られる。</span>
+<span id="cb35-170"><a href="#cb35-170" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-171"><a href="#cb35-171" aria-hidden="true" tabindex="-1"></a>num[<span class="sc">-</span><span class="dv">3</span>]</span>
+<span id="cb35-172"><a href="#cb35-172" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-173"><a href="#cb35-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-174"><a href="#cb35-174" aria-hidden="true" tabindex="-1"></a>複数の要素を同時に取り出すことも容易である。</span>
+<span id="cb35-177"><a href="#cb35-177" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-178"><a href="#cb35-178" aria-hidden="true" tabindex="-1"></a>num[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">4</span>)]</span>
+<span id="cb35-179"><a href="#cb35-179" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-180"><a href="#cb35-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-181"><a href="#cb35-181" aria-hidden="true" tabindex="-1"></a>論理値ベクトルをインデックスとして使えば、条件に合致する要素のみを抽出できる。</span>
+<span id="cb35-184"><a href="#cb35-184" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-185"><a href="#cb35-185" aria-hidden="true" tabindex="-1"></a>idx <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>,<span class="cn">FALSE</span>,<span class="cn">TRUE</span>,<span class="cn">TRUE</span>)</span>
+<span id="cb35-186"><a href="#cb35-186" aria-hidden="true" tabindex="-1"></a>num[idx]</span>
+<span id="cb35-187"><a href="#cb35-187" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-188"><a href="#cb35-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-189"><a href="#cb35-189" aria-hidden="true" tabindex="-1"></a>比較演算子と組み合わせれば、条件式を直接インデックスに渡してフィルタリングできる。</span>
+<span id="cb35-192"><a href="#cb35-192" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-193"><a href="#cb35-193" aria-hidden="true" tabindex="-1"></a>(num <span class="sc">&gt;</span> <span class="dv">4</span>)</span>
+<span id="cb35-194"><a href="#cb35-194" aria-hidden="true" tabindex="-1"></a>num[num <span class="sc">&gt;</span> <span class="dv">4</span>]</span>
+<span id="cb35-195"><a href="#cb35-195" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-196"><a href="#cb35-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-197"><a href="#cb35-197" aria-hidden="true" tabindex="-1"></a><span class="in">`:`</span> 演算子で連続した整数ベクトルを生成し、その範囲を指定して抜き出すこともできる。非整数のステップや逆順が必要な場合は <span class="in">`seq()`</span> を利用すると柔軟に制御できる。</span>
+<span id="cb35-200"><a href="#cb35-200" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-201"><a href="#cb35-201" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">:</span><span class="dv">4</span></span>
+<span id="cb35-202"><a href="#cb35-202" aria-hidden="true" tabindex="-1"></a>num[<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>]</span>
+<span id="cb35-203"><a href="#cb35-203" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-204"><a href="#cb35-204" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-205"><a href="#cb35-205" aria-hidden="true" tabindex="-1"></a>ベクトルには名前属性を付与できる。</span>
+<span id="cb35-208"><a href="#cb35-208" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-209"><a href="#cb35-209" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">x=</span> <span class="dv">3</span>, <span class="at">y =</span><span class="dv">3</span>, <span class="at">z =</span> <span class="dv">4</span>)</span>
+<span id="cb35-210"><a href="#cb35-210" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-211"><a href="#cb35-211" aria-hidden="true" tabindex="-1"></a>別の方法として次のように設定できる。</span>
+<span id="cb35-214"><a href="#cb35-214" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-215"><a href="#cb35-215" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(num) <span class="ot">&lt;-</span> letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]</span>
+<span id="cb35-216"><a href="#cb35-216" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-217"><a href="#cb35-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-218"><a href="#cb35-218" aria-hidden="true" tabindex="-1"></a>名前を付けると、文字列で要素を参照できる。</span>
+<span id="cb35-221"><a href="#cb35-221" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-222"><a href="#cb35-222" aria-hidden="true" tabindex="-1"></a>vec[<span class="st">"x"</span>]</span>
+<span id="cb35-223"><a href="#cb35-223" aria-hidden="true" tabindex="-1"></a>num[<span class="st">"d"</span>]</span>
+<span id="cb35-224"><a href="#cb35-224" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-225"><a href="#cb35-225" aria-hidden="true" tabindex="-1"></a>現在の名前一覧は <span class="in">`names()`</span> で取得でき、不要になった場合は <span class="in">`names(num) &lt;- NULL`</span> のようにして削除する。</span>
+<span id="cb35-226"><a href="#cb35-226" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb35-227"><a href="#cb35-227" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb35-228"><a href="#cb35-228" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb35-229"><a href="#cb35-229" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-230"><a href="#cb35-230" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-231"><a href="#cb35-231" aria-hidden="true" tabindex="-1"></a><span class="fu">## 関数</span></span>
-<span id="cb35-232"><a href="#cb35-232" aria-hidden="true" tabindex="-1"></a>ベクトルを引数に取る関数も多数用意されており、和や積などを簡単に計算できる。累積和（<span class="in">`cumsum()`</span>）や累積積（<span class="in">`cumprod()`</span>）は系列データの推移を追跡したいときに便利である。</span>
-<span id="cb35-235"><a href="#cb35-235" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-236"><a href="#cb35-236" aria-hidden="true" tabindex="-1"></a>x<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>)</span>
-<span id="cb35-237"><a href="#cb35-237" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(x)</span>
-<span id="cb35-238"><a href="#cb35-238" aria-hidden="true" tabindex="-1"></a><span class="fu">cumsum</span>(x)</span>
-<span id="cb35-239"><a href="#cb35-239" aria-hidden="true" tabindex="-1"></a><span class="fu">prod</span>(x)</span>
-<span id="cb35-240"><a href="#cb35-240" aria-hidden="true" tabindex="-1"></a><span class="fu">cumprod</span>(x)</span>
-<span id="cb35-241"><a href="#cb35-241" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-242"><a href="#cb35-242" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-243"><a href="#cb35-243" aria-hidden="true" tabindex="-1"></a>平均、中央値、分散、標準偏差といった統計量もワンライナーで求められる。</span>
-<span id="cb35-246"><a href="#cb35-246" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-247"><a href="#cb35-247" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(x,<span class="dv">10</span>)</span>
-<span id="cb35-248"><a href="#cb35-248" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x)</span>
-<span id="cb35-249"><a href="#cb35-249" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(x)</span>
-<span id="cb35-250"><a href="#cb35-250" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(x)</span>
-<span id="cb35-251"><a href="#cb35-251" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(x)</span>
-<span id="cb35-252"><a href="#cb35-252" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-253"><a href="#cb35-253" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-254"><a href="#cb35-254" aria-hidden="true" tabindex="-1"></a>ベクトルを並べ替えたり、最小値・最大値やその位置を取得したりする関数も充実している。</span>
-<span id="cb35-257"><a href="#cb35-257" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-258"><a href="#cb35-258" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">0</span>)</span>
-<span id="cb35-259"><a href="#cb35-259" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(x)</span>
-<span id="cb35-260"><a href="#cb35-260" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(x,<span class="at">decreasing =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb35-261"><a href="#cb35-261" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(x)</span>
-<span id="cb35-262"><a href="#cb35-262" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(x)</span>
-<span id="cb35-263"><a href="#cb35-263" aria-hidden="true" tabindex="-1"></a><span class="fu">which.min</span>(x)</span>
-<span id="cb35-264"><a href="#cb35-264" aria-hidden="true" tabindex="-1"></a><span class="fu">which.max</span>(x)</span>
-<span id="cb35-265"><a href="#cb35-265" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-266"><a href="#cb35-266" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-267"><a href="#cb35-267" aria-hidden="true" tabindex="-1"></a>欠損値 <span class="in">`NA`</span> が含まれている場合、<span class="in">`mean()`</span> など多くの集計関数は既定の挙動として <span class="in">`NA`</span> を返す。</span>
-<span id="cb35-268"><a href="#cb35-268" aria-hidden="true" tabindex="-1"></a>集計から欠損を除外したいときは、<span class="in">`na.rm = TRUE`</span> を指定する。</span>
-<span id="cb35-269"><a href="#cb35-269" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-272"><a href="#cb35-272" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-273"><a href="#cb35-273" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">2</span>,<span class="cn">NA</span>,<span class="dv">3</span>)</span>
-<span id="cb35-274"><a href="#cb35-274" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x)</span>
-<span id="cb35-275"><a href="#cb35-275" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb35-276"><a href="#cb35-276" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-277"><a href="#cb35-277" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-278"><a href="#cb35-278" aria-hidden="true" tabindex="-1"></a><span class="fu">## 規則的なベクトル</span></span>
-<span id="cb35-279"><a href="#cb35-279" aria-hidden="true" tabindex="-1"></a><span class="in">`1:5`</span> のような規則的なベクトルを柔軟に作成するのに <span class="in">`seq`</span> を用いるとよい。</span>
-<span id="cb35-282"><a href="#cb35-282" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-283"><a href="#cb35-283" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">5</span></span>
-<span id="cb35-284"><a href="#cb35-284" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">5</span>)</span>
-<span id="cb35-285"><a href="#cb35-285" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="at">by =</span> <span class="dv">2</span>)</span>
-<span id="cb35-286"><a href="#cb35-286" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="at">length.out =</span> <span class="dv">4</span>)</span>
-<span id="cb35-287"><a href="#cb35-287" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-288"><a href="#cb35-288" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-289"><a href="#cb35-289" aria-hidden="true" tabindex="-1"></a>繰り返しを作成することができる <span class="in">`rep`</span> も覚えておくと便利である。</span>
-<span id="cb35-292"><a href="#cb35-292" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-293"><a href="#cb35-293" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">5</span>)</span>
-<span id="cb35-294"><a href="#cb35-294" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="at">times =</span> <span class="dv">3</span>)</span>
-<span id="cb35-295"><a href="#cb35-295" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="at">each =</span> <span class="dv">3</span>)</span>
-<span id="cb35-296"><a href="#cb35-296" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-297"><a href="#cb35-297" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-298"><a href="#cb35-298" aria-hidden="true" tabindex="-1"></a>またアルファベットの文字列もあらかじめ組み込まれている。</span>
-<span id="cb35-301"><a href="#cb35-301" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-302"><a href="#cb35-302" aria-hidden="true" tabindex="-1"></a>letters</span>
-<span id="cb35-303"><a href="#cb35-303" aria-hidden="true" tabindex="-1"></a>LETTERS</span>
-<span id="cb35-304"><a href="#cb35-304" aria-hidden="true" tabindex="-1"></a>LETTERS[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span>
-<span id="cb35-305"><a href="#cb35-305" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-306"><a href="#cb35-306" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-307"><a href="#cb35-307" aria-hidden="true" tabindex="-1"></a><span class="fu">## 乱数ベクトル</span></span>
-<span id="cb35-308"><a href="#cb35-308" aria-hidden="true" tabindex="-1"></a>ベクトルを無作為に並べ替えたり抽出したりするには <span class="in">`sample()`</span> を使う。</span>
-<span id="cb35-311"><a href="#cb35-311" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-312"><a href="#cb35-312" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">10</span>)</span>
-<span id="cb35-313"><a href="#cb35-313" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span>
-<span id="cb35-314"><a href="#cb35-314" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-315"><a href="#cb35-315" aria-hidden="true" tabindex="-1"></a>ここで <span class="in">`set.seed()`</span> は乱数の種を固定し、別の環境でも同じ結果を再現できるようにするための設定である。</span>
-<span id="cb35-316"><a href="#cb35-316" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-317"><a href="#cb35-317" aria-hidden="true" tabindex="-1"></a>上記は一度選ばれた値を再度選ばない非復元抽出である。復元抽出にする場合は <span class="in">`replace = TRUE`</span> を指定する。</span>
-<span id="cb35-320"><a href="#cb35-320" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-321"><a href="#cb35-321" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb35-322"><a href="#cb35-322" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-323"><a href="#cb35-323" aria-hidden="true" tabindex="-1"></a><span class="in">`size`</span> 引数を指定すれば、取り出す要素数も制御できる。</span>
-<span id="cb35-324"><a href="#cb35-324" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-327"><a href="#cb35-327" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-328"><a href="#cb35-328" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(LETTERS[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="at">size =</span> <span class="dv">10</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb35-329"><a href="#cb35-329" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-330"><a href="#cb35-330" aria-hidden="true" tabindex="-1"></a>非復元抽出では、<span class="in">`size`</span> を母集合の長さより大きくすることはできない点に注意する。</span>
-<span id="cb35-331"><a href="#cb35-331" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-332"><a href="#cb35-332" aria-hidden="true" tabindex="-1"></a>さらに <span class="in">`prob`</span> で各要素が選ばれる確率を指定できる（確率の合計は 1 になるようにする）。</span>
-<span id="cb35-335"><a href="#cb35-335" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-336"><a href="#cb35-336" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(LETTERS[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.8</span>, <span class="fl">0.2</span>), <span class="at">size =</span> <span class="dv">10</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb35-337"><a href="#cb35-337" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-338"><a href="#cb35-338" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-339"><a href="#cb35-339" aria-hidden="true" tabindex="-1"></a>独立な一様分布に従う長さ <span class="in">`size`</span> のベクトルは <span class="in">`runif(size)`</span>、平均と分散を指定した正規分布なら <span class="in">`rnorm(size, mean, sd)`</span> で生成できる（既定値は平均 0、標準偏差 1）。</span>
-<span id="cb35-342"><a href="#cb35-342" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-343"><a href="#cb35-343" aria-hidden="true" tabindex="-1"></a>size <span class="ot">&lt;-</span> <span class="dv">8</span></span>
-<span id="cb35-344"><a href="#cb35-344" aria-hidden="true" tabindex="-1"></a><span class="fu">runif</span>(size)</span>
-<span id="cb35-345"><a href="#cb35-345" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(size)</span>
-<span id="cb35-346"><a href="#cb35-346" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-230"><a href="#cb35-230" aria-hidden="true" tabindex="-1"></a><span class="fu">## 関数</span></span>
+<span id="cb35-231"><a href="#cb35-231" aria-hidden="true" tabindex="-1"></a>ベクトルを引数に取る関数も多数用意されており、和や積などを簡単に計算できる。累積和（<span class="in">`cumsum()`</span>）や累積積（<span class="in">`cumprod()`</span>）は系列データの推移を追跡したいときに便利である。</span>
+<span id="cb35-234"><a href="#cb35-234" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-235"><a href="#cb35-235" aria-hidden="true" tabindex="-1"></a>x<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>)</span>
+<span id="cb35-236"><a href="#cb35-236" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(x)</span>
+<span id="cb35-237"><a href="#cb35-237" aria-hidden="true" tabindex="-1"></a><span class="fu">cumsum</span>(x)</span>
+<span id="cb35-238"><a href="#cb35-238" aria-hidden="true" tabindex="-1"></a><span class="fu">prod</span>(x)</span>
+<span id="cb35-239"><a href="#cb35-239" aria-hidden="true" tabindex="-1"></a><span class="fu">cumprod</span>(x)</span>
+<span id="cb35-240"><a href="#cb35-240" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-241"><a href="#cb35-241" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-242"><a href="#cb35-242" aria-hidden="true" tabindex="-1"></a>平均、中央値、分散、標準偏差といった統計量もワンライナーで求められる。</span>
+<span id="cb35-245"><a href="#cb35-245" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-246"><a href="#cb35-246" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(x,<span class="dv">10</span>)</span>
+<span id="cb35-247"><a href="#cb35-247" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x)</span>
+<span id="cb35-248"><a href="#cb35-248" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(x)</span>
+<span id="cb35-249"><a href="#cb35-249" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(x)</span>
+<span id="cb35-250"><a href="#cb35-250" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(x)</span>
+<span id="cb35-251"><a href="#cb35-251" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-252"><a href="#cb35-252" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-253"><a href="#cb35-253" aria-hidden="true" tabindex="-1"></a>ベクトルを並べ替えたり、最小値・最大値やその位置を取得したりする関数も充実している。</span>
+<span id="cb35-256"><a href="#cb35-256" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-257"><a href="#cb35-257" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">0</span>)</span>
+<span id="cb35-258"><a href="#cb35-258" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(x)</span>
+<span id="cb35-259"><a href="#cb35-259" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(x,<span class="at">decreasing =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb35-260"><a href="#cb35-260" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(x)</span>
+<span id="cb35-261"><a href="#cb35-261" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(x)</span>
+<span id="cb35-262"><a href="#cb35-262" aria-hidden="true" tabindex="-1"></a><span class="fu">which.min</span>(x)</span>
+<span id="cb35-263"><a href="#cb35-263" aria-hidden="true" tabindex="-1"></a><span class="fu">which.max</span>(x)</span>
+<span id="cb35-264"><a href="#cb35-264" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-265"><a href="#cb35-265" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-266"><a href="#cb35-266" aria-hidden="true" tabindex="-1"></a>欠損値 <span class="in">`NA`</span> が含まれている場合、<span class="in">`mean()`</span> など多くの集計関数は既定の挙動として <span class="in">`NA`</span> を返す。</span>
+<span id="cb35-267"><a href="#cb35-267" aria-hidden="true" tabindex="-1"></a>集計から欠損を除外したいときは、<span class="in">`na.rm = TRUE`</span> を指定する。</span>
+<span id="cb35-268"><a href="#cb35-268" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-271"><a href="#cb35-271" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-272"><a href="#cb35-272" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">2</span>,<span class="cn">NA</span>,<span class="dv">3</span>)</span>
+<span id="cb35-273"><a href="#cb35-273" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x)</span>
+<span id="cb35-274"><a href="#cb35-274" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb35-275"><a href="#cb35-275" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-276"><a href="#cb35-276" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-277"><a href="#cb35-277" aria-hidden="true" tabindex="-1"></a><span class="fu">## 規則的なベクトル</span></span>
+<span id="cb35-278"><a href="#cb35-278" aria-hidden="true" tabindex="-1"></a><span class="in">`1:5`</span> のような規則的なベクトルを柔軟に作成するのに <span class="in">`seq`</span> を用いるとよい。</span>
+<span id="cb35-281"><a href="#cb35-281" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-282"><a href="#cb35-282" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">5</span></span>
+<span id="cb35-283"><a href="#cb35-283" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">5</span>)</span>
+<span id="cb35-284"><a href="#cb35-284" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="at">by =</span> <span class="dv">2</span>)</span>
+<span id="cb35-285"><a href="#cb35-285" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="at">length.out =</span> <span class="dv">4</span>)</span>
+<span id="cb35-286"><a href="#cb35-286" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-287"><a href="#cb35-287" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-288"><a href="#cb35-288" aria-hidden="true" tabindex="-1"></a>繰り返しを作成することができる <span class="in">`rep`</span> も覚えておくと便利である。</span>
+<span id="cb35-291"><a href="#cb35-291" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-292"><a href="#cb35-292" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">5</span>)</span>
+<span id="cb35-293"><a href="#cb35-293" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="at">times =</span> <span class="dv">3</span>)</span>
+<span id="cb35-294"><a href="#cb35-294" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="at">each =</span> <span class="dv">3</span>)</span>
+<span id="cb35-295"><a href="#cb35-295" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-296"><a href="#cb35-296" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-297"><a href="#cb35-297" aria-hidden="true" tabindex="-1"></a>またアルファベットの文字列もあらかじめ組み込まれている。</span>
+<span id="cb35-300"><a href="#cb35-300" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-301"><a href="#cb35-301" aria-hidden="true" tabindex="-1"></a>letters</span>
+<span id="cb35-302"><a href="#cb35-302" aria-hidden="true" tabindex="-1"></a>LETTERS</span>
+<span id="cb35-303"><a href="#cb35-303" aria-hidden="true" tabindex="-1"></a>LETTERS[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span>
+<span id="cb35-304"><a href="#cb35-304" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-305"><a href="#cb35-305" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-306"><a href="#cb35-306" aria-hidden="true" tabindex="-1"></a><span class="fu">## 乱数ベクトル</span></span>
+<span id="cb35-307"><a href="#cb35-307" aria-hidden="true" tabindex="-1"></a>ベクトルを無作為に並べ替えたり抽出したりするには <span class="in">`sample()`</span> を使う。</span>
+<span id="cb35-310"><a href="#cb35-310" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-311"><a href="#cb35-311" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">10</span>)</span>
+<span id="cb35-312"><a href="#cb35-312" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span>
+<span id="cb35-313"><a href="#cb35-313" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-314"><a href="#cb35-314" aria-hidden="true" tabindex="-1"></a>ここで <span class="in">`set.seed()`</span> は乱数の種を固定し、別の環境でも同じ結果を再現できるようにするための設定である。</span>
+<span id="cb35-315"><a href="#cb35-315" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-316"><a href="#cb35-316" aria-hidden="true" tabindex="-1"></a>上記は一度選ばれた値を再度選ばない非復元抽出である。復元抽出にする場合は <span class="in">`replace = TRUE`</span> を指定する。</span>
+<span id="cb35-319"><a href="#cb35-319" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-320"><a href="#cb35-320" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb35-321"><a href="#cb35-321" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-322"><a href="#cb35-322" aria-hidden="true" tabindex="-1"></a><span class="in">`size`</span> 引数を指定すれば、取り出す要素数も制御できる。</span>
+<span id="cb35-323"><a href="#cb35-323" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-326"><a href="#cb35-326" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-327"><a href="#cb35-327" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(LETTERS[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="at">size =</span> <span class="dv">10</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb35-328"><a href="#cb35-328" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-329"><a href="#cb35-329" aria-hidden="true" tabindex="-1"></a>非復元抽出では、<span class="in">`size`</span> を母集合の長さより大きくすることはできない点に注意する。</span>
+<span id="cb35-330"><a href="#cb35-330" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-331"><a href="#cb35-331" aria-hidden="true" tabindex="-1"></a>さらに <span class="in">`prob`</span> で各要素が選ばれる確率を指定できる（確率の合計は 1 になるようにする）。</span>
+<span id="cb35-334"><a href="#cb35-334" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-335"><a href="#cb35-335" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(LETTERS[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.8</span>, <span class="fl">0.2</span>), <span class="at">size =</span> <span class="dv">10</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb35-336"><a href="#cb35-336" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-337"><a href="#cb35-337" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-338"><a href="#cb35-338" aria-hidden="true" tabindex="-1"></a>独立な一様分布に従う長さ <span class="in">`size`</span> のベクトルは <span class="in">`runif(size)`</span>、平均と分散を指定した正規分布なら <span class="in">`rnorm(size, mean, sd)`</span> で生成できる（既定値は平均 0、標準偏差 1）。</span>
+<span id="cb35-341"><a href="#cb35-341" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-342"><a href="#cb35-342" aria-hidden="true" tabindex="-1"></a>size <span class="ot">&lt;-</span> <span class="dv">8</span></span>
+<span id="cb35-343"><a href="#cb35-343" aria-hidden="true" tabindex="-1"></a><span class="fu">runif</span>(size)</span>
+<span id="cb35-344"><a href="#cb35-344" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(size)</span>
+<span id="cb35-345"><a href="#cb35-345" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

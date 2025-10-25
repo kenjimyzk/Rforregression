@@ -260,7 +260,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">rnorm</span>(<span class="dv">10</span>), <span class="at">y =</span> letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>])</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="do">## 'data.frame':    10 obs. of  2 variables:</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ x: num  0.584 0.827 0.948 1.173 -1.022 ...</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ x: num  -1.561 1.213 -2.079 -0.335 1.108 ...</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ y: chr  "a" "b" "c" "d" ...</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>かつての <code>data.frame()</code> は文字列を自動的に因子に変換していた。これを避けるには <code>stringsAsFactors = FALSE</code> を明示する。</p>
@@ -268,7 +268,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">rnorm</span>(<span class="dv">10</span>), <span class="at">y =</span> letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>], <span class="at">stringsAsFactors=</span> <span class="cn">FALSE</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="do">## 'data.frame':    10 obs. of  2 variables:</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ x: num  -0.1618 0.6894 0.0188 0.9254 0.6932 ...</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ x: num  -0.5 0.836 -1.479 -1.744 0.289 ...</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ y: chr  "a" "b" "c" "d" ...</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>あるいは <code>dplyr</code> パッケージの <code>data_frame()</code>（現行では <code>tibble()</code> が推奨）を使えば、オプションなしで文字列を文字列のまま保持できる。</p>
@@ -276,8 +276,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data_frame</span>(<span class="at">x =</span> <span class="fu">rnorm</span>(<span class="dv">10</span>), <span class="at">y =</span> letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>])</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="do">## tibble [10 × 2] (S3: tbl_df/tbl/data.frame)</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ x: num [1:10] 0.724 1.069 0.468 -0.477 1.254 ...</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="do">## tibble [10 x 2] (S3: tbl_df/tbl/data.frame)</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ x: num [1:10] -0.0464 0.4116 0.0537 0.1429 -0.8285 ...</span></span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ y: chr [1:10] "a" "b" "c" "d" ...</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><code>tibble()</code> は列名にスペースが含まれていても自動補正せずに扱え、<code>print()</code> 時に一部だけ表示してくれるため大規模データの確認がしやすい。</p>
