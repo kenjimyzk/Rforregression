@@ -31,7 +31,7 @@ To render only PDF:
 quarto render --to pdf
 ```
 
-To preview the book while editing:
+To preview the book while editing (with hot-reload):
 ```bash
 quarto preview
 ```
@@ -41,11 +41,17 @@ To render a single chapter:
 quarto render 01-base.qmd
 ```
 
+To clean the build:
+```bash
+quarto clean
+```
+
 #### Quarto configuration
 
 - [`_quarto.yml`](_quarto.yml): Main configuration file controlling book structure, output formats, and language settings
-- Output directory: [docs](docs/) (configured for GitHub Pages deployment)
+- Output directory: [docs](docs/) (configured as GitHub Pages publishing source)
 - Supports HTML and PDF outputs with Japanese language support
+- Cross-references use Japanese labels (図, 表, 式, etc.) configured in `_quarto.yml`
 
 ### R Bookdown (Legacy)
 
@@ -68,6 +74,11 @@ To render only the PDF format:
 bookdown::render_book("index.Rmd", "bookdown::pdf_book")
 ```
 
+To preview with hot-reload while editing:
+```r
+bookdown::serve_book(dir = ".", output_dir = "docs")
+```
+
 #### Bookdown configuration
 
 - [`_bookdown.yml`](_bookdown.yml): Controls book structure, output directory, chapter ordering, and language labels
@@ -75,6 +86,14 @@ bookdown::render_book("index.Rmd", "bookdown::pdf_book")
 - [`Rforregression.Rproj`](Rforregression.Rproj): RStudio project file (Build Type: Website, LaTeX: XeLaTeX)
 
 ## Project Structure
+
+### Dual format system
+
+The book content exists in both formats:
+- **Quarto (`.qmd`)**: Primary format, actively maintained
+- **R Markdown (`.Rmd`)**: Legacy format, kept for compatibility
+
+When making content changes, update the `.qmd` files. The `.Rmd` files may need manual synchronization if bookdown builds are required.
 
 ### Source chapters
 
@@ -107,6 +126,7 @@ Econometric analysis chapters rely on these packages:
 - [jeconunicode.bst](jeconunicode.bst) - BibTeX style for Japanese economics citations
 - [figs/](figs/) - Directory for figures
 - [_bookdown_files/](_bookdown_files/) - Cache directory for bookdown
+- [AGENTS.qmd](AGENTS.qmd) - Separate guidelines document (not part of book build)
 
 ## Language and Typography
 
@@ -178,3 +198,7 @@ Each chapter includes its own setup chunk:
 ```r
 knitr::opts_chunk$set(echo = TRUE, collapse=TRUE)
 ```
+
+## Deployment
+
+The [docs](docs/) directory contains the rendered HTML output and is configured as the GitHub Pages publishing source. After running `quarto render`, commit the updated docs/ directory to deploy changes to the live site.

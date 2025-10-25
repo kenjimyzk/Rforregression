@@ -379,7 +379,7 @@ inv_{it} = \beta_1 value_{it} + \beta_2 capital_{it} +\alpha_i + u_{it}
 <p>それぞれの時間平均をとれば以下になる. <span class="math display">\[
 \bar{inv}_{i} = \beta_1 \bar{value}_{i} + \beta_2 \bar{capital}_{i} +\alpha_i  + \bar{u}_{i}
 \]</span></p>
-<p>そして，それぞれの観測値を時間平均で差し引けば以下のように <span class="math inline">\(\alpha_i\)</span> は消去される. <span class="math display">\[
+<p>そして、それぞれの観測値を時間平均で差し引けば以下のように <span class="math inline">\(\alpha_i\)</span> は消去される. <span class="math display">\[
 inv_{it}-\overline{inv}_{i} = \beta_1 (value_{it}-\overline{value}_{i}) + \beta_2 (capital_{it}-\overline{capital}_{i})  + \bar{u}_{i} -\bar{u}_{i}
 \]</span> このように変換して回帰分析すれば <span class="math inline">\(\alpha_i\)</span> は誤差項と相関があっても一致推定量である. このような推定方法を<strong>平均差分法</strong>という.</p>
 <p>固定効果モデルを平均差分法で推定するには, <code>plm()</code> 関数で <code>model = "within"</code> を指定する. <code>plm(inv ~ value + capital, data = pdata, model = "within")</code> コマンドで固定効果推定を行い, 結果を <code>gi</code> に格納する. <code>summary(gi)</code> コマンドで推定結果の詳細を表示する.</p>
@@ -1380,7 +1380,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb24-94"><a href="#cb24-94" aria-hidden="true" tabindex="-1"></a>\bar{inv}_{i} = \beta_1 \bar{value}_{i} + \beta_2 \bar{capital}_{i} +\alpha_i  + \bar{u}_{i}</span>
 <span id="cb24-95"><a href="#cb24-95" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb24-96"><a href="#cb24-96" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-97"><a href="#cb24-97" aria-hidden="true" tabindex="-1"></a>そして，それぞれの観測値を時間平均で差し引けば以下のように $\alpha_i$ は消去される.</span>
+<span id="cb24-97"><a href="#cb24-97" aria-hidden="true" tabindex="-1"></a>そして、それぞれの観測値を時間平均で差し引けば以下のように $\alpha_i$ は消去される.</span>
 <span id="cb24-98"><a href="#cb24-98" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb24-99"><a href="#cb24-99" aria-hidden="true" tabindex="-1"></a>inv_{it}-\overline{inv}_{i} = \beta_1 (value_{it}-\overline{value}_{i}) + \beta_2 (capital_{it}-\overline{capital}_{i})  + \bar{u}_{i} -\bar{u}_{i}</span>
 <span id="cb24-100"><a href="#cb24-100" aria-hidden="true" tabindex="-1"></a>$$ このように変換して回帰分析すれば $\alpha_i$ は誤差項と相関があっても一致推定量である.</span>
