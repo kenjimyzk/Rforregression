@@ -15,7 +15,7 @@ lang: ja-JP
 # github-repo: (your-github-repository)
 description: "This is a description. Please wrote a abstract this contents. "
 ---
-# はじめに {-}
+# はじめに
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
