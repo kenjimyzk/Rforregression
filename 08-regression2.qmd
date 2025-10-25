@@ -9,7 +9,9 @@ editor_options:
 
 # 現代的仮定のもとでの最小二乗法
 
-```{r message=FALSE, warning=FALSE}
+```{r}
+#| message: false
+#| warning: false
 library(AER)
 library(estimatr)
 ```
@@ -123,7 +125,9 @@ lmt <- lm(I(resid(fm1))~w*x,data=df)
 R でロバスト分散を推定するにはパッケージ `AER` を導入するのが簡単である.
 次のコマンド `coeftest` を実行すればよい.
 
-```{r message=FALSE, warning=FALSE}
+```{r}
+#| message: false
+#| warning: false
 coeftest(fm1,vcov=vcovHC)
 ```
 

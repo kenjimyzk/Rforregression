@@ -3,11 +3,15 @@ output: html_document
 ---
 
 # データ入力
-```{r setup, include=FALSE}
+```{r}
+#| label: setup
+#| include: false
 knitr::opts_chunk$set(echo = TRUE, collapse=TRUE)
 ```
 
-```{r, message=FALSE, warning=FALSE}
+```{r}
+#| message: false
+#| warning: false
 library(tidyverse)
 ```
 
@@ -44,7 +48,8 @@ str(df)
 現在のワークングディレクトリとファイルの場所をきちんと把握しておかなければならない.
 
 現在のワーキングディレクトリは以下のコマンドで確認できる.
-```{r, eval=FALSE}
+```{r}
+#| eval: false
 getwd()
 ```
 またワーキングディレクトリを変更するには `setwd` を実行する.
@@ -52,11 +57,13 @@ getwd()
 例えば, 現在のワーキングディレクトリの位置が 
 `C:\Users\kenji\work\project` にあり, 
 データ `data.csv` が `C:\Users\kenji\work\project\data` にある場合,
-```{r, eval=FALSE}
+```{r}
+#| eval: false
 df <- read.table("work/data.csv", header=TRUE, sep = ",")
 ```
 とするか, ワーキングディレクトリを変更しなければならない.
-```{r, eval=FALSE}
+```{r}
+#| eval: false
 setwd("C:/Users/kenji/work/project/data")
 df <- read.table("data.csv", header=TRUE, sep = ",")
 ```
@@ -64,7 +71,8 @@ df <- read.table("data.csv", header=TRUE, sep = ",")
 また `RStudio` はメニューバーの `File` から `Import Dataset` からインタラクティブに外部ファイルが入力可能である.
 いったんこれで入力したとしても, history ペインでどのようなコマンドを実行したかを確認して, 次回も実行できるよう記録しておくとよい.
 
-```{r, echo=FALSE}
+```{r}
+#| echo: false
 knitr::include_graphics("figs/rstudio_input.gif")
 ```
 
@@ -82,38 +90,44 @@ var1, var2, var3
 R 以外の計算機で作成した結果を csv で保存しておけば, それを R に取り込むことができる.
 
 csv ファイルをRに取り込むには関数 `raed.table` を使うのが基本である.
-```{r, eval=FALSE}
+```{r}
+#| eval: false
 df <- read.table("data.csv", header=TRUE, sep = ",")
 ```
 こうすればオブジェクト `df` にデータフレイムとして導入される.
 
 関数 `read.csv` を使えば, 以上のオプションを付ける必要がない.
-```{r, eval=FALSE}
+```{r}
+#| eval: false
 df <- read.table("data.csv")
 ```
 
 外部からファイルを取り込んだ場合, 文字列は自動的に因子ベクトルに変換されてしまう.
 これを避けるには次のようにオプションをつける必要がある.
-```{r, eval=FALSE}
+```{r}
+#| eval: false
 df <- read.table("data.csv", stringsAsFactors= FALSE)
 ```
 
 ファイルを書き込むときには次のようにする. 
-```{r, eval=FALSE}
+```{r}
+#| eval: false
 write.csv(df,"data.csv", row.names = FALSE)
 ```
 このオプションはファイルの一列目に `rownames` が書き込まれるのを避けるための設定である.
 
 もしくはライブラリ `readr` を導入する.
 ファイルの読み込みは以下となる.
-```{r, eval=FALSE}
+```{r}
+#| eval: false
 library(readr)
 df <- read_csv("data.csv")
 ```
 特にオプションをつけなくても, 文字列は自動的に因子ベクトルに変換されない.
 
 ファイルの書き込みは以下となる.
-```{r, eval=FALSE}
+```{r}
+#| eval: false
 write_csv(df,"data.csv")
 ```
 特にオプションをつけなくても, `rownames` は書き込まない.
@@ -127,14 +141,16 @@ R は EXCEL のデータを扱うことができる.
 
 最近のEXCELデータの拡張子は `xlsx` である.
 これを導入するにはライブラリ `readxl` を使えばよい.
-```{r, eval=FALSE}
+```{r}
+#| eval: false
 library(readxl)
 df <- read_excel("data.xlsx",1)
 ```
 ファイル`data.xls` の一枚目のシートを意味する.
 
 直接シート名を指定することができる.
-```{r, eval=FALSE}
+```{r}
+#| eval: false
 read_excel("data.xlsx","Revenues")
 ```
 こちらは「Revenues」という名前のシートを意味する.
@@ -157,11 +173,13 @@ Linux や Mac では文字コードをUTF-8 にしているので
 そのままの読み込みだと⽇本語が⽂字化けになる . 
 Windows でも RStudio を導入したときに最初に文字コードを UTF-8 に設定していたのなら同じように文字化けになる.
 それを防ぐためには , `read.csv` を用いるときは
-```{r, eval=FALSE}
+```{r}
+#| eval: false
 df <- read.csv("data.csv", stringAsFactors=FALSE, fileEncoding="SJIS")
 ```
 として, `read_csv` を用いるときは
-```{r, eval=FALSE}
+```{r}
+#| eval: false
 df <- read_csv("data.csv", locale=locale(encoding = "SJIS"))
 ```
 とする必要がある.
@@ -175,14 +193,16 @@ R は Stata のデータを扱うことができる.
 
 Stata のデータは拡張子 `dta` で保存されている.
 これを導入するにはライブラリ `foreign` を用いる.
-```{r, eval=FALSE}
+```{r}
+#| eval: false
 library(foreign)
 df <- read.dta("data.dta")
 ```
 
 ただ, 最新の Stata には対応していない.
 最新の Stata に対応するにはライブラリ `haven` を導入する.
-```{r, eval=FALSE}
+```{r}
+#| eval: false
 library(haven)
 df <- read_dta("data.dta")
 ```
@@ -192,16 +212,19 @@ df <- read_dta("data.dta")
 ## R に入っているデータ
 R およびパッケージにはいくつかのデータがはいっている.
 どのようなデータが利用可能かは以下のコマンドで調べることができる.
-```{r, eval=FALSE}
+```{r}
+#| eval: false
 data()
 ```
 
 それがどのような変数が含まれているのかを調べるには, `help` を使えばよい.
-```{r, eval=FALSE}
+```{r}
+#| eval: false
 help(cars)
 ```
 
-```{r, echo=FALSE}
+```{r}
+#| echo: false
 knitr::include_graphics("figs/rstudio_data.gif")
 ```
 
@@ -225,14 +248,16 @@ summary(CPS1985)
 + [e-stat](https://www.e-stat.go.jp/) (`estatap`)
 
 また直接, インターネットのファイルをダウンロードすることもできる.
-```{r, eval=FALSE}
+```{r}
+#| eval: false
 library(haven)
 URL <- "http://fmwww.bc.edu/ec-p/data/wooldridge/attend.dta"
 df <-read_dta(URL)
 ```
 
 もし一旦ファイルとして保存しておくなら以下のように実施する.
-```{r, eval=FALSE}
+```{r}
+#| eval: false
 if(!file.exists("mroz.dta")) download.file(URL, "mroz.dta",method="curl")
 library(haven)
 df <- read_dta("mroz.dta")

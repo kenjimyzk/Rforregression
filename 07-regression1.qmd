@@ -5,11 +5,15 @@ output:
 ---
 
 # 古典的仮定のもとでの最小二乗法
-```{r setup, include=FALSE}
+```{r}
+#| label: setup
+#| include: false
 knitr::opts_chunk$set(echo = TRUE, collapse=TRUE)
 ```
 
-```{r message=FALSE, warning=FALSE}
+```{r}
+#| message: false
+#| warning: false
 library(AER)
 ```
 

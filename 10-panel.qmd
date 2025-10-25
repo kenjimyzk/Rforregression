@@ -8,7 +8,9 @@ editor_options:
 
 # パネル分析
 
-```{r setup, include=FALSE}
+```{r}
+#| label: setup
+#| include: false
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
@@ -20,7 +22,9 @@ knitr::opts_chunk$set(echo = TRUE)
 Grunfeld データは企業の投資, 企業価値, 資本ストックに関するパネルデータである.
 `head(Grunfeld)` コマンドでデータの最初の数行を表示する.
 
-```{r message=FALSE, warning=FALSE}
+```{r}
+#| message: false
+#| warning: false
 library(AER)
 library(plm)
 data("Grunfeld", package = "plm")

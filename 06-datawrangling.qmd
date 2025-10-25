@@ -4,7 +4,9 @@ output: html_document
 ---
 
 # 整然データ
-```{r setup, include=FALSE}
+```{r}
+#| label: setup
+#| include: false
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
@@ -22,7 +24,9 @@ http://r4ds.had.co.nz/tidy-data.html
 またはそうしたデータにする方法を紹介する.
 
 ここでは以下のライブラリに全面に依存する.
-```{r message=FALSE, warning=FALSE}
+```{r}
+#| message: false
+#| warning: false
 library(tidyverse)
 ```
 特に `dplyr` と `tidyr` を用いる.
@@ -34,7 +38,8 @@ library(tidyverse)
 mtcars %>% head()
 ```
 ここで `%>%` はパイプ処理といって, 
-```{r, eval=FALSE}
+```{r}
+#| eval: false
 head(mtcars)
 ```
 と同じ効果をもたらす. 括弧が重複する場合, こちらのほうがわかりやすい.
