@@ -19,205 +19,268 @@ http://r4ds.had.co.nz/tidy-data.html
 
 ![tidy data](http://r4ds.had.co.nz/images/tidy-1.png)
 
-これをこのようなデータを使って, データを整形する方法,
-またはそうしたデータにする方法を紹介する.
+この章では、データを整然な形に整形する方法と、もともとのデータを整然データへ変換する手順を紹介する。
 
-ここでは以下のライブラリに全面に依存する.
+ここでは tidyverse を中心に作業を進める。
 ```{r}
 #| message: false
 #| warning: false
 library(tidyverse)
 ```
-特に `dplyr` と `tidyr` を用いる.
+特に `dplyr` と `tidyr` の機能を活用する。
 
 ## データ整形
-データセット `mtcars` を取り扱う.
-この最初の6つを見るには以下を実施する.
+まずデータセット `mtcars` を例に取り、整形の基本操作を確認する。`as_tibble()` を介して行名を列に移すと、後続の操作が行いやすくなる。
 ```{r}
-mtcars %>% head()
-```
-ここで `%>%` はパイプ処理といって, 
-```{r}
-#| eval: false
-head(mtcars)
-```
-と同じ効果をもたらす. 括弧が重複する場合, こちらのほうがわかりやすい.
+mtcars_tbl <- mtcars |> 
+  as_tibble(rownames = "model")
 
-ライブラリ `dplyr` でデータフレイムの処理が簡単になる.
-`select` で変数を選択できる.
-```{r}
-mtcars %>% select(mpg, disp) %>% head()
+mtcars_tbl |> slice_head(n = 6)
 ```
 
-`filter` により条件に応じた抽出ができる.
+ここでは R 4.1 から導入されたパイプ演算子 `|>` を利用している。従来の `%>%` と同様に、左辺の結果を右辺の関数に渡す構文である。
+
+`dplyr` を使うとデータフレームの処理が大幅に簡潔になる。
+変数の抽出には `select()` を使う。
 ```{r}
-mtcars %>% select(mpg, disp) %>% filter(disp > 300) %>% head()
+mtcars_tbl |> 
+  select(model, mpg, disp) |> 
+  slice_head(n = 6)
 ```
 
-`rename` により変数名を変更することができる. 日本語でも一応対応している.
+条件に合致した行だけを抽出したい場合は `filter()` が便利である。
 ```{r}
-mtcars %>% select(mpg, disp) %>% rename(速度 =mpg, 距離 =disp) %>% head()
+mtcars_tbl |> 
+  select(model, mpg, disp) |> 
+  filter(disp > 300)
 ```
 
-`arrange` により順序を変更できる.
+`rename()` を使えば変数名を変更できる。日本語の列名にも対応している。
 ```{r}
-mtcars %>% select(mpg, disp) %>% arrange(mpg) %>% head()
+mtcars_tbl |> 
+  select(model, mpg, disp) |> 
+  rename(速度 = mpg, 距離 = disp) |> 
+  slice_head(n = 6)
 ```
 
-逆順には以下のようにすればよい.
+並べ替えは `arrange()` で行う。
 ```{r}
-mtcars %>% select(mpg, disp) %>% arrange(desc(mpg)) %>% head()
+mtcars_tbl |> 
+  select(model, mpg, disp) |> 
+  arrange(mpg) |> 
+  slice_head(n = 6)
 ```
 
-新しい変数を作成するには以下のように `mutate` を用いる.
+降順に並べる場合は `desc()` と組み合わせる。
 ```{r}
-mtcars %>% select(mpg) %>% mutate(gpm = 1/mpg) %>% head()
+mtcars_tbl |> 
+  select(model, mpg, disp) |> 
+  arrange(desc(mpg)) |> 
+  slice_head(n = 6)
 ```
 
-以下は20より大きいと`TRUE`, そうでないと `FALSE` をとる変数を作成している.
+`mutate()` を使うと新しい列を追加できる。
 ```{r}
-mtcars %>% select(mpg) %>% mutate(binarympg = ifelse(mpg>20,TRUE,FALSE)) %>% head()
+mtcars_tbl |> 
+  mutate(gpm = 1 / mpg) |> 
+  select(model, mpg, gpm) |> 
+  slice_head(n = 6)
+```
+`mutate()` は既存列の上書きや複数列の同時作成も可能で、計算や条件分岐をまとめて記述できる点が強みである。
+
+次の例では、`mpg` が 20 を超える場合に `TRUE` を返すブール列を追加している。
+```{r}
+mtcars_tbl |> 
+  mutate(is_high_mileage = mpg > 20) |> 
+  select(model, mpg, is_high_mileage) |> 
+  slice_head(n = 6)
 ```
 
-`summarize` により変数の基本統計表を作成できる.
+`summarise()` で基本統計量を算出できる。
 ```{r}
-mtcars %>% summarize(avg = mean(mpg), sd =sd(mpg))
+mtcars_tbl |> 
+  summarise(avg = mean(mpg), 
+            sd  = sd(mpg), 
+            .groups = "drop")
 ```
+列名を任意に付けておけば、後続の処理で指標を参照しやすくなる。
 
 
-`group_by` と `summarize` を組み合わせてグループごとの基本統計量も作成できる.
+`summarise()` に `.by` を指定すれば、グループごとの集計も容易である。
 
 ```{r}
-mtcars %>% group_by(cyl) %>% summarize(n = n(), avg = mean(mpg), sd =sd(mpg))
+mtcars_tbl |> 
+  summarise(
+    n   = n(),
+    avg = mean(mpg),
+    sd  = sd(mpg),
+    .by = cyl
+  )
 ```
 
 ## データ結合
-`dplyr` 2つのデータフレイムを結合する便利なコマンドがある.
-列の追加は `bind_rows` を用いる.
+`dplyr` にはデータフレームを縦横方向に結合したり、キーを用いて結合したりするための関数が揃っている。
+
+縦方向に結合するには `bind_rows()` を使う。
 ```{r}
-df1 <- data_frame(X=1:2, Y=1:2)
-df2 <- data_frame(X=4, Y=4)
-bind_rows(df1,df2)
+df1 <- tibble(X = 1:2, Y = 1:2)
+df2 <- tibble(X = 4,   Y = 4)
+
+bind_rows(df1, df2)
+```
+列名と型が一致していれば、欠けている列には自動で `NA` が補われる。
+
+横方向に結合する場合は `bind_cols()` を利用する。
+```{r}
+df3 <- tibble(Z = 5:6)
+bind_cols(df1, df3)
+```
+行数が一致していないとリサイクルされるか警告が出るので注意する。
+
+キーを用いた結合には四種類の join 関数が利用できる。
+```{r}
+dfx <- tibble(id = c("A", "B", "C"), X = 1:3)
+dfy <- tibble(id = c("A", "B", "D"), Y = c(TRUE, FALSE, TRUE))
 ```
 
-行の追加は `bind_rows` を用いる.
+左側データ（`dfx`）の行をすべて保持して結合するには `left_join()` を用いる。
 ```{r}
-df3 <- data_frame(Z=5:6)
-bind_cols(df1,df3)
+left_join(dfx, dfy, by = "id")
 ```
 
-2つのデータフレイムで共通部分を用いて結合させるには4つのやり方がある.
+右側データ（`dfy`）の行をすべて保持するなら `right_join()`。
 ```{r}
-dfx <- data_frame(id=c("A","B","C"), X=1:3)
-dfy <- data_frame(id=c("A","B","D"), Y=c(TRUE,FALSE,TRUE))
+right_join(dfx, dfy, by = "id")
 ```
 
-左側の `dfx` がすべて残るように結合するには, `left_join` を実行する.
+両方の行をすべて保持するなら `full_join()`。
 ```{r}
-left_join(dfx,dfy,by="id")
+full_join(dfx, dfy, by = "id")
 ```
 
-右側の `dfx` がすべて残るように結合するには, `right_join` を実行する.
+`inner_join()` は共通部分のみを抽出する。
 ```{r}
-right_join(dfx,dfy,by="id")
+inner_join(dfx, dfy, by = "id")
 ```
-
-両方がすべて残るように結合するには, `full_join` を実行する.
-```{r}
-full_join(dfx,dfy,by="id")
-```
-
-両方にある行のみ残して結合するには, `inner_join` を実行する.
-```{r}
-inner_join(dfx,dfy,by="id")
-```
-
-
+より複雑な条件で結合したい場合は `join_by()` を使うと柔軟に定義できる。
+複雑な条件で結合したい場合は `join_by()` を使うと柔軟に定義できる。
 
 ## tidyr
 
-以下のデータセットを考える.
+ここからは `tidyr` による整形の例を紹介する。まず次のデータセットを用意する。
 ```{r}
-df <- data_frame(
+df <- tibble(
   time = 2010:2014,
   X = rnorm(5, 0, 1),
   Y = rnorm(5, 0, 2),
   Z = rnorm(5, 0, 4)
 )
-df
+# `tibble()` なら列の型を意識しつつ手早くサンプル値を用意できる
+df |> slice_head(n = 6)
 ```
 
-それぞれの変数名をキーとして, 値を示した表は `pivot_longer` で作れる.
+列名をキーにして縦長へ変換するときは `pivot_longer()` を用いる。
 ```{r}
-df_gather <- df %>% pivot_longer(col=-time,names_to='key',values_to = 'value')
-df_gather
+df_long <- df |> 
+  pivot_longer(-time, names_to = "key", values_to = "value")
+# names_to / values_to を指定しておくと後続処理が読みやすい
+df_long
 ```
 
-`pivot_wider` でもとに戻ることができる.
+`pivot_wider()` を使えば再び元の構造に戻すことができる。
 ```{r}
-df_gather %>% pivot_wider(names_from = 'key', values_from = "value")
+df_long |> 
+  pivot_wider(names_from = "key", values_from = "value")
+```
+列数を増やして見せたいときや、プレゼン資料で横持ちの表が必要なときに役立つ。
+
+`time` を列方向に展開すれば、年次を横持ちした表へ変換できる。
+```{r}
+df_wide <- df_long |> 
+  pivot_wider(names_from = "time", values_from = "value")
+df_wide
 ```
 
-`pivot_wider` で `time` にすると別の形で展開できる.
+再び縦長に戻す場合は次のとおりである。
 ```{r}
-df_spread <- df_gather %>% pivot_wider(names_from = 'time', values_from = "value")
-df_spread
+df_wide |> 
+  pivot_longer(-key, names_to = "time", values_to = "value")
 ```
 
-以下のようにすればもとに戻る.
+`pivot_longer()` と `summarise()` を組み合わせると、変数別の記述統計を簡潔にまとめられる。
 ```{r}
-df_spread %>% pivot_longer(col=-key,names_to='time',values_to = 'value')
+cars |> 
+  as_tibble() |> 
+  pivot_longer(everything(), names_to = "variable", values_to = "value") |> 
+  summarise(
+    nobs = n(),
+    avg  = mean(value),
+    sd   = sd(value),
+    .by  = variable
+  )
+# 欠損を除外したいときは mean(value, na.rm = TRUE) のように na.rm を付ける
 ```
 
-`pivot_longer` をうまく使えば変数ごとの基本統計量の表を作ることができる.
+日本語の列名でも同じ操作が可能である。
 ```{r}
-cars %>% pivot_longer(everything(),names_to='variable',values_to = 'value') %>% group_by(variable) %>%
-  summarize(nobs = n(), avg = mean(value), sd =sd(value))
-```
-
-日本語だと次のようにすればよい.
-```{r}
-tab <- cars %>% rename(距離=dist,速度=speed ) %>%
-  gather(変数,value) %>% group_by(変数) %>%
-  summarize(観測数 = n(), 平均 = mean(value), 標準偏差 =sd(value))
-head(tab)
+tab <- cars |> 
+  as_tibble() |> 
+  rename(距離 = dist, 速度 = speed) |> 
+  pivot_longer(everything(), names_to = "変数", values_to = "value") |> 
+  summarise(
+    観測数   = n(),
+    平均     = mean(value),
+    標準偏差 = sd(value),
+    .by      = 変数
+  )
+tab |> slice_head(n = 6)
 ```
 
 ## 実践例
-tidyr を用いた別の例をみてみよう.
-横軸を年としたデータセット `df` がある.
+tidyr を用いた別の例を見てみよう。横軸を年としたデータセット `df` がある。
 ```{r}
-df <- data_frame(name=letters, "2010"=rnorm(26),"2011"=rnorm(26),"2012"=rnorm(26)) 
-head(df)
+df <- tibble(
+  name  = letters,
+  `2010` = rnorm(26),
+  `2011` = rnorm(26),
+  `2012` = rnorm(26)
+) 
+df |> slice_head(n = 6)
 ```
-`data.frame` でないことに注意されたい.
 
-また, 年ごとのデータセット `df_2010`, `df_2011`, `df_2012` が3つある.
+さらに、年ごとのデータセット `df_2010`、`df_2011`、`df_2012` の 3 つも用意する。
 ```{r}
-df_2010 <- data_frame(name=letters,runif=runif(26))
-df_2011 <- data_frame(name=letters,runif=runif(26))
-df_2012 <- data_frame(name=letters,runif=runif(26))
+df_2010 <- tibble(name = letters, runif = runif(26))
+df_2011 <- tibble(name = letters, runif = runif(26))
+df_2012 <- tibble(name = letters, runif = runif(26))
 ```
-これら4つのデータセットを1つにまとめよう.
+これら 4 つのデータセットを統合して整然データにする。
 
-まずデータ `df` についてであるが, `pivot_longer` をつかう.
+まず `df` を `pivot_longer()` で縦長に変換する。
 ```{r}
-df_rnorm <- df %>% pivot_longer(col=-name,names_to='time',values_to = 'rnorm') %>%
-  mutate(time=as.numeric(time))
-head(df_rnorm)
+df_rnorm <- df |> 
+  pivot_longer(-name, names_to = "time", values_to = "rnorm") |> 
+  mutate(time = as.numeric(time))
+df_rnorm |> slice_head(n = 6)
 ```
-時間の変数を数値に変換している.
+ここでは `time` 列を数値に変換している。
 
-データセット `df_2010`, `df_2011`, `df_2012` をつなげる.
+次に、3 つの年別データセットを `bind_rows()` で縦に結合する。
 ```{r}
-df_runif <- bind_rows(df_2010,df_2011,df_2012) %>% 
-  bind_cols(time=rep(2010:2012,each=26)) 
-head(df_runif)
+df_runif <- bind_rows(
+  "2010" = df_2010,
+  "2011" = df_2011,
+  "2012" = df_2012,
+  .id    = "time"
+) |> 
+  mutate(time = as.numeric(time))
+df_runif |> slice_head(n = 6)
 ```
-それぞれの年の変数を付け加えている.
+`.id` で追加された列を数値に変換して年情報として利用している。
 
-これを `full_join` を用いてつなげる.
+最後に `full_join()` を使って 2 つのデータを結合する。
 ```{r}
-df_full <- full_join(df_rnorm,df_runif,by=c("name","time"))
-head(df_full)  
+df_full <- full_join(df_rnorm, df_runif, by = c("name", "time"))
+df_full |> slice_head(n = 6)
 ```
+整然データにまとめておけば、`ggplot2` やモデリング関数へそのまま渡せるため、後続処理がスムーズになり再現性も高まる。
