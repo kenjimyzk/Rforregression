@@ -199,6 +199,178 @@ Each chapter includes its own setup chunk:
 knitr::opts_chunk$set(echo = TRUE, collapse=TRUE)
 ```
 
+## Writing Style Guidelines
+
+When writing or editing content for this book, follow these style conventions observed throughout the `.qmd` files:
+
+### Japanese Language Style
+
+#### Sentence endings and tone
+- Use です・ます調 (polite form) throughout: である, となる, されたい, すればよい, など
+- Common sentence-ending patterns:
+  - Explanatory: 〜である, 〜となる, 〜されている
+  - Instructional: 〜する, 〜すればよい, 〜されたい
+  - Conditional: 〜なら, 〜のとき, 〜場合
+- Maintain neutral, instructional tone appropriate for technical educational material
+
+#### Punctuation
+- Use full-width Japanese punctuation: 。、
+- Use full-width parentheses for Japanese text: ()
+- Use half-width parentheses for inline code or English terms: `command()`
+- Use full-width colon in Japanese sentences: :
+
+#### Terminology
+- Use katakana for foreign technical terms: パッケージ, コマンド, オプション, パラメータ, データフレーム
+- Keep English terms in Roman alphabet when referring to code elements: `lm`, `data`, `model`
+- Bold important technical terms on first introduction: **外生変数**, **操作変数**, **平均差分法**
+
+### Content Structure
+
+#### Section organization
+- Use hierarchical headings: `#`, `##`, `###`
+- Start chapters with level 1 heading (`#`) for main chapter title
+- Use level 2 (`##`) for major sections
+- Use level 3 (`###`) for subsections
+
+#### Code explanation pattern
+Follow this consistent pattern when introducing R commands:
+
+1. **Mathematical/conceptual introduction** - Present the model or concept with equations when relevant
+2. **Verbal explanation** - Explain what the code does before showing it
+3. **Code block** - Show the R code
+4. **Output interpretation** - Explain the results or what to observe
+
+Example pattern:
+```
+単回帰モデルを考える。
+$$
+y = \alpha + \beta x + u
+$$
+
+R で回帰分析を実施するには `lm` 関数を使用する。
+第一引数には回帰式を `y ~ x` という形式で指定し、`data` 引数にはデータフレームを指定する。
+
+\```{r}
+fm <- lm(y ~ x, data=df)
+\```
+
+推定された係数を取り出すには `coef` 関数を使用する。
+```
+
+#### Formula and equation formatting
+- Use LaTeX math mode for equations: `$$...$$` for display math, `$...$` for inline math
+- Use subscripts for indices: `x_i`, `y_{it}`
+- Use `\alpha`, `\beta`, `\gamma` for parameters
+- Label components clearly: ここで $x$ は説明変数、$y$ は被説明変数、$u$ は誤差項である
+
+### Code Documentation Style
+
+#### Function introduction
+When introducing R functions, follow this pattern:
+- Mention the function name in backticks: `lm` 関数
+- Explain the purpose: 〜を実施するには〜を使用する
+- Describe key arguments: 第一引数には〜, `data` 引数には〜
+- Show usage example
+- Explain how to extract results: 〜を取り出すには〜
+
+Example:
+```
+`plm()` 関数で `model = "pooling"` を指定する。
+`plm(inv ~ value + capital, data = pdata, model = "pooling")` コマンドで、inv を被説明変数、value と capital を説明変数としてプーリングOLS推定を行い、結果を `gp` に格納する。
+```
+
+#### Code block attributes
+- Always include setup chunk at the beginning:
+  ```{r}
+  #| label: setup
+  #| include: false
+  knitr::opts_chunk$set(echo = TRUE, collapse=TRUE)
+  ```
+- Use `#| eval: false` for code that should not be executed
+- Use `#| message: false` and `#| warning: false` when loading packages
+- Use descriptive labels: `#| label: setup`
+
+#### Comments in code
+- Minimize inline comments in R code blocks
+- Use Japanese comments when necessary: `# 係数の取得`
+- Prefer explanatory text before or after code blocks rather than inline comments
+
+### Explanatory Patterns
+
+#### Introducing alternatives
+When showing equivalent methods or alternative syntax:
+```
+`coef` 関数を使用する。
+`coefficients` 関数でも同じ結果が得られる (コメントアウトしている).
+
+\```{r}
+coef(fm)
+# coefficients(fm)
+\```
+```
+
+#### Step-by-step procedures
+When explaining multi-step procedures, use numbered lists:
+```
+以下の手順で実行する:
+
+1. それぞれの内生変数を外生変数と操作変数に回帰させて、その予測値を得る。
+2. 被説明変数を外生変数と内生変数の予測値に回帰させて、その係数を得る。
+```
+
+#### Assumptions and conditions
+When listing assumptions, use bullet points with `+`:
+```
+以下の仮定を置く。
+
++ $(x_i, y_i)$ は独立同一分布に従う。
++ $E[u_i] = 0$ である。
++ $u_i$ と $x_i$ は独立である。
+```
+
+#### Technical definitions
+Define technical terms clearly:
+```
+誤差項と相関が無い説明変数を **外生変数** といい、誤差項と相関がある説明変数を **内生変数** という。
+```
+
+### Cross-references and Links
+
+#### Function references
+- Use backticks for function names: `lm()`, `summary()`, `coef()`
+- Include parentheses when referring to functions
+- Mention package when first introducing specialized functions: `ivreg` コマンドは `AER` パッケージに含まれており
+
+#### File and URL references
+- Use full URLs for external references
+- Provide Japanese context for English resources:
+  ```
+  英語であるがこの動画も有益である。
+
+  https://www.datacamp.com/courses/working-with-the-rstudio-ide-part-1
+  ```
+
+### Consistency Points
+
+#### Variable naming in examples
+- Use consistent variable names across chapters:
+  - `fm`, `fm0`, `fm1` for fitted models
+  - `df` for data frames
+  - `N` for sample size
+  - `x`, `y`, `w` for variables
+  - `pdata` for panel data frames
+
+#### Output display
+- Use `head()` when showing partial output: `head(resid(fm))`
+- Note when commenting out alternative methods: `# coefficients(fm)`
+- Use `with()` for accessing data frame columns: `with(df, cov(x,y)/var(x))`
+
+#### Notes and attention markers
+- Use parenthetical notes with `^[...]` for footnotes
+- Use 注意 or ここで for calling attention
+- Use たとえば for examples
+- Use なお for additional notes
+
 ## Deployment
 
 The [docs](docs/) directory contains the rendered HTML output and is configured as the GitHub Pages publishing source. After running `quarto render`, commit the updated docs/ directory to deploy changes to the live site.
