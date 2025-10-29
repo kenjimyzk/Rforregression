@@ -9,7 +9,7 @@ classoption: ja=standard, xelatex
 geometry: no
 # bibliography: template.bib
 biblio-style: jeconunicode
-link-citations: yes
+link-citations: true
 # csl: apa-jp_JSAM.csl
 lang: ja-JP
 # github-repo: (your-github-repository)
