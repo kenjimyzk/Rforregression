@@ -4,6 +4,9 @@ output:
   html_notebook: default
 ---
 
+
+
+# 基本
 R の基本として以下の2つのサイトでオンラインで学習することをオススメする.
 
 https://rstudio.cloud/learn/primers

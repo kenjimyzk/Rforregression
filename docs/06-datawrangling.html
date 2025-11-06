@@ -1,32 +1,66 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja"><head>
+<html lang="ja-JP" xml:lang="ja-JP">
+<head>
 
-<meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.552">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>7 整然データ | datawrangling</title>
+  <meta name="description" content="This is a description. Please wrote a abstract this contents." />
+  <meta name="generator" content="bookdown 0.45 and GitBook 2.6.7" />
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <meta property="og:title" content="7 整然データ | datawrangling" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This is a description. Please wrote a abstract this contents." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="7 整然データ | datawrangling" />
+  
+  <meta name="twitter:description" content="This is a description. Please wrote a abstract this contents." />
+  
+
+<meta name="author" content="宮﨑憲治" />
 
 
-<title>R と RStudio - 7&nbsp; 整然データ</title>
-<style>
-code{white-space: pre-wrap;}
-span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
-div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-ul.task-list{list-style: none;}
-ul.task-list li input[type="checkbox"] {
-  width: 0.8em;
-  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
-  vertical-align: middle;
-}
-/* CSS for syntax highlighting */
+<meta name="date" content="2025-10-29" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="05-datainput.html"/>
+<link rel="next" href="07-regression1.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -47,1466 +81,630 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
+    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./07-regression1.html" rel="next">
-<link href="./05-datainput.html" rel="prev">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
-  "location": "sidebar",
-  "copy-button": false,
-  "collapse-after": 3,
-  "panel-placement": "start",
-  "type": "textbox",
-  "limit": 50,
-  "keyboard-shortcut": [
-    "f",
-    "/",
-    "s"
-  ],
-  "show-item-context": false,
-  "language": {
-    "search-no-results-text": "一致なし",
-    "search-matching-documents-text": "一致した文書",
-    "search-copy-link-title": "検索へのリンクをコピー",
-    "search-hide-matches-text": "追加の検索結果を非表示",
-    "search-more-match-text": "追加の検索結果",
-    "search-more-matches-text": "追加の検索結果",
-    "search-clear-button-title": "消去",
-    "search-text-placeholder": "",
-    "search-detached-cancel-button-title": "取消",
-    "search-submit-button-title": "検索",
-    "search-label": "サーチ"
-  }
-}</script>
-
-
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
-<body class="nav-sidebar floating">
+<body>
 
-<div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="サイドバーを切り替える" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-        <i class="bi bi-layout-text-sidebar-reverse"></i>
-      </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06-datawrangling.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">整然データ</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="サイドバーを切り替える" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-        </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
-        <i class="bi bi-search"></i>
-      </button>
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R & RStudio</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> はじめに</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#r-%E3%81%A8%E3%81%AF"><i class="fa fa-check"></i><b>1.1</b> R とは</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#r-%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB"><i class="fa fa-check"></i><b>1.2</b> R のインストール</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#r-%E3%81%AE%E8%A8%AD%E5%AE%9A"><i class="fa fa-check"></i><b>1.3</b> R の設定</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#r-%E3%81%AE%E4%BD%BF%E3%81%84%E6%96%B9"><i class="fa fa-check"></i><b>1.4</b> R の使い方</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="01-base.html"><a href="01-base.html"><i class="fa fa-check"></i><b>2</b> 基本</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="01-base.html"><a href="01-base.html#%E9%9B%BB%E5%8D%93%E3%81%A8%E3%81%97%E3%81%A6%E3%81%AE-r"><i class="fa fa-check"></i><b>2.1</b> 電卓としての R</a></li>
+<li class="chapter" data-level="2.2" data-path="01-base.html"><a href="01-base.html#%E9%96%A2%E6%95%B0%E9%9B%BB%E5%8D%93%E3%81%A8%E3%81%97%E3%81%A6%E3%81%AEr"><i class="fa fa-check"></i><b>2.2</b> 関数電卓としてのR</a></li>
+<li class="chapter" data-level="2.3" data-path="01-base.html"><a href="01-base.html#r-%E3%81%AE%E5%9E%8B"><i class="fa fa-check"></i><b>2.3</b> R の型</a></li>
+<li class="chapter" data-level="2.4" data-path="01-base.html"><a href="01-base.html#%E5%A4%89%E6%95%B0"><i class="fa fa-check"></i><b>2.4</b> 変数</a></li>
+<li class="chapter" data-level="2.5" data-path="01-base.html"><a href="01-base.html#%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8"><i class="fa fa-check"></i><b>2.5</b> パッケージ</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="02-rstudio.html"><a href="02-rstudio.html"><i class="fa fa-check"></i><b>3</b> RStudio</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="02-rstudio.html"><a href="02-rstudio.html#rstudio-%E3%81%A8%E3%81%AF"><i class="fa fa-check"></i><b>3.1</b> RStudio とは</a></li>
+<li class="chapter" data-level="3.2" data-path="02-rstudio.html"><a href="02-rstudio.html#rstudio-%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB"><i class="fa fa-check"></i><b>3.2</b> RStudio のインストール</a></li>
+<li class="chapter" data-level="3.3" data-path="02-rstudio.html"><a href="02-rstudio.html#rstudio-%E3%81%AE%E8%A8%AD%E5%AE%9A"><i class="fa fa-check"></i><b>3.3</b> RStudio の設定</a></li>
+<li class="chapter" data-level="3.4" data-path="02-rstudio.html"><a href="02-rstudio.html#rstudio-%E3%81%AE%E4%BD%BF%E3%81%84%E6%96%B9"><i class="fa fa-check"></i><b>3.4</b> RStudio の使い方</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="03-vector.html"><a href="03-vector.html"><i class="fa fa-check"></i><b>4</b> ベクトル</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="03-vector.html"><a href="03-vector.html#%E3%83%99%E3%82%AF%E3%83%88%E3%83%AB-1"><i class="fa fa-check"></i><b>4.1</b> ベクトル</a></li>
+<li class="chapter" data-level="4.2" data-path="03-vector.html"><a href="03-vector.html#%E7%AE%97%E8%A1%93%E6%BC%94%E7%AE%97%E5%AD%90"><i class="fa fa-check"></i><b>4.2</b> 算術演算子</a></li>
+<li class="chapter" data-level="4.3" data-path="03-vector.html"><a href="03-vector.html#%E8%AB%96%E7%90%86%E6%BC%94%E7%AE%97%E5%AD%90"><i class="fa fa-check"></i><b>4.3</b> 論理演算子</a></li>
+<li class="chapter" data-level="4.4" data-path="03-vector.html"><a href="03-vector.html#%E6%AF%94%E8%BC%83%E6%BC%94%E7%AE%97%E5%AD%90"><i class="fa fa-check"></i><b>4.4</b> 比較演算子</a></li>
+<li class="chapter" data-level="4.5" data-path="03-vector.html"><a href="03-vector.html#%E8%A6%81%E7%B4%A0"><i class="fa fa-check"></i><b>4.5</b> 要素</a></li>
+<li class="chapter" data-level="4.6" data-path="03-vector.html"><a href="03-vector.html#%E9%96%A2%E6%95%B0"><i class="fa fa-check"></i><b>4.6</b> 関数</a></li>
+<li class="chapter" data-level="4.7" data-path="03-vector.html"><a href="03-vector.html#%E8%A6%8F%E5%89%87%E7%9A%84%E3%81%AA%E3%83%99%E3%82%AF%E3%83%88%E3%83%AB"><i class="fa fa-check"></i><b>4.7</b> 規則的なベクトル</a></li>
+<li class="chapter" data-level="4.8" data-path="03-vector.html"><a href="03-vector.html#%E4%B9%B1%E6%95%B0%E3%83%99%E3%82%AF%E3%83%88%E3%83%AB"><i class="fa fa-check"></i><b>4.8</b> 乱数ベクトル</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="04-dataframe.html"><a href="04-dataframe.html"><i class="fa fa-check"></i><b>5</b> データ構造</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="04-dataframe.html"><a href="04-dataframe.html#%E3%83%99%E3%82%AF%E3%83%88%E3%83%AB-2"><i class="fa fa-check"></i><b>5.1</b> ベクトル</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="04-dataframe.html"><a href="04-dataframe.html#%E3%83%99%E3%82%AF%E3%83%88%E3%83%AB%E3%81%AE%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9"><i class="fa fa-check"></i><b>5.1.1</b> ベクトルのアクセス</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="04-dataframe.html"><a href="04-dataframe.html#%E3%83%AA%E3%82%B9%E3%83%88"><i class="fa fa-check"></i><b>5.2</b> リスト</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="04-dataframe.html"><a href="04-dataframe.html#%E3%83%AA%E3%82%B9%E3%83%88%E3%81%AE%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9"><i class="fa fa-check"></i><b>5.2.1</b> リストのアクセス</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="04-dataframe.html"><a href="04-dataframe.html#%E5%9B%A0%E5%AD%90%E3%83%99%E3%82%AF%E3%83%88%E3%83%AB"><i class="fa fa-check"></i><b>5.3</b> 因子ベクトル</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="04-dataframe.html"><a href="04-dataframe.html#factor"><i class="fa fa-check"></i><b>5.3.1</b> factor</a></li>
+<li class="chapter" data-level="5.3.2" data-path="04-dataframe.html"><a href="04-dataframe.html#cut"><i class="fa fa-check"></i><b>5.3.2</b> cut</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="04-dataframe.html"><a href="04-dataframe.html#%E8%A1%8C%E5%88%97"><i class="fa fa-check"></i><b>5.4</b> 行列</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="04-dataframe.html"><a href="04-dataframe.html#%E8%A1%8C%E5%88%97%E3%81%AE%E6%BC%94%E7%AE%97"><i class="fa fa-check"></i><b>5.4.1</b> 行列の演算</a></li>
+<li class="chapter" data-level="5.4.2" data-path="04-dataframe.html"><a href="04-dataframe.html#%E8%A1%8C%E5%88%97%E3%81%AE%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9"><i class="fa fa-check"></i><b>5.4.2</b> 行列のアクセス</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="04-dataframe.html"><a href="04-dataframe.html#%E3%83%87%E3%83%BC%E3%82%BF%E3%83%95%E3%83%AC%E3%82%A4%E3%83%A0"><i class="fa fa-check"></i><b>5.5</b> データフレイム</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="04-dataframe.html"><a href="04-dataframe.html#%E3%83%87%E3%83%BC%E3%82%BF%E3%83%95%E3%83%AC%E3%82%A4%E3%83%A0%E3%81%AE%E6%BC%94%E7%AE%97"><i class="fa fa-check"></i><b>5.5.1</b> データフレイムの演算</a></li>
+<li class="chapter" data-level="5.5.2" data-path="04-dataframe.html"><a href="04-dataframe.html#%E3%83%87%E3%83%BC%E3%82%BF%E3%83%95%E3%83%AC%E3%82%A4%E3%83%A0%E3%81%AE%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9"><i class="fa fa-check"></i><b>5.5.2</b> データフレイムのアクセス</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="05-datainput.html"><a href="05-datainput.html"><i class="fa fa-check"></i><b>6</b> データ入力</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="05-datainput.html"><a href="05-datainput.html#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB-1"><i class="fa fa-check"></i><b>6.1</b> はじめに</a></li>
+<li class="chapter" data-level="6.2" data-path="05-datainput.html"><a href="05-datainput.html#csv-%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB"><i class="fa fa-check"></i><b>6.2</b> csv ファイル</a></li>
+<li class="chapter" data-level="6.3" data-path="05-datainput.html"><a href="05-datainput.html#excel-%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB"><i class="fa fa-check"></i><b>6.3</b> EXCEL ファイル</a></li>
+<li class="chapter" data-level="6.4" data-path="05-datainput.html"><a href="05-datainput.html#stata"><i class="fa fa-check"></i><b>6.4</b> STATA</a></li>
+<li class="chapter" data-level="6.5" data-path="05-datainput.html"><a href="05-datainput.html#r-%E3%81%AB%E5%85%A5%E3%81%A3%E3%81%A6%E3%81%84%E3%82%8B%E3%83%87%E3%83%BC%E3%82%BF"><i class="fa fa-check"></i><b>6.5</b> R に入っているデータ</a></li>
+<li class="chapter" data-level="6.6" data-path="05-datainput.html"><a href="05-datainput.html#%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%BC%E3%83%8D%E3%83%83%E3%83%88%E3%81%8B%E3%82%89%E3%83%87%E3%83%BC%E3%82%BF%E5%85%A5%E5%8A%9B"><i class="fa fa-check"></i><b>6.6</b> インターネットからデータ入力</a></li>
+<li class="chapter" data-level="6.7" data-path="05-datainput.html"><a href="05-datainput.html#%E3%81%9D%E3%81%AE%E4%BB%96%E3%81%AE%E3%83%87%E3%83%BC%E3%82%BF%E5%85%A5%E5%8A%9B"><i class="fa fa-check"></i><b>6.7</b> その他のデータ入力</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="06-datawrangling.html"><a href="06-datawrangling.html"><i class="fa fa-check"></i><b>7</b> 整然データ</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="06-datawrangling.html"><a href="06-datawrangling.html#%E3%83%87%E3%83%BC%E3%82%BF%E6%95%B4%E5%BD%A2"><i class="fa fa-check"></i><b>7.1</b> データ整形</a></li>
+<li class="chapter" data-level="7.2" data-path="06-datawrangling.html"><a href="06-datawrangling.html#%E3%83%87%E3%83%BC%E3%82%BF%E7%B5%90%E5%90%88"><i class="fa fa-check"></i><b>7.2</b> データ結合</a></li>
+<li class="chapter" data-level="7.3" data-path="06-datawrangling.html"><a href="06-datawrangling.html#tidyr"><i class="fa fa-check"></i><b>7.3</b> tidyr</a></li>
+<li class="chapter" data-level="7.4" data-path="06-datawrangling.html"><a href="06-datawrangling.html#%E5%AE%9F%E8%B7%B5%E4%BE%8B"><i class="fa fa-check"></i><b>7.4</b> 実践例</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="07-regression1.html"><a href="07-regression1.html"><i class="fa fa-check"></i><b>8</b> 古典的仮定のもとでの最小二乗法</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="07-regression1.html"><a href="07-regression1.html#%E5%8D%98%E5%9B%9E%E5%B8%B0%E3%83%A2%E3%83%87%E3%83%AB"><i class="fa fa-check"></i><b>8.1</b> 単回帰モデル</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="07-regression1.html"><a href="07-regression1.html#%E3%83%86%E3%82%A3%E3%83%BC%E6%A4%9C%E5%AE%9A"><i class="fa fa-check"></i><b>8.1.1</b> ティー検定</a></li>
+<li class="chapter" data-level="8.1.2" data-path="07-regression1.html"><a href="07-regression1.html#%E5%AF%BE%E6%95%B0%E5%A4%89%E6%8F%9B"><i class="fa fa-check"></i><b>8.1.2</b> 対数変換</a></li>
+<li class="chapter" data-level="8.1.3" data-path="07-regression1.html"><a href="07-regression1.html#%E5%88%87%E7%89%87%E3%81%AA%E3%81%97%E5%9B%9E%E5%B8%B0%E3%83%A2%E3%83%87%E3%83%AB"><i class="fa fa-check"></i><b>8.1.3</b> 切片なし回帰モデル</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="07-regression1.html"><a href="07-regression1.html#%E9%87%8D%E5%9B%9E%E5%B8%B0%E3%83%A2%E3%83%87%E3%83%AB"><i class="fa fa-check"></i><b>8.2</b> 重回帰モデル</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="07-regression1.html"><a href="07-regression1.html#%E8%87%AA%E4%B9%97%E9%A0%85"><i class="fa fa-check"></i><b>8.2.1</b> 自乗項</a></li>
+<li class="chapter" data-level="8.2.2" data-path="07-regression1.html"><a href="07-regression1.html#%E4%BA%A4%E5%B7%AE%E9%A0%85"><i class="fa fa-check"></i><b>8.2.2</b> 交差項</a></li>
+<li class="chapter" data-level="8.2.3" data-path="07-regression1.html"><a href="07-regression1.html#%E3%82%A8%E3%83%95%E6%A4%9C%E5%AE%9A"><i class="fa fa-check"></i><b>8.2.3</b> エフ検定</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="08-regression2.html"><a href="08-regression2.html"><i class="fa fa-check"></i><b>9</b> 現代的仮定のもとでの最小二乗法</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="08-regression2.html"><a href="08-regression2.html#%E6%AD%A3%E8%A6%8F%E6%80%A7%E3%81%AE%E4%BB%AE%E5%AE%9A%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6"><i class="fa fa-check"></i><b>9.1</b> 正規性の仮定について</a></li>
+<li class="chapter" data-level="9.2" data-path="08-regression2.html"><a href="08-regression2.html#%E8%AA%A4%E5%B7%AE%E9%A0%85%E3%81%A8%E8%AA%AC%E6%98%8E%E5%A4%89%E6%95%B0%E3%81%8C%E7%8B%AC%E7%AB%8B%E3%81%AE%E4%BB%AE%E5%AE%9A%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6"><i class="fa fa-check"></i><b>9.2</b> 誤差項と説明変数が独立の仮定について</a></li>
+<li class="chapter" data-level="9.3" data-path="08-regression2.html"><a href="08-regression2.html#%E5%88%86%E6%95%A3%E5%9D%87%E4%B8%80%E3%81%AE%E6%A4%9C%E5%AE%9A"><i class="fa fa-check"></i><b>9.3</b> 分散均一の検定</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="09-ivreg.html"><a href="09-ivreg.html"><i class="fa fa-check"></i><b>10</b> 操作変数法</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="09-ivreg.html"><a href="09-ivreg.html#%E3%83%87%E3%83%BC%E3%82%BF"><i class="fa fa-check"></i><b>10.1</b> データ</a></li>
+<li class="chapter" data-level="10.2" data-path="09-ivreg.html"><a href="09-ivreg.html#%E6%93%8D%E4%BD%9C%E5%A4%89%E6%95%B0"><i class="fa fa-check"></i><b>10.2</b> 操作変数</a></li>
+<li class="chapter" data-level="10.3" data-path="09-ivreg.html"><a href="09-ivreg.html#%E6%AE%B5%E9%9A%8E%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%97%E6%B3%95"><i class="fa fa-check"></i><b>10.3</b> 2段階最小二乗法</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="09-ivreg.html"><a href="09-ivreg.html#%E8%A4%87%E6%95%B0%E5%88%B6%E7%B4%84%E3%81%AE%E6%A4%9C%E5%AE%9A"><i class="fa fa-check"></i><b>10.3.1</b> 複数制約の検定</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="09-ivreg.html"><a href="09-ivreg.html#%E7%89%B9%E5%AE%9A%E5%8C%96%E6%A4%9C%E5%AE%9A"><i class="fa fa-check"></i><b>10.4</b> 特定化検定</a>
+<ul>
+<li class="chapter" data-level="10.4.1" data-path="09-ivreg.html"><a href="09-ivreg.html#weak-instruments"><i class="fa fa-check"></i><b>10.4.1</b> Weak instruments</a></li>
+<li class="chapter" data-level="10.4.2" data-path="09-ivreg.html"><a href="09-ivreg.html#wu-hausman-%E6%A4%9C%E5%AE%9A"><i class="fa fa-check"></i><b>10.4.2</b> Wu-Hausman 検定</a></li>
+<li class="chapter" data-level="10.4.3" data-path="09-ivreg.html"><a href="09-ivreg.html#sargan-%E6%A4%9C%E5%AE%9A"><i class="fa fa-check"></i><b>10.4.3</b> Sargan 検定</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="09-ivreg.html"><a href="09-ivreg.html#%E3%83%AD%E3%83%90%E3%82%B9%E3%83%88%E5%88%86%E6%95%A3"><i class="fa fa-check"></i><b>10.5</b> ロバスト分散</a>
+<ul>
+<li class="chapter" data-level="10.5.1" data-path="09-ivreg.html"><a href="09-ivreg.html#%E5%88%86%E6%95%A3%E4%B8%8D%E5%9D%87%E4%B8%80%E3%81%AE%E6%A4%9C%E5%AE%9A"><i class="fa fa-check"></i><b>10.5.1</b> 分散不均一の検定</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="10-panel.html"><a href="10-panel.html"><i class="fa fa-check"></i><b>11</b> パネル分析</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="10-panel.html"><a href="10-panel.html#%E3%83%87%E3%83%BC%E3%82%BF-1"><i class="fa fa-check"></i><b>11.1</b> データ</a></li>
+<li class="chapter" data-level="11.2" data-path="10-panel.html"><a href="10-panel.html#%E3%83%97%E3%83%BC%E3%83%AA%E3%83%B3%E3%82%B0ols"><i class="fa fa-check"></i><b>11.2</b> プーリングOLS</a></li>
+<li class="chapter" data-level="11.3" data-path="10-panel.html"><a href="10-panel.html#%E5%9B%BA%E5%AE%9A%E5%8A%B9%E6%9E%9C-%E5%B9%B3%E5%9D%87%E5%B7%AE%E5%88%86%E6%B3%95"><i class="fa fa-check"></i><b>11.3</b> 固定効果 (平均差分法)</a>
+<ul>
+<li class="chapter" data-level="11.3.1" data-path="10-panel.html"><a href="10-panel.html#%E6%99%82%E9%96%93%E5%8A%B9%E6%9E%9C%E3%83%A2%E3%83%87%E3%83%AB"><i class="fa fa-check"></i><b>11.3.1</b> 時間効果モデル</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="10-panel.html"><a href="10-panel.html#%E5%9B%BA%E5%AE%9A%E5%8A%B9%E6%9E%9C-%E4%B8%80%E9%9A%8E%E5%B7%AE%E5%88%86%E6%B3%95"><i class="fa fa-check"></i><b>11.4</b> 固定効果 (一階差分法)</a>
+<ul>
+<li class="chapter" data-level="11.4.1" data-path="10-panel.html"><a href="10-panel.html#%E5%B9%B3%E5%9D%87%E5%B7%AE%E5%88%86%E6%B3%95%E3%81%A8%E4%B8%80%E9%9A%8E%E5%B7%AE%E5%88%86%E6%B3%95"><i class="fa fa-check"></i><b>11.4.1</b> 平均差分法と一階差分法</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="10-panel.html"><a href="10-panel.html#%E5%A4%89%E9%87%8F%E5%8A%B9%E6%9E%9C"><i class="fa fa-check"></i><b>11.5</b> 変量効果</a>
+<ul>
+<li class="chapter" data-level="11.5.1" data-path="10-panel.html"><a href="10-panel.html#%E3%83%8F%E3%82%A6%E3%82%B9%E3%83%9E%E3%83%B3%E6%A4%9C%E5%AE%9A"><i class="fa fa-check"></i><b>11.5.1</b> ハウスマン検定</a></li>
+</ul></li>
+<li class="chapter" data-level="11.6" data-path="10-panel.html"><a href="10-panel.html#%E3%82%AF%E3%83%A9%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%AD%E3%83%90%E3%82%B9%E3%83%88%E5%88%86%E6%95%A3"><i class="fa fa-check"></i><b>11.6</b> クラスターロバスト分散</a>
+<ul>
+<li class="chapter" data-level="11.6.1" data-path="10-panel.html"><a href="10-panel.html#%E5%88%86%E6%95%A3%E4%B8%8D%E5%9D%87%E4%B8%80%E3%81%AE%E6%A4%9C%E5%AE%9A-1"><i class="fa fa-check"></i><b>11.6.1</b> 分散不均一の検定</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
-<!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
-    <div class="sidebar-title mb-0 py-0">
-      <a href="./">R と RStudio</a> 
-    </div>
-      </div>
-        <div class="mt-2 flex-shrink-0 align-items-center">
-        <div class="sidebar-search">
-        <div id="quarto-search" class="" title="サーチ"></div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">datawrangling</a>
+          </h1>
         </div>
-        </div>
-    <div class="sidebar-menu-container"> 
-    <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">R と RStudio</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./01-base.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">R の基本</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./02-rstudio.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">RStudio</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./03-vector.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">ベクトル</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./04-dataframe.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">データ構造</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./05-datainput.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">データ入力</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./06-datawrangling.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">整然データ</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./07-regression1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">古典的仮定のもとでの最小二乗法</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./08-regression2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">現代的仮定のもとでの最小二乗法</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./09-ivreg.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">操作変数法</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./10-panel.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">パネル分析</span></span></a>
-  </div>
-</li>
-    </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">目次</h2>
-   
-  <ul>
-  <li><a href="#データ整形" id="toc-データ整形" class="nav-link active" data-scroll-target="#データ整形"><span class="header-section-number">7.1</span> データ整形</a></li>
-  <li><a href="#データ結合" id="toc-データ結合" class="nav-link" data-scroll-target="#データ結合"><span class="header-section-number">7.2</span> データ結合</a></li>
-  <li><a href="#tidyr" id="toc-tidyr" class="nav-link" data-scroll-target="#tidyr"><span class="header-section-number">7.3</span> tidyr</a></li>
-  <li><a href="#実践例" id="toc-実践例" class="nav-link" data-scroll-target="#実践例"><span class="header-section-number">7.4</span> 実践例</a></li>
-  </ul>
-</nav>
-    </div>
-<!-- main -->
-<main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">整然データ</span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> コード</button></div></div>
-</div>
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
 
-
-
-<div class="quarto-title-meta">
-
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
-<p>http://r4ds.had.co.nz/tidy-data.html</p>
+            <section class="normal" id="section-">
+<div id="整然データ" class="section level1 hasAnchor" number="7">
+<h1><span class="header-section-number">7</span> 整然データ<a href="06-datawrangling.html#%E6%95%B4%E7%84%B6%E3%83%87%E3%83%BC%E3%82%BF" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><a href="http://r4ds.had.co.nz/tidy-data.html" class="uri">http://r4ds.had.co.nz/tidy-data.html</a></p>
 <p>データが整然 (tidy) であるとは次の条件を満たすデータのことである.</p>
-<ol type="1">
+<ol style="list-style-type: decimal">
 <li>個々の変数 (variable) が1つの列 (column) である</li>
 <li>個々の観測 (observation) が1つの行 (row) である</li>
 <li>個々の値 (value) が1つのセル (cell) である</li>
 </ol>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="http://r4ds.had.co.nz/images/tidy-1.png" class="img-fluid figure-img"></p>
-<figcaption>tidy data</figcaption>
-</figure>
+<div class="float">
+<img src="http://r4ds.had.co.nz/images/tidy-1.png" alt="tidy data" />
+<div class="figcaption">tidy data</div>
 </div>
-<p>この章では、データを整然な形に整形する方法と、もともとのデータを整然データへ変換する手順を紹介する。</p>
-<p>ここでは tidyverse を中心に作業を進める。</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>これをこのようなデータを使って, データを整形する方法,
+またはそうしたデータにする方法を紹介する.</p>
+<p>ここでは以下のライブラリに全面に依存する.</p>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="06-datawrangling.html#cb149-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<p>特に <code>dplyr</code> と <code>tidyr</code> を用いる.</p>
+<div id="データ整形" class="section level2 hasAnchor" number="7.1">
+<h2><span class="header-section-number">7.1</span> データ整形<a href="06-datawrangling.html#%E3%83%87%E3%83%BC%E3%82%BF%E6%95%B4%E5%BD%A2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>データセット <code>mtcars</code> を取り扱う.
+この最初の6つを見るには以下を実施する.</p>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="06-datawrangling.html#cb150-1" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code></pre></div>
+<pre><code>##                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
+## Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+## Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+## Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+## Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre>
+<p>ここで <code>%&gt;%</code> はパイプ処理といって,</p>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="06-datawrangling.html#cb152-1" tabindex="-1"></a><span class="fu">head</span>(mtcars)</span></code></pre></div>
+<p>と同じ効果をもたらす. 括弧が重複する場合, こちらのほうがわかりやすい.</p>
+<p>ライブラリ <code>dplyr</code> でデータフレイムの処理が簡単になる.
+<code>select</code> で変数を選択できる.</p>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="06-datawrangling.html#cb153-1" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span> <span class="fu">select</span>(mpg, disp) <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code></pre></div>
+<pre><code>##                    mpg disp
+## Mazda RX4         21.0  160
+## Mazda RX4 Wag     21.0  160
+## Datsun 710        22.8  108
+## Hornet 4 Drive    21.4  258
+## Hornet Sportabout 18.7  360
+## Valiant           18.1  225</code></pre>
+<p><code>filter</code> により条件に応じた抽出ができる.</p>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="06-datawrangling.html#cb155-1" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span> <span class="fu">select</span>(mpg, disp) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(disp <span class="sc">&gt;</span> <span class="dv">300</span>) <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code></pre></div>
+<pre><code>##                      mpg disp
+## Hornet Sportabout   18.7  360
+## Duster 360          14.3  360
+## Cadillac Fleetwood  10.4  472
+## Lincoln Continental 10.4  460
+## Chrysler Imperial   14.7  440
+## Dodge Challenger    15.5  318</code></pre>
+<p><code>rename</code> により変数名を変更することができる. 日本語でも一応対応している.</p>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="06-datawrangling.html#cb157-1" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span> <span class="fu">select</span>(mpg, disp) <span class="sc">%&gt;%</span> <span class="fu">rename</span>(速度 <span class="ot">=</span>mpg, 距離 <span class="ot">=</span>disp) <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code></pre></div>
+<pre><code>##                   速度 距離
+## Mazda RX4         21.0  160
+## Mazda RX4 Wag     21.0  160
+## Datsun 710        22.8  108
+## Hornet 4 Drive    21.4  258
+## Hornet Sportabout 18.7  360
+## Valiant           18.1  225</code></pre>
+<p><code>arrange</code> により順序を変更できる.</p>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="06-datawrangling.html#cb159-1" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span> <span class="fu">select</span>(mpg, disp) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(mpg) <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code></pre></div>
+<pre><code>##                      mpg disp
+## Cadillac Fleetwood  10.4  472
+## Lincoln Continental 10.4  460
+## Camaro Z28          13.3  350
+## Duster 360          14.3  360
+## Chrysler Imperial   14.7  440
+## Maserati Bora       15.0  301</code></pre>
+<p>逆順には以下のようにすればよい.</p>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="06-datawrangling.html#cb161-1" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span> <span class="fu">select</span>(mpg, disp) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(mpg)) <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code></pre></div>
+<pre><code>##                 mpg  disp
+## Toyota Corolla 33.9  71.1
+## Fiat 128       32.4  78.7
+## Honda Civic    30.4  75.7
+## Lotus Europa   30.4  95.1
+## Fiat X1-9      27.3  79.0
+## Porsche 914-2  26.0 120.3</code></pre>
+<p>新しい変数を作成するには以下のように <code>mutate</code> を用いる.</p>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="06-datawrangling.html#cb163-1" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span> <span class="fu">select</span>(mpg) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">gpm =</span> <span class="dv">1</span><span class="sc">/</span>mpg) <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code></pre></div>
+<pre><code>##                    mpg        gpm
+## Mazda RX4         21.0 0.04761905
+## Mazda RX4 Wag     21.0 0.04761905
+## Datsun 710        22.8 0.04385965
+## Hornet 4 Drive    21.4 0.04672897
+## Hornet Sportabout 18.7 0.05347594
+## Valiant           18.1 0.05524862</code></pre>
+<p>以下は20より大きいと<code>TRUE</code>, そうでないと <code>FALSE</code> をとる変数を作成している.</p>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="06-datawrangling.html#cb165-1" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span> <span class="fu">select</span>(mpg) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">binarympg =</span> <span class="fu">ifelse</span>(mpg<span class="sc">&gt;</span><span class="dv">20</span>,<span class="cn">TRUE</span>,<span class="cn">FALSE</span>)) <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code></pre></div>
+<pre><code>##                    mpg binarympg
+## Mazda RX4         21.0      TRUE
+## Mazda RX4 Wag     21.0      TRUE
+## Datsun 710        22.8      TRUE
+## Hornet 4 Drive    21.4      TRUE
+## Hornet Sportabout 18.7     FALSE
+## Valiant           18.1     FALSE</code></pre>
+<p><code>summarize</code> により変数の基本統計表を作成できる.</p>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="06-datawrangling.html#cb167-1" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="at">avg =</span> <span class="fu">mean</span>(mpg), <span class="at">sd =</span><span class="fu">sd</span>(mpg))</span></code></pre></div>
+<pre><code>##        avg       sd
+## 1 20.09062 6.026948</code></pre>
+<p><code>group_by</code> と <code>summarize</code> を組み合わせてグループごとの基本統計量も作成できる.</p>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="06-datawrangling.html#cb169-1" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(cyl) <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="at">n =</span> <span class="fu">n</span>(), <span class="at">avg =</span> <span class="fu">mean</span>(mpg), <span class="at">sd =</span><span class="fu">sd</span>(mpg))</span></code></pre></div>
+<pre><code>## # A tibble: 3 × 4
+##     cyl     n   avg    sd
+##   &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1     4    11  26.7  4.51
+## 2     6     7  19.7  1.45
+## 3     8    14  15.1  2.56</code></pre>
 </div>
-<p>特に <code>dplyr</code> と <code>tidyr</code> の機能を活用する。</p>
-<section id="データ整形" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="データ整形"><span class="header-section-number">7.1</span> データ整形</h2>
-<p>まずデータセット <code>mtcars</code> を例に取り、整形の基本操作を確認する。<code>as_tibble()</code> を介して行名を列に移すと、後続の操作が行いやすくなる。</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mtcars_tbl <span class="ot">&lt;-</span> mtcars <span class="sc">|&gt;</span> </span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>(<span class="at">rownames =</span> <span class="st">"model"</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>mtcars_tbl <span class="sc">|&gt;</span> <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">6</span>)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 6 × 12</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="do">##   model          mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="do">##   &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 Mazda RX4     21       6   160   110  3.9   2.62  16.5     0     1     4     4</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 Mazda RX4 W…  21       6   160   110  3.9   2.88  17.0     0     1     4     4</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="do">## 3 Datsun 710    22.8     4   108    93  3.85  2.32  18.6     1     1     4     1</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="do">## 4 Hornet 4 Dr…  21.4     6   258   110  3.08  3.22  19.4     1     0     3     1</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="do">## 5 Hornet Spor…  18.7     8   360   175  3.15  3.44  17.0     0     0     3     2</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="do">## 6 Valiant       18.1     6   225   105  2.76  3.46  20.2     1     0     3     1</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="データ結合" class="section level2 hasAnchor" number="7.2">
+<h2><span class="header-section-number">7.2</span> データ結合<a href="06-datawrangling.html#%E3%83%87%E3%83%BC%E3%82%BF%E7%B5%90%E5%90%88" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><code>dplyr</code> 2つのデータフレイムを結合する便利なコマンドがある.
+列の追加は <code>bind_rows</code> を用いる.</p>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="06-datawrangling.html#cb171-1" tabindex="-1"></a>df1 <span class="ot">&lt;-</span> <span class="fu">data_frame</span>(<span class="at">X=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">Y=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## Warning: `data_frame()` was deprecated in tibble 1.1.0.
+## ℹ Please use `tibble()` instead.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+## generated.</code></pre>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="06-datawrangling.html#cb173-1" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> <span class="fu">data_frame</span>(<span class="at">X=</span><span class="dv">4</span>, <span class="at">Y=</span><span class="dv">4</span>)</span>
+<span id="cb173-2"><a href="06-datawrangling.html#cb173-2" tabindex="-1"></a><span class="fu">bind_rows</span>(df1,df2)</span></code></pre></div>
+<pre><code>## # A tibble: 3 × 2
+##       X     Y
+##   &lt;dbl&gt; &lt;dbl&gt;
+## 1     1     1
+## 2     2     2
+## 3     4     4</code></pre>
+<p>行の追加は <code>bind_rows</code> を用いる.</p>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="06-datawrangling.html#cb175-1" tabindex="-1"></a>df3 <span class="ot">&lt;-</span> <span class="fu">data_frame</span>(<span class="at">Z=</span><span class="dv">5</span><span class="sc">:</span><span class="dv">6</span>)</span>
+<span id="cb175-2"><a href="06-datawrangling.html#cb175-2" tabindex="-1"></a><span class="fu">bind_cols</span>(df1,df3)</span></code></pre></div>
+<pre><code>## # A tibble: 2 × 3
+##       X     Y     Z
+##   &lt;int&gt; &lt;int&gt; &lt;int&gt;
+## 1     1     1     5
+## 2     2     2     6</code></pre>
+<p>2つのデータフレイムで共通部分を用いて結合させるには4つのやり方がある.</p>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="06-datawrangling.html#cb177-1" tabindex="-1"></a>dfx <span class="ot">&lt;-</span> <span class="fu">data_frame</span>(<span class="at">id=</span><span class="fu">c</span>(<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;C&quot;</span>), <span class="at">X=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span>
+<span id="cb177-2"><a href="06-datawrangling.html#cb177-2" tabindex="-1"></a>dfy <span class="ot">&lt;-</span> <span class="fu">data_frame</span>(<span class="at">id=</span><span class="fu">c</span>(<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;D&quot;</span>), <span class="at">Y=</span><span class="fu">c</span>(<span class="cn">TRUE</span>,<span class="cn">FALSE</span>,<span class="cn">TRUE</span>))</span></code></pre></div>
+<p>左側の <code>dfx</code> がすべて残るように結合するには, <code>left_join</code> を実行する.</p>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="06-datawrangling.html#cb178-1" tabindex="-1"></a><span class="fu">left_join</span>(dfx,dfy,<span class="at">by=</span><span class="st">&quot;id&quot;</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 3 × 3
+##   id        X Y    
+##   &lt;chr&gt; &lt;int&gt; &lt;lgl&gt;
+## 1 A         1 TRUE 
+## 2 B         2 FALSE
+## 3 C         3 NA</code></pre>
+<p>右側の <code>dfx</code> がすべて残るように結合するには, <code>right_join</code> を実行する.</p>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="06-datawrangling.html#cb180-1" tabindex="-1"></a><span class="fu">right_join</span>(dfx,dfy,<span class="at">by=</span><span class="st">&quot;id&quot;</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 3 × 3
+##   id        X Y    
+##   &lt;chr&gt; &lt;int&gt; &lt;lgl&gt;
+## 1 A         1 TRUE 
+## 2 B         2 FALSE
+## 3 D        NA TRUE</code></pre>
+<p>両方がすべて残るように結合するには, <code>full_join</code> を実行する.</p>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="06-datawrangling.html#cb182-1" tabindex="-1"></a><span class="fu">full_join</span>(dfx,dfy,<span class="at">by=</span><span class="st">&quot;id&quot;</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 4 × 3
+##   id        X Y    
+##   &lt;chr&gt; &lt;int&gt; &lt;lgl&gt;
+## 1 A         1 TRUE 
+## 2 B         2 FALSE
+## 3 C         3 NA   
+## 4 D        NA TRUE</code></pre>
+<p>両方にある行のみ残して結合するには, <code>inner_join</code> を実行する.</p>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="06-datawrangling.html#cb184-1" tabindex="-1"></a><span class="fu">inner_join</span>(dfx,dfy,<span class="at">by=</span><span class="st">&quot;id&quot;</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 2 × 3
+##   id        X Y    
+##   &lt;chr&gt; &lt;int&gt; &lt;lgl&gt;
+## 1 A         1 TRUE 
+## 2 B         2 FALSE</code></pre>
 </div>
-<p>ここでは R 4.1 から導入されたパイプ演算子 <code>|&gt;</code> を利用している。従来の <code>%&gt;%</code> と同様に、左辺の結果を右辺の関数に渡す構文である。</p>
-<p><code>dplyr</code> を使うとデータフレームの処理が大幅に簡潔になる。 変数の抽出には <code>select()</code> を使う。</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>mtcars_tbl <span class="sc">|&gt;</span> </span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(model, mpg, disp) <span class="sc">|&gt;</span> </span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">6</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 6 × 3</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="do">##   model               mpg  disp</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="do">##   &lt;chr&gt;             &lt;dbl&gt; &lt;dbl&gt;</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 Mazda RX4          21     160</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 Mazda RX4 Wag      21     160</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 3 Datsun 710         22.8   108</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="do">## 4 Hornet 4 Drive     21.4   258</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="do">## 5 Hornet Sportabout  18.7   360</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="do">## 6 Valiant            18.1   225</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="tidyr" class="section level2 hasAnchor" number="7.3">
+<h2><span class="header-section-number">7.3</span> tidyr<a href="06-datawrangling.html#tidyr" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>以下のデータセットを考える.</p>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="06-datawrangling.html#cb186-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data_frame</span>(</span>
+<span id="cb186-2"><a href="06-datawrangling.html#cb186-2" tabindex="-1"></a>  <span class="at">time =</span> <span class="dv">2010</span><span class="sc">:</span><span class="dv">2014</span>,</span>
+<span id="cb186-3"><a href="06-datawrangling.html#cb186-3" tabindex="-1"></a>  <span class="at">X =</span> <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb186-4"><a href="06-datawrangling.html#cb186-4" tabindex="-1"></a>  <span class="at">Y =</span> <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="dv">0</span>, <span class="dv">2</span>),</span>
+<span id="cb186-5"><a href="06-datawrangling.html#cb186-5" tabindex="-1"></a>  <span class="at">Z =</span> <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="dv">0</span>, <span class="dv">4</span>)</span>
+<span id="cb186-6"><a href="06-datawrangling.html#cb186-6" tabindex="-1"></a>)</span>
+<span id="cb186-7"><a href="06-datawrangling.html#cb186-7" tabindex="-1"></a>df</span></code></pre></div>
+<pre><code>## # A tibble: 5 × 4
+##    time      X       Y      Z
+##   &lt;int&gt;  &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;
+## 1  2010  0.347 -1.68    1.54 
+## 2  2011  2.31  -1.55    2.44 
+## 3  2012 -0.386 -0.0900  1.39 
+## 4  2013  1.27  -5.01   -0.851
+## 5  2014 -0.364 -3.74   -6.09</code></pre>
+<p>それぞれの変数名をキーとして, 値を示した表は <code>pivot_longer</code> で作れる.</p>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="06-datawrangling.html#cb188-1" tabindex="-1"></a>df_gather <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(<span class="at">col=</span><span class="sc">-</span>time,<span class="at">names_to=</span><span class="st">&#39;key&#39;</span>,<span class="at">values_to =</span> <span class="st">&#39;value&#39;</span>)</span>
+<span id="cb188-2"><a href="06-datawrangling.html#cb188-2" tabindex="-1"></a>df_gather</span></code></pre></div>
+<pre><code>## # A tibble: 15 × 3
+##     time key     value
+##    &lt;int&gt; &lt;chr&gt;   &lt;dbl&gt;
+##  1  2010 X      0.347 
+##  2  2010 Y     -1.68  
+##  3  2010 Z      1.54  
+##  4  2011 X      2.31  
+##  5  2011 Y     -1.55  
+##  6  2011 Z      2.44  
+##  7  2012 X     -0.386 
+##  8  2012 Y     -0.0900
+##  9  2012 Z      1.39  
+## 10  2013 X      1.27  
+## 11  2013 Y     -5.01  
+## 12  2013 Z     -0.851 
+## 13  2014 X     -0.364 
+## 14  2014 Y     -3.74  
+## 15  2014 Z     -6.09</code></pre>
+<p><code>pivot_wider</code> でもとに戻ることができる.</p>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="06-datawrangling.html#cb190-1" tabindex="-1"></a>df_gather <span class="sc">%&gt;%</span> <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> <span class="st">&#39;key&#39;</span>, <span class="at">values_from =</span> <span class="st">&quot;value&quot;</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 5 × 4
+##    time      X       Y      Z
+##   &lt;int&gt;  &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;
+## 1  2010  0.347 -1.68    1.54 
+## 2  2011  2.31  -1.55    2.44 
+## 3  2012 -0.386 -0.0900  1.39 
+## 4  2013  1.27  -5.01   -0.851
+## 5  2014 -0.364 -3.74   -6.09</code></pre>
+<p><code>pivot_wider</code> で <code>time</code> にすると別の形で展開できる.</p>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="06-datawrangling.html#cb192-1" tabindex="-1"></a>df_spread <span class="ot">&lt;-</span> df_gather <span class="sc">%&gt;%</span> <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> <span class="st">&#39;time&#39;</span>, <span class="at">values_from =</span> <span class="st">&quot;value&quot;</span>)</span>
+<span id="cb192-2"><a href="06-datawrangling.html#cb192-2" tabindex="-1"></a>df_spread</span></code></pre></div>
+<pre><code>## # A tibble: 3 × 6
+##   key   `2010` `2011`  `2012` `2013` `2014`
+##   &lt;chr&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+## 1 X      0.347   2.31 -0.386   1.27  -0.364
+## 2 Y     -1.68   -1.55 -0.0900 -5.01  -3.74 
+## 3 Z      1.54    2.44  1.39   -0.851 -6.09</code></pre>
+<p>以下のようにすればもとに戻る.</p>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="06-datawrangling.html#cb194-1" tabindex="-1"></a>df_spread <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(<span class="at">col=</span><span class="sc">-</span>key,<span class="at">names_to=</span><span class="st">&#39;time&#39;</span>,<span class="at">values_to =</span> <span class="st">&#39;value&#39;</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 15 × 3
+##    key   time    value
+##    &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt;
+##  1 X     2010   0.347 
+##  2 X     2011   2.31  
+##  3 X     2012  -0.386 
+##  4 X     2013   1.27  
+##  5 X     2014  -0.364 
+##  6 Y     2010  -1.68  
+##  7 Y     2011  -1.55  
+##  8 Y     2012  -0.0900
+##  9 Y     2013  -5.01  
+## 10 Y     2014  -3.74  
+## 11 Z     2010   1.54  
+## 12 Z     2011   2.44  
+## 13 Z     2012   1.39  
+## 14 Z     2013  -0.851 
+## 15 Z     2014  -6.09</code></pre>
+<p><code>pivot_longer</code> をうまく使えば変数ごとの基本統計量の表を作ることができる.</p>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="06-datawrangling.html#cb196-1" tabindex="-1"></a>cars <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(),<span class="at">names_to=</span><span class="st">&#39;variable&#39;</span>,<span class="at">values_to =</span> <span class="st">&#39;value&#39;</span>) <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(variable) <span class="sc">%&gt;%</span></span>
+<span id="cb196-2"><a href="06-datawrangling.html#cb196-2" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">nobs =</span> <span class="fu">n</span>(), <span class="at">avg =</span> <span class="fu">mean</span>(value), <span class="at">sd =</span><span class="fu">sd</span>(value))</span></code></pre></div>
+<pre><code>## # A tibble: 2 × 4
+##   variable  nobs   avg    sd
+##   &lt;chr&gt;    &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 dist        50  43.0 25.8 
+## 2 speed       50  15.4  5.29</code></pre>
+<p>日本語だと次のようにすればよい.</p>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="06-datawrangling.html#cb198-1" tabindex="-1"></a>tab <span class="ot">&lt;-</span> cars <span class="sc">%&gt;%</span> <span class="fu">rename</span>(距離<span class="ot">=</span>dist,速度<span class="ot">=</span>speed ) <span class="sc">%&gt;%</span></span>
+<span id="cb198-2"><a href="06-datawrangling.html#cb198-2" tabindex="-1"></a>  <span class="fu">gather</span>(変数,value) <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(変数) <span class="sc">%&gt;%</span></span>
+<span id="cb198-3"><a href="06-datawrangling.html#cb198-3" tabindex="-1"></a>  <span class="fu">summarize</span>(観測数 <span class="ot">=</span> <span class="fu">n</span>(), 平均 <span class="ot">=</span> <span class="fu">mean</span>(value), 標準偏差 <span class="ot">=</span><span class="fu">sd</span>(value))</span>
+<span id="cb198-4"><a href="06-datawrangling.html#cb198-4" tabindex="-1"></a><span class="fu">head</span>(tab)</span></code></pre></div>
+<pre><code>## # A tibble: 2 × 4
+##   変数  観測数  平均 標準偏差
+##   &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt;    &lt;dbl&gt;
+## 1 距離      50  43.0    25.8 
+## 2 速度      50  15.4     5.29</code></pre>
 </div>
-<p>条件に合致した行だけを抽出したい場合は <code>filter()</code> が便利である。</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>mtcars_tbl <span class="sc">|&gt;</span> </span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(model, mpg, disp) <span class="sc">|&gt;</span> </span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(disp <span class="sc">&gt;</span> <span class="dv">300</span>)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 11 × 3</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="do">##    model                 mpg  disp</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="do">##    &lt;chr&gt;               &lt;dbl&gt; &lt;dbl&gt;</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="do">##  1 Hornet Sportabout    18.7   360</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="do">##  2 Duster 360           14.3   360</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="do">##  3 Cadillac Fleetwood   10.4   472</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="do">##  4 Lincoln Continental  10.4   460</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="do">##  5 Chrysler Imperial    14.7   440</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="do">##  6 Dodge Challenger     15.5   318</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="do">##  7 AMC Javelin          15.2   304</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="do">##  8 Camaro Z28           13.3   350</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="do">##  9 Pontiac Firebird     19.2   400</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="do">## 10 Ford Pantera L       15.8   351</span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="do">## 11 Maserati Bora        15     301</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><code>rename()</code> を使えば変数名を変更できる。日本語の列名にも対応している。</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>mtcars_tbl <span class="sc">|&gt;</span> </span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(model, mpg, disp) <span class="sc">|&gt;</span> </span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">`</span><span class="at">速度</span><span class="st">`</span> <span class="ot">=</span> mpg, <span class="st">`</span><span class="at">距離</span><span class="st">`</span> <span class="ot">=</span> disp) <span class="sc">|&gt;</span> </span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">6</span>)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 6 × 3</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="do">##   model              速度  距離</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="do">##   &lt;chr&gt;             &lt;dbl&gt; &lt;dbl&gt;</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 Mazda RX4          21     160</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 Mazda RX4 Wag      21     160</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="do">## 3 Datsun 710         22.8   108</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="do">## 4 Hornet 4 Drive     21.4   258</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="do">## 5 Hornet Sportabout  18.7   360</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="do">## 6 Valiant            18.1   225</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>並べ替えは <code>arrange()</code> で行う。</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>mtcars_tbl <span class="sc">|&gt;</span> </span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(model, mpg, disp) <span class="sc">|&gt;</span> </span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(mpg) <span class="sc">|&gt;</span> </span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">6</span>)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 6 × 3</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="do">##   model                 mpg  disp</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="do">##   &lt;chr&gt;               &lt;dbl&gt; &lt;dbl&gt;</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 Cadillac Fleetwood   10.4   472</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 Lincoln Continental  10.4   460</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="do">## 3 Camaro Z28           13.3   350</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="do">## 4 Duster 360           14.3   360</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="do">## 5 Chrysler Imperial    14.7   440</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="do">## 6 Maserati Bora        15     301</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>降順に並べる場合は <code>desc()</code> と組み合わせる。</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>mtcars_tbl <span class="sc">|&gt;</span> </span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(model, mpg, disp) <span class="sc">|&gt;</span> </span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(mpg)) <span class="sc">|&gt;</span> </span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">6</span>)</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 6 × 3</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="do">##   model            mpg  disp</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="do">##   &lt;chr&gt;          &lt;dbl&gt; &lt;dbl&gt;</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 Toyota Corolla  33.9  71.1</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 Fiat 128        32.4  78.7</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="do">## 3 Honda Civic     30.4  75.7</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="do">## 4 Lotus Europa    30.4  95.1</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="do">## 5 Fiat X1-9       27.3  79  </span></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="do">## 6 Porsche 914-2   26   120.</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><code>mutate()</code> を使うと新しい列を追加できる。</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>mtcars_tbl <span class="sc">|&gt;</span> </span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gpm =</span> <span class="dv">1</span> <span class="sc">/</span> mpg) <span class="sc">|&gt;</span> </span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(model, mpg, gpm) <span class="sc">|&gt;</span> </span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">6</span>)</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 6 × 3</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="do">##   model               mpg    gpm</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="do">##   &lt;chr&gt;             &lt;dbl&gt;  &lt;dbl&gt;</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 Mazda RX4          21   0.0476</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 Mazda RX4 Wag      21   0.0476</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="do">## 3 Datsun 710         22.8 0.0439</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="do">## 4 Hornet 4 Drive     21.4 0.0467</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="do">## 5 Hornet Sportabout  18.7 0.0535</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="do">## 6 Valiant            18.1 0.0552</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><code>mutate()</code> は既存列の上書きや複数列の同時作成も可能で、計算や条件分岐をまとめて記述できる点が強みである。</p>
-<p>次の例では、<code>mpg</code> が 20 を超える場合に <code>TRUE</code> を返すブール列を追加している。</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>mtcars_tbl <span class="sc">|&gt;</span> </span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">is_high_mileage =</span> mpg <span class="sc">&gt;</span> <span class="dv">20</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(model, mpg, is_high_mileage) <span class="sc">|&gt;</span> </span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">6</span>)</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 6 × 3</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="do">##   model               mpg is_high_mileage</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="do">##   &lt;chr&gt;             &lt;dbl&gt; &lt;lgl&gt;          </span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 Mazda RX4          21   TRUE           </span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 Mazda RX4 Wag      21   TRUE           </span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="do">## 3 Datsun 710         22.8 TRUE           </span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="do">## 4 Hornet 4 Drive     21.4 TRUE           </span></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="do">## 5 Hornet Sportabout  18.7 FALSE          </span></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="do">## 6 Valiant            18.1 FALSE</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><code>summarise()</code> で基本統計量を算出できる。</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>mtcars_tbl <span class="sc">|&gt;</span> </span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg =</span> <span class="fu">mean</span>(mpg), </span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd  =</span> <span class="fu">sd</span>(mpg), </span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 1 × 2</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="do">##     avg    sd</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="do">##   &lt;dbl&gt; &lt;dbl&gt;</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 1  20.1  6.03</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>列名を任意に付けておけば、後続の処理で指標を参照しやすくなる。</p>
-<p><code>summarise()</code> に <code>.by</code> を指定すれば、グループごとの集計も容易である。</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>mtcars_tbl <span class="sc">|&gt;</span> </span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">n   =</span> <span class="fu">n</span>(),</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg =</span> <span class="fu">mean</span>(mpg),</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd  =</span> <span class="fu">sd</span>(mpg),</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">.by =</span> cyl</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 3 × 4</span></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="do">##     cyl     n   avg    sd</span></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="do">##   &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="do">## 1     6     7  19.7  1.45</span></span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="do">## 2     4    11  26.7  4.51</span></span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="do">## 3     8    14  15.1  2.56</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="データ結合" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="データ結合"><span class="header-section-number">7.2</span> データ結合</h2>
-<p><code>dplyr</code> にはデータフレームを縦横方向に結合したり、キーを用いて結合したりするための関数が揃っている。</p>
-<p>縦方向に結合するには <code>bind_rows()</code> を使う。</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>df1 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">X =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">Y =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">X =</span> <span class="dv">4</span>,   <span class="at">Y =</span> <span class="dv">4</span>)</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">bind_rows</span>(df1, df2)</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 3 × 2</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="do">##       X     Y</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="do">##   &lt;dbl&gt; &lt;dbl&gt;</span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 1     1     1</span></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 2     2     2</span></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="do">## 3     4     4</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>列名と型が一致していれば、欠けている列には自動で <code>NA</code> が補われる。</p>
-<p>横方向に結合する場合は <code>bind_cols()</code> を利用する。</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>df3 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">Z =</span> <span class="dv">5</span><span class="sc">:</span><span class="dv">6</span>)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">bind_cols</span>(df1, df3)</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 2 × 3</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="do">##       X     Y     Z</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="do">##   &lt;int&gt; &lt;int&gt; &lt;int&gt;</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 1     1     1     5</span></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 2     2     2     6</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>行数が一致していないとリサイクルされるか警告が出るので注意する。</p>
-<p>キーを用いた結合には四種類の join 関数が利用できる。</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>dfx <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">id =</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>), <span class="at">X =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>dfy <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">id =</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"D"</span>), <span class="at">Y =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>))</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>左側データ（<code>dfx</code>）の行をすべて保持して結合するには <code>left_join()</code> を用いる。</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">left_join</span>(dfx, dfy, <span class="at">by =</span> <span class="st">"id"</span>)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 3 × 3</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="do">##   id        X Y    </span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="do">##   &lt;chr&gt; &lt;int&gt; &lt;lgl&gt;</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 A         1 TRUE </span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 B         2 FALSE</span></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 3 C         3 NA</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>右側データ（<code>dfy</code>）の行をすべて保持するなら <code>right_join()</code>。</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">right_join</span>(dfx, dfy, <span class="at">by =</span> <span class="st">"id"</span>)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 3 × 3</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="do">##   id        X Y    </span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="do">##   &lt;chr&gt; &lt;int&gt; &lt;lgl&gt;</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 A         1 TRUE </span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 B         2 FALSE</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 3 D        NA TRUE</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>両方の行をすべて保持するなら <code>full_join()</code>。</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">full_join</span>(dfx, dfy, <span class="at">by =</span> <span class="st">"id"</span>)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 4 × 3</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="do">##   id        X Y    </span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="do">##   &lt;chr&gt; &lt;int&gt; &lt;lgl&gt;</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 A         1 TRUE </span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 B         2 FALSE</span></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 3 C         3 NA   </span></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 4 D        NA TRUE</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><code>inner_join()</code> は共通部分のみを抽出する。</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_join</span>(dfx, dfy, <span class="at">by =</span> <span class="st">"id"</span>)</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 2 × 3</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="do">##   id        X Y    </span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="do">##   &lt;chr&gt; &lt;int&gt; &lt;lgl&gt;</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 A         1 TRUE </span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 B         2 FALSE</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>複雑な条件で結合する場合は <code>join_by()</code> を使うと柔軟に定義できる。</p>
-</section>
-<section id="tidyr" class="level2" data-number="7.3">
-<h2 data-number="7.3" class="anchored" data-anchor-id="tidyr"><span class="header-section-number">7.3</span> tidyr</h2>
-<p>ここからは <code>tidyr</code> による整形の例を紹介する。まず次のデータセットを用意する。</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">time =</span> <span class="dv">2010</span><span class="sc">:</span><span class="dv">2014</span>,</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">X =</span> <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="dv">0</span>, <span class="dv">1</span>),</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Y =</span> <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="dv">0</span>, <span class="dv">2</span>),</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">Z =</span> <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="dv">0</span>, <span class="dv">4</span>)</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="co"># `tibble()` なら列の型を意識しつつ手早くサンプル値を用意できる</span></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span> <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">6</span>)</span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 5 × 4</span></span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="do">##    time      X      Y      Z</span></span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="do">##   &lt;int&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;</span></span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="do">## 1  2010 -1.51   3.03  -0.356</span></span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a><span class="do">## 2  2011  0.203  0.466 -0.617</span></span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a><span class="do">## 3  2012  0.868 -0.638 -5.21 </span></span>
-<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a><span class="do">## 4  2013  0.146  0.478  1.31 </span></span>
-<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a><span class="do">## 5  2014 -0.649 -1.35   4.82</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>列名をキーにして縦長へ変換するときは <code>pivot_longer()</code> を用いる。</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>df_long <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span> </span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">-</span>time, <span class="at">names_to =</span> <span class="st">"key"</span>, <span class="at">values_to =</span> <span class="st">"value"</span>)</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># names_to / values_to を指定しておくと後続処理が読みやすい</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>df_long</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 15 × 3</span></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="do">##     time key    value</span></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="do">##    &lt;int&gt; &lt;chr&gt;  &lt;dbl&gt;</span></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="do">##  1  2010 X     -1.51 </span></span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="do">##  2  2010 Y      3.03 </span></span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="do">##  3  2010 Z     -0.356</span></span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="do">##  4  2011 X      0.203</span></span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="do">##  5  2011 Y      0.466</span></span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="do">##  6  2011 Z     -0.617</span></span>
-<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="do">##  7  2012 X      0.868</span></span>
-<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="do">##  8  2012 Y     -0.638</span></span>
-<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="do">##  9  2012 Z     -5.21 </span></span>
-<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a><span class="do">## 10  2013 X      0.146</span></span>
-<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a><span class="do">## 11  2013 Y      0.478</span></span>
-<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a><span class="do">## 12  2013 Z      1.31 </span></span>
-<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a><span class="do">## 13  2014 X     -0.649</span></span>
-<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a><span class="do">## 14  2014 Y     -1.35 </span></span>
-<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a><span class="do">## 15  2014 Z      4.82</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><code>pivot_wider()</code> を使えば再び元の構造に戻すことができる。</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>df_long <span class="sc">|&gt;</span> </span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> <span class="st">"key"</span>, <span class="at">values_from =</span> <span class="st">"value"</span>)</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 5 × 4</span></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="do">##    time      X      Y      Z</span></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="do">##   &lt;int&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;</span></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 1  2010 -1.51   3.03  -0.356</span></span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 2  2011  0.203  0.466 -0.617</span></span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 3  2012  0.868 -0.638 -5.21 </span></span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 4  2013  0.146  0.478  1.31 </span></span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="do">## 5  2014 -0.649 -1.35   4.82</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>列数を増やして見せたいときや、プレゼン資料で横持ちの表が必要なときに役立つ。</p>
-<p><code>time</code> を列方向に展開すれば、年次を横持ちした表へ変換できる。</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>df_wide <span class="ot">&lt;-</span> df_long <span class="sc">|&gt;</span> </span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> <span class="st">"time"</span>, <span class="at">values_from =</span> <span class="st">"value"</span>)</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>df_wide</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 3 × 6</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="do">##   key   `2010` `2011` `2012` `2013` `2014`</span></span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="do">##   &lt;chr&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;</span></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 X     -1.51   0.203  0.868  0.146 -0.649</span></span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 Y      3.03   0.466 -0.638  0.478 -1.35 </span></span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 3 Z     -0.356 -0.617 -5.21   1.31   4.82</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>再び縦長に戻す場合は次のとおりである。</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>df_wide <span class="sc">|&gt;</span> </span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">-</span>key, <span class="at">names_to =</span> <span class="st">"time"</span>, <span class="at">values_to =</span> <span class="st">"value"</span>)</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 15 × 3</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="do">##    key   time   value</span></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="do">##    &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt;</span></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="do">##  1 X     2010  -1.51 </span></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="do">##  2 X     2011   0.203</span></span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="do">##  3 X     2012   0.868</span></span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="do">##  4 X     2013   0.146</span></span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="do">##  5 X     2014  -0.649</span></span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="do">##  6 Y     2010   3.03 </span></span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="do">##  7 Y     2011   0.466</span></span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a><span class="do">##  8 Y     2012  -0.638</span></span>
-<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a><span class="do">##  9 Y     2013   0.478</span></span>
-<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a><span class="do">## 10 Y     2014  -1.35 </span></span>
-<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a><span class="do">## 11 Z     2010  -0.356</span></span>
-<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a><span class="do">## 12 Z     2011  -0.617</span></span>
-<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a><span class="do">## 13 Z     2012  -5.21 </span></span>
-<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a><span class="do">## 14 Z     2013   1.31 </span></span>
-<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a><span class="do">## 15 Z     2014   4.82</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><code>pivot_longer()</code> と <code>summarise()</code> を組み合わせると、変数別の記述統計を簡潔にまとめられる。</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>cars <span class="sc">|&gt;</span> </span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">"variable"</span>, <span class="at">values_to =</span> <span class="st">"value"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(variable) <span class="sc">|&gt;</span></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">nobs =</span> <span class="fu">n</span>(),</span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg  =</span> <span class="fu">mean</span>(value),</span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd   =</span> <span class="fu">sd</span>(value)</span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 2 × 4</span></span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a><span class="do">##   variable  nobs   avg    sd</span></span>
-<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a><span class="do">##   &lt;chr&gt;    &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
-<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 dist        50  43.0 25.8 </span></span>
-<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 speed       50  15.4  5.29</span></span>
-<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a><span class="co"># 欠損を除外したいときは mean(value, na.rm = TRUE) のように na.rm を付ける</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>日本語の列名でも同じ操作が可能である。</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">&lt;-</span> cars <span class="sc">|&gt;</span> </span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">c</span>(dist, speed), <span class="at">names_to =</span> <span class="st">"variable"</span>, <span class="at">values_to =</span> <span class="st">"value"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(variable) <span class="sc">|&gt;</span></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">nobs =</span> <span class="fu">n</span>(),</span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg  =</span> <span class="fu">mean</span>(value),</span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd   =</span> <span class="fu">sd</span>(value)</span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">|&gt;</span></span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">変数</span><span class="st">`</span> <span class="ot">=</span> dplyr<span class="sc">::</span><span class="fu">recode</span>(variable, <span class="at">dist =</span> <span class="st">"距離"</span>, <span class="at">speed =</span> <span class="st">"速度"</span>)</span>
-<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
-<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">変数</span><span class="st">`</span>,</span>
-<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">観測数</span><span class="st">`</span>   <span class="ot">=</span> nobs,</span>
-<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">平均</span><span class="st">`</span>     <span class="ot">=</span> avg,</span>
-<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">標準偏差</span><span class="st">`</span> <span class="ot">=</span> sd</span>
-<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>tab <span class="sc">|&gt;</span> <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">6</span>)</span>
-<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 2 × 4</span></span>
-<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a><span class="do">##   変数  観測数  平均 標準偏差</span></span>
-<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a><span class="do">##   &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt;    &lt;dbl&gt;</span></span>
-<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 距離      50  43.0    25.8 </span></span>
-<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 速度      50  15.4     5.29</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="実践例" class="level2" data-number="7.4">
-<h2 data-number="7.4" class="anchored" data-anchor-id="実践例"><span class="header-section-number">7.4</span> 実践例</h2>
-<p>tidyr を用いた別の例を見てみよう。横軸を年としたデータセット <code>df</code> がある。</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">name  =</span> letters,</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">2010</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">26</span>),</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">2011</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">26</span>),</span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">2012</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">26</span>)</span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>) </span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span> <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">6</span>)</span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 6 × 4</span></span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="do">##   name    `2010` `2011` `2012`</span></span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="do">##   &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;</span></span>
-<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 a      0.00278  1.14   0.553</span></span>
-<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 b      0.445   -0.381 -0.105</span></span>
-<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a><span class="do">## 3 c      0.427    0.462 -0.130</span></span>
-<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a><span class="do">## 4 d      1.31    -0.607 -2.02 </span></span>
-<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a><span class="do">## 5 e     -0.479    0.128 -0.384</span></span>
-<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a><span class="do">## 6 f      1.19    -1.43  -1.29</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>さらに、年ごとのデータセット <code>df_2010</code>、<code>df_2011</code>、<code>df_2012</code> の 3 つも用意する。</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>df_2010 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">name =</span> letters, <span class="at">runif =</span> <span class="fu">runif</span>(<span class="dv">26</span>))</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>df_2011 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">name =</span> letters, <span class="at">runif =</span> <span class="fu">runif</span>(<span class="dv">26</span>))</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>df_2012 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">name =</span> letters, <span class="at">runif =</span> <span class="fu">runif</span>(<span class="dv">26</span>))</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>これら 4 つのデータセットを統合して整然データにする。</p>
-<p>まず <code>df</code> を <code>pivot_longer()</code> で縦長に変換する。</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>df_rnorm <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span> </span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">-</span>name, <span class="at">names_to =</span> <span class="st">"time"</span>, <span class="at">values_to =</span> <span class="st">"rnorm"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">time =</span> <span class="fu">as.numeric</span>(time))</span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>df_rnorm <span class="sc">|&gt;</span> <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">6</span>)</span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 6 × 3</span></span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="do">##   name   time    rnorm</span></span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="do">##   &lt;chr&gt; &lt;dbl&gt;    &lt;dbl&gt;</span></span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 a      2010  0.00278</span></span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 a      2011  1.14   </span></span>
-<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a><span class="do">## 3 a      2012  0.553  </span></span>
-<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a><span class="do">## 4 b      2010  0.445  </span></span>
-<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a><span class="do">## 5 b      2011 -0.381  </span></span>
-<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a><span class="do">## 6 b      2012 -0.105</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>ここでは <code>time</code> 列を数値に変換している。</p>
-<p>次に、3 つの年別データセットを <code>bind_rows()</code> で縦に結合する。</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>df_runif <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"2010"</span> <span class="ot">=</span> df_2010,</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"2011"</span> <span class="ot">=</span> df_2011,</span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"2012"</span> <span class="ot">=</span> df_2012,</span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">.id    =</span> <span class="st">"time"</span></span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span> </span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">time =</span> <span class="fu">as.numeric</span>(time))</span>
-<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>df_runif <span class="sc">|&gt;</span> <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">6</span>)</span>
-<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 6 × 3</span></span>
-<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a><span class="do">##    time name   runif</span></span>
-<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a><span class="do">##   &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt;</span></span>
-<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a><span class="do">## 1  2010 a     0.958 </span></span>
-<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a><span class="do">## 2  2010 b     0.0967</span></span>
-<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a><span class="do">## 3  2010 c     0.492 </span></span>
-<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a><span class="do">## 4  2010 d     0.810 </span></span>
-<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a><span class="do">## 5  2010 e     0.365 </span></span>
-<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a><span class="do">## 6  2010 f     0.453</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><code>.id</code> で追加された列を数値に変換して年情報として利用している。</p>
-<p>最後に <code>full_join()</code> を使って 2 つのデータを結合する。</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>df_full <span class="ot">&lt;-</span> <span class="fu">full_join</span>(df_rnorm, df_runif, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"name"</span>, <span class="st">"time"</span>))</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>df_full <span class="sc">|&gt;</span> <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">6</span>)</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 6 × 4</span></span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="do">##   name   time    rnorm  runif</span></span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="do">##   &lt;chr&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;</span></span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 a      2010  0.00278 0.958 </span></span>
-<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 a      2011  1.14    0.0235</span></span>
-<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 3 a      2012  0.553   0.146 </span></span>
-<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 4 b      2010  0.445   0.0967</span></span>
-<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a><span class="do">## 5 b      2011 -0.381   0.680 </span></span>
-<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a><span class="do">## 6 b      2012 -0.105   0.615</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>整然データにまとめておけば、<code>ggplot2</code> やモデリング関数へそのまま渡せるため、後続処理がスムーズになり再現性も高まる。</p>
+<div id="実践例" class="section level2 hasAnchor" number="7.4">
+<h2><span class="header-section-number">7.4</span> 実践例<a href="06-datawrangling.html#%E5%AE%9F%E8%B7%B5%E4%BE%8B" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>tidyr を用いた別の例をみてみよう.
+横軸を年としたデータセット <code>df</code> がある.</p>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="06-datawrangling.html#cb200-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data_frame</span>(<span class="at">name=</span>letters, <span class="st">&quot;2010&quot;</span><span class="ot">=</span><span class="fu">rnorm</span>(<span class="dv">26</span>),<span class="st">&quot;2011&quot;</span><span class="ot">=</span><span class="fu">rnorm</span>(<span class="dv">26</span>),<span class="st">&quot;2012&quot;</span><span class="ot">=</span><span class="fu">rnorm</span>(<span class="dv">26</span>)) </span>
+<span id="cb200-2"><a href="06-datawrangling.html#cb200-2" tabindex="-1"></a><span class="fu">head</span>(df)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 4
+##   name  `2010` `2011`  `2012`
+##   &lt;chr&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+## 1 a     -1.27   0.303 -0.595 
+## 2 b      0.358 -0.938  0.0560
+## 3 c     -1.49  -1.07  -1.80  
+## 4 d     -0.407 -0.382  0.131 
+## 5 e     -0.503 -0.242  1.33  
+## 6 f      1.28  -0.290 -0.636</code></pre>
+<p><code>data.frame</code> でないことに注意されたい.</p>
+<p>また, 年ごとのデータセット <code>df_2010</code>, <code>df_2011</code>, <code>df_2012</code> が3つある.</p>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="06-datawrangling.html#cb202-1" tabindex="-1"></a>df_2010 <span class="ot">&lt;-</span> <span class="fu">data_frame</span>(<span class="at">name=</span>letters,<span class="at">runif=</span><span class="fu">runif</span>(<span class="dv">26</span>))</span>
+<span id="cb202-2"><a href="06-datawrangling.html#cb202-2" tabindex="-1"></a>df_2011 <span class="ot">&lt;-</span> <span class="fu">data_frame</span>(<span class="at">name=</span>letters,<span class="at">runif=</span><span class="fu">runif</span>(<span class="dv">26</span>))</span>
+<span id="cb202-3"><a href="06-datawrangling.html#cb202-3" tabindex="-1"></a>df_2012 <span class="ot">&lt;-</span> <span class="fu">data_frame</span>(<span class="at">name=</span>letters,<span class="at">runif=</span><span class="fu">runif</span>(<span class="dv">26</span>))</span></code></pre></div>
+<p>これら4つのデータセットを1つにまとめよう.</p>
+<p>まずデータ <code>df</code> についてであるが, <code>pivot_longer</code> をつかう.</p>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="06-datawrangling.html#cb203-1" tabindex="-1"></a>df_rnorm <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(<span class="at">col=</span><span class="sc">-</span>name,<span class="at">names_to=</span><span class="st">&#39;time&#39;</span>,<span class="at">values_to =</span> <span class="st">&#39;rnorm&#39;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb203-2"><a href="06-datawrangling.html#cb203-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">time=</span><span class="fu">as.numeric</span>(time))</span>
+<span id="cb203-3"><a href="06-datawrangling.html#cb203-3" tabindex="-1"></a><span class="fu">head</span>(df_rnorm)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 3
+##   name   time   rnorm
+##   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt;
+## 1 a      2010 -1.27  
+## 2 a      2011  0.303 
+## 3 a      2012 -0.595 
+## 4 b      2010  0.358 
+## 5 b      2011 -0.938 
+## 6 b      2012  0.0560</code></pre>
+<p>時間の変数を数値に変換している.</p>
+<p>データセット <code>df_2010</code>, <code>df_2011</code>, <code>df_2012</code> をつなげる.</p>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="06-datawrangling.html#cb205-1" tabindex="-1"></a>df_runif <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(df_2010,df_2011,df_2012) <span class="sc">%&gt;%</span> </span>
+<span id="cb205-2"><a href="06-datawrangling.html#cb205-2" tabindex="-1"></a>  <span class="fu">bind_cols</span>(<span class="at">time=</span><span class="fu">rep</span>(<span class="dv">2010</span><span class="sc">:</span><span class="dv">2012</span>,<span class="at">each=</span><span class="dv">26</span>)) </span>
+<span id="cb205-3"><a href="06-datawrangling.html#cb205-3" tabindex="-1"></a><span class="fu">head</span>(df_runif)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 3
+##   name  runif  time
+##   &lt;chr&gt; &lt;dbl&gt; &lt;int&gt;
+## 1 a     0.114  2010
+## 2 b     0.840  2010
+## 3 c     0.766  2010
+## 4 d     0.649  2010
+## 5 e     0.879  2010
+## 6 f     0.665  2010</code></pre>
+<p>それぞれの年の変数を付け加えている.</p>
+<p>これを <code>full_join</code> を用いてつなげる.</p>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="06-datawrangling.html#cb207-1" tabindex="-1"></a>df_full <span class="ot">&lt;-</span> <span class="fu">full_join</span>(df_rnorm,df_runif,<span class="at">by=</span><span class="fu">c</span>(<span class="st">&quot;name&quot;</span>,<span class="st">&quot;time&quot;</span>))</span>
+<span id="cb207-2"><a href="06-datawrangling.html#cb207-2" tabindex="-1"></a><span class="fu">head</span>(df_full)  </span></code></pre></div>
+<pre><code>## # A tibble: 6 × 4
+##   name   time   rnorm runif
+##   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;
+## 1 a      2010 -1.27   0.114
+## 2 a      2011  0.303  0.632
+## 3 a      2012 -0.595  0.515
+## 4 b      2010  0.358  0.840
+## 5 b      2011 -0.938  0.631
+## 6 b      2012  0.0560 0.251</code></pre>
 
+</div>
+</div>
+            </section>
 
-<!-- -->
-
-</section>
-
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
-      }
-    }
-    return false;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "コピーしました");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "コピーしました");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  });
-  const viewSource = window.document.getElementById('quarto-view-source') ||
-                     window.document.getElementById('quarto-code-tools-source');
-  if (viewSource) {
-    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
-    viewSource.addEventListener("click", function(e) {
-      if (sourceUrl) {
-        // rstudio viewer pane
-        if (/\bcapabilities=\b/.test(window.location)) {
-          window.open(sourceUrl);
-        } else {
-          window.location.href = sourceUrl;
-        }
-      } else {
-        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
-        modal.show();
-      }
-      return false;
-    });
-  }
-  function toggleCodeHandler(show) {
-    return function(e) {
-      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
-      for (let i=0; i<detailsSrc.length; i++) {
-        const details = detailsSrc[i].parentElement;
-        if (show) {
-          details.open = true;
-        } else {
-          details.removeAttribute("open");
-        }
-      }
-      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
-      const fromCls = show ? "hidden" : "unhidden";
-      const toCls = show ? "unhidden" : "hidden";
-      for (let i=0; i<cellCodeDivs.length; i++) {
-        const codeDiv = cellCodeDivs[i];
-        if (codeDiv.classList.contains(fromCls)) {
-          codeDiv.classList.remove(fromCls);
-          codeDiv.classList.add(toCls);
-        } 
-      }
-      return false;
-    }
-  }
-  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
-  if (hideAllCode) {
-    hideAllCode.addEventListener("click", toggleCodeHandler(false));
-  }
-  const showAllCode = window.document.getElementById("quarto-show-all-code");
-  if (showAllCode) {
-    showAllCode.addEventListener("click", toggleCodeHandler(true));
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
-    };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
-    }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
-          }
-        }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
-        }
-        return container.innerHTML
-      } else {
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(note);
-        }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
-      }
-    }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
-          }
-        } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
-          .then(res => res.text())
-          .then(html => {
-            const parser = new DOMParser();
-            const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
-            if (note !== null) {
-              const html = processXRef(id, note);
-              instance.setContent(html);
-            } 
-          }).finally(() => {
-            instance.enable();
-            instance.show();
-          });
-        }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
-      });
-    }
+          </div>
+        </div>
+      </div>
+<a href="05-datainput.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="07-regression1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/rstudio/bookdown-demo/edit/master/06-datawrangling.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
   }
 });
+});
 </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
-      <a href="./05-datainput.html" class="pagination-link" aria-label="データ入力">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">データ入力</span></span>
-      </a>          
-  </div>
-  <div class="nav-page nav-page-next">
-      <a href="./07-regression1.html" class="pagination-link" aria-label="古典的仮定のもとでの最小二乗法">
-        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">古典的仮定のもとでの最小二乗法</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
-  </div>
-</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">ソースコード</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb31" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span><span class="co"> html_document</span></span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="fu"># 整然データ</span></span>
-<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup</span></span>
-<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
-<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">echo =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>http://r4ds.had.co.nz/tidy-data.html</span>
-<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>データが整然 (tidy) であるとは次の条件を満たすデータのことである.</span>
-<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>個々の変数 (variable) が1つの列 (column) である</span>
-<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>個々の観測 (observation) が1つの行 (row) である</span>
-<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>個々の値 (value) が1つのセル (cell) である</span>
-<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a><span class="al">![tidy data](http://r4ds.had.co.nz/images/tidy-1.png)</span></span>
-<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a>この章では、データを整然な形に整形する方法と、もともとのデータを整然データへ変換する手順を紹介する。</span>
-<span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-26"><a href="#cb31-26" aria-hidden="true" tabindex="-1"></a>ここでは tidyverse を中心に作業を進める。</span>
-<span id="cb31-29"><a href="#cb31-29" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb31-30"><a href="#cb31-30" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb31-31"><a href="#cb31-31" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb31-32"><a href="#cb31-32" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb31-33"><a href="#cb31-33" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb31-34"><a href="#cb31-34" aria-hidden="true" tabindex="-1"></a>特に <span class="in">`dplyr`</span> と <span class="in">`tidyr`</span> の機能を活用する。</span>
-<span id="cb31-35"><a href="#cb31-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-36"><a href="#cb31-36" aria-hidden="true" tabindex="-1"></a><span class="fu">## データ整形</span></span>
-<span id="cb31-37"><a href="#cb31-37" aria-hidden="true" tabindex="-1"></a>まずデータセット <span class="in">`mtcars`</span> を例に取り、整形の基本操作を確認する。<span class="in">`as_tibble()`</span> を介して行名を列に移すと、後続の操作が行いやすくなる。</span>
-<span id="cb31-40"><a href="#cb31-40" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb31-41"><a href="#cb31-41" aria-hidden="true" tabindex="-1"></a>mtcars_tbl <span class="ot">&lt;-</span> mtcars <span class="sc">|&gt;</span> </span>
-<span id="cb31-42"><a href="#cb31-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>(<span class="at">rownames =</span> <span class="st">"model"</span>)</span>
-<span id="cb31-43"><a href="#cb31-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-44"><a href="#cb31-44" aria-hidden="true" tabindex="-1"></a>mtcars_tbl <span class="sc">|&gt;</span> <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">6</span>)</span>
-<span id="cb31-45"><a href="#cb31-45" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb31-46"><a href="#cb31-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-47"><a href="#cb31-47" aria-hidden="true" tabindex="-1"></a>ここでは R 4.1 から導入されたパイプ演算子 <span class="in">`|&gt;`</span> を利用している。従来の <span class="in">`%&gt;%`</span> と同様に、左辺の結果を右辺の関数に渡す構文である。</span>
-<span id="cb31-48"><a href="#cb31-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-49"><a href="#cb31-49" aria-hidden="true" tabindex="-1"></a><span class="in">`dplyr`</span> を使うとデータフレームの処理が大幅に簡潔になる。</span>
-<span id="cb31-50"><a href="#cb31-50" aria-hidden="true" tabindex="-1"></a>変数の抽出には <span class="in">`select()`</span> を使う。</span>
-<span id="cb31-53"><a href="#cb31-53" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb31-54"><a href="#cb31-54" aria-hidden="true" tabindex="-1"></a>mtcars_tbl <span class="sc">|&gt;</span> </span>
-<span id="cb31-55"><a href="#cb31-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(model, mpg, disp) <span class="sc">|&gt;</span> </span>
-<span id="cb31-56"><a href="#cb31-56" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">6</span>)</span>
-<span id="cb31-57"><a href="#cb31-57" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb31-58"><a href="#cb31-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-59"><a href="#cb31-59" aria-hidden="true" tabindex="-1"></a>条件に合致した行だけを抽出したい場合は <span class="in">`filter()`</span> が便利である。</span>
-<span id="cb31-62"><a href="#cb31-62" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb31-63"><a href="#cb31-63" aria-hidden="true" tabindex="-1"></a>mtcars_tbl <span class="sc">|&gt;</span> </span>
-<span id="cb31-64"><a href="#cb31-64" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(model, mpg, disp) <span class="sc">|&gt;</span> </span>
-<span id="cb31-65"><a href="#cb31-65" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(disp <span class="sc">&gt;</span> <span class="dv">300</span>)</span>
-<span id="cb31-66"><a href="#cb31-66" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb31-67"><a href="#cb31-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-68"><a href="#cb31-68" aria-hidden="true" tabindex="-1"></a><span class="in">`rename()`</span> を使えば変数名を変更できる。日本語の列名にも対応している。</span>
-<span id="cb31-71"><a href="#cb31-71" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb31-72"><a href="#cb31-72" aria-hidden="true" tabindex="-1"></a>mtcars_tbl <span class="sc">|&gt;</span> </span>
-<span id="cb31-73"><a href="#cb31-73" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(model, mpg, disp) <span class="sc">|&gt;</span> </span>
-<span id="cb31-74"><a href="#cb31-74" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">`</span><span class="at">速度</span><span class="st">`</span> <span class="ot">=</span> mpg, <span class="st">`</span><span class="at">距離</span><span class="st">`</span> <span class="ot">=</span> disp) <span class="sc">|&gt;</span> </span>
-<span id="cb31-75"><a href="#cb31-75" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">6</span>)</span>
-<span id="cb31-76"><a href="#cb31-76" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb31-77"><a href="#cb31-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-78"><a href="#cb31-78" aria-hidden="true" tabindex="-1"></a>並べ替えは <span class="in">`arrange()`</span> で行う。</span>
-<span id="cb31-81"><a href="#cb31-81" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb31-82"><a href="#cb31-82" aria-hidden="true" tabindex="-1"></a>mtcars_tbl <span class="sc">|&gt;</span> </span>
-<span id="cb31-83"><a href="#cb31-83" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(model, mpg, disp) <span class="sc">|&gt;</span> </span>
-<span id="cb31-84"><a href="#cb31-84" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(mpg) <span class="sc">|&gt;</span> </span>
-<span id="cb31-85"><a href="#cb31-85" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">6</span>)</span>
-<span id="cb31-86"><a href="#cb31-86" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb31-87"><a href="#cb31-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-88"><a href="#cb31-88" aria-hidden="true" tabindex="-1"></a>降順に並べる場合は <span class="in">`desc()`</span> と組み合わせる。</span>
-<span id="cb31-91"><a href="#cb31-91" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb31-92"><a href="#cb31-92" aria-hidden="true" tabindex="-1"></a>mtcars_tbl <span class="sc">|&gt;</span> </span>
-<span id="cb31-93"><a href="#cb31-93" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(model, mpg, disp) <span class="sc">|&gt;</span> </span>
-<span id="cb31-94"><a href="#cb31-94" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(mpg)) <span class="sc">|&gt;</span> </span>
-<span id="cb31-95"><a href="#cb31-95" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">6</span>)</span>
-<span id="cb31-96"><a href="#cb31-96" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb31-97"><a href="#cb31-97" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-98"><a href="#cb31-98" aria-hidden="true" tabindex="-1"></a><span class="in">`mutate()`</span> を使うと新しい列を追加できる。</span>
-<span id="cb31-101"><a href="#cb31-101" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb31-102"><a href="#cb31-102" aria-hidden="true" tabindex="-1"></a>mtcars_tbl <span class="sc">|&gt;</span> </span>
-<span id="cb31-103"><a href="#cb31-103" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gpm =</span> <span class="dv">1</span> <span class="sc">/</span> mpg) <span class="sc">|&gt;</span> </span>
-<span id="cb31-104"><a href="#cb31-104" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(model, mpg, gpm) <span class="sc">|&gt;</span> </span>
-<span id="cb31-105"><a href="#cb31-105" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">6</span>)</span>
-<span id="cb31-106"><a href="#cb31-106" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb31-107"><a href="#cb31-107" aria-hidden="true" tabindex="-1"></a><span class="in">`mutate()`</span> は既存列の上書きや複数列の同時作成も可能で、計算や条件分岐をまとめて記述できる点が強みである。</span>
-<span id="cb31-108"><a href="#cb31-108" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-109"><a href="#cb31-109" aria-hidden="true" tabindex="-1"></a>次の例では、<span class="in">`mpg`</span> が 20 を超える場合に <span class="in">`TRUE`</span> を返すブール列を追加している。</span>
-<span id="cb31-112"><a href="#cb31-112" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb31-113"><a href="#cb31-113" aria-hidden="true" tabindex="-1"></a>mtcars_tbl <span class="sc">|&gt;</span> </span>
-<span id="cb31-114"><a href="#cb31-114" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">is_high_mileage =</span> mpg <span class="sc">&gt;</span> <span class="dv">20</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb31-115"><a href="#cb31-115" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(model, mpg, is_high_mileage) <span class="sc">|&gt;</span> </span>
-<span id="cb31-116"><a href="#cb31-116" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">6</span>)</span>
-<span id="cb31-117"><a href="#cb31-117" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb31-118"><a href="#cb31-118" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-119"><a href="#cb31-119" aria-hidden="true" tabindex="-1"></a><span class="in">`summarise()`</span> で基本統計量を算出できる。</span>
-<span id="cb31-122"><a href="#cb31-122" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb31-123"><a href="#cb31-123" aria-hidden="true" tabindex="-1"></a>mtcars_tbl <span class="sc">|&gt;</span> </span>
-<span id="cb31-124"><a href="#cb31-124" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg =</span> <span class="fu">mean</span>(mpg), </span>
-<span id="cb31-125"><a href="#cb31-125" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd  =</span> <span class="fu">sd</span>(mpg), </span>
-<span id="cb31-126"><a href="#cb31-126" aria-hidden="true" tabindex="-1"></a>            <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
-<span id="cb31-127"><a href="#cb31-127" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb31-128"><a href="#cb31-128" aria-hidden="true" tabindex="-1"></a>列名を任意に付けておけば、後続の処理で指標を参照しやすくなる。</span>
-<span id="cb31-129"><a href="#cb31-129" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-130"><a href="#cb31-130" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-131"><a href="#cb31-131" aria-hidden="true" tabindex="-1"></a><span class="in">`summarise()`</span> に <span class="in">`.by`</span> を指定すれば、グループごとの集計も容易である。</span>
-<span id="cb31-132"><a href="#cb31-132" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-135"><a href="#cb31-135" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb31-136"><a href="#cb31-136" aria-hidden="true" tabindex="-1"></a>mtcars_tbl <span class="sc">|&gt;</span> </span>
-<span id="cb31-137"><a href="#cb31-137" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb31-138"><a href="#cb31-138" aria-hidden="true" tabindex="-1"></a>    <span class="at">n   =</span> <span class="fu">n</span>(),</span>
-<span id="cb31-139"><a href="#cb31-139" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg =</span> <span class="fu">mean</span>(mpg),</span>
-<span id="cb31-140"><a href="#cb31-140" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd  =</span> <span class="fu">sd</span>(mpg),</span>
-<span id="cb31-141"><a href="#cb31-141" aria-hidden="true" tabindex="-1"></a>    <span class="at">.by =</span> cyl</span>
-<span id="cb31-142"><a href="#cb31-142" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb31-143"><a href="#cb31-143" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb31-144"><a href="#cb31-144" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-145"><a href="#cb31-145" aria-hidden="true" tabindex="-1"></a><span class="fu">## データ結合</span></span>
-<span id="cb31-146"><a href="#cb31-146" aria-hidden="true" tabindex="-1"></a><span class="in">`dplyr`</span> にはデータフレームを縦横方向に結合したり、キーを用いて結合したりするための関数が揃っている。</span>
-<span id="cb31-147"><a href="#cb31-147" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-148"><a href="#cb31-148" aria-hidden="true" tabindex="-1"></a>縦方向に結合するには <span class="in">`bind_rows()`</span> を使う。</span>
-<span id="cb31-151"><a href="#cb31-151" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb31-152"><a href="#cb31-152" aria-hidden="true" tabindex="-1"></a>df1 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">X =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">Y =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)</span>
-<span id="cb31-153"><a href="#cb31-153" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">X =</span> <span class="dv">4</span>,   <span class="at">Y =</span> <span class="dv">4</span>)</span>
-<span id="cb31-154"><a href="#cb31-154" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-155"><a href="#cb31-155" aria-hidden="true" tabindex="-1"></a><span class="fu">bind_rows</span>(df1, df2)</span>
-<span id="cb31-156"><a href="#cb31-156" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb31-157"><a href="#cb31-157" aria-hidden="true" tabindex="-1"></a>列名と型が一致していれば、欠けている列には自動で <span class="in">`NA`</span> が補われる。</span>
-<span id="cb31-158"><a href="#cb31-158" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-159"><a href="#cb31-159" aria-hidden="true" tabindex="-1"></a>横方向に結合する場合は <span class="in">`bind_cols()`</span> を利用する。</span>
-<span id="cb31-162"><a href="#cb31-162" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb31-163"><a href="#cb31-163" aria-hidden="true" tabindex="-1"></a>df3 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">Z =</span> <span class="dv">5</span><span class="sc">:</span><span class="dv">6</span>)</span>
-<span id="cb31-164"><a href="#cb31-164" aria-hidden="true" tabindex="-1"></a><span class="fu">bind_cols</span>(df1, df3)</span>
-<span id="cb31-165"><a href="#cb31-165" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb31-166"><a href="#cb31-166" aria-hidden="true" tabindex="-1"></a>行数が一致していないとリサイクルされるか警告が出るので注意する。</span>
-<span id="cb31-167"><a href="#cb31-167" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-168"><a href="#cb31-168" aria-hidden="true" tabindex="-1"></a>キーを用いた結合には四種類の join 関数が利用できる。</span>
-<span id="cb31-171"><a href="#cb31-171" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb31-172"><a href="#cb31-172" aria-hidden="true" tabindex="-1"></a>dfx <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">id =</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>), <span class="at">X =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span>
-<span id="cb31-173"><a href="#cb31-173" aria-hidden="true" tabindex="-1"></a>dfy <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">id =</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"D"</span>), <span class="at">Y =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>))</span>
-<span id="cb31-174"><a href="#cb31-174" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb31-175"><a href="#cb31-175" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-176"><a href="#cb31-176" aria-hidden="true" tabindex="-1"></a>左側データ（<span class="in">`dfx`</span>）の行をすべて保持して結合するには <span class="in">`left_join()`</span> を用いる。</span>
-<span id="cb31-179"><a href="#cb31-179" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb31-180"><a href="#cb31-180" aria-hidden="true" tabindex="-1"></a><span class="fu">left_join</span>(dfx, dfy, <span class="at">by =</span> <span class="st">"id"</span>)</span>
-<span id="cb31-181"><a href="#cb31-181" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb31-182"><a href="#cb31-182" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-183"><a href="#cb31-183" aria-hidden="true" tabindex="-1"></a>右側データ（<span class="in">`dfy`</span>）の行をすべて保持するなら <span class="in">`right_join()`</span>。</span>
-<span id="cb31-186"><a href="#cb31-186" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb31-187"><a href="#cb31-187" aria-hidden="true" tabindex="-1"></a><span class="fu">right_join</span>(dfx, dfy, <span class="at">by =</span> <span class="st">"id"</span>)</span>
-<span id="cb31-188"><a href="#cb31-188" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb31-189"><a href="#cb31-189" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-190"><a href="#cb31-190" aria-hidden="true" tabindex="-1"></a>両方の行をすべて保持するなら <span class="in">`full_join()`</span>。</span>
-<span id="cb31-193"><a href="#cb31-193" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb31-194"><a href="#cb31-194" aria-hidden="true" tabindex="-1"></a><span class="fu">full_join</span>(dfx, dfy, <span class="at">by =</span> <span class="st">"id"</span>)</span>
-<span id="cb31-195"><a href="#cb31-195" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb31-196"><a href="#cb31-196" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-197"><a href="#cb31-197" aria-hidden="true" tabindex="-1"></a><span class="in">`inner_join()`</span> は共通部分のみを抽出する。</span>
-<span id="cb31-200"><a href="#cb31-200" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb31-201"><a href="#cb31-201" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_join</span>(dfx, dfy, <span class="at">by =</span> <span class="st">"id"</span>)</span>
-<span id="cb31-202"><a href="#cb31-202" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb31-203"><a href="#cb31-203" aria-hidden="true" tabindex="-1"></a>複雑な条件で結合する場合は <span class="in">`join_by()`</span> を使うと柔軟に定義できる。</span>
-<span id="cb31-204"><a href="#cb31-204" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-205"><a href="#cb31-205" aria-hidden="true" tabindex="-1"></a><span class="fu">## tidyr</span></span>
-<span id="cb31-206"><a href="#cb31-206" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-207"><a href="#cb31-207" aria-hidden="true" tabindex="-1"></a>ここからは <span class="in">`tidyr`</span> による整形の例を紹介する。まず次のデータセットを用意する。</span>
-<span id="cb31-210"><a href="#cb31-210" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb31-211"><a href="#cb31-211" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb31-212"><a href="#cb31-212" aria-hidden="true" tabindex="-1"></a>  <span class="at">time =</span> <span class="dv">2010</span><span class="sc">:</span><span class="dv">2014</span>,</span>
-<span id="cb31-213"><a href="#cb31-213" aria-hidden="true" tabindex="-1"></a>  <span class="at">X =</span> <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="dv">0</span>, <span class="dv">1</span>),</span>
-<span id="cb31-214"><a href="#cb31-214" aria-hidden="true" tabindex="-1"></a>  <span class="at">Y =</span> <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="dv">0</span>, <span class="dv">2</span>),</span>
-<span id="cb31-215"><a href="#cb31-215" aria-hidden="true" tabindex="-1"></a>  <span class="at">Z =</span> <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="dv">0</span>, <span class="dv">4</span>)</span>
-<span id="cb31-216"><a href="#cb31-216" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb31-217"><a href="#cb31-217" aria-hidden="true" tabindex="-1"></a><span class="co"># `tibble()` なら列の型を意識しつつ手早くサンプル値を用意できる</span></span>
-<span id="cb31-218"><a href="#cb31-218" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span> <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">6</span>)</span>
-<span id="cb31-219"><a href="#cb31-219" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb31-220"><a href="#cb31-220" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-221"><a href="#cb31-221" aria-hidden="true" tabindex="-1"></a>列名をキーにして縦長へ変換するときは <span class="in">`pivot_longer()`</span> を用いる。</span>
-<span id="cb31-224"><a href="#cb31-224" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb31-225"><a href="#cb31-225" aria-hidden="true" tabindex="-1"></a>df_long <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span> </span>
-<span id="cb31-226"><a href="#cb31-226" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">-</span>time, <span class="at">names_to =</span> <span class="st">"key"</span>, <span class="at">values_to =</span> <span class="st">"value"</span>)</span>
-<span id="cb31-227"><a href="#cb31-227" aria-hidden="true" tabindex="-1"></a><span class="co"># names_to / values_to を指定しておくと後続処理が読みやすい</span></span>
-<span id="cb31-228"><a href="#cb31-228" aria-hidden="true" tabindex="-1"></a>df_long</span>
-<span id="cb31-229"><a href="#cb31-229" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb31-230"><a href="#cb31-230" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-231"><a href="#cb31-231" aria-hidden="true" tabindex="-1"></a><span class="in">`pivot_wider()`</span> を使えば再び元の構造に戻すことができる。</span>
-<span id="cb31-234"><a href="#cb31-234" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb31-235"><a href="#cb31-235" aria-hidden="true" tabindex="-1"></a>df_long <span class="sc">|&gt;</span> </span>
-<span id="cb31-236"><a href="#cb31-236" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> <span class="st">"key"</span>, <span class="at">values_from =</span> <span class="st">"value"</span>)</span>
-<span id="cb31-237"><a href="#cb31-237" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb31-238"><a href="#cb31-238" aria-hidden="true" tabindex="-1"></a>列数を増やして見せたいときや、プレゼン資料で横持ちの表が必要なときに役立つ。</span>
-<span id="cb31-239"><a href="#cb31-239" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-240"><a href="#cb31-240" aria-hidden="true" tabindex="-1"></a><span class="in">`time`</span> を列方向に展開すれば、年次を横持ちした表へ変換できる。</span>
-<span id="cb31-243"><a href="#cb31-243" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb31-244"><a href="#cb31-244" aria-hidden="true" tabindex="-1"></a>df_wide <span class="ot">&lt;-</span> df_long <span class="sc">|&gt;</span> </span>
-<span id="cb31-245"><a href="#cb31-245" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> <span class="st">"time"</span>, <span class="at">values_from =</span> <span class="st">"value"</span>)</span>
-<span id="cb31-246"><a href="#cb31-246" aria-hidden="true" tabindex="-1"></a>df_wide</span>
-<span id="cb31-247"><a href="#cb31-247" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb31-248"><a href="#cb31-248" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-249"><a href="#cb31-249" aria-hidden="true" tabindex="-1"></a>再び縦長に戻す場合は次のとおりである。</span>
-<span id="cb31-252"><a href="#cb31-252" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb31-253"><a href="#cb31-253" aria-hidden="true" tabindex="-1"></a>df_wide <span class="sc">|&gt;</span> </span>
-<span id="cb31-254"><a href="#cb31-254" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">-</span>key, <span class="at">names_to =</span> <span class="st">"time"</span>, <span class="at">values_to =</span> <span class="st">"value"</span>)</span>
-<span id="cb31-255"><a href="#cb31-255" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb31-256"><a href="#cb31-256" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-257"><a href="#cb31-257" aria-hidden="true" tabindex="-1"></a><span class="in">`pivot_longer()`</span> と <span class="in">`summarise()`</span> を組み合わせると、変数別の記述統計を簡潔にまとめられる。</span>
-<span id="cb31-260"><a href="#cb31-260" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb31-261"><a href="#cb31-261" aria-hidden="true" tabindex="-1"></a>cars <span class="sc">|&gt;</span> </span>
-<span id="cb31-262"><a href="#cb31-262" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb31-263"><a href="#cb31-263" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">"variable"</span>, <span class="at">values_to =</span> <span class="st">"value"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb31-264"><a href="#cb31-264" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(variable) <span class="sc">|&gt;</span></span>
-<span id="cb31-265"><a href="#cb31-265" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb31-266"><a href="#cb31-266" aria-hidden="true" tabindex="-1"></a>    <span class="at">nobs =</span> <span class="fu">n</span>(),</span>
-<span id="cb31-267"><a href="#cb31-267" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg  =</span> <span class="fu">mean</span>(value),</span>
-<span id="cb31-268"><a href="#cb31-268" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd   =</span> <span class="fu">sd</span>(value)</span>
-<span id="cb31-269"><a href="#cb31-269" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb31-270"><a href="#cb31-270" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
-<span id="cb31-271"><a href="#cb31-271" aria-hidden="true" tabindex="-1"></a><span class="co"># 欠損を除外したいときは mean(value, na.rm = TRUE) のように na.rm を付ける</span></span>
-<span id="cb31-272"><a href="#cb31-272" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb31-273"><a href="#cb31-273" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-274"><a href="#cb31-274" aria-hidden="true" tabindex="-1"></a>日本語の列名でも同じ操作が可能である。</span>
-<span id="cb31-277"><a href="#cb31-277" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb31-278"><a href="#cb31-278" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">&lt;-</span> cars <span class="sc">|&gt;</span> </span>
-<span id="cb31-279"><a href="#cb31-279" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb31-280"><a href="#cb31-280" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">c</span>(dist, speed), <span class="at">names_to =</span> <span class="st">"variable"</span>, <span class="at">values_to =</span> <span class="st">"value"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb31-281"><a href="#cb31-281" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(variable) <span class="sc">|&gt;</span></span>
-<span id="cb31-282"><a href="#cb31-282" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb31-283"><a href="#cb31-283" aria-hidden="true" tabindex="-1"></a>    <span class="at">nobs =</span> <span class="fu">n</span>(),</span>
-<span id="cb31-284"><a href="#cb31-284" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg  =</span> <span class="fu">mean</span>(value),</span>
-<span id="cb31-285"><a href="#cb31-285" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd   =</span> <span class="fu">sd</span>(value)</span>
-<span id="cb31-286"><a href="#cb31-286" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb31-287"><a href="#cb31-287" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">|&gt;</span></span>
-<span id="cb31-288"><a href="#cb31-288" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb31-289"><a href="#cb31-289" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">変数</span><span class="st">`</span> <span class="ot">=</span> dplyr<span class="sc">::</span><span class="fu">recode</span>(variable, <span class="at">dist =</span> <span class="st">"距離"</span>, <span class="at">speed =</span> <span class="st">"速度"</span>)</span>
-<span id="cb31-290"><a href="#cb31-290" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb31-291"><a href="#cb31-291" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
-<span id="cb31-292"><a href="#cb31-292" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">変数</span><span class="st">`</span>,</span>
-<span id="cb31-293"><a href="#cb31-293" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">観測数</span><span class="st">`</span>   <span class="ot">=</span> nobs,</span>
-<span id="cb31-294"><a href="#cb31-294" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">平均</span><span class="st">`</span>     <span class="ot">=</span> avg,</span>
-<span id="cb31-295"><a href="#cb31-295" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">標準偏差</span><span class="st">`</span> <span class="ot">=</span> sd</span>
-<span id="cb31-296"><a href="#cb31-296" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb31-297"><a href="#cb31-297" aria-hidden="true" tabindex="-1"></a>tab <span class="sc">|&gt;</span> <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">6</span>)</span>
-<span id="cb31-298"><a href="#cb31-298" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb31-299"><a href="#cb31-299" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-300"><a href="#cb31-300" aria-hidden="true" tabindex="-1"></a><span class="fu">## 実践例</span></span>
-<span id="cb31-301"><a href="#cb31-301" aria-hidden="true" tabindex="-1"></a>tidyr を用いた別の例を見てみよう。横軸を年としたデータセット <span class="in">`df`</span> がある。</span>
-<span id="cb31-304"><a href="#cb31-304" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb31-305"><a href="#cb31-305" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb31-306"><a href="#cb31-306" aria-hidden="true" tabindex="-1"></a>  <span class="at">name  =</span> letters,</span>
-<span id="cb31-307"><a href="#cb31-307" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">2010</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">26</span>),</span>
-<span id="cb31-308"><a href="#cb31-308" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">2011</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">26</span>),</span>
-<span id="cb31-309"><a href="#cb31-309" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">2012</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">26</span>)</span>
-<span id="cb31-310"><a href="#cb31-310" aria-hidden="true" tabindex="-1"></a>) </span>
-<span id="cb31-311"><a href="#cb31-311" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span> <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">6</span>)</span>
-<span id="cb31-312"><a href="#cb31-312" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb31-313"><a href="#cb31-313" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-314"><a href="#cb31-314" aria-hidden="true" tabindex="-1"></a>さらに、年ごとのデータセット <span class="in">`df_2010`</span>、<span class="in">`df_2011`</span>、<span class="in">`df_2012`</span> の 3 つも用意する。</span>
-<span id="cb31-317"><a href="#cb31-317" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb31-318"><a href="#cb31-318" aria-hidden="true" tabindex="-1"></a>df_2010 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">name =</span> letters, <span class="at">runif =</span> <span class="fu">runif</span>(<span class="dv">26</span>))</span>
-<span id="cb31-319"><a href="#cb31-319" aria-hidden="true" tabindex="-1"></a>df_2011 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">name =</span> letters, <span class="at">runif =</span> <span class="fu">runif</span>(<span class="dv">26</span>))</span>
-<span id="cb31-320"><a href="#cb31-320" aria-hidden="true" tabindex="-1"></a>df_2012 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">name =</span> letters, <span class="at">runif =</span> <span class="fu">runif</span>(<span class="dv">26</span>))</span>
-<span id="cb31-321"><a href="#cb31-321" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb31-322"><a href="#cb31-322" aria-hidden="true" tabindex="-1"></a>これら 4 つのデータセットを統合して整然データにする。</span>
-<span id="cb31-323"><a href="#cb31-323" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-324"><a href="#cb31-324" aria-hidden="true" tabindex="-1"></a>まず <span class="in">`df`</span> を <span class="in">`pivot_longer()`</span> で縦長に変換する。</span>
-<span id="cb31-327"><a href="#cb31-327" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb31-328"><a href="#cb31-328" aria-hidden="true" tabindex="-1"></a>df_rnorm <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span> </span>
-<span id="cb31-329"><a href="#cb31-329" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">-</span>name, <span class="at">names_to =</span> <span class="st">"time"</span>, <span class="at">values_to =</span> <span class="st">"rnorm"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb31-330"><a href="#cb31-330" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">time =</span> <span class="fu">as.numeric</span>(time))</span>
-<span id="cb31-331"><a href="#cb31-331" aria-hidden="true" tabindex="-1"></a>df_rnorm <span class="sc">|&gt;</span> <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">6</span>)</span>
-<span id="cb31-332"><a href="#cb31-332" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb31-333"><a href="#cb31-333" aria-hidden="true" tabindex="-1"></a>ここでは <span class="in">`time`</span> 列を数値に変換している。</span>
-<span id="cb31-334"><a href="#cb31-334" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-335"><a href="#cb31-335" aria-hidden="true" tabindex="-1"></a>次に、3 つの年別データセットを <span class="in">`bind_rows()`</span> で縦に結合する。</span>
-<span id="cb31-338"><a href="#cb31-338" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb31-339"><a href="#cb31-339" aria-hidden="true" tabindex="-1"></a>df_runif <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
-<span id="cb31-340"><a href="#cb31-340" aria-hidden="true" tabindex="-1"></a>  <span class="st">"2010"</span> <span class="ot">=</span> df_2010,</span>
-<span id="cb31-341"><a href="#cb31-341" aria-hidden="true" tabindex="-1"></a>  <span class="st">"2011"</span> <span class="ot">=</span> df_2011,</span>
-<span id="cb31-342"><a href="#cb31-342" aria-hidden="true" tabindex="-1"></a>  <span class="st">"2012"</span> <span class="ot">=</span> df_2012,</span>
-<span id="cb31-343"><a href="#cb31-343" aria-hidden="true" tabindex="-1"></a>  <span class="at">.id    =</span> <span class="st">"time"</span></span>
-<span id="cb31-344"><a href="#cb31-344" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span> </span>
-<span id="cb31-345"><a href="#cb31-345" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">time =</span> <span class="fu">as.numeric</span>(time))</span>
-<span id="cb31-346"><a href="#cb31-346" aria-hidden="true" tabindex="-1"></a>df_runif <span class="sc">|&gt;</span> <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">6</span>)</span>
-<span id="cb31-347"><a href="#cb31-347" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb31-348"><a href="#cb31-348" aria-hidden="true" tabindex="-1"></a><span class="in">`.id`</span> で追加された列を数値に変換して年情報として利用している。</span>
-<span id="cb31-349"><a href="#cb31-349" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-350"><a href="#cb31-350" aria-hidden="true" tabindex="-1"></a>最後に <span class="in">`full_join()`</span> を使って 2 つのデータを結合する。</span>
-<span id="cb31-353"><a href="#cb31-353" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb31-354"><a href="#cb31-354" aria-hidden="true" tabindex="-1"></a>df_full <span class="ot">&lt;-</span> <span class="fu">full_join</span>(df_rnorm, df_runif, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"name"</span>, <span class="st">"time"</span>))</span>
-<span id="cb31-355"><a href="#cb31-355" aria-hidden="true" tabindex="-1"></a>df_full <span class="sc">|&gt;</span> <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">6</span>)</span>
-<span id="cb31-356"><a href="#cb31-356" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb31-357"><a href="#cb31-357" aria-hidden="true" tabindex="-1"></a>整然データにまとめておけば、<span class="in">`ggplot2`</span> やモデリング関数へそのまま渡せるため、後続処理がスムーズになり再現性も高まる。</span>
-</code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div></div></div></div></div>
-</div> <!-- /content -->
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
 
-
-
-</body></html>
+</html>

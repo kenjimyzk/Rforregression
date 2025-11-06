@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.552">
+<meta name="generator" content="quarto-1.7.32">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>R と RStudio - 10&nbsp; 操作変数法</title>
+<title>10&nbsp; 操作変数法 – R と RStudio</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,8 +21,9 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 /* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -66,15 +67,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="./">
 <link href="./10-panel.html" rel="next">
 <link href="./08-regression2.html" rel="prev">
-<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-485d01fc63b59abcd3ee1bf1e8e2748d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -107,19 +109,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="サイドバーを切り替える" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="サイドバーを切り替える" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./09-ivreg.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">操作変数法</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="サイドバーを切り替える" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="サイドバーを切り替える" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="サーチ" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -278,16 +280,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>説明変数に多重共線性が存在しない</li>
 </ol>
 <p>3つ目の仮定が必ずしも成立しない場合の推定方法を紹介する。</p>
-<p>そのために、外生変数と内生変数と操作変数の3つの概念を導入する。 誤差項と相関が無い説明変数を <strong>外生変数</strong> といい、誤差項と相関がある説明変数を <strong>内生変数</strong> という。 <strong>操作変数</strong> とは、説明変数に含まれず、説明変数と相関をもち、誤差項と相関をもたない変数のことである。 なお操作変数の個数は内生変数の個数より多苦なければならない。</p>
-<p>R においては <code>ivreg</code> コマンドを用いて操作変数法を実行する。 このコマンドは <code>AER</code> パッケージに含まれており、基本的な書式は <code>ivreg(被説明変数 ~ 内生変数 | 操作変数、data=データフレーム)</code> である。 ここで被説明変数は <code>log(wage)</code>, 内生変数は <code>educ</code>, 操作変数は <code>fatheduc</code> である。</p>
-<p>以下のコマンドで操作変数法を実行し、<code>coef</code> コマンドで推定された係数を取り出す。</p>
+<p>そのために、外生変数と内生変数と操作変数の3つの概念を導入する。 誤差項と相関が無い説明変数を <strong>外生変数</strong> といい、誤差項と相関がある説明変数を <strong>内生変数</strong> という。 <strong>操作変数</strong> とは、説明変数に含まれず、説明変数と相関をもち、誤差項と相関をもたない変数のことである。 なお操作変数の個数は内生変数の個数より多くなければならない。</p>
+<p>R では <code>ivreg</code> 関数を用いて操作変数法を実行する。 この関数は <code>AER</code> パッケージに含まれており、基本的な書式は <code>ivreg(被説明変数 ~ 内生変数 | 操作変数, data=データフレーム)</code> である。 ここで被説明変数は <code>log(wage)</code>, 内生変数は <code>educ</code>, 操作変数は <code>fatheduc</code> である。</p>
+<p>以下のコマンドで操作変数法を実行し、<code>coef()</code> 関数で推定された係数を取り出す。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>fm  <span class="ot">&lt;-</span> <span class="fu">ivreg</span>(<span class="fu">log</span>(wage)<span class="sc">~</span>educ<span class="sc">|</span>fatheduc, <span class="at">data=</span>df)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(fm)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)        educ </span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="do">##  0.44110339  0.05917348</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>傾きの推定値は操作変数推定量の公式を用いて直接計算することもできる。 具体的には、被説明変数と操作変数の共分散を内生変数と操作変数の共分散で割ることで得られる。 以下のコマンドで <code>cov</code> 関数を用いて共分散を計算し、同じ推定値が得られることを確認する。</p>
+<p>傾きの推定値は操作変数推定量の公式を用いて直接計算することもできる。 具体的には、被説明変数と操作変数の共分散を内生変数と操作変数の共分散で割ることで得られる。 以下のコマンドで <code>cov()</code> 関数を用いて共分散を計算し、同じ推定値が得られることを確認する。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(df, <span class="fu">cov</span>(<span class="fu">log</span>(wage),fatheduc)<span class="sc">/</span><span class="fu">cov</span>(educ,fatheduc))</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.05917348</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -295,7 +297,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="段階最小二乗法" class="level2" data-number="10.3">
 <h2 data-number="10.3" class="anchored" data-anchor-id="段階最小二乗法"><span class="header-section-number">10.3</span> 2段階最小二乗法</h2>
-<p>複数の説明変数あり、操作変数の数が内生変数の数以上のとき、係数の一致推定量を得るには二段階最小自乗法を用いる。 二段階最小二乗法は次の手順で実行される:</p>
+<p>複数の説明変数があり、操作変数の数が内生変数の数以上のとき、係数の一致推定量を得るには二段階最小二乗法を用いる。 二段階最小二乗法は次の手順で実行される:</p>
 <ol type="1">
 <li>それぞれの内生変数を外生変数と操作変数に回帰させて、その予測値を得る。</li>
 <li>被説明変数を外生変数と内生変数の予測値に回帰させて、その係数を得る。</li>
@@ -304,12 +306,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>母集団が線形モデル</li>
 <li>標本が無作為抽出</li>
-<li>誤差項が平均ゼロで操作変数と外生変数に対して独立。</li>
-<li>操作変数は内生変数と相関をもつ。</li>
-<li>外生変数と内生変数の予測値に多重共線性が存在しない`</li>
+<li>誤差項が平均ゼロで操作変数と外生変数に対して独立</li>
+<li>操作変数は内生変数と相関をもつ</li>
+<li>外生変数と内生変数の予測値に多重共線性が存在しない</li>
 </ul>
-<p>R においては <code>ivreg</code> コマンドを用いて二段階最小二乗法を実行する。 複数の説明変数がある場合の書式は <code>ivreg(被説明変数 ~ 内生変数 + 外生変数 | 外生変数 + 操作変数、data=データフレーム)</code> である。 ここで被説明変数は <code>log(wage)</code>, 内生変数は <code>educ</code>, 外生変数は <code>exper</code>, <code>I(exper^2)</code>, 操作変数は <code>motheduc</code>, <code>fatheduc</code> である。 注意点として、パイプ記号 <code>|</code> の右側には外生変数も含める必要がある。</p>
-<p>以下のコマンドで二段階最小二乗法を実行し、<code>summary</code> コマンドで推定結果の要約を表示する。</p>
+<p>R では <code>ivreg()</code> 関数を用いて二段階最小二乗法を実行する。 複数の説明変数がある場合の書式は <code>ivreg(被説明変数 ~ 内生変数 + 外生変数 | 外生変数 + 操作変数, data=データフレーム)</code> である。 ここで被説明変数は <code>log(wage)</code>, 内生変数は <code>educ</code>, 外生変数は <code>exper</code>, <code>I(exper^2)</code>, 操作変数は <code>motheduc</code>, <code>fatheduc</code> である。 注意点として、パイプ記号 <code>|</code> の右側には外生変数も含める必要がある。</p>
+<p>以下のコマンドで二段階最小二乗法を実行し、<code>summary()</code> 関数で推定結果の要約を表示する。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>fm  <span class="ot">&lt;-</span> <span class="fu">ivreg</span>(<span class="fu">log</span>(wage)<span class="sc">~</span>educ<span class="sc">+</span>exper<span class="sc">+</span><span class="fu">I</span>(exper<span class="sc">^</span><span class="dv">2</span>)<span class="sc">|</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>            exper<span class="sc">+</span><span class="fu">I</span>(exper<span class="sc">^</span><span class="dv">2</span>)<span class="sc">+</span>motheduc<span class="sc">+</span>fatheduc,</span>
@@ -337,8 +339,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiple R-Squared: 0.1357,  Adjusted R-squared: 0.1296 </span></span>
 <span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="do">## Wald test: 8.141 on 3 and 424 DF,  p-value: 2.787e-05</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>二段階最小二乗法の手順を <code>lm</code> コマンドを用いて手動で実行し、同じ係数推定値が得られることを確認できる。 ただし標準誤差の値が異なっている。 なぜなら残差は内生変数および外生変数から算出させる必要があるが、以下のやりかただと内生変数の予測値および外生変数から算出するためである。</p>
-<p>以下では第一段階として <code>lm</code> コマンドで内生変数 <code>educ</code> を外生変数と操作変数に回帰し、<code>fitted</code> コマンドで予測値を取得する。 第二段階として被説明変数を外生変数と内生変数の予測値に回帰する。</p>
+<p>二段階最小二乗法の手順を <code>lm()</code> 関数を用いて手動で実行し、同じ係数推定値が得られることを確認できる。 ただし標準誤差の値が異なっている。 なぜなら残差は内生変数および外生変数から算出する必要があるが、以下のやり方だと内生変数の予測値および外生変数から算出するためである。</p>
+<p>以下では第一段階として <code>lm()</code> 関数で内生変数 <code>educ</code> を外生変数と操作変数に回帰し、<code>fitted()</code> 関数で予測値を取得する。 第二段階として被説明変数を外生変数と内生変数の予測値に回帰する。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>ols1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(educ<span class="sc">~</span>exper<span class="sc">+</span><span class="fu">I</span>(exper<span class="sc">^</span><span class="dv">2</span>)<span class="sc">+</span>motheduc<span class="sc">+</span>fatheduc,  <span class="at">data =</span> df)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>ols2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log</span>(wage)<span class="sc">~</span><span class="fu">fitted</span>(ols1)<span class="sc">+</span>exper<span class="sc">+</span><span class="fu">I</span>(exper<span class="sc">^</span><span class="dv">2</span>),  <span class="at">data =</span> df)</span>
@@ -367,7 +369,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="複数制約の検定" class="level3" data-number="10.3.1">
 <h3 data-number="10.3.1" class="anchored" data-anchor-id="複数制約の検定"><span class="header-section-number">10.3.1</span> 複数制約の検定</h3>
 <p>帰無仮説が複数の係数制約を課す場合のワルド検定を実施する。 例えば、2つの外生変数 <code>exper</code> と <code>I(exper^2)</code> の係数がともにゼロであるという仮説を検定する。</p>
-<p>まず <code>ivreg</code> コマンドで制約モデル（外生変数を含まないモデル）を推定し、<code>waldtest</code> コマンドで制約なしモデルと比較する。 <code>waldtest</code> コマンドは2つのモデルを引数にとり、ワルド検定を実行する。</p>
+<p>まず <code>ivreg()</code> 関数で制約モデル（外生変数を含まないモデル）を推定し、<code>waldtest()</code> 関数で制約なしモデルと比較する。 <code>waldtest()</code> 関数は2つのモデルを引数にとり、ワルド検定を実行する。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>fm0 <span class="ot">&lt;-</span> <span class="fu">ivreg</span>(<span class="fu">log</span>(wage)<span class="sc">~</span>educ<span class="sc">|</span>motheduc<span class="sc">+</span>fatheduc,<span class="at">data=</span>df)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">waldtest</span>(fm0,fm)</span>
@@ -382,7 +384,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
 <span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>LM検定（ラグランジュ乗数検定）も実行可能である。 まず <code>resid</code> コマンドで制約モデルの残差を取得し、その残差を制約される説明変数に回帰する。 <code>nrow</code> コマンドで観測数を取得し、決定係数 <code>r.squared</code> を乗じてLM統計量を計算する。 最後に <code>pchisq</code> コマンドでカイ二乗分布のP値を計算する（自由度は制約の数3）。</p>
+<p>LM検定（ラグランジュ乗数検定）も実行可能である。 まず <code>resid()</code> 関数で制約モデルの残差を取得し、その残差を制約される説明変数に回帰する。 <code>nrow()</code> 関数で観測数を取得し、決定係数 <code>r.squared</code> を乗じてLM統計量を計算する。 最後に <code>pchisq()</code> 関数でカイ二乗分布のP値を計算する（自由度は制約の数3）。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>lmt <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">resid</span>(fm0)<span class="sc">~</span>educ <span class="sc">+</span> exper <span class="sc">+</span> <span class="fu">I</span>(exper<span class="sc">^</span><span class="dv">2</span>) ,<span class="at">data=</span>df)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>(lmt <span class="ot">&lt;-</span> <span class="fu">nrow</span>(df)<span class="sc">*</span><span class="fu">summary</span>(lmt)<span class="sc">$</span>r.squared)</span>
@@ -394,7 +396,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="特定化検定" class="level2" data-number="10.4">
 <h2 data-number="10.4" class="anchored" data-anchor-id="特定化検定"><span class="header-section-number">10.4</span> 特定化検定</h2>
-<p>操作変数法が妥当かどうかを検証するために、複数の特定化検定を実施する。 <code>summary</code> コマンドにオプション <code>diagnostics = TRUE</code> を追加すると、弱操作変数検定（Weak instruments）、Wu-Hausman検定、Sargan検定を一度に実行できる。 これらの検定結果から、操作変数の妥当性、内生性の有無、操作変数の外生性を確認できる。</p>
+<p>操作変数法が妥当かどうかを検証するために、複数の特定化検定を実施する。 <code>summary()</code> 関数にオプション <code>diagnostics = TRUE</code> を追加すると、弱操作変数検定（Weak instruments）、Wu-Hausman検定、Sargan検定を一度に実行できる。 これらの検定結果から、操作変数の妥当性、内生性の有無、操作変数の外生性を確認できる。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fm, <span class="at">diagnostics =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
@@ -428,8 +430,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="weak-instruments" class="level3" data-number="10.4.1">
 <h3 data-number="10.4.1" class="anchored" data-anchor-id="weak-instruments"><span class="header-section-number">10.4.1</span> Weak instruments</h3>
 <p>操作変数が内生変数と弱い相関関係しかない場合、<strong>弱操作変数</strong>という。 弱操作変数の場合、推定量の性質が悪化するため、操作変数が十分に強い相関を持つかを検定する必要がある。</p>
-<p>検定手順は以下の通りである: それぞれの内生変数に対して、帰無仮説を内生変数を外生変数のみに回帰させたモデルとし、対立仮説を内生変数を外生変数および操作変数に回帰させたモデルとし、F検定を実施する。</p>
-<p>以下のコマンドで <code>lm</code> による制約モデルを推定し、<code>anova</code> コマンドで第一段階の回帰モデル <code>ols1</code> と比較してF検定を実行する。 この結果が先の <code>diagnostics = TRUE</code> で得られた弱操作変数検定と同じであることを確認されたい。</p>
+<p>検定手順は以下の通りである。 それぞれの内生変数に対して、帰無仮説を内生変数を外生変数のみに回帰させたモデルとし、対立仮説を内生変数を外生変数および操作変数に回帰させたモデルとし、F検定を実施する。</p>
+<p>以下のコマンドで <code>lm()</code> 関数による制約モデルを推定し、<code>anova()</code> 関数で第一段階の回帰モデル <code>ols1</code> と比較してF検定を実行する。 この結果が先の <code>diagnostics = TRUE</code> で得られた弱操作変数検定と同じであることを確認されたい。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>ols0 <span class="ot">&lt;-</span> <span class="fu">lm</span>(educ <span class="sc">~</span> exper <span class="sc">+</span> <span class="fu">I</span>(exper<span class="sc">^</span><span class="dv">2</span>), <span class="at">data =</span> df)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(ols0, ols1)</span>
@@ -446,13 +448,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="wu-hausman-検定" class="level3" data-number="10.4.2">
 <h3 data-number="10.4.2" class="anchored" data-anchor-id="wu-hausman-検定"><span class="header-section-number">10.4.2</span> Wu-Hausman 検定</h3>
-<p>Wu-Hausman 検定は 帰無仮説が誤差項と説明変数が無相関、対立仮説が誤差項と説明変数が相関ありの検定をおこなう。 帰無仮説のもとでは、OLSも2SLSも一致推定量であるが、OLSの方が効率的である。 よって検定統計量のP値が十分小さいなら帰無仮説は棄却され、内生性があることになり操作変数法（2SLS）を選択する。 そうでなければより効率的な最小二乗法（OLS）を実施する。</p>
-<p>具体的には以下のF検定を実施する:</p>
+<p>Wu-Hausman 検定は帰無仮説が誤差項と説明変数が無相関、対立仮説が誤差項と説明変数が相関ありの検定を行う。 帰無仮説のもとでは、OLSも2SLSも一致推定量であるが、OLSの方が効率的である。 よって検定統計量のP値が十分小さいなら帰無仮説は棄却され、内生性があることになり操作変数法（2SLS）を選択する。 そうでなければより効率的な最小二乗法（OLS）を実施する。</p>
+<p>具体的には以下のF検定を実施する。</p>
 <ol type="1">
-<li><code>lm</code> コマンドでそれぞれの内生変数を外生変数に回帰し、<code>resid</code> コマンドで残差を得る (<code>resid(ols1)</code>)</li>
-<li><code>lm</code> コマンドで被説明変数を説明変数に回帰する (<code>ols3</code>)</li>
-<li><code>update</code> コマンドで被説明変数を説明変数および先程の残差に回帰する (<code>ols4</code>)</li>
-<li><code>anova</code> コマンドでこれらの残差の係数はゼロであるという帰無仮説のもとF検定を実施する</li>
+<li><code>lm()</code> 関数でそれぞれの内生変数を外生変数に回帰し、<code>resid()</code> 関数で残差を得る (<code>resid(ols1)</code>)</li>
+<li><code>lm()</code> 関数で被説明変数を説明変数に回帰する (<code>ols3</code>)</li>
+<li><code>update()</code> 関数で被説明変数を説明変数および先程の残差に回帰する (<code>ols4</code>)</li>
+<li><code>anova()</code> 関数でこれらの残差の係数はゼロであるという帰無仮説のもとF検定を実施する</li>
 </ol>
 <p>以下のコマンドが先の <code>diagnostics = TRUE</code> で得られたWu-Hausman検定と同じであることを確認されたい。</p>
 <div class="cell">
@@ -472,13 +474,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="sargan-検定" class="level3" data-number="10.4.3">
 <h3 data-number="10.4.3" class="anchored" data-anchor-id="sargan-検定"><span class="header-section-number">10.4.3</span> Sargan 検定</h3>
-<p>Sargan 検定は 誤差項が操作変数 (および外生変数) と相関しているかどうかを検定する。 帰無仮説は操作変数が外生的である（相関が無い）場合で、対立仮説は操作変数が内生的である（相関がある）場合である。 この検定は操作変数が過剰識別されている（操作変数の数が内生変数の数より多い）場合にのみ実施可能である。</p>
-<p>LM検定（ラグランジュ乗数検定）を以下の手順で実施する:</p>
+<p>Sargan 検定は誤差項が操作変数（および外生変数）と相関しているかどうかを検定する。 帰無仮説は操作変数が外生的である（相関が無い）場合で、対立仮説は操作変数が内生的である（相関がある）場合である。 この検定は操作変数が過剰識別されている（操作変数の数が内生変数の数より多い）場合にのみ実施可能である。</p>
+<p>LM検定（ラグランジュ乗数検定）を以下の手順で実施する。</p>
 <ol type="1">
-<li><code>resid</code> コマンドで二段階最小二乗法を実施したときの残差を得る (<code>resid(fm)</code>)</li>
-<li><code>lm</code> コマンドで残差を外生変数および操作変数に回帰する</li>
-<li><code>nrow</code> コマンドで観測数を取得し、回帰の決定係数 <code>r.squared</code> を乗じたLM統計量を得る</li>
-<li><code>pchisq</code> コマンドで検定統計量のP値を計算する。検定統計量は帰無仮説のもと、操作変数の数から内生変数の数を差し引いた自由度（この例では1）のカイ二乗分布にしたがう</li>
+<li><code>resid()</code> 関数で二段階最小二乗法を実施したときの残差を得る (<code>resid(fm)</code>)</li>
+<li><code>lm()</code> 関数で残差を外生変数および操作変数に回帰する</li>
+<li><code>nrow()</code> 関数で観測数を取得し、回帰の決定係数 <code>r.squared</code> を乗じたLM統計量を得る</li>
+<li><code>pchisq()</code> 関数で検定統計量のP値を計算する。検定統計量は帰無仮説のもと、操作変数の数から内生変数の数を差し引いた自由度（この例では1）のカイ二乗分布にしたがう</li>
 </ol>
 <p>以下のコマンドが先の <code>diagnostics = TRUE</code> で得られたSargan検定と同じであることを確認されたい。</p>
 <div class="cell">
@@ -493,7 +495,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="ロバスト分散" class="level2" data-number="10.5">
 <h2 data-number="10.5" class="anchored" data-anchor-id="ロバスト分散"><span class="header-section-number">10.5</span> ロバスト分散</h2>
 <p>以上の分析は、誤差項が操作変数と独立かつ均一分散の場合の分析である。 独立でない場合や分散不均一の場合、推定量の分散が変わりうる。 そうした場合に頑健な分散推定量を<strong>ロバスト分散</strong>という。</p>
-<p>ロバスト分散にもとづく推定結果を得るには、<code>summary</code> コマンドにオプション <code>vcov = vcovHC</code> を追加する。 <code>vcovHC</code> は不均一分散に頑健な分散共分散行列を計算する関数である。 オプション <code>df = Inf</code> は自由度を無限大とし、t分布ではなく正規分布を用いて検定を行う。</p>
+<p>ロバスト分散にもとづく推定結果を得るには、<code>summary()</code> 関数にオプション <code>vcov = vcovHC</code> を追加する。 <code>vcovHC()</code> 関数は不均一分散に頑健な分散共分散行列を計算する関数である。 オプション <code>df = Inf</code> は自由度を無限大とし、t分布ではなく正規分布を用いて検定を行う。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fm, <span class="at">vcov =</span> vcovHC, <span class="at">df =</span> <span class="cn">Inf</span>)</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
@@ -518,7 +520,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiple R-Squared: 0.1357,  Adjusted R-squared: 0.1296 </span></span>
 <span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a><span class="do">## Wald test: 18.11 on 3 DF,  p-value: 0.0004168</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>係数の検定結果のみを表示したい場合は、<code>coeftest</code> コマンドを用いる。 このコマンドは推定されたモデルオブジェクトと分散共分散行列を引数にとり、係数のt検定結果を表示する。</p>
+<p>係数の検定結果のみを表示したい場合は、<code>coeftest()</code> 関数を用いる。 この関数は推定されたモデルオブジェクトと分散共分散行列を引数にとり、係数のt検定結果を表示する。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coeftest</span>(fm, <span class="at">vcov=</span>vcovHC)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
@@ -532,7 +534,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
 <span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>ロバスト分散のもとでの複数制約のワルド検定を実施するには、<code>waldtest</code> コマンドにオプション <code>vcov=vcovHC</code> を追加する。</p>
+<p>ロバスト分散のもとでの複数制約のワルド検定を実施するには、<code>waldtest()</code> 関数にオプション <code>vcov=vcovHC</code> を追加する。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">waldtest</span>(fm0,fm, <span class="at">vcov=</span>vcovHC)</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Wald test</span></span>
@@ -546,8 +548,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
 <span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>最近開発されたパッケージ <code>estimatr</code> のコマンド <code>iv_robust</code> を用いるとロバスト分散のもとの推定値が簡単に計算できる。 このコマンドはデフォルトでロバスト標準誤差（HC2型）を計算し、オプション <code>diagnostics = TRUE</code> で特定化検定も同時に実行できる。 書式は <code>ivreg</code> と同じである。</p>
-<p>以下のコマンドで <code>iv_robust</code> による推定を実行し、<code>summary</code> コマンドで結果を表示する。</p>
+<p>最近開発されたパッケージ <code>estimatr</code> の <code>iv_robust()</code> 関数を用いるとロバスト分散のもとの推定値が簡単に計算できる。 この関数はデフォルトでロバスト標準誤差（HC2型）を計算し、オプション <code>diagnostics = TRUE</code> で特定化検定も同時に実行できる。 書式は <code>ivreg()</code> 関数と同じである。</p>
+<p>以下のコマンドで <code>iv_robust()</code> 関数による推定を実行し、<code>summary()</code> 関数で結果を表示する。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>fm2 <span class="ot">&lt;-</span> <span class="fu">iv_robust</span>(<span class="fu">log</span>(wage)<span class="sc">~</span>educ<span class="sc">+</span>exper<span class="sc">+</span><span class="fu">I</span>(exper<span class="sc">^</span><span class="dv">2</span>)<span class="sc">|</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>            exper<span class="sc">+</span><span class="fu">I</span>(exper<span class="sc">^</span><span class="dv">2</span>)<span class="sc">+</span>motheduc<span class="sc">+</span>fatheduc,</span>
@@ -613,13 +615,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="分散不均一の検定" class="level3" data-number="10.5.1">
 <h3 data-number="10.5.1" class="anchored" data-anchor-id="分散不均一の検定"><span class="header-section-number">10.5.1</span> 分散不均一の検定</h3>
-<p>誤差項が操作変数と独立なら条件付き分散は操作変数に無関係で均一である。 これを利用して分散均一を帰無仮説に、分散不均一を対立仮説にしたBP検定（Breusch-Pagan検定）が実行可能である。 ただし、通常のコマンド <code>bptest</code> では正しく実行できないので、手動で実行する必要がある。</p>
-<p>以下の手順でBP検定を実行する:</p>
+<p>誤差項が操作変数と独立なら条件付き分散は操作変数に無関係で均一である。 これを利用して分散均一を帰無仮説に、分散不均一を対立仮説にしたBP検定（Breusch-Pagan検定）が実行可能である。 ただし、通常の <code>bptest()</code> 関数では正しく実行できないので、手動で実行する必要がある。</p>
+<p>以下の手順でBP検定を実行する。</p>
 <ol type="1">
-<li><code>I</code> 関数と <code>resid</code> コマンドを用いて二段階最小二乗法の残差の二乗を計算する (<code>I(resid(fm)^2)</code>)</li>
-<li><code>lm</code> コマンドで残差の二乗を外生変数および操作変数に回帰する</li>
-<li><code>nrow</code> コマンドで観測数を取得し、決定係数 <code>r.squared</code> を乗じてLM統計量を得る</li>
-<li><code>pchisq</code> コマンドで検定統計量のP値を計算する。検定統計量は帰無仮説のもと、説明変数の数（この例では4）の自由度のカイ二乗分布にしたがう</li>
+<li><code>I()</code> 関数と <code>resid()</code> 関数を用いて二段階最小二乗法の残差の二乗を計算する (<code>I(resid(fm)^2)</code>)</li>
+<li><code>lm()</code> 関数で残差の二乗を外生変数および操作変数に回帰する</li>
+<li><code>nrow()</code> 関数で観測数を取得し、決定係数 <code>r.squared</code> を乗じてLM統計量を得る</li>
+<li><code>pchisq()</code> 関数で検定統計量のP値を計算する。検定統計量は帰無仮説のもと、説明変数の数（この例では4）の自由度のカイ二乗分布にしたがう</li>
 </ol>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>bpt <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">I</span>(<span class="fu">resid</span>(fm)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">~</span>exper <span class="sc">+</span> <span class="fu">I</span>(exper<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> motheduc <span class="sc">+</span> fatheduc,<span class="at">data=</span>df)</span>
@@ -637,279 +639,293 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
-      }
-    }
-    return false;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "コピーしました");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "コピーしました");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  });
-  const viewSource = window.document.getElementById('quarto-view-source') ||
-                     window.document.getElementById('quarto-code-tools-source');
-  if (viewSource) {
-    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
-    viewSource.addEventListener("click", function(e) {
-      if (sourceUrl) {
-        // rstudio viewer pane
-        if (/\bcapabilities=\b/.test(window.location)) {
-          window.open(sourceUrl);
-        } else {
-          window.location.href = sourceUrl;
-        }
-      } else {
-        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
-        modal.show();
-      }
-      return false;
-    });
-  }
-  function toggleCodeHandler(show) {
-    return function(e) {
-      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
-      for (let i=0; i<detailsSrc.length; i++) {
-        const details = detailsSrc[i].parentElement;
-        if (show) {
-          details.open = true;
-        } else {
-          details.removeAttribute("open");
-        }
-      }
-      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
-      const fromCls = show ? "hidden" : "unhidden";
-      const toCls = show ? "unhidden" : "hidden";
-      for (let i=0; i<cellCodeDivs.length; i++) {
-        const codeDiv = cellCodeDivs[i];
-        if (codeDiv.classList.contains(fromCls)) {
-          codeDiv.classList.remove(fromCls);
-          codeDiv.classList.add(toCls);
-        } 
-      }
-      return false;
-    }
-  }
-  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
-  if (hideAllCode) {
-    hideAllCode.addEventListener("click", toggleCodeHandler(false));
-  }
-  const showAllCode = window.document.getElementById("quarto-show-all-code");
-  if (showAllCode) {
-    showAllCode.addEventListener("click", toggleCodeHandler(true));
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
     };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
         }
       }
+      return false;
     }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "コピーしました");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "コピーしました");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
         }
-        return container.innerHTML
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -917,185 +933,161 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script>
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./08-regression2.html" class="pagination-link" aria-label="現代的仮定のもとでの最小二乗法">
@@ -1120,7 +1112,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup</span></span>
 <span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
-<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">echo =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">echo =</span> <span class="cn">TRUE</span>, <span class="at">collapse=</span><span class="cn">TRUE</span>)</span>
 <span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a><span class="fu">## データ</span></span>
@@ -1149,13 +1141,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb18-43"><a href="#cb18-43" aria-hidden="true" tabindex="-1"></a>そのために、外生変数と内生変数と操作変数の3つの概念を導入する。</span>
 <span id="cb18-44"><a href="#cb18-44" aria-hidden="true" tabindex="-1"></a>誤差項と相関が無い説明変数を **外生変数** といい、誤差項と相関がある説明変数を **内生変数** という。</span>
 <span id="cb18-45"><a href="#cb18-45" aria-hidden="true" tabindex="-1"></a>**操作変数** とは、説明変数に含まれず、説明変数と相関をもち、誤差項と相関をもたない変数のことである。</span>
-<span id="cb18-46"><a href="#cb18-46" aria-hidden="true" tabindex="-1"></a>なお操作変数の個数は内生変数の個数より多苦なければならない。</span>
+<span id="cb18-46"><a href="#cb18-46" aria-hidden="true" tabindex="-1"></a>なお操作変数の個数は内生変数の個数より多くなければならない。</span>
 <span id="cb18-47"><a href="#cb18-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-48"><a href="#cb18-48" aria-hidden="true" tabindex="-1"></a>R においては <span class="in">`ivreg`</span> コマンドを用いて操作変数法を実行する。</span>
-<span id="cb18-49"><a href="#cb18-49" aria-hidden="true" tabindex="-1"></a>このコマンドは <span class="in">`AER`</span> パッケージに含まれており、基本的な書式は <span class="in">`ivreg(被説明変数 ~ 内生変数 | 操作変数、data=データフレーム)`</span> である。</span>
+<span id="cb18-48"><a href="#cb18-48" aria-hidden="true" tabindex="-1"></a>R では <span class="in">`ivreg`</span> 関数を用いて操作変数法を実行する。</span>
+<span id="cb18-49"><a href="#cb18-49" aria-hidden="true" tabindex="-1"></a>この関数は <span class="in">`AER`</span> パッケージに含まれており、基本的な書式は <span class="in">`ivreg(被説明変数 ~ 内生変数 | 操作変数, data=データフレーム)`</span> である。</span>
 <span id="cb18-50"><a href="#cb18-50" aria-hidden="true" tabindex="-1"></a>ここで被説明変数は <span class="in">`log(wage)`</span>, 内生変数は <span class="in">`educ`</span>, 操作変数は <span class="in">`fatheduc`</span> である。</span>
 <span id="cb18-51"><a href="#cb18-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-52"><a href="#cb18-52" aria-hidden="true" tabindex="-1"></a>以下のコマンドで操作変数法を実行し、<span class="in">`coef`</span> コマンドで推定された係数を取り出す。</span>
+<span id="cb18-52"><a href="#cb18-52" aria-hidden="true" tabindex="-1"></a>以下のコマンドで操作変数法を実行し、<span class="in">`coef()`</span> 関数で推定された係数を取り出す。</span>
 <span id="cb18-53"><a href="#cb18-53" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-56"><a href="#cb18-56" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb18-57"><a href="#cb18-57" aria-hidden="true" tabindex="-1"></a>fm  <span class="ot">&lt;-</span> <span class="fu">ivreg</span>(<span class="fu">log</span>(wage)<span class="sc">~</span>educ<span class="sc">|</span>fatheduc, <span class="at">data=</span>df)</span>
@@ -1164,7 +1156,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb18-60"><a href="#cb18-60" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-61"><a href="#cb18-61" aria-hidden="true" tabindex="-1"></a>傾きの推定値は操作変数推定量の公式を用いて直接計算することもできる。</span>
 <span id="cb18-62"><a href="#cb18-62" aria-hidden="true" tabindex="-1"></a>具体的には、被説明変数と操作変数の共分散を内生変数と操作変数の共分散で割ることで得られる。</span>
-<span id="cb18-63"><a href="#cb18-63" aria-hidden="true" tabindex="-1"></a>以下のコマンドで <span class="in">`cov`</span> 関数を用いて共分散を計算し、同じ推定値が得られることを確認する。</span>
+<span id="cb18-63"><a href="#cb18-63" aria-hidden="true" tabindex="-1"></a>以下のコマンドで <span class="in">`cov()`</span> 関数を用いて共分散を計算し、同じ推定値が得られることを確認する。</span>
 <span id="cb18-64"><a href="#cb18-64" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-67"><a href="#cb18-67" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb18-68"><a href="#cb18-68" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(df, <span class="fu">cov</span>(<span class="fu">log</span>(wage),fatheduc)<span class="sc">/</span><span class="fu">cov</span>(educ,fatheduc))</span>
@@ -1172,7 +1164,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb18-70"><a href="#cb18-70" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-71"><a href="#cb18-71" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2段階最小二乗法</span></span>
 <span id="cb18-72"><a href="#cb18-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-73"><a href="#cb18-73" aria-hidden="true" tabindex="-1"></a>複数の説明変数あり、操作変数の数が内生変数の数以上のとき、係数の一致推定量を得るには二段階最小自乗法を用いる。</span>
+<span id="cb18-73"><a href="#cb18-73" aria-hidden="true" tabindex="-1"></a>複数の説明変数があり、操作変数の数が内生変数の数以上のとき、係数の一致推定量を得るには二段階最小二乗法を用いる。</span>
 <span id="cb18-74"><a href="#cb18-74" aria-hidden="true" tabindex="-1"></a>二段階最小二乗法は次の手順で実行される:</span>
 <span id="cb18-75"><a href="#cb18-75" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-76"><a href="#cb18-76" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>それぞれの内生変数を外生変数と操作変数に回帰させて、その予測値を得る。</span>
@@ -1182,16 +1174,16 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb18-80"><a href="#cb18-80" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-81"><a href="#cb18-81" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>母集団が線形モデル</span>
 <span id="cb18-82"><a href="#cb18-82" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>標本が無作為抽出</span>
-<span id="cb18-83"><a href="#cb18-83" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>誤差項が平均ゼロで操作変数と外生変数に対して独立。</span>
-<span id="cb18-84"><a href="#cb18-84" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>操作変数は内生変数と相関をもつ。</span>
-<span id="cb18-85"><a href="#cb18-85" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>外生変数と内生変数の予測値に多重共線性が存在しない<span class="sc">\`</span></span>
+<span id="cb18-83"><a href="#cb18-83" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>誤差項が平均ゼロで操作変数と外生変数に対して独立</span>
+<span id="cb18-84"><a href="#cb18-84" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>操作変数は内生変数と相関をもつ</span>
+<span id="cb18-85"><a href="#cb18-85" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>外生変数と内生変数の予測値に多重共線性が存在しない</span>
 <span id="cb18-86"><a href="#cb18-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-87"><a href="#cb18-87" aria-hidden="true" tabindex="-1"></a>R においては <span class="in">`ivreg`</span> コマンドを用いて二段階最小二乗法を実行する。</span>
-<span id="cb18-88"><a href="#cb18-88" aria-hidden="true" tabindex="-1"></a>複数の説明変数がある場合の書式は <span class="in">`ivreg(被説明変数 ~ 内生変数 + 外生変数 | 外生変数 + 操作変数、data=データフレーム)`</span> である。</span>
+<span id="cb18-87"><a href="#cb18-87" aria-hidden="true" tabindex="-1"></a>R では <span class="in">`ivreg()`</span> 関数を用いて二段階最小二乗法を実行する。</span>
+<span id="cb18-88"><a href="#cb18-88" aria-hidden="true" tabindex="-1"></a>複数の説明変数がある場合の書式は <span class="in">`ivreg(被説明変数 ~ 内生変数 + 外生変数 | 外生変数 + 操作変数, data=データフレーム)`</span> である。</span>
 <span id="cb18-89"><a href="#cb18-89" aria-hidden="true" tabindex="-1"></a>ここで被説明変数は <span class="in">`log(wage)`</span>, 内生変数は <span class="in">`educ`</span>, 外生変数は <span class="in">`exper`</span>, <span class="in">`I(exper^2)`</span>, 操作変数は <span class="in">`motheduc`</span>, <span class="in">`fatheduc`</span> である。</span>
 <span id="cb18-90"><a href="#cb18-90" aria-hidden="true" tabindex="-1"></a>注意点として、パイプ記号 <span class="in">`|`</span> の右側には外生変数も含める必要がある。</span>
 <span id="cb18-91"><a href="#cb18-91" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-92"><a href="#cb18-92" aria-hidden="true" tabindex="-1"></a>以下のコマンドで二段階最小二乗法を実行し、<span class="in">`summary`</span> コマンドで推定結果の要約を表示する。</span>
+<span id="cb18-92"><a href="#cb18-92" aria-hidden="true" tabindex="-1"></a>以下のコマンドで二段階最小二乗法を実行し、<span class="in">`summary()`</span> 関数で推定結果の要約を表示する。</span>
 <span id="cb18-93"><a href="#cb18-93" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-96"><a href="#cb18-96" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb18-97"><a href="#cb18-97" aria-hidden="true" tabindex="-1"></a>fm  <span class="ot">&lt;-</span> <span class="fu">ivreg</span>(<span class="fu">log</span>(wage)<span class="sc">~</span>educ<span class="sc">+</span>exper<span class="sc">+</span><span class="fu">I</span>(exper<span class="sc">^</span><span class="dv">2</span>)<span class="sc">|</span></span>
@@ -1200,11 +1192,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb18-100"><a href="#cb18-100" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fm)</span>
 <span id="cb18-101"><a href="#cb18-101" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb18-102"><a href="#cb18-102" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-103"><a href="#cb18-103" aria-hidden="true" tabindex="-1"></a>二段階最小二乗法の手順を <span class="in">`lm`</span> コマンドを用いて手動で実行し、同じ係数推定値が得られることを確認できる。</span>
+<span id="cb18-103"><a href="#cb18-103" aria-hidden="true" tabindex="-1"></a>二段階最小二乗法の手順を <span class="in">`lm()`</span> 関数を用いて手動で実行し、同じ係数推定値が得られることを確認できる。</span>
 <span id="cb18-104"><a href="#cb18-104" aria-hidden="true" tabindex="-1"></a>ただし標準誤差の値が異なっている。</span>
-<span id="cb18-105"><a href="#cb18-105" aria-hidden="true" tabindex="-1"></a>なぜなら残差は内生変数および外生変数から算出させる必要があるが、以下のやりかただと内生変数の予測値および外生変数から算出するためである。</span>
+<span id="cb18-105"><a href="#cb18-105" aria-hidden="true" tabindex="-1"></a>なぜなら残差は内生変数および外生変数から算出する必要があるが、以下のやり方だと内生変数の予測値および外生変数から算出するためである。</span>
 <span id="cb18-106"><a href="#cb18-106" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-107"><a href="#cb18-107" aria-hidden="true" tabindex="-1"></a>以下では第一段階として <span class="in">`lm`</span> コマンドで内生変数 <span class="in">`educ`</span> を外生変数と操作変数に回帰し、<span class="in">`fitted`</span> コマンドで予測値を取得する。</span>
+<span id="cb18-107"><a href="#cb18-107" aria-hidden="true" tabindex="-1"></a>以下では第一段階として <span class="in">`lm()`</span> 関数で内生変数 <span class="in">`educ`</span> を外生変数と操作変数に回帰し、<span class="in">`fitted()`</span> 関数で予測値を取得する。</span>
 <span id="cb18-108"><a href="#cb18-108" aria-hidden="true" tabindex="-1"></a>第二段階として被説明変数を外生変数と内生変数の予測値に回帰する。</span>
 <span id="cb18-109"><a href="#cb18-109" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-112"><a href="#cb18-112" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
@@ -1218,8 +1210,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb18-120"><a href="#cb18-120" aria-hidden="true" tabindex="-1"></a>帰無仮説が複数の係数制約を課す場合のワルド検定を実施する。</span>
 <span id="cb18-121"><a href="#cb18-121" aria-hidden="true" tabindex="-1"></a>例えば、2つの外生変数 <span class="in">`exper`</span> と <span class="in">`I(exper^2)`</span> の係数がともにゼロであるという仮説を検定する。</span>
 <span id="cb18-122"><a href="#cb18-122" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-123"><a href="#cb18-123" aria-hidden="true" tabindex="-1"></a>まず <span class="in">`ivreg`</span> コマンドで制約モデル（外生変数を含まないモデル）を推定し、<span class="in">`waldtest`</span> コマンドで制約なしモデルと比較する。</span>
-<span id="cb18-124"><a href="#cb18-124" aria-hidden="true" tabindex="-1"></a><span class="in">`waldtest`</span> コマンドは2つのモデルを引数にとり、ワルド検定を実行する。</span>
+<span id="cb18-123"><a href="#cb18-123" aria-hidden="true" tabindex="-1"></a>まず <span class="in">`ivreg()`</span> 関数で制約モデル（外生変数を含まないモデル）を推定し、<span class="in">`waldtest()`</span> 関数で制約なしモデルと比較する。</span>
+<span id="cb18-124"><a href="#cb18-124" aria-hidden="true" tabindex="-1"></a><span class="in">`waldtest()`</span> 関数は2つのモデルを引数にとり、ワルド検定を実行する。</span>
 <span id="cb18-125"><a href="#cb18-125" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-128"><a href="#cb18-128" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb18-129"><a href="#cb18-129" aria-hidden="true" tabindex="-1"></a>fm0 <span class="ot">&lt;-</span> <span class="fu">ivreg</span>(<span class="fu">log</span>(wage)<span class="sc">~</span>educ<span class="sc">|</span>motheduc<span class="sc">+</span>fatheduc,<span class="at">data=</span>df)</span>
@@ -1227,9 +1219,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb18-131"><a href="#cb18-131" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb18-132"><a href="#cb18-132" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-133"><a href="#cb18-133" aria-hidden="true" tabindex="-1"></a>LM検定（ラグランジュ乗数検定）も実行可能である。</span>
-<span id="cb18-134"><a href="#cb18-134" aria-hidden="true" tabindex="-1"></a>まず <span class="in">`resid`</span> コマンドで制約モデルの残差を取得し、その残差を制約される説明変数に回帰する。</span>
-<span id="cb18-135"><a href="#cb18-135" aria-hidden="true" tabindex="-1"></a><span class="in">`nrow`</span> コマンドで観測数を取得し、決定係数 <span class="in">`r.squared`</span> を乗じてLM統計量を計算する。</span>
-<span id="cb18-136"><a href="#cb18-136" aria-hidden="true" tabindex="-1"></a>最後に <span class="in">`pchisq`</span> コマンドでカイ二乗分布のP値を計算する（自由度は制約の数3）。</span>
+<span id="cb18-134"><a href="#cb18-134" aria-hidden="true" tabindex="-1"></a>まず <span class="in">`resid()`</span> 関数で制約モデルの残差を取得し、その残差を制約される説明変数に回帰する。</span>
+<span id="cb18-135"><a href="#cb18-135" aria-hidden="true" tabindex="-1"></a><span class="in">`nrow()`</span> 関数で観測数を取得し、決定係数 <span class="in">`r.squared`</span> を乗じてLM統計量を計算する。</span>
+<span id="cb18-136"><a href="#cb18-136" aria-hidden="true" tabindex="-1"></a>最後に <span class="in">`pchisq()`</span> 関数でカイ二乗分布のP値を計算する（自由度は制約の数3）。</span>
 <span id="cb18-137"><a href="#cb18-137" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-140"><a href="#cb18-140" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb18-141"><a href="#cb18-141" aria-hidden="true" tabindex="-1"></a>lmt <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">resid</span>(fm0)<span class="sc">~</span>educ <span class="sc">+</span> exper <span class="sc">+</span> <span class="fu">I</span>(exper<span class="sc">^</span><span class="dv">2</span>) ,<span class="at">data=</span>df)</span>
@@ -1240,7 +1232,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb18-146"><a href="#cb18-146" aria-hidden="true" tabindex="-1"></a><span class="fu">## 特定化検定</span></span>
 <span id="cb18-147"><a href="#cb18-147" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-148"><a href="#cb18-148" aria-hidden="true" tabindex="-1"></a>操作変数法が妥当かどうかを検証するために、複数の特定化検定を実施する。</span>
-<span id="cb18-149"><a href="#cb18-149" aria-hidden="true" tabindex="-1"></a><span class="in">`summary`</span> コマンドにオプション <span class="in">`diagnostics = TRUE`</span> を追加すると、弱操作変数検定（Weak instruments）、Wu-Hausman検定、Sargan検定を一度に実行できる。</span>
+<span id="cb18-149"><a href="#cb18-149" aria-hidden="true" tabindex="-1"></a><span class="in">`summary()`</span> 関数にオプション <span class="in">`diagnostics = TRUE`</span> を追加すると、弱操作変数検定（Weak instruments）、Wu-Hausman検定、Sargan検定を一度に実行できる。</span>
 <span id="cb18-150"><a href="#cb18-150" aria-hidden="true" tabindex="-1"></a>これらの検定結果から、操作変数の妥当性、内生性の有無、操作変数の外生性を確認できる。</span>
 <span id="cb18-151"><a href="#cb18-151" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-154"><a href="#cb18-154" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
@@ -1252,10 +1244,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb18-160"><a href="#cb18-160" aria-hidden="true" tabindex="-1"></a>操作変数が内生変数と弱い相関関係しかない場合、**弱操作変数**という。</span>
 <span id="cb18-161"><a href="#cb18-161" aria-hidden="true" tabindex="-1"></a>弱操作変数の場合、推定量の性質が悪化するため、操作変数が十分に強い相関を持つかを検定する必要がある。</span>
 <span id="cb18-162"><a href="#cb18-162" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-163"><a href="#cb18-163" aria-hidden="true" tabindex="-1"></a>検定手順は以下の通りである:</span>
+<span id="cb18-163"><a href="#cb18-163" aria-hidden="true" tabindex="-1"></a>検定手順は以下の通りである。</span>
 <span id="cb18-164"><a href="#cb18-164" aria-hidden="true" tabindex="-1"></a>それぞれの内生変数に対して、帰無仮説を内生変数を外生変数のみに回帰させたモデルとし、対立仮説を内生変数を外生変数および操作変数に回帰させたモデルとし、F検定を実施する。</span>
 <span id="cb18-165"><a href="#cb18-165" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-166"><a href="#cb18-166" aria-hidden="true" tabindex="-1"></a>以下のコマンドで <span class="in">`lm`</span> による制約モデルを推定し、<span class="in">`anova`</span> コマンドで第一段階の回帰モデル <span class="in">`ols1`</span> と比較してF検定を実行する。</span>
+<span id="cb18-166"><a href="#cb18-166" aria-hidden="true" tabindex="-1"></a>以下のコマンドで <span class="in">`lm()`</span> 関数による制約モデルを推定し、<span class="in">`anova()`</span> 関数で第一段階の回帰モデル <span class="in">`ols1`</span> と比較してF検定を実行する。</span>
 <span id="cb18-167"><a href="#cb18-167" aria-hidden="true" tabindex="-1"></a>この結果が先の <span class="in">`diagnostics = TRUE`</span> で得られた弱操作変数検定と同じであることを確認されたい。</span>
 <span id="cb18-168"><a href="#cb18-168" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-171"><a href="#cb18-171" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
@@ -1265,17 +1257,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb18-175"><a href="#cb18-175" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-176"><a href="#cb18-176" aria-hidden="true" tabindex="-1"></a><span class="fu">### Wu-Hausman 検定</span></span>
 <span id="cb18-177"><a href="#cb18-177" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-178"><a href="#cb18-178" aria-hidden="true" tabindex="-1"></a>Wu-Hausman 検定は 帰無仮説が誤差項と説明変数が無相関、対立仮説が誤差項と説明変数が相関ありの検定をおこなう。</span>
+<span id="cb18-178"><a href="#cb18-178" aria-hidden="true" tabindex="-1"></a>Wu-Hausman 検定は帰無仮説が誤差項と説明変数が無相関、対立仮説が誤差項と説明変数が相関ありの検定を行う。</span>
 <span id="cb18-179"><a href="#cb18-179" aria-hidden="true" tabindex="-1"></a>帰無仮説のもとでは、OLSも2SLSも一致推定量であるが、OLSの方が効率的である。</span>
 <span id="cb18-180"><a href="#cb18-180" aria-hidden="true" tabindex="-1"></a>よって検定統計量のP値が十分小さいなら帰無仮説は棄却され、内生性があることになり操作変数法（2SLS）を選択する。</span>
 <span id="cb18-181"><a href="#cb18-181" aria-hidden="true" tabindex="-1"></a>そうでなければより効率的な最小二乗法（OLS）を実施する。</span>
 <span id="cb18-182"><a href="#cb18-182" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-183"><a href="#cb18-183" aria-hidden="true" tabindex="-1"></a>具体的には以下のF検定を実施する:</span>
+<span id="cb18-183"><a href="#cb18-183" aria-hidden="true" tabindex="-1"></a>具体的には以下のF検定を実施する。</span>
 <span id="cb18-184"><a href="#cb18-184" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-185"><a href="#cb18-185" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span><span class="in">`lm`</span> コマンドでそれぞれの内生変数を外生変数に回帰し、<span class="in">`resid`</span> コマンドで残差を得る (<span class="in">`resid(ols1)`</span>)</span>
-<span id="cb18-186"><a href="#cb18-186" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span><span class="in">`lm`</span> コマンドで被説明変数を説明変数に回帰する (<span class="in">`ols3`</span>)</span>
-<span id="cb18-187"><a href="#cb18-187" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span><span class="in">`update`</span> コマンドで被説明変数を説明変数および先程の残差に回帰する (<span class="in">`ols4`</span>)</span>
-<span id="cb18-188"><a href="#cb18-188" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span><span class="in">`anova`</span> コマンドでこれらの残差の係数はゼロであるという帰無仮説のもとF検定を実施する</span>
+<span id="cb18-185"><a href="#cb18-185" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span><span class="in">`lm()`</span> 関数でそれぞれの内生変数を外生変数に回帰し、<span class="in">`resid()`</span> 関数で残差を得る (<span class="in">`resid(ols1)`</span>)</span>
+<span id="cb18-186"><a href="#cb18-186" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span><span class="in">`lm()`</span> 関数で被説明変数を説明変数に回帰する (<span class="in">`ols3`</span>)</span>
+<span id="cb18-187"><a href="#cb18-187" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span><span class="in">`update()`</span> 関数で被説明変数を説明変数および先程の残差に回帰する (<span class="in">`ols4`</span>)</span>
+<span id="cb18-188"><a href="#cb18-188" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span><span class="in">`anova()`</span> 関数でこれらの残差の係数はゼロであるという帰無仮説のもとF検定を実施する</span>
 <span id="cb18-189"><a href="#cb18-189" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-190"><a href="#cb18-190" aria-hidden="true" tabindex="-1"></a>以下のコマンドが先の <span class="in">`diagnostics = TRUE`</span> で得られたWu-Hausman検定と同じであることを確認されたい。</span>
 <span id="cb18-191"><a href="#cb18-191" aria-hidden="true" tabindex="-1"></a></span>
@@ -1287,16 +1279,16 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb18-199"><a href="#cb18-199" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-200"><a href="#cb18-200" aria-hidden="true" tabindex="-1"></a><span class="fu">### Sargan 検定</span></span>
 <span id="cb18-201"><a href="#cb18-201" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-202"><a href="#cb18-202" aria-hidden="true" tabindex="-1"></a>Sargan 検定は 誤差項が操作変数 (および外生変数) と相関しているかどうかを検定する。</span>
+<span id="cb18-202"><a href="#cb18-202" aria-hidden="true" tabindex="-1"></a>Sargan 検定は誤差項が操作変数（および外生変数）と相関しているかどうかを検定する。</span>
 <span id="cb18-203"><a href="#cb18-203" aria-hidden="true" tabindex="-1"></a>帰無仮説は操作変数が外生的である（相関が無い）場合で、対立仮説は操作変数が内生的である（相関がある）場合である。</span>
 <span id="cb18-204"><a href="#cb18-204" aria-hidden="true" tabindex="-1"></a>この検定は操作変数が過剰識別されている（操作変数の数が内生変数の数より多い）場合にのみ実施可能である。</span>
 <span id="cb18-205"><a href="#cb18-205" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-206"><a href="#cb18-206" aria-hidden="true" tabindex="-1"></a>LM検定（ラグランジュ乗数検定）を以下の手順で実施する:</span>
+<span id="cb18-206"><a href="#cb18-206" aria-hidden="true" tabindex="-1"></a>LM検定（ラグランジュ乗数検定）を以下の手順で実施する。</span>
 <span id="cb18-207"><a href="#cb18-207" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-208"><a href="#cb18-208" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span><span class="in">`resid`</span> コマンドで二段階最小二乗法を実施したときの残差を得る (<span class="in">`resid(fm)`</span>)</span>
-<span id="cb18-209"><a href="#cb18-209" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span><span class="in">`lm`</span> コマンドで残差を外生変数および操作変数に回帰する</span>
-<span id="cb18-210"><a href="#cb18-210" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span><span class="in">`nrow`</span> コマンドで観測数を取得し、回帰の決定係数 <span class="in">`r.squared`</span> を乗じたLM統計量を得る</span>
-<span id="cb18-211"><a href="#cb18-211" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span><span class="in">`pchisq`</span> コマンドで検定統計量のP値を計算する。検定統計量は帰無仮説のもと、操作変数の数から内生変数の数を差し引いた自由度（この例では1）のカイ二乗分布にしたがう</span>
+<span id="cb18-208"><a href="#cb18-208" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span><span class="in">`resid()`</span> 関数で二段階最小二乗法を実施したときの残差を得る (<span class="in">`resid(fm)`</span>)</span>
+<span id="cb18-209"><a href="#cb18-209" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span><span class="in">`lm()`</span> 関数で残差を外生変数および操作変数に回帰する</span>
+<span id="cb18-210"><a href="#cb18-210" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span><span class="in">`nrow()`</span> 関数で観測数を取得し、回帰の決定係数 <span class="in">`r.squared`</span> を乗じたLM統計量を得る</span>
+<span id="cb18-211"><a href="#cb18-211" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span><span class="in">`pchisq()`</span> 関数で検定統計量のP値を計算する。検定統計量は帰無仮説のもと、操作変数の数から内生変数の数を差し引いた自由度（この例では1）のカイ二乗分布にしたがう</span>
 <span id="cb18-212"><a href="#cb18-212" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-213"><a href="#cb18-213" aria-hidden="true" tabindex="-1"></a>以下のコマンドが先の <span class="in">`diagnostics = TRUE`</span> で得られたSargan検定と同じであることを確認されたい。</span>
 <span id="cb18-214"><a href="#cb18-214" aria-hidden="true" tabindex="-1"></a></span>
@@ -1312,32 +1304,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb18-226"><a href="#cb18-226" aria-hidden="true" tabindex="-1"></a>独立でない場合や分散不均一の場合、推定量の分散が変わりうる。</span>
 <span id="cb18-227"><a href="#cb18-227" aria-hidden="true" tabindex="-1"></a>そうした場合に頑健な分散推定量を**ロバスト分散**という。</span>
 <span id="cb18-228"><a href="#cb18-228" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-229"><a href="#cb18-229" aria-hidden="true" tabindex="-1"></a>ロバスト分散にもとづく推定結果を得るには、<span class="in">`summary`</span> コマンドにオプション <span class="in">`vcov = vcovHC`</span> を追加する。</span>
-<span id="cb18-230"><a href="#cb18-230" aria-hidden="true" tabindex="-1"></a><span class="in">`vcovHC`</span> は不均一分散に頑健な分散共分散行列を計算する関数である。</span>
+<span id="cb18-229"><a href="#cb18-229" aria-hidden="true" tabindex="-1"></a>ロバスト分散にもとづく推定結果を得るには、<span class="in">`summary()`</span> 関数にオプション <span class="in">`vcov = vcovHC`</span> を追加する。</span>
+<span id="cb18-230"><a href="#cb18-230" aria-hidden="true" tabindex="-1"></a><span class="in">`vcovHC()`</span> 関数は不均一分散に頑健な分散共分散行列を計算する関数である。</span>
 <span id="cb18-231"><a href="#cb18-231" aria-hidden="true" tabindex="-1"></a>オプション <span class="in">`df = Inf`</span> は自由度を無限大とし、t分布ではなく正規分布を用いて検定を行う。</span>
 <span id="cb18-232"><a href="#cb18-232" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-235"><a href="#cb18-235" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb18-236"><a href="#cb18-236" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fm, <span class="at">vcov =</span> vcovHC, <span class="at">df =</span> <span class="cn">Inf</span>)</span>
 <span id="cb18-237"><a href="#cb18-237" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb18-238"><a href="#cb18-238" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-239"><a href="#cb18-239" aria-hidden="true" tabindex="-1"></a>係数の検定結果のみを表示したい場合は、<span class="in">`coeftest`</span> コマンドを用いる。</span>
-<span id="cb18-240"><a href="#cb18-240" aria-hidden="true" tabindex="-1"></a>このコマンドは推定されたモデルオブジェクトと分散共分散行列を引数にとり、係数のt検定結果を表示する。</span>
+<span id="cb18-239"><a href="#cb18-239" aria-hidden="true" tabindex="-1"></a>係数の検定結果のみを表示したい場合は、<span class="in">`coeftest()`</span> 関数を用いる。</span>
+<span id="cb18-240"><a href="#cb18-240" aria-hidden="true" tabindex="-1"></a>この関数は推定されたモデルオブジェクトと分散共分散行列を引数にとり、係数のt検定結果を表示する。</span>
 <span id="cb18-241"><a href="#cb18-241" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-244"><a href="#cb18-244" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb18-245"><a href="#cb18-245" aria-hidden="true" tabindex="-1"></a><span class="fu">coeftest</span>(fm, <span class="at">vcov=</span>vcovHC)</span>
 <span id="cb18-246"><a href="#cb18-246" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb18-247"><a href="#cb18-247" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-248"><a href="#cb18-248" aria-hidden="true" tabindex="-1"></a>ロバスト分散のもとでの複数制約のワルド検定を実施するには、<span class="in">`waldtest`</span> コマンドにオプション <span class="in">`vcov=vcovHC`</span> を追加する。</span>
+<span id="cb18-248"><a href="#cb18-248" aria-hidden="true" tabindex="-1"></a>ロバスト分散のもとでの複数制約のワルド検定を実施するには、<span class="in">`waldtest()`</span> 関数にオプション <span class="in">`vcov=vcovHC`</span> を追加する。</span>
 <span id="cb18-249"><a href="#cb18-249" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-252"><a href="#cb18-252" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb18-253"><a href="#cb18-253" aria-hidden="true" tabindex="-1"></a><span class="fu">waldtest</span>(fm0,fm, <span class="at">vcov=</span>vcovHC)</span>
 <span id="cb18-254"><a href="#cb18-254" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb18-255"><a href="#cb18-255" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-256"><a href="#cb18-256" aria-hidden="true" tabindex="-1"></a>最近開発されたパッケージ <span class="in">`estimatr`</span> のコマンド <span class="in">`iv_robust`</span> を用いるとロバスト分散のもとの推定値が簡単に計算できる。</span>
-<span id="cb18-257"><a href="#cb18-257" aria-hidden="true" tabindex="-1"></a>このコマンドはデフォルトでロバスト標準誤差（HC2型）を計算し、オプション <span class="in">`diagnostics = TRUE`</span> で特定化検定も同時に実行できる。</span>
-<span id="cb18-258"><a href="#cb18-258" aria-hidden="true" tabindex="-1"></a>書式は <span class="in">`ivreg`</span> と同じである。</span>
+<span id="cb18-256"><a href="#cb18-256" aria-hidden="true" tabindex="-1"></a>最近開発されたパッケージ <span class="in">`estimatr`</span> の <span class="in">`iv_robust()`</span> 関数を用いるとロバスト分散のもとの推定値が簡単に計算できる。</span>
+<span id="cb18-257"><a href="#cb18-257" aria-hidden="true" tabindex="-1"></a>この関数はデフォルトでロバスト標準誤差（HC2型）を計算し、オプション <span class="in">`diagnostics = TRUE`</span> で特定化検定も同時に実行できる。</span>
+<span id="cb18-258"><a href="#cb18-258" aria-hidden="true" tabindex="-1"></a>書式は <span class="in">`ivreg()`</span> 関数と同じである。</span>
 <span id="cb18-259"><a href="#cb18-259" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-260"><a href="#cb18-260" aria-hidden="true" tabindex="-1"></a>以下のコマンドで <span class="in">`iv_robust`</span> による推定を実行し、<span class="in">`summary`</span> コマンドで結果を表示する。</span>
+<span id="cb18-260"><a href="#cb18-260" aria-hidden="true" tabindex="-1"></a>以下のコマンドで <span class="in">`iv_robust()`</span> 関数による推定を実行し、<span class="in">`summary()`</span> 関数で結果を表示する。</span>
 <span id="cb18-261"><a href="#cb18-261" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-264"><a href="#cb18-264" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb18-265"><a href="#cb18-265" aria-hidden="true" tabindex="-1"></a>fm2 <span class="ot">&lt;-</span> <span class="fu">iv_robust</span>(<span class="fu">log</span>(wage)<span class="sc">~</span>educ<span class="sc">+</span>exper<span class="sc">+</span><span class="fu">I</span>(exper<span class="sc">^</span><span class="dv">2</span>)<span class="sc">|</span></span>
@@ -1362,21 +1354,21 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb18-286"><a href="#cb18-286" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-287"><a href="#cb18-287" aria-hidden="true" tabindex="-1"></a>誤差項が操作変数と独立なら条件付き分散は操作変数に無関係で均一である。</span>
 <span id="cb18-288"><a href="#cb18-288" aria-hidden="true" tabindex="-1"></a>これを利用して分散均一を帰無仮説に、分散不均一を対立仮説にしたBP検定（Breusch-Pagan検定）が実行可能である。</span>
-<span id="cb18-289"><a href="#cb18-289" aria-hidden="true" tabindex="-1"></a>ただし、通常のコマンド <span class="in">`bptest`</span> では正しく実行できないので、手動で実行する必要がある。</span>
+<span id="cb18-289"><a href="#cb18-289" aria-hidden="true" tabindex="-1"></a>ただし、通常の <span class="in">`bptest()`</span> 関数では正しく実行できないので、手動で実行する必要がある。</span>
 <span id="cb18-290"><a href="#cb18-290" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-291"><a href="#cb18-291" aria-hidden="true" tabindex="-1"></a>以下の手順でBP検定を実行する:</span>
+<span id="cb18-291"><a href="#cb18-291" aria-hidden="true" tabindex="-1"></a>以下の手順でBP検定を実行する。</span>
 <span id="cb18-292"><a href="#cb18-292" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-293"><a href="#cb18-293" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span><span class="in">`I`</span> 関数と <span class="in">`resid`</span> コマンドを用いて二段階最小二乗法の残差の二乗を計算する (<span class="in">`I(resid(fm)^2)`</span>)</span>
-<span id="cb18-294"><a href="#cb18-294" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span><span class="in">`lm`</span> コマンドで残差の二乗を外生変数および操作変数に回帰する</span>
-<span id="cb18-295"><a href="#cb18-295" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span><span class="in">`nrow`</span> コマンドで観測数を取得し、決定係数 <span class="in">`r.squared`</span> を乗じてLM統計量を得る</span>
-<span id="cb18-296"><a href="#cb18-296" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span><span class="in">`pchisq`</span> コマンドで検定統計量のP値を計算する。検定統計量は帰無仮説のもと、説明変数の数（この例では4）の自由度のカイ二乗分布にしたがう</span>
+<span id="cb18-293"><a href="#cb18-293" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span><span class="in">`I()`</span> 関数と <span class="in">`resid()`</span> 関数を用いて二段階最小二乗法の残差の二乗を計算する (<span class="in">`I(resid(fm)^2)`</span>)</span>
+<span id="cb18-294"><a href="#cb18-294" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span><span class="in">`lm()`</span> 関数で残差の二乗を外生変数および操作変数に回帰する</span>
+<span id="cb18-295"><a href="#cb18-295" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span><span class="in">`nrow()`</span> 関数で観測数を取得し、決定係数 <span class="in">`r.squared`</span> を乗じてLM統計量を得る</span>
+<span id="cb18-296"><a href="#cb18-296" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span><span class="in">`pchisq()`</span> 関数で検定統計量のP値を計算する。検定統計量は帰無仮説のもと、説明変数の数（この例では4）の自由度のカイ二乗分布にしたがう</span>
 <span id="cb18-297"><a href="#cb18-297" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-300"><a href="#cb18-300" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb18-301"><a href="#cb18-301" aria-hidden="true" tabindex="-1"></a>bpt <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">I</span>(<span class="fu">resid</span>(fm)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">~</span>exper <span class="sc">+</span> <span class="fu">I</span>(exper<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> motheduc <span class="sc">+</span> fatheduc,<span class="at">data=</span>df)</span>
 <span id="cb18-302"><a href="#cb18-302" aria-hidden="true" tabindex="-1"></a>(bpt <span class="ot">&lt;-</span> <span class="fu">nrow</span>(df)<span class="sc">*</span><span class="fu">summary</span>(bpt)<span class="sc">$</span>r.squared)</span>
 <span id="cb18-303"><a href="#cb18-303" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pchisq</span>(bpt,<span class="at">df=</span><span class="dv">4</span>)</span>
 <span id="cb18-304"><a href="#cb18-304" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-</code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</code><button title="コピー" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

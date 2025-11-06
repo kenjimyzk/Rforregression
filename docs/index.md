@@ -1,7 +1,7 @@
 --- 
 title: "R と RStudio"
 author: "宮﨑憲治"
-date: "2025-10-25"
+date: "2025-10-29"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: bxjsbook
@@ -9,13 +9,13 @@ classoption: ja=standard, xelatex
 geometry: no
 # bibliography: template.bib
 biblio-style: jeconunicode
-link-citations: true
+# link-citations: yes
 # csl: apa-jp_JSAM.csl
 lang: ja-JP
 # github-repo: (your-github-repository)
 description: "This is a description. Please wrote a abstract this contents. "
 ---
-# はじめに {-}
+# はじめに
 
 
 
